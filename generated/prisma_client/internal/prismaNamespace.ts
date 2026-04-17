@@ -431,6 +431,7 @@ export const ModelName = {
   LeadDesignMeeting: 'LeadDesignMeeting',
   LeadDesignMeetingDocumentsMapping: 'LeadDesignMeetingDocumentsMapping',
   LeadDesignSelection: 'LeadDesignSelection',
+  CHSSelectionTypeMapping: 'CHSSelectionTypeMapping',
   PaymentTypeMaster: 'PaymentTypeMaster',
   LeadSiteSupervisorMapping: 'LeadSiteSupervisorMapping',
   UserLeadTask: 'UserLeadTask',
@@ -500,7 +501,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3979,6 +3980,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadDesignSelectionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadDesignSelectionCountAggregateOutputType> | number
+        }
+      }
+    }
+    CHSSelectionTypeMapping: {
+      payload: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>
+      fields: Prisma.CHSSelectionTypeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CHSSelectionTypeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CHSSelectionTypeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.CHSSelectionTypeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CHSSelectionTypeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.CHSSelectionTypeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.CHSSelectionTypeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.CHSSelectionTypeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CHSSelectionTypeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.CHSSelectionTypeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        update: {
+          args: Prisma.CHSSelectionTypeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.CHSSelectionTypeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CHSSelectionTypeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CHSSelectionTypeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.CHSSelectionTypeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CHSSelectionTypeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.CHSSelectionTypeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCHSSelectionTypeMapping>
+        }
+        groupBy: {
+          args: Prisma.CHSSelectionTypeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CHSSelectionTypeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CHSSelectionTypeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CHSSelectionTypeMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -8779,6 +8854,24 @@ export const LeadDesignSelectionScalarFieldEnum = {
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]
 
 
+export const CHSSelectionTypeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  selection_id: 'selection_id',
+  carcass_type_id: 'carcass_type_id',
+  shutter_type_id: 'shutter_type_id',
+  shutter_sub_type_id: 'shutter_sub_type_id',
+  handle_type_id: 'handle_type_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type CHSSelectionTypeMappingScalarFieldEnum = (typeof CHSSelectionTypeMappingScalarFieldEnum)[keyof typeof CHSSelectionTypeMappingScalarFieldEnum]
+
+
 export const PaymentTypeMasterScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -10192,6 +10285,7 @@ export type GlobalOmitConfig = {
   leadDesignMeeting?: Prisma.LeadDesignMeetingOmit
   leadDesignMeetingDocumentsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOmit
   leadDesignSelection?: Prisma.LeadDesignSelectionOmit
+  cHSSelectionTypeMapping?: Prisma.CHSSelectionTypeMappingOmit
   paymentTypeMaster?: Prisma.PaymentTypeMasterOmit
   leadSiteSupervisorMapping?: Prisma.LeadSiteSupervisorMappingOmit
   userLeadTask?: Prisma.UserLeadTaskOmit

@@ -294,6 +294,7 @@ export type LeadDesignSelectionWhereInput = {
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }
 
 export type LeadDesignSelectionOrderByWithRelationInput = {
@@ -314,6 +315,7 @@ export type LeadDesignSelectionOrderByWithRelationInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
 }
 
 export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
@@ -337,6 +339,7 @@ export type LeadDesignSelectionWhereUniqueInput = Prisma.AtLeast<{
   productStructureInstance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
 }, "id">
 
 export type LeadDesignSelectionOrderByWithAggregationInput = {
@@ -386,6 +389,7 @@ export type LeadDesignSelectionCreateInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateInput = {
@@ -400,6 +404,7 @@ export type LeadDesignSelectionUncheckedCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUpdateInput = {
@@ -413,6 +418,7 @@ export type LeadDesignSelectionUpdateInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateInput = {
@@ -427,6 +433,7 @@ export type LeadDesignSelectionUncheckedUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionCreateManyInput = {
@@ -534,6 +541,11 @@ export type LeadDesignSelectionSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   product_structure_instance_id?: Prisma.SortOrder
+}
+
+export type LeadDesignSelectionScalarRelationFilter = {
+  is?: Prisma.LeadDesignSelectionWhereInput
+  isNot?: Prisma.LeadDesignSelectionWhereInput
 }
 
 export type LeadDesignSelectionCreateNestedManyWithoutVendorInput = {
@@ -788,6 +800,20 @@ export type LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanc
   deleteMany?: Prisma.LeadDesignSelectionScalarWhereInput | Prisma.LeadDesignSelectionScalarWhereInput[]
 }
 
+export type LeadDesignSelectionCreateNestedOneWithoutChsSelectionMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadDesignSelectionCreateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.LeadDesignSelectionCreateOrConnectWithoutChsSelectionMappingsInput
+  connect?: Prisma.LeadDesignSelectionWhereUniqueInput
+}
+
+export type LeadDesignSelectionUpdateOneRequiredWithoutChsSelectionMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDesignSelectionCreateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.LeadDesignSelectionCreateOrConnectWithoutChsSelectionMappingsInput
+  upsert?: Prisma.LeadDesignSelectionUpsertWithoutChsSelectionMappingsInput
+  connect?: Prisma.LeadDesignSelectionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDesignSelectionUpdateToOneWithWhereWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUpdateWithoutChsSelectionMappingsInput>, Prisma.LeadDesignSelectionUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
 export type LeadDesignSelectionCreateWithoutVendorInput = {
   type: string
   desc: string
@@ -798,6 +824,7 @@ export type LeadDesignSelectionCreateWithoutVendorInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutVendorInput = {
@@ -811,6 +838,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutVendorInput = {
@@ -866,6 +894,7 @@ export type LeadDesignSelectionCreateWithoutCreatedByInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutCreatedByInput = {
@@ -879,6 +908,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutCreatedByInput = {
@@ -901,6 +931,7 @@ export type LeadDesignSelectionCreateWithoutUpdatedByInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutUpdatedByInput = {
@@ -914,6 +945,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutUpdatedByInput = {
@@ -968,6 +1000,7 @@ export type LeadDesignSelectionCreateWithoutLeadInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutLeadInput = {
@@ -981,6 +1014,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutLeadInput = {
@@ -1019,6 +1053,7 @@ export type LeadDesignSelectionCreateWithoutAccountInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutAccountInput = {
@@ -1032,6 +1067,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutAccountInput = {
   created_at?: Date | string
   updated_at?: Date | string
   product_structure_instance_id?: number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutAccountInput = {
@@ -1070,6 +1106,7 @@ export type LeadDesignSelectionCreateWithoutProductStructureInstanceInput = {
   lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionUncheckedCreateWithoutProductStructureInstanceInput = {
@@ -1083,6 +1120,7 @@ export type LeadDesignSelectionUncheckedCreateWithoutProductStructureInstanceInp
   updated_by?: number | null
   created_at?: Date | string
   updated_at?: Date | string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutSelectionInput
 }
 
 export type LeadDesignSelectionCreateOrConnectWithoutProductStructureInstanceInput = {
@@ -1111,6 +1149,76 @@ export type LeadDesignSelectionUpdateManyWithWhereWithoutProductStructureInstanc
   data: Prisma.XOR<Prisma.LeadDesignSelectionUpdateManyMutationInput, Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceInput>
 }
 
+export type LeadDesignSelectionCreateWithoutChsSelectionMappingsInput = {
+  type: string
+  desc: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  account: Prisma.AccountMasterCreateNestedOneWithoutDesignSelectionInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutDesignSelectionInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDesignSelectionsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutDesignSelectionsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDesignSelectionInput
+}
+
+export type LeadDesignSelectionUncheckedCreateWithoutChsSelectionMappingsInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  type: string
+  desc: string
+  created_by: number
+  updated_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  product_structure_instance_id?: number | null
+}
+
+export type LeadDesignSelectionCreateOrConnectWithoutChsSelectionMappingsInput = {
+  where: Prisma.LeadDesignSelectionWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadDesignSelectionCreateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedCreateWithoutChsSelectionMappingsInput>
+}
+
+export type LeadDesignSelectionUpsertWithoutChsSelectionMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadDesignSelectionUpdateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedUpdateWithoutChsSelectionMappingsInput>
+  create: Prisma.XOR<Prisma.LeadDesignSelectionCreateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedCreateWithoutChsSelectionMappingsInput>
+  where?: Prisma.LeadDesignSelectionWhereInput
+}
+
+export type LeadDesignSelectionUpdateToOneWithWhereWithoutChsSelectionMappingsInput = {
+  where?: Prisma.LeadDesignSelectionWhereInput
+  data: Prisma.XOR<Prisma.LeadDesignSelectionUpdateWithoutChsSelectionMappingsInput, Prisma.LeadDesignSelectionUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
+export type LeadDesignSelectionUpdateWithoutChsSelectionMappingsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  desc?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDesignSelectionsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+}
+
+export type LeadDesignSelectionUncheckedUpdateWithoutChsSelectionMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  desc?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
 export type LeadDesignSelectionCreateManyVendorInput = {
   id?: number
   lead_id: number
@@ -1134,6 +1242,7 @@ export type LeadDesignSelectionUpdateWithoutVendorInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutVendorInput = {
@@ -1147,6 +1256,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutVendorInput = {
@@ -1198,6 +1308,7 @@ export type LeadDesignSelectionUpdateWithoutCreatedByInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutCreatedByInput = {
@@ -1211,6 +1322,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1236,6 +1348,7 @@ export type LeadDesignSelectionUpdateWithoutUpdatedByInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutUpdatedByInput = {
@@ -1249,6 +1362,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1287,6 +1401,7 @@ export type LeadDesignSelectionUpdateWithoutLeadInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutLeadInput = {
@@ -1300,6 +1415,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutLeadInput = {
@@ -1338,6 +1454,7 @@ export type LeadDesignSelectionUpdateWithoutAccountInput = {
   productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDesignSelectionsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutAccountInput = {
@@ -1351,6 +1468,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutAccountInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutAccountInput = {
@@ -1389,6 +1507,7 @@ export type LeadDesignSelectionUpdateWithoutProductStructureInstanceInput = {
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutDesignSelectionsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDesignSelectionNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateWithoutProductStructureInstanceInput = {
@@ -1402,6 +1521,7 @@ export type LeadDesignSelectionUncheckedUpdateWithoutProductStructureInstanceInp
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutSelectionNestedInput
 }
 
 export type LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanceInput = {
@@ -1417,6 +1537,35 @@ export type LeadDesignSelectionUncheckedUpdateManyWithoutProductStructureInstanc
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type LeadDesignSelectionCountOutputType
+ */
+
+export type LeadDesignSelectionCountOutputType = {
+  chsSelectionMappings: number
+}
+
+export type LeadDesignSelectionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chsSelectionMappings?: boolean | LeadDesignSelectionCountOutputTypeCountChsSelectionMappingsArgs
+}
+
+/**
+ * LeadDesignSelectionCountOutputType without action
+ */
+export type LeadDesignSelectionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadDesignSelectionCountOutputType
+   */
+  select?: Prisma.LeadDesignSelectionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LeadDesignSelectionCountOutputType without action
+ */
+export type LeadDesignSelectionCountOutputTypeCountChsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
+}
 
 
 export type LeadDesignSelectionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1437,6 +1586,8 @@ export type LeadDesignSelectionSelect<ExtArgs extends runtime.Types.Extensions.I
   productStructureInstance?: boolean | Prisma.LeadDesignSelection$productStructureInstanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.LeadDesignSelection$chsSelectionMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadDesignSelectionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadDesignSelection"]>
 
 export type LeadDesignSelectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1501,6 +1652,8 @@ export type LeadDesignSelectionInclude<ExtArgs extends runtime.Types.Extensions.
   productStructureInstance?: boolean | Prisma.LeadDesignSelection$productStructureInstanceArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.LeadDesignSelection$chsSelectionMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadDesignSelectionCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadDesignSelectionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
@@ -1528,6 +1681,7 @@ export type $LeadDesignSelectionPayload<ExtArgs extends runtime.Types.Extensions
     productStructureInstance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1941,6 +2095,7 @@ export interface Prisma__LeadDesignSelectionClient<T, Null = never, ExtArgs exte
   productStructureInstance<T extends Prisma.LeadDesignSelection$productStructureInstanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignSelection$productStructureInstanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadDesignSelection$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignSelection$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  chsSelectionMappings<T extends Prisma.LeadDesignSelection$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDesignSelection$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2412,6 +2567,30 @@ export type LeadDesignSelection$updatedByArgs<ExtArgs extends runtime.Types.Exte
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadDesignSelection.chsSelectionMappings
+ */
+export type LeadDesignSelection$chsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CHSSelectionTypeMapping
+   */
+  select?: Prisma.CHSSelectionTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CHSSelectionTypeMapping
+   */
+  omit?: Prisma.CHSSelectionTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CHSSelectionTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
+  orderBy?: Prisma.CHSSelectionTypeMappingOrderByWithRelationInput | Prisma.CHSSelectionTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CHSSelectionTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
 }
 
 /**

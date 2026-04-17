@@ -273,6 +273,11 @@ export type LeadDesignMeetingDocumentsMapping = Prisma.LeadDesignMeetingDocument
  */
 export type LeadDesignSelection = Prisma.LeadDesignSelectionModel
 /**
+ * Model CHSSelectionTypeMapping
+ * 
+ */
+export type CHSSelectionTypeMapping = Prisma.CHSSelectionTypeMappingModel
+/**
  * Model PaymentTypeMaster
  * 
  */

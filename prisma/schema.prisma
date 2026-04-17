@@ -49,6 +49,7 @@ model VendorMaster {
   designMeeting                        LeadDesignMeeting[]
   designMeetingDocsMapping             LeadDesignMeetingDocumentsMapping[]
   designSelection                      LeadDesignSelection[]
+  chsSelectionMappings                 CHSSelectionTypeMapping[]
   leadDetailedLogs                     LeadDetailedLogs[]
   leadDocumentLogs                     LeadDocumentLogs[]
   documents                            LeadDocuments[]
@@ -163,6 +164,8 @@ model UserMaster {
   designMeetingDocsMappingForCreatedBY       LeadDesignMeetingDocumentsMapping[]  @relation("DesignMeetingDocsMappingCreatedBy")
   designSelectionsCreated                    LeadDesignSelection[]                @relation("DesignSelectionCreatedBy")
   designSelectionsUpdated                    LeadDesignSelection[]                @relation("DesignSelectionUpdatedBy")
+  chsMappingCreatedBy                        CHSSelectionTypeMapping[]            @relation("CHSMappingCreatedBy")
+  chsMappingUpdatedBy                        CHSSelectionTypeMapping[]            @relation("CHSMappingUpdatedBy")
   leadDetailedLogs                           LeadDetailedLogs[]
   leadDocumentLogs                           LeadDocumentLogs[]
   documentsCreated                           LeadDocuments[]                      @relation("DocumentCreatedBy")
@@ -453,6 +456,7 @@ model LeadMaster {
   designMeeting                               LeadDesignMeeting[]
   designMeetingDocsMapping                    LeadDesignMeetingDocumentsMapping[]
   designSelection                             LeadDesignSelection[]
+  chsSelectionMappings                        CHSSelectionTypeMapping[]
   leadDetailedLogs                            LeadDetailedLogs[]
   leadDocumentLogs                            LeadDocumentLogs[]
   documents                                   LeadDocuments[]
@@ -643,34 +647,38 @@ model ProductTypeMaster {
 }
 
 model CarcassTypeMaster {
-  id         Int            @id @default(autoincrement())
-  name       String
-  vendor_id  Int
-  rules      TimelineRule[]
-  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                      Int                        @id @default(autoincrement())
+  name                    String
+  vendor_id               Int
+  rules                   TimelineRule[]
+  chsSelectionMappings    CHSSelectionTypeMapping[]
+  vendor                  VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model ShutterTypeMaster {
-  id         Int                   @id @default(autoincrement())
-  name       String
-  vendor_id  Int
-  subTypes   ShutterSubTypeMaster[]
-  rules      TimelineRule[]
-  vendor     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                      Int                        @id @default(autoincrement())
+  name                    String
+  vendor_id               Int
+  subTypes                ShutterSubTypeMaster[]
+  rules                   TimelineRule[]
+  chsSelectionMappings    CHSSelectionTypeMapping[]
+  vendor                  VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model ShutterSubTypeMaster {
-  id               Int               @id @default(autoincrement())
-  name             String
-  shutter_type_id  Int
-  shutter          ShutterTypeMaster @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+  id                      Int                        @id @default(autoincrement())
+  name                    String
+  shutter_type_id         Int
+  chsSelectionMappings    CHSSelectionTypeMapping[]
+  shutter                 ShutterTypeMaster          @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
 }
 
 model HandleTypeMaster {
-  id         Int            @id @default(autoincrement())
-  name       String
-  vendor_id  Int
-  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                      Int                        @id @default(autoincrement())
+  name                    String
+  vendor_id               Int
+  chsSelectionMappings    CHSSelectionTypeMapping[]
+  vendor                  VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model TimelineRule {
@@ -1066,6 +1074,34 @@ model LeadDesignSelection {
   productStructureInstance      LeadProductStructureInstance? @relation(fields: [product_structure_instance_id], references: [id])
   updatedBy                     UserMaster?                   @relation("DesignSelectionUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
   vendor                        VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  chsSelectionMappings          CHSSelectionTypeMapping[]
+}
+
+model CHSSelectionTypeMapping {
+  id                  Int                   @id @default(autoincrement())
+  vendor_id           Int
+  lead_id             Int
+  selection_id        Int
+  carcass_type_id     Int?
+  shutter_type_id     Int?
+  shutter_sub_type_id Int?
+  handle_type_id      Int?
+  created_at          DateTime              @default(now())
+  created_by          Int
+  updated_at          DateTime              @updatedAt
+  updated_by          Int?
+
+  vendor        VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  selection     LeadDesignSelection   @relation(fields: [selection_id], references: [id], onDelete: Cascade)
+  carcassType   CarcassTypeMaster?    @relation(fields: [carcass_type_id], references: [id])
+  shutterType   ShutterTypeMaster?    @relation(fields: [shutter_type_id], references: [id])
+  shutterSubType ShutterSubTypeMaster? @relation(fields: [shutter_sub_type_id], references: [id])
+  handleType    HandleTypeMaster?     @relation(fields: [handle_type_id], references: [id])
+  createdBy     UserMaster            @relation("CHSMappingCreatedBy", fields: [created_by], references: [id])
+  updatedBy     UserMaster?           @relation("CHSMappingUpdatedBy", fields: [updated_by], references: [id])
+
+  @@map("chs_selection_type_mapping")
 }
 
 model PaymentTypeMaster {

@@ -204,6 +204,7 @@ export type HandleTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"HandleTypeMaster"> | number
   name?: Prisma.StringFilter<"HandleTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HandleTypeMaster"> | number
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -211,6 +212,7 @@ export type HandleTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -221,6 +223,7 @@ export type HandleTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.HandleTypeMasterWhereInput | Prisma.HandleTypeMasterWhereInput[]
   name?: Prisma.StringFilter<"HandleTypeMaster"> | string
   vendor_id?: Prisma.IntFilter<"HandleTypeMaster"> | number
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -246,6 +249,7 @@ export type HandleTypeMasterScalarWhereWithAggregatesInput = {
 
 export type HandleTypeMasterCreateInput = {
   name: string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutHandleTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutHandleTypesInput
 }
 
@@ -253,10 +257,12 @@ export type HandleTypeMasterUncheckedCreateInput = {
   id?: number
   name: string
   vendor_id: number
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutHandleTypeInput
 }
 
 export type HandleTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutHandleTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHandleTypesNestedInput
 }
 
@@ -264,6 +270,7 @@ export type HandleTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutHandleTypeNestedInput
 }
 
 export type HandleTypeMasterCreateManyInput = {
@@ -320,6 +327,11 @@ export type HandleTypeMasterSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
 }
 
+export type HandleTypeMasterNullableScalarRelationFilter = {
+  is?: Prisma.HandleTypeMasterWhereInput | null
+  isNot?: Prisma.HandleTypeMasterWhereInput | null
+}
+
 export type HandleTypeMasterCreateNestedManyWithoutVendorInput = {
   create?: Prisma.XOR<Prisma.HandleTypeMasterCreateWithoutVendorInput, Prisma.HandleTypeMasterUncheckedCreateWithoutVendorInput> | Prisma.HandleTypeMasterCreateWithoutVendorInput[] | Prisma.HandleTypeMasterUncheckedCreateWithoutVendorInput[]
   connectOrCreate?: Prisma.HandleTypeMasterCreateOrConnectWithoutVendorInput | Prisma.HandleTypeMasterCreateOrConnectWithoutVendorInput[]
@@ -362,13 +374,31 @@ export type HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.HandleTypeMasterScalarWhereInput | Prisma.HandleTypeMasterScalarWhereInput[]
 }
 
+export type HandleTypeMasterCreateNestedOneWithoutChsSelectionMappingsInput = {
+  create?: Prisma.XOR<Prisma.HandleTypeMasterCreateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.HandleTypeMasterCreateOrConnectWithoutChsSelectionMappingsInput
+  connect?: Prisma.HandleTypeMasterWhereUniqueInput
+}
+
+export type HandleTypeMasterUpdateOneWithoutChsSelectionMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.HandleTypeMasterCreateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.HandleTypeMasterCreateOrConnectWithoutChsSelectionMappingsInput
+  upsert?: Prisma.HandleTypeMasterUpsertWithoutChsSelectionMappingsInput
+  disconnect?: Prisma.HandleTypeMasterWhereInput | boolean
+  delete?: Prisma.HandleTypeMasterWhereInput | boolean
+  connect?: Prisma.HandleTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.HandleTypeMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUpdateWithoutChsSelectionMappingsInput>, Prisma.HandleTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
 export type HandleTypeMasterCreateWithoutVendorInput = {
   name: string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutHandleTypeInput
 }
 
 export type HandleTypeMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   name: string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutHandleTypeInput
 }
 
 export type HandleTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -406,6 +436,44 @@ export type HandleTypeMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"HandleTypeMaster"> | number
 }
 
+export type HandleTypeMasterCreateWithoutChsSelectionMappingsInput = {
+  name: string
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutHandleTypesInput
+}
+
+export type HandleTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
+  id?: number
+  name: string
+  vendor_id: number
+}
+
+export type HandleTypeMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
+  where: Prisma.HandleTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.HandleTypeMasterCreateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+}
+
+export type HandleTypeMasterUpsertWithoutChsSelectionMappingsInput = {
+  update: Prisma.XOR<Prisma.HandleTypeMasterUpdateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+  create: Prisma.XOR<Prisma.HandleTypeMasterCreateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  where?: Prisma.HandleTypeMasterWhereInput
+}
+
+export type HandleTypeMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInput = {
+  where?: Prisma.HandleTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.HandleTypeMasterUpdateWithoutChsSelectionMappingsInput, Prisma.HandleTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
+export type HandleTypeMasterUpdateWithoutChsSelectionMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutHandleTypesNestedInput
+}
+
+export type HandleTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type HandleTypeMasterCreateManyVendorInput = {
   id?: number
   name: string
@@ -413,11 +481,13 @@ export type HandleTypeMasterCreateManyVendorInput = {
 
 export type HandleTypeMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutHandleTypeNestedInput
 }
 
 export type HandleTypeMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutHandleTypeNestedInput
 }
 
 export type HandleTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -426,12 +496,43 @@ export type HandleTypeMasterUncheckedUpdateManyWithoutVendorInput = {
 }
 
 
+/**
+ * Count Type HandleTypeMasterCountOutputType
+ */
+
+export type HandleTypeMasterCountOutputType = {
+  chsSelectionMappings: number
+}
+
+export type HandleTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chsSelectionMappings?: boolean | HandleTypeMasterCountOutputTypeCountChsSelectionMappingsArgs
+}
+
+/**
+ * HandleTypeMasterCountOutputType without action
+ */
+export type HandleTypeMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HandleTypeMasterCountOutputType
+   */
+  select?: Prisma.HandleTypeMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * HandleTypeMasterCountOutputType without action
+ */
+export type HandleTypeMasterCountOutputTypeCountChsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
+}
+
 
 export type HandleTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   vendor_id?: boolean
+  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.HandleTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["handleTypeMaster"]>
 
 export type HandleTypeMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -456,7 +557,9 @@ export type HandleTypeMasterSelectScalar = {
 
 export type HandleTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "vendor_id", ExtArgs["result"]["handleTypeMaster"]>
 export type HandleTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  chsSelectionMappings?: boolean | Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.HandleTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type HandleTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -468,6 +571,7 @@ export type HandleTypeMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $HandleTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "HandleTypeMaster"
   objects: {
+    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -868,6 +972,7 @@ readonly fields: HandleTypeMasterFieldRefs;
  */
 export interface Prisma__HandleTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  chsSelectionMappings<T extends Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1294,6 +1399,30 @@ export type HandleTypeMasterDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many HandleTypeMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * HandleTypeMaster.chsSelectionMappings
+ */
+export type HandleTypeMaster$chsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CHSSelectionTypeMapping
+   */
+  select?: Prisma.CHSSelectionTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CHSSelectionTypeMapping
+   */
+  omit?: Prisma.CHSSelectionTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CHSSelectionTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
+  orderBy?: Prisma.CHSSelectionTypeMappingOrderByWithRelationInput | Prisma.CHSSelectionTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CHSSelectionTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
 }
 
 /**

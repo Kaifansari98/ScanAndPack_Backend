@@ -863,6 +863,7 @@ export type LeadMasterWhereInput = {
   designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -984,6 +985,7 @@ export type LeadMasterOrderByWithRelationInput = {
   designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
   designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
@@ -1109,6 +1111,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
@@ -1385,6 +1388,7 @@ export type LeadMasterCreateInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -1506,6 +1510,7 @@ export type LeadMasterUncheckedCreateInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -1606,6 +1611,7 @@ export type LeadMasterUpdateInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -1727,6 +1733,7 @@ export type LeadMasterUncheckedUpdateInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -2932,6 +2939,20 @@ export type LeadMasterUpdateOneRequiredWithoutDesignSelectionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutDesignSelectionInput, Prisma.LeadMasterUpdateWithoutDesignSelectionInput>, Prisma.LeadMasterUncheckedUpdateWithoutDesignSelectionInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutChsSelectionMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutChsSelectionMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutChsSelectionMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutChsSelectionMappingsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutChsSelectionMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInput, Prisma.LeadMasterUpdateWithoutChsSelectionMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
 export type LeadMasterCreateNestedOneWithoutSiteSupervisorsInput = {
   create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutSiteSupervisorsInput, Prisma.LeadMasterUncheckedCreateWithoutSiteSupervisorsInput>
   connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutSiteSupervisorsInput
@@ -3251,6 +3272,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -3370,6 +3392,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -3578,6 +3601,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -3697,6 +3721,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -3807,6 +3832,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -3926,6 +3952,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -4036,6 +4063,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -4155,6 +4183,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -4265,6 +4294,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -4384,6 +4414,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -4558,6 +4589,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -4678,6 +4710,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -4793,6 +4826,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -4913,6 +4947,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -5012,6 +5047,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -5132,6 +5168,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -5247,6 +5284,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -5367,6 +5405,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -5466,6 +5505,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -5586,6 +5626,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -5701,6 +5742,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -5821,6 +5863,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -5919,6 +5962,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -6039,6 +6083,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -6154,6 +6199,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -6274,6 +6320,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -6374,6 +6421,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -6493,6 +6541,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -6619,6 +6668,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -6738,6 +6788,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -6864,6 +6915,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -6983,6 +7035,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -7109,6 +7162,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -7229,6 +7283,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -7344,6 +7399,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -7464,6 +7520,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -7563,6 +7620,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
@@ -7683,6 +7741,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
@@ -7798,6 +7857,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
@@ -7918,6 +7978,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
@@ -8016,6 +8077,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -8136,6 +8198,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -8251,6 +8314,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -8371,6 +8435,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -8470,6 +8535,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -8590,6 +8656,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -8705,6 +8772,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -8825,6 +8893,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -8925,6 +8994,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -9045,6 +9115,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -9160,6 +9231,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -9280,6 +9352,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -9379,6 +9452,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -9499,6 +9573,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -9614,6 +9689,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -9734,6 +9810,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -9833,6 +9910,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -9953,6 +10031,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -10068,6 +10147,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -10188,6 +10268,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -10287,6 +10368,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -10407,6 +10489,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -10522,6 +10605,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -10642,6 +10726,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -10741,6 +10826,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -10861,6 +10947,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -10976,6 +11063,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -11096,6 +11184,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -11195,6 +11284,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -11315,6 +11405,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -11430,6 +11521,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -11550,6 +11642,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -11649,6 +11742,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -11768,6 +11862,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -11894,6 +11989,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -12014,6 +12110,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -12129,6 +12226,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -12249,6 +12347,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -12347,6 +12446,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -12467,6 +12567,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -12582,6 +12683,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -12702,6 +12804,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -12801,6 +12904,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -12921,6 +13025,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -13036,6 +13141,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -13156,6 +13262,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -13255,6 +13362,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -13375,6 +13483,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -13490,6 +13599,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -13610,6 +13720,465 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  order_login_prod_files_remark?: string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+}
+
+export type LeadMasterUpsertWithoutChsSelectionMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutChsSelectionMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput>
+}
+
+export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -13710,6 +14279,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -13830,6 +14400,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -13945,6 +14516,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -14065,6 +14637,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -14164,6 +14737,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -14284,6 +14858,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -14399,6 +14974,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -14519,6 +15095,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -14618,6 +15195,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
@@ -14738,6 +15316,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
@@ -14853,6 +15432,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
@@ -14973,6 +15553,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
@@ -15072,6 +15653,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
@@ -15192,6 +15774,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
@@ -15307,6 +15890,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
@@ -15427,6 +16011,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
@@ -15526,6 +16111,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -15646,6 +16232,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -15761,6 +16348,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -15881,6 +16469,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -15980,6 +16569,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -16100,6 +16690,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -16215,6 +16806,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -16335,6 +16927,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -16433,6 +17026,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -16553,6 +17147,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -16668,6 +17263,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -16788,6 +17384,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -16887,6 +17484,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -17007,6 +17605,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -17122,6 +17721,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -17242,6 +17842,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -17342,6 +17943,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -17462,6 +18064,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -17577,6 +18180,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -17697,6 +18301,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -17795,6 +18400,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -17915,6 +18521,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -18030,6 +18637,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -18150,6 +18758,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -18249,6 +18858,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -18369,6 +18979,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -18484,6 +19095,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -18604,6 +19216,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -18703,6 +19316,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -18823,6 +19437,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -18938,6 +19553,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -19058,6 +19674,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -19158,6 +19775,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -19278,6 +19896,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -19393,6 +20012,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -19513,6 +20133,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -19612,6 +20233,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -19731,6 +20353,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -19857,6 +20480,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
@@ -19977,6 +20601,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
@@ -20092,6 +20717,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -20212,6 +20838,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -20389,6 +21016,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -20508,6 +21136,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -20998,6 +21627,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -21117,6 +21747,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -21295,6 +21926,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -21414,6 +22046,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -21592,6 +22225,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -21711,6 +22345,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -21889,6 +22524,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -22008,6 +22644,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -22264,6 +22901,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -22383,6 +23021,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -22639,6 +23278,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -22758,6 +23398,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -23014,6 +23655,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -23133,6 +23775,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -23389,6 +24032,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -23508,6 +24152,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -23764,6 +24409,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
@@ -23883,6 +24529,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
@@ -24001,6 +24648,7 @@ export type LeadMasterCountOutputType = {
   designMeeting: number
   designMeetingDocsMapping: number
   designSelection: number
+  chsSelectionMappings: number
   leadDetailedLogs: number
   leadDocumentLogs: number
   documents: number
@@ -24036,6 +24684,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   designMeeting?: boolean | LeadMasterCountOutputTypeCountDesignMeetingArgs
   designMeetingDocsMapping?: boolean | LeadMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
   designSelection?: boolean | LeadMasterCountOutputTypeCountDesignSelectionArgs
+  chsSelectionMappings?: boolean | LeadMasterCountOutputTypeCountChsSelectionMappingsArgs
   leadDetailedLogs?: boolean | LeadMasterCountOutputTypeCountLeadDetailedLogsArgs
   leadDocumentLogs?: boolean | LeadMasterCountOutputTypeCountLeadDocumentLogsArgs
   documents?: boolean | LeadMasterCountOutputTypeCountDocumentsArgs
@@ -24144,6 +24793,13 @@ export type LeadMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArgs e
  */
 export type LeadMasterCountOutputTypeCountDesignSelectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDesignSelectionWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountChsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
 }
 
 /**
@@ -24382,6 +25038,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   designMeeting?: boolean | Prisma.LeadMaster$designMeetingArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.LeadMaster$designMeetingDocsMappingArgs<ExtArgs>
   designSelection?: boolean | Prisma.LeadMaster$designSelectionArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.LeadMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.LeadMaster$leadDetailedLogsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.LeadMaster$documentsArgs<ExtArgs>
@@ -24686,6 +25343,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   designMeeting?: boolean | Prisma.LeadMaster$designMeetingArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.LeadMaster$designMeetingDocsMappingArgs<ExtArgs>
   designSelection?: boolean | Prisma.LeadMaster$designSelectionArgs<ExtArgs>
+  chsSelectionMappings?: boolean | Prisma.LeadMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.LeadMaster$leadDetailedLogsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.LeadMaster$documentsArgs<ExtArgs>
@@ -24758,6 +25416,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
     designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
     designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
+    chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
@@ -25272,6 +25931,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   designMeeting<T extends Prisma.LeadMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designMeetingDocsMapping<T extends Prisma.LeadMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designSelection<T extends Prisma.LeadMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chsSelectionMappings<T extends Prisma.LeadMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.LeadMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.LeadMaster$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.LeadMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -26065,6 +26725,30 @@ export type LeadMaster$designSelectionArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.LeadDesignSelectionScalarFieldEnum | Prisma.LeadDesignSelectionScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.chsSelectionMappings
+ */
+export type LeadMaster$chsSelectionMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CHSSelectionTypeMapping
+   */
+  select?: Prisma.CHSSelectionTypeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CHSSelectionTypeMapping
+   */
+  omit?: Prisma.CHSSelectionTypeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CHSSelectionTypeMappingInclude<ExtArgs> | null
+  where?: Prisma.CHSSelectionTypeMappingWhereInput
+  orderBy?: Prisma.CHSSelectionTypeMappingOrderByWithRelationInput | Prisma.CHSSelectionTypeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CHSSelectionTypeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
 }
 
 /**

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { DesigingStageController } from "../../../controllers/leadModuleControllers/desigingStage/designing-stage.controller";
+import { CHSSelectionTypeMappingController } from "../../../controllers/leadModuleControllers/desigingStage/chs-selection-type-mapping.controller";
 import {
   createDesignSelectionValidation,
   updateLeadStatusValidation,
@@ -137,4 +138,24 @@ DesigningStageRouter.get(
   "/vendor/:vendorId/lead/:leadId/instance/:instanceId/stage",
   DesigingStageController.getInstanceStageController,
 );
+
+// ─── CHS Selection Type Mapping ───────────────────────────────────────────────
+// POST   /api/leads/designing-stage/chs-selection-type-mapping
+DesigningStageRouter.post(
+  "/chs-selection-type-mapping",
+  CHSSelectionTypeMappingController.upsert,
+);
+
+// GET    /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/chs-selection-type-mapping
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/chs-selection-type-mapping",
+  CHSSelectionTypeMappingController.getByLead,
+);
+
+// PUT    /api/leads/designing-stage/chs-selection-type-mapping/:id
+DesigningStageRouter.put(
+  "/chs-selection-type-mapping/:id",
+  CHSSelectionTypeMappingController.updateById,
+);
+
 export default DesigningStageRouter;

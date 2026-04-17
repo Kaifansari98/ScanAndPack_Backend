@@ -98,6 +98,7 @@ export const ModelName = {
   LeadDesignMeeting: 'LeadDesignMeeting',
   LeadDesignMeetingDocumentsMapping: 'LeadDesignMeetingDocumentsMapping',
   LeadDesignSelection: 'LeadDesignSelection',
+  CHSSelectionTypeMapping: 'CHSSelectionTypeMapping',
   PaymentTypeMaster: 'PaymentTypeMaster',
   LeadSiteSupervisorMapping: 'LeadSiteSupervisorMapping',
   UserLeadTask: 'UserLeadTask',
@@ -930,6 +931,24 @@ export const LeadDesignSelectionScalarFieldEnum = {
 } as const
 
 export type LeadDesignSelectionScalarFieldEnum = (typeof LeadDesignSelectionScalarFieldEnum)[keyof typeof LeadDesignSelectionScalarFieldEnum]
+
+
+export const CHSSelectionTypeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  selection_id: 'selection_id',
+  carcass_type_id: 'carcass_type_id',
+  shutter_type_id: 'shutter_type_id',
+  shutter_sub_type_id: 'shutter_sub_type_id',
+  handle_type_id: 'handle_type_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by'
+} as const
+
+export type CHSSelectionTypeMappingScalarFieldEnum = (typeof CHSSelectionTypeMappingScalarFieldEnum)[keyof typeof CHSSelectionTypeMappingScalarFieldEnum]
 
 
 export const PaymentTypeMasterScalarFieldEnum = {
