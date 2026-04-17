@@ -165,40 +165,54 @@ export class CHSSelectionTypeMappingService {
       m.productType.type.toLowerCase().includes("kitchen"),
     );
 
-    // 2. Get all distinct (carcass_type_id, shutter_type_id) pairs for the lead
+    // 2. Collect all distinct carcass IDs and shutter IDs stored for this lead.
+    //    Each selection type (Carcas / Shutter / Handles) is saved as a separate
+    //    row so no single row has both fields set. We build a Cartesian product.
     const chsMappings = await prisma.cHSSelectionTypeMapping.findMany({
       where: { lead_id: leadId },
       select: { carcass_type_id: true, shutter_type_id: true },
     });
 
+    const carcassIds = [
+      ...new Set(
+        chsMappings
+          .map((m) => m.carcass_type_id)
+          .filter((id): id is number => id != null),
+      ),
+    ];
+    const shutterIds = [
+      ...new Set(
+        chsMappings
+          .map((m) => m.shutter_type_id)
+          .filter((id): id is number => id != null),
+      ),
+    ];
+
     let maxDays = 0;
-    const seen = new Set<string>();
 
-    for (const m of chsMappings) {
-      if (!m.carcass_type_id || !m.shutter_type_id) continue;
-      const key = `${m.carcass_type_id}-${m.shutter_type_id}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-
-      const rule = await prisma.timelineRule.findUnique({
-        where: {
-          vendor_id_carcass_id_shutter_id: {
-            vendor_id: vendorId,
-            carcass_id: m.carcass_type_id,
-            shutter_id: m.shutter_type_id,
+    // Cartesian product: every carcass × every shutter combination
+    for (const carcassId of carcassIds) {
+      for (const shutterId of shutterIds) {
+        const rule = await prisma.timelineRule.findUnique({
+          where: {
+            vendor_id_carcass_id_shutter_id: {
+              vendor_id: vendorId,
+              carcass_id: carcassId,
+              shutter_id: shutterId,
+            },
           },
-        },
-        select: {
-          kitchen_manufacturing_days: true,
-          other_manufacturing_days: true,
-        },
-      });
+          select: {
+            kitchen_manufacturing_days: true,
+            other_manufacturing_days: true,
+          },
+        });
 
-      if (rule) {
-        const days = isKitchen
-          ? rule.kitchen_manufacturing_days
-          : rule.other_manufacturing_days;
-        if (days > maxDays) maxDays = days;
+        if (rule) {
+          const days = isKitchen
+            ? rule.kitchen_manufacturing_days
+            : rule.other_manufacturing_days;
+          if (days > maxDays) maxDays = days;
+        }
       }
     }
 
