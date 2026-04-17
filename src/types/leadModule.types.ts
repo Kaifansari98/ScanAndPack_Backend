@@ -59,6 +59,31 @@ export interface ProductStructureType{
     status?: string;
 }
 
+export interface CarcassType {
+    id: number;
+    name: string;
+    vendor_id: number;
+}
+
+export interface ShutterSubType {
+    id: number;
+    name: string;
+    shutter_type_id: number;
+}
+
+export interface ShutterType {
+    id: number;
+    name: string;
+    vendor_id: number;
+    subTypes?: ShutterSubType[];
+}
+
+export interface HandleType {
+    id: number;
+    name: string;
+    vendor_id: number;
+}
+
 export interface DocumentTypeInput {
   vendor_id: number;
   type: string;

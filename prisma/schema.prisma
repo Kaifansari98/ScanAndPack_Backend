@@ -39,6 +39,10 @@ model VendorMaster {
   installerMappings                    InstallerUserMapping[]
   installers                           InstallerUserMaster[]
   issueLogTypeMaster                   IssueLogTypeMaster[]
+  carcassTypes                         CarcassTypeMaster[]
+  shutterTypes                         ShutterTypeMaster[]
+  handleTypes                          HandleTypeMaster[]
+  timelineRules                        TimelineRule[]
   leadActivityStatusLog                LeadActivityStatusLog[]
   leadChatDocuments                    LeadChatDocument[]
   leadChatRooms                        LeadChatRoom[]
@@ -636,6 +640,54 @@ model ProductTypeMaster {
   leads                     LeadProductMapping[]
   productStructureInstances LeadProductStructureInstance[]
   vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model CarcassTypeMaster {
+  id         Int            @id @default(autoincrement())
+  name       String
+  vendor_id  Int
+  rules      TimelineRule[]
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model ShutterTypeMaster {
+  id         Int                   @id @default(autoincrement())
+  name       String
+  vendor_id  Int
+  subTypes   ShutterSubTypeMaster[]
+  rules      TimelineRule[]
+  vendor     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model ShutterSubTypeMaster {
+  id               Int               @id @default(autoincrement())
+  name             String
+  shutter_type_id  Int
+  shutter          ShutterTypeMaster @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+}
+
+model HandleTypeMaster {
+  id         Int            @id @default(autoincrement())
+  name       String
+  vendor_id  Int
+  vendor     VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model TimelineRule {
+  id                          Int               @id @default(autoincrement())
+  vendor_id                   Int
+  carcass_id                  Int
+  shutter_id                  Int
+  kitchen_manufacturing_days  Int
+  other_manufacturing_days    Int
+  created_at                  DateTime          @default(now())
+  carcass                     CarcassTypeMaster @relation(fields: [carcass_id], references: [id], onDelete: Cascade)
+  shutter                     ShutterTypeMaster @relation(fields: [shutter_id], references: [id], onDelete: Cascade)
+  vendor                      VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, carcass_id, shutter_id])
+  @@index([carcass_id])
+  @@index([shutter_id])
 }
 
 model LeadDocuments {

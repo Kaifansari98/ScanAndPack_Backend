@@ -128,6 +128,31 @@ export type LeadProductMapping = Prisma.LeadProductMappingModel
  */
 export type ProductTypeMaster = Prisma.ProductTypeMasterModel
 /**
+ * Model CarcassTypeMaster
+ * 
+ */
+export type CarcassTypeMaster = Prisma.CarcassTypeMasterModel
+/**
+ * Model ShutterTypeMaster
+ * 
+ */
+export type ShutterTypeMaster = Prisma.ShutterTypeMasterModel
+/**
+ * Model ShutterSubTypeMaster
+ * 
+ */
+export type ShutterSubTypeMaster = Prisma.ShutterSubTypeMasterModel
+/**
+ * Model HandleTypeMaster
+ * 
+ */
+export type HandleTypeMaster = Prisma.HandleTypeMasterModel
+/**
+ * Model TimelineRule
+ * 
+ */
+export type TimelineRule = Prisma.TimelineRuleModel
+/**
  * Model LeadDocuments
  * 
  */

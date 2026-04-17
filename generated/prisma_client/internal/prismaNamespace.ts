@@ -406,6 +406,11 @@ export const ModelName = {
   AccountMaster: 'AccountMaster',
   LeadProductMapping: 'LeadProductMapping',
   ProductTypeMaster: 'ProductTypeMaster',
+  CarcassTypeMaster: 'CarcassTypeMaster',
+  ShutterTypeMaster: 'ShutterTypeMaster',
+  ShutterSubTypeMaster: 'ShutterSubTypeMaster',
+  HandleTypeMaster: 'HandleTypeMaster',
+  TimelineRule: 'TimelineRule',
   LeadDocuments: 'LeadDocuments',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
@@ -495,7 +500,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2124,6 +2129,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProductTypeMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProductTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CarcassTypeMaster: {
+      payload: Prisma.$CarcassTypeMasterPayload<ExtArgs>
+      fields: Prisma.CarcassTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CarcassTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CarcassTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.CarcassTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CarcassTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.CarcassTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.CarcassTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.CarcassTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CarcassTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.CarcassTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.CarcassTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CarcassTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CarcassTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CarcassTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.CarcassTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.CarcassTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCarcassTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.CarcassTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarcassTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CarcassTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarcassTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShutterTypeMaster: {
+      payload: Prisma.$ShutterTypeMasterPayload<ExtArgs>
+      fields: Prisma.ShutterTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShutterTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShutterTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ShutterTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShutterTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ShutterTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ShutterTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ShutterTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShutterTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ShutterTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.ShutterTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShutterTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShutterTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShutterTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShutterTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ShutterTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShutterTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.ShutterTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShutterTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ShutterSubTypeMaster: {
+      payload: Prisma.$ShutterSubTypeMasterPayload<ExtArgs>
+      fields: Prisma.ShutterSubTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShutterSubTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShutterSubTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ShutterSubTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShutterSubTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ShutterSubTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ShutterSubTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ShutterSubTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShutterSubTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ShutterSubTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.ShutterSubTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShutterSubTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShutterSubTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShutterSubTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShutterSubTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShutterSubTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ShutterSubTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShutterSubTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.ShutterSubTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterSubTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShutterSubTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShutterSubTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    HandleTypeMaster: {
+      payload: Prisma.$HandleTypeMasterPayload<ExtArgs>
+      fields: Prisma.HandleTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HandleTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HandleTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.HandleTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HandleTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.HandleTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.HandleTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.HandleTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HandleTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.HandleTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.HandleTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.HandleTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HandleTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HandleTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.HandleTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HandleTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.HandleTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHandleTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.HandleTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HandleTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HandleTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HandleTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    TimelineRule: {
+      payload: Prisma.$TimelineRulePayload<ExtArgs>
+      fields: Prisma.TimelineRuleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TimelineRuleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TimelineRuleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        findFirst: {
+          args: Prisma.TimelineRuleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TimelineRuleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        findMany: {
+          args: Prisma.TimelineRuleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>[]
+        }
+        create: {
+          args: Prisma.TimelineRuleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        createMany: {
+          args: Prisma.TimelineRuleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TimelineRuleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>[]
+        }
+        delete: {
+          args: Prisma.TimelineRuleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        update: {
+          args: Prisma.TimelineRuleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        deleteMany: {
+          args: Prisma.TimelineRuleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TimelineRuleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TimelineRuleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>[]
+        }
+        upsert: {
+          args: Prisma.TimelineRuleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TimelineRulePayload>
+        }
+        aggregate: {
+          args: Prisma.TimelineRuleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTimelineRule>
+        }
+        groupBy: {
+          args: Prisma.TimelineRuleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TimelineRuleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TimelineRuleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TimelineRuleCountAggregateOutputType> | number
         }
       }
     }
@@ -8041,6 +8416,55 @@ export const ProductTypeMasterScalarFieldEnum = {
 export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFieldEnum)[keyof typeof ProductTypeMasterScalarFieldEnum]
 
 
+export const CarcassTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
+
+
+export const ShutterTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type ShutterTypeMasterScalarFieldEnum = (typeof ShutterTypeMasterScalarFieldEnum)[keyof typeof ShutterTypeMasterScalarFieldEnum]
+
+
+export const ShutterSubTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shutter_type_id: 'shutter_type_id'
+} as const
+
+export type ShutterSubTypeMasterScalarFieldEnum = (typeof ShutterSubTypeMasterScalarFieldEnum)[keyof typeof ShutterSubTypeMasterScalarFieldEnum]
+
+
+export const HandleTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type HandleTypeMasterScalarFieldEnum = (typeof HandleTypeMasterScalarFieldEnum)[keyof typeof HandleTypeMasterScalarFieldEnum]
+
+
+export const TimelineRuleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  carcass_id: 'carcass_id',
+  shutter_id: 'shutter_id',
+  kitchen_manufacturing_days: 'kitchen_manufacturing_days',
+  other_manufacturing_days: 'other_manufacturing_days',
+  created_at: 'created_at'
+} as const
+
+export type TimelineRuleScalarFieldEnum = (typeof TimelineRuleScalarFieldEnum)[keyof typeof TimelineRuleScalarFieldEnum]
+
+
 export const LeadDocumentsScalarFieldEnum = {
   id: 'id',
   doc_og_name: 'doc_og_name',
@@ -9743,6 +10167,11 @@ export type GlobalOmitConfig = {
   accountMaster?: Prisma.AccountMasterOmit
   leadProductMapping?: Prisma.LeadProductMappingOmit
   productTypeMaster?: Prisma.ProductTypeMasterOmit
+  carcassTypeMaster?: Prisma.CarcassTypeMasterOmit
+  shutterTypeMaster?: Prisma.ShutterTypeMasterOmit
+  shutterSubTypeMaster?: Prisma.ShutterSubTypeMasterOmit
+  handleTypeMaster?: Prisma.HandleTypeMasterOmit
+  timelineRule?: Prisma.TimelineRuleOmit
   leadDocuments?: Prisma.LeadDocumentsOmit
   leadChatRoom?: Prisma.LeadChatRoomOmit
   leadChatMember?: Prisma.LeadChatMemberOmit

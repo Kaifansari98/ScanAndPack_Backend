@@ -44,6 +44,11 @@ import {
   fetchAllPaymentTypes,
   removePaymentType,
 } from "../../controllers/leadModuleControllers/paymentType.controller";
+import {
+  fetchAllCarcassTypes,
+  fetchAllHandleTypes,
+  fetchAllShutterTypes,
+} from "../../controllers/leadModuleControllers/selectionMaster.controller";
 
 const leadsRouter = Router();
 
@@ -58,6 +63,9 @@ leadsRouter.get("/get-all-status-types/:vendor_id", fetchAllStatusTypes);
 leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
 leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
+leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
+leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
+leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
 leadsRouter.patch("/update-product-type-status/:id", toggleProductTypeStatus);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);

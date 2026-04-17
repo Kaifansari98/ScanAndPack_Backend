@@ -73,6 +73,11 @@ export const ModelName = {
   AccountMaster: 'AccountMaster',
   LeadProductMapping: 'LeadProductMapping',
   ProductTypeMaster: 'ProductTypeMaster',
+  CarcassTypeMaster: 'CarcassTypeMaster',
+  ShutterTypeMaster: 'ShutterTypeMaster',
+  ShutterSubTypeMaster: 'ShutterSubTypeMaster',
+  HandleTypeMaster: 'HandleTypeMaster',
+  TimelineRule: 'TimelineRule',
   LeadDocuments: 'LeadDocuments',
   LeadChatRoom: 'LeadChatRoom',
   LeadChatMember: 'LeadChatMember',
@@ -562,6 +567,55 @@ export const ProductTypeMasterScalarFieldEnum = {
 } as const
 
 export type ProductTypeMasterScalarFieldEnum = (typeof ProductTypeMasterScalarFieldEnum)[keyof typeof ProductTypeMasterScalarFieldEnum]
+
+
+export const CarcassTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type CarcassTypeMasterScalarFieldEnum = (typeof CarcassTypeMasterScalarFieldEnum)[keyof typeof CarcassTypeMasterScalarFieldEnum]
+
+
+export const ShutterTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type ShutterTypeMasterScalarFieldEnum = (typeof ShutterTypeMasterScalarFieldEnum)[keyof typeof ShutterTypeMasterScalarFieldEnum]
+
+
+export const ShutterSubTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  shutter_type_id: 'shutter_type_id'
+} as const
+
+export type ShutterSubTypeMasterScalarFieldEnum = (typeof ShutterSubTypeMasterScalarFieldEnum)[keyof typeof ShutterSubTypeMasterScalarFieldEnum]
+
+
+export const HandleTypeMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type HandleTypeMasterScalarFieldEnum = (typeof HandleTypeMasterScalarFieldEnum)[keyof typeof HandleTypeMasterScalarFieldEnum]
+
+
+export const TimelineRuleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  carcass_id: 'carcass_id',
+  shutter_id: 'shutter_id',
+  kitchen_manufacturing_days: 'kitchen_manufacturing_days',
+  other_manufacturing_days: 'other_manufacturing_days',
+  created_at: 'created_at'
+} as const
+
+export type TimelineRuleScalarFieldEnum = (typeof TimelineRuleScalarFieldEnum)[keyof typeof TimelineRuleScalarFieldEnum]
 
 
 export const LeadDocumentsScalarFieldEnum = {

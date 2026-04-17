@@ -309,6 +309,10 @@ export type VendorMasterWhereInput = {
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   installers?: Prisma.InstallerUserMasterListRelationFilter
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterListRelationFilter
+  carcassTypes?: Prisma.CarcassTypeMasterListRelationFilter
+  shutterTypes?: Prisma.ShutterTypeMasterListRelationFilter
+  handleTypes?: Prisma.HandleTypeMasterListRelationFilter
+  timelineRules?: Prisma.TimelineRuleListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
   leadChatDocuments?: Prisma.LeadChatDocumentListRelationFilter
   leadChatRooms?: Prisma.LeadChatRoomListRelationFilter
@@ -394,6 +398,10 @@ export type VendorMasterOrderByWithRelationInput = {
   installerMappings?: Prisma.InstallerUserMappingOrderByRelationAggregateInput
   installers?: Prisma.InstallerUserMasterOrderByRelationAggregateInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterOrderByRelationAggregateInput
+  carcassTypes?: Prisma.CarcassTypeMasterOrderByRelationAggregateInput
+  shutterTypes?: Prisma.ShutterTypeMasterOrderByRelationAggregateInput
+  handleTypes?: Prisma.HandleTypeMasterOrderByRelationAggregateInput
+  timelineRules?: Prisma.TimelineRuleOrderByRelationAggregateInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogOrderByRelationAggregateInput
   leadChatDocuments?: Prisma.LeadChatDocumentOrderByRelationAggregateInput
   leadChatRooms?: Prisma.LeadChatRoomOrderByRelationAggregateInput
@@ -482,6 +490,10 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   installerMappings?: Prisma.InstallerUserMappingListRelationFilter
   installers?: Prisma.InstallerUserMasterListRelationFilter
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterListRelationFilter
+  carcassTypes?: Prisma.CarcassTypeMasterListRelationFilter
+  shutterTypes?: Prisma.ShutterTypeMasterListRelationFilter
+  handleTypes?: Prisma.HandleTypeMasterListRelationFilter
+  timelineRules?: Prisma.TimelineRuleListRelationFilter
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogListRelationFilter
   leadChatDocuments?: Prisma.LeadChatDocumentListRelationFilter
   leadChatRooms?: Prisma.LeadChatRoomListRelationFilter
@@ -608,6 +620,10 @@ export type VendorMasterCreateInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -693,6 +709,10 @@ export type VendorMasterUncheckedCreateInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -777,6 +797,10 @@ export type VendorMasterUpdateInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -862,6 +886,10 @@ export type VendorMasterUncheckedUpdateInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -1314,6 +1342,62 @@ export type VendorMasterUpdateOneRequiredWithoutProductTypesNestedInput = {
   upsert?: Prisma.VendorMasterUpsertWithoutProductTypesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutProductTypesInput, Prisma.VendorMasterUpdateWithoutProductTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutProductTypesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutCarcassTypesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCarcassTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutCarcassTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCarcassTypesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutCarcassTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutCarcassTypesInput, Prisma.VendorMasterUpdateWithoutCarcassTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutCarcassTypesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutShutterTypesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedCreateWithoutShutterTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutShutterTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedCreateWithoutShutterTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutShutterTypesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutShutterTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutShutterTypesInput, Prisma.VendorMasterUpdateWithoutShutterTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutShutterTypesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutHandleTypesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHandleTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutHandleTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutHandleTypesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHandleTypesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutHandleTypesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutHandleTypesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutHandleTypesInput, Prisma.VendorMasterUpdateWithoutHandleTypesInput>, Prisma.VendorMasterUncheckedUpdateWithoutHandleTypesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutTimelineRulesInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedCreateWithoutTimelineRulesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutTimelineRulesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutTimelineRulesNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedCreateWithoutTimelineRulesInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutTimelineRulesInput
+  upsert?: Prisma.VendorMasterUpsertWithoutTimelineRulesInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutTimelineRulesInput, Prisma.VendorMasterUpdateWithoutTimelineRulesInput>, Prisma.VendorMasterUncheckedUpdateWithoutTimelineRulesInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutDocumentsInput = {
@@ -2049,6 +2133,10 @@ export type VendorMasterCreateWithoutAddressesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -2133,6 +2221,10 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -2232,6 +2324,10 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -2316,6 +2412,10 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -2399,6 +2499,10 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -2483,6 +2587,10 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -2582,6 +2690,10 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -2666,6 +2778,10 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -2749,6 +2865,10 @@ export type VendorMasterCreateWithoutUsersInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -2833,6 +2953,10 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -2932,6 +3056,10 @@ export type VendorMasterUpdateWithoutUsersInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -3016,6 +3144,10 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -3099,6 +3231,10 @@ export type VendorMasterCreateWithoutProjectsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -3183,6 +3319,10 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -3282,6 +3422,10 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -3366,6 +3510,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -3449,6 +3597,10 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -3533,6 +3685,10 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -3632,6 +3788,10 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -3716,6 +3876,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -3799,6 +3963,10 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -3883,6 +4051,10 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -3982,6 +4154,10 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -4066,6 +4242,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -4148,6 +4328,10 @@ export type VendorMasterCreateWithoutBoxesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -4232,6 +4416,10 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -4331,6 +4519,10 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -4415,6 +4607,10 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -4499,6 +4695,10 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -4583,6 +4783,10 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -4682,6 +4886,10 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -4766,6 +4974,10 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -4849,6 +5061,10 @@ export type VendorMasterCreateWithoutTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -4933,6 +5149,10 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -5032,6 +5252,10 @@ export type VendorMasterUpdateWithoutTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -5116,6 +5340,10 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -5199,6 +5427,10 @@ export type VendorMasterCreateWithoutLeadsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -5283,6 +5515,10 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -5382,6 +5618,10 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -5466,6 +5706,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -5549,6 +5793,10 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -5633,6 +5881,10 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -5732,6 +5984,10 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -5816,6 +6072,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -5899,6 +6159,10 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -5983,6 +6247,10 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -6082,6 +6350,10 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -6166,6 +6438,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -6249,6 +6525,10 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
@@ -6333,6 +6613,10 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
@@ -6432,6 +6716,10 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
@@ -6516,6 +6804,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
@@ -6599,6 +6891,10 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -6683,6 +6979,10 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -6782,6 +7082,10 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -6866,6 +7170,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -6949,6 +7257,10 @@ export type VendorMasterCreateWithoutSourcesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -7033,6 +7345,10 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -7132,6 +7448,10 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -7216,6 +7536,10 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -7298,6 +7622,10 @@ export type VendorMasterCreateWithoutAccountsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -7382,6 +7710,10 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -7481,6 +7813,10 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -7565,6 +7901,10 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -7649,6 +7989,10 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -7733,6 +8077,10 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -7832,6 +8180,10 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -7916,6 +8268,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -7999,6 +8355,10 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -8083,6 +8443,10 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -8182,6 +8546,10 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -8266,6 +8634,10 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -8296,6 +8668,1470 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
   paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutCarcassTypesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutCarcassTypesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassTypesInput>
+}
+
+export type VendorMasterUpsertWithoutCarcassTypesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutCarcassTypesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedCreateWithoutCarcassTypesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutCarcassTypesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutCarcassTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutCarcassTypesInput>
+}
+
+export type VendorMasterUpdateWithoutCarcassTypesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutShutterTypesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutShutterTypesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedCreateWithoutShutterTypesInput>
+}
+
+export type VendorMasterUpsertWithoutShutterTypesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutShutterTypesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedCreateWithoutShutterTypesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutShutterTypesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutShutterTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutShutterTypesInput>
+}
+
+export type VendorMasterUpdateWithoutShutterTypesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutHandleTypesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutHandleTypesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHandleTypesInput>
+}
+
+export type VendorMasterUpsertWithoutHandleTypesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutHandleTypesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedCreateWithoutHandleTypesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutHandleTypesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutHandleTypesInput, Prisma.VendorMasterUncheckedUpdateWithoutHandleTypesInput>
+}
+
+export type VendorMasterUpdateWithoutHandleTypesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutTimelineRulesInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutTimelineRulesInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedCreateWithoutTimelineRulesInput>
+}
+
+export type VendorMasterUpsertWithoutTimelineRulesInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedUpdateWithoutTimelineRulesInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedCreateWithoutTimelineRulesInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutTimelineRulesInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutTimelineRulesInput, Prisma.VendorMasterUncheckedUpdateWithoutTimelineRulesInput>
+}
+
+export type VendorMasterUpdateWithoutTimelineRulesInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
   projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
   projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8349,6 +10185,10 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -8433,6 +10273,10 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -8532,6 +10376,10 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -8616,6 +10464,10 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -8699,6 +10551,10 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
@@ -8783,6 +10639,10 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
@@ -8882,6 +10742,10 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
@@ -8966,6 +10830,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
@@ -9049,6 +10917,10 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
@@ -9133,6 +11005,10 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
@@ -9232,6 +11108,10 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
@@ -9316,6 +11196,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
@@ -9399,6 +11283,10 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -9483,6 +11371,10 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -9582,6 +11474,10 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -9666,6 +11562,10 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -9749,6 +11649,10 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -9833,6 +11737,10 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -9932,6 +11840,10 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -10016,6 +11928,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -10099,6 +12015,10 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -10183,6 +12103,10 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -10282,6 +12206,10 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -10366,6 +12294,10 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -10449,6 +12381,10 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -10533,6 +12469,10 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -10632,6 +12572,10 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -10716,6 +12660,10 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -10799,6 +12747,10 @@ export type VendorMasterCreateWithoutLedgersInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -10883,6 +12835,10 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -10982,6 +12938,10 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -11066,6 +13026,10 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -11148,6 +13112,10 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -11232,6 +13200,10 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -11331,6 +13303,10 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -11415,6 +13391,10 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -11499,6 +13479,10 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -11583,6 +13567,10 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -11682,6 +13670,10 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -11766,6 +13758,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -11849,6 +13845,10 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -11933,6 +13933,10 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -12032,6 +14036,10 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -12116,6 +14124,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -12199,6 +14211,10 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -12283,6 +14299,10 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -12382,6 +14402,10 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -12466,6 +14490,10 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -12549,6 +14577,10 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -12633,6 +14665,10 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -12732,6 +14768,10 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -12816,6 +14856,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -12899,6 +14943,10 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -12983,6 +15031,10 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -13082,6 +15134,10 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -13166,6 +15222,10 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -13249,6 +15309,10 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -13333,6 +15397,10 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -13432,6 +15500,10 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -13516,6 +15588,10 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -13599,6 +15675,10 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -13683,6 +15763,10 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -13782,6 +15866,10 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -13866,6 +15954,10 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -13949,6 +16041,10 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -14033,6 +16129,10 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -14132,6 +16232,10 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -14216,6 +16320,10 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -14299,6 +16407,10 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -14383,6 +16495,10 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -14482,6 +16598,10 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -14566,6 +16686,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -14649,6 +16773,10 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -14733,6 +16861,10 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -14832,6 +16964,10 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -14916,6 +17052,10 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -14999,6 +17139,10 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -15083,6 +17227,10 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -15182,6 +17330,10 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -15266,6 +17418,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -15349,6 +17505,10 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -15433,6 +17593,10 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -15532,6 +17696,10 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -15616,6 +17784,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -15698,6 +17870,10 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -15782,6 +17958,10 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -15881,6 +18061,10 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -15965,6 +18149,10 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -16049,6 +18237,10 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -16133,6 +18325,10 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -16232,6 +18428,10 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -16316,6 +18516,10 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -16399,6 +18603,10 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -16483,6 +18691,10 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -16582,6 +18794,10 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -16666,6 +18882,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -16748,6 +18968,10 @@ export type VendorMasterCreateWithoutInstallersInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -16832,6 +19056,10 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -16931,6 +19159,10 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -17015,6 +19247,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -17098,6 +19334,10 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -17182,6 +19422,10 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -17281,6 +19525,10 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -17365,6 +19613,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -17448,6 +19700,10 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -17532,6 +19788,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -17631,6 +19891,10 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -17715,6 +19979,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -17798,6 +20066,10 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -17882,6 +20154,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -17981,6 +20257,10 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -18065,6 +20345,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -18149,6 +20433,10 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -18233,6 +20521,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -18332,6 +20624,10 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -18416,6 +20712,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -18499,6 +20799,10 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -18583,6 +20887,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -18682,6 +20990,10 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -18766,6 +21078,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -18849,6 +21165,10 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -18933,6 +21253,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -19032,6 +21356,10 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -19116,6 +21444,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -19199,6 +21531,10 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -19283,6 +21619,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -19382,6 +21722,10 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -19466,6 +21810,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -19548,6 +21896,10 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -19632,6 +21984,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -19731,6 +22087,10 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -19815,6 +22175,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -19898,6 +22262,10 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -19982,6 +22350,10 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -20081,6 +22453,10 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -20165,6 +22541,10 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -20248,6 +22628,10 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -20332,6 +22716,10 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -20431,6 +22819,10 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -20515,6 +22907,10 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -20599,6 +22995,10 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -20683,6 +23083,10 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -20782,6 +23186,10 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -20866,6 +23274,10 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -20949,6 +23361,10 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -21033,6 +23449,10 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -21132,6 +23552,10 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -21216,6 +23640,10 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -21299,6 +23727,10 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -21383,6 +23815,10 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -21482,6 +23918,10 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -21566,6 +24006,10 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -21649,6 +24093,10 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -21733,6 +24181,10 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -21832,6 +24284,10 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -21916,6 +24372,10 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -21998,6 +24458,10 @@ export type VendorMasterCreateWithoutCutListInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -22082,6 +24546,10 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -22181,6 +24649,10 @@ export type VendorMasterUpdateWithoutCutListInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -22265,6 +24737,10 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -22348,6 +24824,10 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -22432,6 +24912,10 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -22531,6 +25015,10 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -22615,6 +25103,10 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -22699,6 +25191,10 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -22783,6 +25279,10 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -22882,6 +25382,10 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -22966,6 +25470,10 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -23049,6 +25557,10 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -23133,6 +25645,10 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -23232,6 +25748,10 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -23316,6 +25836,10 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -23398,6 +25922,10 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -23482,6 +26010,10 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -23581,6 +26113,10 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -23665,6 +26201,10 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -23748,6 +26288,10 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -23832,6 +26376,10 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -23931,6 +26479,10 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -24015,6 +26567,10 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -24098,6 +26654,10 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -24182,6 +26742,10 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -24281,6 +26845,10 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -24365,6 +26933,10 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -24448,6 +27020,10 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -24532,6 +27108,10 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -24631,6 +27211,10 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -24715,6 +27299,10 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -24799,6 +27387,10 @@ export type VendorMasterCreateWithoutThemesInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -24883,6 +27475,10 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -24982,6 +27578,10 @@ export type VendorMasterUpdateWithoutThemesInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -25066,6 +27666,10 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -25149,6 +27753,10 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -25233,6 +27841,10 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -25332,6 +27944,10 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -25416,6 +28032,10 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -25499,6 +28119,10 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
@@ -25583,6 +28207,10 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
   installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
@@ -25682,6 +28310,10 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
@@ -25766,6 +28398,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
   installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
   issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
@@ -25841,6 +28477,10 @@ export type VendorMasterCountOutputType = {
   installerMappings: number
   installers: number
   issueLogTypeMaster: number
+  carcassTypes: number
+  shutterTypes: number
+  handleTypes: number
+  timelineRules: number
   leadActivityStatusLog: number
   leadChatDocuments: number
   leadChatRooms: number
@@ -25912,6 +28552,10 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   installerMappings?: boolean | VendorMasterCountOutputTypeCountInstallerMappingsArgs
   installers?: boolean | VendorMasterCountOutputTypeCountInstallersArgs
   issueLogTypeMaster?: boolean | VendorMasterCountOutputTypeCountIssueLogTypeMasterArgs
+  carcassTypes?: boolean | VendorMasterCountOutputTypeCountCarcassTypesArgs
+  shutterTypes?: boolean | VendorMasterCountOutputTypeCountShutterTypesArgs
+  handleTypes?: boolean | VendorMasterCountOutputTypeCountHandleTypesArgs
+  timelineRules?: boolean | VendorMasterCountOutputTypeCountTimelineRulesArgs
   leadActivityStatusLog?: boolean | VendorMasterCountOutputTypeCountLeadActivityStatusLogArgs
   leadChatDocuments?: boolean | VendorMasterCountOutputTypeCountLeadChatDocumentsArgs
   leadChatRooms?: boolean | VendorMasterCountOutputTypeCountLeadChatRoomsArgs
@@ -26092,6 +28736,34 @@ export type VendorMasterCountOutputTypeCountInstallersArgs<ExtArgs extends runti
  */
 export type VendorMasterCountOutputTypeCountIssueLogTypeMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.IssueLogTypeMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountCarcassTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CarcassTypeMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountShutterTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ShutterTypeMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountHandleTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HandleTypeMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountTimelineRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TimelineRuleWhereInput
 }
 
 /**
@@ -26484,6 +29156,10 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   installerMappings?: boolean | Prisma.VendorMaster$installerMappingsArgs<ExtArgs>
   installers?: boolean | Prisma.VendorMaster$installersArgs<ExtArgs>
   issueLogTypeMaster?: boolean | Prisma.VendorMaster$issueLogTypeMasterArgs<ExtArgs>
+  carcassTypes?: boolean | Prisma.VendorMaster$carcassTypesArgs<ExtArgs>
+  shutterTypes?: boolean | Prisma.VendorMaster$shutterTypesArgs<ExtArgs>
+  handleTypes?: boolean | Prisma.VendorMaster$handleTypesArgs<ExtArgs>
+  timelineRules?: boolean | Prisma.VendorMaster$timelineRulesArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.VendorMaster$leadActivityStatusLogArgs<ExtArgs>
   leadChatDocuments?: boolean | Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>
   leadChatRooms?: boolean | Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>
@@ -26608,6 +29284,10 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   installerMappings?: boolean | Prisma.VendorMaster$installerMappingsArgs<ExtArgs>
   installers?: boolean | Prisma.VendorMaster$installersArgs<ExtArgs>
   issueLogTypeMaster?: boolean | Prisma.VendorMaster$issueLogTypeMasterArgs<ExtArgs>
+  carcassTypes?: boolean | Prisma.VendorMaster$carcassTypesArgs<ExtArgs>
+  shutterTypes?: boolean | Prisma.VendorMaster$shutterTypesArgs<ExtArgs>
+  handleTypes?: boolean | Prisma.VendorMaster$handleTypesArgs<ExtArgs>
+  timelineRules?: boolean | Prisma.VendorMaster$timelineRulesArgs<ExtArgs>
   leadActivityStatusLog?: boolean | Prisma.VendorMaster$leadActivityStatusLogArgs<ExtArgs>
   leadChatDocuments?: boolean | Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>
   leadChatRooms?: boolean | Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>
@@ -26684,6 +29364,10 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     installerMappings: Prisma.$InstallerUserMappingPayload<ExtArgs>[]
     installers: Prisma.$InstallerUserMasterPayload<ExtArgs>[]
     issueLogTypeMaster: Prisma.$IssueLogTypeMasterPayload<ExtArgs>[]
+    carcassTypes: Prisma.$CarcassTypeMasterPayload<ExtArgs>[]
+    shutterTypes: Prisma.$ShutterTypeMasterPayload<ExtArgs>[]
+    handleTypes: Prisma.$HandleTypeMasterPayload<ExtArgs>[]
+    timelineRules: Prisma.$TimelineRulePayload<ExtArgs>[]
     leadActivityStatusLog: Prisma.$LeadActivityStatusLogPayload<ExtArgs>[]
     leadChatDocuments: Prisma.$LeadChatDocumentPayload<ExtArgs>[]
     leadChatRooms: Prisma.$LeadChatRoomPayload<ExtArgs>[]
@@ -27162,6 +29846,10 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   installerMappings<T extends Prisma.VendorMaster$installerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$installerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   installers<T extends Prisma.VendorMaster$installersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$installersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InstallerUserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   issueLogTypeMaster<T extends Prisma.VendorMaster$issueLogTypeMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$issueLogTypeMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IssueLogTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  carcassTypes<T extends Prisma.VendorMaster$carcassTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$carcassTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CarcassTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  shutterTypes<T extends Prisma.VendorMaster$shutterTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$shutterTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShutterTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  handleTypes<T extends Prisma.VendorMaster$handleTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$handleTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HandleTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  timelineRules<T extends Prisma.VendorMaster$timelineRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$timelineRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadActivityStatusLog<T extends Prisma.VendorMaster$leadActivityStatusLogArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadActivityStatusLogArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadActivityStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatDocuments<T extends Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatRooms<T extends Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -28049,6 +30737,102 @@ export type VendorMaster$issueLogTypeMasterArgs<ExtArgs extends runtime.Types.Ex
   take?: number
   skip?: number
   distinct?: Prisma.IssueLogTypeMasterScalarFieldEnum | Prisma.IssueLogTypeMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.carcassTypes
+ */
+export type VendorMaster$carcassTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CarcassTypeMaster
+   */
+  select?: Prisma.CarcassTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CarcassTypeMaster
+   */
+  omit?: Prisma.CarcassTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CarcassTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.CarcassTypeMasterWhereInput
+  orderBy?: Prisma.CarcassTypeMasterOrderByWithRelationInput | Prisma.CarcassTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.CarcassTypeMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CarcassTypeMasterScalarFieldEnum | Prisma.CarcassTypeMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.shutterTypes
+ */
+export type VendorMaster$shutterTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ShutterTypeMaster
+   */
+  select?: Prisma.ShutterTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ShutterTypeMaster
+   */
+  omit?: Prisma.ShutterTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ShutterTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.ShutterTypeMasterWhereInput
+  orderBy?: Prisma.ShutterTypeMasterOrderByWithRelationInput | Prisma.ShutterTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.ShutterTypeMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ShutterTypeMasterScalarFieldEnum | Prisma.ShutterTypeMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.handleTypes
+ */
+export type VendorMaster$handleTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HandleTypeMaster
+   */
+  select?: Prisma.HandleTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HandleTypeMaster
+   */
+  omit?: Prisma.HandleTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HandleTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.HandleTypeMasterWhereInput
+  orderBy?: Prisma.HandleTypeMasterOrderByWithRelationInput | Prisma.HandleTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.HandleTypeMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HandleTypeMasterScalarFieldEnum | Prisma.HandleTypeMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.timelineRules
+ */
+export type VendorMaster$timelineRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TimelineRule
+   */
+  select?: Prisma.TimelineRuleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TimelineRule
+   */
+  omit?: Prisma.TimelineRuleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TimelineRuleInclude<ExtArgs> | null
+  where?: Prisma.TimelineRuleWhereInput
+  orderBy?: Prisma.TimelineRuleOrderByWithRelationInput | Prisma.TimelineRuleOrderByWithRelationInput[]
+  cursor?: Prisma.TimelineRuleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TimelineRuleScalarFieldEnum | Prisma.TimelineRuleScalarFieldEnum[]
 }
 
 /**
