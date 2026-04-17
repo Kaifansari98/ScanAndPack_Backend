@@ -445,6 +445,7 @@ model LeadMaster {
   final_handover_marked_at                    DateTime?
   franchise_id                                Int?
   order_login_prod_files_remark               String?
+  total_required_chs_manufacturing_days       Int?
   cutList                                     CutList[]
   cutListMachineMapping                       CutListMachineMapping[]
   installationIssueLogMaster                  InstallationIssueLogMaster[]

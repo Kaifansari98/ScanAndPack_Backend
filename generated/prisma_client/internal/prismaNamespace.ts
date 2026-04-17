@@ -8371,7 +8371,8 @@ export const LeadMasterScalarFieldEnum = {
   amc_plan_closed_at: 'amc_plan_closed_at',
   final_handover_marked_at: 'final_handover_marked_at',
   franchise_id: 'franchise_id',
-  order_login_prod_files_remark: 'order_login_prod_files_remark'
+  order_login_prod_files_remark: 'order_login_prod_files_remark',
+  total_required_chs_manufacturing_days: 'total_required_chs_manufacturing_days'
 } as const
 
 export type LeadMasterScalarFieldEnum = (typeof LeadMasterScalarFieldEnum)[keyof typeof LeadMasterScalarFieldEnum]
