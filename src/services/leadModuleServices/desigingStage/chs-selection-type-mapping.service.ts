@@ -36,23 +36,21 @@ export class CHSSelectionTypeMappingService {
       where: { selection_id: data.selection_id },
     });
 
-    if (data.items.length === 0) {
-      return [];
+    if (data.items.length > 0) {
+      // Create new mappings
+      await prisma.cHSSelectionTypeMapping.createMany({
+        data: data.items.map((item) => ({
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          selection_id: data.selection_id,
+          carcass_type_id: item.carcass_type_id ?? null,
+          shutter_type_id: item.shutter_type_id ?? null,
+          shutter_sub_type_id: item.shutter_sub_type_id ?? null,
+          handle_type_id: item.handle_type_id ?? null,
+          created_by: data.created_by,
+        })),
+      });
     }
-
-    // Create new mappings
-    await prisma.cHSSelectionTypeMapping.createMany({
-      data: data.items.map((item) => ({
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        selection_id: data.selection_id,
-        carcass_type_id: item.carcass_type_id ?? null,
-        shutter_type_id: item.shutter_type_id ?? null,
-        shutter_sub_type_id: item.shutter_sub_type_id ?? null,
-        handle_type_id: item.handle_type_id ?? null,
-        created_by: data.created_by,
-      })),
-    });
 
     const result = await prisma.cHSSelectionTypeMapping.findMany({
       where: { selection_id: data.selection_id },
@@ -64,6 +62,7 @@ export class CHSSelectionTypeMappingService {
       },
     });
 
+    // Always recompute — covers both new items and cleared selections
     await CHSSelectionTypeMappingService.computeAndSetManufacturingDays(
       data.lead_id,
       data.vendor_id,
