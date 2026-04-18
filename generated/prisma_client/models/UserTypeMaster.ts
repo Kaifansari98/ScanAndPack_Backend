@@ -171,7 +171,7 @@ export type UserTypeMasterGroupByOutputType = {
   _max: UserTypeMasterMaxAggregateOutputType | null
 }
 
-type GetUserTypeMasterGroupByPayload<T extends UserTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserTypeMasterGroupByPayload<T extends UserTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1031,6 +1031,11 @@ export type UserTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` UserTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserTypeMasters.
+   */
   distinct?: Prisma.UserTypeMasterScalarFieldEnum | Prisma.UserTypeMasterScalarFieldEnum[]
 }
 

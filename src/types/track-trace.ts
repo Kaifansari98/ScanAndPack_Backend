@@ -33,4 +33,7 @@ export interface MarkDefectPayload {
   defect_id: number;
   defect_name: string;
   cut_list_id:number;
+  images:any
+  action:string,
+  rework_machine_id:number
 }

@@ -265,7 +265,7 @@ export type LeadAmcContractGroupByOutputType = {
   _max: LeadAmcContractMaxAggregateOutputType | null
 }
 
-type GetLeadAmcContractGroupByPayload<T extends LeadAmcContractGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadAmcContractGroupByPayload<T extends LeadAmcContractGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadAmcContractGroupByOutputType, T['by']> &
       {
@@ -2242,6 +2242,11 @@ export type LeadAmcContractFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` LeadAmcContracts.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadAmcContracts.
+   */
   distinct?: Prisma.LeadAmcContractScalarFieldEnum | Prisma.LeadAmcContractScalarFieldEnum[]
 }
 

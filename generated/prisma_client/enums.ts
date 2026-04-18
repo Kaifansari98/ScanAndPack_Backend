@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProjectCategoriesStatus = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ProjectCategoriesStatus = (typeof ProjectCategoriesStatus)[keyof typeof ProjectCategoriesStatus]
+
+
 export const ExternalPlatformTokenActiveStatus = {
   Yes: 'Yes',
   No: 'No'
@@ -240,3 +248,11 @@ export const ServiceClosureReason = {
 } as const
 
 export type ServiceClosureReason = (typeof ServiceClosureReason)[keyof typeof ServiceClosureReason]
+
+
+export const DefectStatus = {
+  Pending: 'Pending',
+  Completed: 'Completed'
+} as const
+
+export type DefectStatus = (typeof DefectStatus)[keyof typeof DefectStatus]

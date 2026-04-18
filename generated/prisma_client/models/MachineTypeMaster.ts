@@ -192,7 +192,7 @@ export type MachineTypeMasterGroupByOutputType = {
   _max: MachineTypeMasterMaxAggregateOutputType | null
 }
 
-type GetMachineTypeMasterGroupByPayload<T extends MachineTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetMachineTypeMasterGroupByPayload<T extends MachineTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MachineTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1133,6 +1133,11 @@ export type MachineTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` MachineTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MachineTypeMasters.
+   */
   distinct?: Prisma.MachineTypeMasterScalarFieldEnum | Prisma.MachineTypeMasterScalarFieldEnum[]
 }
 

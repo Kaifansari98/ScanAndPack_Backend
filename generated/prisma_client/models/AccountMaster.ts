@@ -282,7 +282,7 @@ export type AccountMasterGroupByOutputType = {
   _max: AccountMasterMaxAggregateOutputType | null
 }
 
-type GetAccountMasterGroupByPayload<T extends AccountMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetAccountMasterGroupByPayload<T extends AccountMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AccountMasterGroupByOutputType, T['by']> &
       {
@@ -8249,6 +8249,11 @@ export type AccountMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` AccountMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AccountMasters.
+   */
   distinct?: Prisma.AccountMasterScalarFieldEnum | Prisma.AccountMasterScalarFieldEnum[]
 }
 

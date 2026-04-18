@@ -152,7 +152,12 @@ export const ModelName = {
   ApiRequestLog: 'ApiRequestLog',
   ExternalPlatformMaster: 'ExternalPlatformMaster',
   ExternalPlatformToken: 'ExternalPlatformToken',
-  LeadExternalPlatformCustomerMapping: 'LeadExternalPlatformCustomerMapping'
+  LeadExternalPlatformCustomerMapping: 'LeadExternalPlatformCustomerMapping',
+  DefectedItemImage: 'DefectedItemImage',
+  DefectCompletionPhoto: 'DefectCompletionPhoto',
+  ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
+  ProjectCategoriesMaster: 'ProjectCategoriesMaster',
+  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -276,7 +281,7 @@ export const ProjectDetailsScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
+  lead_id: 'lead_id',
   total_items: 'total_items',
   total_packed: 'total_packed',
   total_unpacked: 'total_unpacked',
@@ -294,7 +299,6 @@ export const ProjectItemsMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
   category: 'category',
   unique_id: 'unique_id',
   item_name: 'item_name',
@@ -314,7 +318,7 @@ export const BoxMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
+  lead_id: 'lead_id',
   box_name: 'box_name',
   box_status: 'box_status',
   created_by: 'created_by',
@@ -322,7 +326,11 @@ export const BoxMasterScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
-  project_details_id: 'project_details_id'
+  project_details_id: 'project_details_id',
+  factory_out_by: 'factory_out_by',
+  factory_out_at: 'factory_out_at',
+  site_in_by: 'site_in_by',
+  site_in_at: 'site_in_at'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -1427,7 +1435,10 @@ export const CutListMachineMappingScalarFieldEnum = {
   in_operator: 'in_operator',
   out_operator: 'out_operator',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  box_id: 'box_id',
+  site_in_at: 'site_in_at',
+  site_in_by: 'site_in_by'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -1523,7 +1534,12 @@ export const DefectedItemScalarFieldEnum = {
   remark: 'remark',
   created_by: 'created_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  action: 'action',
+  rework_machine_id: 'rework_machine_id',
+  defect_status: 'defect_status',
+  defect_completed_by: 'defect_completed_by',
+  defect_completed_at: 'defect_completed_at'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -1727,6 +1743,69 @@ export const LeadExternalPlatformCustomerMappingScalarFieldEnum = {
 } as const
 
 export type LeadExternalPlatformCustomerMappingScalarFieldEnum = (typeof LeadExternalPlatformCustomerMappingScalarFieldEnum)[keyof typeof LeadExternalPlatformCustomerMappingScalarFieldEnum]
+
+
+export const DefectedItemImageScalarFieldEnum = {
+  id: 'id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_at: 'created_at'
+} as const
+
+export type DefectedItemImageScalarFieldEnum = (typeof DefectedItemImageScalarFieldEnum)[keyof typeof DefectedItemImageScalarFieldEnum]
+
+
+export const DefectCompletionPhotoScalarFieldEnum = {
+  id: 'id',
+  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
+  cut_list_id: 'cut_list_id',
+  vendor_id: 'vendor_id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type DefectCompletionPhotoScalarFieldEnum = (typeof DefectCompletionPhotoScalarFieldEnum)[keyof typeof DefectCompletionPhotoScalarFieldEnum]
+
+
+export const ProjectCategoriesTypeMasterScalarFieldEnum = {
+  id: 'id',
+  module_name: 'module_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectCategoriesTypeMasterScalarFieldEnum = (typeof ProjectCategoriesTypeMasterScalarFieldEnum)[keyof typeof ProjectCategoriesTypeMasterScalarFieldEnum]
+
+
+export const ProjectCategoriesMasterScalarFieldEnum = {
+  id: 'id',
+  category_name: 'category_name',
+  status: 'status',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  external_category_id: 'external_category_id'
+} as const
+
+export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
+
+
+export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {
+  id: 'id',
+  project_categories_master_id: 'project_categories_master_id',
+  project_categories_type_master_id: 'project_categories_type_master_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
+} as const
+
+export type ProjectCategoriesMasterVendorMappingScalarFieldEnum = (typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum)[keyof typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum]
 
 
 export const SortOrder = {

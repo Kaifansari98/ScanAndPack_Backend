@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.4.1
- * Query Engine version: 55ae170b1ced7fc6ed07a15f110549408c501bb3
+ * Prisma Client JS version: 7.7.0
+ * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.4.1",
-  engine: "55ae170b1ced7fc6ed07a15f110549408c501bb3"
+  client: "7.7.0",
+  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
 /**
@@ -485,7 +485,12 @@ export const ModelName = {
   ApiRequestLog: 'ApiRequestLog',
   ExternalPlatformMaster: 'ExternalPlatformMaster',
   ExternalPlatformToken: 'ExternalPlatformToken',
-  LeadExternalPlatformCustomerMapping: 'LeadExternalPlatformCustomerMapping'
+  LeadExternalPlatformCustomerMapping: 'LeadExternalPlatformCustomerMapping',
+  DefectedItemImage: 'DefectedItemImage',
+  DefectCompletionPhoto: 'DefectCompletionPhoto',
+  ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
+  ProjectCategoriesMaster: 'ProjectCategoriesMaster',
+  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -501,7 +506,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -8053,6 +8058,376 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DefectedItemImage: {
+      payload: Prisma.$DefectedItemImagePayload<ExtArgs>
+      fields: Prisma.DefectedItemImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DefectedItemImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DefectedItemImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        findFirst: {
+          args: Prisma.DefectedItemImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DefectedItemImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        findMany: {
+          args: Prisma.DefectedItemImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        create: {
+          args: Prisma.DefectedItemImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        createMany: {
+          args: Prisma.DefectedItemImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DefectedItemImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        delete: {
+          args: Prisma.DefectedItemImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        update: {
+          args: Prisma.DefectedItemImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.DefectedItemImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DefectedItemImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DefectedItemImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.DefectedItemImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectedItemImagePayload>
+        }
+        aggregate: {
+          args: Prisma.DefectedItemImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDefectedItemImage>
+        }
+        groupBy: {
+          args: Prisma.DefectedItemImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectedItemImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DefectedItemImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectedItemImageCountAggregateOutputType> | number
+        }
+      }
+    }
+    DefectCompletionPhoto: {
+      payload: Prisma.$DefectCompletionPhotoPayload<ExtArgs>
+      fields: Prisma.DefectCompletionPhotoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DefectCompletionPhotoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DefectCompletionPhotoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        findFirst: {
+          args: Prisma.DefectCompletionPhotoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DefectCompletionPhotoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        findMany: {
+          args: Prisma.DefectCompletionPhotoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>[]
+        }
+        create: {
+          args: Prisma.DefectCompletionPhotoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        createMany: {
+          args: Prisma.DefectCompletionPhotoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DefectCompletionPhotoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>[]
+        }
+        delete: {
+          args: Prisma.DefectCompletionPhotoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        update: {
+          args: Prisma.DefectCompletionPhotoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        deleteMany: {
+          args: Prisma.DefectCompletionPhotoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DefectCompletionPhotoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DefectCompletionPhotoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>[]
+        }
+        upsert: {
+          args: Prisma.DefectCompletionPhotoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DefectCompletionPhotoPayload>
+        }
+        aggregate: {
+          args: Prisma.DefectCompletionPhotoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDefectCompletionPhoto>
+        }
+        groupBy: {
+          args: Prisma.DefectCompletionPhotoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectCompletionPhotoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DefectCompletionPhotoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DefectCompletionPhotoCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectCategoriesTypeMaster: {
+      payload: Prisma.$ProjectCategoriesTypeMasterPayload<ExtArgs>
+      fields: Prisma.ProjectCategoriesTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectCategoriesTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectCategoriesTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectCategoriesTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectCategoriesTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectCategoriesTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectCategoriesTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectCategoriesTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectCategoriesTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectCategoriesTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.ProjectCategoriesTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectCategoriesTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectCategoriesTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectCategoriesTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectCategoriesTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectCategoriesTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectCategoriesTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.ProjectCategoriesTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectCategoriesTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectCategoriesMaster: {
+      payload: Prisma.$ProjectCategoriesMasterPayload<ExtArgs>
+      fields: Prisma.ProjectCategoriesMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectCategoriesMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectCategoriesMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectCategoriesMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectCategoriesMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectCategoriesMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectCategoriesMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectCategoriesMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectCategoriesMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectCategoriesMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        update: {
+          args: Prisma.ProjectCategoriesMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectCategoriesMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectCategoriesMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectCategoriesMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectCategoriesMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectCategoriesMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectCategoriesMaster>
+        }
+        groupBy: {
+          args: Prisma.ProjectCategoriesMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectCategoriesMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectCategoriesMasterVendorMapping: {
+      payload: Prisma.$ProjectCategoriesMasterVendorMappingPayload<ExtArgs>
+      fields: Prisma.ProjectCategoriesMasterVendorMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        update: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectCategoriesMasterVendorMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectCategoriesMasterVendorMapping>
+        }
+        groupBy: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesMasterVendorMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectCategoriesMasterVendorMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCategoriesMasterVendorMappingCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -8197,7 +8572,7 @@ export const ProjectDetailsScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
+  lead_id: 'lead_id',
   total_items: 'total_items',
   total_packed: 'total_packed',
   total_unpacked: 'total_unpacked',
@@ -8215,7 +8590,6 @@ export const ProjectItemsMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
   category: 'category',
   unique_id: 'unique_id',
   item_name: 'item_name',
@@ -8235,7 +8609,7 @@ export const BoxMasterScalarFieldEnum = {
   id: 'id',
   project_id: 'project_id',
   vendor_id: 'vendor_id',
-  client_id: 'client_id',
+  lead_id: 'lead_id',
   box_name: 'box_name',
   box_status: 'box_status',
   created_by: 'created_by',
@@ -8243,7 +8617,11 @@ export const BoxMasterScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
-  project_details_id: 'project_details_id'
+  project_details_id: 'project_details_id',
+  factory_out_by: 'factory_out_by',
+  factory_out_at: 'factory_out_at',
+  site_in_by: 'site_in_by',
+  site_in_at: 'site_in_at'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -9348,7 +9726,10 @@ export const CutListMachineMappingScalarFieldEnum = {
   in_operator: 'in_operator',
   out_operator: 'out_operator',
   created_by: 'created_by',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  box_id: 'box_id',
+  site_in_at: 'site_in_at',
+  site_in_by: 'site_in_by'
 } as const
 
 export type CutListMachineMappingScalarFieldEnum = (typeof CutListMachineMappingScalarFieldEnum)[keyof typeof CutListMachineMappingScalarFieldEnum]
@@ -9444,7 +9825,12 @@ export const DefectedItemScalarFieldEnum = {
   remark: 'remark',
   created_by: 'created_by',
   created_at: 'created_at',
-  updated_at: 'updated_at'
+  updated_at: 'updated_at',
+  action: 'action',
+  rework_machine_id: 'rework_machine_id',
+  defect_status: 'defect_status',
+  defect_completed_by: 'defect_completed_by',
+  defect_completed_at: 'defect_completed_at'
 } as const
 
 export type DefectedItemScalarFieldEnum = (typeof DefectedItemScalarFieldEnum)[keyof typeof DefectedItemScalarFieldEnum]
@@ -9648,6 +10034,69 @@ export const LeadExternalPlatformCustomerMappingScalarFieldEnum = {
 } as const
 
 export type LeadExternalPlatformCustomerMappingScalarFieldEnum = (typeof LeadExternalPlatformCustomerMappingScalarFieldEnum)[keyof typeof LeadExternalPlatformCustomerMappingScalarFieldEnum]
+
+
+export const DefectedItemImageScalarFieldEnum = {
+  id: 'id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_at: 'created_at'
+} as const
+
+export type DefectedItemImageScalarFieldEnum = (typeof DefectedItemImageScalarFieldEnum)[keyof typeof DefectedItemImageScalarFieldEnum]
+
+
+export const DefectCompletionPhotoScalarFieldEnum = {
+  id: 'id',
+  cut_list_machine_mapping_id: 'cut_list_machine_mapping_id',
+  cut_list_id: 'cut_list_id',
+  vendor_id: 'vendor_id',
+  defected_item_id: 'defected_item_id',
+  doc_og_name: 'doc_og_name',
+  doc_sys_name: 'doc_sys_name',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type DefectCompletionPhotoScalarFieldEnum = (typeof DefectCompletionPhotoScalarFieldEnum)[keyof typeof DefectCompletionPhotoScalarFieldEnum]
+
+
+export const ProjectCategoriesTypeMasterScalarFieldEnum = {
+  id: 'id',
+  module_name: 'module_name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProjectCategoriesTypeMasterScalarFieldEnum = (typeof ProjectCategoriesTypeMasterScalarFieldEnum)[keyof typeof ProjectCategoriesTypeMasterScalarFieldEnum]
+
+
+export const ProjectCategoriesMasterScalarFieldEnum = {
+  id: 'id',
+  category_name: 'category_name',
+  status: 'status',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  external_category_id: 'external_category_id'
+} as const
+
+export type ProjectCategoriesMasterScalarFieldEnum = (typeof ProjectCategoriesMasterScalarFieldEnum)[keyof typeof ProjectCategoriesMasterScalarFieldEnum]
+
+
+export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {
+  id: 'id',
+  project_categories_master_id: 'project_categories_master_id',
+  project_categories_type_master_id: 'project_categories_type_master_id',
+  vendor_id: 'vendor_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by'
+} as const
+
+export type ProjectCategoriesMasterVendorMappingScalarFieldEnum = (typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum)[keyof typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -10090,6 +10539,20 @@ export type ListEnumMachineTypeMasterStatusFieldRefInput<$PrismaModel> = FieldRe
 
 
 /**
+ * Reference to a field of type 'DefectStatus'
+ */
+export type EnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'DefectStatus[]'
+ */
+export type ListEnumDefectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DefectStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'UserActivityType'
  */
 export type EnumUserActivityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserActivityType'>
@@ -10142,6 +10605,20 @@ export type EnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel> = F
  * Reference to a field of type 'ExternalPlatformTokenActiveStatus[]'
  */
 export type ListEnumExternalPlatformTokenActiveStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ExternalPlatformTokenActiveStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectCategoriesStatus'
+ */
+export type EnumProjectCategoriesStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectCategoriesStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectCategoriesStatus[]'
+ */
+export type ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectCategoriesStatus[]'>
     
 
 /**
@@ -10341,6 +10818,11 @@ export type GlobalOmitConfig = {
   externalPlatformMaster?: Prisma.ExternalPlatformMasterOmit
   externalPlatformToken?: Prisma.ExternalPlatformTokenOmit
   leadExternalPlatformCustomerMapping?: Prisma.LeadExternalPlatformCustomerMappingOmit
+  defectedItemImage?: Prisma.DefectedItemImageOmit
+  defectCompletionPhoto?: Prisma.DefectCompletionPhotoOmit
+  projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterOmit
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterOmit
+  projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingOmit
 }
 
 /* Types for Logging */

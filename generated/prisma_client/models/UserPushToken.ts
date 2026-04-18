@@ -235,7 +235,7 @@ export type UserPushTokenGroupByOutputType = {
   _max: UserPushTokenMaxAggregateOutputType | null
 }
 
-type GetUserPushTokenGroupByPayload<T extends UserPushTokenGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserPushTokenGroupByPayload<T extends UserPushTokenGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserPushTokenGroupByOutputType, T['by']> &
       {
@@ -1631,6 +1631,11 @@ export type UserPushTokenFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` UserPushTokens.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserPushTokens.
+   */
   distinct?: Prisma.UserPushTokenScalarFieldEnum | Prisma.UserPushTokenScalarFieldEnum[]
 }
 

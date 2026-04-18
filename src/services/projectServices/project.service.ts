@@ -114,16 +114,136 @@ export const getAllProjectItems = () => {
   });
 };
 
-export const getProjectById = (id: number) => {
-  return prisma.projectMaster.findUnique({
-    where: { id },
-    include: {
-      vendor: true,
-      createdByUser: true,
-      details: true,
-      items: true,
+
+// ── Shared helper: compute total eligible rows for a packaging/QC machine ────
+// Same logic as dashboard: Part A (waterfall) + Part B (packaging-only items)
+const getPackagingTotal = async (
+  project_id: number,
+  vendor_id: number,
+  machine: { id: number; sequence_no: number | null }
+): Promise<number> => {
+  const machineSeq = machine.sequence_no ?? 0;
+
+  // Find cut_list_ids that have at least one row at seq < packaging seq
+  const cutListsWithPrior = await prisma.cutListMachineMapping.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      sequence_no: { lt: machineSeq },
+      expected_in: true,
+    },
+    select: { cut_list_id: true },
+    distinct: ["cut_list_id"],
+  });
+  const cutListIdsWithPrior = cutListsWithPrior.map((r) => r.cut_list_id);
+
+  // Part A: rows at packaging where cut_list HAS prior machines
+  //         eligible if their last prior machine is scanned
+  const partARows = await prisma.cutListMachineMapping.findMany({
+    where: {
+      project_id,
+      vendor_id,
+      machine_id: machine.id,
+      expected_in: true,
+      cut_list_id: cutListIdsWithPrior.length > 0
+        ? { in: cutListIdsWithPrior }
+        : { in: [-1] }, // empty set
+    },
+    select: { cut_list_id: true, id: true },
+  });
+
+  let partAEligible = 0;
+  for (const row of partARows) {
+    const lastPriorRow = await prisma.cutListMachineMapping.findFirst({
+      where: {
+        project_id,
+        vendor_id,
+        cut_list_id: row.cut_list_id,
+        sequence_no: { lt: machineSeq },
+        expected_in: true,
+      },
+      orderBy: { sequence_no: "desc" },
+      select: { actual_in_at: true },
+    });
+    if (lastPriorRow?.actual_in_at !== null) {
+      partAEligible++;
+    }
+  }
+
+  // Part B: rows at packaging with NO prior machines — always eligible
+  const partBCount = await prisma.cutListMachineMapping.count({
+    where: {
+      project_id,
+      vendor_id,
+      machine_id: machine.id,
+      expected_in: true,
+      ...(cutListIdsWithPrior.length > 0
+        ? { cut_list_id: { notIn: cutListIdsWithPrior } }
+        : { cut_list_id: { notIn: [-1] } }
+      ),
     },
   });
+
+  return partAEligible + partBCount;
+};
+
+// ── getProjectById ────────────────────────────────────────────────────────────
+
+export const getProjectById = async (id: number) => {
+  const [project, packagingMachine] = await Promise.all([
+    prisma.projectMaster.findUnique({
+      where: { id },
+      include: {
+        vendor: true,
+        createdByUser: true,
+        details: true,
+      },
+    }),
+    prisma.machineMaster.findFirst({
+      where: { machine_type_id: 18 },
+      select: { id: true, machine_name: true, sequence_no: true },
+      orderBy: { id: "asc" },
+    }),
+  ]);
+
+  if (!project) return null;
+
+  const packagingMachineId = packagingMachine?.id ?? null;
+
+  // ── total_items: dashboard-style (Part A waterfall + Part B packaging-only)
+  // ── total_packed: distinct cut_list_ids with box_id set (assigned to a box)
+  const [total_items, totalPackedGroups] = await Promise.all([
+    packagingMachine
+      ? getPackagingTotal(id, project.vendor_id, packagingMachine)
+      : Promise.resolve(0),
+
+    packagingMachineId
+      ? prisma.cutListMachineMapping.groupBy({
+          by: ["cut_list_id"],
+          where: {
+            project_id: id,
+            machine_id: packagingMachineId,
+            expected_in: true,
+            box_id: { not: null },
+          },
+        })
+      : Promise.resolve([]),
+  ]);
+
+  const total_packed = totalPackedGroups.length;
+  const total_unpacked = total_items - total_packed;
+
+  return {
+    ...project,
+    machine_id: packagingMachineId,
+    machine_name: packagingMachine?.machine_name ?? null,
+    totals: {
+      total_items,
+      total_packed,
+      total_unpacked,
+      total_weight: 0,
+    },
+  };
 };
 
 export const getProjectDetailsById = (id: number) => {
@@ -150,15 +270,22 @@ export const getProjectItemById = (id: number) => {
 
 
 export const getProjectsByVendorIdService = async (vendorId: number) => {
+ 
+  // ── 1. Fetch packaging machine ───────────────────────────────────────────
+  const packagingMachine = await prisma.machineMaster.findFirst({
+    where: { vendor_id: vendorId, machine_type_id: 18 },
+    select: { id: true, sequence_no: true },
+    orderBy: { id: "asc" },
+  });
+ 
+  // ── 2. Fetch all projects ────────────────────────────────────────────────
   const projects = await prisma.projectMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-    },
+    where: { vendor_id: vendorId },
     select: {
       id: true,
       project_name: true,
       vendor_id: true,
-      client_id: true,
+      lead_id: true,
       created_by: true,
       project_status: true,
       created_at: true,
@@ -175,7 +302,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
           id: true,
           project_id: true,
           vendor_id: true,
-          client_id: true,
+          lead_id: true,
           total_items: true,
           total_packed: true,
           total_unpacked: true,
@@ -187,42 +314,180 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       },
     },
   });
-
-  // Transform the data to sum up totals for each project
-  const projectsWithAggregatedTotals = projects.map(project => {
-    // Sum up all totals from all rooms (details) for this project
-    const aggregatedTotals = project.details.reduce(
-      (acc, detail) => {
-        acc.total_items += detail.total_items || 0;
-        acc.total_packed += detail.total_packed || 0;
-        acc.total_unpacked += detail.total_unpacked || 0;
-        return acc;
-      },
-      { total_items: 0, total_packed: 0, total_unpacked: 0 }
-    );
-
-    return {
+ 
+  if (!packagingMachine) {
+    return projects.map((project) => ({
       id: project.id,
       project_name: project.project_name,
       vendor_id: project.vendor_id,
-      client_id: project.client_id,
       created_by: project.created_by,
       project_status: project.project_status,
       created_at: project.created_at,
       createdByUser: project.createdByUser,
-      // Aggregated totals in separate object
-      aggregatedTotals: {
-        total_items: aggregatedTotals.total_items,
-        total_packed: aggregatedTotals.total_packed,
-        total_unpacked: aggregatedTotals.total_unpacked,
-      },
-      // Keep room-wise details for reference if needed
       details: project.details,
+      aggregatedTotals: { total_items: 0, total_packed: 0, total_unpacked: 0 },
+      factory_out_at: null,
+      site_in_at: null,
+    }));
+  }
+ 
+  const pkgMachineId  = packagingMachine.id;
+  const pkgMachineSeq = packagingMachine.sequence_no ?? 0;
+  const allProjectIds = projects.map((p) => p.id);
+ 
+  // ── 3. Fetch CutListMachineMapping rows + boxes for all projects ──────────
+  const [priorRows, packagingRows, allBoxes] = await Promise.all([
+    prisma.cutListMachineMapping.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: { in: allProjectIds },
+        sequence_no: { lt: pkgMachineSeq },
+        expected_in: true,
+      },
+      select: {
+        project_id: true,
+        cut_list_id: true,
+        sequence_no: true,
+        actual_in_at: true,
+      },
+    }),
+    prisma.cutListMachineMapping.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: { in: allProjectIds },
+        machine_id: pkgMachineId,
+        expected_in: true,
+      },
+      select: {
+        project_id: true,
+        cut_list_id: true,
+        box_id: true,
+      },
+    }),
+    // ── Boxes: get factory_out_at and site_in_at per project ──────────────
+    prisma.boxMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: { in: allProjectIds },
+        is_deleted: false,
+      },
+      select: {
+        project_id: true,
+        factory_out_at: true,
+        site_in_at: true,
+      },
+    }),
+  ]);
+ 
+  // ── 4. Build lookup maps ─────────────────────────────────────────────────
+  const priorByKey = new Map<string, typeof priorRows[0]>();
+  for (const row of priorRows) {
+    const key = `${row.project_id}-${row.cut_list_id}`;
+    const existing = priorByKey.get(key);
+    if (!existing || row.sequence_no > existing.sequence_no) {
+      priorByKey.set(key, row);
+    }
+  }
+ 
+  const lastPriorActualMap = new Map<string, Date | null>();
+  for (const [key, row] of priorByKey) {
+    lastPriorActualMap.set(key, row.actual_in_at);
+  }
+ 
+  const cutListsWithPriorByProject = new Map<number, Set<number>>();
+  for (const row of priorRows) {
+    if (!cutListsWithPriorByProject.has(row.project_id)) {
+      cutListsWithPriorByProject.set(row.project_id, new Set());
+    }
+    cutListsWithPriorByProject.get(row.project_id)!.add(row.cut_list_id);
+  }
+ 
+  // ── 5. Build factory_out / site_in status per project ────────────────────
+  // factory_out_at: latest factory_out_at across all boxes (null if any box has it null)
+  // site_in_at:     latest site_in_at across all boxes (null if any box has it null)
+  const boxesByProject = new Map<number, typeof allBoxes>();
+  for (const box of allBoxes) {
+    if (!boxesByProject.has(box.project_id)) {
+      boxesByProject.set(box.project_id, []);
+    }
+    boxesByProject.get(box.project_id)!.push(box);
+  }
+ 
+  // ── 6. Compute totals + dispatch status per project ──────────────────────
+  const result = projects.map((project) => {
+    const pid     = project.id;
+    const hasPrior = cutListsWithPriorByProject.get(pid) ?? new Set<number>();
+    const projPkgRows = packagingRows.filter((r) => r.project_id === pid);
+ 
+    const eligibleCutLists = new Set<number>();
+    const packedCutLists   = new Set<number>();
+ 
+    for (const row of projPkgRows) {
+      const clId = row.cut_list_id;
+      const isEligible = hasPrior.has(clId)
+        ? (lastPriorActualMap.get(`${pid}-${clId}`) ?? null) !== null
+        : true;
+      if (isEligible) eligibleCutLists.add(clId);
+      if (row.box_id !== null) packedCutLists.add(clId);
+    }
+ 
+    const totalItems    = eligibleCutLists.size;
+    const totalPacked   = packedCutLists.size;
+    const totalUnpacked = Math.max(0, totalItems - totalPacked);
+ 
+    // ── Dispatch status ──────────────────────────────────────────────────
+    // factory_out_at = null if ANY box hasn't been dispatched yet
+    // site_in_at     = null if ANY box hasn't arrived at site yet
+    const projectBoxes = boxesByProject.get(pid) ?? [];
+ 
+    const anyFactoryOutNull = projectBoxes.length === 0 || projectBoxes.some((b) => b.factory_out_at === null);
+    const allFactoryOutSet  = projectBoxes.length > 0 && projectBoxes.every((b) => b.factory_out_at !== null);
+    const anyFactoryOutSet  = projectBoxes.some((b) => b.factory_out_at !== null);
+    const anySiteInNull     = projectBoxes.some((b) => b.site_in_at === null);
+ 
+    // Latest timestamps for display
+    const latestFactoryOutAt = anyFactoryOutNull
+      ? null
+      : projectBoxes.reduce<Date | null>((latest, b) => {
+          if (!b.factory_out_at) return latest;
+          return !latest || b.factory_out_at > latest ? b.factory_out_at : latest;
+        }, null);
+ 
+    const latestSiteInAt = !allFactoryOutSet || anySiteInNull
+      ? null
+      : projectBoxes.reduce<Date | null>((latest, b) => {
+          if (!b.site_in_at) return latest;
+          return !latest || b.site_in_at > latest ? b.site_in_at : latest;
+        }, null);
+ 
+    return {
+      id: project.id,
+      project_name: project.project_name,
+      vendor_id: project.vendor_id,
+      created_by: project.created_by,
+      project_status: project.project_status,
+      created_at: project.created_at,
+      createdByUser: project.createdByUser,
+      details: project.details,
+      aggregatedTotals: {
+        total_items:    totalItems,
+        total_packed:   totalPacked,
+        total_unpacked: totalUnpacked,
+      },
+      // null = not all boxes dispatched, Date = all dispatched
+      factory_out_at:  latestFactoryOutAt,
+      // null = not all boxes received at site, Date = all received
+      site_in_at:      latestSiteInAt,
+      // true = every box has factory_out_at set
+      all_factory_out: allFactoryOutSet,
+      // true = at least one box has factory_out_at set
+      any_factory_out: anyFactoryOutSet,
     };
   });
-
-  return projectsWithAggregatedTotals;
+ 
+  return result;
 };
+
 
 export const getProjectItemByFields = async (params: {
   project_id: number;
@@ -873,30 +1138,26 @@ export const autoPackGroupedBoxesService = async (vendorId: number) => {
 import { z } from "zod";
 
 
-export const handelItems = async (
+export const handelItems_13_april = async (
   vendorToken: string,
   payload: CadbidPayload
 ) => {
   try {
 
-    // ✅ Declared at top scope so always accessible in catch
     let resolvedVendorId: number | null = null;
     let resolvedProjectId: number | null = null;
-
-
-
 
     try {
       await prisma.apiRequestLog.create({
         data: {
           endpoint: "handelItems",
           vendor_token: vendorToken,
-          vendor_id: resolvedVendorId,       // always safe, null if not yet resolved
+          vendor_id: resolvedVendorId,
           payload: payload as any,
           success: false,
           response: '',
           error: null,
-          project_id: resolvedProjectId,     // always safe, null if not yet resolved
+          project_id: resolvedProjectId,
         }
       });
     } catch (logError) {
@@ -909,9 +1170,7 @@ export const handelItems = async (
       z.string().min(1, `${field} blank`);
 
     const requiredNumber = (field: string) =>
-      z.coerce.number({
-        error: `${field} missing`
-      });
+      z.coerce.number({ error: `${field} missing` });
 
     const itemSchema = z.object({
       articleCode: requiredString("articleCode"),
@@ -931,6 +1190,7 @@ export const handelItems = async (
 
     const payloadSchema = z.object({
       projectName: requiredString("projectName"),
+      customer_id: z.coerce.number({ error: "customer_id missing" }),
       items: z.array(itemSchema).min(1, "items missing")
     });
 
@@ -946,28 +1206,18 @@ export const handelItems = async (
               ? "blank"
               : issue.message
       }));
-
-      return {
-        success: false,
-        message: errors
-      };
+      return { success: false, message: errors };
     }
 
-    // ✅ Step 1: Collect unique barcode1 values across items (not expanded by qty)
-    // Same barcode1 with qty > 1 is valid — only cross-item duplicates are rejected
+    // ── Step 1: Check duplicate barcode1 within payload ────────────────────
     const uniqueCodesToInsert: string[] = [];
-
     for (const item of payload.items) {
-      if (item.barcode1) {
-        uniqueCodesToInsert.push(item.barcode1);
-      }
+      if (item.barcode1) uniqueCodesToInsert.push(item.barcode1);
     }
 
-    // ✅ Step 2: Check for duplicate barcode1 across different items in the payload
     const duplicatesInPayload = uniqueCodesToInsert.filter(
       (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
-
     if (duplicatesInPayload.length > 0) {
       return {
         success: false,
@@ -976,69 +1226,70 @@ export const handelItems = async (
       };
     }
 
-    // ✅ Step 3: Check if any barcode1 already exists in database
+    // ── Step 2: Check barcode1 duplicates in database ──────────────────────
     if (uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
-        where: {
-          unique_code: {
-            in: uniqueCodesToInsert
-          }
-        },
-        select: {
-          unique_code: true
-        }
+        where: { unique_code: { in: uniqueCodesToInsert } },
+        select: { unique_code: true }
       });
-
       if (existingCodes.length > 0) {
-        const duplicateCodes = existingCodes.map(c => c.unique_code);
         return {
           success: false,
           message: "Duplicate barcodes found in database",
-          duplicates: duplicateCodes
+          duplicates: existingCodes.map(c => c.unique_code)
         };
       }
     }
 
-    // ✅ Step 4: Resolve vendor
+    // ── Step 3: Resolve vendor ─────────────────────────────────────────────
     const vendorTokenEntry = await prisma.vendorTokens.findUnique({
       where: { token: vendorToken },
       include: { vendor: true }
     });
 
     if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
-      return {
-        success: false,
-        message: "Invalid or expired vendor token"
-      };
+      return { success: false, message: "Invalid or expired vendor token" };
     }
 
     const vendor = vendorTokenEntry.vendor;
 
-    // ✅ Step 5: Resolve admin user
+    // ── Step 4: Resolve admin user ─────────────────────────────────────────
     const adminUser = await prisma.userMaster.findFirst({
-      where: {
-        vendor_id: vendor.id,
-        user_type_id: 2
-      },
+      where: { vendor_id: vendor.id, user_type_id: 2 },
       orderBy: { created_at: "asc" }
     });
 
     if (!adminUser) {
-      return {
-        success: false,
-        message: "No admin user found for this vendor"
-      };
+      return { success: false, message: "No admin user found for this vendor" };
     }
 
     const createdByUserId = adminUser.id;
-    const lead_id = null;
+
+    // ── Step 5: Resolve lead_id from customer_id ───────────────────────────
+    const customerMapping = await prisma.leadExternalPlatformCustomerMapping.findFirst({
+      where: {
+        external_platform_customer_id: String(payload.customer_id),
+        vendor_id: vendor.id,
+      },
+      select: { lead_id: true }
+    });
+
+    if (!customerMapping) {
+      return {
+        success: false,
+        message: "lead not mapped in cadbid and furnix"
+      };
+    }
+
+    const lead_id = customerMapping.lead_id;
 
     const { randomUUID } = require("crypto");
     const unique_project_id = randomUUID();
 
-    // 🔥 MAIN TRANSACTION
+    // ── 🔥 MAIN TRANSACTION ────────────────────────────────────────────────
     const result = await prisma.$transaction(async (tx) => {
 
+      // Create project
       const project = await tx.projectMaster.create({
         data: {
           project_name: payload.projectName,
@@ -1046,7 +1297,27 @@ export const handelItems = async (
           vendor_id: vendor.id,
           created_by: createdByUserId,
           project_status: "Initiated",
-          is_grouping: false
+          is_grouping: false,
+          lead_id: lead_id,
+        }
+      });
+
+      // ── Create ProjectDetails entry ───────────────────────────────────────
+      // total_items = sum of qty across all items
+      const totalItems = payload.items.reduce((sum, item) => sum + Number(item.qty), 0);
+
+      await tx.projectDetails.create({
+        data: {
+          project_id: project.id,
+          vendor_id: vendor.id,
+          lead_id: lead_id,
+          room_name: payload.projectName,
+          total_items: totalItems,
+          total_packed: 0,
+          total_unpacked: totalItems,
+          is_grouping: false,
+          start_date: new Date(),
+          estimated_completion_date: null,
         }
       });
 
@@ -1055,7 +1326,7 @@ export const handelItems = async (
         const quantity = Number(item.qty);
         const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
 
-        // ✅ 1 cutList row per item regardless of qty
+        // 1 cutList row per item regardless of qty
         const row = await tx.cutList.create({
           data: {
             project_id: project.id,
@@ -1079,7 +1350,6 @@ export const handelItems = async (
             group_name: item.groupName || null,
             category_name: item.categoryName || null,
             procurement: item.procurement || null,
-
           }
         });
 
@@ -1090,41 +1360,120 @@ export const handelItems = async (
           data: { unique_code: uniqueCode }
         });
 
-        // ✅ cutListMachineMapping: 1 row per qty unit
+        // cutListMachineMapping: 1 row per qty unit
         if (hasEdgeBanding) {
-
           const machine_type = await tx.machineMaster.findFirst({
-            where: {
-              vendor_id: Number(vendor.id),
-              machine_type_id: 11
-            },
-            select: {
-              id: true,
-              sequence_no: true
-            }
+            where: { vendor_id: Number(vendor.id), machine_type_id: 11 },
+            select: { id: true, sequence_no: true }
           });
 
           if (!machine_type) {
             throw new Error("Edgebanding machine is not configured");
           }
 
-          const machine_type_id = machine_type.id;
-          const sequence_no = machine_type.sequence_no ?? 0;
-
           for (let i = 0; i < quantity; i++) {
             await tx.cutListMachineMapping.create({
               data: {
                 cut_list_id: row.id,
-                machine_id: machine_type_id,
+                machine_id: machine_type.id,
                 project_id: project.id,
                 vendor_id: vendor.id,
                 lead_id: lead_id,
-                sequence_no: sequence_no,
+                sequence_no: machine_type.sequence_no ?? 0,
                 status: "Pending",
                 created_by: createdByUserId,
                 expected_in: true
               }
             });
+          }
+        }
+
+        // ── All items: map to first active machine with machine_type_id = 3 ──
+        const machine_type_3 = await tx.machineMaster.findFirst({
+          where: {
+            vendor_id: Number(vendor.id),
+            machine_type_id: 3,
+            status: "ACTIVE",
+          },
+          select: { id: true, sequence_no: true },
+          orderBy: { id: "asc" },
+        });
+
+        if (machine_type_3) {
+          for (let i = 0; i < quantity; i++) {
+            await tx.cutListMachineMapping.create({
+              data: {
+                cut_list_id: row.id,
+                machine_id: machine_type_3.id,
+                project_id: project.id,
+                vendor_id: vendor.id,
+                lead_id: lead_id,
+                sequence_no: machine_type_3.sequence_no ?? 0,
+                status: "Pending",
+                created_by: createdByUserId,
+                expected_in: true,
+              },
+            });
+          }
+        }
+
+        // ── l3 > 9: map to first active machine with machine_type_id = 7 ── CNC
+        const l3Value = Number(item.l3);
+        if (l3Value > 9) {
+          const machine_type_7 = await tx.machineMaster.findFirst({
+            where: {
+              vendor_id: Number(vendor.id),
+              machine_type_id: 7,
+              status: "ACTIVE",
+            },
+            select: { id: true, sequence_no: true },
+            orderBy: { id: "asc" },
+          });
+
+          if (machine_type_7) {
+            for (let i = 0; i < quantity; i++) {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine_type_7.id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: machine_type_7.sequence_no ?? 0,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true,
+                },
+              });
+            }
+          }
+        }
+
+        // Default machines: type 17 and 18
+        const defaultMachineTypeIds = [17, 18];
+
+        for (const typeId of defaultMachineTypeIds) {
+          const machine = await tx.machineMaster.findFirst({
+            where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
+            select: { id: true, sequence_no: true }
+          });
+
+          if (machine) {
+            for (let i = 0; i < quantity; i++) {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine.id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: machine.sequence_no ?? 0,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true,
+                },
+              });
+            }
           }
         }
       }
@@ -1140,9 +1489,431 @@ export const handelItems = async (
     };
 
   } catch (error: any) {
-
     console.error("Transaction failed:", error);
+    return {
+      success: false,
+      message: error.message || "Something went wrong. Transaction rolled back."
+    };
+  }
+};
 
+
+export const handelItems = async (
+  vendorToken: string,
+  payload: CadbidPayload
+) => {
+  try {
+
+    let resolvedVendorId: number | null = null;
+    let resolvedProjectId: number | null = null;
+
+    try {
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint: "handelItems",
+          vendor_token: vendorToken,
+          vendor_id: resolvedVendorId,
+          payload: payload as any,
+          success: false,
+          response: '',
+          error: null,
+          project_id: resolvedProjectId,
+        }
+      });
+    } catch (logError) {
+      console.error("Failed to write api log:", logError);
+    }
+
+    console.log("payload", payload);
+
+    const requiredString = (field: string) =>
+      z.string().min(1, `${field} blank`);
+
+    const requiredNumber = (field: string) =>
+      z.coerce.number({ error: `${field} missing` });
+
+    const itemSchema = z.object({
+      articleCode: requiredString("articleCode"),
+      groupName: requiredString("groupName"),
+      l1: requiredNumber("l1"),
+      l2: requiredNumber("l2"),
+      l3: requiredNumber("l3"),
+      name: requiredString("name"),
+      qty: z.coerce.number().int().positive("qty must be greater than 0"),
+      barcode1: z.string().optional(),
+      barcode2: z.string().optional(),
+      el1: z.string().optional(),
+      el2: z.string().optional(),
+      sl1: z.string().optional(),
+      sl2: z.string().optional(),
+    });
+
+    const payloadSchema = z.object({
+      projectName: requiredString("projectName"),
+      customer_id: z.coerce.number({ error: "customer_id missing" }),
+      items: z.array(itemSchema).min(1, "items missing")
+    });
+
+    const validation = payloadSchema.safeParse(payload);
+
+    if (!validation.success) {
+      const errors = validation.error.issues.map(issue => ({
+        field_name: issue.path.join("."),
+        message:
+          issue.code === "invalid_type"
+            ? "missing"
+            : issue.message.includes("blank")
+              ? "blank"
+              : issue.message
+      }));
+      return { success: false, message: errors };
+    }
+
+    // ── Step 1: Check duplicate barcode1 within payload ────────────────────
+    const uniqueCodesToInsert: string[] = [];
+    for (const item of payload.items) {
+      if (item.barcode1) uniqueCodesToInsert.push(item.barcode1);
+    }
+
+    const duplicatesInPayload = uniqueCodesToInsert.filter(
+      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
+    );
+    if (duplicatesInPayload.length > 0) {
+      return {
+        success: false,
+        message: "Duplicate barcodes found in payload",
+        duplicates: [...new Set(duplicatesInPayload)]
+      };
+    }
+
+    // ── Step 2: Check barcode1 duplicates in database ──────────────────────
+    if (uniqueCodesToInsert.length > 0) {
+      const existingCodes = await prisma.cutList.findMany({
+        where: { unique_code: { in: uniqueCodesToInsert } },
+        select: { unique_code: true }
+      });
+      if (existingCodes.length > 0) {
+        return {
+          success: false,
+          message: "Duplicate barcodes found in database",
+          duplicates: existingCodes.map(c => c.unique_code)
+        };
+      }
+    }
+
+    // ── Step 3: Resolve vendor ─────────────────────────────────────────────
+    const vendorTokenEntry = await prisma.vendorTokens.findUnique({
+      where: { token: vendorToken },
+      include: { vendor: true }
+    });
+
+    if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
+      return { success: false, message: "Invalid or expired vendor token" };
+    }
+
+    const vendor = vendorTokenEntry.vendor;
+
+    // ── Step 4: Resolve admin user ─────────────────────────────────────────
+    const adminUser = await prisma.userMaster.findFirst({
+      where: { vendor_id: vendor.id, user_type_id: 2 },
+      orderBy: { created_at: "asc" }
+    });
+
+    if (!adminUser) {
+      return { success: false, message: "No admin user found for this vendor" };
+    }
+
+    const createdByUserId = adminUser.id;
+
+    // ── Step 5: Resolve lead_id from customer_id ───────────────────────────
+    const customerMapping = await prisma.leadExternalPlatformCustomerMapping.findFirst({
+      where: {
+        external_platform_customer_id: String(payload.customer_id),
+        vendor_id: vendor.id,
+      },
+      select: { lead_id: true }
+    });
+
+    if (!customerMapping) {
+      return {
+        success: false,
+        message: "lead not mapped in cadbid and furnix"
+      };
+    }
+
+    const lead_id = customerMapping.lead_id;
+
+    // ── Step 6: Pre-fetch all category type mappings for this vendor ───────
+    // Build a Map: category_name (lowercase) → project_categories_type_master_id[]
+    // This avoids N+1 queries inside the transaction loop
+    const categoryMappings = await prisma.projectCategoriesMaster.findMany({
+      where: { vendor_id: vendor.id, status: "Yes" },
+      select: {
+        category_name: true,
+        projectCategoriesMasterVendorMapping: {
+          select: { project_categories_type_master_id: true },
+        },
+      },
+    });
+
+    const categoryTypeMap = new Map<string, number[]>();
+    for (const cat of categoryMappings) {
+      const typeIds = cat.projectCategoriesMasterVendorMapping.map(
+        (m) => m.project_categories_type_master_id
+      );
+      categoryTypeMap.set(cat.category_name.trim().toLowerCase(), typeIds);
+    }
+
+    const { randomUUID } = require("crypto");
+    const unique_project_id = randomUUID();
+
+    // ── 🔥 MAIN TRANSACTION ────────────────────────────────────────────────
+    const result = await prisma.$transaction(async (tx) => {
+
+      // Create project
+      const project = await tx.projectMaster.create({
+        data: {
+          project_name: payload.projectName,
+          unique_project_id,
+          vendor_id: vendor.id,
+          created_by: createdByUserId,
+          project_status: "Initiated",
+          is_grouping: false,
+          lead_id: lead_id,
+        }
+      });
+
+      // ── Create ProjectDetails entry ───────────────────────────────────────
+      const totalItems = payload.items.reduce((sum, item) => sum + Number(item.qty), 0);
+
+      await tx.projectDetails.create({
+        data: {
+          project_id: project.id,
+          vendor_id: vendor.id,
+          lead_id: lead_id,
+          room_name: payload.projectName,
+          total_items: totalItems,
+          total_packed: 0,
+          total_unpacked: totalItems,
+          is_grouping: false,
+          start_date: new Date(),
+          estimated_completion_date: null,
+        }
+      });
+
+      for (const item of payload.items) {
+
+        const quantity = Number(item.qty);
+        const hasEdgeBanding = item.el1 || item.el2 || item.sl1 || item.sl2;
+
+        // 1 cutList row per item regardless of qty
+        const row = await tx.cutList.create({
+          data: {
+            project_id: project.id,
+            vendor_id: vendor.id,
+            description: item.name,
+            length: Number(item.l1),
+            width: Number(item.l2),
+            thickness: Number(item.l3),
+            qty: quantity,
+            material_details: item.articleCode,
+            item_name: item.name,
+            status: "Active",
+            created_by: createdByUserId,
+            lead_id: lead_id,
+            elf: item.el1 || '',
+            elb: item.el2 || '',
+            esl: item.sl1 || '',
+            esr: item.sl2 || '',
+            unique_code: "",
+            unique_code_2: item.barcode2 || null,
+            group_name: item.groupName || null,
+            category_name: item.categoryName || null,
+            procurement: item.procurement || null,
+          }
+        });
+
+        // Set unique_code: use barcode1 if provided, else generate from row id
+        const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
+        await tx.cutList.update({
+          where: { id: row.id },
+          data: { unique_code: uniqueCode }
+        });
+
+        // ── Resolve category type ids for this item ────────────────────────
+        // Look up by categoryName (case-insensitive)
+        const itemCategoryName = (item.categoryName ?? "").trim().toLowerCase();
+        const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+        // ── Determine machine mapping behaviour based on category type ─────
+        //
+        // type 1 or 2 → normal flow: machine type 3, 7 (if l3>9), 11 (if edge banding)
+        // type 3      → only machine type 17 and 18
+        // type 4      → skip CutListMachineMapping entirely
+        // no mapping  → normal flow (fallback)
+
+        const hasType4 = categoryTypeIds.includes(4);
+        const hasType3 = categoryTypeIds.includes(3);
+        const hasType1or2 = categoryTypeIds.some((t) => t === 1 || t === 2);
+        const isNormalFlow = hasType1or2 || categoryTypeIds.length === 0;
+
+        // type 4 — skip entirely
+        if (hasType4) {
+          continue;
+        }
+
+        // type 3 — only machines 17 and 18
+        if (hasType3 && !isNormalFlow) {
+          const scanPackMachineTypeIds = [17, 18];
+          for (const typeId of scanPackMachineTypeIds) {
+            const machine = await tx.machineMaster.findFirst({
+              where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
+              select: { id: true, sequence_no: true }
+            });
+            if (machine) {
+              for (let i = 0; i < quantity; i++) {
+                await tx.cutListMachineMapping.create({
+                  data: {
+                    cut_list_id: row.id,
+                    machine_id: machine.id,
+                    project_id: project.id,
+                    vendor_id: vendor.id,
+                    lead_id: lead_id,
+                    sequence_no: machine.sequence_no ?? 0,
+                    status: "Pending",
+                    created_by: createdByUserId,
+                    expected_in: true,
+                  },
+                });
+              }
+            }
+          }
+          continue;
+        }
+
+        // ── Normal flow (type 1, 2, or no mapping) ─────────────────────────
+
+        // Edgebanding machine (type 11) — only if item has edge banding
+        if (hasEdgeBanding) {
+          const machine_type_11 = await tx.machineMaster.findFirst({
+            where: { vendor_id: Number(vendor.id), machine_type_id: 11 },
+            select: { id: true, sequence_no: true }
+          });
+
+          if (!machine_type_11) {
+            throw new Error("Edgebanding machine is not configured");
+          }
+
+          for (let i = 0; i < quantity; i++) {
+            await tx.cutListMachineMapping.create({
+              data: {
+                cut_list_id: row.id,
+                machine_id: machine_type_11.id,
+                project_id: project.id,
+                vendor_id: vendor.id,
+                lead_id: lead_id,
+                sequence_no: machine_type_11.sequence_no ?? 0,
+                status: "Pending",
+                created_by: createdByUserId,
+                expected_in: true
+              }
+            });
+          }
+        }
+
+        // Cutting machine (type 3) — all items
+        const machine_type_3 = await tx.machineMaster.findFirst({
+          where: { vendor_id: Number(vendor.id), machine_type_id: 3, status: "ACTIVE" },
+          select: { id: true, sequence_no: true },
+          orderBy: { id: "asc" },
+        });
+
+        if (machine_type_3) {
+          for (let i = 0; i < quantity; i++) {
+            await tx.cutListMachineMapping.create({
+              data: {
+                cut_list_id: row.id,
+                machine_id: machine_type_3.id,
+                project_id: project.id,
+                vendor_id: vendor.id,
+                lead_id: lead_id,
+                sequence_no: machine_type_3.sequence_no ?? 0,
+                status: "Pending",
+                created_by: createdByUserId,
+                expected_in: true,
+              },
+            });
+          }
+        }
+
+        // CNC machine (type 7) — only if l3 > 9
+        const l3Value = Number(item.l3);
+        if (l3Value > 9) {
+          const machine_type_7 = await tx.machineMaster.findFirst({
+            where: { vendor_id: Number(vendor.id), machine_type_id: 7, status: "ACTIVE" },
+            select: { id: true, sequence_no: true },
+            orderBy: { id: "asc" },
+          });
+
+          if (machine_type_7) {
+            for (let i = 0; i < quantity; i++) {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine_type_7.id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: machine_type_7.sequence_no ?? 0,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true,
+                },
+              });
+            }
+          }
+        }
+
+        // Default machines: type 17 and 18
+        const defaultMachineTypeIds = [17, 18];
+        for (const typeId of defaultMachineTypeIds) {
+          const machine = await tx.machineMaster.findFirst({
+            where: { vendor_id: Number(vendor.id), machine_type_id: typeId },
+            select: { id: true, sequence_no: true }
+          });
+
+          if (machine) {
+            for (let i = 0; i < quantity; i++) {
+              await tx.cutListMachineMapping.create({
+                data: {
+                  cut_list_id: row.id,
+                  machine_id: machine.id,
+                  project_id: project.id,
+                  vendor_id: vendor.id,
+                  lead_id: lead_id,
+                  sequence_no: machine.sequence_no ?? 0,
+                  status: "Pending",
+                  created_by: createdByUserId,
+                  expected_in: true,
+                },
+              });
+            }
+          }
+        }
+      }
+
+      return project;
+    });
+
+    return {
+      success: true,
+      message: "Items processed successfully",
+      project_id: result.id,
+      unique_project_id: unique_project_id
+    };
+
+  } catch (error: any) {
+    console.error("Transaction failed:", error);
     return {
       success: false,
       message: error.message || "Something went wrong. Transaction rolled back."

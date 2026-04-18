@@ -527,3 +527,28 @@ export type ExternalPlatformToken = Prisma.ExternalPlatformTokenModel
  * 
  */
 export type LeadExternalPlatformCustomerMapping = Prisma.LeadExternalPlatformCustomerMappingModel
+/**
+ * Model DefectedItemImage
+ * 
+ */
+export type DefectedItemImage = Prisma.DefectedItemImageModel
+/**
+ * Model DefectCompletionPhoto
+ * 
+ */
+export type DefectCompletionPhoto = Prisma.DefectCompletionPhotoModel
+/**
+ * Model ProjectCategoriesTypeMaster
+ * 
+ */
+export type ProjectCategoriesTypeMaster = Prisma.ProjectCategoriesTypeMasterModel
+/**
+ * Model ProjectCategoriesMaster
+ * 
+ */
+export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
+/**
+ * Model ProjectCategoriesMasterVendorMapping
+ * 
+ */
+export type ProjectCategoriesMasterVendorMapping = Prisma.ProjectCategoriesMasterVendorMappingModel

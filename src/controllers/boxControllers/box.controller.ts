@@ -1,15 +1,23 @@
 import { Request, Response } from 'express';
 import * as boxService from '../../services/boxServices/box.service';
-import { 
+import {
   getAllBoxesWithItemCountService,
   updateBoxStatus,
   softDeleteBoxWithScanItems,
-  getGroupedItemInfoByBoxId
- } from '../../services/boxServices/box.service';
+  getGroupedItemInfoByBoxId,
+  generateBoxPdfService,
+  generateProjectBoxPdfService,
+  generateAllBoxesPdfService,
+  generateProjectFullReportService,
+  markItemSiteInService, 
+  getBoxSiteInStatusService
+} from '../../services/boxServices/box.service';
 import { BoxStatus } from '../../prisma/generated';
+import { ApiResponse } from 'src/utils/apiResponse';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const newBox = await boxService.createBox(req.body);
     res.status(201).json({
       message: 'Box created successfully',
@@ -57,6 +65,7 @@ export const getAllBoxes = async (req: Request, res: Response) => {
 
 export const getBoxesByVendorAndProject = async (req: Request, res: Response) => {
   try {
+    console.log("getBoxesByVendorAndProject");
     const vendorId = Number(req.params.vendorId);
     const projectId = Number(req.params.projectId);
 
@@ -66,13 +75,7 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
 
     const boxes = await boxService.getBoxesByVendorAndProject(vendorId, projectId);
 
-    const transformed = boxes.map((box: any) => ({
-      ...box,
-      items_count: box._count.items,
-      _count: undefined, // Optional: remove raw _count
-    }));
-
-    res.status(200).json(transformed);
+    res.status(200).json(boxes);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }
@@ -82,7 +85,7 @@ export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
     const projectId = Number(req.params.projectId);
-    const clientId = Number(req.params.clientId);
+    const clientId = Number(0);
     const boxId = Number(req.params.boxId);
 
     if ([vendorId, projectId, clientId, boxId].some(isNaN)) {
@@ -177,3 +180,126 @@ export const getGroupedItemInfo = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+export const generateBoxPdf = async (req: Request, res: Response) => {
+  try {
+    const box_id = Number(req.params.boxId);
+    const project_id = Number(req.params.project_id);
+    const vendor_id = Number(req.params.vendor_id);
+
+    if (isNaN(box_id) || isNaN(project_id) || isNaN(vendor_id)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    const result = await generateBoxPdfService(box_id, project_id, vendor_id);
+
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+
+    return res.status(200).json(
+      ApiResponse.success(result.data, result.message, 200)
+    );
+  } catch (err) {
+    console.error("generateBoxPdf controller error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+export const generateProjectBoxPdf = async (req: Request, res: Response) => {
+  try {
+
+    const project_id = Number(req.params.project_id);
+    const vendor_id = Number(req.params.vendor_id);
+
+    if (isNaN(project_id) || isNaN(vendor_id)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+
+    const result = await generateProjectBoxPdfService(project_id, vendor_id);
+
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+
+    return res.status(200).json(
+      ApiResponse.success(result.data, result.message, 200)
+    );
+  } catch (err) {
+    console.error("generateBoxPdf controller error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+export const generateAllBoxesPdf = async (req: Request, res: Response) => {
+  const project_id = Number(req.params.project_id);
+  const vendor_id = Number(req.params.vendor_id);
+  const result = await generateAllBoxesPdfService(project_id, vendor_id);
+  if (result.status === 0) return res.status(200).json(ApiResponse.error(result.message, 500));
+  return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+};
+
+export const generateProjectFullReport = async (req: Request, res: Response) => {
+  const project_id = Number(req.params.project_id);
+  const vendor_id = Number(req.params.vendor_id);
+  const result = await generateProjectFullReportService(project_id, vendor_id);
+  if (result.status === 0) return res.status(200).json(ApiResponse.error(result.message, 500));
+  return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+};
+
+
+
+
+export const markItemSiteIn = async (req: Request, res: Response) => {
+  try {
+    console.log(req.body);
+    const box_id      = Number(req.params.box_id);
+    const project_id  = Number(req.body.project_id);
+    const vendor_id   = Number(req.body.vendor_id);
+    const user_id     = Number(req.body.user_id);
+    const unique_code = String(req.body.unique_code ?? "").trim();
+ 
+    if ([box_id, project_id, vendor_id, user_id].some(isNaN) || !unique_code) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+ 
+    const result = await markItemSiteInService(
+      unique_code, box_id, project_id, vendor_id, user_id
+    );
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("markItemSiteIn error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /boxes/:box_id/site-in-status?project_id=&vendor_id=
+export const getBoxSiteInStatus = async (req: Request, res: Response) => {
+  try {
+    const box_id     = Number(req.params.box_id);
+    const project_id = Number(req.query.project_id);
+    const vendor_id  = Number(req.query.vendor_id);
+ 
+    if ([box_id, project_id, vendor_id].some(isNaN)) {
+      return res.status(400).json(ApiResponse.error("Invalid parameters", 400));
+    }
+ 
+    const result = await getBoxSiteInStatusService(box_id, project_id, vendor_id);
+ 
+    if (result.status === 0) {
+      return res.status(200).json(ApiResponse.error(result.message, 500));
+    }
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error("getBoxSiteInStatus error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+

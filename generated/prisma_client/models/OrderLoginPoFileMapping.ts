@@ -240,7 +240,7 @@ export type OrderLoginPoFileMappingGroupByOutputType = {
   _max: OrderLoginPoFileMappingMaxAggregateOutputType | null
 }
 
-type GetOrderLoginPoFileMappingGroupByPayload<T extends OrderLoginPoFileMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetOrderLoginPoFileMappingGroupByPayload<T extends OrderLoginPoFileMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<OrderLoginPoFileMappingGroupByOutputType, T['by']> &
       {
@@ -1899,6 +1899,11 @@ export type OrderLoginPoFileMappingFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` OrderLoginPoFileMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of OrderLoginPoFileMappings.
+   */
   distinct?: Prisma.OrderLoginPoFileMappingScalarFieldEnum | Prisma.OrderLoginPoFileMappingScalarFieldEnum[]
 }
 

@@ -414,7 +414,7 @@ export type LeadProductStructureInstanceGroupByOutputType = {
   _max: LeadProductStructureInstanceMaxAggregateOutputType | null
 }
 
-type GetLeadProductStructureInstanceGroupByPayload<T extends LeadProductStructureInstanceGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadProductStructureInstanceGroupByPayload<T extends LeadProductStructureInstanceGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadProductStructureInstanceGroupByOutputType, T['by']> &
       {
@@ -4194,6 +4194,11 @@ export type LeadProductStructureInstanceFindManyArgs<ExtArgs extends runtime.Typ
    * Skip the first `n` LeadProductStructureInstances.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadProductStructureInstances.
+   */
   distinct?: Prisma.LeadProductStructureInstanceScalarFieldEnum | Prisma.LeadProductStructureInstanceScalarFieldEnum[]
 }
 

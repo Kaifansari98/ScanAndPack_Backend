@@ -1,5 +1,8 @@
 import { Router } from "express";
 import multer from "multer";
+import os from "os";
+
+
 import { getAllProjectsTrackTrace } from "../../controllers/trackTraceController/project.controller";
 
 import {
@@ -21,6 +24,28 @@ import {
   downloadQrLabelsFile,
   getVendorLead,
   linkLeadToProject,
+  getReworkMachines,
+  getUserModules,
+  getQualityCheckProjects,
+  getTraceTraceDashboard,
+  getProjectCategoryTypes,
+  getProjectCategories,
+  createProjectCategory,
+  updateProjectCategory,
+  toggleProjectCategoryStatus,
+  unsetBoxFromMapping,
+  markBoxFactoryOut,
+  markBoxSiteIn,
+  checkToken,
+  syncCategories,
+  getProjectDetail,
+  getBoxItems,
+  getDefectDashboard,
+  getProjectDefects,
+  getDefectSummary,
+  getPendingDefects,
+  getResolvedDefects
+
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -36,11 +61,14 @@ import { uploadMachineExcel } from "../../../src/controllers/trackTraceControlle
 
 
 const router = Router();
+const uploadDisk = multer({ dest: os.tmpdir() });
 
 router.get("/project/:vendor_id", getAllProjectsTrackTrace);
 router.get("/get-filter-track-trace/:vendor_id", get_filter_track_trace);
 
-router.post('/scan/item', scan_item);
+
+router.post('/scan/item', uploadDisk.array("photos[]", 10), scan_item);
+// router.post('/scan/item', scan_item);
 router.post('/scan/check-item', check_item);
 
 
@@ -73,21 +101,68 @@ router.post("/link-lead/:project_id/lead", linkLeadToProject);
 const storage = multer.memoryStorage();
 
 router.get('/defect-master/:vendor_id',get_defect);
-router.post('/mark-defect',mark_Defect);
+
+router.post('/mark-defect', uploadDisk.array("photos[]", 10), mark_Defect);
+// router.post('/mark-defect',mark_Defect);
 router.post('/scan/check-defect', check_defect);
 router.get('/get-scan-status-dashboard/:vendor_id/:user_id',getScanStatsDashboard);
+router.get('/rework-machines/:vendor_id/:machine_id', getReworkMachines);
+
+router.get('/user-modules/:vendor_id/:user_id', getUserModules);
+router.get('/quality-check-projects/:vendor_id', getQualityCheckProjects);
 
 
 
-const upload = multer({
-  storage,
-});
+router.get('/dashboard/:vendor_id', getTraceTraceDashboard);
 
 
+router.patch("/mapping/:id/:project_id/:vendor_id/unset-box", unsetBoxFromMapping);
+
+
+
+
+// const upload = multer({
+//   storage,
+// });
+
+const upload = multer({ storage: multer.memoryStorage() });
 router.post(
   "/upload-machine-excel/:vendor_id/:project_token",
   upload.single("file"),
   uploadMachineExcel,
 );
+
+
+router.get("/project-categories/types", getProjectCategoryTypes);
+router.get("/project-categories/:vendor_id", getProjectCategories);
+router.post("/project-categories", createProjectCategory);
+router.put("/project-categories/:id", updateProjectCategory);
+router.patch("/project-categories/:id/status", toggleProjectCategoryStatus);
+
+router.patch("/boxes/:box_id/factory-out", markBoxFactoryOut);
+router.patch("/boxes/:box_id/site-in",     markBoxSiteIn);
+
+
+router.get("/category/project-categories/check-token", checkToken);
+router.post("/category/project-categories/sync", syncCategories);
+
+router.get("/project-detail/:vendor_id/:project_id",         getProjectDetail);
+router.get("/project-detail/:vendor_id/:project_id/box/:box_id", getBoxItems);
+
+
+router.get("/defect-dashboard/:vendor_id",                          getDefectDashboard);
+router.get("/defect-dashboard/:vendor_id/project/:unique_project_id", getProjectDefects);
+
+router.get("/defect-dashboard/:vendor_id/summary",  getDefectSummary);
+router.get("/defect-dashboard/:vendor_id/pending",  getPendingDefects);
+router.get("/defect-dashboard/:vendor_id/resolved", getResolvedDefects);
+
+
+
+// router.post(
+//   "/upload-machine-excel/:vendor_id/:project_token",
+//   upload.single("file"),
+//   uploadMachineExcel,
+// );
 
 export default router;

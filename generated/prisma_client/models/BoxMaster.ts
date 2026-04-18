@@ -30,27 +30,31 @@ export type BoxMasterAvgAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   created_by: number | null
   deleted_by: number | null
   project_details_id: number | null
+  factory_out_by: number | null
+  site_in_by: number | null
 }
 
 export type BoxMasterSumAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   created_by: number | null
   deleted_by: number | null
   project_details_id: number | null
+  factory_out_by: number | null
+  site_in_by: number | null
 }
 
 export type BoxMasterMinAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   box_name: string | null
   box_status: $Enums.BoxStatus | null
   created_by: number | null
@@ -59,13 +63,17 @@ export type BoxMasterMinAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   project_details_id: number | null
+  factory_out_by: number | null
+  factory_out_at: Date | null
+  site_in_by: number | null
+  site_in_at: Date | null
 }
 
 export type BoxMasterMaxAggregateOutputType = {
   id: number | null
   project_id: number | null
   vendor_id: number | null
-  client_id: number | null
+  lead_id: number | null
   box_name: string | null
   box_status: $Enums.BoxStatus | null
   created_by: number | null
@@ -74,13 +82,17 @@ export type BoxMasterMaxAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   project_details_id: number | null
+  factory_out_by: number | null
+  factory_out_at: Date | null
+  site_in_by: number | null
+  site_in_at: Date | null
 }
 
 export type BoxMasterCountAggregateOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: number
   box_status: number
   created_by: number
@@ -89,6 +101,10 @@ export type BoxMasterCountAggregateOutputType = {
   deleted_by: number
   is_deleted: number
   project_details_id: number
+  factory_out_by: number
+  factory_out_at: number
+  site_in_by: number
+  site_in_at: number
   _all: number
 }
 
@@ -97,27 +113,31 @@ export type BoxMasterAvgAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   created_by?: true
   deleted_by?: true
   project_details_id?: true
+  factory_out_by?: true
+  site_in_by?: true
 }
 
 export type BoxMasterSumAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   created_by?: true
   deleted_by?: true
   project_details_id?: true
+  factory_out_by?: true
+  site_in_by?: true
 }
 
 export type BoxMasterMinAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
@@ -126,13 +146,17 @@ export type BoxMasterMinAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
+  factory_out_by?: true
+  factory_out_at?: true
+  site_in_by?: true
+  site_in_at?: true
 }
 
 export type BoxMasterMaxAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
@@ -141,13 +165,17 @@ export type BoxMasterMaxAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
+  factory_out_by?: true
+  factory_out_at?: true
+  site_in_by?: true
+  site_in_at?: true
 }
 
 export type BoxMasterCountAggregateInputType = {
   id?: true
   project_id?: true
   vendor_id?: true
-  client_id?: true
+  lead_id?: true
   box_name?: true
   box_status?: true
   created_by?: true
@@ -156,6 +184,10 @@ export type BoxMasterCountAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   project_details_id?: true
+  factory_out_by?: true
+  factory_out_at?: true
+  site_in_by?: true
+  site_in_at?: true
   _all?: true
 }
 
@@ -249,7 +281,7 @@ export type BoxMasterGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -258,6 +290,10 @@ export type BoxMasterGroupByOutputType = {
   deleted_by: number | null
   is_deleted: boolean
   project_details_id: number
+  factory_out_by: number | null
+  factory_out_at: Date | null
+  site_in_by: number | null
+  site_in_at: Date | null
   _count: BoxMasterCountAggregateOutputType | null
   _avg: BoxMasterAvgAggregateOutputType | null
   _sum: BoxMasterSumAggregateOutputType | null
@@ -265,7 +301,7 @@ export type BoxMasterGroupByOutputType = {
   _max: BoxMasterMaxAggregateOutputType | null
 }
 
-type GetBoxMasterGroupByPayload<T extends BoxMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetBoxMasterGroupByPayload<T extends BoxMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BoxMasterGroupByOutputType, T['by']> &
       {
@@ -287,7 +323,7 @@ export type BoxMasterWhereInput = {
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  client_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -296,18 +332,25 @@ export type BoxMasterWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ScanAndPackItemListRelationFilter
+  leadMaster?: Prisma.LeadMasterListRelationFilter
+  cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  factoryOutByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  siteInByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }
 
 export type BoxMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -316,11 +359,18 @@ export type BoxMasterOrderByWithRelationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
-  client?: Prisma.ClientMasterOrderByWithRelationInput
+  factory_out_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  factory_out_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_in_at?: Prisma.SortOrderInput | Prisma.SortOrder
   details?: Prisma.ProjectDetailsOrderByWithRelationInput
   project?: Prisma.ProjectMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   items?: Prisma.ScanAndPackItemOrderByRelationAggregateInput
+  leadMaster?: Prisma.LeadMasterOrderByRelationAggregateInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingOrderByRelationAggregateInput
+  factoryOutByUser?: Prisma.UserMasterOrderByWithRelationInput
+  siteInByUser?: Prisma.UserMasterOrderByWithRelationInput
 }
 
 export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -330,7 +380,7 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  client_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -339,18 +389,25 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
-  client?: Prisma.XOR<Prisma.ClientMasterScalarRelationFilter, Prisma.ClientMasterWhereInput>
+  factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
   details?: Prisma.XOR<Prisma.ProjectDetailsScalarRelationFilter, Prisma.ProjectDetailsWhereInput>
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   items?: Prisma.ScanAndPackItemListRelationFilter
+  leadMaster?: Prisma.LeadMasterListRelationFilter
+  cutListMachineMapping?: Prisma.CutListMachineMappingListRelationFilter
+  factoryOutByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  siteInByUser?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
 }, "id">
 
 export type BoxMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -359,6 +416,10 @@ export type BoxMasterOrderByWithAggregationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  factory_out_at?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_in_by?: Prisma.SortOrderInput | Prisma.SortOrder
+  site_in_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BoxMasterCountOrderByAggregateInput
   _avg?: Prisma.BoxMasterAvgOrderByAggregateInput
   _max?: Prisma.BoxMasterMaxOrderByAggregateInput
@@ -373,7 +434,7 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
-  client_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   box_name?: Prisma.StringWithAggregatesFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusWithAggregatesFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
@@ -382,9 +443,14 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
+  factory_out_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  factory_out_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
+  site_in_by?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
+  site_in_at?: Prisma.DateTimeNullableWithAggregatesFilter<"BoxMaster"> | Date | string | null
 }
 
 export type BoxMasterCreateInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -392,18 +458,23 @@ export type BoxMasterCreateInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
 export type BoxMasterUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -412,10 +483,17 @@ export type BoxMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
 export type BoxMasterUpdateInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -423,18 +501,23 @@ export type BoxMasterUpdateInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
 export type BoxMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -443,14 +526,20 @@ export type BoxMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
 export type BoxMasterCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -459,9 +548,14 @@ export type BoxMasterCreateManyInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
 }
 
 export type BoxMasterUpdateManyMutationInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -469,13 +563,15 @@ export type BoxMasterUpdateManyMutationInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type BoxMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -484,6 +580,10 @@ export type BoxMasterUncheckedUpdateManyInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type BoxMasterListRelationFilter = {
@@ -500,7 +600,7 @@ export type BoxMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -509,23 +609,29 @@ export type BoxMasterCountOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrder
+  factory_out_at?: Prisma.SortOrder
+  site_in_by?: Prisma.SortOrder
+  site_in_at?: Prisma.SortOrder
 }
 
 export type BoxMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrder
+  site_in_by?: Prisma.SortOrder
 }
 
 export type BoxMasterMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -534,13 +640,17 @@ export type BoxMasterMaxOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrder
+  factory_out_at?: Prisma.SortOrder
+  site_in_by?: Prisma.SortOrder
+  site_in_at?: Prisma.SortOrder
 }
 
 export type BoxMasterMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -549,21 +659,32 @@ export type BoxMasterMinOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrder
+  factory_out_at?: Prisma.SortOrder
+  site_in_by?: Prisma.SortOrder
+  site_in_at?: Prisma.SortOrder
 }
 
 export type BoxMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  client_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
   project_details_id?: Prisma.SortOrder
+  factory_out_by?: Prisma.SortOrder
+  site_in_by?: Prisma.SortOrder
 }
 
 export type BoxMasterScalarRelationFilter = {
   is?: Prisma.BoxMasterWhereInput
   isNot?: Prisma.BoxMasterWhereInput
+}
+
+export type BoxMasterNullableScalarRelationFilter = {
+  is?: Prisma.BoxMasterWhereInput | null
+  isNot?: Prisma.BoxMasterWhereInput | null
 }
 
 export type BoxMasterCreateNestedManyWithoutVendorInput = {
@@ -605,6 +726,90 @@ export type BoxMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutVendorInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutVendorInput[]
   updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutVendorInput | Prisma.BoxMasterUpdateManyWithWhereWithoutVendorInput[]
+  deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
+}
+
+export type BoxMasterCreateNestedManyWithoutFactoryOutByUserInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput> | Prisma.BoxMasterCreateWithoutFactoryOutByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput | Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManyFactoryOutByUserInputEnvelope
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+}
+
+export type BoxMasterCreateNestedManyWithoutSiteInByUserInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput> | Prisma.BoxMasterCreateWithoutSiteInByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput | Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManySiteInByUserInputEnvelope
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+}
+
+export type BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput> | Prisma.BoxMasterCreateWithoutFactoryOutByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput | Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManyFactoryOutByUserInputEnvelope
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+}
+
+export type BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput> | Prisma.BoxMasterCreateWithoutSiteInByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput | Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManySiteInByUserInputEnvelope
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+}
+
+export type BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput> | Prisma.BoxMasterCreateWithoutFactoryOutByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput | Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutFactoryOutByUserInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutFactoryOutByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManyFactoryOutByUserInputEnvelope
+  set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutFactoryOutByUserInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutFactoryOutByUserInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutFactoryOutByUserInput | Prisma.BoxMasterUpdateManyWithWhereWithoutFactoryOutByUserInput[]
+  deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
+}
+
+export type BoxMasterUpdateManyWithoutSiteInByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput> | Prisma.BoxMasterCreateWithoutSiteInByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput | Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutSiteInByUserInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutSiteInByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManySiteInByUserInputEnvelope
+  set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutSiteInByUserInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutSiteInByUserInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput | Prisma.BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput[]
+  deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
+}
+
+export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput> | Prisma.BoxMasterCreateWithoutFactoryOutByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput | Prisma.BoxMasterCreateOrConnectWithoutFactoryOutByUserInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutFactoryOutByUserInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutFactoryOutByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManyFactoryOutByUserInputEnvelope
+  set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutFactoryOutByUserInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutFactoryOutByUserInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutFactoryOutByUserInput | Prisma.BoxMasterUpdateManyWithWhereWithoutFactoryOutByUserInput[]
+  deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
+}
+
+export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput> | Prisma.BoxMasterCreateWithoutSiteInByUserInput[] | Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput | Prisma.BoxMasterCreateOrConnectWithoutSiteInByUserInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutSiteInByUserInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutSiteInByUserInput[]
+  createMany?: Prisma.BoxMasterCreateManySiteInByUserInputEnvelope
+  set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutSiteInByUserInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutSiteInByUserInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput | Prisma.BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput[]
   deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
 }
 
@@ -710,49 +915,62 @@ export type BoxMasterUpdateOneRequiredWithoutItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BoxMasterUpdateToOneWithWhereWithoutItemsInput, Prisma.BoxMasterUpdateWithoutItemsInput>, Prisma.BoxMasterUncheckedUpdateWithoutItemsInput>
 }
 
-export type BoxMasterCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput> | Prisma.BoxMasterCreateWithoutClientInput[] | Prisma.BoxMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutClientInput | Prisma.BoxMasterCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.BoxMasterCreateManyClientInputEnvelope
+export type BoxMasterCreateNestedManyWithoutLeadMasterInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput> | Prisma.BoxMasterCreateWithoutLeadMasterInput[] | Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput | Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput[]
   connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
 }
 
-export type BoxMasterUncheckedCreateNestedManyWithoutClientInput = {
-  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput> | Prisma.BoxMasterCreateWithoutClientInput[] | Prisma.BoxMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutClientInput | Prisma.BoxMasterCreateOrConnectWithoutClientInput[]
-  createMany?: Prisma.BoxMasterCreateManyClientInputEnvelope
+export type BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput> | Prisma.BoxMasterCreateWithoutLeadMasterInput[] | Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput | Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput[]
   connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
 }
 
-export type BoxMasterUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput> | Prisma.BoxMasterCreateWithoutClientInput[] | Prisma.BoxMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutClientInput | Prisma.BoxMasterCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutClientInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.BoxMasterCreateManyClientInputEnvelope
+export type BoxMasterUpdateManyWithoutLeadMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput> | Prisma.BoxMasterCreateWithoutLeadMasterInput[] | Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput | Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutLeadMasterInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutLeadMasterInput[]
   set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
-  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutClientInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutClientInput | Prisma.BoxMasterUpdateManyWithWhereWithoutClientInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutLeadMasterInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutLeadMasterInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutLeadMasterInput | Prisma.BoxMasterUpdateManyWithWhereWithoutLeadMasterInput[]
   deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
 }
 
-export type BoxMasterUncheckedUpdateManyWithoutClientNestedInput = {
-  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput> | Prisma.BoxMasterCreateWithoutClientInput[] | Prisma.BoxMasterUncheckedCreateWithoutClientInput[]
-  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutClientInput | Prisma.BoxMasterCreateOrConnectWithoutClientInput[]
-  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutClientInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutClientInput[]
-  createMany?: Prisma.BoxMasterCreateManyClientInputEnvelope
+export type BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput> | Prisma.BoxMasterCreateWithoutLeadMasterInput[] | Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput[]
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput | Prisma.BoxMasterCreateOrConnectWithoutLeadMasterInput[]
+  upsert?: Prisma.BoxMasterUpsertWithWhereUniqueWithoutLeadMasterInput | Prisma.BoxMasterUpsertWithWhereUniqueWithoutLeadMasterInput[]
   set?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   disconnect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   delete?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
   connect?: Prisma.BoxMasterWhereUniqueInput | Prisma.BoxMasterWhereUniqueInput[]
-  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutClientInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutClientInput[]
-  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutClientInput | Prisma.BoxMasterUpdateManyWithWhereWithoutClientInput[]
+  update?: Prisma.BoxMasterUpdateWithWhereUniqueWithoutLeadMasterInput | Prisma.BoxMasterUpdateWithWhereUniqueWithoutLeadMasterInput[]
+  updateMany?: Prisma.BoxMasterUpdateManyWithWhereWithoutLeadMasterInput | Prisma.BoxMasterUpdateManyWithWhereWithoutLeadMasterInput[]
   deleteMany?: Prisma.BoxMasterScalarWhereInput | Prisma.BoxMasterScalarWhereInput[]
+}
+
+export type BoxMasterCreateNestedOneWithoutCutListMachineMappingInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedCreateWithoutCutListMachineMappingInput>
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutCutListMachineMappingInput
+  connect?: Prisma.BoxMasterWhereUniqueInput
+}
+
+export type BoxMasterUpdateOneWithoutCutListMachineMappingNestedInput = {
+  create?: Prisma.XOR<Prisma.BoxMasterCreateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedCreateWithoutCutListMachineMappingInput>
+  connectOrCreate?: Prisma.BoxMasterCreateOrConnectWithoutCutListMachineMappingInput
+  upsert?: Prisma.BoxMasterUpsertWithoutCutListMachineMappingInput
+  disconnect?: Prisma.BoxMasterWhereInput | boolean
+  delete?: Prisma.BoxMasterWhereInput | boolean
+  connect?: Prisma.BoxMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BoxMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput, Prisma.BoxMasterUpdateWithoutCutListMachineMappingInput>, Prisma.BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput>
 }
 
 export type BoxMasterCreateWithoutVendorInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -760,16 +978,21 @@ export type BoxMasterCreateWithoutVendorInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
 export type BoxMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -778,7 +1001,13 @@ export type BoxMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
 export type BoxMasterCreateOrConnectWithoutVendorInput = {
@@ -814,7 +1043,7 @@ export type BoxMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  client_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -823,9 +1052,14 @@ export type BoxMasterScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"BoxMaster"> | boolean
   project_details_id?: Prisma.IntFilter<"BoxMaster"> | number
+  factory_out_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  factory_out_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
+  site_in_by?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
+  site_in_at?: Prisma.DateTimeNullableFilter<"BoxMaster"> | Date | string | null
 }
 
-export type BoxMasterCreateWithoutProjectInput = {
+export type BoxMasterCreateWithoutFactoryOutByUserInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -833,16 +1067,22 @@ export type BoxMasterCreateWithoutProjectInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
-export type BoxMasterUncheckedCreateWithoutProjectInput = {
+export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
   id?: number
+  project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -851,7 +1091,146 @@ export type BoxMasterUncheckedCreateWithoutProjectInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
+}
+
+export type BoxMasterCreateOrConnectWithoutFactoryOutByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput>
+}
+
+export type BoxMasterCreateManyFactoryOutByUserInputEnvelope = {
+  data: Prisma.BoxMasterCreateManyFactoryOutByUserInput | Prisma.BoxMasterCreateManyFactoryOutByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoxMasterCreateWithoutSiteInByUserInput = {
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
+  items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+}
+
+export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
+}
+
+export type BoxMasterCreateOrConnectWithoutSiteInByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput>
+}
+
+export type BoxMasterCreateManySiteInByUserInputEnvelope = {
+  data: Prisma.BoxMasterCreateManySiteInByUserInput | Prisma.BoxMasterCreateManySiteInByUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type BoxMasterUpsertWithWhereUniqueWithoutFactoryOutByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedCreateWithoutFactoryOutByUserInput>
+}
+
+export type BoxMasterUpdateWithWhereUniqueWithoutFactoryOutByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutFactoryOutByUserInput, Prisma.BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput>
+}
+
+export type BoxMasterUpdateManyWithWhereWithoutFactoryOutByUserInput = {
+  where: Prisma.BoxMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateManyMutationInput, Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput>
+}
+
+export type BoxMasterUpsertWithWhereUniqueWithoutSiteInByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedUpdateWithoutSiteInByUserInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedCreateWithoutSiteInByUserInput>
+}
+
+export type BoxMasterUpdateWithWhereUniqueWithoutSiteInByUserInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutSiteInByUserInput, Prisma.BoxMasterUncheckedUpdateWithoutSiteInByUserInput>
+}
+
+export type BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput = {
+  where: Prisma.BoxMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateManyMutationInput, Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput>
+}
+
+export type BoxMasterCreateWithoutProjectInput = {
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
+  items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
+}
+
+export type BoxMasterUncheckedCreateWithoutProjectInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
 export type BoxMasterCreateOrConnectWithoutProjectInput = {
@@ -881,6 +1260,7 @@ export type BoxMasterUpdateManyWithWhereWithoutProjectInput = {
 }
 
 export type BoxMasterCreateWithoutDetailsInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -888,17 +1268,22 @@ export type BoxMasterCreateWithoutDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
 export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -906,7 +1291,13 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
 export type BoxMasterCreateOrConnectWithoutDetailsInput = {
@@ -936,6 +1327,7 @@ export type BoxMasterUpdateManyWithWhereWithoutDetailsInput = {
 }
 
 export type BoxMasterCreateWithoutItemsInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -943,17 +1335,22 @@ export type BoxMasterCreateWithoutItemsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
-  client: Prisma.ClientMasterCreateNestedOneWithoutBoxesInput
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
 export type BoxMasterUncheckedCreateWithoutItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -962,6 +1359,12 @@ export type BoxMasterUncheckedCreateWithoutItemsInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
 export type BoxMasterCreateOrConnectWithoutItemsInput = {
@@ -981,6 +1384,7 @@ export type BoxMasterUpdateToOneWithWhereWithoutItemsInput = {
 }
 
 export type BoxMasterUpdateWithoutItemsInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -988,17 +1392,22 @@ export type BoxMasterUpdateWithoutItemsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1007,9 +1416,16 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
-export type BoxMasterCreateWithoutClientInput = {
+export type BoxMasterCreateWithoutLeadMasterInput = {
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1017,16 +1433,22 @@ export type BoxMasterCreateWithoutClientInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
   details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
   project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
   items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
 }
 
-export type BoxMasterUncheckedCreateWithoutClientInput = {
+export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
   id?: number
   project_id: number
   vendor_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1035,39 +1457,137 @@ export type BoxMasterUncheckedCreateWithoutClientInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutBoxMasterInput
 }
 
-export type BoxMasterCreateOrConnectWithoutClientInput = {
+export type BoxMasterCreateOrConnectWithoutLeadMasterInput = {
   where: Prisma.BoxMasterWhereUniqueInput
-  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput>
 }
 
-export type BoxMasterCreateManyClientInputEnvelope = {
-  data: Prisma.BoxMasterCreateManyClientInput | Prisma.BoxMasterCreateManyClientInput[]
-  skipDuplicates?: boolean
-}
-
-export type BoxMasterUpsertWithWhereUniqueWithoutClientInput = {
+export type BoxMasterUpsertWithWhereUniqueWithoutLeadMasterInput = {
   where: Prisma.BoxMasterWhereUniqueInput
-  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutClientInput, Prisma.BoxMasterUncheckedUpdateWithoutClientInput>
-  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutClientInput, Prisma.BoxMasterUncheckedCreateWithoutClientInput>
+  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedUpdateWithoutLeadMasterInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedCreateWithoutLeadMasterInput>
 }
 
-export type BoxMasterUpdateWithWhereUniqueWithoutClientInput = {
+export type BoxMasterUpdateWithWhereUniqueWithoutLeadMasterInput = {
   where: Prisma.BoxMasterWhereUniqueInput
-  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutClientInput, Prisma.BoxMasterUncheckedUpdateWithoutClientInput>
+  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutLeadMasterInput, Prisma.BoxMasterUncheckedUpdateWithoutLeadMasterInput>
 }
 
-export type BoxMasterUpdateManyWithWhereWithoutClientInput = {
+export type BoxMasterUpdateManyWithWhereWithoutLeadMasterInput = {
   where: Prisma.BoxMasterScalarWhereInput
-  data: Prisma.XOR<Prisma.BoxMasterUpdateManyMutationInput, Prisma.BoxMasterUncheckedUpdateManyWithoutClientInput>
+  data: Prisma.XOR<Prisma.BoxMasterUpdateManyMutationInput, Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterInput>
+}
+
+export type BoxMasterCreateWithoutCutListMachineMappingInput = {
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
+  details: Prisma.ProjectDetailsCreateNestedOneWithoutBoxesInput
+  project: Prisma.ProjectMasterCreateNestedOneWithoutBoxesInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutBoxesInput
+  items?: Prisma.ScanAndPackItemCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterCreateNestedManyWithoutBoxMasterInput
+  factoryOutByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesFactoryOutInput
+  siteInByUser?: Prisma.UserMasterCreateNestedOneWithoutBoxesSiteInInput
+}
+
+export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutBoxInput
+  leadMaster?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutBoxMasterInput
+}
+
+export type BoxMasterCreateOrConnectWithoutCutListMachineMappingInput = {
+  where: Prisma.BoxMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedCreateWithoutCutListMachineMappingInput>
+}
+
+export type BoxMasterUpsertWithoutCutListMachineMappingInput = {
+  update: Prisma.XOR<Prisma.BoxMasterUpdateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput>
+  create: Prisma.XOR<Prisma.BoxMasterCreateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedCreateWithoutCutListMachineMappingInput>
+  where?: Prisma.BoxMasterWhereInput
+}
+
+export type BoxMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput = {
+  where?: Prisma.BoxMasterWhereInput
+  data: Prisma.XOR<Prisma.BoxMasterUpdateWithoutCutListMachineMappingInput, Prisma.BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput>
+}
+
+export type BoxMasterUpdateWithoutCutListMachineMappingInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
+  items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
+}
+
+export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
 export type BoxMasterCreateManyVendorInput = {
   id?: number
   project_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1076,9 +1596,14 @@ export type BoxMasterCreateManyVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
 }
 
 export type BoxMasterUpdateWithoutVendorInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1086,16 +1611,21 @@ export type BoxMasterUpdateWithoutVendorInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1104,13 +1634,19 @@ export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1119,12 +1655,17 @@ export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type BoxMasterCreateManyProjectInput = {
+export type BoxMasterCreateManyFactoryOutByUserInput = {
   id?: number
+  project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1133,9 +1674,31 @@ export type BoxMasterCreateManyProjectInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   project_details_id: number
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
 }
 
-export type BoxMasterUpdateWithoutProjectInput = {
+export type BoxMasterCreateManySiteInByUserInput = {
+  id?: number
+  project_id: number
+  vendor_id: number
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_at?: Date | string | null
+}
+
+export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1143,16 +1706,157 @@ export type BoxMasterUpdateWithoutProjectInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
+  items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
+}
+
+export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
+}
+
+export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type BoxMasterUpdateWithoutSiteInByUserInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
+  project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
+  items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+}
+
+export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
+}
+
+export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  project_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type BoxMasterCreateManyProjectInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  box_name: string
+  box_status: $Enums.BoxStatus
+  created_by: number
+  created_date?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  project_details_id: number
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
+}
+
+export type BoxMasterUpdateWithoutProjectInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  box_name?: Prisma.StringFieldUpdateOperationsInput | string
+  box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1161,13 +1865,19 @@ export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1176,13 +1886,17 @@ export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type BoxMasterCreateManyDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  client_id: number
+  lead_id: number
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1190,9 +1904,14 @@ export type BoxMasterCreateManyDetailsInput = {
   deleted_at?: Date | string | null
   deleted_by?: number | null
   is_deleted?: boolean
+  factory_out_by?: number | null
+  factory_out_at?: Date | string | null
+  site_in_by?: number | null
+  site_in_at?: Date | string | null
 }
 
 export type BoxMasterUpdateWithoutDetailsInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1200,17 +1919,22 @@ export type BoxMasterUpdateWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  client?: Prisma.ClientMasterUpdateOneRequiredWithoutBoxesNestedInput
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
 export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1218,14 +1942,20 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  leadMaster?: Prisma.LeadMasterUncheckedUpdateManyWithoutBoxMasterNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
 export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  client_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1233,23 +1963,14 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type BoxMasterCreateManyClientInput = {
-  id?: number
-  project_id: number
-  vendor_id: number
-  box_name: string
-  box_status: $Enums.BoxStatus
-  created_by: number
-  created_date?: Date | string
-  deleted_at?: Date | string | null
-  deleted_by?: number | null
-  is_deleted?: boolean
-  project_details_id: number
-}
-
-export type BoxMasterUpdateWithoutClientInput = {
+export type BoxMasterUpdateWithoutLeadMasterInput = {
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1257,16 +1978,22 @@ export type BoxMasterUpdateWithoutClientInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   details?: Prisma.ProjectDetailsUpdateOneRequiredWithoutBoxesNestedInput
   project?: Prisma.ProjectMasterUpdateOneRequiredWithoutBoxesNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutBoxesNestedInput
   items?: Prisma.ScanAndPackItemUpdateManyWithoutBoxNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutBoxMasterNestedInput
+  factoryOutByUser?: Prisma.UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput
+  siteInByUser?: Prisma.UserMasterUpdateOneWithoutBoxesSiteInNestedInput
 }
 
-export type BoxMasterUncheckedUpdateWithoutClientInput = {
+export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1275,13 +2002,19 @@ export type BoxMasterUncheckedUpdateWithoutClientInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   items?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutBoxNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutBoxMasterNestedInput
 }
 
-export type BoxMasterUncheckedUpdateManyWithoutClientInput = {
+export type BoxMasterUncheckedUpdateManyWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1290,6 +2023,10 @@ export type BoxMasterUncheckedUpdateManyWithoutClientInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   project_details_id?: Prisma.IntFieldUpdateOperationsInput | number
+  factory_out_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  factory_out_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_in_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  site_in_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -1299,10 +2036,14 @@ export type BoxMasterUncheckedUpdateManyWithoutClientInput = {
 
 export type BoxMasterCountOutputType = {
   items: number
+  leadMaster: number
+  cutListMachineMapping: number
 }
 
 export type BoxMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   items?: boolean | BoxMasterCountOutputTypeCountItemsArgs
+  leadMaster?: boolean | BoxMasterCountOutputTypeCountLeadMasterArgs
+  cutListMachineMapping?: boolean | BoxMasterCountOutputTypeCountCutListMachineMappingArgs
 }
 
 /**
@@ -1322,12 +2063,26 @@ export type BoxMasterCountOutputTypeCountItemsArgs<ExtArgs extends runtime.Types
   where?: Prisma.ScanAndPackItemWhereInput
 }
 
+/**
+ * BoxMasterCountOutputType without action
+ */
+export type BoxMasterCountOutputTypeCountLeadMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadMasterWhereInput
+}
+
+/**
+ * BoxMasterCountOutputType without action
+ */
+export type BoxMasterCountOutputTypeCountCutListMachineMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CutListMachineMappingWhereInput
+}
+
 
 export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
@@ -1336,11 +2091,18 @@ export type BoxMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  factory_out_by?: boolean
+  factory_out_at?: boolean
+  site_in_by?: boolean
+  site_in_at?: boolean
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.BoxMaster$leadMasterArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.BoxMaster$cutListMachineMappingArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
@@ -1348,7 +2110,7 @@ export type BoxMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
@@ -1357,17 +2119,22 @@ export type BoxMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  factory_out_by?: boolean
+  factory_out_at?: boolean
+  site_in_by?: boolean
+  site_in_at?: boolean
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
 export type BoxMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
@@ -1376,17 +2143,22 @@ export type BoxMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
+  factory_out_by?: boolean
+  factory_out_at?: boolean
+  site_in_by?: boolean
+  site_in_at?: boolean
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
 }, ExtArgs["result"]["boxMaster"]>
 
 export type BoxMasterSelectScalar = {
   id?: boolean
   project_id?: boolean
   vendor_id?: boolean
-  client_id?: boolean
+  lead_id?: boolean
   box_name?: boolean
   box_status?: boolean
   created_by?: boolean
@@ -1395,44 +2167,56 @@ export type BoxMasterSelectScalar = {
   deleted_by?: boolean
   is_deleted?: boolean
   project_details_id?: boolean
+  factory_out_by?: boolean
+  factory_out_at?: boolean
+  site_in_by?: boolean
+  site_in_at?: boolean
 }
 
-export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "client_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id", ExtArgs["result"]["boxMaster"]>
+export type BoxMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "project_id" | "vendor_id" | "lead_id" | "box_name" | "box_status" | "created_by" | "created_date" | "deleted_at" | "deleted_by" | "is_deleted" | "project_details_id" | "factory_out_by" | "factory_out_at" | "site_in_by" | "site_in_at", ExtArgs["result"]["boxMaster"]>
 export type BoxMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   items?: boolean | Prisma.BoxMaster$itemsArgs<ExtArgs>
+  leadMaster?: boolean | Prisma.BoxMaster$leadMasterArgs<ExtArgs>
+  cutListMachineMapping?: boolean | Prisma.BoxMaster$cutListMachineMappingArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
   _count?: boolean | Prisma.BoxMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BoxMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
 }
 export type BoxMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  client?: boolean | Prisma.ClientMasterDefaultArgs<ExtArgs>
   details?: boolean | Prisma.ProjectDetailsDefaultArgs<ExtArgs>
   project?: boolean | Prisma.ProjectMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  factoryOutByUser?: boolean | Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>
+  siteInByUser?: boolean | Prisma.BoxMaster$siteInByUserArgs<ExtArgs>
 }
 
 export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "BoxMaster"
   objects: {
-    client: Prisma.$ClientMasterPayload<ExtArgs>
     details: Prisma.$ProjectDetailsPayload<ExtArgs>
     project: Prisma.$ProjectMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     items: Prisma.$ScanAndPackItemPayload<ExtArgs>[]
+    leadMaster: Prisma.$LeadMasterPayload<ExtArgs>[]
+    cutListMachineMapping: Prisma.$CutListMachineMappingPayload<ExtArgs>[]
+    factoryOutByUser: Prisma.$UserMasterPayload<ExtArgs> | null
+    siteInByUser: Prisma.$UserMasterPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     project_id: number
     vendor_id: number
-    client_id: number
+    lead_id: number
     box_name: string
     box_status: $Enums.BoxStatus
     created_by: number
@@ -1441,6 +2225,10 @@ export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     deleted_by: number | null
     is_deleted: boolean
     project_details_id: number
+    factory_out_by: number | null
+    factory_out_at: Date | null
+    site_in_by: number | null
+    site_in_at: Date | null
   }, ExtArgs["result"]["boxMaster"]>
   composites: {}
 }
@@ -1835,11 +2623,14 @@ readonly fields: BoxMasterFieldRefs;
  */
 export interface Prisma__BoxMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  client<T extends Prisma.ClientMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClientMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ClientMasterClient<runtime.Types.Result.GetResult<Prisma.$ClientMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   details<T extends Prisma.ProjectDetailsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDetailsDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectDetailsClient<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.ProjectMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   items<T extends Prisma.BoxMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScanAndPackItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadMaster<T extends Prisma.BoxMaster$leadMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$leadMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  cutListMachineMapping<T extends Prisma.BoxMaster$cutListMachineMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$cutListMachineMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CutListMachineMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  factoryOutByUser<T extends Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$factoryOutByUserArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  siteInByUser<T extends Prisma.BoxMaster$siteInByUserArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.BoxMaster$siteInByUserArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1872,7 +2663,7 @@ export interface BoxMasterFieldRefs {
   readonly id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly project_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"BoxMaster", 'Int'>
-  readonly client_id: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly lead_id: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly box_name: Prisma.FieldRef<"BoxMaster", 'String'>
   readonly box_status: Prisma.FieldRef<"BoxMaster", 'BoxStatus'>
   readonly created_by: Prisma.FieldRef<"BoxMaster", 'Int'>
@@ -1881,6 +2672,10 @@ export interface BoxMasterFieldRefs {
   readonly deleted_by: Prisma.FieldRef<"BoxMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"BoxMaster", 'Boolean'>
   readonly project_details_id: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly factory_out_by: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly factory_out_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
+  readonly site_in_by: Prisma.FieldRef<"BoxMaster", 'Int'>
+  readonly site_in_at: Prisma.FieldRef<"BoxMaster", 'DateTime'>
 }
     
 
@@ -2077,6 +2872,11 @@ export type BoxMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` BoxMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of BoxMasters.
+   */
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
 }
 
@@ -2298,6 +3098,92 @@ export type BoxMaster$itemsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.ScanAndPackItemScalarFieldEnum | Prisma.ScanAndPackItemScalarFieldEnum[]
+}
+
+/**
+ * BoxMaster.leadMaster
+ */
+export type BoxMaster$leadMasterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
+  orderBy?: Prisma.LeadMasterOrderByWithRelationInput | Prisma.LeadMasterOrderByWithRelationInput[]
+  cursor?: Prisma.LeadMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
+}
+
+/**
+ * BoxMaster.cutListMachineMapping
+ */
+export type BoxMaster$cutListMachineMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CutListMachineMapping
+   */
+  select?: Prisma.CutListMachineMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CutListMachineMapping
+   */
+  omit?: Prisma.CutListMachineMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CutListMachineMappingInclude<ExtArgs> | null
+  where?: Prisma.CutListMachineMappingWhereInput
+  orderBy?: Prisma.CutListMachineMappingOrderByWithRelationInput | Prisma.CutListMachineMappingOrderByWithRelationInput[]
+  cursor?: Prisma.CutListMachineMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CutListMachineMappingScalarFieldEnum | Prisma.CutListMachineMappingScalarFieldEnum[]
+}
+
+/**
+ * BoxMaster.factoryOutByUser
+ */
+export type BoxMaster$factoryOutByUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * BoxMaster.siteInByUser
+ */
+export type BoxMaster$siteInByUserArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserMaster
+   */
+  select?: Prisma.UserMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserMaster
+   */
+  omit?: Prisma.UserMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserMasterInclude<ExtArgs> | null
+  where?: Prisma.UserMasterWhereInput
 }
 
 /**

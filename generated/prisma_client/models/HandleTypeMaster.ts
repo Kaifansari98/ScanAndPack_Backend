@@ -182,7 +182,7 @@ export type HandleTypeMasterGroupByOutputType = {
   _max: HandleTypeMasterMaxAggregateOutputType | null
 }
 
-type GetHandleTypeMasterGroupByPayload<T extends HandleTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetHandleTypeMasterGroupByPayload<T extends HandleTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<HandleTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1202,6 +1202,11 @@ export type HandleTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` HandleTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of HandleTypeMasters.
+   */
   distinct?: Prisma.HandleTypeMasterScalarFieldEnum | Prisma.HandleTypeMasterScalarFieldEnum[]
 }
 

@@ -4,7 +4,7 @@ import { ItemStatus } from '../../prisma/generated'; // assuming status enum is 
 interface ScanPackPayload {
   project_id: number;
   vendor_id: number;
-  client_id: number;
+  lead_id: number;
   unique_id: string;
   box_id: number;
   created_by: number;
@@ -12,14 +12,14 @@ interface ScanPackPayload {
 }
 
 export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) => {
-  const { project_id, vendor_id, client_id, unique_id, box_id, created_by, status } = payload;
+  const { project_id, vendor_id, lead_id, unique_id, box_id, created_by, status } = payload;
 
   // Step 1: Get the item
   const item = await prisma.projectItemsMaster.findFirst({
     where: {
       project_id,
       vendor_id,
-      client_id,
+      lead_id,
       unique_id
     },
     include: {
@@ -227,69 +227,105 @@ export const getProjectItemAndInsertScanPack = async (payload: ScanPackPayload) 
 export const getScanItemsByFields = async ({
   project_id,
   vendor_id,
-  client_id,
   box_id,
 }: {
   project_id: number;
   vendor_id: number;
-  client_id: number;
+  client_id: number; // kept for API compatibility
   box_id: number;
 }) => {
+
+  // ── Box details ────────────────────────────────────────────────────────────
   const boxDetails = await prisma.boxMaster.findFirst({
     where: {
       id: box_id,
       project_id,
       vendor_id,
-      client_id,
       is_deleted: false,
     },
   });
 
-  const scanItems = await prisma.scanAndPackItem.findMany({
+  // ── Items: CutListMachineMapping rows assigned to this box ─────────────────
+  // Each row joined with its CutList for item details.
+  // Only packaging machine rows (machine with box_id set) — filter by box_id
+  // which is already scoped to the packaging machine via scan flow.
+  const mappingRows = await prisma.cutListMachineMapping.findMany({
     where: {
+      box_id,
       project_id,
       vendor_id,
-      client_id,
-      box_id,
-      is_deleted: false,
+      expected_in: true,
     },
-    include: {
-      details: true, // Include ProjectDetails relation
+    select: {
+      id: true,
+      cut_list_id: true,
+      machine_id: true,
+      sequence_no: true,
+      status: true,
+      actual_in_at: true,
+      actual_out_at: true,
+      in_operator: true,
+      created_at: true,
+      cut_list: {
+        select: {
+          id: true,
+          unique_code: true,
+          unique_code_2: true,
+          item_name: true,
+          description: true,
+          length: true,
+          width: true,
+          thickness: true,
+          qty: true,
+          material_details: true,
+          category_name: true,
+          group_name: true,
+          procurement: true,
+          elf: true,
+          elb: true,
+          esl: true,
+          esr: true,
+        },
+      },
     },
-    orderBy: {
-      created_date: 'desc',
-    },
+    orderBy: { created_at: "desc" },
   });
 
-  const enrichedItems = await Promise.all(
-    scanItems.map(async (item) => {
-      const projectItems = await prisma.projectItemsMaster.findMany({
-        where: {
-          project_id: item.project_id,
-          vendor_id: item.vendor_id,
-          client_id: item.client_id,
-          unique_id: item.unique_id,
-        },
-      });
-
-      return {
-        id: item.id, // Include ScanAndPackItem.id
-        unique_id: item.unique_id,
-        project_id: item.project_id,
-        vendor_id: item.vendor_id,
-        client_id: item.client_id,
-        box_id: item.box_id,
-        project_details_id: item.project_details_id,
-        status: item.status,
-        created_by: item.created_by,
-        created_date: item.created_date,
-        qty: item.qty,
-        weight: item.weight,
-        project_details: item.details, // ProjectDetails data
-        project_item_details: projectItems.length === 1 ? projectItems[0] : projectItems,
-      };      
-    })
-  );
+  const enrichedItems = mappingRows.map((row) => ({
+    id: row.id,
+    cut_list_id: row.cut_list_id,
+    machine_id: row.machine_id,
+    sequence_no: row.sequence_no,
+    project_id,
+    vendor_id,
+    box_id,
+    status: row.status,
+    actual_in_at: row.actual_in_at,
+    actual_out_at: row.actual_out_at,
+    in_operator: row.in_operator,
+    created_date: row.created_at,
+    // CutList data shaped to match old ScanAndPackItem / ProjectItemsMaster response
+    project_item_details: row.cut_list
+      ? {
+          unique_id: row.cut_list.unique_code,
+          unique_code_2: row.cut_list.unique_code_2,
+          item_name: row.cut_list.item_name,
+          description: row.cut_list.description,
+          L1: row.cut_list.length?.toString() ?? "0",
+          L2: row.cut_list.width?.toString() ?? "0",
+          L3: row.cut_list.thickness?.toString() ?? "0",
+          qty: row.cut_list.qty,
+          material_details: row.cut_list.material_details,
+          category: row.cut_list.category_name ?? "",
+          group: row.cut_list.group_name ?? "",
+          procurement: row.cut_list.procurement ?? "",
+          elf: row.cut_list.elf ?? "",
+          elb: row.cut_list.elb ?? "",
+          esl: row.cut_list.esl ?? "",
+          esr: row.cut_list.esr ?? "",
+        }
+      : null,
+  }));
 
   return {
     box_details: boxDetails,

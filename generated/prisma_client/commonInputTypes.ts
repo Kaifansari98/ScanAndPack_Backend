@@ -670,6 +670,23 @@ export type EnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
 }
 
+export type EnumDefectStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel> | $Enums.DefectStatus
+}
+
+export type EnumDefectStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel> | $Enums.DefectStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+}
+
 export type EnumUserActivityTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.UserActivityType | Prisma.EnumUserActivityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.UserActivityType[] | Prisma.ListEnumUserActivityTypeFieldRefInput<$PrismaModel>
@@ -821,6 +838,23 @@ export type EnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$PrismaMod
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
+}
+
+export type EnumProjectCategoriesStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectCategoriesStatus | Prisma.EnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel> | $Enums.ProjectCategoriesStatus
+}
+
+export type EnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectCategoriesStatus | Prisma.EnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProjectCategoriesStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
 }
 
 export type NestedIntFilter<$PrismaModel = never> = {
@@ -1470,6 +1504,23 @@ export type NestedEnumMachineTypeMasterStatusWithAggregatesFilter<$PrismaModel =
   _max?: Prisma.NestedEnumMachineTypeMasterStatusFilter<$PrismaModel>
 }
 
+export type NestedEnumDefectStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel> | $Enums.DefectStatus
+}
+
+export type NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DefectStatus | Prisma.EnumDefectStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DefectStatus[] | Prisma.ListEnumDefectStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDefectStatusWithAggregatesFilter<$PrismaModel> | $Enums.DefectStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDefectStatusFilter<$PrismaModel>
+}
+
 export type NestedEnumUserActivityTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.UserActivityType | Prisma.EnumUserActivityTypeFieldRefInput<$PrismaModel>
   in?: $Enums.UserActivityType[] | Prisma.ListEnumUserActivityTypeFieldRefInput<$PrismaModel>
@@ -1567,6 +1618,23 @@ export type NestedEnumExternalPlatformTokenActiveStatusWithAggregatesFilter<$Pri
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumExternalPlatformTokenActiveStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumProjectCategoriesStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectCategoriesStatus | Prisma.EnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel> | $Enums.ProjectCategoriesStatus
+}
+
+export type NestedEnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProjectCategoriesStatus | Prisma.EnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProjectCategoriesStatus[] | Prisma.ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel> | $Enums.ProjectCategoriesStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
 }
 
 

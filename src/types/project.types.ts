@@ -60,6 +60,7 @@ export interface FullProjectCreateInput {
 
 export interface CadbidPayload {
   projectName: string;
+  customer_id:Number
   items: CadbidItems[];
 }
 
