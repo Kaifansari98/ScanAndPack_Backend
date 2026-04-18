@@ -4,7 +4,9 @@ import { CreateBoxInput } from '../../types/boxTypes';
 
 import fs from "fs";
 import path from "path";
-import htmlPdfNode from "html-pdf-node";
+// import htmlPdfNode from "html-pdf-node";
+import puppeteer from "puppeteer";
+
 import { validationResponse } from '../../../src/utils/validationResponse';
 import { uploadPdfAndGetSignedUrl, uploadPdfToWasabi } from 'src/utils/wasabiClient';
 
@@ -663,16 +665,19 @@ export const generateBoxPdfService = async (
 
     // fs.writeFileSync(tempFilePath, pdfBuffer);
 
-    const pdfBuffer = await htmlPdfNode.generatePdf(
-      { content: html },
-      {
-        format: "A4",
-        margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-        printBackground: true,
-      }
-    ) as unknown as Buffer;
 
-    fs.writeFileSync(tempFilePath, pdfBuffer);
+    const pdfBuffer = await generatePdf(html,tempFilePath);
+
+    // const pdfBuffer = await htmlPdfNode.generatePdf(
+    //   { content: html },
+    //   {
+    //     format: "A4",
+    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
+    //     printBackground: true,
+    //   }
+    // ) as unknown as Buffer;
+
+    // fs.writeFileSync(tempFilePath, pdfBuffer);
 
     // ── 7. Upload to Wasabi + get signed URL + delete temp file ──────────────
     const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
@@ -701,6 +706,35 @@ export const generateBoxPdfService = async (
 };
 
 
+
+export async function generatePdf(html: string, filePath: string) {
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"], // required on VPS
+  });
+
+  const page = await browser.newPage();
+
+  await page.setContent(html, {
+    waitUntil: "networkidle0",
+  });
+
+  const pdfBuffer = await page.pdf({
+    format: "A4",
+    printBackground: true,
+    margin: {
+      top: "10mm",
+      bottom: "10mm",
+      left: "10mm",
+      right: "10mm",
+    },
+  });
+
+  await browser.close();
+
+  fs.writeFileSync(filePath, pdfBuffer);
+  return pdfBuffer;
+}
 
 
 export const generateProjectBoxPdfService = async (
@@ -916,14 +950,15 @@ export const generateProjectBoxPdfService = async (
     tempFilePath = path.join(tempDir, fileName);
 
 
-    const pdfBuffer = await htmlPdfNode.generatePdf(
-      { content: html },
-      {
-        format: "A4",
-        margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-        printBackground: true,
-      }
-    ) as unknown as Buffer;
+    const pdfBuffer = await generatePdf(html,tempFilePath);
+    // const pdfBuffer = await htmlPdfNode.generatePdf(
+    //   { content: html },
+    //   {
+    //     format: "A4",
+    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
+    //     printBackground: true,
+    //   }
+    // ) as unknown as Buffer;
 
     // const pdfBuffer = await htmlPdfNode.generatePdf(
     //   { content: html },
@@ -1218,16 +1253,17 @@ export const generateAllBoxesPdfService = async (
     const fileName = `all_boxes_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
     tempFilePath = path.join(tempDir, fileName);
 
-    const pdfBuffer = await htmlPdfNode.generatePdf(
-      { content: html },
-      {
-        format: "A4",
-        margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-        printBackground: true,
-      }
-    ) as unknown as Buffer;
+    const pdfBuffer = await generatePdf(html,tempFilePath);
+    // const pdfBuffer = await htmlPdfNode.generatePdf(
+    //   { content: html },
+    //   {
+    //     format: "A4",
+    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
+    //     printBackground: true,
+    //   }
+    // ) as unknown as Buffer;
 
-    fs.writeFileSync(tempFilePath, pdfBuffer);
+    //fs.writeFileSync(tempFilePath, pdfBuffer);
 
     // ── 8. Upload to Wasabi + signed URL + delete temp ───────────────────────
     const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
@@ -1609,16 +1645,18 @@ export const generateProjectFullReportService = async (
     const fileName = `report_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
     tempFilePath = path.join(tempDir, fileName);
 
-    const pdfBuffer = await htmlPdfNode.generatePdf(
-      { content: html },
-      {
-        format: "A4",
-        margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-        printBackground: true,
-      }
-    ) as unknown as Buffer;
+    const pdfBuffer = await generatePdf(html,tempFilePath);
 
-    fs.writeFileSync(tempFilePath, pdfBuffer);
+    // const pdfBuffer = await htmlPdfNode.generatePdf(
+    //   { content: html },
+    //   {
+    //     format: "A4",
+    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
+    //     printBackground: true,
+    //   }
+    // ) as unknown as Buffer;
+
+    // fs.writeFileSync(tempFilePath, pdfBuffer);
 
     // ── 10. Upload to Wasabi + signed URL + delete temp ──────────────────────
     const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
