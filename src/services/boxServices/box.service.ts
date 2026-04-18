@@ -8,7 +8,7 @@ import path from "path";
 import puppeteer from "puppeteer";
 
 import { validationResponse } from '../../../src/utils/validationResponse';
-import { uploadPdfAndGetSignedUrl, uploadPdfToWasabi } from 'src/utils/wasabiClient';
+import { uploadPdfAndGetSignedUrl, uploadPdfToWasabi } from '../../../src/utils/wasabiClient';
 
 // ─── Output directory ─────────────────────────────────────────────────────────
 const PDF_OUTPUT_DIR = path.join(process.cwd(), "public", "pdfs", "boxes");
