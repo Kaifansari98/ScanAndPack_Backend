@@ -7,7 +7,7 @@ import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
-import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from 'src/utils/wasabiClient';
+import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from '../../../src/utils/wasabiClient';
 import { cache } from "../../utils/cache";
 
 interface TrackTracePayload {
