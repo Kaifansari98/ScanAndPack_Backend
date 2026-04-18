@@ -13,7 +13,7 @@ import {
   getBoxSiteInStatusService
 } from '../../services/boxServices/box.service';
 import { BoxStatus } from '../../prisma/generated';
-import { ApiResponse } from 'src/utils/apiResponse';
+import { ApiResponse } from '../../../src/utils/apiResponse';
 
 export const createBox = async (req: Request, res: Response) => {
   try {
