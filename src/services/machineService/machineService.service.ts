@@ -1,4 +1,4 @@
-import { generateSignedUrl } from 'src/utils/wasabiClient';
+import { generateSignedUrl } from '../../../src/utils/wasabiClient';
 import { prisma } from '../../prisma/client';
 
 // export const getAllMachines = async (
