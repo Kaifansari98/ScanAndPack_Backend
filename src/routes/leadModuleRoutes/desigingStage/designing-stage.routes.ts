@@ -152,6 +152,12 @@ DesigningStageRouter.get(
   CHSSelectionTypeMappingController.getByLead,
 );
 
+// GET    /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/chs-manufacturing-days-by-instance
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/chs-manufacturing-days-by-instance",
+  CHSSelectionTypeMappingController.getManufacturingDaysByInstance,
+);
+
 // PUT    /api/leads/designing-stage/chs-selection-type-mapping/:id
 DesigningStageRouter.put(
   "/chs-selection-type-mapping/:id",

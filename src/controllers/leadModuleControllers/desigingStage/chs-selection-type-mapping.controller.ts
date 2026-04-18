@@ -77,6 +77,38 @@ export class CHSSelectionTypeMappingController {
   }
 
   /**
+   * GET /leads/designing-stage/vendor/:vendorId/lead/:leadId/chs-manufacturing-days-by-instance
+   */
+  public static async getManufacturingDaysByInstance(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const { vendorId, leadId } = req.params;
+      if (!vendorId || !leadId) {
+        return res
+          .status(400)
+          .json(ApiResponse.validationError("vendorId and leadId are required"));
+      }
+      const result =
+        await CHSSelectionTypeMappingService.getManufacturingDaysByInstance(
+          Number(vendorId),
+          Number(leadId),
+        );
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            "Manufacturing days by instance fetched successfully",
+          ),
+        );
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message));
+    }
+  }
+
+  /**
    * PUT /leads/designing-stage/chs-selection-type-mapping/:id
    * Body: { carcass_type_id?, shutter_type_id?, shutter_sub_type_id?, handle_type_id?, updated_by }
    */

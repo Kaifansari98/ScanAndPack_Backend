@@ -72,6 +72,94 @@ export class CHSSelectionTypeMappingService {
   }
 
   /**
+   * GET — manufacturing days grouped by product_structure_instance_id.
+   * For each instance, collects all distinct carcass + shutter IDs from its
+   * CHS mappings, builds a Cartesian product, looks up TimelineRule, and
+   * returns the maximum days (kitchen or other, based on lead product type).
+   */
+  public static async getManufacturingDaysByInstance(
+    vendorId: number,
+    leadId: number,
+  ): Promise<{ instance_id: number | null; max_days: number | null }[]> {
+    // 1. Check kitchen
+    const productMappings = await prisma.leadProductMapping.findMany({
+      where: { lead_id: leadId },
+      select: { productType: { select: { type: true } } },
+    });
+    const isKitchen = productMappings.some((m) =>
+      m.productType.type.toLowerCase().includes("kitchen"),
+    );
+
+    // 2. Get all CHS mappings with their selection's instance_id
+    const chsMappings = await prisma.cHSSelectionTypeMapping.findMany({
+      where: { lead_id: leadId },
+      select: {
+        carcass_type_id: true,
+        shutter_type_id: true,
+        selection: { select: { product_structure_instance_id: true } },
+      },
+    });
+
+    // 3. Group by instance_id
+    const byInstance = new Map<
+      number | null,
+      { carcassIds: Set<number>; shutterIds: Set<number> }
+    >();
+
+    for (const m of chsMappings) {
+      const instanceId = m.selection.product_structure_instance_id ?? null;
+      if (!byInstance.has(instanceId)) {
+        byInstance.set(instanceId, {
+          carcassIds: new Set(),
+          shutterIds: new Set(),
+        });
+      }
+      const group = byInstance.get(instanceId)!;
+      if (m.carcass_type_id) group.carcassIds.add(m.carcass_type_id);
+      if (m.shutter_type_id) group.shutterIds.add(m.shutter_type_id);
+    }
+
+    // 4. Compute max days per instance via Cartesian product
+    const result: { instance_id: number | null; max_days: number | null }[] =
+      [];
+
+    for (const [instanceId, { carcassIds, shutterIds }] of byInstance) {
+      let maxDays = 0;
+
+      for (const carcassId of carcassIds) {
+        for (const shutterId of shutterIds) {
+          const rule = await prisma.timelineRule.findUnique({
+            where: {
+              vendor_id_carcass_id_shutter_id: {
+                vendor_id: vendorId,
+                carcass_id: carcassId,
+                shutter_id: shutterId,
+              },
+            },
+            select: {
+              kitchen_manufacturing_days: true,
+              other_manufacturing_days: true,
+            },
+          });
+          if (rule) {
+            const days = isKitchen
+              ? rule.kitchen_manufacturing_days
+              : rule.other_manufacturing_days;
+            if (days > maxDays) maxDays = days;
+          }
+        }
+      }
+
+      result.push({
+        instance_id: instanceId,
+        max_days: maxDays > 0 ? maxDays : null,
+      });
+    }
+
+    return result;
+  }
+
+  /**
    * GET — fetch all mappings for a lead, optionally filtered by selection_id.
    */
   public static async getByLead(
