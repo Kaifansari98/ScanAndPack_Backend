@@ -37,7 +37,15 @@ import {
   markBoxFactoryOut,
   markBoxSiteIn,
   checkToken,
-  syncCategories
+  syncCategories,
+  getProjectDetail,
+  getBoxItems,
+  getDefectDashboard,
+  getProjectDefects,
+  getDefectSummary,
+  getPendingDefects,
+  getResolvedDefects
+
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
 import { 
@@ -137,6 +145,17 @@ router.patch("/boxes/:box_id/site-in",     markBoxSiteIn);
 
 router.get("/category/project-categories/check-token", checkToken);
 router.post("/category/project-categories/sync", syncCategories);
+
+router.get("/project-detail/:vendor_id/:project_id",         getProjectDetail);
+router.get("/project-detail/:vendor_id/:project_id/box/:box_id", getBoxItems);
+
+
+router.get("/defect-dashboard/:vendor_id",                          getDefectDashboard);
+router.get("/defect-dashboard/:vendor_id/project/:unique_project_id", getProjectDefects);
+
+router.get("/defect-dashboard/:vendor_id/summary",  getDefectSummary);
+router.get("/defect-dashboard/:vendor_id/pending",  getPendingDefects);
+router.get("/defect-dashboard/:vendor_id/resolved", getResolvedDefects);
 
 
 

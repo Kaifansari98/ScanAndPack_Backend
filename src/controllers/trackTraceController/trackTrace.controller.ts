@@ -88,6 +88,7 @@ export const check_item = async (req: Request, res: Response) => {
     console.log("Query params:", req.body);
 
     let serviceResponse = await trackTraceService.updateScannedItem(req.body, true);
+    console.log("serviceResponse:",serviceResponse);
     if (serviceResponse?.status == 0) {
         return res
             .status(200)
@@ -1047,6 +1048,125 @@ export const checkToken = async (req: Request, res: Response) => {
     return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
   } catch (err) {
     console.error("checkToken error:", err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+
+
+// GET /track-trace/project-detail/:vendor_id/:project_id
+export const getProjectDetail = async (req: Request, res: Response) => {
+  try {
+    console.log("getProjectDetail",req.params);
+    const vendor_id  = Number(req.params.vendor_id);
+    const project_id = String(req.params.project_id);
+    if (isNaN(vendor_id))
+      return res.status(400).json(ApiResponse.error("Invalid params", 400));
+ 
+    const result = await trackTraceService.getProjectDetailService(vendor_id, project_id);
+    console.log("result",result);
+    if (result.status === 0)
+      return res.status(404).json(ApiResponse.error(result.message, 404));
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /track-trace/project-detail/:vendor_id/:project_id/box/:box_id
+export const getBoxItems = async (req: Request, res: Response) => {
+  try {
+    const vendor_id  = Number(req.params.vendor_id);
+    const project_id = String(req.params.project_id);
+    const box_id     = Number(req.params.box_id);
+    if ([vendor_id, box_id].some(isNaN))
+      return res.status(400).json(ApiResponse.error("Invalid params", 400));
+ 
+    const result = await trackTraceService.getBoxItemsService(vendor_id, project_id, box_id);
+    if (result.status === 0)
+      return res.status(404).json(ApiResponse.error(result.message, 404));
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+export const getDefectDashboard = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    if (isNaN(vendor_id))
+      return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+ 
+    const result = await trackTraceService.getDefectDashboardService(vendor_id);
+    if (result.status === 0)
+      return res.status(500).json(ApiResponse.error(result.message, 500));
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /track-trace/defect-dashboard/:vendor_id/project/:unique_project_id
+export const getProjectDefects = async (req: Request, res: Response) => {
+  try {
+    const vendor_id         = Number(req.params.vendor_id);
+    const unique_project_id = String(req.params.unique_project_id).trim();
+    if (isNaN(vendor_id) || !unique_project_id)
+      return res.status(400).json(ApiResponse.error("Invalid params", 400));
+ 
+    const result = await trackTraceService.getProjectDefectsService(vendor_id, unique_project_id);
+    if (result.status === 0)
+      return res.status(404).json(ApiResponse.error(result.message, 404));
+ 
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+
+
+export const getDefectSummary = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    if (isNaN(vendor_id)) return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const result = await trackTraceService.getDefectSummaryService(vendor_id);
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /track-trace/defect-dashboard/:vendor_id/pending?page=1
+export const getPendingDefects = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const page      = Math.max(1, Number(req.query.page) || 1);
+    if (isNaN(vendor_id)) return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const result = await trackTraceService.getPendingDefectsService(vendor_id, page);
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
+    return res.status(500).json(ApiResponse.error("Internal server error", 500));
+  }
+};
+ 
+// GET /track-trace/defect-dashboard/:vendor_id/resolved?page=1
+export const getResolvedDefects = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+    const page      = Math.max(1, Number(req.query.page) || 1);
+    if (isNaN(vendor_id)) return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
+    const result = await trackTraceService.getResolvedDefectsService(vendor_id, page);
+    return res.status(200).json(ApiResponse.success(result.data, result.message, 200));
+  } catch (err) {
     return res.status(500).json(ApiResponse.error("Internal server error", 500));
   }
 };
