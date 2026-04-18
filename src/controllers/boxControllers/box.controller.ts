@@ -3,8 +3,8 @@ import * as boxService from '../../services/boxServices/box.service';
 import {
   getAllBoxesWithItemCountService,
   updateBoxStatus,
-  softDeleteBoxWithScanItems,
-  getGroupedItemInfoByBoxId,
+  // softDeleteBoxWithScanItems,
+  // getGroupedItemInfoByBoxId,
   generateBoxPdfService,
   generateProjectBoxPdfService,
   generateAllBoxesPdfService,
@@ -81,24 +81,24 @@ export const getBoxesByVendorAndProject = async (req: Request, res: Response) =>
   }
 };
 
-export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
-  try {
-    const vendorId = Number(req.params.vendorId);
-    const projectId = Number(req.params.projectId);
-    const clientId = Number(0);
-    const boxId = Number(req.params.boxId);
+// export const getBoxDetailsWithItems = async (req: Request, res: Response) => {
+//   try {
+//     const vendorId = Number(req.params.vendorId);
+//     const projectId = Number(req.params.projectId);
+//     const clientId = Number(0);
+//     const boxId = Number(req.params.boxId);
 
-    if ([vendorId, projectId, clientId, boxId].some(isNaN)) {
-      return res.status(400).json({ error: 'Invalid parameters' });
-    }
+//     if ([vendorId, projectId, clientId, boxId].some(isNaN)) {
+//       return res.status(400).json({ error: 'Invalid parameters' });
+//     }
 
-    const data = await boxService.getBoxDetailsWithItems(vendorId, projectId, clientId, boxId);
-    res.status(200).json(data);
-  } catch (err: any) {
-    console.error(err);
-    res.status(500).json({ error: err.message });
-  }
-};
+//     const data = await boxService.getBoxDetailsWithItems(vendorId, projectId, clientId, boxId);
+//     res.status(200).json(data);
+//   } catch (err: any) {
+//     console.error(err);
+//     res.status(500).json({ error: err.message });
+//   }
+// };
 
 export const getAllBoxesWithItemCount = async (req: Request, res: Response) => {
   try {
@@ -142,44 +142,44 @@ export const markBoxAsUnpacked = async (req: Request, res: Response) => {
   }
 };
 
-export const deleteBoxAndItsScanItems = async (req: Request, res: Response) => {
-  const boxId = Number(req.params.boxId);
-  const deletedBy = Number(req.body.deleted_by);
+// export const deleteBoxAndItsScanItems = async (req: Request, res: Response) => {
+//   const boxId = Number(req.params.boxId);
+//   const deletedBy = Number(req.body.deleted_by);
 
-  if (isNaN(boxId) || isNaN(deletedBy)) {
-    return res.status(400).json({ error: 'Invalid boxId or deleted_by' });
-  }
+//   if (isNaN(boxId) || isNaN(deletedBy)) {
+//     return res.status(400).json({ error: 'Invalid boxId or deleted_by' });
+//   }
 
-  try {
-    const result = await softDeleteBoxWithScanItems(boxId, deletedBy);
-    res.status(200).json(result);
-  } catch (error: any) {
-    console.error('[Delete Box]', error);
-    res.status(500).json({ error: error.message || 'Failed to delete box' });
-  }
-};
+//   try {
+//     const result = await softDeleteBoxWithScanItems(boxId, deletedBy);
+//     res.status(200).json(result);
+//   } catch (error: any) {
+//     console.error('[Delete Box]', error);
+//     res.status(500).json({ error: error.message || 'Failed to delete box' });
+//   }
+// };
 
-export const getGroupedItemInfo = async (req: Request, res: Response) => {
-  try {
-    const boxIdParam = Array.isArray(req.params.boxId)
-      ? req.params.boxId[0]
-      : req.params.boxId;
-    const boxId = Number(boxIdParam);
-    if (isNaN(boxId)) {
-      return res.status(400).json({ error: 'Invalid box ID' });
-    }
+// export const getGroupedItemInfo = async (req: Request, res: Response) => {
+//   try {
+//     const boxIdParam = Array.isArray(req.params.boxId)
+//       ? req.params.boxId[0]
+//       : req.params.boxId;
+//     const boxId = Number(boxIdParam);
+//     if (isNaN(boxId)) {
+//       return res.status(400).json({ error: 'Invalid box ID' });
+//     }
 
-    const result = await getGroupedItemInfoByBoxId(boxId);
-    if (!result) {
-      return res.status(404).json({ message: 'No grouped items found in this box' });
-    }
+//     const result = await getGroupedItemInfoByBoxId(boxId);
+//     if (!result) {
+//       return res.status(404).json({ message: 'No grouped items found in this box' });
+//     }
 
-    return res.status(200).json(result);
-  } catch (error) {
-    console.error('Error fetching grouped item info:', error);
-    return res.status(500).json({ error: 'Internal server error' });
-  }
-};
+//     return res.status(200).json(result);
+//   } catch (error) {
+//     console.error('Error fetching grouped item info:', error);
+//     return res.status(500).json({ error: 'Internal server error' });
+//   }
+// };
 
 export const generateBoxPdf = async (req: Request, res: Response) => {
   try {

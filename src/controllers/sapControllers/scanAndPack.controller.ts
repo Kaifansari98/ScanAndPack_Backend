@@ -1,15 +1,16 @@
 import { Request, Response } from 'express';
-import { getProjectItemAndInsertScanPack, getScanItemsByFields, deleteScanAndPackItemById } from '../../services/sapServices/scanAndPack.service';
+// import { getProjectItemAndInsertScanPack, getScanItemsByFields, deleteScanAndPackItemById } from '../../services/sapServices/scanAndPack.service';
+import {  getScanItemsByFields, deleteScanAndPackItemById } from '../../services/sapServices/scanAndPack.service';
 
-export const addScanAndPackItem = async (req: Request, res: Response) => {
-  try {
-    const result = await getProjectItemAndInsertScanPack(req.body);
-    res.status(201).json(result);
-  } catch (error: any) {
-    console.error('[Add ScanPack Item]', error);
-    res.status(400).json({ error: error.message || 'Failed to insert scan and pack item' });
-  }
-};
+// export const addScanAndPackItem = async (req: Request, res: Response) => {
+//   try {
+//     const result = await getProjectItemAndInsertScanPack(req.body);
+//     res.status(201).json(result);
+//   } catch (error: any) {
+//     console.error('[Add ScanPack Item]', error);
+//     res.status(400).json({ error: error.message || 'Failed to insert scan and pack item' });
+//   }
+// };
 
 export const getScanAndPackItemsByFields = async (req: Request, res: Response) => {
   try {
@@ -22,7 +23,8 @@ export const getScanAndPackItemsByFields = async (req: Request, res: Response) =
       });
     }
 
-    const items = await getScanItemsByFields({ project_id, vendor_id, box_id });
+    const client_id = 0;
+    const items = await getScanItemsByFields({ project_id, vendor_id, client_id, box_id });
 
     return res.status(200).json({
       message: 'Scan and Pack items fetched successfully',

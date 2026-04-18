@@ -3,13 +3,13 @@ import {
   createBox,
   getAllBoxes,
   getBoxesByVendorAndProject,
-  getBoxDetailsWithItems,
+  // getBoxDetailsWithItems,
   getAllBoxesWithItemCount,
   updateBoxName,
   markBoxAsPacked,
   markBoxAsUnpacked,
-  deleteBoxAndItsScanItems,
-  getGroupedItemInfo,
+  // deleteBoxAndItsScanItems,
+  // getGroupedItemInfo,
   generateBoxPdf,
   generateProjectBoxPdf,
   generateAllBoxesPdf,
@@ -25,10 +25,10 @@ router.get('/', getAllBoxes); // Get all boxes
 router.get('/vendor/:vendorId/project/:projectId', getBoxesByVendorAndProject); // Filtered
 
 // 🔥 NEW API: Get full box + vendor + item details
-router.get(
-  '/details/vendor/:vendorId/project/:projectId/box/:boxId',
-  getBoxDetailsWithItems
-);
+// router.get(
+//   '/details/vendor/:vendorId/project/:projectId/box/:boxId',
+//   getBoxDetailsWithItems
+// );
 
 router.get(
   '/details/vendor/:vendorId/project/:projectId/client/:clientId/boxes',
@@ -40,9 +40,9 @@ router.put('/update-name', updateBoxName);
 router.put('/status/packed/:boxId', markBoxAsPacked);
 router.put('/status/unpacked/:boxId', markBoxAsUnpacked);
 
-router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
+// router.delete('/delete/:boxId', deleteBoxAndItsScanItems);
 
-router.get('/grouped-info/:boxId', getGroupedItemInfo);
+// router.get('/grouped-info/:boxId', getGroupedItemInfo);
 
 router.get('/boxes/pdf/:boxId/:project_id/:vendor_id', generateBoxPdf);
 router.get('/boxes/projects/:project_id/:vendor_id', generateProjectBoxPdf);

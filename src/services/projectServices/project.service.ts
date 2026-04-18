@@ -14,60 +14,60 @@ export const createProjectDetails = async (data: Omit<ProjectDetails, 'id'>) => 
   });
 };
 
-export const createProjectItem = async (data: Omit<ProjectItemsMaster, 'id'>) => {
-  // 1. Create the new item
-  const newItem = await prisma.projectItemsMaster.create({ data });
+// export const createProjectItem = async (data: Omit<ProjectItemsMaster, 'id'>) => {
+//   // 1. Create the new item
+//   const newItem = await prisma.projectItemsMaster.create({ data });
 
-  // 2. Recalculate total_items
-  const totalQty = await prisma.projectItemsMaster.aggregate({
-    _sum: { qty: true },
-    where: {
-      project_id: data.project_id,
-      vendor_id: data.vendor_id,
-      client_id: data.client_id,
-    },
-  });
+//   // 2. Recalculate total_items
+//   const totalQty = await prisma.projectItemsMaster.aggregate({
+//     _sum: { qty: true },
+//     where: {
+//       project_id: data.project_id,
+//       vendor_id: data.vendor_id,
+//       client_id: data.client_id,
+//     },
+//   });
 
-  const total_items = totalQty._sum.qty || 0;
+//   const total_items = totalQty._sum.qty || 0;
 
-  // 3. Get current packed count from projectDetails
-  const existingDetails = await prisma.projectDetails.findFirst({
-    where: {
-      project_id: data.project_id,
-      vendor_id: data.vendor_id,
-      client_id: data.client_id,
-    },
-  });
+//   // 3. Get current packed count from projectDetails
+//   const existingDetails = await prisma.projectDetails.findFirst({
+//     where: {
+//       project_id: data.project_id,
+//       vendor_id: data.vendor_id,
+//       client_id: data.client_id,
+//     },
+//   });
 
-  const total_packed = existingDetails?.total_packed || 0;
-  const total_unpacked = Math.max(total_items - total_packed, 0); // prevent negative
+//   const total_packed = existingDetails?.total_packed || 0;
+//   const total_unpacked = Math.max(total_items - total_packed, 0); // prevent negative
 
-  // 4. Update ProjectDetails
-  await prisma.projectDetails.updateMany({
-    where: {
-      project_id: data.project_id,
-      vendor_id: data.vendor_id,
-      client_id: data.client_id,
-    },
-    data: {
-      total_items,
-      total_unpacked,
-    },
-  });
+//   // 4. Update ProjectDetails
+//   await prisma.projectDetails.updateMany({
+//     where: {
+//       project_id: data.project_id,
+//       vendor_id: data.vendor_id,
+//       client_id: data.client_id,
+//     },
+//     data: {
+//       total_items,
+//       total_unpacked,
+//     },
+//   });
 
-  return newItem;
-};
+//   return newItem;
+// };
 
-export const getAllProjects = () => {
-  return prisma.projectMaster.findMany({
-    include: {
-      vendor: true,
-      createdByUser: true,
-      details: true,
-      items: true,
-    },
-  });
-};
+// export const getAllProjects = () => {
+//   return prisma.projectMaster.findMany({
+//     include: {
+//       vendor: true,
+//       createdByUser: true,
+//       details: true,
+//       items: true,
+//     },
+//   });
+// };
 
 
 
@@ -104,15 +104,15 @@ export const getAllProjectDetails = () => {
   });
 };
 
-export const getAllProjectItems = () => {
-  return prisma.projectItemsMaster.findMany({
-    include: {
-      project: true,
-      vendor: true,
-      details: true,
-    },
-  });
-};
+// export const getAllProjectItems = () => {
+//   return prisma.projectItemsMaster.findMany({
+//     include: {
+//       project: true,
+//       vendor: true,
+//       details: true,
+//     },
+//   });
+// };
 
 
 // ── Shared helper: compute total eligible rows for a packaging/QC machine ────
@@ -489,260 +489,260 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
 };
 
 
-export const getProjectItemByFields = async (params: {
-  project_id: number;
-  vendor_id: number;
-  client_id: number;
-  unique_id: string;
-}) => {
-  return prisma.projectItemsMaster.findFirst({
-    where: {
-      project_id: params.project_id,
-      vendor_id: params.vendor_id,
-      client_id: params.client_id,
-      unique_id: {
-        equals: params.unique_id.trim(),
-        mode: 'insensitive',
-      },
-    },
-    include: {
-      project: true,
-      vendor: true,
-      details: true,
-    },
-  });
-};
+// export const getProjectItemByFields = async (params: {
+//   project_id: number;
+//   vendor_id: number;
+//   client_id: number;
+//   unique_id: string;
+// }) => {
+//   return prisma.projectItemsMaster.findFirst({
+//     where: {
+//       project_id: params.project_id,
+//       vendor_id: params.vendor_id,
+//       client_id: params.client_id,
+//       unique_id: {
+//         equals: params.unique_id.trim(),
+//         mode: 'insensitive',
+//       },
+//     },
+//     include: {
+//       project: true,
+//       vendor: true,
+//       details: true,
+//     },
+//   });
+// };
 
-export const getProjectItemCounts = async ({
-  project_id,
-  vendor_id,
-  client_id,
-}: {
-  project_id: number;
-  vendor_id: number;
-  client_id: number;
-}) => {
-  // 1. Total qty from ProjectItemsMaster
-  const totalQty = await prisma.projectItemsMaster.aggregate({
-    _sum: { qty: true },
-    where: {
-      project_id,
-      vendor_id,
-      client_id,
-    },
-  });
+// export const getProjectItemCounts = async ({
+//   project_id,
+//   vendor_id,
+//   client_id,
+// }: {
+//   project_id: number;
+//   vendor_id: number;
+//   client_id: number;
+// }) => {
+//   // 1. Total qty from ProjectItemsMaster
+//   const totalQty = await prisma.projectItemsMaster.aggregate({
+//     _sum: { qty: true },
+//     where: {
+//       project_id,
+//       vendor_id,
+//       client_id,
+//     },
+//   });
 
-  // 2. Total packed qty from ScanAndPackItem (SUM qty, not just COUNT)
-  const packedQty = await prisma.scanAndPackItem.aggregate({
-    _sum: { qty: true },
-    where: {
-      project_id,
-      vendor_id,
-      client_id,
-      status: 'packed',
-    },
-  });
+//   // 2. Total packed qty from ScanAndPackItem (SUM qty, not just COUNT)
+//   const packedQty = await prisma.scanAndPackItem.aggregate({
+//     _sum: { qty: true },
+//     where: {
+//       project_id,
+//       vendor_id,
+//       client_id,
+//       status: 'packed',
+//     },
+//   });
 
-  const total_items = totalQty._sum.qty || 0;
-  const total_packed = packedQty._sum.qty || 0;
-  const total_unpacked = total_items - total_packed;
+//   const total_items = totalQty._sum.qty || 0;
+//   const total_packed = packedQty._sum.qty || 0;
+//   const total_unpacked = total_items - total_packed;
 
-  // 3. Update ProjectDetails here (optional step)
-  await prisma.projectDetails.updateMany({
-    where: {
-      project_id,
-      vendor_id,
-      client_id,
-    },
-    data: {
-      total_items,
-      total_packed,
-      total_unpacked,
-    },
-  });
+//   // 3. Update ProjectDetails here (optional step)
+//   await prisma.projectDetails.updateMany({
+//     where: {
+//       project_id,
+//       vendor_id,
+//       client_id,
+//     },
+//     data: {
+//       total_items,
+//       total_packed,
+//       total_unpacked,
+//     },
+//   });
 
-  return {
-    total_items,
-    total_packed,
-    total_unpacked,
-  };
-};
+//   return {
+//     total_items,
+//     total_packed,
+//     total_unpacked,
+//   };
+// };
 
-export const createOrUpdateFullProject = async (
-  vendorToken: string,
-  payload: FullProjectCreateInput
-) => {
-  // ✅ Step 1: Resolve vendor from token
-  const vendorTokenEntry = await prisma.vendorTokens.findUnique({
-    where: { token: vendorToken },
-    include: { vendor: true }
-  });
+// export const createOrUpdateFullProject = async (
+//   vendorToken: string,
+//   payload: FullProjectCreateInput
+// ) => {
+//   // ✅ Step 1: Resolve vendor from token
+//   const vendorTokenEntry = await prisma.vendorTokens.findUnique({
+//     where: { token: vendorToken },
+//     include: { vendor: true }
+//   });
 
-  if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
-    throw new Error("Invalid or expired vendor token");
-  }
+//   if (!vendorTokenEntry || new Date() > vendorTokenEntry.expiry_date) {
+//     throw new Error("Invalid or expired vendor token");
+//   }
 
-  const vendor = vendorTokenEntry.vendor;
+//   const vendor = vendorTokenEntry.vendor;
 
-  // ✅ Step 2: Resolve default admin user (created_by)
-  const adminUser = await prisma.userMaster.findFirst({
-    where: {
-      vendor_id: vendor.id,
-      user_type_id: 2 // assuming 1 = admin
-    },
-    orderBy: { created_at: "asc" }
-  });
+//   // ✅ Step 2: Resolve default admin user (created_by)
+//   const adminUser = await prisma.userMaster.findFirst({
+//     where: {
+//       vendor_id: vendor.id,
+//       user_type_id: 2 // assuming 1 = admin
+//     },
+//     orderBy: { created_at: "asc" }
+//   });
 
-  if (!adminUser) throw new Error("No admin user found for this vendor");
+//   if (!adminUser) throw new Error("No admin user found for this vendor");
 
-  const createdByUserId = adminUser.id;
+//   const createdByUserId = adminUser.id;
 
-  // ✅ Step 3: Find or create client
-  const orConditions: Prisma.ClientMasterWhereInput[] = [];
-  if (payload.client.contact) orConditions.push({ contact: payload.client.contact });
-  if (payload.client.id) orConditions.push({ id: payload.client.id });
+//   // ✅ Step 3: Find or create client
+//   const orConditions: Prisma.ClientMasterWhereInput[] = [];
+//   if (payload.client.contact) orConditions.push({ contact: payload.client.contact });
+//   if (payload.client.id) orConditions.push({ id: payload.client.id });
 
-  let client = await prisma.clientMaster.findFirst({
-    where: { OR: orConditions }
-  });
+//   let client = await prisma.clientMaster.findFirst({
+//     where: { OR: orConditions }
+//   });
 
-  if (!client) {
-    client = await prisma.clientMaster.create({
-      data: {
-        name: payload.client.name,
-        contact: payload.client.contact,
-        alt_contact: payload.client.alt_contact || "",
-        email: payload.client.email || "",
-        address: payload.client.address.address || "",
-        city: payload.client.address.city || "",
-        state: payload.client.address.state || "",
-        country: payload.client.address.country || "",
-        pincode: payload.client.address.pincode || "",
-        clientCode: payload.client.contact
-      }
-    });
-  }
+//   if (!client) {
+//     client = await prisma.clientMaster.create({
+//       data: {
+//         name: payload.client.name,
+//         contact: payload.client.contact,
+//         alt_contact: payload.client.alt_contact || "",
+//         email: payload.client.email || "",
+//         address: payload.client.address.address || "",
+//         city: payload.client.address.city || "",
+//         state: payload.client.address.state || "",
+//         country: payload.client.address.country || "",
+//         pincode: payload.client.address.pincode || "",
+//         clientCode: payload.client.contact
+//       }
+//     });
+//   }
 
-  // ✅ Step 4: Find or create project
-  let project = await prisma.projectMaster.findFirst({
-    where: {
-      unique_project_id: payload.project.unique_project_id,
-      vendor_id: vendor.id,
-      client_id: client.id
-    }
-  });
+//   // ✅ Step 4: Find or create project
+//   let project = await prisma.projectMaster.findFirst({
+//     where: {
+//       unique_project_id: payload.project.unique_project_id,
+//       vendor_id: vendor.id,
+//       client_id: client.id
+//     }
+//   });
 
-  if (!project) {
-    project = await prisma.projectMaster.create({
-      data: {
-        project_name: payload.project.project_name,
-        unique_project_id: payload.project.unique_project_id,
-        vendor_id: vendor.id,
-        client_id: client.id,
-        created_by: createdByUserId,
-        project_status: "Initiated",
-        is_grouping: payload.project.is_grouping ?? false
-      }
-    });
-  } else {
-    await prisma.projectMaster.update({
-      where: { id: project.id },
-      data: { project_status: "in-progress" }
-    });
-  }
+//   if (!project) {
+//     project = await prisma.projectMaster.create({
+//       data: {
+//         project_name: payload.project.project_name,
+//         unique_project_id: payload.project.unique_project_id,
+//         vendor_id: vendor.id,
+//         client_id: client.id,
+//         created_by: createdByUserId,
+//         project_status: "Initiated",
+//         is_grouping: payload.project.is_grouping ?? false
+//       }
+//     });
+//   } else {
+//     await prisma.projectMaster.update({
+//       where: { id: project.id },
+//       data: { project_status: "in-progress" }
+//     });
+//   }
 
-  // ✅ Step 5: Loop through rooms and insert items
-  for (const room of payload.rooms) {
-    const projectDetails = await prisma.projectDetails.create({
-      data: {
-        project_id: project.id,
-        vendor_id: vendor.id,
-        client_id: client.id,
-        estimated_completion_date: room.estimated_completion_date
-          ? new Date(room.estimated_completion_date)
-          : new Date(),
-        total_items: 0,
-        total_packed: 0,
-        total_unpacked: 0,
-        room_name: room.room_name,
-        is_grouping: room.is_grouping ?? false
-      }
-    });
+//   // ✅ Step 5: Loop through rooms and insert items
+//   for (const room of payload.rooms) {
+//     const projectDetails = await prisma.projectDetails.create({
+//       data: {
+//         project_id: project.id,
+//         vendor_id: vendor.id,
+//         client_id: client.id,
+//         estimated_completion_date: room.estimated_completion_date
+//           ? new Date(room.estimated_completion_date)
+//           : new Date(),
+//         total_items: 0,
+//         total_packed: 0,
+//         total_unpacked: 0,
+//         room_name: room.room_name,
+//         is_grouping: room.is_grouping ?? false
+//       }
+//     });
 
-    const invalidItems: string[] = [];
-    const seenUniqueIds = new Set<string>();
+//     const invalidItems: string[] = [];
+//     const seenUniqueIds = new Set<string>();
 
-    for (const [index, item] of room.items.entries()) {
-      if (!item.unique_id || !item.item_name || !item.category || !item.qty || !item.group) {
-        invalidItems.push(`Room "${room.room_name}" item at index ${index} missing required fields.`);
-        continue;
-      }
+//     for (const [index, item] of room.items.entries()) {
+//       if (!item.unique_id || !item.item_name || !item.category || !item.qty || !item.group) {
+//         invalidItems.push(`Room "${room.room_name}" item at index ${index} missing required fields.`);
+//         continue;
+//       }
 
-      if (seenUniqueIds.has(item.unique_id)) {
-        invalidItems.push(`Duplicate unique_id "${item.unique_id}" in same room.`);
-        continue;
-      }
+//       if (seenUniqueIds.has(item.unique_id)) {
+//         invalidItems.push(`Duplicate unique_id "${item.unique_id}" in same room.`);
+//         continue;
+//       }
 
-      seenUniqueIds.add(item.unique_id);
-    }
+//       seenUniqueIds.add(item.unique_id);
+//     }
 
-    const existingItems = await prisma.projectItemsMaster.findMany({
-      where: { project_id: project.id },
-      select: { unique_id: true }
-    });
+//     const existingItems = await prisma.projectItemsMaster.findMany({
+//       where: { project_id: project.id },
+//       select: { unique_id: true }
+//     });
 
-    const existingUniqueIds = new Set(existingItems.map(i => i.unique_id));
+//     const existingUniqueIds = new Set(existingItems.map(i => i.unique_id));
 
-    const validItems = room.items.filter(item => {
-      if (existingUniqueIds.has(item.unique_id)) {
-        invalidItems.push(`Duplicate unique_id "${item.unique_id}" already exists in DB.`);
-        return false;
-      }
-      return true;
-    });
+//     const validItems = room.items.filter(item => {
+//       if (existingUniqueIds.has(item.unique_id)) {
+//         invalidItems.push(`Duplicate unique_id "${item.unique_id}" already exists in DB.`);
+//         return false;
+//       }
+//       return true;
+//     });
 
-    if (invalidItems.length > 0) {
-      throw new Error(`Validation errors in room "${room.room_name}":\n${invalidItems.join("\n")}`);
-    }
+//     if (invalidItems.length > 0) {
+//       throw new Error(`Validation errors in room "${room.room_name}":\n${invalidItems.join("\n")}`);
+//     }
 
-    const totalQty = validItems.reduce((sum, i) => sum + i.qty, 0);
+//     const totalQty = validItems.reduce((sum, i) => sum + i.qty, 0);
 
-    await prisma.$transaction([
-      ...validItems.map(item =>
-        prisma.projectItemsMaster.create({
-          data: {
-            project_id: project.id,
-            vendor_id: vendor.id,
-            client_id: client.id,
-            category: item.category,
-            item_name: item.item_name,
-            qty: item.qty,
-            weight: item.weight ?? 0,
-            group: item.group,
-            L1: item.L1,
-            L2: item.L2,
-            L3: item.L3,
-            unique_id: item.unique_id,
-            project_details_id: projectDetails.id
-          }
-        })
-      ),
-      prisma.projectDetails.update({
-        where: { id: projectDetails.id },
-        data: {
-          total_items: { increment: totalQty },
-          total_unpacked: { increment: totalQty }
-        }
-      })
-    ]);
-  }
+//     await prisma.$transaction([
+//       ...validItems.map(item =>
+//         prisma.projectItemsMaster.create({
+//           data: {
+//             project_id: project.id,
+//             vendor_id: vendor.id,
+//             client_id: client.id,
+//             category: item.category,
+//             item_name: item.item_name,
+//             qty: item.qty,
+//             weight: item.weight ?? 0,
+//             group: item.group,
+//             L1: item.L1,
+//             L2: item.L2,
+//             L3: item.L3,
+//             unique_id: item.unique_id,
+//             project_details_id: projectDetails.id
+//           }
+//         })
+//       ),
+//       prisma.projectDetails.update({
+//         where: { id: projectDetails.id },
+//         data: {
+//           total_items: { increment: totalQty },
+//           total_unpacked: { increment: totalQty }
+//         }
+//       })
+//     ]);
+//   }
 
-  return {
-    message: "Project processed successfully",
-    project_id: project.id,
-    client_id: client.id
-  };
-};
+//   return {
+//     message: "Project processed successfully",
+//     project_id: project.id,
+//     client_id: client.id
+//   };
+// };
 
 export const calculateProjectWeight = async (
   vendorId: number,
@@ -813,157 +813,157 @@ export const calculateProjectAndBoxWeight = async (
 // UPDATED SERVICE FUNCTION
 // ============================================
 
-export const getCompletedProjectsByVendorIdService = async (vendorId: number) => {
-  // First get all projects with their details
-  const projects = await prisma.projectMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-    },
-    select: {
-      id: true,
-      project_name: true,
-      vendor_id: true,
-      client_id: true,
-      created_by: true,
-      project_status: true,
-      created_at: true,
-      createdByUser: {
-        select: {
-          id: true,
-          vendor_id: true,
-          user_name: true,
-          user_type_id: true,
-        },
-      },
-      details: {
-        select: {
-          id: true,
-          project_id: true,
-          vendor_id: true,
-          client_id: true,
-          total_items: true,
-          total_packed: true,
-          total_unpacked: true,
-          start_date: true,
-          estimated_completion_date: true,
-          actual_completion_date: true,
-          room_name: true,
-        },
-      },
-    },
-  });
+// export const getCompletedProjectsByVendorIdService = async (vendorId: number) => {
+//   // First get all projects with their details
+//   const projects = await prisma.projectMaster.findMany({
+//     where: {
+//       vendor_id: vendorId,
+//     },
+//     select: {
+//       id: true,
+//       project_name: true,
+//       vendor_id: true,
+//       client_id: true,
+//       created_by: true,
+//       project_status: true,
+//       created_at: true,
+//       createdByUser: {
+//         select: {
+//           id: true,
+//           vendor_id: true,
+//           user_name: true,
+//           user_type_id: true,
+//         },
+//       },
+//       details: {
+//         select: {
+//           id: true,
+//           project_id: true,
+//           vendor_id: true,
+//           client_id: true,
+//           total_items: true,
+//           total_packed: true,
+//           total_unpacked: true,
+//           start_date: true,
+//           estimated_completion_date: true,
+//           actual_completion_date: true,
+//           room_name: true,
+//         },
+//       },
+//     },
+//   });
 
-  // Filter and transform projects where total_packed equals total_items (as sum)
-  const completedProjectsWithAggregatedTotals = [];
-  const boxUpdateResults = [];
+//   // Filter and transform projects where total_packed equals total_items (as sum)
+//   const completedProjectsWithAggregatedTotals = [];
+//   const boxUpdateResults = [];
 
-  for (const project of projects) {
-    // Sum up all totals from all rooms (details) for this project
-    const aggregatedTotals = project.details.reduce(
-      (acc, detail) => {
-        acc.total_items += detail.total_items || 0;
-        acc.total_packed += detail.total_packed || 0;
-        acc.total_unpacked += detail.total_unpacked || 0;
-        return acc;
-      },
-      { total_items: 0, total_packed: 0, total_unpacked: 0 }
-    );
+//   for (const project of projects) {
+//     // Sum up all totals from all rooms (details) for this project
+//     const aggregatedTotals = project.details.reduce(
+//       (acc, detail) => {
+//         acc.total_items += detail.total_items || 0;
+//         acc.total_packed += detail.total_packed || 0;
+//         acc.total_unpacked += detail.total_unpacked || 0;
+//         return acc;
+//       },
+//       { total_items: 0, total_packed: 0, total_unpacked: 0 }
+//     );
 
-    // Check if project is completed (100% packed)
-    const isCompleted = aggregatedTotals.total_items > 0 &&
-      aggregatedTotals.total_packed === aggregatedTotals.total_items;
+//     // Check if project is completed (100% packed)
+//     const isCompleted = aggregatedTotals.total_items > 0 &&
+//       aggregatedTotals.total_packed === aggregatedTotals.total_items;
 
-    if (isCompleted) {
-      // First, check how many boxes are currently unpacked
-      const unpackedBoxesCount = await prisma.boxMaster.count({
-        where: {
-          project_id: project.id,
-          vendor_id: project.vendor_id,
-          client_id: project.client_id ?? undefined,
-          is_deleted: false,
-          box_status: 'unpacked'
-        }
-      });
+//     if (isCompleted) {
+//       // First, check how many boxes are currently unpacked
+//       const unpackedBoxesCount = await prisma.boxMaster.count({
+//         where: {
+//           project_id: project.id,
+//           vendor_id: project.vendor_id,
+//           client_id: project.client_id ?? undefined,
+//           is_deleted: false,
+//           box_status: 'unpacked'
+//         }
+//       });
 
-      let boxUpdateResult = { count: 0 };
+//       let boxUpdateResult = { count: 0 };
 
-      // Only update if there are unpacked boxes
-      if (unpackedBoxesCount > 0) {
-        console.log(`📦 Found ${unpackedBoxesCount} unpacked boxes for project "${project.project_name}", updating to packed...`);
+//       // Only update if there are unpacked boxes
+//       if (unpackedBoxesCount > 0) {
+//         console.log(`📦 Found ${unpackedBoxesCount} unpacked boxes for project "${project.project_name}", updating to packed...`);
 
-        boxUpdateResult = await prisma.boxMaster.updateMany({
-          where: {
-            project_id: project.id,
-            vendor_id: project.vendor_id,
-            client_id: project.client_id ?? undefined,
-            is_deleted: false, // Only update non-deleted boxes
-            box_status: 'unpacked' // Only update boxes that are currently unpacked
-          },
-          data: {
-            box_status: 'packed'
-          }
-        });
-      } else {
-        console.log(`✅ All boxes for project "${project.project_name}" are already packed, skipping update`);
-      }
+//         boxUpdateResult = await prisma.boxMaster.updateMany({
+//           where: {
+//             project_id: project.id,
+//             vendor_id: project.vendor_id,
+//             client_id: project.client_id ?? undefined,
+//             is_deleted: false, // Only update non-deleted boxes
+//             box_status: 'unpacked' // Only update boxes that are currently unpacked
+//           },
+//           data: {
+//             box_status: 'packed'
+//           }
+//         });
+//       } else {
+//         console.log(`✅ All boxes for project "${project.project_name}" are already packed, skipping update`);
+//       }
 
-      // Get count of all boxes for this project (for reporting)
-      const totalBoxesCount = await prisma.boxMaster.count({
-        where: {
-          project_id: project.id,
-          vendor_id: project.vendor_id,
-          client_id: project.client_id ?? undefined,
-          is_deleted: false
-        }
-      });
+//       // Get count of all boxes for this project (for reporting)
+//       const totalBoxesCount = await prisma.boxMaster.count({
+//         where: {
+//           project_id: project.id,
+//           vendor_id: project.vendor_id,
+//           client_id: project.client_id ?? undefined,
+//           is_deleted: false
+//         }
+//       });
 
-      // Get count of packed boxes after update
-      const packedBoxesCount = await prisma.boxMaster.count({
-        where: {
-          project_id: project.id,
-          vendor_id: project.vendor_id,
-          client_id: project.client_id ?? undefined,
-          is_deleted: false,
-          box_status: 'packed'
-        }
-      });
+//       // Get count of packed boxes after update
+//       const packedBoxesCount = await prisma.boxMaster.count({
+//         where: {
+//           project_id: project.id,
+//           vendor_id: project.vendor_id,
+//           client_id: project.client_id ?? undefined,
+//           is_deleted: false,
+//           box_status: 'packed'
+//         }
+//       });
 
-      boxUpdateResults.push({
-        project_id: project.id,
-        project_name: project.project_name,
-        boxes_updated: boxUpdateResult.count,
-        total_boxes: totalBoxesCount,
-        packed_boxes: packedBoxesCount,
-        was_already_completed: unpackedBoxesCount === 0
-      });
+//       boxUpdateResults.push({
+//         project_id: project.id,
+//         project_name: project.project_name,
+//         boxes_updated: boxUpdateResult.count,
+//         total_boxes: totalBoxesCount,
+//         packed_boxes: packedBoxesCount,
+//         was_already_completed: unpackedBoxesCount === 0
+//       });
 
-      // Add to completed projects list
-      completedProjectsWithAggregatedTotals.push({
-        id: project.id,
-        project_name: project.project_name,
-        vendor_id: project.vendor_id,
-        client_id: project.client_id,
-        created_by: project.created_by,
-        project_status: project.project_status,
-        created_at: project.created_at,
-        createdByUser: project.createdByUser,
-        // Aggregated totals in separate object
-        aggregatedTotals: {
-          total_items: aggregatedTotals.total_items,
-          total_packed: aggregatedTotals.total_packed,
-          total_unpacked: aggregatedTotals.total_unpacked,
-        },
-        // Keep room-wise details for reference if needed
-        details: project.details,
-      });
-    }
-  }
+//       // Add to completed projects list
+//       completedProjectsWithAggregatedTotals.push({
+//         id: project.id,
+//         project_name: project.project_name,
+//         vendor_id: project.vendor_id,
+//         client_id: project.client_id,
+//         created_by: project.created_by,
+//         project_status: project.project_status,
+//         created_at: project.created_at,
+//         createdByUser: project.createdByUser,
+//         // Aggregated totals in separate object
+//         aggregatedTotals: {
+//           total_items: aggregatedTotals.total_items,
+//           total_packed: aggregatedTotals.total_packed,
+//           total_unpacked: aggregatedTotals.total_unpacked,
+//         },
+//         // Keep room-wise details for reference if needed
+//         details: project.details,
+//       });
+//     }
+//   }
 
-  return {
-    completedProjects: completedProjectsWithAggregatedTotals,
-    boxUpdateSummary: boxUpdateResults
-  };
-};
+//   return {
+//     completedProjects: completedProjectsWithAggregatedTotals,
+//     boxUpdateSummary: boxUpdateResults
+//   };
+// };
 
 export const autoPackGroupedBoxesService = async (vendorId: number) => {
   // Step 1: Get all projects with grouping enabled
