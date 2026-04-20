@@ -497,6 +497,12 @@ export class SiteReadinessService {
         status_type: toStatus.type,
       });
 
+      const vendor = await tx.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { IsAccountLocInEnabled: true },
+      });
+      const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled === true;
+
       // 3️⃣ Complete "Site Readiness" Task (if exists)
       const siteReadinessTask = await tx.userLeadTask.findFirst({
         where: {
@@ -566,14 +572,16 @@ export class SiteReadinessService {
         createdBy: updatedBy,
       });
 
-      await SiteReadinessService.leadSuperAdminApprovalLockInService.createDispatchPlanningLockIn(
-        {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          created_by: updatedBy,
-        },
-        tx,
-      );
+      if (isAccountLocInEnabled) {
+        await SiteReadinessService.leadSuperAdminApprovalLockInService.createDispatchPlanningLockIn(
+          {
+            vendor_id: vendorId,
+            lead_id: lead.id,
+            created_by: updatedBy,
+          },
+          tx,
+        );
+      }
 
       logger.info("[SERVICE] Lead moved to Dispatch Planning", {
         lead_id: lead.id,
