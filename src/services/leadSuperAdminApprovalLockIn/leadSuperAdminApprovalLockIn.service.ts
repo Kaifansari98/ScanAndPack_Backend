@@ -405,6 +405,14 @@ export class LeadSuperAdminApprovalLockInService {
       isNewApproval = true;
     }
 
+    if (approval.is_approved) {
+      return {
+        approval,
+        task: null,
+        superAdminId: superAdmin.id,
+      };
+    }
+
     const leadStage = lead.status_id
       ? (
           await db.statusTypeMaster.findUnique({
