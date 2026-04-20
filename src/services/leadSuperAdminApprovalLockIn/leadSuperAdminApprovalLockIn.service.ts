@@ -38,6 +38,7 @@ interface CreateOrderLoginLockInInput {
   lead_id: number;
   created_by: number;
   base_date?: Date;
+  instance_id?: number | null;
 }
 
 interface CreateDispatchPlanningLockInInput {
@@ -94,6 +95,19 @@ export class LeadSuperAdminApprovalLockInService {
     dueDate.setDate(dueDate.getDate() + 1);
     dueDate.setHours(0, 0, 0, 0);
     return dueDate;
+  }
+
+  private getTaskTypeForApprovalType(approvalType?: SuperAdminApprovalType) {
+    switch (approvalType) {
+      case SuperAdminApprovalType.booking_done:
+        return "Booking Done Approval";
+      case SuperAdminApprovalType.order_login:
+        return "Order Login Approval";
+      case SuperAdminApprovalType.dispatch_planning:
+        return "Dispatch Planning Approval";
+      default:
+        return null;
+    }
   }
 
   async createBookingDoneLockIn(
@@ -321,6 +335,28 @@ export class LeadSuperAdminApprovalLockInService {
       throw new Error(`Lead ${input.lead_id} is missing account_id`);
     }
 
+    const instance =
+      typeof input.instance_id !== "undefined" && input.instance_id !== null
+        ? await db.leadProductStructureInstance.findFirst({
+            where: {
+              id: input.instance_id,
+              lead_id: input.lead_id,
+              vendor_id: input.vendor_id,
+            },
+            select: {
+              id: true,
+              title: true,
+              quantity_index: true,
+            },
+          })
+        : null;
+
+    if (typeof input.instance_id !== "undefined" && input.instance_id !== null && !instance) {
+      throw new Error(
+        `Order Login instance ${input.instance_id} not found for lead ${input.lead_id}`,
+      );
+    }
+
     const superAdmin = await db.userMaster.findFirst({
       where: {
         vendor_id: input.vendor_id,
@@ -384,6 +420,9 @@ export class LeadSuperAdminApprovalLockInService {
         lead_id: input.lead_id,
         user_id: superAdmin.id,
         task_type: "Order Login Approval",
+        ...(typeof input.instance_id !== "undefined"
+          ? { instance_id: input.instance_id ?? null }
+          : {}),
         status: {
           in: ["open", "in_progress"],
         },
@@ -402,9 +441,14 @@ export class LeadSuperAdminApprovalLockInService {
           task_type: "Order Login Approval",
           lead_stage: leadStage,
           due_date: this.getNextDayDueDate(input.base_date),
-          remark: "Order Login approval pending from Super Admin",
+          remark: instance?.title
+            ? `Order Login approval pending from Super Admin for instance ${instance.title}`
+            : "Order Login approval pending from Super Admin",
           status: "open",
           created_by: input.created_by,
+          ...(typeof input.instance_id !== "undefined"
+            ? { instance_id: input.instance_id ?? null }
+            : {}),
         },
       });
       isNewTask = true;
@@ -430,6 +474,10 @@ export class LeadSuperAdminApprovalLockInService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
       const displayLead = leadName ? `${leadCode} - ${leadName}` : leadCode;
+      const displayLeadWithInstance =
+        instance?.quantity_index && instance?.title
+          ? `${displayLead}.${instance.quantity_index} (${instance.title})`
+          : displayLead;
       const dueDateText = this.formatDisplayDate(task.due_date ?? new Date());
       const actionDate = this.formatDisplayDate(input.base_date ?? new Date());
       const taskUrl = `${this.getClientBaseUrl()}/dashboard/my-tasks?taskId=${task.id}`;
@@ -446,7 +494,7 @@ export class LeadSuperAdminApprovalLockInService {
           sender_id: input.created_by,
           type: NotificationType.TASK_ASSIGNED,
           title: "Approval Required – Order Login",
-          message: `${displayLead} requires approval at Order Login stage. Action due by ${dueDateText}.`,
+          message: `${displayLeadWithInstance} requires approval at Order Login stage. Action due by ${dueDateText}.`,
           entity_type: "lead_super_admin_approval_lockin",
           entity_id: approval.id,
           redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
@@ -458,7 +506,9 @@ export class LeadSuperAdminApprovalLockInService {
             toEmail: superAdmin.user_email,
             toName: superAdmin.user_name ?? undefined,
             leadCode,
-            leadName: leadName || "Lead",
+            leadName: instance?.title
+              ? `${leadName || "Lead"} (${instance.title})`
+              : leadName || "Lead",
             movedBy: movedByName,
             dateOfAction: actionDate,
             dueDate: dueDateText,
@@ -684,7 +734,8 @@ export class LeadSuperAdminApprovalLockInService {
     leadId: number,
     approvalType?: SuperAdminApprovalType,
   ) {
-    return this.getDb().leadSuperAdminApprovalLocIns.findMany({
+    const db = this.getDb();
+    const lockIns = await db.leadSuperAdminApprovalLocIns.findMany({
       where: {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -701,6 +752,34 @@ export class LeadSuperAdminApprovalLockInService {
       },
       orderBy: { id: "desc" },
     });
+
+    const taskType = this.getTaskTypeForApprovalType(approvalType);
+    if (!taskType) {
+      return lockIns;
+    }
+
+    const pendingTasks = await db.userLeadTask.findMany({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        task_type: taskType,
+        status: {
+          in: ["open", "in_progress"],
+        },
+      },
+      select: {
+        id: true,
+        instance_id: true,
+        status: true,
+        due_date: true,
+      },
+      orderBy: { id: "desc" },
+    });
+
+    return lockIns.map((lockIn) => ({
+      ...lockIn,
+      pending_tasks: pendingTasks,
+    }));
   }
 
   async approveLockIn(input: ApproveLockInInput) {

@@ -149,6 +149,7 @@ export class TechCheckService {
                     vendor_id: vendorId,
                     lead_id: leadId,
                     created_by: userId,
+                    instance_id: productStructureInstanceId,
                   },
                   tx,
                 );
@@ -260,6 +261,7 @@ export class TechCheckService {
                     vendor_id: vendorId,
                     lead_id: leadId,
                     created_by: userId,
+                    instance_id: updatedInstance.id,
                   },
                   tx,
                 );
