@@ -735,6 +735,13 @@ export class ClientDocumentationService {
       throw new Error("vendorId and leadId are required");
     }
 
+    logger.info("[ClientDocumentation:getClientDocumentation] START", {
+      leadId,
+      vendorId,
+      userId,
+      instanceId: instanceId ?? null,
+    });
+
     const [pptDocType, pythaDocType, productStructureInstances, lead] =
       await Promise.all([
         prisma.documentTypeMaster.findFirst({
@@ -773,8 +780,20 @@ export class ClientDocumentationService {
       ]);
 
     if (!lead) {
+      logger.error("[ClientDocumentation:getClientDocumentation] Lead not found", { leadId, vendorId });
       throw new Error("Lead not found");
     }
+
+    logger.info("[ClientDocumentation:getClientDocumentation] Lead fetched", {
+      leadId,
+      vendorId,
+      leadStatus: lead.status_id,
+      totalDocuments: lead.documents.length,
+      pptDocTypeId: pptDocType?.id ?? null,
+      pythaDocTypeId: pythaDocType?.id ?? null,
+      instanceCount: productStructureInstances.length,
+      instanceIds: productStructureInstances.map((i) => i.id),
+    });
 
     const pptDocs = lead.documents.filter(
       (d) => d.doc_type_id === pptDocType?.id,
@@ -860,39 +879,22 @@ export class ClientDocumentationService {
     //   };
     // });
 
-    // const documentsByInstance: any[] = productStructureInstances.map((instance) => ({
-    //   instance_id: instance.id,
-    //   instance_title: instance.title,
-    //   quantity_index: instance.quantity_index,
-    //   product_structure: instance.productStructure,
-    //   documents: {
-    //     ppt: pptDocsWithUrls.filter(
-    //       (doc: any) => doc.product_structure_instance_id === instance.id
-    //     ),
-    //     pytha: pythaDocsWithUrls.filter(
-    //       (doc: any) => doc.product_structure_instance_id === instance.id
-    //     ),
-    //   },
-    // }));
-
-    // const unassignedPpt = pptDocsWithUrls.filter(
-    //   (doc: any) => !doc.product_structure_instance_id
-    // );
-    // const unassignedPytha = pythaDocsWithUrls.filter(
-    //   (doc: any) => !doc.product_structure_instance_id
-    // );
-    if (unassignedPpt.length || unassignedPytha.length) {
-      documentsByInstance.push({
-        instance_id: null,
-        instance_title: "General",
-        quantity_index: null,
-        product_structure: null,
-        documents: {
-          ppt: unassignedPpt,
-          pytha: unassignedPytha,
-        },
-      });
-    }
+    logger.info("[ClientDocumentation:getClientDocumentation] documents_by_instance built", {
+      leadId,
+      vendorId,
+      instanceCount: productStructureInstances.length,
+      totalPptDocs: pptDocsWithUrls.length,
+      totalPythaDocs: pythaDocsWithUrls.length,
+      unassignedPptCount: unassignedPpt.length,
+      unassignedPythaCount: unassignedPytha.length,
+      documentsByInstanceLength: documentsByInstance.length,
+      documentsByInstanceSummary: documentsByInstance.map((g) => ({
+        instance_id: g.instance_id,
+        instance_title: g.instance_title,
+        pptCount: g.documents?.ppt?.length ?? 0,
+        pythaCount: g.documents?.pytha?.length ?? 0,
+      })),
+    });
 
     const sectionCardsByInstance = documentsByInstance.map((group: any) => {
       const projectCount = group.documents?.ppt?.length || 0;
@@ -920,13 +922,21 @@ export class ClientDocumentationService {
     });
 
     // 🔔 SAFE TRIGGER (read-through side effect)
-    await this.triggerOrderLoginEnabledNotification(
-      vendorId,
-      leadId,
-      userId,
-      baseUrl,
-      instanceId,
-    );
+    try {
+      await this.triggerOrderLoginEnabledNotification(
+        vendorId,
+        leadId,
+        userId,
+        baseUrl,
+        instanceId,
+      );
+    } catch (notifyErr: any) {
+      logger.warn("[ClientDocumentation:getClientDocumentation] triggerOrderLoginEnabledNotification failed (non-fatal)", {
+        leadId,
+        vendorId,
+        error: notifyErr?.message,
+      });
+    }
 
     return {
       id: lead.id,
