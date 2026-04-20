@@ -71,6 +71,12 @@ export class TechCheckService {
   ): Promise<ApproveTechCheckResult> {
     const result: ApproveTechCheckResult = await prisma.$transaction(
       async (tx) => {
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: vendorId },
+          select: { IsAccountLocInEnabled: true },
+        });
+        const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled === true;
+
         if (productStructureInstanceId) {
           const instance = await tx.leadProductStructureInstance.findFirst({
             where: {
@@ -141,7 +147,7 @@ export class TechCheckService {
 
           let orderLoginLockIn: any = null;
 
-          if (pendingInstances === 0) {
+          if (isAccountLocInEnabled) {
             try {
               orderLoginLockIn =
                 await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
@@ -155,7 +161,7 @@ export class TechCheckService {
                 );
             } catch (lockInError: any) {
               logger.warn(
-                "Early Order Login lock-in creation failed after tech-check instance completion",
+                "Order Login lock-in creation failed after tech-check instance completion",
                 {
                   lead_id: leadId,
                   instance_id: productStructureInstanceId,
@@ -163,7 +169,9 @@ export class TechCheckService {
                 },
               );
             }
+          }
 
+          if (pendingInstances === 0) {
             if (!assignToUserId || !effectiveAccountId) {
               throw new Error(
                 "assign_to_user_id and account_id are required to move lead to Order Login",
@@ -254,7 +262,7 @@ export class TechCheckService {
               },
             });
 
-            if (!orderLoginLockIn) {
+            if (!orderLoginLockIn && isAccountLocInEnabled) {
               orderLoginLockIn =
                 await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
                   {
@@ -399,15 +407,16 @@ export class TechCheckService {
           },
         });
 
-        const orderLoginLockIn =
-          await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
-            {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              created_by: userId,
-            },
-            tx,
-          );
+        const orderLoginLockIn = isAccountLocInEnabled
+          ? await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+              {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                created_by: userId,
+              },
+              tx,
+            )
+          : null;
 
         return { updatedLead, mapping, order_login_lock_in: orderLoginLockIn };
       },
