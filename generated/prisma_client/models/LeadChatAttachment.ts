@@ -193,7 +193,7 @@ export type LeadChatAttachmentGroupByOutputType = {
   _max: LeadChatAttachmentMaxAggregateOutputType | null
 }
 
-export type GetLeadChatAttachmentGroupByPayload<T extends LeadChatAttachmentGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadChatAttachmentGroupByPayload<T extends LeadChatAttachmentGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatAttachmentGroupByOutputType, T['by']> &
       {
@@ -1256,11 +1256,6 @@ export type LeadChatAttachmentFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` LeadChatAttachments.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadChatAttachments.
-   */
   distinct?: Prisma.LeadChatAttachmentScalarFieldEnum | Prisma.LeadChatAttachmentScalarFieldEnum[]
 }
 

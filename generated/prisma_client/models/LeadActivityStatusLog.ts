@@ -240,7 +240,7 @@ export type LeadActivityStatusLogGroupByOutputType = {
   _max: LeadActivityStatusLogMaxAggregateOutputType | null
 }
 
-export type GetLeadActivityStatusLogGroupByPayload<T extends LeadActivityStatusLogGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadActivityStatusLogGroupByPayload<T extends LeadActivityStatusLogGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadActivityStatusLogGroupByOutputType, T['by']> &
       {
@@ -1757,11 +1757,6 @@ export type LeadActivityStatusLogFindManyArgs<ExtArgs extends runtime.Types.Exte
    * Skip the first `n` LeadActivityStatusLogs.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadActivityStatusLogs.
-   */
   distinct?: Prisma.LeadActivityStatusLogScalarFieldEnum | Prisma.LeadActivityStatusLogScalarFieldEnum[]
 }
 

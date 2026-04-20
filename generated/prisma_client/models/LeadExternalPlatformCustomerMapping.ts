@@ -215,7 +215,7 @@ export type LeadExternalPlatformCustomerMappingGroupByOutputType = {
   _max: LeadExternalPlatformCustomerMappingMaxAggregateOutputType | null
 }
 
-export type GetLeadExternalPlatformCustomerMappingGroupByPayload<T extends LeadExternalPlatformCustomerMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadExternalPlatformCustomerMappingGroupByPayload<T extends LeadExternalPlatformCustomerMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadExternalPlatformCustomerMappingGroupByOutputType, T['by']> &
       {
@@ -1599,11 +1599,6 @@ export type LeadExternalPlatformCustomerMappingFindManyArgs<ExtArgs extends runt
    * Skip the first `n` LeadExternalPlatformCustomerMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadExternalPlatformCustomerMappings.
-   */
   distinct?: Prisma.LeadExternalPlatformCustomerMappingScalarFieldEnum | Prisma.LeadExternalPlatformCustomerMappingScalarFieldEnum[]
 }
 

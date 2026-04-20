@@ -268,7 +268,7 @@ export type ProjectItemsMasterGroupByOutputType = {
   _max: ProjectItemsMasterMaxAggregateOutputType | null
 }
 
-export type GetProjectItemsMasterGroupByPayload<T extends ProjectItemsMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetProjectItemsMasterGroupByPayload<T extends ProjectItemsMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ProjectItemsMasterGroupByOutputType, T['by']> &
       {
@@ -1811,11 +1811,6 @@ export type ProjectItemsMasterFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` ProjectItemsMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ProjectItemsMasters.
-   */
   distinct?: Prisma.ProjectItemsMasterScalarFieldEnum | Prisma.ProjectItemsMasterScalarFieldEnum[]
 }
 

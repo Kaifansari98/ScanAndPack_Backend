@@ -285,7 +285,7 @@ export type CompanyVendorsMasterGroupByOutputType = {
   _max: CompanyVendorsMasterMaxAggregateOutputType | null
 }
 
-export type GetCompanyVendorsMasterGroupByPayload<T extends CompanyVendorsMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetCompanyVendorsMasterGroupByPayload<T extends CompanyVendorsMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CompanyVendorsMasterGroupByOutputType, T['by']> &
       {
@@ -2291,11 +2291,6 @@ export type CompanyVendorsMasterFindManyArgs<ExtArgs extends runtime.Types.Exten
    * Skip the first `n` CompanyVendorsMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of CompanyVendorsMasters.
-   */
   distinct?: Prisma.CompanyVendorsMasterScalarFieldEnum | Prisma.CompanyVendorsMasterScalarFieldEnum[]
 }
 

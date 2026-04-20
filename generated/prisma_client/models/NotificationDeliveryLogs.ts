@@ -207,7 +207,7 @@ export type NotificationDeliveryLogsGroupByOutputType = {
   _max: NotificationDeliveryLogsMaxAggregateOutputType | null
 }
 
-export type GetNotificationDeliveryLogsGroupByPayload<T extends NotificationDeliveryLogsGroupByArgs> = Prisma.PrismaPromise<
+type GetNotificationDeliveryLogsGroupByPayload<T extends NotificationDeliveryLogsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<NotificationDeliveryLogsGroupByOutputType, T['by']> &
       {
@@ -1332,11 +1332,6 @@ export type NotificationDeliveryLogsFindManyArgs<ExtArgs extends runtime.Types.E
    * Skip the first `n` NotificationDeliveryLogs.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of NotificationDeliveryLogs.
-   */
   distinct?: Prisma.NotificationDeliveryLogsScalarFieldEnum | Prisma.NotificationDeliveryLogsScalarFieldEnum[]
 }
 

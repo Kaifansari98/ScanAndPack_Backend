@@ -171,7 +171,7 @@ export type CountryMasterGroupByOutputType = {
   _max: CountryMasterMaxAggregateOutputType | null
 }
 
-export type GetCountryMasterGroupByPayload<T extends CountryMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetCountryMasterGroupByPayload<T extends CountryMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CountryMasterGroupByOutputType, T['by']> &
       {
@@ -1031,11 +1031,6 @@ export type CountryMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` CountryMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of CountryMasters.
-   */
   distinct?: Prisma.CountryMasterScalarFieldEnum | Prisma.CountryMasterScalarFieldEnum[]
 }
 

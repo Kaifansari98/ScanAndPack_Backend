@@ -234,7 +234,7 @@ export type ClientMasterGroupByOutputType = {
   _max: ClientMasterMaxAggregateOutputType | null
 }
 
-export type GetClientMasterGroupByPayload<T extends ClientMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetClientMasterGroupByPayload<T extends ClientMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ClientMasterGroupByOutputType, T['by']> &
       {
@@ -1560,11 +1560,6 @@ export type ClientMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` ClientMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ClientMasters.
-   */
   distinct?: Prisma.ClientMasterScalarFieldEnum | Prisma.ClientMasterScalarFieldEnum[]
 }
 

@@ -277,7 +277,7 @@ export type CHSSelectionTypeMappingGroupByOutputType = {
   _max: CHSSelectionTypeMappingMaxAggregateOutputType | null
 }
 
-export type GetCHSSelectionTypeMappingGroupByPayload<T extends CHSSelectionTypeMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetCHSSelectionTypeMappingGroupByPayload<T extends CHSSelectionTypeMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CHSSelectionTypeMappingGroupByOutputType, T['by']> &
       {
@@ -2740,11 +2740,6 @@ export type CHSSelectionTypeMappingFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` CHSSelectionTypeMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of CHSSelectionTypeMappings.
-   */
   distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
 }
 

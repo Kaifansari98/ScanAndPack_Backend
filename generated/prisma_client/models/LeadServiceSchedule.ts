@@ -354,7 +354,7 @@ export type LeadServiceScheduleGroupByOutputType = {
   _max: LeadServiceScheduleMaxAggregateOutputType | null
 }
 
-export type GetLeadServiceScheduleGroupByPayload<T extends LeadServiceScheduleGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadServiceScheduleGroupByPayload<T extends LeadServiceScheduleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadServiceScheduleGroupByOutputType, T['by']> &
       {
@@ -3446,11 +3446,6 @@ export type LeadServiceScheduleFindManyArgs<ExtArgs extends runtime.Types.Extens
    * Skip the first `n` LeadServiceSchedules.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadServiceSchedules.
-   */
   distinct?: Prisma.LeadServiceScheduleScalarFieldEnum | Prisma.LeadServiceScheduleScalarFieldEnum[]
 }
 

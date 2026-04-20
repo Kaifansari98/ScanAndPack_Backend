@@ -185,7 +185,7 @@ export type ExternalPlatformMasterGroupByOutputType = {
   _max: ExternalPlatformMasterMaxAggregateOutputType | null
 }
 
-export type GetExternalPlatformMasterGroupByPayload<T extends ExternalPlatformMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetExternalPlatformMasterGroupByPayload<T extends ExternalPlatformMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ExternalPlatformMasterGroupByOutputType, T['by']> &
       {
@@ -1183,11 +1183,6 @@ export type ExternalPlatformMasterFindManyArgs<ExtArgs extends runtime.Types.Ext
    * Skip the first `n` ExternalPlatformMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ExternalPlatformMasters.
-   */
   distinct?: Prisma.ExternalPlatformMasterScalarFieldEnum | Prisma.ExternalPlatformMasterScalarFieldEnum[]
 }
 

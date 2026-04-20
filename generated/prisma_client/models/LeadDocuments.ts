@@ -283,7 +283,7 @@ export type LeadDocumentsGroupByOutputType = {
   _max: LeadDocumentsMaxAggregateOutputType | null
 }
 
-export type GetLeadDocumentsGroupByPayload<T extends LeadDocumentsGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadDocumentsGroupByPayload<T extends LeadDocumentsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadDocumentsGroupByOutputType, T['by']> &
       {
@@ -4014,11 +4014,6 @@ export type LeadDocumentsFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` LeadDocuments.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadDocuments.
-   */
   distinct?: Prisma.LeadDocumentsScalarFieldEnum | Prisma.LeadDocumentsScalarFieldEnum[]
 }
 

@@ -182,7 +182,7 @@ export type CityMasterGroupByOutputType = {
   _max: CityMasterMaxAggregateOutputType | null
 }
 
-export type GetCityMasterGroupByPayload<T extends CityMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetCityMasterGroupByPayload<T extends CityMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CityMasterGroupByOutputType, T['by']> &
       {
@@ -1200,11 +1200,6 @@ export type CityMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` CityMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of CityMasters.
-   */
   distinct?: Prisma.CityMasterScalarFieldEnum | Prisma.CityMasterScalarFieldEnum[]
 }
 

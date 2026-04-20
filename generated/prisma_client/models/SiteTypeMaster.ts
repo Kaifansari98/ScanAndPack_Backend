@@ -189,7 +189,7 @@ export type SiteTypeMasterGroupByOutputType = {
   _max: SiteTypeMasterMaxAggregateOutputType | null
 }
 
-export type GetSiteTypeMasterGroupByPayload<T extends SiteTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetSiteTypeMasterGroupByPayload<T extends SiteTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SiteTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1241,11 +1241,6 @@ export type SiteTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Skip the first `n` SiteTypeMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of SiteTypeMasters.
-   */
   distinct?: Prisma.SiteTypeMasterScalarFieldEnum | Prisma.SiteTypeMasterScalarFieldEnum[]
 }
 

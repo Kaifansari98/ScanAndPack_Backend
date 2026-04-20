@@ -240,7 +240,7 @@ export type UserMachineMappingGroupByOutputType = {
   _max: UserMachineMappingMaxAggregateOutputType | null
 }
 
-export type GetUserMachineMappingGroupByPayload<T extends UserMachineMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetUserMachineMappingGroupByPayload<T extends UserMachineMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserMachineMappingGroupByOutputType, T['by']> &
       {
@@ -1903,11 +1903,6 @@ export type UserMachineMappingFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` UserMachineMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of UserMachineMappings.
-   */
   distinct?: Prisma.UserMachineMappingScalarFieldEnum | Prisma.UserMachineMappingScalarFieldEnum[]
 }
 

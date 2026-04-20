@@ -251,7 +251,7 @@ export type LedgerGroupByOutputType = {
   _max: LedgerMaxAggregateOutputType | null
 }
 
-export type GetLedgerGroupByPayload<T extends LedgerGroupByArgs> = Prisma.PrismaPromise<
+type GetLedgerGroupByPayload<T extends LedgerGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LedgerGroupByOutputType, T['by']> &
       {
@@ -1968,11 +1968,6 @@ export type LedgerFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Skip the first `n` Ledgers.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of Ledgers.
-   */
   distinct?: Prisma.LedgerScalarFieldEnum | Prisma.LedgerScalarFieldEnum[]
 }
 

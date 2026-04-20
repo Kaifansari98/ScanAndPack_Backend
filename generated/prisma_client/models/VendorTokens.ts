@@ -189,7 +189,7 @@ export type VendorTokensGroupByOutputType = {
   _max: VendorTokensMaxAggregateOutputType | null
 }
 
-export type GetVendorTokensGroupByPayload<T extends VendorTokensGroupByArgs> = Prisma.PrismaPromise<
+type GetVendorTokensGroupByPayload<T extends VendorTokensGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorTokensGroupByOutputType, T['by']> &
       {
@@ -1132,11 +1132,6 @@ export type VendorTokensFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` VendorTokens.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of VendorTokens.
-   */
   distinct?: Prisma.VendorTokensScalarFieldEnum | Prisma.VendorTokensScalarFieldEnum[]
 }
 

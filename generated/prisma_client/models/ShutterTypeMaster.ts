@@ -182,7 +182,7 @@ export type ShutterTypeMasterGroupByOutputType = {
   _max: ShutterTypeMasterMaxAggregateOutputType | null
 }
 
-export type GetShutterTypeMasterGroupByPayload<T extends ShutterTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetShutterTypeMasterGroupByPayload<T extends ShutterTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ShutterTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1383,11 +1383,6 @@ export type ShutterTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` ShutterTypeMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ShutterTypeMasters.
-   */
   distinct?: Prisma.ShutterTypeMasterScalarFieldEnum | Prisma.ShutterTypeMasterScalarFieldEnum[]
 }
 

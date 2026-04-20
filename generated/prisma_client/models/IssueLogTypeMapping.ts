@@ -186,7 +186,7 @@ export type IssueLogTypeMappingGroupByOutputType = {
   _max: IssueLogTypeMappingMaxAggregateOutputType | null
 }
 
-export type GetIssueLogTypeMappingGroupByPayload<T extends IssueLogTypeMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetIssueLogTypeMappingGroupByPayload<T extends IssueLogTypeMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IssueLogTypeMappingGroupByOutputType, T['by']> &
       {
@@ -1216,11 +1216,6 @@ export type IssueLogTypeMappingFindManyArgs<ExtArgs extends runtime.Types.Extens
    * Skip the first `n` IssueLogTypeMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of IssueLogTypeMappings.
-   */
   distinct?: Prisma.IssueLogTypeMappingScalarFieldEnum | Prisma.IssueLogTypeMappingScalarFieldEnum[]
 }
 

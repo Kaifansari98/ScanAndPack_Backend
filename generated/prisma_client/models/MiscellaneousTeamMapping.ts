@@ -186,7 +186,7 @@ export type MiscellaneousTeamMappingGroupByOutputType = {
   _max: MiscellaneousTeamMappingMaxAggregateOutputType | null
 }
 
-export type GetMiscellaneousTeamMappingGroupByPayload<T extends MiscellaneousTeamMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetMiscellaneousTeamMappingGroupByPayload<T extends MiscellaneousTeamMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MiscellaneousTeamMappingGroupByOutputType, T['by']> &
       {
@@ -1216,11 +1216,6 @@ export type MiscellaneousTeamMappingFindManyArgs<ExtArgs extends runtime.Types.E
    * Skip the first `n` MiscellaneousTeamMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of MiscellaneousTeamMappings.
-   */
   distinct?: Prisma.MiscellaneousTeamMappingScalarFieldEnum | Prisma.MiscellaneousTeamMappingScalarFieldEnum[]
 }
 

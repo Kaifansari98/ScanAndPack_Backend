@@ -207,7 +207,7 @@ export type LeadChatMessageGroupByOutputType = {
   _max: LeadChatMessageMaxAggregateOutputType | null
 }
 
-export type GetLeadChatMessageGroupByPayload<T extends LeadChatMessageGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadChatMessageGroupByPayload<T extends LeadChatMessageGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadChatMessageGroupByOutputType, T['by']> &
       {
@@ -1555,11 +1555,6 @@ export type LeadChatMessageFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` LeadChatMessages.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadChatMessages.
-   */
   distinct?: Prisma.LeadChatMessageScalarFieldEnum | Prisma.LeadChatMessageScalarFieldEnum[]
 }
 

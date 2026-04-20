@@ -207,7 +207,7 @@ export type MiscellaneousTeamMasterGroupByOutputType = {
   _max: MiscellaneousTeamMasterMaxAggregateOutputType | null
 }
 
-export type GetMiscellaneousTeamMasterGroupByPayload<T extends MiscellaneousTeamMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetMiscellaneousTeamMasterGroupByPayload<T extends MiscellaneousTeamMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<MiscellaneousTeamMasterGroupByOutputType, T['by']> &
       {
@@ -1419,11 +1419,6 @@ export type MiscellaneousTeamMasterFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` MiscellaneousTeamMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of MiscellaneousTeamMasters.
-   */
   distinct?: Prisma.MiscellaneousTeamMasterScalarFieldEnum | Prisma.MiscellaneousTeamMasterScalarFieldEnum[]
 }
 

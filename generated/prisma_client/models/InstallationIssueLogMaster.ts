@@ -229,7 +229,7 @@ export type InstallationIssueLogMasterGroupByOutputType = {
   _max: InstallationIssueLogMasterMaxAggregateOutputType | null
 }
 
-export type GetInstallationIssueLogMasterGroupByPayload<T extends InstallationIssueLogMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetInstallationIssueLogMasterGroupByPayload<T extends InstallationIssueLogMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InstallationIssueLogMasterGroupByOutputType, T['by']> &
       {
@@ -1949,11 +1949,6 @@ export type InstallationIssueLogMasterFindManyArgs<ExtArgs extends runtime.Types
    * Skip the first `n` InstallationIssueLogMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of InstallationIssueLogMasters.
-   */
   distinct?: Prisma.InstallationIssueLogMasterScalarFieldEnum | Prisma.InstallationIssueLogMasterScalarFieldEnum[]
 }
 

@@ -318,7 +318,7 @@ export type FranchiseMasterGroupByOutputType = {
   _max: FranchiseMasterMaxAggregateOutputType | null
 }
 
-export type GetFranchiseMasterGroupByPayload<T extends FranchiseMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetFranchiseMasterGroupByPayload<T extends FranchiseMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FranchiseMasterGroupByOutputType, T['by']> &
       {
@@ -2519,11 +2519,6 @@ export type FranchiseMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` FranchiseMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of FranchiseMasters.
-   */
   distinct?: Prisma.FranchiseMasterScalarFieldEnum | Prisma.FranchiseMasterScalarFieldEnum[]
 }
 

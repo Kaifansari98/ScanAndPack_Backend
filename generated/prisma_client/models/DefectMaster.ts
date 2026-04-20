@@ -196,7 +196,7 @@ export type DefectMasterGroupByOutputType = {
   _max: DefectMasterMaxAggregateOutputType | null
 }
 
-export type GetDefectMasterGroupByPayload<T extends DefectMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetDefectMasterGroupByPayload<T extends DefectMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DefectMasterGroupByOutputType, T['by']> &
       {
@@ -1280,11 +1280,6 @@ export type DefectMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` DefectMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of DefectMasters.
-   */
   distinct?: Prisma.DefectMasterScalarFieldEnum | Prisma.DefectMasterScalarFieldEnum[]
 }
 

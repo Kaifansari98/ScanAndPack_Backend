@@ -182,7 +182,7 @@ export type CarcassTypeMasterGroupByOutputType = {
   _max: CarcassTypeMasterMaxAggregateOutputType | null
 }
 
-export type GetCarcassTypeMasterGroupByPayload<T extends CarcassTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetCarcassTypeMasterGroupByPayload<T extends CarcassTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CarcassTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1291,11 +1291,6 @@ export type CarcassTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` CarcassTypeMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of CarcassTypeMasters.
-   */
   distinct?: Prisma.CarcassTypeMasterScalarFieldEnum | Prisma.CarcassTypeMasterScalarFieldEnum[]
 }
 

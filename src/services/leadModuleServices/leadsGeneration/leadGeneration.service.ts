@@ -63,7 +63,7 @@ const editTaskISMSchema = Joi.object({
 
 export const createLeadService = async (
   payload: CreateLeadDTO & { is_draft?: boolean },
-  files: Express.Multer.File[]
+  files: Express.Multer.File[],
 ) => {
   logger.debug("[SERVICE] createLeadService called", {
     fileCount: files.length,
@@ -188,309 +188,313 @@ export const createLeadService = async (
             },
           }));
 
-      // 2) ⬅️ NEW: generate lead_code for this franchise
-      const lead_code = await generateLeadCode(tx, franchise_id);
+        // 2) ⬅️ NEW: generate lead_code for this franchise
+        const lead_code = await generateLeadCode(tx, franchise_id);
 
-      // 3) Create Lead with the generated code
-      const leadCreateData: any = {
-        lead_code,
-        firstname,
-        lastname,
-        country_code,
-        contact_no,
-        alt_contact_no,
-        email: email ?? "",
-        site_address,
-        site_map_link,
-        site_type_id,
-        status_id,
-        source_id,
-        archetech_name,
-        designer_remark,
-        vendor_id,
-        franchise_id,
-        created_by,
-        priority: priority?.trim() || null,
-        account_id: account.id, // Add account_id reference
-        assign_to,
-        assigned_by,
-        initial_site_measurement_date,
-        is_draft: !!payload.is_draft,
-      };
+        // 3) Create Lead with the generated code
+        const leadCreateData: any = {
+          lead_code,
+          firstname,
+          lastname,
+          country_code,
+          contact_no,
+          alt_contact_no,
+          email: email ?? "",
+          site_address,
+          site_map_link,
+          site_type_id,
+          status_id,
+          source_id,
+          archetech_name,
+          designer_remark,
+          vendor_id,
+          franchise_id,
+          created_by,
+          priority: priority?.trim() || null,
+          account_id: account.id, // Add account_id reference
+          assign_to,
+          assigned_by,
+          initial_site_measurement_date,
+          is_draft: !!payload.is_draft,
+        };
 
-      const lead = await tx.leadMaster.create({
-        data: leadCreateData,
-      });
+        const lead = await tx.leadMaster.create({
+          data: leadCreateData,
+        });
 
-      /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
+        /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
       - Both cases use: type="ISM", status="active"
       */
-      const creator = await tx.userMaster.findUnique({
-        where: { id: created_by },
-        include: { user_type: true }, // joins UserTypeMaster
-      });
-
-      const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
-
-      // Base fields common to all LeadUserMapping rows
-      const mappingBase = {
-        vendor_id,
-        account_id: account.id,
-        lead_id: lead.id,
-        type: "ISM" as const,
-        status: "active" as const,
-        created_by, // actor creating the mapping
-      };
-
-      // Always insert mapping for the creator
-      await tx.leadUserMapping.create({
-        data: { ...mappingBase, user_id: created_by },
-      });
-
-      // If creator is admin -> also map the assignee (when provided)
-      if (creatorRole === "admin" && assign_to) {
-        await tx.leadUserMapping.create({
-          data: { ...mappingBase, user_id: assign_to },
+        const creator = await tx.userMaster.findUnique({
+          where: { id: created_by },
+          include: { user_type: true }, // joins UserTypeMaster
         });
-      }
 
-      // ✅ Create lead chat room and seed members (all admins + creator + assigned user)
-      const chatRoom = await tx.leadChatRoom.create({
-        data: {
-          lead_id: lead.id,
+        const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
+
+        // Base fields common to all LeadUserMapping rows
+        const mappingBase = {
           vendor_id,
-        },
-      });
+          account_id: account.id,
+          lead_id: lead.id,
+          type: "ISM" as const,
+          status: "active" as const,
+          created_by, // actor creating the mapping
+        };
 
-      const [superAdminUsers, adminUsers] = await Promise.all([
-        tx.userMaster.findMany({
-          where: {
-            vendor_id,
-            status: "active",
-            user_type: { user_type: "super-admin" },
-          },
-          select: { id: true },
-        }),
-        franchise_id
-          ? tx.userMaster.findMany({
-              where: {
-                vendor_id,
-                franchise_id,
-                status: "active",
-                user_type: { user_type: "admin" },
-              },
-              select: { id: true },
-            })
-          : Promise.resolve([]),
-      ]);
-
-      const memberIds = new Set<number>([
-        ...superAdminUsers.map((user) => user.id),
-        ...adminUsers.map((user) => user.id),
-      ]);
-      memberIds.add(created_by);
-
-      if (creatorRole === "admin" && assign_to) {
-        memberIds.add(assign_to);
-      }
-
-      if (memberIds.size > 0) {
-        await tx.leadChatMember.createMany({
-          data: Array.from(memberIds).map((user_id) => ({
-            chat_room_id: chatRoom.id,
-            user_id,
-            added_by: created_by,
-          })),
-          skipDuplicates: true,
-        });
-      }
-
-      // 🧹 Invalidate Performance Snapshot Cache for creator
-      await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
-
-      if (payload.is_draft) {
-        logger.info(
-          "📝 Draft lead detected — skipping mappings, logs & uploads"
-        );
-        return { lead, account, draft: true };
-      }
-
-      // If creator is sales-executive -> nothing more to do (only his own mapping above)
-      // Any other/unknown role falls back to just the creator row
-
-      // 3. Validate and create mappings for product types using IDs
-      for (const productTypeId of product_types) {
-        logger.debug("Processing product type", { productTypeId });
-
-        // Validate that the product type exists and belongs to the vendor
-        const productType = await tx.productTypeMaster.findFirst({
-          where: {
-            id: productTypeId,
-            vendor_id,
-          },
+        // Always insert mapping for the creator
+        await tx.leadUserMapping.create({
+          data: { ...mappingBase, user_id: created_by },
         });
 
-        if (!productType) {
-          throw new Error(
-            `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`
-          );
+        // If creator is admin -> also map the assignee (when provided)
+        if (creatorRole === "admin" && assign_to) {
+          await tx.leadUserMapping.create({
+            data: { ...mappingBase, user_id: assign_to },
+          });
         }
 
-        await tx.leadProductMapping.create({
+        // ✅ Create lead chat room and seed members (all admins + creator + assigned user)
+        const chatRoom = await tx.leadChatRoom.create({
           data: {
-            vendor_id,
             lead_id: lead.id,
-            account_id: account.id,
-            product_type_id: productTypeId,
-            created_by,
-          },
-        });
-        logger.info("✅ Product mapping created", { productTypeId });
-      }
-
-      // 4. Validate and create mappings for product structures using IDs
-      for (const productStructureId of product_structures) {
-        logger.debug("Processing product structure", { productStructureId });
-
-        // Validate that the product structure exists and belongs to the vendor
-        const structure = await tx.productStructure.findFirst({
-          where: {
-            id: productStructureId,
             vendor_id,
           },
         });
 
-        if (!structure) {
-          throw new Error(
-            `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`
-          );
+        const [superAdminUsers, adminUsers] = await Promise.all([
+          tx.userMaster.findMany({
+            where: {
+              vendor_id,
+              status: "active",
+              user_type: { user_type: "super-admin" },
+            },
+            select: { id: true },
+          }),
+          franchise_id
+            ? tx.userMaster.findMany({
+                where: {
+                  vendor_id,
+                  franchise_id,
+                  status: "active",
+                  user_type: { user_type: "admin" },
+                },
+                select: { id: true },
+              })
+            : Promise.resolve([]),
+        ]);
+
+        const memberIds = new Set<number>([
+          ...superAdminUsers.map((user) => user.id),
+          ...adminUsers.map((user) => user.id),
+        ]);
+        memberIds.add(created_by);
+
+        if (creatorRole === "admin" && assign_to) {
+          memberIds.add(assign_to);
         }
 
-        await tx.leadProductStructureMapping.create({
-          data: {
-            vendor_id,
-            lead_id: lead.id,
-            account_id: account.id,
-            product_structure_id: productStructureId,
-            created_by,
-          },
-        });
-        logger.info("✅ Product structure mapping created", {
-          productStructureId,
-        });
-      }
-
-      // 5. Create product structure instances
-      const instanceProductTypeId = product_types[0];
-      const instanceSource: {
-        product_structure_id: number;
-        title?: string;
-        description?: string;
-      }[] =
-        product_structure_instances.length > 0
-          ? product_structure_instances
-          : product_structures.map((product_structure_id) => ({
-              product_structure_id,
-            }));
-
-      if (!instanceProductTypeId) {
-        logger.warn(
-          "⚠️ Skipping structure instances: product_types is empty",
-          { lead_id: lead.id }
-        );
-      } else {
-        const structureIds = Array.from(
-          new Set(instanceSource.map((instance) => instance.product_structure_id))
-        );
-        const structures = await tx.productStructure.findMany({
-          where: {
-            id: { in: structureIds },
-            vendor_id,
-          },
-        });
-        const structureMap = new Map(
-          structures.map((structure) => [structure.id, structure])
-        );
-
-        if (structureMap.size !== structureIds.length) {
-          const missingIds = structureIds.filter((id) => !structureMap.has(id));
-          throw new Error(
-            `Product structure with ID(s) ${missingIds.join(
-              ", "
-            )} not found for vendor ${vendor_id}`
-          );
+        if (memberIds.size > 0) {
+          await tx.leadChatMember.createMany({
+            data: Array.from(memberIds).map((user_id) => ({
+              chat_room_id: chatRoom.id,
+              user_id,
+              added_by: created_by,
+            })),
+            skipDuplicates: true,
+          });
         }
 
-        let nextIndex = 0;
-        for (const instance of instanceSource) {
-          const structure = structureMap.get(instance.product_structure_id);
-          if (!structure) continue;
+        // 🧹 Invalidate Performance Snapshot Cache for creator
+        await cache.del(`performance:snapshot:${vendor_id}:${created_by}`);
 
-          nextIndex += 1;
+        if (payload.is_draft) {
+          logger.info(
+            "📝 Draft lead detected — skipping mappings, logs & uploads",
+          );
+          return { lead, account, draft: true };
+        }
 
-          await tx.leadProductStructureInstance.create({
+        // If creator is sales-executive -> nothing more to do (only his own mapping above)
+        // Any other/unknown role falls back to just the creator row
+
+        // 3. Validate and create mappings for product types using IDs
+        for (const productTypeId of product_types) {
+          logger.debug("Processing product type", { productTypeId });
+
+          // Validate that the product type exists and belongs to the vendor
+          const productType = await tx.productTypeMaster.findFirst({
+            where: {
+              id: productTypeId,
+              vendor_id,
+            },
+          });
+
+          if (!productType) {
+            throw new Error(
+              `Product type with ID ${productTypeId} not found for vendor ${vendor_id}`,
+            );
+          }
+
+          await tx.leadProductMapping.create({
             data: {
               vendor_id,
               lead_id: lead.id,
               account_id: account.id,
-              product_type_id: instanceProductTypeId,
-              product_structure_id: instance.product_structure_id,
-              quantity_index: nextIndex,
-              title: instance.title?.trim() || structure.type,
-              description: instance.description?.trim() || null,
+              product_type_id: productTypeId,
               created_by,
             },
           });
+          logger.info("✅ Product mapping created", { productTypeId });
         }
+
+        // 4. Validate and create mappings for product structures using IDs
+        for (const productStructureId of product_structures) {
+          logger.debug("Processing product structure", { productStructureId });
+
+          // Validate that the product structure exists and belongs to the vendor
+          const structure = await tx.productStructure.findFirst({
+            where: {
+              id: productStructureId,
+              vendor_id,
+            },
+          });
+
+          if (!structure) {
+            throw new Error(
+              `Product structure with ID ${productStructureId} not found for vendor ${vendor_id}`,
+            );
+          }
+
+          await tx.leadProductStructureMapping.create({
+            data: {
+              vendor_id,
+              lead_id: lead.id,
+              account_id: account.id,
+              product_structure_id: productStructureId,
+              created_by,
+            },
+          });
+          logger.info("✅ Product structure mapping created", {
+            productStructureId,
+          });
+        }
+
+        // 5. Create product structure instances
+        const instanceProductTypeId = product_types[0];
+        const instanceSource: {
+          product_structure_id: number;
+          title?: string;
+          description?: string;
+        }[] =
+          product_structure_instances.length > 0
+            ? product_structure_instances
+            : product_structures.map((product_structure_id) => ({
+                product_structure_id,
+              }));
+
+        if (!instanceProductTypeId) {
+          logger.warn(
+            "⚠️ Skipping structure instances: product_types is empty",
+            { lead_id: lead.id },
+          );
+        } else {
+          const structureIds = Array.from(
+            new Set(
+              instanceSource.map((instance) => instance.product_structure_id),
+            ),
+          );
+          const structures = await tx.productStructure.findMany({
+            where: {
+              id: { in: structureIds },
+              vendor_id,
+            },
+          });
+          const structureMap = new Map(
+            structures.map((structure) => [structure.id, structure]),
+          );
+
+          if (structureMap.size !== structureIds.length) {
+            const missingIds = structureIds.filter(
+              (id) => !structureMap.has(id),
+            );
+            throw new Error(
+              `Product structure with ID(s) ${missingIds.join(
+                ", ",
+              )} not found for vendor ${vendor_id}`,
+            );
+          }
+
+          let nextIndex = 0;
+          for (const instance of instanceSource) {
+            const structure = structureMap.get(instance.product_structure_id);
+            if (!structure) continue;
+
+            nextIndex += 1;
+
+            await tx.leadProductStructureInstance.create({
+              data: {
+                vendor_id,
+                lead_id: lead.id,
+                account_id: account.id,
+                product_type_id: instanceProductTypeId,
+                product_structure_id: instance.product_structure_id,
+                quantity_index: nextIndex,
+                title: instance.title?.trim() || structure.type,
+                description: instance.description?.trim() || null,
+                created_by,
+              },
+            });
+          }
+        }
+
+        // 6. LeadStatusLogs entry
+        await tx.leadStatusLogs.create({
+          data: {
+            lead_id: lead.id,
+            account_id: account.id,
+            vendor_id,
+            status_id, // from openStatus.id earlier
+            created_by,
+            created_at: new Date(),
+          },
+        });
+        logger.info("✅ LeadStatusLogs entry created for initial stage", {
+          lead_id: lead.id,
+          status_id,
+        });
+
+        // 7. LeadDetailedLogs entry
+        await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id,
+            lead_id: lead.id,
+            account_id: account.id,
+            action: "Lead has been created successfully",
+            action_type: "CREATE",
+            created_by,
+            created_at: new Date(),
+          },
+        });
+        logger.info("✅ LeadDetailedLogs entry created for lead creation", {
+          lead_id: lead.id,
+        });
+
+        // 8. Return final result
+        return {
+          lead,
+          account,
+          draft: !!payload.is_draft,
+        };
+      } catch (err) {
+        logDbError(err, "createLeadService.transaction", {
+          vendor_id,
+          created_by,
+        });
+        throw err; // IMPORTANT
       }
-
-      // 6. LeadStatusLogs entry
-      await tx.leadStatusLogs.create({
-        data: {
-          lead_id: lead.id,
-          account_id: account.id,
-          vendor_id,
-          status_id, // from openStatus.id earlier
-          created_by,
-          created_at: new Date(),
-        },
-      });
-      logger.info("✅ LeadStatusLogs entry created for initial stage", {
-        lead_id: lead.id,
-        status_id,
-      });
-
-      // 7. LeadDetailedLogs entry
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id: lead.id,
-          account_id: account.id,
-          action: "Lead has been created successfully",
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
-      });
-      logger.info("✅ LeadDetailedLogs entry created for lead creation", {
-        lead_id: lead.id,
-      });
-
-      // 8. Return final result
-      return {
-        lead,
-        account,
-        draft: !!payload.is_draft,
-      };
-    } catch (err) {
-      logDbError(err, "createLeadService.transaction", {
-        vendor_id,
-        created_by,
-      });
-      throw err; // IMPORTANT
-    }
-  },
-  { timeout: 15000 }
+    },
+    { timeout: 15000 },
   );
 
   if (transactionResult.draft) {
@@ -512,16 +516,14 @@ export const createLeadService = async (
 
     if (!docTypeRecord) {
       throw new Error(
-        `Document type "Type 1" not found for vendor ${vendor_id}`
+        `Document type "Type 1" not found for vendor ${vendor_id}`,
       );
     }
 
     for (const file of files) {
       const diskPath = file.path;
       const fileExists = diskPath ? fs.existsSync(diskPath) : false;
-      console.log(
-        `[DEBUG] File path: ${diskPath}, disk exists: ${fileExists}`
-      );
+      console.log(`[DEBUG] File path: ${diskPath}, disk exists: ${fileExists}`);
 
       logger.info("[FILE CHECK]", {
         name: file.originalname,
@@ -534,7 +536,7 @@ export const createLeadService = async (
         vendor_id,
         transactionResult.lead.id,
         file.originalname,
-        file.mimetype
+        file.mimetype,
       );
 
       await fs.promises.unlink(file.path);
@@ -562,7 +564,7 @@ export const createLeadService = async (
 
     console.log(
       "[DEBUG] Files uploaded to Wasabi and saved:",
-      uploadedFiles.length
+      uploadedFiles.length,
     );
   } else {
     logger.info("No documents to process - files are optional");
@@ -577,7 +579,7 @@ export const createLeadService = async (
 
 export const uploadMoreSitePhotosService = async (
   payload: { vendor_id: number; lead_id: number; created_by: number },
-  files: Express.Multer.File[]
+  files: Express.Multer.File[],
 ) => {
   const { vendor_id, lead_id, created_by } = payload;
 
@@ -624,7 +626,7 @@ export const uploadMoreSitePhotosService = async (
       vendor_id,
       lead.id,
       file.originalname,
-      file.mimetype
+      file.mimetype,
     );
 
     await fs.promises.unlink(file.path);
@@ -716,11 +718,11 @@ export const getLeadsByVendor = async (vendorId: number) => {
  */
 export const getLeadsByVendorAndUser = async (
   vendorId: number,
-  userId: number
+  userId: number,
 ) => {
   try {
     console.log(
-      `[SERVICE] Fetching leads for vendor ${vendorId} and user ${userId}`
+      `[SERVICE] Fetching leads for vendor ${vendorId} and user ${userId}`,
     );
 
     // First, get user role information
@@ -751,19 +753,19 @@ export const getLeadsByVendorAndUser = async (
       ];
 
       console.log(
-        `[SERVICE] Applied sales-executive filter for user ${userId}`
+        `[SERVICE] Applied sales-executive filter for user ${userId}`,
       );
     } else if (["admin", "super-admin"].includes(userType)) {
       // Admins and super-admins can see all leads for their vendor
       // No additional filtering needed beyond vendor_id
       console.log(
-        `[SERVICE] Admin/Super-admin access - showing all vendor leads`
+        `[SERVICE] Admin/Super-admin access - showing all vendor leads`,
       );
     } else {
       // Other roles (if any) - restrict to only their created leads
       whereCondition.created_by = userId;
       console.log(
-        `[SERVICE] Restricted access for role ${userType} - only created leads`
+        `[SERVICE] Restricted access for role ${userType} - only created leads`,
       );
     }
 
@@ -828,18 +830,18 @@ export const getLeadsByVendorAndUser = async (
               const signedUrl = await generateSignedUrl(
                 doc.doc_sys_name,
                 3600,
-                "inline"
+                "inline",
               ); // 1h
               return { ...doc, signedUrl };
             } catch (err) {
               console.error(`[ERROR] Failed to sign doc ${doc.id}:`, err);
               return { ...doc, signedUrl: null };
             }
-          })
+          }),
         );
 
         return { ...lead, documents: signedDocs };
-      })
+      }),
     );
 
     return {
@@ -860,11 +862,11 @@ export const getLeadsByVendorAndUser = async (
 export const getLeadById = async (
   leadId: number,
   userId: number,
-  vendorId: number
+  vendorId: number,
 ) => {
   try {
     console.log(
-      `[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`
+      `[SERVICE] Fetching lead ${leadId} for user ${userId} in vendor ${vendorId}`,
     );
 
     // 1️⃣ Get user role info
@@ -967,29 +969,28 @@ export const getLeadById = async (
           }
         : null;
 
-    const oldestSiteSupervisorMapping =
-      await prisma.leadUserMapping.findFirst({
-        where: {
-          lead_id: lead.id,
-          vendor_id: vendorId,
-          status: "active",
-          user: {
+    const oldestSiteSupervisorMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        status: "active",
+        user: {
+          user_type: {
             user_type: {
-              user_type: {
-                equals: "site-supervisor",
-                mode: "insensitive",
-              },
+              equals: "site-supervisor",
+              mode: "insensitive",
             },
           },
         },
-        orderBy: { created_at: "asc" },
-        select: {
-          id: true,
-          user_id: true,
-          created_at: true,
-          user: { select: { id: true, user_name: true } },
-        },
-      });
+      },
+      orderBy: { created_at: "asc" },
+      select: {
+        id: true,
+        user_id: true,
+        created_at: true,
+        user: { select: { id: true, user_name: true } },
+      },
+    });
 
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
@@ -998,7 +999,7 @@ export const getLeadById = async (
           ? await generateSignedUrl(doc.doc_sys_name, 3600, "inline")
           : null;
         return { ...doc, signedUrl };
-      })
+      }),
     );
 
     return {
@@ -1028,7 +1029,7 @@ export const getLeadById = async (
 
 export const getLeadProductStructureInstances = async (
   leadId: number,
-  vendorId: number
+  vendorId: number,
 ) => {
   try {
     return await prisma.leadProductStructureInstance.findMany({
@@ -1045,10 +1046,10 @@ export const getLeadProductStructureInstances = async (
   } catch (error: any) {
     console.error(
       "[SERVICE] Error fetching lead product structure instances:",
-      error
+      error,
     );
     throw new Error(
-      `Failed to fetch lead product structure instances: ${error.message}`
+      `Failed to fetch lead product structure instances: ${error.message}`,
     );
   }
 };
@@ -1057,7 +1058,7 @@ export const deleteLeadProductStructureInstance = async (
   leadId: number,
   vendorId: number,
   instanceId: number,
-  deletedBy?: number | null
+  deletedBy?: number | null,
 ) => {
   try {
     const existing = await prisma.leadProductStructureInstance.findFirst({
@@ -1092,10 +1093,10 @@ export const deleteLeadProductStructureInstance = async (
   } catch (error: any) {
     console.error(
       "[SERVICE] Error deleting lead product structure instance:",
-      error
+      error,
     );
     throw new Error(
-      `Failed to delete lead product structure instance: ${error.message}`
+      `Failed to delete lead product structure instance: ${error.message}`,
     );
   }
 };
@@ -1181,10 +1182,10 @@ export const updateLeadProductStructureInstance = async ({
   } catch (error: any) {
     console.error(
       "[SERVICE] Error updating lead product structure instance:",
-      error
+      error,
     );
     throw new Error(
-      `Failed to update lead product structure instance: ${error.message}`
+      `Failed to update lead product structure instance: ${error.message}`,
     );
   }
 };
@@ -1254,15 +1255,14 @@ export const createLeadProductStructureInstance = async ({
       .includes("kitchen");
 
     if (!isKitchenType) {
-      const existingMappings = await prisma.leadProductStructureMapping.findMany(
-        {
+      const existingMappings =
+        await prisma.leadProductStructureMapping.findMany({
           where: {
             lead_id: leadId,
             vendor_id: vendorId,
           },
           select: { product_structure_id: true },
-        }
-      );
+        });
 
       if (existingMappings.length > 0) {
         const existingInstanceStructureIds =
@@ -1275,7 +1275,7 @@ export const createLeadProductStructureInstance = async ({
           });
 
         const existingInstanceSet = new Set(
-          existingInstanceStructureIds.map((row) => row.product_structure_id)
+          existingInstanceStructureIds.map((row) => row.product_structure_id),
         );
 
         for (const mapping of existingMappings) {
@@ -1367,10 +1367,10 @@ export const createLeadProductStructureInstance = async ({
   } catch (error: any) {
     console.error(
       "[SERVICE] Error creating lead product structure instance:",
-      error
+      error,
     );
     throw new Error(
-      `Failed to create lead product structure instance: ${error.message}`
+      `Failed to create lead product structure instance: ${error.message}`,
     );
   }
 };
@@ -1457,7 +1457,7 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
     // 🧹 Clear Performance Snapshot cache for all mapped users
     for (const mapping of mappings) {
       await cache.del(
-        `performance:snapshot:${mapping.vendor_id}:${mapping.user_id}`
+        `performance:snapshot:${mapping.vendor_id}:${mapping.user_id}`,
       );
     }
 
@@ -1471,7 +1471,7 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
 export const updateLeadService = async (
   leadId: number,
   payload: UpdateLeadDTO,
-  clientBaseUrl?: string
+  clientBaseUrl?: string,
 ) => {
   let leadCreatedEmailPayload: LeadCreatedEmailPayload | null = null;
   let leadFranchiseId: number | null = null;
@@ -1549,7 +1549,7 @@ export const updateLeadService = async (
 
       if (dateValue < today) {
         throw new Error(
-          `Invalid initial_site_measurement_date: ${initial_site_measurement_date}. Date must be today or a future date.`
+          `Invalid initial_site_measurement_date: ${initial_site_measurement_date}. Date must be today or a future date.`,
         );
       }
 
@@ -1584,7 +1584,6 @@ export const updateLeadService = async (
       where: { id: leadId },
       data: leadUpdateData,
     });
-
 
     // ✅ Auto-unmark draft if completed and prepare email payload
     if (existingLead.is_draft) {
@@ -1678,43 +1677,43 @@ export const updateLeadService = async (
     collectChange(
       "Name",
       `${existingLead.firstname} ${existingLead.lastname}`,
-      `${updatedLead.firstname} ${updatedLead.lastname}`
+      `${updatedLead.firstname} ${updatedLead.lastname}`,
     );
     collectChange("Email", existingLead.email, updatedLead.email);
     collectChange(
       "Contact Number",
       existingLead.contact_no,
-      updatedLead.contact_no
+      updatedLead.contact_no,
     );
     collectChange(
       "Alternate Contact Number",
       existingLead.alt_contact_no,
-      updatedLead.alt_contact_no
+      updatedLead.alt_contact_no,
     );
     collectChange(
       "Site Address",
       existingLead.site_address,
-      updatedLead.site_address
+      updatedLead.site_address,
     );
     collectChange(
       "Site Map Link",
       existingLead.site_map_link,
-      updatedLead.site_map_link
+      updatedLead.site_map_link,
     );
     collectChange(
       "Architect Name",
       existingLead.archetech_name,
-      updatedLead.archetech_name
+      updatedLead.archetech_name,
     );
     collectChange(
       "Designer Remark",
       existingLead.designer_remark,
-      updatedLead.designer_remark
+      updatedLead.designer_remark,
     );
     collectChange(
       "Initial Site Measurement Date",
       existingLead.initial_site_measurement_date?.toISOString(),
-      updatedLead.initial_site_measurement_date?.toISOString()
+      updatedLead.initial_site_measurement_date?.toISOString(),
     );
 
     // Helper to join list with commas and "and" before the last item
@@ -1788,7 +1787,11 @@ export const updateLeadService = async (
       );
 
       if (adminRecipients.length > 0) {
-        const redirectUrl = resolveLeadStagePath(leadId, leadStageTag, result.lead.account_id);
+        const redirectUrl = resolveLeadStagePath(
+          leadId,
+          leadStageTag,
+          result.lead.account_id,
+        );
 
         await Promise.allSettled([
           ...adminRecipients.map((admin) =>
@@ -1814,9 +1817,12 @@ export const updateLeadService = async (
         ]);
       }
     } catch (emailError: any) {
-      logger.warn("⚠️ Failed to send lead created email after draft completion", {
-        error: emailError?.message,
-      });
+      logger.warn(
+        "⚠️ Failed to send lead created email after draft completion",
+        {
+          error: emailError?.message,
+        },
+      );
     }
   }
 
@@ -1825,17 +1831,19 @@ export const updateLeadService = async (
 
 export const isContactOrEmailExists = async (
   vendor_id: number,
-  payload: { phone_number?: string; alt_phone_number?: string; email?: string }
+  payload: { phone_number?: string; alt_phone_number?: string; email?: string },
 ) => {
   const { phone_number, alt_phone_number, email } = payload;
   const provided = [phone_number, alt_phone_number, email].filter(
-    (v) => v !== undefined && v !== null && String(v).trim() !== ""
+    (v) => v !== undefined && v !== null && String(v).trim() !== "",
   );
 
   if (provided.length !== 1) {
     throw Object.assign(
-      new Error("Provide exactly one of phone_number, alt_phone_number, or email"),
-      { statusCode: 400 }
+      new Error(
+        "Provide exactly one of phone_number, alt_phone_number, or email",
+      ),
+      { statusCode: 400 },
     );
   }
 
@@ -1859,8 +1867,8 @@ export const isContactOrEmailExists = async (
     checked_field: phone_number
       ? "phone_number"
       : alt_phone_number
-      ? "alt_phone_number"
-      : "email",
+        ? "alt_phone_number"
+        : "email",
     lead: existingLead
       ? {
           lead_id: existingLead.id,
@@ -1879,7 +1887,7 @@ export const getSalesExecutivesByVendor = async (
 ): Promise<SalesExecutiveData[]> => {
   try {
     console.log(
-      `[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`
+      `[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`,
     );
 
     // First, find the user type ID for 'sales-executive'
@@ -1898,7 +1906,7 @@ export const getSalesExecutivesByVendor = async (
     }
 
     console.log(
-      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`
+      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`,
     );
 
     // Fetch all users with sales-executive role for the specified vendor
@@ -1943,7 +1951,7 @@ export const getSalesExecutivesByVendor = async (
           document_number: doc.document_number,
           filename: doc.filename,
         })),
-      })
+      }),
     );
 
     return transformedData;
@@ -1954,11 +1962,11 @@ export const getSalesExecutivesByVendor = async (
 };
 
 export const getSiteSupervisorByVendor = async (
-  vendorId: number
+  vendorId: number,
 ): Promise<SiteSupervisorData[]> => {
   try {
     console.log(
-      `[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}`
+      `[SERVICE] Fetching Site Supervisor for vendor ID: ${vendorId}`,
     );
 
     // First, find the user type ID for 'site-supervisor'
@@ -1977,7 +1985,7 @@ export const getSiteSupervisorByVendor = async (
     }
 
     console.log(
-      `[SERVICE] Found Site Supervisor type ID: ${SiteSupervisorType.id}`
+      `[SERVICE] Found Site Supervisor type ID: ${SiteSupervisorType.id}`,
     );
 
     // Fetch all users with sales-executive role for the specified vendor
@@ -2021,7 +2029,7 @@ export const getSiteSupervisorByVendor = async (
           document_number: doc.document_number,
           filename: doc.filename,
         })),
-      })
+      }),
     );
 
     return transformedData;
@@ -2032,11 +2040,11 @@ export const getSiteSupervisorByVendor = async (
 };
 
 export const getHeadSiteSupervisorByVendor = async (
-  vendorId: number
+  vendorId: number,
 ): Promise<SiteSupervisorData[]> => {
   try {
     console.log(
-      `[SERVICE] Fetching Head Site Supervisor for vendor ID: ${vendorId}`
+      `[SERVICE] Fetching Head Site Supervisor for vendor ID: ${vendorId}`,
     );
 
     // First, find the user type ID for 'head-site-supervisor'
@@ -2055,7 +2063,7 @@ export const getHeadSiteSupervisorByVendor = async (
     }
 
     console.log(
-      `[SERVICE] Found Head Site Supervisor type ID: ${headSiteSupervisorType.id}`
+      `[SERVICE] Found Head Site Supervisor type ID: ${headSiteSupervisorType.id}`,
     );
 
     const headSiteSupervisors = await prisma.userMaster.findMany({
@@ -2074,7 +2082,7 @@ export const getHeadSiteSupervisorByVendor = async (
     });
 
     console.log(
-      `[SERVICE] Found ${headSiteSupervisors.length} Head Site Supervisors`
+      `[SERVICE] Found ${headSiteSupervisors.length} Head Site Supervisors`,
     );
 
     const transformedData: SiteSupervisorData[] = headSiteSupervisors.map(
@@ -2099,15 +2107,13 @@ export const getHeadSiteSupervisorByVendor = async (
           document_number: doc.document_number,
           filename: doc.filename,
         })),
-      })
+      }),
     );
 
     return transformedData;
   } catch (error: any) {
     console.error("[SERVICE] Error fetching Head Site Supervisors:", error);
-    throw new Error(
-      `Failed to fetch Head Site Supervisors: ${error.message}`
-    );
+    throw new Error(`Failed to fetch Head Site Supervisors: ${error.message}`);
   }
 };
 
@@ -2119,11 +2125,11 @@ export const getHeadSiteSupervisorByVendor = async (
  */
 export const getSalesExecutiveById = async (
   vendorId: number,
-  userId: number
+  userId: number,
 ): Promise<SalesExecutiveData | null> => {
   try {
     console.log(
-      `[SERVICE] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`
+      `[SERVICE] Fetching sales executive ID: ${userId} for vendor: ${vendorId}`,
     );
 
     // First, find the user type ID for 'sales-executive'
@@ -2200,13 +2206,13 @@ export const assignLeadToUser = async (
   leadId: number,
   vendorId: number,
   payload: AssignLeadPayload,
-  clientBaseUrl?: string
+  clientBaseUrl?: string,
 ): Promise<LeadAssignmentResult> => {
   try {
     console.log(`[SERVICE] Starting lead assignment process`);
     console.log(`[SERVICE] Lead ID: ${leadId}, Vendor ID: ${vendorId}`);
     console.log(
-      `[SERVICE] Assign to: ${payload.assign_to}, Assign by: ${payload.assign_by}`
+      `[SERVICE] Assign to: ${payload.assign_to}, Assign by: ${payload.assign_by}`,
     );
 
     // Step 1: Validate admin user (assign_by)
@@ -2218,7 +2224,7 @@ export const assignLeadToUser = async (
     // Step 2: Validate sales executive user (assign_to)
     const salesExecutiveUser = await validateSalesExecutiveUser(
       payload.assign_to,
-      vendorId
+      vendorId,
     );
     if (!salesExecutiveUser) {
       throw new Error("Invalid sales executive user or user is not active");
@@ -2245,7 +2251,7 @@ export const assignLeadToUser = async (
 
     if (lead.assign_to === payload.assign_to) {
       throw new Error(
-        `Lead is already assigned to ${salesExecutiveUser.user_name}`
+        `Lead is already assigned to ${salesExecutiveUser.user_name}`,
       );
     }
 
@@ -2318,7 +2324,7 @@ export const assignLeadToUser = async (
 
     console.log(`[SERVICE] Lead assignment successful`);
     console.log(
-      `[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`
+      `[SERVICE] Lead ${leadId} assigned to ${salesExecutiveUser.user_name} by ${adminUser.user_name}`,
     );
 
     // Step 6: Insert LeadDetailedLogs entry (Audit Trail)
@@ -2510,7 +2516,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
   const { error, value } = editTaskISMSchema.validate(payload);
   if (error) {
     throw new Error(
-      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`
+      `Validation failed: ${error.details.map((d) => d.message).join(", ")}`,
     );
   }
 
@@ -2565,7 +2571,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       });
       if (!assignee || assignee.vendor_id !== vendor_id) {
         throw new Error(
-          `Assignee ${assignee_user_id} does not belong to vendor ${vendor_id}`
+          `Assignee ${assignee_user_id} does not belong to vendor ${vendor_id}`,
         );
       }
 
@@ -2581,7 +2587,7 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
       if (!closer || closer.vendor_id !== vendor_id) {
         throw new Error(
-          `Closed_by user ${closed_by} does not belong to vendor ${vendor_id}`
+          `Closed_by user ${closed_by} does not belong to vendor ${vendor_id}`,
         );
       }
 
@@ -2751,14 +2757,14 @@ export const getLeadLogsWithDocuments = async (params: {
           const signedUrl = await generateSignedUrl(
             doc.doc_sys_name,
             3600,
-            "inline"
+            "inline",
           );
           return {
             id: doc.id,
             original_name: doc.doc_og_name,
             signedUrl,
           };
-        })
+        }),
       );
 
       return {
@@ -2773,7 +2779,7 @@ export const getLeadLogsWithDocuments = async (params: {
         },
         docs,
       };
-    })
+    }),
   );
 
   return {
@@ -2788,7 +2794,7 @@ export const getLeadLogsWithDocuments = async (params: {
 
 export const checkSiteSupervisorAssigned = async (
   vendorId: number,
-  leadId: number
+  leadId: number,
 ): Promise<{ isSiteSupervisorAssigned: boolean }> => {
   const mapping = await prisma.leadUserMapping.findFirst({
     where: {
@@ -2803,7 +2809,7 @@ export const checkSiteSupervisorAssigned = async (
 
 export const getClientRequiredCompletionDate = async (
   vendorId: number,
-  leadId: number
+  leadId: number,
 ): Promise<Date | null> => {
   const lead = await prisma.leadMaster.findFirst({
     where: {

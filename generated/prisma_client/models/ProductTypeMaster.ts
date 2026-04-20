@@ -196,7 +196,7 @@ export type ProductTypeMasterGroupByOutputType = {
   _max: ProductTypeMasterMaxAggregateOutputType | null
 }
 
-export type GetProductTypeMasterGroupByPayload<T extends ProductTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetProductTypeMasterGroupByPayload<T extends ProductTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ProductTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1370,11 +1370,6 @@ export type ProductTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` ProductTypeMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ProductTypeMasters.
-   */
   distinct?: Prisma.ProductTypeMasterScalarFieldEnum | Prisma.ProductTypeMasterScalarFieldEnum[]
 }
 

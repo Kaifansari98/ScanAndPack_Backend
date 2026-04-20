@@ -273,7 +273,7 @@ export type PaymentInfoGroupByOutputType = {
   _max: PaymentInfoMaxAggregateOutputType | null
 }
 
-export type GetPaymentInfoGroupByPayload<T extends PaymentInfoGroupByArgs> = Prisma.PrismaPromise<
+type GetPaymentInfoGroupByPayload<T extends PaymentInfoGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PaymentInfoGroupByOutputType, T['by']> &
       {
@@ -2414,11 +2414,6 @@ export type PaymentInfoFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Skip the first `n` PaymentInfos.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of PaymentInfos.
-   */
   distinct?: Prisma.PaymentInfoScalarFieldEnum | Prisma.PaymentInfoScalarFieldEnum[]
 }
 

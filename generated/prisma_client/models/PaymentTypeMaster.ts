@@ -189,7 +189,7 @@ export type PaymentTypeMasterGroupByOutputType = {
   _max: PaymentTypeMasterMaxAggregateOutputType | null
 }
 
-export type GetPaymentTypeMasterGroupByPayload<T extends PaymentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetPaymentTypeMasterGroupByPayload<T extends PaymentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<PaymentTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1239,11 +1239,6 @@ export type PaymentTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` PaymentTypeMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of PaymentTypeMasters.
-   */
   distinct?: Prisma.PaymentTypeMasterScalarFieldEnum | Prisma.PaymentTypeMasterScalarFieldEnum[]
 }
 

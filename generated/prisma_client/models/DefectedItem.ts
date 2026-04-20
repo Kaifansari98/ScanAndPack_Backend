@@ -334,7 +334,7 @@ export type DefectedItemGroupByOutputType = {
   _max: DefectedItemMaxAggregateOutputType | null
 }
 
-export type GetDefectedItemGroupByPayload<T extends DefectedItemGroupByArgs> = Prisma.PrismaPromise<
+type GetDefectedItemGroupByPayload<T extends DefectedItemGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DefectedItemGroupByOutputType, T['by']> &
       {
@@ -3303,11 +3303,6 @@ export type DefectedItemFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` DefectedItems.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of DefectedItems.
-   */
   distinct?: Prisma.DefectedItemScalarFieldEnum | Prisma.DefectedItemScalarFieldEnum[]
 }
 

@@ -189,7 +189,7 @@ export type SourceMasterGroupByOutputType = {
   _max: SourceMasterMaxAggregateOutputType | null
 }
 
-export type GetSourceMasterGroupByPayload<T extends SourceMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetSourceMasterGroupByPayload<T extends SourceMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SourceMasterGroupByOutputType, T['by']> &
       {
@@ -1241,11 +1241,6 @@ export type SourceMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` SourceMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of SourceMasters.
-   */
   distinct?: Prisma.SourceMasterScalarFieldEnum | Prisma.SourceMasterScalarFieldEnum[]
 }
 

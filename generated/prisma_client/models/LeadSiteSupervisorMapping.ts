@@ -233,7 +233,7 @@ export type LeadSiteSupervisorMappingGroupByOutputType = {
   _max: LeadSiteSupervisorMappingMaxAggregateOutputType | null
 }
 
-export type GetLeadSiteSupervisorMappingGroupByPayload<T extends LeadSiteSupervisorMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadSiteSupervisorMappingGroupByPayload<T extends LeadSiteSupervisorMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadSiteSupervisorMappingGroupByOutputType, T['by']> &
       {
@@ -1844,11 +1844,6 @@ export type LeadSiteSupervisorMappingFindManyArgs<ExtArgs extends runtime.Types.
    * Skip the first `n` LeadSiteSupervisorMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadSiteSupervisorMappings.
-   */
   distinct?: Prisma.LeadSiteSupervisorMappingScalarFieldEnum | Prisma.LeadSiteSupervisorMappingScalarFieldEnum[]
 }
 

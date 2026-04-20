@@ -247,7 +247,7 @@ export type LeadDesignMeetingGroupByOutputType = {
   _max: LeadDesignMeetingMaxAggregateOutputType | null
 }
 
-export type GetLeadDesignMeetingGroupByPayload<T extends LeadDesignMeetingGroupByArgs> = Prisma.PrismaPromise<
+type GetLeadDesignMeetingGroupByPayload<T extends LeadDesignMeetingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadDesignMeetingGroupByOutputType, T['by']> &
       {
@@ -2105,11 +2105,6 @@ export type LeadDesignMeetingFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` LeadDesignMeetings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of LeadDesignMeetings.
-   */
   distinct?: Prisma.LeadDesignMeetingScalarFieldEnum | Prisma.LeadDesignMeetingScalarFieldEnum[]
 }
 

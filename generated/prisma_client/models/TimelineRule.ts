@@ -226,7 +226,7 @@ export type TimelineRuleGroupByOutputType = {
   _max: TimelineRuleMaxAggregateOutputType | null
 }
 
-export type GetTimelineRuleGroupByPayload<T extends TimelineRuleGroupByArgs> = Prisma.PrismaPromise<
+type GetTimelineRuleGroupByPayload<T extends TimelineRuleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<TimelineRuleGroupByOutputType, T['by']> &
       {
@@ -1528,11 +1528,6 @@ export type TimelineRuleFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` TimelineRules.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of TimelineRules.
-   */
   distinct?: Prisma.TimelineRuleScalarFieldEnum | Prisma.TimelineRuleScalarFieldEnum[]
 }
 

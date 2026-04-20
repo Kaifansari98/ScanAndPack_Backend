@@ -214,7 +214,7 @@ export type InstallerUserMasterGroupByOutputType = {
   _max: InstallerUserMasterMaxAggregateOutputType | null
 }
 
-export type GetInstallerUserMasterGroupByPayload<T extends InstallerUserMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetInstallerUserMasterGroupByPayload<T extends InstallerUserMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<InstallerUserMasterGroupByOutputType, T['by']> &
       {
@@ -1496,11 +1496,6 @@ export type InstallerUserMasterFindManyArgs<ExtArgs extends runtime.Types.Extens
    * Skip the first `n` InstallerUserMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of InstallerUserMasters.
-   */
   distinct?: Prisma.InstallerUserMasterScalarFieldEnum | Prisma.InstallerUserMasterScalarFieldEnum[]
 }
 

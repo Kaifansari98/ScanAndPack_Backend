@@ -196,7 +196,7 @@ export type ThemeMappingGroupByOutputType = {
   _max: ThemeMappingMaxAggregateOutputType | null
 }
 
-export type GetThemeMappingGroupByPayload<T extends ThemeMappingGroupByArgs> = Prisma.PrismaPromise<
+type GetThemeMappingGroupByPayload<T extends ThemeMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ThemeMappingGroupByOutputType, T['by']> &
       {
@@ -1173,11 +1173,6 @@ export type ThemeMappingFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` ThemeMappings.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of ThemeMappings.
-   */
   distinct?: Prisma.ThemeMappingScalarFieldEnum | Prisma.ThemeMappingScalarFieldEnum[]
 }
 

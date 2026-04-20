@@ -182,7 +182,7 @@ export type AreaMasterGroupByOutputType = {
   _max: AreaMasterMaxAggregateOutputType | null
 }
 
-export type GetAreaMasterGroupByPayload<T extends AreaMasterGroupByArgs> = Prisma.PrismaPromise<
+type GetAreaMasterGroupByPayload<T extends AreaMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AreaMasterGroupByOutputType, T['by']> &
       {
@@ -1097,11 +1097,6 @@ export type AreaMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` AreaMasters.
    */
   skip?: number
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-   * 
-   * Filter by unique combinations of AreaMasters.
-   */
   distinct?: Prisma.AreaMasterScalarFieldEnum | Prisma.AreaMasterScalarFieldEnum[]
 }
 
