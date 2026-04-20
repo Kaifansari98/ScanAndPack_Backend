@@ -368,7 +368,7 @@ export type CutListGroupByOutputType = {
   _max: CutListMaxAggregateOutputType | null
 }
 
-type GetCutListGroupByPayload<T extends CutListGroupByArgs> = Prisma.PrismaPromise<
+export type GetCutListGroupByPayload<T extends CutListGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<CutListGroupByOutputType, T['by']> &
       {
@@ -2965,6 +2965,11 @@ export type CutListFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` CutLists.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of CutLists.
+   */
   distinct?: Prisma.CutListScalarFieldEnum | Prisma.CutListScalarFieldEnum[]
 }
 

@@ -49,6 +49,7 @@ export type VendorMasterMinAggregateOutputType = {
   status: string | null
   logo: string | null
   time_zone: string | null
+  IsAccountLocInEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +67,7 @@ export type VendorMasterMaxAggregateOutputType = {
   status: string | null
   logo: string | null
   time_zone: string | null
+  IsAccountLocInEnabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -83,6 +85,7 @@ export type VendorMasterCountAggregateOutputType = {
   status: number
   logo: number
   time_zone: number
+  IsAccountLocInEnabled: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -112,6 +115,7 @@ export type VendorMasterMinAggregateInputType = {
   status?: true
   logo?: true
   time_zone?: true
+  IsAccountLocInEnabled?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -129,6 +133,7 @@ export type VendorMasterMaxAggregateInputType = {
   status?: true
   logo?: true
   time_zone?: true
+  IsAccountLocInEnabled?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -146,6 +151,7 @@ export type VendorMasterCountAggregateInputType = {
   status?: true
   logo?: true
   time_zone?: true
+  IsAccountLocInEnabled?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -250,6 +256,7 @@ export type VendorMasterGroupByOutputType = {
   status: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled: boolean | null
   createdAt: Date
   updatedAt: Date
   _count: VendorMasterCountAggregateOutputType | null
@@ -259,7 +266,7 @@ export type VendorMasterGroupByOutputType = {
   _max: VendorMasterMaxAggregateOutputType | null
 }
 
-type GetVendorMasterGroupByPayload<T extends VendorMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetVendorMasterGroupByPayload<T extends VendorMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorMasterGroupByOutputType, T['by']> &
       {
@@ -290,6 +297,7 @@ export type VendorMasterWhereInput = {
   status?: Prisma.StringFilter<"VendorMaster"> | string
   logo?: Prisma.StringFilter<"VendorMaster"> | string
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
+  IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   accounts?: Prisma.AccountMasterListRelationFilter
@@ -383,6 +391,7 @@ export type VendorMasterOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   time_zone?: Prisma.SortOrder
+  IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   accounts?: Prisma.AccountMasterOrderByRelationAggregateInput
@@ -479,6 +488,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"VendorMaster"> | string
   logo?: Prisma.StringFilter<"VendorMaster"> | string
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
+  IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   accounts?: Prisma.AccountMasterListRelationFilter
@@ -572,6 +582,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   time_zone?: Prisma.SortOrder
+  IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.VendorMasterCountOrderByAggregateInput
@@ -597,6 +608,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   status?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   logo?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   time_zone?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
+  IsAccountLocInEnabled?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
 }
@@ -613,6 +625,7 @@ export type VendorMasterCreateInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -706,6 +719,7 @@ export type VendorMasterUncheckedCreateInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -798,6 +812,7 @@ export type VendorMasterUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -891,6 +906,7 @@ export type VendorMasterUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -984,6 +1000,7 @@ export type VendorMasterCreateManyInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1000,6 +1017,7 @@ export type VendorMasterUpdateManyMutationInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1017,6 +1035,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1034,6 +1053,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   time_zone?: Prisma.SortOrder
+  IsAccountLocInEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1056,6 +1076,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   time_zone?: Prisma.SortOrder
+  IsAccountLocInEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1073,6 +1094,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   logo?: Prisma.SortOrder
   time_zone?: Prisma.SortOrder
+  IsAccountLocInEnabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -1106,6 +1128,10 @@ export type NullableIntFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -2198,6 +2224,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -2290,6 +2317,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -2397,6 +2425,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -2489,6 +2518,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -2580,6 +2610,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -2672,6 +2703,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -2779,6 +2811,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -2871,6 +2904,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -2962,6 +2996,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3054,6 +3089,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -3161,6 +3197,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -3253,6 +3290,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -3344,6 +3382,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3436,6 +3475,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -3543,6 +3583,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -3635,6 +3676,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -3726,6 +3768,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3818,6 +3861,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -3925,6 +3969,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4017,6 +4062,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4108,6 +4154,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4200,6 +4247,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4307,6 +4355,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4399,6 +4448,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4490,6 +4540,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4582,6 +4633,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4689,6 +4741,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4781,6 +4834,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4872,6 +4926,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4964,6 +5019,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5071,6 +5127,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5163,6 +5220,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5254,6 +5312,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5346,6 +5405,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5453,6 +5513,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5545,6 +5606,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5636,6 +5698,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5728,6 +5791,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5835,6 +5899,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5927,6 +5992,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6018,6 +6084,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6110,6 +6177,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6217,6 +6285,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6309,6 +6378,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6400,6 +6470,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6492,6 +6563,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6599,6 +6671,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6691,6 +6764,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6782,6 +6856,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6874,6 +6949,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6981,6 +7057,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7073,6 +7150,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7164,6 +7242,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -7256,6 +7335,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7363,6 +7443,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7455,6 +7536,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7546,6 +7628,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -7638,6 +7721,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7745,6 +7829,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7837,6 +7922,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7928,6 +8014,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
@@ -8020,6 +8107,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8127,6 +8215,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
@@ -8219,6 +8308,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8310,6 +8400,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8402,6 +8493,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8509,6 +8601,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8601,6 +8694,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8692,6 +8786,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8784,6 +8879,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8891,6 +8987,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8983,6 +9080,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9074,6 +9172,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9166,6 +9265,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9273,6 +9373,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9365,6 +9466,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9456,6 +9558,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9548,6 +9651,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9655,6 +9759,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9747,6 +9852,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9838,6 +9944,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9930,6 +10037,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10037,6 +10145,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10129,6 +10238,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10220,6 +10330,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10312,6 +10423,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10419,6 +10531,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10511,6 +10624,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10602,6 +10716,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10694,6 +10809,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10801,6 +10917,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10893,6 +11010,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10984,6 +11102,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11076,6 +11195,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11183,6 +11303,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -11275,6 +11396,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11366,6 +11488,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11458,6 +11581,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11565,6 +11689,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -11657,6 +11782,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11748,6 +11874,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11840,6 +11967,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11947,6 +12075,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12039,6 +12168,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12130,6 +12260,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12222,6 +12353,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12329,6 +12461,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12421,6 +12554,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12512,6 +12646,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12604,6 +12739,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12711,6 +12847,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12803,6 +12940,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12894,6 +13032,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12986,6 +13125,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13093,6 +13233,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13185,6 +13326,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13276,6 +13418,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13368,6 +13511,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13475,6 +13619,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13567,6 +13712,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13658,6 +13804,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13750,6 +13897,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13857,6 +14005,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13949,6 +14098,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14040,6 +14190,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14132,6 +14283,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14239,6 +14391,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14331,6 +14484,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14422,6 +14576,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14514,6 +14669,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14621,6 +14777,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14713,6 +14870,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14804,6 +14962,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14896,6 +15055,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15003,6 +15163,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15095,6 +15256,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15186,6 +15348,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -15278,6 +15441,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15385,6 +15549,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15477,6 +15642,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15568,6 +15734,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -15660,6 +15827,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15767,6 +15935,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15859,6 +16028,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15950,6 +16120,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16042,6 +16213,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16149,6 +16321,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16241,6 +16414,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16332,6 +16506,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16424,6 +16599,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16531,6 +16707,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16623,6 +16800,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16714,6 +16892,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16806,6 +16985,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16913,6 +17093,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17005,6 +17186,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17096,6 +17278,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17188,6 +17371,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17295,6 +17479,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17387,6 +17572,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17478,6 +17664,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17570,6 +17757,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17677,6 +17865,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17769,6 +17958,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17860,6 +18050,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17952,6 +18143,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18059,6 +18251,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18151,6 +18344,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18242,6 +18436,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18334,6 +18529,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18441,6 +18637,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18533,6 +18730,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18624,6 +18822,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18716,6 +18915,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18823,6 +19023,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18915,6 +19116,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19006,6 +19208,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19098,6 +19301,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19205,6 +19409,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -19297,6 +19502,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19388,6 +19594,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19480,6 +19687,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19587,6 +19795,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -19679,6 +19888,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19770,6 +19980,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19862,6 +20073,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19969,6 +20181,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20061,6 +20274,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20152,6 +20366,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20244,6 +20459,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20351,6 +20567,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20443,6 +20660,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20534,6 +20752,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20626,6 +20845,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20733,6 +20953,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20825,6 +21046,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20916,6 +21138,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21008,6 +21231,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21115,6 +21339,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21207,6 +21432,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21298,6 +21524,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21390,6 +21617,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21497,6 +21725,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21589,6 +21818,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21680,6 +21910,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21772,6 +22003,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21879,6 +22111,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21971,6 +22204,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22062,6 +22296,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22154,6 +22389,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22261,6 +22497,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22353,6 +22590,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22444,6 +22682,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22536,6 +22775,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22643,6 +22883,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22735,6 +22976,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22826,6 +23068,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22918,6 +23161,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23025,6 +23269,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23117,6 +23362,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23208,6 +23454,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -23300,6 +23547,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23407,6 +23655,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23499,6 +23748,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23590,6 +23840,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -23682,6 +23933,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23789,6 +24041,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23881,6 +24134,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23972,6 +24226,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24064,6 +24319,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24171,6 +24427,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24263,6 +24520,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24354,6 +24612,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24446,6 +24705,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24553,6 +24813,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24645,6 +24906,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24736,6 +24998,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24828,6 +25091,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24935,6 +25199,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25027,6 +25292,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25118,6 +25384,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25210,6 +25477,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25317,6 +25585,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25409,6 +25678,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25500,6 +25770,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25592,6 +25863,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25699,6 +25971,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25791,6 +26064,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25882,6 +26156,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25974,6 +26249,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26081,6 +26357,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26173,6 +26450,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26264,6 +26542,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26356,6 +26635,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26463,6 +26743,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26555,6 +26836,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26646,6 +26928,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26738,6 +27021,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26845,6 +27129,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26937,6 +27222,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27028,6 +27314,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27120,6 +27407,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27227,6 +27515,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -27319,6 +27608,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27410,6 +27700,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27502,6 +27793,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27609,6 +27901,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -27701,6 +27994,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27792,6 +28086,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27884,6 +28179,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27991,6 +28287,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28083,6 +28380,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28174,6 +28472,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28266,6 +28565,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28373,6 +28673,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28465,6 +28766,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28556,6 +28858,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28648,6 +28951,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28755,6 +29059,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28847,6 +29152,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28938,6 +29244,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29030,6 +29337,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29137,6 +29445,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29229,6 +29538,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29320,6 +29630,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29412,6 +29723,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29519,6 +29831,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29611,6 +29924,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29702,6 +30016,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29794,6 +30109,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29901,6 +30217,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29993,6 +30310,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30084,6 +30402,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30176,6 +30495,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30283,6 +30603,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30375,6 +30696,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30466,6 +30788,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30558,6 +30881,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30665,6 +30989,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30757,6 +31082,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30848,6 +31174,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30940,6 +31267,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   status?: string
   logo: string
   time_zone: string
+  IsAccountLocInEnabled?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31047,6 +31375,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -31139,6 +31468,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31937,6 +32267,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   status?: boolean
   logo?: boolean
   time_zone?: boolean
+  IsAccountLocInEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
@@ -32031,6 +32362,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   status?: boolean
   logo?: boolean
   time_zone?: boolean
+  IsAccountLocInEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["vendorMaster"]>
@@ -32048,6 +32380,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   status?: boolean
   logo?: boolean
   time_zone?: boolean
+  IsAccountLocInEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["vendorMaster"]>
@@ -32065,11 +32398,12 @@ export type VendorMasterSelectScalar = {
   status?: boolean
   logo?: boolean
   time_zone?: boolean
+  IsAccountLocInEnabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "createdAt" | "updatedAt", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "createdAt" | "updatedAt", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -32245,6 +32579,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     status: string
     logo: string
     time_zone: string
+    IsAccountLocInEnabled: boolean | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["vendorMaster"]>
@@ -32758,6 +33093,7 @@ export interface VendorMasterFieldRefs {
   readonly status: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly logo: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly time_zone: Prisma.FieldRef<"VendorMaster", 'String'>
+  readonly IsAccountLocInEnabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
 }
@@ -32956,6 +33292,11 @@ export type VendorMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` VendorMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VendorMasters.
+   */
   distinct?: Prisma.VendorMasterScalarFieldEnum | Prisma.VendorMasterScalarFieldEnum[]
 }
 

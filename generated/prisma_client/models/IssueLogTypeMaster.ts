@@ -207,7 +207,7 @@ export type IssueLogTypeMasterGroupByOutputType = {
   _max: IssueLogTypeMasterMaxAggregateOutputType | null
 }
 
-type GetIssueLogTypeMasterGroupByPayload<T extends IssueLogTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetIssueLogTypeMasterGroupByPayload<T extends IssueLogTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<IssueLogTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1323,6 +1323,11 @@ export type IssueLogTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` IssueLogTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of IssueLogTypeMasters.
+   */
   distinct?: Prisma.IssueLogTypeMasterScalarFieldEnum | Prisma.IssueLogTypeMasterScalarFieldEnum[]
 }
 

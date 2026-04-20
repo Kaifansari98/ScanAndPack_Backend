@@ -189,6 +189,7 @@ export const VendorMasterScalarFieldEnum = {
   status: 'status',
   logo: 'logo',
   time_zone: 'time_zone',
+  IsAccountLocInEnabled: 'IsAccountLocInEnabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

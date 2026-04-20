@@ -301,7 +301,7 @@ export type BoxMasterGroupByOutputType = {
   _max: BoxMasterMaxAggregateOutputType | null
 }
 
-type GetBoxMasterGroupByPayload<T extends BoxMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetBoxMasterGroupByPayload<T extends BoxMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<BoxMasterGroupByOutputType, T['by']> &
       {
@@ -2872,6 +2872,11 @@ export type BoxMasterFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Skip the first `n` BoxMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of BoxMasters.
+   */
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
 }
 

@@ -20,6 +20,7 @@ model VendorMaster {
   status                               String                                @default("inactive")
   logo                                 String
   time_zone                            String
+  IsAccountLocInEnabled                Boolean?                              @default(false)
   createdAt                            DateTime                              @default(now())
   updatedAt                            DateTime                              @updatedAt
   accounts                             AccountMaster[]

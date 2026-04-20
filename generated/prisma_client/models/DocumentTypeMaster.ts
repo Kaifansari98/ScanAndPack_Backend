@@ -203,7 +203,7 @@ export type DocumentTypeMasterGroupByOutputType = {
   _max: DocumentTypeMasterMaxAggregateOutputType | null
 }
 
-type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetDocumentTypeMasterGroupByPayload<T extends DocumentTypeMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DocumentTypeMasterGroupByOutputType, T['by']> &
       {
@@ -1317,6 +1317,11 @@ export type DocumentTypeMasterFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` DocumentTypeMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DocumentTypeMasters.
+   */
   distinct?: Prisma.DocumentTypeMasterScalarFieldEnum | Prisma.DocumentTypeMasterScalarFieldEnum[]
 }
 

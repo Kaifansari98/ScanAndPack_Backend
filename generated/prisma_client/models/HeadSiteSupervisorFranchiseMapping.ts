@@ -222,7 +222,7 @@ export type HeadSiteSupervisorFranchiseMappingGroupByOutputType = {
   _max: HeadSiteSupervisorFranchiseMappingMaxAggregateOutputType | null
 }
 
-type GetHeadSiteSupervisorFranchiseMappingGroupByPayload<T extends HeadSiteSupervisorFranchiseMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetHeadSiteSupervisorFranchiseMappingGroupByPayload<T extends HeadSiteSupervisorFranchiseMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<HeadSiteSupervisorFranchiseMappingGroupByOutputType, T['by']> &
       {
@@ -1658,6 +1658,11 @@ export type HeadSiteSupervisorFranchiseMappingFindManyArgs<ExtArgs extends runti
    * Skip the first `n` HeadSiteSupervisorFranchiseMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of HeadSiteSupervisorFranchiseMappings.
+   */
   distinct?: Prisma.HeadSiteSupervisorFranchiseMappingScalarFieldEnum | Prisma.HeadSiteSupervisorFranchiseMappingScalarFieldEnum[]
 }
 

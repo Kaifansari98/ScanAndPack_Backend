@@ -226,7 +226,7 @@ export type LeadProductMappingGroupByOutputType = {
   _max: LeadProductMappingMaxAggregateOutputType | null
 }
 
-type GetLeadProductMappingGroupByPayload<T extends LeadProductMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadProductMappingGroupByPayload<T extends LeadProductMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadProductMappingGroupByOutputType, T['by']> &
       {
@@ -1781,6 +1781,11 @@ export type LeadProductMappingFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` LeadProductMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadProductMappings.
+   */
   distinct?: Prisma.LeadProductMappingScalarFieldEnum | Prisma.LeadProductMappingScalarFieldEnum[]
 }
 

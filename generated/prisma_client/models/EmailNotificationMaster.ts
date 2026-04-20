@@ -217,7 +217,7 @@ export type EmailNotificationMasterGroupByOutputType = {
   _max: EmailNotificationMasterMaxAggregateOutputType | null
 }
 
-type GetEmailNotificationMasterGroupByPayload<T extends EmailNotificationMasterGroupByArgs> = Prisma.PrismaPromise<
+export type GetEmailNotificationMasterGroupByPayload<T extends EmailNotificationMasterGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<EmailNotificationMasterGroupByOutputType, T['by']> &
       {
@@ -1278,6 +1278,11 @@ export type EmailNotificationMasterFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` EmailNotificationMasters.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of EmailNotificationMasters.
+   */
   distinct?: Prisma.EmailNotificationMasterScalarFieldEnum | Prisma.EmailNotificationMasterScalarFieldEnum[]
 }
 

@@ -404,19 +404,28 @@ export class BookingStageService {
           },
         });
 
-        const bookingDoneLockIn =
-          await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
-            {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              created_by: data.created_by,
-              base_date: new Date(),
-            },
-            tx,
-          );
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: data.vendor_id },
+          select: { IsAccountLocInEnabled: true },
+        });
 
-        response.superAdminApprovalLockIn = bookingDoneLockIn.approval;
-        response.superAdminApprovalTask = bookingDoneLockIn.task;
+        const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled ?? false;
+
+        if (isAccountLocInEnabled) {
+          const bookingDoneLockIn =
+            await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
+              {
+                vendor_id: data.vendor_id,
+                lead_id: data.lead_id,
+                created_by: data.created_by,
+                base_date: new Date(),
+              },
+              tx,
+            );
+
+          response.superAdminApprovalLockIn = bookingDoneLockIn.approval;
+          response.superAdminApprovalTask = bookingDoneLockIn.task;
+        }
 
         await cache.del(
           `performance:snapshot:${data.vendor_id}:${data.created_by}`,

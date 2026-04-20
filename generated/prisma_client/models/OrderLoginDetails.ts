@@ -297,7 +297,7 @@ export type OrderLoginDetailsGroupByOutputType = {
   _max: OrderLoginDetailsMaxAggregateOutputType | null
 }
 
-type GetOrderLoginDetailsGroupByPayload<T extends OrderLoginDetailsGroupByArgs> = Prisma.PrismaPromise<
+export type GetOrderLoginDetailsGroupByPayload<T extends OrderLoginDetailsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<OrderLoginDetailsGroupByOutputType, T['by']> &
       {
@@ -2683,6 +2683,11 @@ export type OrderLoginDetailsFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` OrderLoginDetails.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of OrderLoginDetails.
+   */
   distinct?: Prisma.OrderLoginDetailsScalarFieldEnum | Prisma.OrderLoginDetailsScalarFieldEnum[]
 }
 

@@ -196,7 +196,7 @@ export type DefectedItemImageGroupByOutputType = {
   _max: DefectedItemImageMaxAggregateOutputType | null
 }
 
-type GetDefectedItemImageGroupByPayload<T extends DefectedItemImageGroupByArgs> = Prisma.PrismaPromise<
+export type GetDefectedItemImageGroupByPayload<T extends DefectedItemImageGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DefectedItemImageGroupByOutputType, T['by']> &
       {
@@ -1167,6 +1167,11 @@ export type DefectedItemImageFindManyArgs<ExtArgs extends runtime.Types.Extensio
    * Skip the first `n` DefectedItemImages.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DefectedItemImages.
+   */
   distinct?: Prisma.DefectedItemImageScalarFieldEnum | Prisma.DefectedItemImageScalarFieldEnum[]
 }
 

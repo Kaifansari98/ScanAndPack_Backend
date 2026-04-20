@@ -233,7 +233,7 @@ export type ProjectCategoriesMasterVendorMappingGroupByOutputType = {
   _max: ProjectCategoriesMasterVendorMappingMaxAggregateOutputType | null
 }
 
-type GetProjectCategoriesMasterVendorMappingGroupByPayload<T extends ProjectCategoriesMasterVendorMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetProjectCategoriesMasterVendorMappingGroupByPayload<T extends ProjectCategoriesMasterVendorMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ProjectCategoriesMasterVendorMappingGroupByOutputType, T['by']> &
       {
@@ -1840,6 +1840,11 @@ export type ProjectCategoriesMasterVendorMappingFindManyArgs<ExtArgs extends run
    * Skip the first `n` ProjectCategoriesMasterVendorMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of ProjectCategoriesMasterVendorMappings.
+   */
   distinct?: Prisma.ProjectCategoriesMasterVendorMappingScalarFieldEnum | Prisma.ProjectCategoriesMasterVendorMappingScalarFieldEnum[]
 }
 

@@ -186,7 +186,7 @@ export type UserGeographicalMappingGroupByOutputType = {
   _max: UserGeographicalMappingMaxAggregateOutputType | null
 }
 
-type GetUserGeographicalMappingGroupByPayload<T extends UserGeographicalMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetUserGeographicalMappingGroupByPayload<T extends UserGeographicalMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<UserGeographicalMappingGroupByOutputType, T['by']> &
       {
@@ -1216,6 +1216,11 @@ export type UserGeographicalMappingFindManyArgs<ExtArgs extends runtime.Types.Ex
    * Skip the first `n` UserGeographicalMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserGeographicalMappings.
+   */
   distinct?: Prisma.UserGeographicalMappingScalarFieldEnum | Prisma.UserGeographicalMappingScalarFieldEnum[]
 }
 

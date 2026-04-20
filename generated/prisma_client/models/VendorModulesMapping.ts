@@ -229,7 +229,7 @@ export type VendorModulesMappingGroupByOutputType = {
   _max: VendorModulesMappingMaxAggregateOutputType | null
 }
 
-type GetVendorModulesMappingGroupByPayload<T extends VendorModulesMappingGroupByArgs> = Prisma.PrismaPromise<
+export type GetVendorModulesMappingGroupByPayload<T extends VendorModulesMappingGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<VendorModulesMappingGroupByOutputType, T['by']> &
       {
@@ -1430,6 +1430,11 @@ export type VendorModulesMappingFindManyArgs<ExtArgs extends runtime.Types.Exten
    * Skip the first `n` VendorModulesMappings.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of VendorModulesMappings.
+   */
   distinct?: Prisma.VendorModulesMappingScalarFieldEnum | Prisma.VendorModulesMappingScalarFieldEnum[]
 }
 

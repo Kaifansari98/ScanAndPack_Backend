@@ -254,7 +254,7 @@ export type LeadSuperAdminApprovalLocInsGroupByOutputType = {
   _max: LeadSuperAdminApprovalLocInsMaxAggregateOutputType | null
 }
 
-type GetLeadSuperAdminApprovalLocInsGroupByPayload<T extends LeadSuperAdminApprovalLocInsGroupByArgs> = Prisma.PrismaPromise<
+export type GetLeadSuperAdminApprovalLocInsGroupByPayload<T extends LeadSuperAdminApprovalLocInsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<LeadSuperAdminApprovalLocInsGroupByOutputType, T['by']> &
       {
@@ -2028,6 +2028,11 @@ export type LeadSuperAdminApprovalLocInsFindManyArgs<ExtArgs extends runtime.Typ
    * Skip the first `n` LeadSuperAdminApprovalLocIns.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of LeadSuperAdminApprovalLocIns.
+   */
   distinct?: Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum | Prisma.LeadSuperAdminApprovalLocInsScalarFieldEnum[]
 }
 
