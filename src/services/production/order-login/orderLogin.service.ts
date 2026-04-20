@@ -6,6 +6,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
+import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 // 🧩 Define this at the top of your service file
 
@@ -476,6 +477,8 @@ export class OrderLoginService {
     "Shutter",
     "Stock Hardware",
   ] as const;
+  private readonly leadSuperAdminApprovalLockInService =
+    new LeadSuperAdminApprovalLockInService();
 
   private async getMissingRequiredOrderLoginTypes(
     vendorId: number,
@@ -1371,6 +1374,11 @@ export class OrderLoginService {
           },
         });
 
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: vendorId },
+          select: { IsAccountLocInEnabled: true },
+        });
+
         // 3. Mark instance as order login completed
         const updatedInstance = await tx.leadProductStructureInstance.update({
           where: { id: instanceId },
@@ -1381,6 +1389,21 @@ export class OrderLoginService {
             updated_at: new Date(),
           },
         });
+
+        let orderLoginLockIn: any = null;
+        if (vendor?.IsAccountLocInEnabled) {
+          orderLoginLockIn =
+            await this.leadSuperAdminApprovalLockInService.createOrderLoginLockIn(
+              {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                created_by: userId,
+                base_date: new Date(),
+                instance_id: instanceId,
+              },
+              tx,
+            );
+        }
 
         // 4. Create Production assignment mapping (if not exists)
         let productionMapping: any = null;
@@ -1590,6 +1613,7 @@ export class OrderLoginService {
           instanceCode,
           rawLeadCode,
           pendingInstances,
+          orderLoginLockIn,
         };
       });
       // ── Transaction ends here — DB lock released ──
