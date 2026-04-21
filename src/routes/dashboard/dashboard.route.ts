@@ -62,5 +62,17 @@ DashboardRouter.get(
   "/admin/all-stage-leads",
   dashboardController.getAdminAllStageLeads
 );
+DashboardRouter.get(
+  "/admin/active-franchisee-count",
+  dashboardController.getActiveFranchiseeCount
+);
+DashboardRouter.get(
+  "/admin/leads-this-month",
+  dashboardController.getLeadsThisMonth
+);
+DashboardRouter.get(
+  "/admin/leads-by-franchise",
+  dashboardController.getLeadsByFranchise
+);
 
 export default DashboardRouter;

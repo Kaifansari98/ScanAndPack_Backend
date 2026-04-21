@@ -816,6 +816,17 @@ export class DashboardService {
     const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
     const overall = (await sumByRange())._sum?.total_project_amount || 0;
 
+    const now = new Date();
+    let sixMonthsTotal = 0;
+    for (let i = 1; i <= 6; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const start = new Date(d.getFullYear(), d.getMonth(), 1, 0, 0, 0);
+      const end   = new Date(d.getFullYear(), d.getMonth() + 1, 0, 23, 59, 59, 999);
+      const res = await sumByRange({ start, end });
+      sixMonthsTotal += res._sum?.total_project_amount || 0;
+    }
+    const lastSixMonthsAvg = sixMonthsTotal / 6;
+
     return {
       thisWeekArray,
       thisMonthArray,
@@ -823,6 +834,7 @@ export class DashboardService {
       thisWeekTotal: sum(thisWeekArray),
       thisMonthTotal: sum(thisMonthArray),
       thisYearTotal: sum(thisYearArray),
+      lastSixMonthsAvg,
       overall,
     };
   }
@@ -830,6 +842,49 @@ export class DashboardService {
   // -------------------------------------------------------
   // Admin Dashboard : Stage Counts (Type 1 → Type 17 buckets)
   // -------------------------------------------------------
+  public async getLeadsByFranchise(vendor_id: number) {
+    const franchises = await prisma.franchiseMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, franchise_name: true },
+      orderBy: { franchise_name: "asc" },
+    });
+
+    const results = await Promise.all(
+      franchises.map(async (f) => ({
+        franchise_id: f.id,
+        name: f.franchise_name,
+        leads: await prisma.leadMaster.count({
+          where: { vendor_id, franchise_id: f.id, is_deleted: false },
+        }),
+      }))
+    );
+
+    return results.sort((a, b) => b.leads - a.leads);
+  }
+
+  public async getLeadsThisMonth(vendor_id: number) {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0);
+    const end   = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+
+    const count = await prisma.leadMaster.count({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        created_at: { gte: start, lte: end },
+      },
+    });
+
+    return { count };
+  }
+
+  public async getActiveFranchiseeCount(vendor_id: number) {
+    const count = await prisma.franchiseMaster.count({
+      where: { vendor_id, status: "active" },
+    });
+    return { count };
+  }
+
   public async getAdminStageCounts(vendor_id: number, franchise_id?: number) {
     const statuses = await prisma.statusTypeMaster.findMany({
       where: { vendor_id },
