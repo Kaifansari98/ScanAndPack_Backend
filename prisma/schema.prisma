@@ -88,6 +88,7 @@ model VendorMaster {
   userLeadTasks                        UserLeadTask[]
   userMachineMapping                   UserMachineMapping[]
   users                                UserMaster[]
+  userSessions                         UserSession[]
   userPushTokens                       UserPushToken[]
   addresses                            VendorAddress[]
   vendorModulesMappings                VendorModulesMapping[]
@@ -223,6 +224,8 @@ model UserMaster {
   franchise                                  FranchiseMaster?                     @relation(fields: [franchise_id], references: [id])
   user_type                                  UserTypeMaster                       @relation(fields: [user_type_id], references: [id])
   vendor                                     VendorMaster                         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  sessions                                   UserSession[]                        @relation("UserSessions")
+  revokedSessions                            UserSession[]                        @relation("UserSessionRevokedBy")
   pushTokens                                 UserPushToken[]
   externalPlatformTokensCreated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenCreatedBy")
   externalPlatformTokensUpdated              ExternalPlatformToken[]              @relation("ExternalPlatformTokenUpdatedBy")
@@ -244,6 +247,37 @@ model UserDocument {
   document_number String
   filename        String
   user            UserMaster @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model UserSession {
+  id                 Int               @id @default(autoincrement())
+  user_id            Int
+  vendor_id          Int
+  refresh_token_hash String
+  access_jti         String?           @unique
+  device_id          String?
+  device_name        String?
+  platform           String?
+  ip_address         String?
+  user_agent         String?
+  status             UserSessionStatus @default(active)
+  is_current         Boolean?          @default(true)
+  last_seen_at       DateTime?         @default(now())
+  expires_at         DateTime
+  logged_out_at      DateTime?
+  revoked_at         DateTime?
+  revoked_by         Int?
+  revoke_reason      String?
+  created_at         DateTime          @default(now())
+  updated_at         DateTime          @updatedAt
+  user               UserMaster        @relation("UserSessions", fields: [user_id], references: [id], onDelete: Cascade)
+  vendor             VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  revokedBy          UserMaster?       @relation("UserSessionRevokedBy", fields: [revoked_by], references: [id])
+
+  @@index([user_id, status])
+  @@index([user_id, created_at])
+  @@index([vendor_id, status])
+  @@index([device_id])
 }
 
 model ProjectMaster {
@@ -2186,6 +2220,13 @@ enum ProductInstanceStatus {
 enum ActiveStatus {
   Yes
   No
+}
+
+enum UserSessionStatus {
+  active
+  logged_out
+  revoked
+  expired
 }
 
 enum ModulesVendorMappingActiveStatus {

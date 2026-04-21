@@ -179,6 +179,16 @@ export const ActiveStatus = {
 export type ActiveStatus = (typeof ActiveStatus)[keyof typeof ActiveStatus]
 
 
+export const UserSessionStatus = {
+  active: 'active',
+  logged_out: 'logged_out',
+  revoked: 'revoked',
+  expired: 'expired'
+} as const
+
+export type UserSessionStatus = (typeof UserSessionStatus)[keyof typeof UserSessionStatus]
+
+
 export const ModulesVendorMappingActiveStatus = {
   Yes: 'Yes',
   No: 'No'

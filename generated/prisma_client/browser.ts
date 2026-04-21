@@ -48,6 +48,11 @@ export type UserMaster = Prisma.UserMasterModel
  */
 export type UserDocument = Prisma.UserDocumentModel
 /**
+ * Model UserSession
+ * 
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
  * Model ProjectMaster
  * 
  */

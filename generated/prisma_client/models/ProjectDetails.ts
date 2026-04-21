@@ -662,10 +662,6 @@ export type ProjectDetailsUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.ProjectDetailsScalarWhereInput | Prisma.ProjectDetailsScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type ProjectDetailsCreateNestedOneWithoutItemsInput = {
   create?: Prisma.XOR<Prisma.ProjectDetailsCreateWithoutItemsInput, Prisma.ProjectDetailsUncheckedCreateWithoutItemsInput>
   connectOrCreate?: Prisma.ProjectDetailsCreateOrConnectWithoutItemsInput

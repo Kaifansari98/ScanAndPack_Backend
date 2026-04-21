@@ -57,6 +57,7 @@ export const ModelName = {
   UserTypeMaster: 'UserTypeMaster',
   UserMaster: 'UserMaster',
   UserDocument: 'UserDocument',
+  UserSession: 'UserSession',
   ProjectMaster: 'ProjectMaster',
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
@@ -259,6 +260,32 @@ export const UserDocumentScalarFieldEnum = {
 } as const
 
 export type UserDocumentScalarFieldEnum = (typeof UserDocumentScalarFieldEnum)[keyof typeof UserDocumentScalarFieldEnum]
+
+
+export const UserSessionScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  vendor_id: 'vendor_id',
+  refresh_token_hash: 'refresh_token_hash',
+  access_jti: 'access_jti',
+  device_id: 'device_id',
+  device_name: 'device_name',
+  platform: 'platform',
+  ip_address: 'ip_address',
+  user_agent: 'user_agent',
+  status: 'status',
+  is_current: 'is_current',
+  last_seen_at: 'last_seen_at',
+  expires_at: 'expires_at',
+  logged_out_at: 'logged_out_at',
+  revoked_at: 'revoked_at',
+  revoked_by: 'revoked_by',
+  revoke_reason: 'revoke_reason',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
 
 
 export const ProjectMasterScalarFieldEnum = {
