@@ -8,6 +8,17 @@ export interface CHSMappingItem {
 }
 
 export class CHSSelectionTypeMappingService {
+  private static usesKitchenManufacturingDays(
+    productMappings: { productType: { type: string } }[],
+  ) {
+    return productMappings.some((mapping) => {
+      const productType = mapping.productType.type.toLowerCase();
+      return (
+        productType.includes("kitchen") || productType.includes("small order")
+      );
+    });
+  }
+
   /**
    * POST — replace all mappings for a given selection_id with a new set of items.
    */
@@ -86,9 +97,10 @@ export class CHSSelectionTypeMappingService {
       where: { lead_id: leadId },
       select: { productType: { select: { type: true } } },
     });
-    const isKitchen = productMappings.some((m) =>
-      m.productType.type.toLowerCase().includes("kitchen"),
-    );
+    const usesKitchenManufacturingDays =
+      CHSSelectionTypeMappingService.usesKitchenManufacturingDays(
+        productMappings,
+      );
 
     // 2. Get all CHS mappings with their selection's instance_id
     const chsMappings = await prisma.cHSSelectionTypeMapping.findMany({
@@ -142,7 +154,7 @@ export class CHSSelectionTypeMappingService {
             },
           });
           if (rule) {
-            const days = isKitchen
+            const days = usesKitchenManufacturingDays
               ? rule.kitchen_manufacturing_days
               : rule.other_manufacturing_days;
             if (days > maxDays) maxDays = days;
@@ -234,7 +246,8 @@ export class CHSSelectionTypeMappingService {
    * combinations for the lead, then writes the result to LeadMaster.
    *
    * Logic:
-   *  1. Check if any product mapped to this lead has "kitchen" in its type name.
+   *  1. Check if any product mapped to this lead has "kitchen" or "small order"
+   *     in its type name.
    *  2. For every distinct (carcass_type_id, shutter_type_id) pair in
    *     chs_selection_type_mapping for the lead, look up the matching TimelineRule.
    *  3. Pick kitchen_manufacturing_days or other_manufacturing_days based on step 1.
@@ -244,14 +257,15 @@ export class CHSSelectionTypeMappingService {
     leadId: number,
     vendorId: number,
   ) {
-    // 1. Determine if any product for this lead is a "kitchen" type
+    // 1. Determine if any product for this lead should use kitchen timelines
     const productMappings = await prisma.leadProductMapping.findMany({
       where: { lead_id: leadId },
       select: { productType: { select: { type: true } } },
     });
-    const isKitchen = productMappings.some((m) =>
-      m.productType.type.toLowerCase().includes("kitchen"),
-    );
+    const usesKitchenManufacturingDays =
+      CHSSelectionTypeMappingService.usesKitchenManufacturingDays(
+        productMappings,
+      );
 
     // 2. Collect all distinct carcass IDs and shutter IDs stored for this lead.
     //    Each selection type (Carcas / Shutter / Handles) is saved as a separate
@@ -296,7 +310,7 @@ export class CHSSelectionTypeMappingService {
         });
 
         if (rule) {
-          const days = isKitchen
+          const days = usesKitchenManufacturingDays
             ? rule.kitchen_manufacturing_days
             : rule.other_manufacturing_days;
           if (days > maxDays) maxDays = days;
