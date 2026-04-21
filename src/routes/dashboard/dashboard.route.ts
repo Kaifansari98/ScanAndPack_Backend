@@ -74,5 +74,17 @@ DashboardRouter.get(
   "/admin/leads-by-franchise",
   dashboardController.getLeadsByFranchise
 );
+DashboardRouter.get(
+  "/admin/overdue-projects-count",
+  dashboardController.getOverdueProjectsCount
+);
+DashboardRouter.get(
+  "/admin/franchise-performance",
+  dashboardController.getFranchisePerformance
+);
+DashboardRouter.get(
+  "/admin/avg-days-per-stage",
+  dashboardController.getAvgDaysPerStage
+);
 
 export default DashboardRouter;

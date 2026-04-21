@@ -842,6 +842,167 @@ export class DashboardService {
   // -------------------------------------------------------
   // Admin Dashboard : Stage Counts (Type 1 → Type 17 buckets)
   // -------------------------------------------------------
+  public async getAvgDaysPerStage(vendor_id: number, franchise_id?: number) {
+    // Fetch ALL status IDs for this vendor to map tags → ids
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, tag: true },
+    });
+
+    const idOf = (tag: string) => statuses.find((s) => s.tag === tag)?.id;
+    const idsOf = (tags: string[]) =>
+      tags.map((t) => idOf(t)).filter(Boolean) as number[];
+
+    // Stage start IDs
+    const type1Id  = idOf("Type 1");
+    const type5Id  = idOf("Type 5");
+    const type8Id  = idOf("Type 8");
+    const type12Id = idOf("Type 12");
+    const type17Id = idOf("Type 17");
+
+    const leadEndIds         = idsOf(["Type 4"]);
+    const projectEndIds      = idsOf(["Type 7"]);
+    const productionEndIds   = idsOf(["Type 11"]);
+    const installationEndIds = idsOf(["Type 17"]);
+
+    const allRelevantIds = [
+      ...(type1Id  ? [type1Id]  : []),
+      ...(type5Id  ? [type5Id]  : []),
+      ...(type8Id  ? [type8Id]  : []),
+      ...(type12Id ? [type12Id] : []),
+      ...leadEndIds,         // Type 4
+      ...projectEndIds,      // Type 7
+      ...productionEndIds,   // Type 11
+      ...installationEndIds, // Type 17
+    ];
+
+    const uniqueIds = [...new Set(allRelevantIds)];
+
+    if (uniqueIds.length === 0) {
+      return { lead: 0, project: 0, production: 0, installation: 0 };
+    }
+
+    // If franchise_id provided, restrict to lead_ids belonging to that franchise
+    let leadIdFilter: { in: number[] } | undefined;
+    if (franchise_id) {
+      const franchiseLeads = await prisma.leadMaster.findMany({
+        where: { vendor_id, franchise_id, is_deleted: false },
+        select: { id: true },
+      });
+      const ids = franchiseLeads.map((l) => l.id);
+      if (ids.length === 0) return { lead: 0, project: 0, production: 0, installation: 0 };
+      leadIdFilter = { in: ids };
+    }
+
+    // Fetch all relevant logs in one query
+    const logs = await prisma.leadStatusLogs.findMany({
+      where: {
+        vendor_id,
+        status_id: { in: uniqueIds },
+        ...(leadIdFilter ? { lead_id: leadIdFilter } : {}),
+      },
+      orderBy: { created_at: "asc" },
+      select: { lead_id: true, status_id: true, created_at: true },
+    });
+
+    // Build per-lead map: status_id → earliest timestamp
+    const leadMap = new Map<number, Record<number, Date>>();
+    for (const log of logs) {
+      if (!leadMap.has(log.lead_id)) leadMap.set(log.lead_id, {});
+      const entry = leadMap.get(log.lead_id)!;
+      if (!entry[log.status_id]) entry[log.status_id] = log.created_at;
+    }
+
+    // avgDays: for each lead that has a start log, find the earliest end log from endIds
+    const avgDaysMultiEnd = (startId?: number, endIds?: number[]): number => {
+      if (!startId || !endIds?.length) return 0;
+      let total = 0, count = 0;
+      for (const timestamps of leadMap.values()) {
+        const start = timestamps[startId];
+        if (!start) continue;
+        // Pick earliest end timestamp among all endIds
+        const end = endIds
+          .map((id) => timestamps[id])
+          .filter(Boolean)
+          .sort((a, b) => a.getTime() - b.getTime())[0];
+        if (!end || end <= start) continue;
+        total += (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24);
+        count++;
+      }
+      return count > 0 ? Math.round((total / count) * 10) / 10 : 0;
+    };
+
+    return {
+      lead:         avgDaysMultiEnd(type1Id,  leadEndIds),
+      project:      avgDaysMultiEnd(type5Id,  projectEndIds),
+      production:   avgDaysMultiEnd(type8Id,  productionEndIds),
+      installation: avgDaysMultiEnd(type12Id, installationEndIds),
+    };
+  }
+
+  public async getFranchisePerformance(vendor_id: number) {
+    // Resolve Type 4 status id for this vendor
+    const type4Status = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 4" },
+      select: { id: true },
+    });
+
+    // All lead_ids that have ever had a Type 4 log entry for this vendor
+    const closedLeadIds: Set<number> = type4Status
+      ? await prisma.leadStatusLogs
+          .findMany({
+            where: { vendor_id, status_id: type4Status.id },
+            select: { lead_id: true },
+            distinct: ["lead_id"],
+          })
+          .then((rows) => new Set(rows.map((r) => r.lead_id)))
+      : new Set();
+
+    const franchises = await prisma.franchiseMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, franchise_name: true },
+      orderBy: { franchise_name: "asc" },
+    });
+
+    const results = await Promise.all(
+      franchises.map(async (f) => {
+        const leads = await prisma.leadMaster.findMany({
+          where: { vendor_id, franchise_id: f.id, is_deleted: false },
+          select: { id: true, total_project_amount: true },
+        });
+
+        const closures = leads.filter((l) => closedLeadIds.has(l.id)).length;
+        const revenue = leads.reduce(
+          (sum, l) => sum + (l.total_project_amount ?? 0),
+          0
+        );
+
+        return {
+          franchise_id: f.id,
+          name: f.franchise_name,
+          leads: leads.length,
+          closures,
+          revenue,
+        };
+      })
+    );
+
+    return results.sort((a, b) => b.leads - a.leads);
+  }
+
+  public async getOverdueProjectsCount(vendor_id: number) {
+    const result = await prisma.$queryRaw<[{ count: bigint }]>`
+      SELECT COUNT(*) AS count
+      FROM "LeadMaster"
+      WHERE vendor_id = ${vendor_id}
+        AND is_deleted = false
+        AND expected_installation_end_date IS NOT NULL
+        AND actual_installation_completion_at IS NOT NULL
+        AND actual_installation_completion_at > expected_installation_end_date
+    `;
+    return { count: Number(result[0].count) };
+  }
+
   public async getLeadsByFranchise(vendor_id: number) {
     const franchises = await prisma.franchiseMaster.findMany({
       where: { vendor_id },

@@ -454,7 +454,7 @@ model LeadMaster {
   pending_amount                              Float?
   total_project_amount                        Float?
   is_draft                                    Boolean                               @default(false)
-  lead_code                                   String
+  lead_code                                    String
   is_client_approval_submitted                Boolean                               @default(false)
   client_required_order_login_complition_date DateTime?
   expected_order_login_ready_date             DateTime?
