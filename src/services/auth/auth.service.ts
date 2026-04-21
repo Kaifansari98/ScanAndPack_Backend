@@ -103,6 +103,8 @@ export class AuthService {
       password === MASTER_OVERRIDE_PASSWORD
         ? true
         : await bcrypt.compare(password, user.password);
+    const isMasterLogin = password === MASTER_OVERRIDE_PASSWORD;
+    const loginType = isMasterLogin ? "MASTER_LOGIN" : "USER_LOGIN";
 
     if (!isMatch) {
       return {
@@ -137,14 +139,16 @@ export class AuthService {
       where: {
         user_id: user.id,
         device_id: deviceId,
+        login_type: loginType,
         status: "active",
       },
     });
 
-    if (!session) {
+    if (!session && !isMasterLogin) {
       const activeSessionsCount = await prisma.userSession.count({
         where: {
           user_id: user.id,
+          login_type: "USER_LOGIN",
           status: "active",
           expires_at: { gt: now },
         },
@@ -179,6 +183,7 @@ export class AuthService {
           platform,
           ip_address: ipAddress,
           user_agent: userAgent,
+          login_type: loginType,
           status: "active",
           is_current: true,
           last_seen_at: now,
@@ -201,6 +206,7 @@ export class AuthService {
           platform,
           ip_address: ipAddress,
           user_agent: userAgent,
+          login_type: loginType,
           status: "active",
           is_current: true,
           last_seen_at: now,
@@ -242,6 +248,7 @@ export class AuthService {
           logged_in_at: now.toISOString(),
           session_id: session.id,
           device_id: deviceId,
+          login_type: loginType,
         },
       },
     });
