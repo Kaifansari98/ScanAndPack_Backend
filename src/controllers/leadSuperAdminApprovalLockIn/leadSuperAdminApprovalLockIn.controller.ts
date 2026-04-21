@@ -2,6 +2,24 @@ import { Request, Response } from "express";
 import { SuperAdminApprovalType } from "../../prisma/generated";
 import { LeadSuperAdminApprovalLockInService } from "../../services/leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
+
 const isApprovalType = (
   value: string | undefined,
 ): value is SuperAdminApprovalType =>
@@ -131,6 +149,7 @@ export class LeadSuperAdminApprovalLockInController {
         task_id: taskId,
         approved_by: approvedBy,
         approval_remark: approvalRemark,
+        clientBaseUrl: resolveClientBaseUrl(req),
       });
 
       res.status(200).json({
@@ -173,6 +192,7 @@ export class LeadSuperAdminApprovalLockInController {
         task_id: taskId,
         approved_by: approvedBy,
         approval_remark: approvalRemark,
+        clientBaseUrl: resolveClientBaseUrl(req),
       });
 
       res.status(200).json({
@@ -215,6 +235,7 @@ export class LeadSuperAdminApprovalLockInController {
         task_id: taskId,
         approved_by: approvedBy,
         approval_remark: approvalRemark,
+        clientBaseUrl: resolveClientBaseUrl(req),
       });
 
       res.status(200).json({

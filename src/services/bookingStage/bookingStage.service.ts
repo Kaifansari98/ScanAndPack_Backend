@@ -419,6 +419,7 @@ export class BookingStageService {
                 lead_id: data.lead_id,
                 created_by: data.created_by,
                 base_date: new Date(),
+                clientBaseUrl: data.baseUrl,
               },
               tx,
             );

@@ -25,6 +25,7 @@ interface CreateBookingDoneLockInInput {
   lead_id: number;
   created_by: number;
   base_date?: Date;
+  clientBaseUrl?: string;
 }
 
 interface ApproveLockInInput {
@@ -39,6 +40,7 @@ interface CreateOrderLoginLockInInput {
   created_by: number;
   base_date?: Date;
   instance_id?: number | null;
+  clientBaseUrl?: string;
 }
 
 interface CreateDispatchPlanningLockInInput {
@@ -46,6 +48,7 @@ interface CreateDispatchPlanningLockInInput {
   lead_id: number;
   created_by: number;
   base_date?: Date;
+  clientBaseUrl?: string;
 }
 
 interface ApproveBookingDoneTaskInput {
@@ -53,6 +56,7 @@ interface ApproveBookingDoneTaskInput {
   task_id: number;
   approved_by: number;
   approval_remark?: string | null;
+  clientBaseUrl?: string;
 }
 
 interface ApproveOrderLoginTaskInput {
@@ -60,6 +64,7 @@ interface ApproveOrderLoginTaskInput {
   task_id: number;
   approved_by: number;
   approval_remark?: string | null;
+  clientBaseUrl?: string;
 }
 
 interface ApproveDispatchPlanningTaskInput {
@@ -67,6 +72,7 @@ interface ApproveDispatchPlanningTaskInput {
   task_id: number;
   approved_by: number;
   approval_remark?: string | null;
+  clientBaseUrl?: string;
 }
 
 export class LeadSuperAdminApprovalLockInService {
@@ -82,7 +88,11 @@ export class LeadSuperAdminApprovalLockInService {
     }).format(date);
   }
 
-  private getClientBaseUrl() {
+  private getClientBaseUrl(clientBaseUrl?: string) {
+    if (typeof clientBaseUrl === "string" && clientBaseUrl.trim().length > 0) {
+      return clientBaseUrl.replace(/\/$/, "");
+    }
+
     return (
       process.env.CLIENT_BASE_URL ||
       process.env.FRONTEND_URL ||
@@ -258,7 +268,7 @@ export class LeadSuperAdminApprovalLockInService {
       const displayLead = leadName ? `${leadCode} - ${leadName}` : leadCode;
       const dueDateText = this.formatDisplayDate(task.due_date ?? new Date());
       const actionDate = this.formatDisplayDate(input.base_date ?? new Date());
-      const taskUrl = `${this.getClientBaseUrl()}/dashboard/my-tasks?taskId=${task.id}`;
+      const taskUrl = `${this.getClientBaseUrl(input.clientBaseUrl)}/dashboard/my-tasks?taskId=${task.id}`;
       const movedByUser = await db.userMaster.findUnique({
         where: { id: input.created_by },
         select: { user_name: true },
@@ -488,7 +498,7 @@ export class LeadSuperAdminApprovalLockInService {
           : displayLead;
       const dueDateText = this.formatDisplayDate(task.due_date ?? new Date());
       const actionDate = this.formatDisplayDate(input.base_date ?? new Date());
-      const taskUrl = `${this.getClientBaseUrl()}/dashboard/my-tasks?taskId=${task.id}`;
+      const taskUrl = `${this.getClientBaseUrl(input.clientBaseUrl)}/dashboard/my-tasks?taskId=${task.id}`;
       const movedByUser = await db.userMaster.findUnique({
         where: { id: input.created_by },
         select: { user_name: true },
@@ -688,7 +698,7 @@ export class LeadSuperAdminApprovalLockInService {
       const displayLead = leadName ? `${leadCode} - ${leadName}` : leadCode;
       const dueDateText = this.formatDisplayDate(task.due_date ?? new Date());
       const actionDate = this.formatDisplayDate(input.base_date ?? new Date());
-      const taskUrl = `${this.getClientBaseUrl()}/dashboard/my-tasks?taskId=${task.id}`;
+      const taskUrl = `${this.getClientBaseUrl(input.clientBaseUrl)}/dashboard/my-tasks?taskId=${task.id}`;
       const movedByUser = await db.userMaster.findUnique({
         where: { id: input.created_by },
         select: { user_name: true },
@@ -958,7 +968,7 @@ export class LeadSuperAdminApprovalLockInService {
         const redirectPath = result.lead.account_id
           ? `/dashboard/leads/booking-stage/details/${input.lead_id}?accountId=${result.lead.account_id}`
           : `/dashboard/leads/booking-stage/details/${input.lead_id}`;
-        const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
+        const ctaLink = `${this.getClientBaseUrl(input.clientBaseUrl)}${redirectPath}`;
 
         const seenIds = new Set<number>();
         const uniqueSalesExecs = salesExecMappings
@@ -1246,7 +1256,7 @@ export class LeadSuperAdminApprovalLockInService {
             const redirectPath = `/dashboard/production/order-login/details/${input.lead_id}${
               queryString ? `?${queryString}` : ""
             }`;
-            const projectUrl = `${this.getClientBaseUrl()}${redirectPath}`;
+            const projectUrl = `${this.getClientBaseUrl(input.clientBaseUrl)}${redirectPath}`;
             const assignedAt = this.formatDisplayDate(
               result.approval.approved_at ?? new Date(),
             );
@@ -1431,7 +1441,7 @@ export class LeadSuperAdminApprovalLockInService {
         const redirectPath = result.lead.account_id
           ? `/dashboard/installation/dispatch-planning/details/${input.lead_id}?accountId=${result.lead.account_id}`
           : `/dashboard/installation/dispatch-planning/details/${input.lead_id}`;
-        const ctaLink = `${this.getClientBaseUrl()}${redirectPath}`;
+        const ctaLink = `${this.getClientBaseUrl(input.clientBaseUrl)}${redirectPath}`;
 
         const seenIds = new Set<number>();
         const uniqueSalesExecs = salesExecMappings

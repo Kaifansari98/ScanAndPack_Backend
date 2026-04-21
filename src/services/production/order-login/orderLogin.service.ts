@@ -1400,6 +1400,7 @@ export class OrderLoginService {
                 created_by: userId,
                 base_date: new Date(),
                 instance_id: instanceId,
+                clientBaseUrl: baseUrl,
               },
               tx,
             );

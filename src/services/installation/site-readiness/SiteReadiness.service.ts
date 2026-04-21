@@ -578,6 +578,7 @@ export class SiteReadinessService {
             vendor_id: vendorId,
             lead_id: lead.id,
             created_by: updatedBy,
+            clientBaseUrl: baseUrl,
           },
           tx,
         );
