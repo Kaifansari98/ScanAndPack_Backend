@@ -28,6 +28,22 @@ export const logoutActivity = async (req: Request, res: Response) => {
   }
 };
 
+export const logoutAllByVendor = async (req: Request, res: Response) => {
+  const vendorId = Number(req.params.vendor_id);
+
+  if (!vendorId || Number.isNaN(vendorId)) {
+    return res.status(400).json({ message: "vendor_id must be a valid number" });
+  }
+
+  try {
+    const response = await authService.logoutAllByVendor(req, vendorId);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Logout all by vendor error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const changePassword = async (req: Request, res: Response) => {
   const userId = (req as any).user?.id;
   const { currentPassword, newPassword } = req.body;

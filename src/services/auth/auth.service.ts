@@ -314,6 +314,75 @@ export class AuthService {
     };
   }
 
+  async logoutAllByVendor(req: Request, vendorId: number) {
+    const actor = (req as any).user as TokenPayload | undefined;
+    const actorUserId = actor?.id;
+    const actorVendorId = actor?.vendor_id;
+    const actorUserType = actor?.user_type?.toLowerCase();
+    const now = new Date();
+    const ipAddress = getIpAddress(req);
+    const userAgent = req.headers["user-agent"] || null;
+
+    if (!actorUserId || !actorVendorId) {
+      return {
+        status: 401,
+        body: { message: "Unauthorized" },
+      };
+    }
+
+    if (actorVendorId !== vendorId) {
+      return {
+        status: 403,
+        body: { message: "You can only logout sessions for your own vendor." },
+      };
+    }
+
+    if (actorUserType !== "admin" && actorUserType !== "super-admin") {
+      return {
+        status: 403,
+        body: { message: "Only admin and super-admin can logout all vendor sessions." },
+      };
+    }
+
+    const result = await prisma.userSession.updateMany({
+      where: {
+        vendor_id: vendorId,
+        status: "active",
+      },
+      data: {
+        status: "revoked",
+        is_current: false,
+        revoked_at: now,
+        revoked_by: actorUserId,
+        revoke_reason: "Vendor-wide logout",
+        last_seen_at: now,
+      },
+    });
+
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: actorUserId,
+        action: `Logged out all active sessions for vendor ${vendorId}.`,
+        activity_type: "LOGOUT",
+        ip_address: ipAddress,
+        user_agent: userAgent,
+        metadata: {
+          vendor_id: vendorId,
+          revoked_sessions_count: result.count,
+          logged_out_at: now.toISOString(),
+        },
+      },
+    });
+
+    return {
+      status: 200,
+      body: {
+        message: `Logged out ${result.count} active session${result.count === 1 ? "" : "s"} for vendor ${vendorId}.`,
+        count: result.count,
+      },
+    };
+  }
+
   async verifySessionToken(token: string) {
     const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload & TokenPayload;
 
