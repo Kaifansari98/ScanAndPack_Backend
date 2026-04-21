@@ -273,6 +273,7 @@ export const UserSessionScalarFieldEnum = {
   platform: 'platform',
   ip_address: 'ip_address',
   user_agent: 'user_agent',
+  login_type: 'login_type',
   status: 'status',
   is_current: 'is_current',
   last_seen_at: 'last_seen_at',

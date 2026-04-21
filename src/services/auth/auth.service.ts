@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { prisma } from "../../prisma/client";
+import { redis } from "../../config/redis";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const MASTER_OVERRIDE_PASSWORD =
@@ -48,7 +49,95 @@ const buildDeviceId = (req: Request) => {
   return crypto.createHash("sha256").update(seed).digest("hex");
 };
 
+type CachedSession = {
+  session_id: number;
+  user_id: number;
+  vendor_id: number;
+  jti: string;
+  status: "active";
+  expires_at: string;
+};
+
+const sessionCacheKey = (sessionId: number) => `auth:session:${sessionId}`;
+const vendorSessionsKey = (vendorId: number) => `auth:vendor-sessions:${vendorId}`;
+const getSessionTtlSeconds = (expiresAt: Date) =>
+  Math.max(1, Math.ceil((expiresAt.getTime() - Date.now()) / 1000));
+const VENDOR_SESSION_INDEX_TTL_SECONDS = ACCESS_TOKEN_TTL_DAYS * 24 * 60 * 60;
+
 export class AuthService {
+  private async cacheSession(session: {
+    id: number;
+    user_id: number;
+    vendor_id: number;
+    access_jti: string | null;
+    status: string;
+    expires_at: Date;
+  }) {
+    if (!session.access_jti || session.status !== "active") return;
+
+    const payload: CachedSession = {
+      session_id: session.id,
+      user_id: session.user_id,
+      vendor_id: session.vendor_id,
+      jti: session.access_jti,
+      status: "active",
+      expires_at: session.expires_at.toISOString(),
+    };
+
+    const ttlSeconds = getSessionTtlSeconds(session.expires_at);
+
+    try {
+      await redis.set(sessionCacheKey(session.id), JSON.stringify(payload), {
+        EX: ttlSeconds,
+      });
+      await redis.sAdd(vendorSessionsKey(session.vendor_id), String(session.id));
+      await redis.expire(
+        vendorSessionsKey(session.vendor_id),
+        VENDOR_SESSION_INDEX_TTL_SECONDS,
+      );
+    } catch (error) {
+      console.error("Failed to cache auth session:", error);
+    }
+  }
+
+  private async evictSessionCache(sessionId: number, vendorId?: number | null) {
+    try {
+      await redis.del(sessionCacheKey(sessionId));
+      if (vendorId) {
+        await redis.sRem(vendorSessionsKey(vendorId), String(sessionId));
+      }
+    } catch (error) {
+      console.error("Failed to evict auth session cache:", error);
+    }
+  }
+
+  private async evictVendorSessionsCache(vendorId: number) {
+    try {
+      const key = vendorSessionsKey(vendorId);
+      const sessionIds = await redis.sMembers(key);
+
+      if (sessionIds.length > 0) {
+        await redis.del(sessionIds.map((id) => sessionCacheKey(Number(id))));
+      }
+
+      await redis.del(key);
+    } catch (error) {
+      console.error("Failed to evict vendor auth sessions cache:", error);
+    }
+  }
+
+  private async getCachedSession(sessionId: number) {
+    try {
+      const cached = await redis.get(sessionCacheKey(sessionId));
+      if (!cached) return null;
+
+      return JSON.parse(cached) as CachedSession;
+    } catch (error) {
+      console.error("Failed to read auth session cache:", error);
+      return null;
+    }
+  }
+
   async login(req: Request) {
     const { identifier, password } = req.body;
 
@@ -253,6 +342,8 @@ export class AuthService {
       },
     });
 
+    await this.cacheSession(session);
+
     return {
       status: 200,
       body: {
@@ -269,6 +360,7 @@ export class AuthService {
     const user = (req as any).user as TokenPayload | undefined;
     const userId = user?.id;
     const sessionId = user?.session_id;
+    const vendorId = user?.vendor_id;
     const now = new Date();
     const ipAddress = getIpAddress(req);
     const userAgent = req.headers["user-agent"] || null;
@@ -307,6 +399,8 @@ export class AuthService {
         },
       },
     });
+
+    await this.evictSessionCache(sessionId, vendorId);
 
     return {
       status: 200,
@@ -359,6 +453,8 @@ export class AuthService {
       },
     });
 
+    await this.evictVendorSessionsCache(vendorId);
+
     await prisma.userActivityLog.create({
       data: {
         user_id: actorUserId,
@@ -392,6 +488,34 @@ export class AuthService {
       });
     }
 
+    const cachedSession = await this.getCachedSession(decoded.session_id);
+    if (cachedSession) {
+      const expiresAt = new Date(cachedSession.expires_at);
+
+      if (
+        cachedSession.user_id === decoded.id &&
+        cachedSession.jti === decoded.jti &&
+        cachedSession.status === "active"
+      ) {
+        if (expiresAt <= new Date()) {
+          await this.evictSessionCache(
+            decoded.session_id,
+            cachedSession.vendor_id,
+          );
+        } else {
+          return decoded;
+        }
+      } else {
+        await this.evictSessionCache(
+          decoded.session_id,
+          cachedSession.vendor_id,
+        );
+        throw Object.assign(new Error("Session is no longer active."), {
+          statusCode: 403,
+        });
+      }
+    }
+
     const session = await prisma.userSession.findFirst({
       where: {
         id: decoded.session_id,
@@ -401,6 +525,10 @@ export class AuthService {
       },
       select: {
         id: true,
+        user_id: true,
+        vendor_id: true,
+        access_jti: true,
+        status: true,
         expires_at: true,
         user: {
           select: {
@@ -425,16 +553,21 @@ export class AuthService {
         },
       });
 
+      await this.evictSessionCache(session.id, session.vendor_id);
+
       throw Object.assign(new Error("Session expired. Please login again."), {
         statusCode: 403,
       });
     }
 
     if (session.user.status !== "active") {
+      await this.evictSessionCache(session.id, session.vendor_id);
       throw Object.assign(new Error("User is inactive."), {
         statusCode: 403,
       });
     }
+
+    await this.cacheSession(session);
 
     return decoded;
   }

@@ -177,6 +177,13 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type EnumUserSessionLoginTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserSessionLoginType | Prisma.EnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel> | $Enums.UserSessionLoginType
+}
+
 export type EnumUserSessionStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.UserSessionStatus | Prisma.EnumUserSessionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.UserSessionStatus[] | Prisma.ListEnumUserSessionStatusFieldRefInput<$PrismaModel>
@@ -193,6 +200,16 @@ export type DateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type EnumUserSessionLoginTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserSessionLoginType | Prisma.EnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserSessionLoginTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserSessionLoginType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel>
 }
 
 export type EnumUserSessionStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -1050,6 +1067,13 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
+export type NestedEnumUserSessionLoginTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserSessionLoginType | Prisma.EnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel> | $Enums.UserSessionLoginType
+}
+
 export type NestedEnumUserSessionStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.UserSessionStatus | Prisma.EnumUserSessionStatusFieldRefInput<$PrismaModel>
   in?: $Enums.UserSessionStatus[] | Prisma.ListEnumUserSessionStatusFieldRefInput<$PrismaModel>
@@ -1066,6 +1090,16 @@ export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
   gt?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   gte?: Date | string | Prisma.DateTimeFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+}
+
+export type NestedEnumUserSessionLoginTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.UserSessionLoginType | Prisma.EnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.UserSessionLoginType[] | Prisma.ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumUserSessionLoginTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserSessionLoginType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumUserSessionLoginTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumUserSessionStatusWithAggregatesFilter<$PrismaModel = never> = {

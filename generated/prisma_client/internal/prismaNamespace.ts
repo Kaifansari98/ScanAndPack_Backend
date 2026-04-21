@@ -8638,6 +8638,7 @@ export const UserSessionScalarFieldEnum = {
   platform: 'platform',
   ip_address: 'ip_address',
   user_agent: 'user_agent',
+  login_type: 'login_type',
   status: 'status',
   is_current: 'is_current',
   last_seen_at: 'last_seen_at',
@@ -10301,6 +10302,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType'
+ */
+export type EnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType'>
+    
+
+
+/**
+ * Reference to a field of type 'UserSessionLoginType[]'
+ */
+export type ListEnumUserSessionLoginTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionLoginType[]'>
     
 
 

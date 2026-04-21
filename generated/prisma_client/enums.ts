@@ -189,6 +189,14 @@ export const UserSessionStatus = {
 export type UserSessionStatus = (typeof UserSessionStatus)[keyof typeof UserSessionStatus]
 
 
+export const UserSessionLoginType = {
+  MASTER_LOGIN: 'MASTER_LOGIN',
+  USER_LOGIN: 'USER_LOGIN'
+} as const
+
+export type UserSessionLoginType = (typeof UserSessionLoginType)[keyof typeof UserSessionLoginType]
+
+
 export const ModulesVendorMappingActiveStatus = {
   Yes: 'Yes',
   No: 'No'
