@@ -991,6 +991,20 @@ export class DashboardService {
   }
 
   public async getOverdueProjectsCount(vendor_id: number) {
+    // Debug: check what the count query sees
+    const debug = await prisma.$queryRaw<{ id: number; expected_installation_end_date: Date | null; actual_installation_completion_at: Date | null; franchise_id: number | null }[]>`
+      SELECT id, expected_installation_end_date, actual_installation_completion_at, franchise_id
+      FROM "LeadMaster"
+      WHERE vendor_id = ${vendor_id}
+        AND is_deleted = false
+        AND expected_installation_end_date IS NOT NULL
+    `;
+    console.log(`[OverdueCount DEBUG] vendor_id=${vendor_id} — leads with expected_installation_end_date set:`, debug.length);
+    debug.forEach((r) => {
+      const isOverdue = r.actual_installation_completion_at === null && r.expected_installation_end_date && r.expected_installation_end_date < new Date();
+      console.log(`  lead id=${r.id} franchise_id=${r.franchise_id} expected=${r.expected_installation_end_date?.toISOString()} actual=${r.actual_installation_completion_at?.toISOString() ?? "NULL"} → counts=${isOverdue}`);
+    });
+
     const result = await prisma.$queryRaw<[{ count: bigint }]>`
       SELECT COUNT(*) AS count
       FROM "LeadMaster"
@@ -1000,6 +1014,7 @@ export class DashboardService {
         AND actual_installation_completion_at IS NULL
         AND expected_installation_end_date < NOW()
     `;
+    console.log(`[OverdueCount] vendor_id=${vendor_id} count=${Number(result[0].count)}`);
     return { count: Number(result[0].count) };
   }
 
@@ -1008,21 +1023,50 @@ export class DashboardService {
       id: bigint;
       lead_code: string | null;
       name: string;
+      account_id: bigint | null;
       franchise_name: string | null;
       expected_installation_end_date: Date;
+      stage_tag: string | null;
+      instance_id: bigint | null;
       days_overdue: number;
     };
+
+    console.log(`[OverdueInstallations] vendor_id=${vendor_id} franchise_id=${franchise_id}`);
+
+    // Debug: check what this franchise has before applying full filter
+    const debugRows = await prisma.$queryRaw<{ id: number; expected_installation_end_date: Date | null; actual_installation_completion_at: Date | null }[]>`
+      SELECT id, expected_installation_end_date, actual_installation_completion_at
+      FROM "LeadMaster"
+      WHERE vendor_id = ${vendor_id}
+        AND franchise_id = ${franchise_id}
+        AND is_deleted = false
+        AND expected_installation_end_date IS NOT NULL
+    `;
+    console.log(`[OverdueInstallations DEBUG] leads with expected_installation_end_date for franchise ${franchise_id}:`, debugRows.length);
+    debugRows.forEach((r) => {
+      console.log(`  lead id=${r.id} expected=${r.expected_installation_end_date?.toISOString()} actual=${r.actual_installation_completion_at?.toISOString() ?? "NULL"} past_due=${r.expected_installation_end_date && r.expected_installation_end_date < new Date()}`);
+    });
 
     const rows = await prisma.$queryRaw<Row[]>`
       SELECT
         lm.id,
         lm.lead_code,
-        lm.name,
+        CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+        lm.account_id,
         fm.franchise_name,
         lm.expected_installation_end_date,
+        stm.tag AS stage_tag,
+        (
+          SELECT lpsi.id
+          FROM "LeadProductStructureInstance" lpsi
+          WHERE lpsi.lead_id = lm.id
+          ORDER BY lpsi.id ASC
+          LIMIT 1
+        ) AS instance_id,
         EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
       FROM "LeadMaster" lm
       LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+      LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
       WHERE lm.vendor_id = ${vendor_id}
         AND lm.franchise_id = ${franchise_id}
         AND lm.is_deleted = false
@@ -1032,13 +1076,17 @@ export class DashboardService {
       ORDER BY days_overdue DESC
     `;
 
+    console.log(`[OverdueInstallations] result rows for franchise ${franchise_id}:`, rows.length);
+
     return rows.map((r) => ({
       id: Number(r.id),
       lead_code: r.lead_code,
       name: r.name,
+      account_id: r.account_id ? Number(r.account_id) : null,
       franchise_name: r.franchise_name,
       expected_end: r.expected_installation_end_date,
-      actual_completion: null,
+      stage_tag: r.stage_tag,
+      instance_id: r.instance_id ? Number(r.instance_id) : null,
       days_overdue: r.days_overdue,
     }));
   }
