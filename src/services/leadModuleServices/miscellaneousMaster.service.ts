@@ -396,21 +396,16 @@ export const getPendingMiscellaneousLeads = async (
 
 export const getPendingMiscellaneousLeadCountService = async (
   vendorId: number,
-  franchiseId: number,
+  franchiseId?: number,
 ): Promise<number> => {
 
-  // Step 1 → Find unique lead_ids having unresolved misc
   const result = await prisma.miscellaneousMaster.findMany({
     where: {
       vendor_id: vendorId,
       is_resolved: false,
-      lead: {
-        franchise_id: franchiseId,
-      },
+      ...(franchiseId ? { lead: { franchise_id: franchiseId } } : {}),
     },
-    select: {
-      lead_id: true,
-    },
+    select: { lead_id: true },
     distinct: ["lead_id"],
   });
 

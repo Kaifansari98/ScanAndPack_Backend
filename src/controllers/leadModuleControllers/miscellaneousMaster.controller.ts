@@ -366,10 +366,10 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
       ? Number(req.query.franchise_id)
       : undefined;
 
-    if (!vendorId || !franchiseId) {
+    if (!vendorId) {
       return res.status(400).json({
         success: false,
-        message: "Vendor ID and Franchise ID are required",
+        message: "Vendor ID is required",
       });
     }
 
