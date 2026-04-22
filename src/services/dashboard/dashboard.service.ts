@@ -997,10 +997,50 @@ export class DashboardService {
       WHERE vendor_id = ${vendor_id}
         AND is_deleted = false
         AND expected_installation_end_date IS NOT NULL
-        AND actual_installation_completion_at IS NOT NULL
-        AND actual_installation_completion_at > expected_installation_end_date
+        AND actual_installation_completion_at IS NULL
+        AND expected_installation_end_date < NOW()
     `;
     return { count: Number(result[0].count) };
+  }
+
+  public async getOverdueInstallations(vendor_id: number, franchise_id: number) {
+    type Row = {
+      id: bigint;
+      lead_code: string | null;
+      name: string;
+      franchise_name: string | null;
+      expected_installation_end_date: Date;
+      days_overdue: number;
+    };
+
+    const rows = await prisma.$queryRaw<Row[]>`
+      SELECT
+        lm.id,
+        lm.lead_code,
+        lm.name,
+        fm.franchise_name,
+        lm.expected_installation_end_date,
+        EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
+      FROM "LeadMaster" lm
+      LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+      WHERE lm.vendor_id = ${vendor_id}
+        AND lm.franchise_id = ${franchise_id}
+        AND lm.is_deleted = false
+        AND lm.expected_installation_end_date IS NOT NULL
+        AND lm.actual_installation_completion_at IS NULL
+        AND lm.expected_installation_end_date < NOW()
+      ORDER BY days_overdue DESC
+    `;
+
+    return rows.map((r) => ({
+      id: Number(r.id),
+      lead_code: r.lead_code,
+      name: r.name,
+      franchise_name: r.franchise_name,
+      expected_end: r.expected_installation_end_date,
+      actual_completion: null,
+      days_overdue: r.days_overdue,
+    }));
   }
 
   public async getLeadsByFranchise(vendor_id: number) {
