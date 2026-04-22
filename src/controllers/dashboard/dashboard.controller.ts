@@ -509,6 +509,39 @@ export class DashboardController {
     }
   };
 
+  public getFranchiseLeads = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = Number(req.query.franchise_id);
+
+      if (!vendor_id || !franchise_id) {
+        return res.status(400).json({ success: false, message: "vendor_id and franchise_id are required" });
+      }
+
+      const data = await dashboardService.getFranchiseLeads(vendor_id, franchise_id);
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
+  public getStageLeads = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const tag = req.query.tag as string;
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+
+      if (!vendor_id || !tag) {
+        return res.status(400).json({ success: false, message: "vendor_id and tag are required" });
+      }
+
+      const data = await dashboardService.getStageLeads(vendor_id, tag, franchise_id);
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
   public getStageWiseCounts = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);

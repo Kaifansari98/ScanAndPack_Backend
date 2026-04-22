@@ -94,5 +94,13 @@ DashboardRouter.get(
   "/admin/stage-wise-counts",
   dashboardController.getStageWiseCounts
 );
+DashboardRouter.get(
+  "/admin/stage-leads",
+  dashboardController.getStageLeads
+);
+DashboardRouter.get(
+  "/admin/franchise-leads",
+  dashboardController.getFranchiseLeads
+);
 
 export default DashboardRouter;
