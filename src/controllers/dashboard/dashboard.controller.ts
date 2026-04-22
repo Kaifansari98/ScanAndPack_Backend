@@ -496,10 +496,10 @@ export class DashboardController {
   public getOverdueInstallations = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);
-      const franchise_id = Number(req.query.franchise_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
-      if (!vendor_id || !franchise_id) {
-        return res.status(400).json({ success: false, message: "vendor_id and franchise_id are required" });
+      if (!vendor_id) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
       }
 
       const data = await dashboardService.getOverdueInstallations(vendor_id, franchise_id);

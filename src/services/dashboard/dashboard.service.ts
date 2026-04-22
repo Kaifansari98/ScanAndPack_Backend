@@ -1018,7 +1018,7 @@ export class DashboardService {
     return { count: Number(result[0].count) };
   }
 
-  public async getOverdueInstallations(vendor_id: number, franchise_id: number) {
+  public async getOverdueInstallations(vendor_id: number, franchise_id?: number) {
     type Row = {
       id: bigint;
       lead_code: string | null;
@@ -1031,52 +1031,65 @@ export class DashboardService {
       days_overdue: number;
     };
 
-    console.log(`[OverdueInstallations] vendor_id=${vendor_id} franchise_id=${franchise_id}`);
-
-    // Debug: check what this franchise has before applying full filter
-    const debugRows = await prisma.$queryRaw<{ id: number; expected_installation_end_date: Date | null; actual_installation_completion_at: Date | null }[]>`
-      SELECT id, expected_installation_end_date, actual_installation_completion_at
-      FROM "LeadMaster"
-      WHERE vendor_id = ${vendor_id}
-        AND franchise_id = ${franchise_id}
-        AND is_deleted = false
-        AND expected_installation_end_date IS NOT NULL
-    `;
-    console.log(`[OverdueInstallations DEBUG] leads with expected_installation_end_date for franchise ${franchise_id}:`, debugRows.length);
-    debugRows.forEach((r) => {
-      console.log(`  lead id=${r.id} expected=${r.expected_installation_end_date?.toISOString()} actual=${r.actual_installation_completion_at?.toISOString() ?? "NULL"} past_due=${r.expected_installation_end_date && r.expected_installation_end_date < new Date()}`);
-    });
-
-    const rows = await prisma.$queryRaw<Row[]>`
-      SELECT
-        lm.id,
-        lm.lead_code,
-        CONCAT(lm.firstname, ' ', lm.lastname) AS name,
-        lm.account_id,
-        fm.franchise_name,
-        lm.expected_installation_end_date,
-        stm.tag AS stage_tag,
-        (
-          SELECT lpsi.id
-          FROM "LeadProductStructureInstance" lpsi
-          WHERE lpsi.lead_id = lm.id
-          ORDER BY lpsi.id ASC
-          LIMIT 1
-        ) AS instance_id,
-        EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
-      FROM "LeadMaster" lm
-      LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
-      LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
-      WHERE lm.vendor_id = ${vendor_id}
-        AND lm.franchise_id = ${franchise_id}
-        AND lm.is_deleted = false
-        AND lm.expected_installation_end_date IS NOT NULL
-        AND lm.actual_installation_completion_at IS NULL
-        AND lm.expected_installation_end_date < NOW()
-      ORDER BY days_overdue DESC
-    `;
-
-    console.log(`[OverdueInstallations] result rows for franchise ${franchise_id}:`, rows.length);
+    let rows: Row[];
+    if (franchise_id) {
+      rows = await prisma.$queryRaw<Row[]>`
+        SELECT
+          lm.id,
+          lm.lead_code,
+          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          lm.account_id,
+          fm.franchise_name,
+          lm.expected_installation_end_date,
+          stm.tag AS stage_tag,
+          (
+            SELECT lpsi.id
+            FROM "LeadProductStructureInstance" lpsi
+            WHERE lpsi.lead_id = lm.id
+            ORDER BY lpsi.id ASC
+            LIMIT 1
+          ) AS instance_id,
+          EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
+        FROM "LeadMaster" lm
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        WHERE lm.vendor_id = ${vendor_id}
+          AND lm.franchise_id = ${franchise_id}
+          AND lm.is_deleted = false
+          AND lm.expected_installation_end_date IS NOT NULL
+          AND lm.actual_installation_completion_at IS NULL
+          AND lm.expected_installation_end_date < NOW()
+        ORDER BY days_overdue DESC
+      `;
+    } else {
+      rows = await prisma.$queryRaw<Row[]>`
+        SELECT
+          lm.id,
+          lm.lead_code,
+          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          lm.account_id,
+          fm.franchise_name,
+          lm.expected_installation_end_date,
+          stm.tag AS stage_tag,
+          (
+            SELECT lpsi.id
+            FROM "LeadProductStructureInstance" lpsi
+            WHERE lpsi.lead_id = lm.id
+            ORDER BY lpsi.id ASC
+            LIMIT 1
+          ) AS instance_id,
+          EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
+        FROM "LeadMaster" lm
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        WHERE lm.vendor_id = ${vendor_id}
+          AND lm.is_deleted = false
+          AND lm.expected_installation_end_date IS NOT NULL
+          AND lm.actual_installation_completion_at IS NULL
+          AND lm.expected_installation_end_date < NOW()
+        ORDER BY days_overdue DESC
+      `;
+    }
 
     return rows.map((r) => ({
       id: Number(r.id),
