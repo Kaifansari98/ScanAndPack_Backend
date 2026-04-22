@@ -90,5 +90,9 @@ DashboardRouter.get(
   "/admin/avg-days-per-stage",
   dashboardController.getAvgDaysPerStage
 );
+DashboardRouter.get(
+  "/admin/stage-wise-counts",
+  dashboardController.getStageWiseCounts
+);
 
 export default DashboardRouter;

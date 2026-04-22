@@ -1091,6 +1091,38 @@ export class DashboardService {
     }));
   }
 
+  public async getStageWiseCounts(vendor_id: number, franchise_id?: number) {
+    const statusTypes = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, tag: true, type: true },
+    });
+
+    const counts = await prisma.leadMaster.groupBy({
+      by: ["status_id"],
+      where: {
+        vendor_id,
+        is_deleted: false,
+        ...(franchise_id ? { franchise_id } : {}),
+      },
+      _count: { id: true },
+    });
+
+    const countMap = new Map(counts.map((c) => [c.status_id, c._count.id]));
+
+    return statusTypes
+      .filter((st) => /^Type \d+$/.test(st.tag))
+      .map((st) => ({
+        tag: st.tag,
+        type: st.type,
+        count: countMap.get(st.id) ?? 0,
+      }))
+      .sort((a, b) => {
+        const aNum = parseInt(a.tag.replace("Type ", ""));
+        const bNum = parseInt(b.tag.replace("Type ", ""));
+        return aNum - bNum;
+      });
+  }
+
   public async getLeadsByFranchise(vendor_id: number) {
     const franchises = await prisma.franchiseMaster.findMany({
       where: { vendor_id },
