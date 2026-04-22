@@ -83,6 +83,14 @@ DashboardRouter.get(
   dashboardController.getOverdueInstallations
 );
 DashboardRouter.get(
+  "/admin/overdue-production-count",
+  dashboardController.getOverdueProductionCount
+);
+DashboardRouter.get(
+  "/admin/overdue-production",
+  dashboardController.getOverdueProduction
+);
+DashboardRouter.get(
   "/admin/franchise-performance",
   dashboardController.getFranchisePerformance
 );

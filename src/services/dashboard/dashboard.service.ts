@@ -1091,6 +1091,109 @@ export class DashboardService {
     }));
   }
 
+  public async getOverdueProductionCount(vendor_id: number) {
+    const result = await prisma.$queryRaw<[{ count: bigint }]>`
+      SELECT COUNT(*) AS count
+      FROM "LeadMaster"
+      WHERE vendor_id = ${vendor_id}
+        AND is_deleted = false
+        AND expected_order_login_ready_date IS NOT NULL
+        AND client_required_order_login_complition_date IS NOT NULL
+        AND expected_order_login_ready_date > client_required_order_login_complition_date
+    `;
+    return { count: Number(result[0].count) };
+  }
+
+  public async getOverdueProduction(vendor_id: number, franchise_id?: number) {
+    type Row = {
+      id: bigint;
+      lead_code: string | null;
+      name: string;
+      account_id: bigint | null;
+      franchise_name: string | null;
+      client_required_order_login_complition_date: Date;
+      expected_order_login_ready_date: Date;
+      stage_tag: string | null;
+      instance_id: bigint | null;
+      days_overdue: number;
+    };
+
+    let rows: Row[];
+    if (franchise_id) {
+      rows = await prisma.$queryRaw<Row[]>`
+        SELECT
+          lm.id,
+          lm.lead_code,
+          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          lm.account_id,
+          fm.franchise_name,
+          lm.client_required_order_login_complition_date,
+          lm.expected_order_login_ready_date,
+          stm.tag AS stage_tag,
+          (
+            SELECT lpsi.id
+            FROM "LeadProductStructureInstance" lpsi
+            WHERE lpsi.lead_id = lm.id
+            ORDER BY lpsi.id ASC
+            LIMIT 1
+          ) AS instance_id,
+          EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
+        FROM "LeadMaster" lm
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        WHERE lm.vendor_id = ${vendor_id}
+          AND lm.franchise_id = ${franchise_id}
+          AND lm.is_deleted = false
+          AND lm.expected_order_login_ready_date IS NOT NULL
+          AND lm.client_required_order_login_complition_date IS NOT NULL
+          AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+        ORDER BY days_overdue DESC
+      `;
+    } else {
+      rows = await prisma.$queryRaw<Row[]>`
+        SELECT
+          lm.id,
+          lm.lead_code,
+          CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          lm.account_id,
+          fm.franchise_name,
+          lm.client_required_order_login_complition_date,
+          lm.expected_order_login_ready_date,
+          stm.tag AS stage_tag,
+          (
+            SELECT lpsi.id
+            FROM "LeadProductStructureInstance" lpsi
+            WHERE lpsi.lead_id = lm.id
+            ORDER BY lpsi.id ASC
+            LIMIT 1
+          ) AS instance_id,
+          EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
+        FROM "LeadMaster" lm
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
+        LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        WHERE lm.vendor_id = ${vendor_id}
+          AND lm.is_deleted = false
+          AND lm.expected_order_login_ready_date IS NOT NULL
+          AND lm.client_required_order_login_complition_date IS NOT NULL
+          AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+        ORDER BY days_overdue DESC
+      `;
+    }
+
+    return rows.map((r) => ({
+      id: Number(r.id),
+      lead_code: r.lead_code,
+      name: r.name,
+      account_id: r.account_id ? Number(r.account_id) : null,
+      franchise_name: r.franchise_name ?? null,
+      client_required_date: r.client_required_order_login_complition_date,
+      expected_ready_date: r.expected_order_login_ready_date,
+      stage_tag: r.stage_tag,
+      instance_id: r.instance_id ? Number(r.instance_id) : null,
+      days_overdue: r.days_overdue,
+    }));
+  }
+
   public async getFranchiseLeads(vendor_id: number, franchise_id: number) {
     type Row = {
       id: bigint;
@@ -1139,6 +1242,7 @@ export class DashboardService {
       id: bigint;
       lead_code: string | null;
       name: string;
+      franchise_name: string | null;
       account_id: bigint | null;
       stage_tag: string | null;
       instance_id: bigint | null;
@@ -1151,6 +1255,7 @@ export class DashboardService {
           lm.id,
           lm.lead_code,
           CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          fm.franchise_name,
           lm.account_id,
           stm.tag AS stage_tag,
           (
@@ -1162,6 +1267,7 @@ export class DashboardService {
           ) AS instance_id
         FROM "LeadMaster" lm
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         WHERE lm.vendor_id = ${vendor_id}
           AND stm.tag = ${tag}
           AND lm.franchise_id = ${franchise_id}
@@ -1175,6 +1281,7 @@ export class DashboardService {
           lm.id,
           lm.lead_code,
           CONCAT(lm.firstname, ' ', lm.lastname) AS name,
+          fm.franchise_name,
           lm.account_id,
           stm.tag AS stage_tag,
           (
@@ -1186,6 +1293,7 @@ export class DashboardService {
           ) AS instance_id
         FROM "LeadMaster" lm
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         WHERE lm.vendor_id = ${vendor_id}
           AND stm.tag = ${tag}
           AND lm.is_deleted = false
@@ -1198,6 +1306,7 @@ export class DashboardService {
       id: Number(r.id),
       lead_code: r.lead_code,
       name: r.name,
+      franchise_name: r.franchise_name ?? null,
       account_id: r.account_id ? Number(r.account_id) : null,
       stage_tag: r.stage_tag,
       instance_id: r.instance_id ? Number(r.instance_id) : null,
