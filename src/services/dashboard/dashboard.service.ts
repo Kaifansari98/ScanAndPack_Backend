@@ -1006,7 +1006,7 @@ export class DashboardService {
   public async getLeadsByFranchise(vendor_id: number) {
     const franchises = await prisma.franchiseMaster.findMany({
       where: { vendor_id },
-      select: { id: true, franchise_name: true },
+      select: { id: true, franchise_name: true, franchise_code: true },
       orderBy: { franchise_name: "asc" },
     });
 
@@ -1014,6 +1014,7 @@ export class DashboardService {
       franchises.map(async (f) => ({
         franchise_id: f.id,
         name: f.franchise_name,
+        code: f.franchise_code ?? f.franchise_name,
         leads: await prisma.leadMaster.count({
           where: { vendor_id, franchise_id: f.id, is_deleted: false },
         }),
