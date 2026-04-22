@@ -242,7 +242,7 @@ export const toggleMiscTeamStatus = async (req: Request, res: Response) => {
 export const  getPendingMiscellaneousLeads = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
-    const franchiseId = Number(req.body.franchise_id);
+    const franchiseId = req.body.franchise_id ? Number(req.body.franchise_id) : undefined;
     const page = parseInt((req.body.page as string) || "1");
     const limit = parseInt((req.body.limit as string) || "10");
 
@@ -305,10 +305,10 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
       date_range: dateRange,
     };
 
-    if (!vendorId || !franchiseId) {
+    if (!vendorId) {
       return res.status(400).json({
         success: false,
-        message: "Vendor ID and Franchise ID are required",
+        message: "Vendor ID is required",
       });
     }
 

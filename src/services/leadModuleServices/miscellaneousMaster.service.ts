@@ -164,7 +164,7 @@ export const updateMiscTeamStatus = async (
 
 export const getPendingMiscellaneousLeads = async (
   vendorId: number,
-  franchiseId: number,
+  franchiseId: number | undefined,
   page: number = 1,
   limit: number = 10,
   filters: {
@@ -193,9 +193,7 @@ export const getPendingMiscellaneousLeads = async (
     where: {
       vendor_id: vendorId,
       is_resolved: false,
-      lead: {
-        franchise_id: franchiseId,
-      },
+      ...(franchiseId ? { lead: { franchise_id: franchiseId } } : {}),
     },
     select: { lead_id: true },
     distinct: ["lead_id"],
@@ -212,7 +210,7 @@ export const getPendingMiscellaneousLeads = async (
   const where: Prisma.LeadMasterWhereInput = {
     id: { in: leadIds },
     vendor_id: vendorId,
-    franchise_id: franchiseId,
+    ...(franchiseId ? { franchise_id: franchiseId } : {}),
     is_deleted: false,
   };
 
