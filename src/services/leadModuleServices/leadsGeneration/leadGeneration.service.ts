@@ -2726,6 +2726,9 @@ export const getLeadLogsWithDocuments = async (params: {
           id: true,
           user_name: true,
           user_email: true,
+          user_type: {
+            select: { user_type: true },
+          },
         },
       },
       docLogs: {
@@ -2776,6 +2779,7 @@ export const getLeadLogsWithDocuments = async (params: {
           id: log.user.id,
           name: log.user.user_name,
           email: log.user.user_email,
+          role: log.user.user_type?.user_type ?? null,
         },
         docs,
       };
