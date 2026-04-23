@@ -1117,9 +1117,13 @@ export class DashboardService {
 
   public async getOverdueProductionCount(vendor_id: number) {
     const result = await prisma.$queryRaw<[{ count: bigint }]>`
-      SELECT COUNT(*) AS count
+      SELECT COUNT(lpsi.id) AS count
       FROM "LeadMaster" lm
       LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+      INNER JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id
+        AND lpsi.vendor_id = lm.vendor_id
+        AND lpsi.is_tech_check_completed = true
+        AND lpsi.is_order_login_completed = true
       WHERE lm.vendor_id = ${vendor_id}
         AND lm.is_deleted = false
         AND lm.expected_order_login_ready_date IS NOT NULL
