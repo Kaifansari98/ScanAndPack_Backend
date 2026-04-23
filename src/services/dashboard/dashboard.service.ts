@@ -1030,6 +1030,8 @@ export class DashboardService {
       expected_installation_end_date: Date;
       stage_tag: string | null;
       instance_id: bigint | null;
+      quantity_index: number | null;
+      instance_title: string | null;
       days_overdue: number;
     };
 
@@ -1044,17 +1046,17 @@ export class DashboardService {
           fm.franchise_name,
           lm.expected_installation_end_date,
           stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id,
+          lpsi.id AS instance_id,
+          lpsi.quantity_index,
+          lpsi.title AS instance_title,
           EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        LEFT JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id
+          AND lpsi.vendor_id = lm.vendor_id
+          AND lpsi.is_tech_check_completed = true
+          AND lpsi.is_order_login_completed = true
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.franchise_id = ${franchise_id}
           AND lm.is_deleted = false
@@ -1074,17 +1076,17 @@ export class DashboardService {
           fm.franchise_name,
           lm.expected_installation_end_date,
           stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id,
+          lpsi.id AS instance_id,
+          lpsi.quantity_index,
+          lpsi.title AS instance_title,
           EXTRACT(DAY FROM (NOW() - lm.expected_installation_end_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        LEFT JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id
+          AND lpsi.vendor_id = lm.vendor_id
+          AND lpsi.is_tech_check_completed = true
+          AND lpsi.is_order_login_completed = true
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.is_deleted = false
           AND lm.expected_installation_end_date IS NOT NULL
@@ -1097,13 +1099,18 @@ export class DashboardService {
 
     return rows.map((r) => ({
       id: Number(r.id),
-      lead_code: r.lead_code,
+      lead_code:
+        r.lead_code && r.quantity_index !== null && r.quantity_index !== undefined
+          ? `${r.lead_code}.${r.quantity_index}`
+          : r.lead_code,
       name: r.name,
       account_id: r.account_id ? Number(r.account_id) : null,
       franchise_name: r.franchise_name,
       expected_end: r.expected_installation_end_date,
       stage_tag: r.stage_tag,
       instance_id: r.instance_id ? Number(r.instance_id) : null,
+      instance_title: r.instance_title,
+      quantity_index: r.quantity_index,
       days_overdue: r.days_overdue,
     }));
   }
@@ -1134,6 +1141,8 @@ export class DashboardService {
       expected_order_login_ready_date: Date;
       stage_tag: string | null;
       instance_id: bigint | null;
+      quantity_index: number | null;
+      instance_title: string | null;
       days_overdue: number;
     };
 
@@ -1149,17 +1158,17 @@ export class DashboardService {
           lm.client_required_order_login_complition_date,
           lm.expected_order_login_ready_date,
           stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id,
+          lpsi.id AS instance_id,
+          lpsi.quantity_index,
+          lpsi.title AS instance_title,
           EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        INNER JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id
+          AND lpsi.vendor_id = lm.vendor_id
+          AND lpsi.is_tech_check_completed = true
+          AND lpsi.is_order_login_completed = true
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.franchise_id = ${franchise_id}
           AND lm.is_deleted = false
@@ -1180,17 +1189,17 @@ export class DashboardService {
           lm.client_required_order_login_complition_date,
           lm.expected_order_login_ready_date,
           stm.tag AS stage_tag,
-          (
-            SELECT lpsi.id
-            FROM "LeadProductStructureInstance" lpsi
-            WHERE lpsi.lead_id = lm.id
-            ORDER BY lpsi.id ASC
-            LIMIT 1
-          ) AS instance_id,
+          lpsi.id AS instance_id,
+          lpsi.quantity_index,
+          lpsi.title AS instance_title,
           EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+        INNER JOIN "LeadProductStructureInstance" lpsi ON lpsi.lead_id = lm.id
+          AND lpsi.vendor_id = lm.vendor_id
+          AND lpsi.is_tech_check_completed = true
+          AND lpsi.is_order_login_completed = true
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.is_deleted = false
           AND lm.expected_order_login_ready_date IS NOT NULL
@@ -1203,7 +1212,10 @@ export class DashboardService {
 
     return rows.map((r) => ({
       id: Number(r.id),
-      lead_code: r.lead_code,
+      lead_code:
+        r.lead_code && r.quantity_index !== null && r.quantity_index !== undefined
+          ? `${r.lead_code}.${r.quantity_index}`
+          : r.lead_code,
       name: r.name,
       account_id: r.account_id ? Number(r.account_id) : null,
       franchise_name: r.franchise_name ?? null,
@@ -1211,6 +1223,8 @@ export class DashboardService {
       expected_ready_date: r.expected_order_login_ready_date,
       stage_tag: r.stage_tag,
       instance_id: r.instance_id ? Number(r.instance_id) : null,
+      instance_title: r.instance_title,
+      quantity_index: r.quantity_index,
       days_overdue: r.days_overdue,
     }));
   }
