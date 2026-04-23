@@ -1129,7 +1129,14 @@ export class DashboardService {
         AND lpsi.production_erd_date IS NOT NULL
         AND lm.client_required_order_login_complition_date IS NOT NULL
         AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
-        AND stm.tag = 'Type 10'
+        AND (
+          stm.tag = 'Type 10'
+          OR (
+            lpsi.is_tech_check_completed = true
+            AND lpsi.is_order_login_completed = true
+            AND (lpsi.is_production_completed = false OR lpsi.is_production_completed IS NULL)
+          )
+        )
     `;
     return { count: Number(result[0].count) };
   }
@@ -1179,7 +1186,14 @@ export class DashboardService {
           AND lpsi.production_erd_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
           AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
-          AND stm.tag = 'Type 10'
+          AND (
+            stm.tag = 'Type 10'
+            OR (
+              lpsi.is_tech_check_completed = true
+              AND lpsi.is_order_login_completed = true
+              AND (lpsi.is_production_completed = false OR lpsi.is_production_completed IS NULL)
+            )
+          )
         ORDER BY days_overdue DESC
       `;
     } else {
@@ -1209,7 +1223,14 @@ export class DashboardService {
           AND lpsi.production_erd_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
           AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
-          AND stm.tag = 'Type 10'
+          AND (
+            stm.tag = 'Type 10'
+            OR (
+              lpsi.is_tech_check_completed = true
+              AND lpsi.is_order_login_completed = true
+              AND (lpsi.is_production_completed = false OR lpsi.is_production_completed IS NULL)
+            )
+          )
         ORDER BY days_overdue DESC
       `;
     }
