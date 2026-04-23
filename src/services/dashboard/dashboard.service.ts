@@ -1126,9 +1126,9 @@ export class DashboardService {
         AND lpsi.is_order_login_completed = true
       WHERE lm.vendor_id = ${vendor_id}
         AND lm.is_deleted = false
-        AND lm.expected_order_login_ready_date IS NOT NULL
+        AND lpsi.production_erd_date IS NOT NULL
         AND lm.client_required_order_login_complition_date IS NOT NULL
-        AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+        AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
         AND stm.tag = 'Type 10'
     `;
     return { count: Number(result[0].count) };
@@ -1142,7 +1142,7 @@ export class DashboardService {
       account_id: bigint | null;
       franchise_name: string | null;
       client_required_order_login_complition_date: Date;
-      expected_order_login_ready_date: Date;
+      production_erd_date: Date;
       stage_tag: string | null;
       instance_id: bigint | null;
       quantity_index: number | null;
@@ -1160,12 +1160,12 @@ export class DashboardService {
           lm.account_id,
           fm.franchise_name,
           lm.client_required_order_login_complition_date,
-          lm.expected_order_login_ready_date,
+          lpsi.production_erd_date,
           stm.tag AS stage_tag,
           lpsi.id AS instance_id,
           lpsi.quantity_index,
           lpsi.title AS instance_title,
-          EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
+          EXTRACT(DAY FROM (lpsi.production_erd_date - lm.client_required_order_login_complition_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
@@ -1176,9 +1176,9 @@ export class DashboardService {
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.franchise_id = ${franchise_id}
           AND lm.is_deleted = false
-          AND lm.expected_order_login_ready_date IS NOT NULL
+          AND lpsi.production_erd_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
-          AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+          AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
           AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
@@ -1191,12 +1191,12 @@ export class DashboardService {
           lm.account_id,
           fm.franchise_name,
           lm.client_required_order_login_complition_date,
-          lm.expected_order_login_ready_date,
+          lpsi.production_erd_date,
           stm.tag AS stage_tag,
           lpsi.id AS instance_id,
           lpsi.quantity_index,
           lpsi.title AS instance_title,
-          EXTRACT(DAY FROM (lm.expected_order_login_ready_date - lm.client_required_order_login_complition_date))::int AS days_overdue
+          EXTRACT(DAY FROM (lpsi.production_erd_date - lm.client_required_order_login_complition_date))::int AS days_overdue
         FROM "LeadMaster" lm
         LEFT JOIN "FranchiseMaster" fm ON fm.id = lm.franchise_id
         LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
@@ -1206,9 +1206,9 @@ export class DashboardService {
           AND lpsi.is_order_login_completed = true
         WHERE lm.vendor_id = ${vendor_id}
           AND lm.is_deleted = false
-          AND lm.expected_order_login_ready_date IS NOT NULL
+          AND lpsi.production_erd_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
-          AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+          AND lpsi.production_erd_date > lm.client_required_order_login_complition_date
           AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
@@ -1224,7 +1224,7 @@ export class DashboardService {
       account_id: r.account_id ? Number(r.account_id) : null,
       franchise_name: r.franchise_name ?? null,
       client_required_date: r.client_required_order_login_complition_date,
-      expected_ready_date: r.expected_order_login_ready_date,
+      expected_ready_date: r.production_erd_date,
       stage_tag: r.stage_tag,
       instance_id: r.instance_id ? Number(r.instance_id) : null,
       instance_title: r.instance_title,
