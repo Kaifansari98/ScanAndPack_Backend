@@ -1007,12 +1007,14 @@ export class DashboardService {
 
     const result = await prisma.$queryRaw<[{ count: bigint }]>`
       SELECT COUNT(*) AS count
-      FROM "LeadMaster"
-      WHERE vendor_id = ${vendor_id}
-        AND is_deleted = false
-        AND expected_installation_end_date IS NOT NULL
-        AND actual_installation_completion_at IS NULL
-        AND expected_installation_end_date < NOW()
+      FROM "LeadMaster" lm
+      LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+      WHERE lm.vendor_id = ${vendor_id}
+        AND lm.is_deleted = false
+        AND lm.expected_installation_end_date IS NOT NULL
+        AND lm.actual_installation_completion_at IS NULL
+        AND lm.expected_installation_end_date < NOW()
+        AND stm.tag = 'Type 10'
     `;
     console.log(`[OverdueCount] vendor_id=${vendor_id} count=${Number(result[0].count)}`);
     return { count: Number(result[0].count) };
@@ -1059,6 +1061,7 @@ export class DashboardService {
           AND lm.expected_installation_end_date IS NOT NULL
           AND lm.actual_installation_completion_at IS NULL
           AND lm.expected_installation_end_date < NOW()
+          AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
     } else {
@@ -1087,6 +1090,7 @@ export class DashboardService {
           AND lm.expected_installation_end_date IS NOT NULL
           AND lm.actual_installation_completion_at IS NULL
           AND lm.expected_installation_end_date < NOW()
+          AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
     }
@@ -1107,12 +1111,14 @@ export class DashboardService {
   public async getOverdueProductionCount(vendor_id: number) {
     const result = await prisma.$queryRaw<[{ count: bigint }]>`
       SELECT COUNT(*) AS count
-      FROM "LeadMaster"
-      WHERE vendor_id = ${vendor_id}
-        AND is_deleted = false
-        AND expected_order_login_ready_date IS NOT NULL
-        AND client_required_order_login_complition_date IS NOT NULL
-        AND expected_order_login_ready_date > client_required_order_login_complition_date
+      FROM "LeadMaster" lm
+      LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
+      WHERE lm.vendor_id = ${vendor_id}
+        AND lm.is_deleted = false
+        AND lm.expected_order_login_ready_date IS NOT NULL
+        AND lm.client_required_order_login_complition_date IS NOT NULL
+        AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+        AND stm.tag = 'Type 10'
     `;
     return { count: Number(result[0].count) };
   }
@@ -1160,6 +1166,7 @@ export class DashboardService {
           AND lm.expected_order_login_ready_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
           AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+          AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
     } else {
@@ -1189,6 +1196,7 @@ export class DashboardService {
           AND lm.expected_order_login_ready_date IS NOT NULL
           AND lm.client_required_order_login_complition_date IS NOT NULL
           AND lm.expected_order_login_ready_date > lm.client_required_order_login_complition_date
+          AND stm.tag = 'Type 10'
         ORDER BY days_overdue DESC
       `;
     }
