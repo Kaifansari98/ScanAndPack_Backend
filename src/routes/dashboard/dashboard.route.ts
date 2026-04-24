@@ -123,6 +123,10 @@ DashboardRouter.get(
   dashboardController.getPriorityLeadCounts
 );
 DashboardRouter.get(
+  "/admin/lost-approval-leads",
+  dashboardController.getAdminLostApprovalLeads
+);
+DashboardRouter.get(
   "/admin/task-overview",
   dashboardController.getAdminTaskOverview
 );

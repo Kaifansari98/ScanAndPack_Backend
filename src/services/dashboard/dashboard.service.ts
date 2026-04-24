@@ -1745,6 +1745,46 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Admin : Lost Approval Leads (by franchise_id)
+  // -------------------------------------------------------
+  public async getAdminLostApprovalLeads(vendor_id: number, franchise_id?: number) {
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        activity_status: ActivityStatus.lostApproval,
+        ...(franchise_id ? { franchise_id } : {}),
+      },
+      select: {
+        id: true,
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        contact_no: true,
+        country_code: true,
+        priority: true,
+        account_id: true,
+        assignedTo: { select: { user_name: true } },
+        productMappings: {
+          select: { productType: { select: { type: true } } },
+        },
+      },
+      orderBy: { created_at: "desc" },
+    });
+
+    return leads.map((l) => ({
+      id: l.id,
+      lead_code: l.lead_code,
+      name: `${l.firstname ?? ""} ${l.lastname ?? ""}`.trim(),
+      contact: `${l.country_code ?? ""}${l.contact_no ?? ""}`,
+      furniture_type: l.productMappings.map((p) => p.productType?.type).filter(Boolean).join(", "),
+      sales_executive: l.assignedTo?.user_name ?? "",
+      priority: l.priority ?? "",
+      account_id: l.account_id,
+    }));
+  }
+
+  // -------------------------------------------------------
   // Admin : Sales Executive Task Overview (by franchise_id)
   // -------------------------------------------------------
   public async getAdminTaskOverview(
