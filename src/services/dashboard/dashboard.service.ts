@@ -1486,6 +1486,24 @@ export class DashboardService {
       });
     };
 
+    // Count instances (not leads) for production stages Type 8, 9, 10
+    const countInstancesByTags = async (tags: string[]) => {
+      const statusIds = tags
+        .map((tag) => statusMap.get(tag))
+        .filter((id): id is number => Boolean(id));
+
+      if (statusIds.length === 0) return 0;
+
+      return prisma.leadProductStructureInstance.count({
+        where: {
+          lead: {
+            ...baseWhere,
+            status_id: { in: statusIds },
+          },
+        },
+      });
+    };
+
     const sumByTags = async (tags: string[]) => {
       const statusIds = tags
         .map((tag) => statusMap.get(tag))
@@ -1504,12 +1522,15 @@ export class DashboardService {
       return result._sum?.total_project_amount || 0;
     };
 
-    const [leads, project, production, installation] = await Promise.all([
+    const [leads, project, productionInstances, productionLeads, installation] = await Promise.all([
       countByTags(["Type 1", "Type 2", "Type 3", "Type 4"]),
       countByTags(["Type 5", "Type 6", "Type 7"]),
-      countByTags(["Type 8", "Type 9", "Type 10", "Type 11"]),
+      countInstancesByTags(["Type 8", "Type 9", "Type 10"]),
+      countByTags(["Type 11"]),
       countByTags(["Type 12", "Type 13", "Type 14", "Type 15", "Type 16", "Type 17"]),
     ]);
+
+    const production = productionInstances + productionLeads;
 
     const [
       leadsAmount,
