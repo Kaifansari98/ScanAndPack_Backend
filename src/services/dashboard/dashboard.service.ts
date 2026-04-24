@@ -1665,7 +1665,7 @@ export class DashboardService {
       countByTags(["Type 5", "Type 6", "Type 7"]),
       countInstancesByTags(["Type 8", "Type 9", "Type 10"]),
       countByTags(["Type 11"]),
-      countByTags(["Type 12", "Type 13", "Type 14", "Type 15", "Type 16", "Type 17"]),
+      countByTags(["Type 12", "Type 13", "Type 14", "Type 15", "Type 16"]),
     ]);
 
     const production = productionInstances + productionLeads;
