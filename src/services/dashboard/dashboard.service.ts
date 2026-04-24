@@ -1745,6 +1745,71 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Admin : Sales Executive Task Overview (by franchise_id)
+  // -------------------------------------------------------
+  public async getAdminTaskOverview(
+    vendor_id: number,
+    franchise_id?: number,
+    page = 1,
+    limit = 20,
+    search = "",
+    status?: string
+  ) {
+    const skip = (page - 1) * limit;
+
+    const statusFilter =
+      status && status !== "all"
+        ? { in: [status as any] }
+        : { in: ["open", "in_progress", "completed"] as const };
+
+    const where: any = {
+      vendor_id,
+      status: statusFilter,
+      ...(franchise_id ? { franchise_id } : {}),
+      user: { user_type: { user_type: "sales-executive" } },
+      ...(search
+        ? {
+            OR: [
+              { lead: { lead_code: { contains: search } } },
+              { user: { user_name: { contains: search } } },
+              { task_type: { contains: search } },
+            ],
+          }
+        : {}),
+    };
+
+    const [total, tasks] = await Promise.all([
+      prisma.userLeadTask.count({ where }),
+      prisma.userLeadTask.findMany({
+        where,
+        select: {
+          id: true,
+          task_type: true,
+          status: true,
+          due_date: true,
+          lead: { select: { lead_code: true } },
+          user: { select: { user_name: true } },
+        },
+        orderBy: { due_date: "asc" },
+        skip,
+        take: limit,
+      }),
+    ]);
+
+    return {
+      data: tasks.map((t) => ({
+        id: t.id,
+        lead_code: t.lead?.lead_code ?? "",
+        sales_executive: t.user?.user_name ?? "",
+        task_type: t.task_type,
+        status: t.status,
+        due_date: t.due_date,
+      })),
+      pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
+    };
+  }
+
+  // -------------------------------------------------------
   // Sales Executive : Stage counts for selected tags
   // -------------------------------------------------------
   public async getSalesExecutiveStageCounts(

@@ -122,5 +122,9 @@ DashboardRouter.get(
   "/admin/priority-leads",
   dashboardController.getPriorityLeadCounts
 );
+DashboardRouter.get(
+  "/admin/task-overview",
+  dashboardController.getAdminTaskOverview
+);
 
 export default DashboardRouter;

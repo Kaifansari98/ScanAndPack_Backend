@@ -318,6 +318,26 @@ export class DashboardController {
     }
   };
 
+  public getAdminTaskOverview = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+      const page = req.query.page ? Number(req.query.page) : 1;
+      const limit = req.query.limit ? Number(req.query.limit) : 20;
+      const search = req.query.search ? String(req.query.search) : "";
+      const status = req.query.status ? String(req.query.status) : undefined;
+
+      if (!vendor_id) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
+      }
+
+      const data = await dashboardService.getAdminTaskOverview(vendor_id, franchise_id, page, limit, search, status);
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
   public getSalesExecutiveStageCounts = async (
     req: Request,
     res: Response
