@@ -47,6 +47,14 @@ DashboardRouter.get(
   dashboardController.getProjectsOverview
 );
 DashboardRouter.get(
+  "/admin/completed-overview",
+  dashboardController.getCompletedOverview
+);
+DashboardRouter.get(
+  "/admin/lost-approval-overview",
+  dashboardController.getLostApprovalOverview
+);
+DashboardRouter.get(
   "/admin/orders-in-pipeline",
   dashboardController.getOrdersInPipeline
 );
@@ -109,6 +117,10 @@ DashboardRouter.get(
 DashboardRouter.get(
   "/admin/franchise-leads",
   dashboardController.getFranchiseLeads
+);
+DashboardRouter.get(
+  "/admin/priority-leads",
+  dashboardController.getPriorityLeadCounts
 );
 
 export default DashboardRouter;

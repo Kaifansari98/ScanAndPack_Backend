@@ -767,6 +767,144 @@ export class DashboardService {
   }
 
   // ----------------------------------------------------------------
+  // Admin Dashboard : Completed Overview (Type 17 counts by created_at)
+  // ----------------------------------------------------------------
+  public async getCompletedOverview(vendor_id: number, franchise_id?: number) {
+    const type17 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 17" },
+      select: { id: true },
+    });
+
+    if (!type17?.id) {
+      return {
+        thisWeekArray: Array(7).fill(0),
+        thisMonthArray: Array(4).fill(0),
+        thisYearArray: Array(12).fill(0),
+        thisWeekTotal: 0,
+        thisMonthTotal: 0,
+        thisYearTotal: 0,
+        overall: 0,
+      };
+    }
+
+    const baseWhere = {
+      vendor_id,
+      is_deleted: false,
+      status_id: type17.id,
+      ...(franchise_id ? { franchise_id } : {}),
+    };
+
+    const countLeadsInRange = (range?: { start: Date; end: Date }) =>
+      prisma.leadMaster.count({
+        where: {
+          ...baseWhere,
+          ...(range && { created_at: { gte: range.start, lte: range.end } }),
+        },
+      });
+
+    const weekRanges = getWeekDayRanges();
+    const thisWeekArray = [];
+    for (const r of weekRanges) {
+      thisWeekArray.push(await countLeadsInRange(r));
+    }
+
+    const monthRanges = getMonthFourRanges();
+    const thisMonthArray = [];
+    for (const r of monthRanges) {
+      thisMonthArray.push(await countLeadsInRange(r));
+    }
+
+    const yearRanges = getYearMonthRanges();
+    const thisYearArray = [];
+    for (const r of yearRanges) {
+      thisYearArray.push(await countLeadsInRange(r));
+    }
+
+    const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+    const overall = await prisma.leadMaster.count({
+      where: baseWhere,
+    });
+
+    return {
+      thisWeekArray,
+      thisMonthArray,
+      thisYearArray,
+      thisWeekTotal: sum(thisWeekArray),
+      thisMonthTotal: sum(thisMonthArray),
+      thisYearTotal: sum(thisYearArray),
+      overall,
+    };
+  }
+
+  // ----------------------------------------------------------------
+  // Admin Dashboard : Lost Approval Overview
+  // Current lead activity_status = lostApproval, bucketed by log created_at
+  // ----------------------------------------------------------------
+  public async getLostApprovalOverview(vendor_id: number, franchise_id?: number) {
+    const baseWhere = {
+      vendor_id,
+      activity_status: ActivityStatus.lostApproval,
+      lead: {
+        vendor_id,
+        is_deleted: false,
+        activity_status: ActivityStatus.lostApproval,
+        ...(franchise_id ? { franchise_id } : {}),
+      },
+    };
+
+    const countLeadsInRange = async (range?: { start: Date; end: Date }) => {
+      const rows = await prisma.leadActivityStatusLog.findMany({
+        where: {
+          ...baseWhere,
+          ...(range && { created_at: { gte: range.start, lte: range.end } }),
+        },
+        select: { lead_id: true },
+        distinct: ["lead_id"],
+      });
+      return rows.length;
+    };
+
+    const weekRanges = getWeekDayRanges();
+    const thisWeekArray = [];
+    for (const r of weekRanges) {
+      thisWeekArray.push(await countLeadsInRange(r));
+    }
+
+    const monthRanges = getMonthFourRanges();
+    const thisMonthArray = [];
+    for (const r of monthRanges) {
+      thisMonthArray.push(await countLeadsInRange(r));
+    }
+
+    const yearRanges = getYearMonthRanges();
+    const thisYearArray = [];
+    for (const r of yearRanges) {
+      thisYearArray.push(await countLeadsInRange(r));
+    }
+
+    const overall = await prisma.leadMaster.count({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        activity_status: ActivityStatus.lostApproval,
+        ...(franchise_id ? { franchise_id } : {}),
+      },
+    });
+
+    const sum = (arr: number[]) => arr.reduce((acc, v) => acc + v, 0);
+
+    return {
+      thisWeekArray,
+      thisMonthArray,
+      thisYearArray,
+      thisWeekTotal: sum(thisWeekArray),
+      thisMonthTotal: sum(thisMonthArray),
+      thisYearTotal: sum(thisYearArray),
+      overall,
+    };
+  }
+
+  // ----------------------------------------------------------------
   // Admin Dashboard : Total Revenue (sum total_project_amount)
   // ----------------------------------------------------------------
   public async getTotalRevenue(vendor_id: number, franchise_id?: number) {
@@ -1553,6 +1691,56 @@ export class DashboardService {
       productionAmount,
       installation,
       installationAmount,
+    };
+  }
+
+  // -------------------------------------------------------
+  // Admin : Priority lead counts (Open / ISM / Designing)
+  // -------------------------------------------------------
+  public async getPriorityLeadCounts(vendor_id: number, franchise_id?: number) {
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map<string, number>();
+    statuses.forEach((s) => statusMap.set(s.tag, s.id));
+
+    const baseWhere = {
+      vendor_id,
+      is_deleted: false,
+      activity_status: {
+        notIn: [
+          ActivityStatus.onHold,
+          ActivityStatus.lostApproval,
+          ActivityStatus.lost,
+        ],
+      },
+      ...(franchise_id ? { franchise_id } : {}),
+    };
+
+    const count = async (tag: string, priority: string) => {
+      const statusId = statusMap.get(tag);
+      if (!statusId) return 0;
+      return prisma.leadMaster.count({
+        where: { ...baseWhere, status_id: statusId, priority },
+      });
+    };
+
+    const [
+      openHigh,   openMedium,   openLow,
+      ismHigh,    ismMedium,    ismLow,
+      desHigh,    desMedium,    desLow,
+    ] = await Promise.all([
+      count("Type 1", "High"),   count("Type 1", "Medium"),   count("Type 1", "Low"),
+      count("Type 2", "High"),   count("Type 2", "Medium"),   count("Type 2", "Low"),
+      count("Type 3", "High"),   count("Type 3", "Medium"),   count("Type 3", "Low"),
+    ]);
+
+    return {
+      open:      { high: openHigh,  medium: openMedium,  low: openLow  },
+      ism:       { high: ismHigh,   medium: ismMedium,   low: ismLow   },
+      designing: { high: desHigh,   medium: desMedium,   low: desLow   },
     };
   }
 
