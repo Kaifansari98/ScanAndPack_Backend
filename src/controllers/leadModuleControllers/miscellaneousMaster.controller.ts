@@ -242,7 +242,15 @@ export const toggleMiscTeamStatus = async (req: Request, res: Response) => {
 export const  getPendingMiscellaneousLeads = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
-    const franchiseId = req.body.franchise_id ? Number(req.body.franchise_id) : undefined;
+    const userType = String(req.body.user_type || "").toLowerCase();
+    const skipFranchiseFilter =
+      userType === "factory" ||
+      userType === "site-supervisor" ||
+      userType === "backend";
+    const franchiseId =
+      !skipFranchiseFilter && req.body.franchise_id
+        ? Number(req.body.franchise_id)
+        : undefined;
     const page = parseInt((req.body.page as string) || "1");
     const limit = parseInt((req.body.limit as string) || "10");
 
@@ -362,9 +370,15 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
 export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Response) => {
   try {
     const vendorId = Number(req.params.vendorId);
-    const franchiseId = req.query.franchise_id
-      ? Number(req.query.franchise_id)
-      : undefined;
+    const userType = String(req.query.user_type || "").toLowerCase();
+    const skipFranchiseFilter =
+      userType === "factory" ||
+      userType === "site-supervisor" ||
+      userType === "backend";
+    const franchiseId =
+      !skipFranchiseFilter && req.query.franchise_id
+        ? Number(req.query.franchise_id)
+        : undefined;
 
     if (!vendorId) {
       return res.status(400).json({
