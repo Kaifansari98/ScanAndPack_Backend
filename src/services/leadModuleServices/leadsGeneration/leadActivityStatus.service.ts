@@ -78,6 +78,8 @@ export class LeadActivityStatusService {
       throw new Error("Remark is required when changing activity status.");
     }
 
+    const affectedTaskUserIds = new Set<number>();
+
     const lead = await prisma.$transaction(async (tx) => {
       // 1. Update LeadMaster
       const updatedLead = await tx.leadMaster.update({
@@ -102,7 +104,39 @@ export class LeadActivityStatusService {
         },
       });
 
-      // 3. If status is onHold → create a follow-up task
+      // 3. If status is lost → cancel all still-open tasks for this lead
+      if (status === ActivityStatus.lost) {
+        const openTasks = await tx.userLeadTask.findMany({
+          where: {
+            lead_id: leadId,
+            vendor_id: vendorId,
+            status: "open",
+          },
+          select: {
+            id: true,
+            user_id: true,
+          },
+        });
+
+        openTasks.forEach((task) => affectedTaskUserIds.add(task.user_id));
+
+        if (openTasks.length > 0) {
+          await tx.userLeadTask.updateMany({
+            where: {
+              id: { in: openTasks.map((task) => task.id) },
+            },
+            data: {
+              status: "cancelled",
+              closed_by: userId,
+              closed_at: new Date(),
+              remark: "Lead has been marked as Lost.",
+              updated_by: createdBy,
+            },
+          });
+        }
+      }
+
+      // 4. If status is onHold → create a follow-up task
       if (status === ActivityStatus.onHold) {
         if (!dueDate) {
           throw new Error("Due date is required when marking lead as On Hold.");
@@ -136,8 +170,13 @@ export class LeadActivityStatusService {
 
       // 🧹 Invalidate Sales-Executive Dashboard Cache
       await cache.del(`dashboard:tasks:${vendorId}:${userId}`);
+      await Promise.all(
+        Array.from(affectedTaskUserIds).map((taskUserId) =>
+          cache.del(`dashboard:tasks:${vendorId}:${taskUserId}`),
+        ),
+      );
 
-      // 4. Insert into LeadDetailedLogs (Audit Trail)
+      // 5. Insert into LeadDetailedLogs (Audit Trail)
       let actionMessage = "";
 
       if (status === ActivityStatus.onHold) {
