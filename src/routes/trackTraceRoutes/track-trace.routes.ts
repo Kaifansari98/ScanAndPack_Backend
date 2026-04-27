@@ -44,7 +44,8 @@ import {
   getProjectDefects,
   getDefectSummary,
   getPendingDefects,
-  getResolvedDefects
+  getResolvedDefects,
+  syncProducts
 
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
@@ -156,6 +157,11 @@ router.get("/defect-dashboard/:vendor_id/project/:unique_project_id", getProject
 router.get("/defect-dashboard/:vendor_id/summary",  getDefectSummary);
 router.get("/defect-dashboard/:vendor_id/pending",  getPendingDefects);
 router.get("/defect-dashboard/:vendor_id/resolved", getResolvedDefects);
+
+router.post("/sync-cadbid-products", syncProducts);
+
+
+
 
 
 

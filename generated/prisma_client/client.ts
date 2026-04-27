@@ -579,3 +579,13 @@ export type ProjectCategoriesMaster = Prisma.ProjectCategoriesMasterModel
  * 
  */
 export type ProjectCategoriesMasterVendorMapping = Prisma.ProjectCategoriesMasterVendorMappingModel
+/**
+ * Model BrandMaster
+ * 
+ */
+export type BrandMaster = Prisma.BrandMasterModel
+/**
+ * Model ProductMaster
+ * 
+ */
+export type ProductMaster = Prisma.ProductMasterModel

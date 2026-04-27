@@ -891,6 +891,40 @@ export type EnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
 }
 
+export type EnumBrandActiveFlagFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrandActiveFlag | Prisma.EnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel> | $Enums.BrandActiveFlag
+}
+
+export type EnumBrandActiveFlagWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrandActiveFlag | Prisma.EnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBrandActiveFlagWithAggregatesFilter<$PrismaModel> | $Enums.BrandActiveFlag
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel>
+}
+
+export type EnumProductActiveFlagFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductActiveFlag | Prisma.EnumProductActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel> | $Enums.ProductActiveFlag
+}
+
+export type EnumProductActiveFlagWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductActiveFlag | Prisma.EnumProductActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductActiveFlagWithAggregatesFilter<$PrismaModel> | $Enums.ProductActiveFlag
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -1703,6 +1737,40 @@ export type NestedEnumProjectCategoriesStatusWithAggregatesFilter<$PrismaModel =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumProjectCategoriesStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumBrandActiveFlagFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrandActiveFlag | Prisma.EnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel> | $Enums.BrandActiveFlag
+}
+
+export type NestedEnumBrandActiveFlagWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BrandActiveFlag | Prisma.EnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BrandActiveFlag[] | Prisma.ListEnumBrandActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBrandActiveFlagWithAggregatesFilter<$PrismaModel> | $Enums.BrandActiveFlag
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBrandActiveFlagFilter<$PrismaModel>
+}
+
+export type NestedEnumProductActiveFlagFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductActiveFlag | Prisma.EnumProductActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel> | $Enums.ProductActiveFlag
+}
+
+export type NestedEnumProductActiveFlagWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ProductActiveFlag | Prisma.EnumProductActiveFlagFieldRefInput<$PrismaModel>
+  in?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ProductActiveFlag[] | Prisma.ListEnumProductActiveFlagFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumProductActiveFlagWithAggregatesFilter<$PrismaModel> | $Enums.ProductActiveFlag
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumProductActiveFlagFilter<$PrismaModel>
 }
 
 
