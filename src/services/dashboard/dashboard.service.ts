@@ -2076,7 +2076,11 @@ export class DashboardService {
       select: {
         id: true,
         expected_ready_date: true,
+        required_delivery_date: true,
         misc_approved: true,
+        is_resolved: true,
+        problem_description: true,
+        reorder_material_details: true,
         lead: {
           select: {
             id: true,
@@ -2094,21 +2098,52 @@ export class DashboardService {
       take: 50,
     });
 
-    return items.map((item) => ({
-      id: item.id,
-      lead_id: item.lead.id,
-      account_id: item.lead.account_id,
-      lead_code: item.lead.lead_code ?? "",
-      client: `${item.lead.firstname ?? ""} ${item.lead.lastname ?? ""}`.trim(),
-      misc_type: item.type.name,
-      expected_ready_date: item.expected_ready_date,
-      status:
-        item.misc_approved === true
-          ? "approved"
-          : item.misc_approved === false
-          ? "rejected"
-          : "pending",
-    }));
+    if (items.length === 0) return [];
+
+    const leadIds = [...new Set(items.map((i) => i.lead.id))];
+
+    const miscTasks = await prisma.userLeadTask.findMany({
+      where: { vendor_id, lead_id: { in: leadIds }, task_type: "Miscellaneous" },
+      select: { id: true, lead_id: true, task_type: true, remark: true, status: true },
+    });
+
+    return items.map((item) => {
+      const miscTaskKey = `[misc:${item.id}]`;
+      const remarkKey = `${item.reorder_material_details} - ${item.problem_description}`;
+
+      const leadTasks = miscTasks.filter((t) => t.lead_id === item.lead.id);
+
+      const task = leadTasks.find(
+        (t) =>
+          (t.remark && t.remark.includes(miscTaskKey)) ||
+          t.remark === remarkKey
+      );
+
+      const deliveryTask = leadTasks.find(
+        (t) =>
+          typeof t.remark === "string" &&
+          t.remark.includes("Required delivery date set for") &&
+          item.reorder_material_details != null &&
+          item.problem_description != null &&
+          t.remark.includes(item.reorder_material_details) &&
+          t.remark.includes(item.problem_description)
+      );
+
+      return {
+        id: item.id,
+        lead_id: item.lead.id,
+        account_id: item.lead.account_id,
+        lead_code: item.lead.lead_code ?? "",
+        client: `${item.lead.firstname ?? ""} ${item.lead.lastname ?? ""}`.trim(),
+        misc_type: item.type.name,
+        expected_ready_date: item.expected_ready_date,
+        required_delivery_date: item.required_delivery_date,
+        misc_approved: item.misc_approved,
+        is_resolved: item.is_resolved,
+        task_status: task?.status ?? null,
+        delivery_task_status: deliveryTask?.status ?? null,
+      };
+    });
   }
 
   // -------------------------------------------------------
