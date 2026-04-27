@@ -1997,7 +1997,6 @@ export class DashboardService {
       where: {
         vendor_id,
         is_deleted: false,
-        dispatch_date: { not: null },
         status_id: type14.id,
         userMappings: { some: { user_id, status: LeadUserStatus.active } },
       },
