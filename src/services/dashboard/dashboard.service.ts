@@ -1998,7 +1998,7 @@ export class DashboardService {
         vendor_id,
         is_deleted: false,
         dispatch_date: { not: null },
-        leadStatusLogs: { some: { status_id: type14.id } },
+        status_id: type14.id,
         userMappings: { some: { user_id, status: LeadUserStatus.active } },
       },
     });
