@@ -1793,20 +1793,49 @@ export class DashboardService {
     page = 1,
     limit = 20,
     search = "",
-    status?: string
+    status?: string,
+    overview?: string
   ) {
     const skip = (page - 1) * limit;
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    const startOfTomorrow = new Date(startOfToday);
+    startOfTomorrow.setDate(startOfTomorrow.getDate() + 1);
 
     const statusFilter =
       status && status !== "all"
         ? { in: [status as any] }
         : { in: ["open", "in_progress", "completed"] as const };
 
+    const overviewWhere =
+      overview === "today"
+        ? {
+            status: { not: "completed" as const },
+            due_date: { gte: startOfToday, lt: startOfTomorrow },
+          }
+        : overview === "upcoming"
+          ? {
+              status: { not: "completed" as const },
+              due_date: { gte: startOfTomorrow },
+            }
+          : overview === "overdue"
+            ? {
+                status: { not: "completed" as const },
+                due_date: { lt: startOfToday },
+              }
+            : undefined;
+
+    const andConditions: any[] = [];
+    if (overviewWhere) {
+      andConditions.push(overviewWhere);
+    }
+
     const where: any = {
       vendor_id,
       status: statusFilter,
       ...(franchise_id ? { franchise_id } : {}),
       user: { user_type: { user_type: "sales-executive" } },
+      ...(andConditions.length ? { AND: andConditions } : {}),
       ...(search
         ? {
             OR: [
