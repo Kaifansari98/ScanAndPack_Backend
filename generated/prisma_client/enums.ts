@@ -9,6 +9,22 @@
 * 🟢 You can import this file directly.
 */
 
+export const ProductActiveFlag = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type ProductActiveFlag = (typeof ProductActiveFlag)[keyof typeof ProductActiveFlag]
+
+
+export const BrandActiveFlag = {
+  Yes: 'Yes',
+  No: 'No'
+} as const
+
+export type BrandActiveFlag = (typeof BrandActiveFlag)[keyof typeof BrandActiveFlag]
+
+
 export const ProjectCategoriesStatus = {
   Yes: 'Yes',
   No: 'No'

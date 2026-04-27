@@ -158,7 +158,9 @@ export const ModelName = {
   DefectCompletionPhoto: 'DefectCompletionPhoto',
   ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
   ProjectCategoriesMaster: 'ProjectCategoriesMaster',
-  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping'
+  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
+  BrandMaster: 'BrandMaster',
+  ProductMaster: 'ProductMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1835,6 +1837,63 @@ export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {
 } as const
 
 export type ProjectCategoriesMasterVendorMappingScalarFieldEnum = (typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum)[keyof typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum]
+
+
+export const BrandMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  brand_name: 'brand_name',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BrandMasterScalarFieldEnum = (typeof BrandMasterScalarFieldEnum)[keyof typeof BrandMasterScalarFieldEnum]
+
+
+export const ProductMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  item_id: 'item_id',
+  rotation: 'rotation',
+  alt_conv_factor: 'alt_conv_factor',
+  board_length: 'board_length',
+  board_width: 'board_width',
+  dimension_1: 'dimension_1',
+  dimension_2: 'dimension_2',
+  dimension_3: 'dimension_3',
+  installation_charges: 'installation_charges',
+  item1_weight: 'item1_weight',
+  level1_price: 'level1_price',
+  level2_price: 'level2_price',
+  level3_price: 'level3_price',
+  moq: 'moq',
+  no_of_drill_holes: 'no_of_drill_holes',
+  pre_mill_width: 'pre_mill_width',
+  alt_uom_text: 'alt_uom_text',
+  brand_id: 'brand_id',
+  category_id: 'category_id',
+  article_code: 'article_code',
+  core_material: 'core_material',
+  edge_banding_color: 'edge_banding_color',
+  finish: 'finish',
+  group: 'group',
+  hsn_code: 'hsn_code',
+  product_name: 'product_name',
+  procurement: 'procurement',
+  unit_of_measure: 'unit_of_measure',
+  vendor_code: 'vendor_code',
+  custom_field_1: 'custom_field_1',
+  custom_field_2: 'custom_field_2',
+  custom_field_3: 'custom_field_3',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  active: 'active'
+} as const
+
+export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
 
 
 export const SortOrder = {

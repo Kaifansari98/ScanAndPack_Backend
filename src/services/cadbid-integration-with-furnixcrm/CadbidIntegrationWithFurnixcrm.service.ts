@@ -2,7 +2,7 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 
 const CADBID_CREATE_EXTERNAL_CUSTOMER_URL =
-  "https://cadbid.com/api/customers/create-external-customer";
+  process.env.CADBID_URL + "/api/customers/create-external-customer";
 const CADBID_EXTERNAL_PLATFORM_TYPE = "CADBID";
 
 type CadbidExternalCustomerPayload = {

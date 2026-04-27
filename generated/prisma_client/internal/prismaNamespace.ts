@@ -491,7 +491,9 @@ export const ModelName = {
   DefectCompletionPhoto: 'DefectCompletionPhoto',
   ProjectCategoriesTypeMaster: 'ProjectCategoriesTypeMaster',
   ProjectCategoriesMaster: 'ProjectCategoriesMaster',
-  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping'
+  ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
+  BrandMaster: 'BrandMaster',
+  ProductMaster: 'ProductMaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -507,7 +509,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "userSession" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "userSession" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -8503,6 +8505,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    BrandMaster: {
+      payload: Prisma.$BrandMasterPayload<ExtArgs>
+      fields: Prisma.BrandMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BrandMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BrandMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.BrandMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BrandMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        findMany: {
+          args: Prisma.BrandMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>[]
+        }
+        create: {
+          args: Prisma.BrandMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        createMany: {
+          args: Prisma.BrandMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BrandMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.BrandMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        update: {
+          args: Prisma.BrandMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.BrandMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BrandMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BrandMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.BrandMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BrandMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.BrandMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBrandMaster>
+        }
+        groupBy: {
+          args: Prisma.BrandMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BrandMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BrandMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BrandMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProductMaster: {
+      payload: Prisma.$ProductMasterPayload<ExtArgs>
+      fields: Prisma.ProductMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProductMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProductMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ProductMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProductMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ProductMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ProductMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ProductMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProductMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ProductMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        update: {
+          args: Prisma.ProductMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProductMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProductMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProductMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProductMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ProductMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProductMaster>
+        }
+        groupBy: {
+          args: Prisma.ProductMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProductMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductMasterCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -10202,6 +10352,63 @@ export const ProjectCategoriesMasterVendorMappingScalarFieldEnum = {
 export type ProjectCategoriesMasterVendorMappingScalarFieldEnum = (typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum)[keyof typeof ProjectCategoriesMasterVendorMappingScalarFieldEnum]
 
 
+export const BrandMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  brand_name: 'brand_name',
+  active: 'active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type BrandMasterScalarFieldEnum = (typeof BrandMasterScalarFieldEnum)[keyof typeof BrandMasterScalarFieldEnum]
+
+
+export const ProductMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  item_id: 'item_id',
+  rotation: 'rotation',
+  alt_conv_factor: 'alt_conv_factor',
+  board_length: 'board_length',
+  board_width: 'board_width',
+  dimension_1: 'dimension_1',
+  dimension_2: 'dimension_2',
+  dimension_3: 'dimension_3',
+  installation_charges: 'installation_charges',
+  item1_weight: 'item1_weight',
+  level1_price: 'level1_price',
+  level2_price: 'level2_price',
+  level3_price: 'level3_price',
+  moq: 'moq',
+  no_of_drill_holes: 'no_of_drill_holes',
+  pre_mill_width: 'pre_mill_width',
+  alt_uom_text: 'alt_uom_text',
+  brand_id: 'brand_id',
+  category_id: 'category_id',
+  article_code: 'article_code',
+  core_material: 'core_material',
+  edge_banding_color: 'edge_banding_color',
+  finish: 'finish',
+  group: 'group',
+  hsn_code: 'hsn_code',
+  product_name: 'product_name',
+  procurement: 'procurement',
+  unit_of_measure: 'unit_of_measure',
+  vendor_code: 'vendor_code',
+  custom_field_1: 'custom_field_1',
+  custom_field_2: 'custom_field_2',
+  custom_field_3: 'custom_field_3',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  active: 'active'
+} as const
+
+export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -10752,6 +10959,34 @@ export type EnumProjectCategoriesStatusFieldRefInput<$PrismaModel> = FieldRefInp
 export type ListEnumProjectCategoriesStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectCategoriesStatus[]'>
     
 
+
+/**
+ * Reference to a field of type 'BrandActiveFlag'
+ */
+export type EnumBrandActiveFlagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandActiveFlag'>
+    
+
+
+/**
+ * Reference to a field of type 'BrandActiveFlag[]'
+ */
+export type ListEnumBrandActiveFlagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BrandActiveFlag[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductActiveFlag'
+ */
+export type EnumProductActiveFlagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductActiveFlag'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductActiveFlag[]'
+ */
+export type ListEnumProductActiveFlagFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductActiveFlag[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -10955,6 +11190,8 @@ export type GlobalOmitConfig = {
   projectCategoriesTypeMaster?: Prisma.ProjectCategoriesTypeMasterOmit
   projectCategoriesMaster?: Prisma.ProjectCategoriesMasterOmit
   projectCategoriesMasterVendorMapping?: Prisma.ProjectCategoriesMasterVendorMappingOmit
+  brandMaster?: Prisma.BrandMasterOmit
+  productMaster?: Prisma.ProductMasterOmit
 }
 
 /* Types for Logging */

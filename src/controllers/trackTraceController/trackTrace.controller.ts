@@ -1170,3 +1170,51 @@ export const getResolvedDefects = async (req: Request, res: Response) => {
     return res.status(500).json(ApiResponse.error("Internal server error", 500));
   }
 };
+
+
+export const syncProducts = async (req: Request, res: Response) => {
+  try {
+    // console.log(req.body);return;
+    const vendor_id = Number(
+      req.body.vendor_id ?? req.query.vendor_id
+    );
+
+    if (isNaN(vendor_id)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid vendor_id", 400));
+    }
+
+    const result =
+      await trackTraceService.syncProductsFromExternalService(
+        vendor_id
+      );
+
+    if (result.status === 0) {
+      return res
+        .status(200)
+        .json(ApiResponse.error(result.message, 500));
+    }
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result.data,
+          result.message,
+          200
+        )
+      );
+  } catch (err) {
+    console.error("syncProducts error:", err);
+
+    return res
+      .status(500)
+      .json(
+        ApiResponse.error(
+          "Internal server error",
+          500
+        )
+      );
+  }
+};

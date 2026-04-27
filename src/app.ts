@@ -31,6 +31,15 @@ function isFurnixSubdomain(origin: string) {
   }
 }
 
+function isCadbidSubdomain(origin: string) {
+  try {
+    const url = new URL(origin);
+    return url.hostname.endsWith(".cadbid.com");
+  } catch {
+    return false;
+  }
+}
+
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -38,6 +47,10 @@ app.use(
 
       // ✅ Allow *.furnixcrm.com
       if (isFurnixSubdomain(origin)) {
+        return callback(null, true);
+      }
+
+       if (isCadbidSubdomain(origin)) {
         return callback(null, true);
       }
 

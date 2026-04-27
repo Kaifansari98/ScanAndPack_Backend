@@ -101,6 +101,8 @@ model VendorMaster {
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
   projectCategoriesMaster              ProjectCategoriesMaster[]
   projectCategoriesVendorMappings      ProjectCategoriesMasterVendorMapping[]
+  brands   BrandMaster[]
+products ProductMaster[]
 }
 
 model VendorAddress {
@@ -2075,6 +2077,7 @@ model ProjectCategoriesMaster {
   external_category_id                 Int?
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
+  products ProductMaster[]
 }
 
 model ProjectCategoriesMasterVendorMapping {
@@ -2092,6 +2095,84 @@ model ProjectCategoriesMasterVendorMapping {
   vendor                      VendorMaster                @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   createdBy                   UserMaster                  @relation("ProjectCategoriesVendorMapping_createdBy", fields: [created_by], references: [id])
   updatedBy                   UserMaster                  @relation("ProjectCategoriesVendorMapping_updatedBy", fields: [updated_by], references: [id])
+}
+
+
+
+model BrandMaster {
+  id         Int         @id @default(autoincrement())
+  vendor_id  Int
+  brand_name String
+  active     BrandActiveFlag  @default(Yes)
+
+  vendor   VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([vendor_id])
+}
+
+model ProductMaster {
+  id                    Int         @id @default(autoincrement())
+  vendor_id             Int
+  item_id               Int
+  rotation              Int         @default(0)
+  alt_conv_factor       Float       @default(0)
+  board_length          Float       @default(0)
+  board_width           Float       @default(0)
+  dimension_1           Float       @default(0)
+  dimension_2           Float       @default(0)
+  dimension_3           Float       @default(0)
+  installation_charges  Decimal?    @db.Decimal(12, 2)
+  item1_weight          Decimal?    @db.Decimal(12, 2)
+  level1_price          Decimal?    @db.Decimal(12, 2)
+  level2_price          Decimal?    @db.Decimal(12, 2)
+  level3_price          Decimal?    @db.Decimal(12, 2)
+  moq                   Int         @default(0)
+  no_of_drill_holes     Int         @default(0)
+  pre_mill_width        Float       @default(0)
+  alt_uom_text          String?
+  brand_id              Int?
+  category_id           Int
+  article_code          String?
+  core_material         String?
+  edge_banding_color    String?
+  finish                String?
+  group                 String?
+  hsn_code              Int?
+  product_name          String
+  procurement           String?
+  unit_of_measure       String?
+  vendor_code           String?
+  custom_field_1        String?
+  custom_field_2        String?
+  custom_field_3        String?
+  created_by            Int?
+  created_at            DateTime    @default(now())
+  updated_at            DateTime    @updatedAt
+  updated_by            Int?
+  active                ProductActiveFlag  @default(Yes)
+
+  vendor   VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  brand                 BrandMaster?              @relation(fields: [brand_id], references: [id], onDelete: SetNull)
+  category ProjectCategoriesMaster  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([brand_id])
+  @@index([category_id])
+  @@index([item_id])
+}
+
+enum ProductActiveFlag {
+  Yes
+  No
+}
+
+enum BrandActiveFlag {
+  Yes
+  No
 }
 
 enum ProjectCategoriesStatus {
