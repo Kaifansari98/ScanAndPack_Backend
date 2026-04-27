@@ -16,7 +16,7 @@ interface TrackTracePayload {
   machine_id: number;
   unique_code: string;
   created_by: number;
-  box_id?:number;
+  box_id?: number;
 }
 
 // export const updateScannedItem = async (payload: TrackTracePayload) => {
@@ -683,7 +683,7 @@ export const updateScannedItem = async (
           }
 
           console.log("mappedItem", mappedItem);
-          return validationResponse(1, '', { mappedItem, activeDefect,countdown_timer: 3 });
+          return validationResponse(1, '', { mappedItem, activeDefect, countdown_timer: 3 });
 
         } else {
           updateScannedItem(payload, false, files);
@@ -3263,7 +3263,7 @@ async function sumQty(cutListIds: number[]): Promise<number> {
 
 export const getTraceTraceDashboard = async (vendor_id: number) => {
   try {
- 
+
     // ── 1. Fetch all projects for this vendor ──────────────────────────────
     const projects = await prisma.projectMaster.findMany({
       where: { vendor_id },
@@ -3276,7 +3276,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
       },
       orderBy: { created_at: "desc" },
     });
- 
+
     // ── 2. Fetch all non-PASS machines ordered by sequence ─────────────────
     const machines = await prisma.machineMaster.findMany({
       where: {
@@ -3287,10 +3287,10 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
       select: { id: true, machine_name: true, sequence_no: true, machine_type_id: true },
       orderBy: { sequence_no: "asc" },
     });
- 
+
     // ── 3. For each project, compute per-machine counts ────────────────────
     const buildProjectStatus = async (project: (typeof projects)[0]) => {
- 
+
       // Pre-compute scanned count per machine for this project (used for waterfall)
       const scannedPerMachine: Map<number, number> = new Map();
       for (const machine of machines) {
@@ -3305,7 +3305,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
         });
         scannedPerMachine.set(machine.id, count);
       }
- 
+
       const machineStatuses = await Promise.all(
         machines.map(async (machine, index) => {
           // Check if this machine is assigned to this project at all
@@ -3317,30 +3317,30 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               expected_in: true,
             },
           });
- 
+
           if (assigned === 0) return null;
- 
+
           const scanned = scannedPerMachine.get(machine.id) ?? 0;
- 
+
           // ── Waterfall total ──────────────────────────────────────────────
           // total = rows at this machine where this cut_list's LAST assigned
           // machine before this one has been scanned (actual_in_at != null).
           // This correctly handles cut_lists that skip intermediate machines.
           let total: number;
- 
+
           const isQCStation = machine.machine_type_id === 17 || machine.machine_type_id === 18;
- 
+
           if (index === 0) {
             // First machine: total = all assigned rows
             total = assigned;
- 
+
           } else if (isQCStation) {
             // QC Station:
             // Part A — cut_lists that DO have a prior machine assignment:
             //   eligible if their last assigned machine before QC is scanned
             // Part B — cut_lists with NO prior machine assignment (QC-only):
             //   always eligible (count all their QC rows)
- 
+
             // Find cut_list_ids that have at least one row at seq < QC seq
             const cutListsWithPrior = await prisma.cutListMachineMapping.findMany({
               where: {
@@ -3353,7 +3353,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               distinct: ["cut_list_id"],
             });
             const cutListIdsWithPrior = cutListsWithPrior.map((r) => r.cut_list_id);
- 
+
             // Part A: rows at QC where cut_list HAS prior machines
             // eligible = the immediately previous assigned machine for that cut_list is scanned
             // We count QC rows where the cut_list's max-seq prior row has actual_in_at != null
@@ -3369,7 +3369,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               },
               select: { cut_list_id: true, id: true },
             });
- 
+
             // For each Part A row, check if the last prior machine is scanned
             let partAEligible = 0;
             for (const row of partARows) {
@@ -3389,7 +3389,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
                 partAEligible++;
               }
             }
- 
+
             // Part B: QC-only rows (no prior machine at all) — always eligible
             const partBCount = await prisma.cutListMachineMapping.count({
               where: {
@@ -3403,9 +3403,9 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
                 ),
               },
             });
- 
+
             total = partAEligible + partBCount;
- 
+
           } else {
             // Normal machines: count rows at this machine where
             // the last assigned machine before this one (for that cut_list) is scanned
@@ -3418,7 +3418,7 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
               },
               select: { cut_list_id: true },
             });
- 
+
             let eligible = 0;
             for (const row of thisMachineRows) {
               // Find the last machine assigned to this cut_list before current seq
@@ -3433,23 +3433,23 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
                 orderBy: { sequence_no: "desc" },
                 select: { actual_in_at: true },
               });
- 
+
               if (!lastPriorRow) {
                 // No prior machine for this cut_list — not eligible yet
                 // (shouldn't happen for non-first machines in normal flow)
                 continue;
               }
- 
+
               if (lastPriorRow.actual_in_at !== null) {
                 eligible++;
               }
             }
- 
+
             total = eligible;
           }
- 
+
           const pending = Math.max(0, total - scanned);
- 
+
           return {
             machine_id: machine.id,
             machine_name: machine.machine_name,
@@ -3461,26 +3461,26 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
           };
         })
       );
- 
+
       // ── Panels: total and fully scanned ───────────────────────────────────
       const firstMachine = machines[0];
       const lastMachine = machines[machines.length - 1];
- 
+
       const total_panels = firstMachine
         ? await prisma.cutListMachineMapping.count({
-            where: {
-              project_id: project.id,
-              vendor_id,
-              machine_id: firstMachine.id,
-              expected_in: true,
-            },
-          })
+          where: {
+            project_id: project.id,
+            vendor_id,
+            machine_id: firstMachine.id,
+            expected_in: true,
+          },
+        })
         : 0;
- 
+
       const panels_scanned = lastMachine
         ? (scannedPerMachine.get(lastMachine.id) ?? 0)
         : 0;
- 
+
       return {
         project_id: project.id,
         project_name: project.project_name,
@@ -3492,14 +3492,14 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
         machines: machineStatuses.filter(Boolean),
       };
     };
- 
+
     const allStatuses = await Promise.all(projects.map(buildProjectStatus));
- 
+
     // ── 4. Split into active vs archived ───────────────────────────────────
     const activeStatuses = ["Initiated", "Started"];
     const active = allStatuses.filter((p) => activeStatuses.includes(p.project_status));
     const archived = allStatuses.filter((p) => !activeStatuses.includes(p.project_status));
- 
+
     return validationResponse(1, "", {
       active,
       archived,
@@ -3535,14 +3535,14 @@ export const getProjectCategories = async (vendor_id: number) => {
         },
       },
     });
- 
+
     return validationResponse(1, "", { categories });
   } catch (error) {
     console.error("Error in getProjectCategories", error);
     return validationResponse(0, "Something went wrong");
   }
 };
- 
+
 // ─── Get all type masters ─────────────────────────────────────────────────────
 export const getProjectCategoryTypes = async () => {
   try {
@@ -3550,14 +3550,14 @@ export const getProjectCategoryTypes = async () => {
       orderBy: { module_name: "asc" },
       select: { id: true, module_name: true },
     });
- 
+
     return validationResponse(1, "", { types });
   } catch (error) {
     console.error("Error in getProjectCategoryTypes", error);
     return validationResponse(0, "Something went wrong");
   }
 };
- 
+
 // ─── Create category + assign type mappings ───────────────────────────────────
 export const createProjectCategory = async (
   vendor_id: number,
@@ -3570,7 +3570,7 @@ export const createProjectCategory = async (
       const category = await tx.projectCategoriesMaster.create({
         data: { category_name, vendor_id, status: "Yes" },
       });
- 
+
       if (type_ids.length > 0) {
         await tx.projectCategoriesMasterVendorMapping.createMany({
           data: type_ids.map((type_id) => ({
@@ -3582,17 +3582,17 @@ export const createProjectCategory = async (
           })),
         });
       }
- 
+
       return category;
     });
- 
+
     return validationResponse(1, "Category created successfully", { id: result.id });
   } catch (error) {
     console.error("Error in createProjectCategory", error);
     return validationResponse(0, "Something went wrong");
   }
 };
- 
+
 // ─── Update category name, status, and type mappings ─────────────────────────
 export const updateProjectCategory = async (
   id: number,
@@ -3608,12 +3608,12 @@ export const updateProjectCategory = async (
         where: { id },
         data: { category_name, status },
       });
- 
+
       // Delete existing mappings and re-insert (clean replace)
       await tx.projectCategoriesMasterVendorMapping.deleteMany({
         where: { project_categories_master_id: id },
       });
- 
+
       if (type_ids.length > 0) {
         await tx.projectCategoriesMasterVendorMapping.createMany({
           data: type_ids.map((type_id) => ({
@@ -3626,14 +3626,14 @@ export const updateProjectCategory = async (
         });
       }
     });
- 
+
     return validationResponse(1, "Category updated successfully");
   } catch (error) {
     console.error("Error in updateProjectCategory", error);
     return validationResponse(0, "Something went wrong");
   }
 };
- 
+
 // ─── Toggle status ────────────────────────────────────────────────────────────
 export const toggleProjectCategoryStatus = async (
   id: number,
@@ -3644,7 +3644,7 @@ export const toggleProjectCategoryStatus = async (
       where: { id },
       data: { status },
     });
- 
+
     return validationResponse(1, `Category ${status === "Yes" ? "activated" : "deactivated"} successfully`);
   } catch (error) {
     console.error("Error in toggleProjectCategoryStatus", error);
@@ -3659,8 +3659,8 @@ export const unsetBoxFromMappingService = async (
 ) => {
   try {
 
-    
- 
+
+
     // ── 1. Find the mapping row scoped to project + vendor ───────────────────
     const mapping = await prisma.cutListMachineMapping.findFirst({
       where: {
@@ -3673,10 +3673,10 @@ export const unsetBoxFromMappingService = async (
         box_id: true,
       },
     });
- 
-    if (!mapping)        return validationResponse(0, "Mapping not found");
+
+    if (!mapping) return validationResponse(0, "Mapping not found");
     if (!mapping.box_id) return validationResponse(0, "Item is not assigned to any box");
- 
+
     // ── 2. Get project_details_id from the box ───────────────────────────────
     const box = await prisma.boxMaster.findFirst({
       where: {
@@ -3687,33 +3687,33 @@ export const unsetBoxFromMappingService = async (
       },
       select: { project_details_id: true },
     });
- 
+
     if (!box) return validationResponse(0, "Box not found");
- 
+
     // ── 3 & 4. Atomic transaction: unset box + update ProjectDetails ─────────
     await prisma.$transaction([
       prisma.cutListMachineMapping.update({
         where: { id: mapping_id },
         data: {
-          box_id:       null,
+          box_id: null,
           actual_in_at: null,
-          in_operator:  null,
+          in_operator: null,
         },
       }),
       prisma.projectDetails.update({
         where: { id: box.project_details_id },
         data: {
-          total_packed:   { decrement: 1 },
+          total_packed: { decrement: 1 },
           total_unpacked: { increment: 1 },
         },
       }),
     ]);
- 
+
     return validationResponse(1, "Item removed from box successfully", {
       mapping_id,
       project_details_id: box.project_details_id,
     });
- 
+
   } catch (error) {
     console.error("Error in unsetBoxFromMappingService:", error);
     return validationResponse(0, "Failed to remove item from box");
@@ -3734,11 +3734,11 @@ export const markBoxFactoryOutService = async (
       where: { id: box_id, project_id, vendor_id, is_deleted: false },
       select: { id: true, box_status: true, factory_out_at: true },
     });
- 
-    if (!box)                          return validationResponse(0, "Box not found");
-    if (box.box_status !== "packed")   return validationResponse(0, "Only packed boxes can be marked as factory out");
-    if (box.factory_out_at)            return validationResponse(0, "Box already marked as factory out");
- 
+
+    if (!box) return validationResponse(0, "Box not found");
+    if (box.box_status !== "packed") return validationResponse(0, "Only packed boxes can be marked as factory out");
+    if (box.factory_out_at) return validationResponse(0, "Box already marked as factory out");
+
     const updated = await prisma.boxMaster.update({
       where: { id: box_id },
       data: {
@@ -3747,15 +3747,15 @@ export const markBoxFactoryOutService = async (
       },
       select: { id: true, box_name: true, factory_out_at: true, factory_out_by: true },
     });
- 
+
     return validationResponse(1, "Box marked as factory out successfully", updated);
- 
+
   } catch (error) {
     console.error("Error in markBoxFactoryOutService:", error);
     return validationResponse(0, "Failed to mark factory out");
   }
 };
- 
+
 // ── Mark site_in_at on a box ──────────────────────────────────────────────────
 export const markBoxSiteInService = async (
   box_id: number,
@@ -3768,12 +3768,12 @@ export const markBoxSiteInService = async (
       where: { id: box_id, project_id, vendor_id, is_deleted: false },
       select: { id: true, box_status: true, factory_out_at: true, site_in_at: true },
     });
- 
-    if (!box)                        return validationResponse(0, "Box not found");
+
+    if (!box) return validationResponse(0, "Box not found");
     if (box.box_status !== "packed") return validationResponse(0, "Only packed boxes can be marked as site in");
-    if (!box.factory_out_at)         return validationResponse(0, "Box has not been marked as factory out yet");
-    if (box.site_in_at)              return validationResponse(0, "Box already marked as site in");
- 
+    if (!box.factory_out_at) return validationResponse(0, "Box has not been marked as factory out yet");
+    if (box.site_in_at) return validationResponse(0, "Box already marked as site in");
+
     const updated = await prisma.boxMaster.update({
       where: { id: box_id },
       data: {
@@ -3782,9 +3782,9 @@ export const markBoxSiteInService = async (
       },
       select: { id: true, box_name: true, site_in_at: true, site_in_by: true },
     });
- 
+
     return validationResponse(1, "Box marked as site in successfully", updated);
- 
+
   } catch (error) {
     console.error("Error in markBoxSiteInService:", error);
     return validationResponse(0, "Failed to mark site in");
@@ -3792,12 +3792,12 @@ export const markBoxSiteInService = async (
 };
 
 
-const CADBID_API_URL = "https://cadbid.com/api/category/get-ct";
+const CADBID_API_URL = process.env.CADBID_URL + "/api/category/get-ct";
 const CADBID_PLATFORM_ID = 1;
- 
+
 export const syncCategoriesFromExternalService = async (vendor_id: number) => {
   try {
- 
+
     // ── 1. Check ExternalPlatformToken for this vendor ───────────────────────
     const tokenRecord = await prisma.externalPlatformToken.findFirst({
       where: {
@@ -3807,15 +3807,15 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
       },
       select: { id: true, token: true },
     });
- 
-    console.log("tokenRecord.token:",tokenRecord?.token);
+
+    console.log("tokenRecord.token:", tokenRecord?.token);
     if (!tokenRecord) {
       return validationResponse(0, "No active token found for this vendor. Please connect your CadBid account first.");
     }
- 
+
     // ── 2. Call CadBid API ───────────────────────────────────────────────────
     let externalCategories: { nItemCategoryId: number; sName: string }[] = [];
- 
+
     try {
       const response = await axios.get(CADBID_API_URL, {
         headers: {
@@ -3823,7 +3823,7 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
         },
         timeout: 15000,
       });
-      
+
       // externalCategories = Array.isArray(response.data.categories) ? response.data : [];
       externalCategories = Array.isArray(response.data?.categories) ? response.data.categories : [];
 
@@ -3832,23 +3832,23 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
       console.error("CadBid API error:", apiErr?.response?.data ?? apiErr.message);
       return validationResponse(0, "Failed to fetch categories from CadBid. Please check your token.");
     }
- 
+
     if (externalCategories.length === 0) {
       return validationResponse(0, "No categories returned from CadBid");
     }
- 
+
     // ── 3. Upsert into ProjectCategoriesMaster ───────────────────────────────
     // Upsert key: external_category_id + vendor_id
     // ProjectCategoriesMaster has no unique constraint on those two fields,
     // so we do a manual find-then-create-or-update.
- 
+
     let created = 0;
     let updated = 0;
- 
+
     for (const cat of externalCategories) {
       const { nItemCategoryId, sName } = cat;
       if (!nItemCategoryId || !sName) continue;
- 
+
       const existing = await prisma.projectCategoriesMaster.findFirst({
         where: {
           external_category_id: nItemCategoryId,
@@ -3856,7 +3856,7 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
         },
         select: { id: true, category_name: true },
       });
- 
+
       if (existing) {
         // Update name if changed
         if (existing.category_name !== sName) {
@@ -3870,28 +3870,28 @@ export const syncCategoriesFromExternalService = async (vendor_id: number) => {
         await prisma.projectCategoriesMaster.create({
           data: {
             vendor_id,
-            category_name:       sName,
+            category_name: sName,
             external_category_id: nItemCategoryId,
-            status:              "Yes",
+            status: "Yes",
           },
         });
         created++;
       }
     }
- 
+
     return validationResponse(1, `Sync complete. ${created} created, ${updated} updated.`, {
-      total:   externalCategories.length,
+      total: externalCategories.length,
       created,
       updated,
       skipped: externalCategories.length - created - updated,
     });
- 
+
   } catch (error) {
     console.error("Error in syncCategoriesFromExternalService:", error);
     return validationResponse(0, "Sync failed");
   }
 };
- 
+
 // ── Check if vendor has an active token ──────────────────────────────────────
 export const checkExternalTokenService = async (vendor_id: number) => {
   try {
@@ -3903,7 +3903,7 @@ export const checkExternalTokenService = async (vendor_id: number) => {
       },
       select: { id: true, name: true, email: true, created_at: true },
     });
- 
+
     return validationResponse(1, "Token status fetched", { has_token: !!token, token });
   } catch (error) {
     console.error("Error in checkExternalTokenService:", error);
@@ -3919,7 +3919,7 @@ export const getProjectDetailService = async (
   unique_project_id: string
 ) => {
   try {
- 
+
     // ── Resolve unique_project_id → project_id ────────────────────────────────
     const projectLookup = await prisma.projectMaster.findFirst({
       where: { unique_project_id, vendor_id },
@@ -3927,7 +3927,7 @@ export const getProjectDetailService = async (
     });
     if (!projectLookup) return validationResponse(0, "Project not found");
     const project_id = projectLookup.id;
- 
+
     // ── 1. Project + lead info ────────────────────────────────────────────────
     const project = await prisma.projectMaster.findFirst({
       where: { id: project_id, vendor_id },
@@ -3951,9 +3951,9 @@ export const getProjectDetailService = async (
         },
       },
     });
- 
+
     if (!project) return validationResponse(0, "Project not found");
- 
+
     // Fetch lead separately
     let lead: { firstname: string; contact_no: string; email: string | null; site_address: string | null } | null = null;
     if (project.lead_id) {
@@ -3962,7 +3962,7 @@ export const getProjectDetailService = async (
         select: { firstname: true, contact_no: true, email: true, site_address: true },
       });
     }
- 
+
     // ── 2. Boxes ──────────────────────────────────────────────────────────────
     const boxes = await prisma.boxMaster.findMany({
       where: { project_id, vendor_id, is_deleted: false },
@@ -3977,7 +3977,7 @@ export const getProjectDetailService = async (
       },
       orderBy: { id: "asc" },
     });
- 
+
     const boxItemCounts = await Promise.all(
       boxes.map(b =>
         prisma.cutListMachineMapping.count({
@@ -3985,22 +3985,22 @@ export const getProjectDetailService = async (
         })
       )
     );
- 
+
     const operatorIds = [
       ...new Set([
         ...boxes.map(b => b.factory_out_by).filter(Boolean),
         ...boxes.map(b => b.site_in_by).filter(Boolean),
       ])
     ] as number[];
- 
+
     const operators = operatorIds.length > 0
       ? await prisma.userMaster.findMany({
-          where: { id: { in: operatorIds } },
-          select: { id: true, user_name: true },
-        })
+        where: { id: { in: operatorIds } },
+        select: { id: true, user_name: true },
+      })
       : [];
     const operatorMap = new Map(operators.map(u => [u.id, u.user_name]));
- 
+
     // ── 3. Machines ───────────────────────────────────────────────────────────
     const distinctMachines = await prisma.cutListMachineMapping.findMany({
       where: { project_id, vendor_id, expected_in: true },
@@ -4016,7 +4016,7 @@ export const getProjectDetailService = async (
         },
       },
     });
- 
+
     const machineStats = await Promise.all(
       distinctMachines.map(async (m) => {
         const [total, scanned] = await Promise.all([
@@ -4024,7 +4024,7 @@ export const getProjectDetailService = async (
           prisma.cutListMachineMapping.count({ where: { project_id, vendor_id, machine_id: m.machine_id, expected_in: true, actual_in_at: { not: null } } }),
         ]);
         return {
-          machine_id:   m.machine_id,
+          machine_id: m.machine_id,
           machine_name: m.machine.machine_name,
           machine_type: m.machine.machineType?.machine_type ?? null,
           total, scanned,
@@ -4033,7 +4033,7 @@ export const getProjectDetailService = async (
         };
       })
     );
- 
+
     // ── 4. Cut list — one row per panel unit ──────────────────────────────────
     const allMappings = await prisma.cutListMachineMapping.findMany({
       where: { project_id, vendor_id, expected_in: true },
@@ -4063,169 +4063,169 @@ export const getProjectDetailService = async (
       },
       orderBy: [{ cut_list_id: "asc" }, { machine_id: "asc" }, { id: "asc" }],
     });
- 
+
     // Collect operator ids for name lookup
     const allInOperatorIds = [
       ...new Set(allMappings.map(m => m.in_operator).filter(Boolean))
     ] as number[];
- 
+
     const allOperators = allInOperatorIds.length > 0
       ? await prisma.userMaster.findMany({
-          where: { id: { in: allInOperatorIds } },
-          select: { id: true, user_name: true },
-        })
+        where: { id: { in: allInOperatorIds } },
+        select: { id: true, user_name: true },
+      })
       : [];
     const allOperatorMap = new Map(allOperators.map(u => [u.id, u.user_name]));
- 
+
     // Group by cut_list_id, then pair units across machines
     const cutlistByItem = new Map<number, typeof allMappings>();
     for (const m of allMappings) {
       if (!cutlistByItem.has(m.cut_list_id)) cutlistByItem.set(m.cut_list_id, []);
       cutlistByItem.get(m.cut_list_id)!.push(m);
     }
- 
+
     const unitRows: {
-      row_number:  number;
+      row_number: number;
       cut_list_id: number;
-      item_name:   string;
+      item_name: string;
       unique_code: string | null;
       description: string;
-      qty:         number;
-      unit_index:  number;
-      category:    string | null;
-      group:       string | null;
-      length:      any;
-      width:       any;
-      thickness:   any;
+      qty: number;
+      unit_index: number;
+      category: string | null;
+      group: string | null;
+      length: any;
+      width: any;
+      thickness: any;
       machines: {
-        mapping_id:   number;
-        machine_id:   number;
+        mapping_id: number;
+        machine_id: number;
         machine_name: string;
-        sequence_no:  number;
-        box_id:       number | null;
-        scanned:      boolean;
-        scanned_at:   Date | null;
-        scanned_by:   string | null;
+        sequence_no: number;
+        box_id: number | null;
+        scanned: boolean;
+        scanned_at: Date | null;
+        scanned_by: string | null;
       }[];
     }[] = [];
- 
+
     let rowNumber = 1;
     for (const [cut_list_id, rows] of cutlistByItem) {
       const cl = rows[0].cut_list;
- 
+
       // Group rows by machine_id
       const byMachine = new Map<number, typeof rows>();
       for (const r of rows) {
         if (!byMachine.has(r.machine_id)) byMachine.set(r.machine_id, []);
         byMachine.get(r.machine_id)!.push(r);
       }
- 
+
       // Unit count = rows for any single machine (all machines have same count)
       const unitCount = Math.max(...[...byMachine.values()].map(v => v.length));
- 
+
       for (let u = 0; u < unitCount; u++) {
         const machineColumns = [];
         for (const [, machineRows] of byMachine) {
           const r = machineRows[u];
           if (!r) continue;
           machineColumns.push({
-            mapping_id:   r.id,
-            machine_id:   r.machine_id,
+            mapping_id: r.id,
+            machine_id: r.machine_id,
             machine_name: r.machine.machine_name,
-            sequence_no:  r.sequence_no,
-            box_id:       r.box_id,
-            scanned:      r.actual_in_at !== null,
-            scanned_at:   r.actual_in_at,
-            scanned_by:   r.in_operator ? (allOperatorMap.get(r.in_operator) ?? null) : null,
+            sequence_no: r.sequence_no,
+            box_id: r.box_id,
+            scanned: r.actual_in_at !== null,
+            scanned_at: r.actual_in_at,
+            scanned_by: r.in_operator ? (allOperatorMap.get(r.in_operator) ?? null) : null,
           });
         }
         unitRows.push({
-          row_number:  rowNumber++,
+          row_number: rowNumber++,
           cut_list_id,
-          item_name:   cl.item_name,
+          item_name: cl.item_name,
           unique_code: cl.unique_code,
           description: cl.description,
-          qty:         cl.qty,
-          unit_index:  u + 1,
-          category:    cl.category_name,
-          group:       cl.group_name,
-          length:      cl.length,
-          width:       cl.width,
-          thickness:   cl.thickness,
-          machines:    machineColumns,
+          qty: cl.qty,
+          unit_index: u + 1,
+          category: cl.category_name,
+          group: cl.group_name,
+          length: cl.length,
+          width: cl.width,
+          thickness: cl.thickness,
+          machines: machineColumns,
         });
       }
     }
- 
+
     // ── 5. Stats ──────────────────────────────────────────────────────────────
-    const totalPanels   = unitRows.length;
-    const uniqueItems   = cutlistByItem.size;   // ✅ fix 2: replaces cutListItems.length
- 
+    const totalPanels = unitRows.length;
+    const uniqueItems = cutlistByItem.size;   // ✅ fix 2: replaces cutListItems.length
+
     return validationResponse(1, "Project detail fetched", {
       project: {
-        id:                 project.id,
-        project_name:       project.project_name,
-        project_status:     project.project_status,
+        id: project.id,
+        project_name: project.project_name,
+        project_status: project.project_status,
         track_trace_status: project.track_trace_status,
-        lead_id:            project.lead_id,
+        lead_id: project.lead_id,
         lead: lead ? {
-          lead_name:    lead.firstname,
-          lead_phone:   lead.contact_no,
-          lead_email:   lead.email,
+          lead_name: lead.firstname,
+          lead_phone: lead.contact_no,
+          lead_email: lead.email,
           lead_address: lead.site_address,
         } : null,
         details: project.details[0] ?? null,
       },
       stats: {
-        total_panels:   totalPanels,
-        total_items:    uniqueItems,            // ✅ fix 2: was cutListItems.length
-        total_boxes:    boxes.length,
-        packed_boxes:   boxes.filter(b => b.box_status === "packed").length,
+        total_panels: totalPanels,
+        total_items: uniqueItems,            // ✅ fix 2: was cutListItems.length
+        total_boxes: boxes.length,
+        packed_boxes: boxes.filter(b => b.box_status === "packed").length,
         unpacked_boxes: boxes.filter(b => b.box_status === "unpacked").length,
       },
       machines: machineStats,
       boxes: boxes.map((b, idx) => ({
-        id:             b.id,
-        box_name:       b.box_name,
-        box_status:     b.box_status,
-        items_count:    boxItemCounts[idx],
+        id: b.id,
+        box_name: b.box_name,
+        box_status: b.box_status,
+        items_count: boxItemCounts[idx],
         factory_out_at: b.factory_out_at,
         factory_out_by: b.factory_out_by ? (operatorMap.get(b.factory_out_by) ?? null) : null,
-        site_in_at:     b.site_in_at,
-        site_in_by:     b.site_in_by ? (operatorMap.get(b.site_in_by) ?? null) : null,
+        site_in_at: b.site_in_at,
+        site_in_by: b.site_in_by ? (operatorMap.get(b.site_in_by) ?? null) : null,
       })),
       cutlist: unitRows,
     });
- 
+
   } catch (error) {
     console.error("getProjectDetailService error:", error);
     return validationResponse(0, "Failed to fetch project detail");
   }
 };
- 
+
 // ─── GET box items ────────────────────────────────────────────────────────────
- 
+
 export const getBoxItemsService = async (
   vendor_id: number,
   unique_project_id: string,
   box_id: number
 ) => {
   try {
- 
+
     const projectLookup = await prisma.projectMaster.findFirst({
       where: { unique_project_id, vendor_id },
       select: { id: true },
     });
     if (!projectLookup) return validationResponse(0, "Project not found");
     const project_id = projectLookup.id;
- 
+
     const box = await prisma.boxMaster.findFirst({
       where: { id: box_id, project_id, vendor_id, is_deleted: false },
       select: { id: true, box_name: true, box_status: true, factory_out_at: true, site_in_at: true },
     });
- 
+
     if (!box) return validationResponse(0, "Box not found");
- 
+
     const mappings = await prisma.cutListMachineMapping.findMany({
       where: { box_id, project_id, vendor_id, expected_in: true },
       select: {
@@ -4246,30 +4246,30 @@ export const getBoxItemsService = async (
       },
       orderBy: { id: "asc" },
     });
- 
+
     const opIds = [...new Set([
       ...mappings.map(m => m.in_operator).filter(Boolean),
       ...mappings.map(m => m.site_in_by).filter(Boolean),
     ])] as number[];
- 
+
     const ops = opIds.length > 0
       ? await prisma.userMaster.findMany({ where: { id: { in: opIds } }, select: { id: true, user_name: true } })
       : [];
     const opMap = new Map(ops.map(u => [u.id, u.user_name]));
- 
+
     return validationResponse(1, "Box items fetched", {
       box,
       items: mappings.map(m => ({
-        id:           m.id,
-        machine:      { machine_name: m.machine.machine_name },
+        id: m.id,
+        machine: { machine_name: m.machine.machine_name },
         actual_in_at: m.actual_in_at,
-        site_in_at:   m.site_in_at,
-        scanned_by:   m.in_operator ? (opMap.get(m.in_operator) ?? null) : null,
-        site_in_by:   m.site_in_by  ? (opMap.get(m.site_in_by)  ?? null) : null,
-        cut_list:     m.cut_list,
+        site_in_at: m.site_in_at,
+        scanned_by: m.in_operator ? (opMap.get(m.in_operator) ?? null) : null,
+        site_in_by: m.site_in_by ? (opMap.get(m.site_in_by) ?? null) : null,
+        cut_list: m.cut_list,
       })),
     });
- 
+
   } catch (error) {
     console.error("getBoxItemsService error:", error);
     return validationResponse(0, "Failed to fetch box items");
@@ -4280,7 +4280,7 @@ export const getBoxItemsService = async (
 
 export const getDefectDashboardService = async (vendor_id: number) => {
   try {
- 
+
     // ── 1. Summary counts ─────────────────────────────────────────────────────
     const [total, pending, completed, rework, replace] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id } }),
@@ -4289,7 +4289,7 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       prisma.defectedItem.count({ where: { vendor_id, action: "rework" } }),
       prisma.defectedItem.count({ where: { vendor_id, action: "replace" } }),
     ]);
- 
+
     // ── 2. Defect breakdown by defect type ────────────────────────────────────
     const byDefectType = await prisma.defectedItem.groupBy({
       by: ["defect_id"],
@@ -4297,19 +4297,19 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       _count: { id: true },
       orderBy: { _count: { id: "desc" } },
     });
- 
+
     const defectMasters = await prisma.defectMaster.findMany({
       where: { id: { in: byDefectType.map(d => d.defect_id).filter(Boolean) as number[] } },
       select: { id: true, defect_name: true },
     });
     const defectMap = new Map(defectMasters.map(d => [d.id, d.defect_name]));
- 
+
     const defectBreakdown = byDefectType.map(d => ({
-      defect_id:   d.defect_id,
+      defect_id: d.defect_id,
       defect_name: d.defect_id ? (defectMap.get(d.defect_id) ?? "Unknown") : "Unknown",
-      count:       d._count.id,
+      count: d._count.id,
     }));
- 
+
     // ── 3. Defect breakdown by project ────────────────────────────────────────
     const byProject = await prisma.defectedItem.groupBy({
       by: ["project_id"],
@@ -4318,19 +4318,19 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       orderBy: { _count: { id: "desc" } },
       take: 10,
     });
- 
+
     const projects = await prisma.projectMaster.findMany({
       where: { id: { in: byProject.map(p => p.project_id) } },
       select: { id: true, project_name: true },
     });
     const projectMap = new Map(projects.map(p => [p.id, p.project_name]));
- 
+
     const projectBreakdown = byProject.map(p => ({
-      project_id:   p.project_id,
+      project_id: p.project_id,
       project_name: projectMap.get(p.project_id) ?? "Unknown",
-      count:        p._count.id,
+      count: p._count.id,
     }));
- 
+
     // ── 4. Defect breakdown by machine ────────────────────────────────────────
     const byMachine = await prisma.defectedItem.groupBy({
       by: ["machine_id"],
@@ -4338,26 +4338,26 @@ export const getDefectDashboardService = async (vendor_id: number) => {
       _count: { id: true },
       orderBy: { _count: { id: "desc" } },
     });
- 
+
     const machines = await prisma.machineMaster.findMany({
       where: { id: { in: byMachine.map(m => m.machine_id) } },
       select: { id: true, machine_name: true },
     });
     const machineMap = new Map(machines.map(m => [m.id, m.machine_name]));
- 
+
     const machineBreakdown = byMachine.map(m => ({
-      machine_id:   m.machine_id,
+      machine_id: m.machine_id,
       machine_name: machineMap.get(m.machine_id) ?? "Unknown",
-      count:        m._count.id,
+      count: m._count.id,
     }));
- 
+
     // ── 5. Status breakdown ───────────────────────────────────────────────────
     const byStatus = await prisma.defectedItem.groupBy({
       by: ["defect_status"],
       where: { vendor_id },
       _count: { id: true },
     });
- 
+
     // ── 6. Recent defects list ────────────────────────────────────────────────
     const recentDefects = await prisma.defectedItem.findMany({
       where: { vendor_id },
@@ -4378,23 +4378,23 @@ export const getDefectDashboardService = async (vendor_id: number) => {
         images: { select: { id: true, doc_sys_name: true }, take: 1 },
       },
     });
- 
+
     // ── 7. Avg resolution time (completed defects) ────────────────────────────
     const completedWithTime = await prisma.defectedItem.findMany({
       where: { vendor_id, defect_status: "Completed", defect_completed_at: { not: null } },
       select: { created_at: true, defect_completed_at: true },
     });
- 
+
     const avgResolutionMs = completedWithTime.length > 0
       ? completedWithTime.reduce((sum, d) =>
-          sum + (d.defect_completed_at!.getTime() - d.created_at.getTime()), 0
-        ) / completedWithTime.length
+        sum + (d.defect_completed_at!.getTime() - d.created_at.getTime()), 0
+      ) / completedWithTime.length
       : null;
- 
+
     const avgResolutionHours = avgResolutionMs !== null
       ? Math.round(avgResolutionMs / 1000 / 60 / 60 * 10) / 10
       : null;
- 
+
     return validationResponse(1, "Defect dashboard fetched", {
       summary: {
         total,
@@ -4405,21 +4405,21 @@ export const getDefectDashboardService = async (vendor_id: number) => {
         completion_rate: total > 0 ? Math.round((completed / total) * 100) : 0,
         avg_resolution_hours: avgResolutionHours,
       },
-      by_defect_type:  defectBreakdown,
-      by_project:      projectBreakdown,
-      by_machine:      machineBreakdown,
-      by_status:       byStatus.map(s => ({ status: s.defect_status, count: s._count.id })),
-      recent_defects:  recentDefects,
+      by_defect_type: defectBreakdown,
+      by_project: projectBreakdown,
+      by_machine: machineBreakdown,
+      by_status: byStatus.map(s => ({ status: s.defect_status, count: s._count.id })),
+      recent_defects: recentDefects,
     });
- 
+
   } catch (error) {
     console.error("getDefectDashboardService error:", error);
     return validationResponse(0, "Failed to fetch defect dashboard");
   }
 };
- 
+
 // ── Per-project defect list ───────────────────────────────────────────────────
- 
+
 export const getProjectDefectsService = async (
   vendor_id: number,
   unique_project_id: string
@@ -4430,7 +4430,7 @@ export const getProjectDefectsService = async (
       select: { id: true, project_name: true },
     });
     if (!project) return validationResponse(0, "Project not found");
- 
+
     const defects = await prisma.defectedItem.findMany({
       where: { vendor_id, project_id: project.id },
       orderBy: { created_at: "desc" },
@@ -4449,12 +4449,12 @@ export const getProjectDefectsService = async (
         completionPhotos: { select: { id: true, doc_sys_name: true } },
       },
     });
- 
+
     return validationResponse(1, "Project defects fetched", {
       project: { id: project.id, project_name: project.project_name },
       defects,
     });
- 
+
   } catch (error) {
     console.error("getProjectDefectsService error:", error);
     return validationResponse(0, "Failed to fetch project defects");
@@ -4463,9 +4463,9 @@ export const getProjectDefectsService = async (
 
 
 const PAGE_SIZE = 15;
- 
+
 // ─── Helper: attach signed URLs to images ─────────────────────────────────────
- 
+
 async function signImages(images: { id: number; doc_sys_name: string; doc_og_name: string }[]) {
   return Promise.all(
     images.map(async (img) => ({
@@ -4474,9 +4474,9 @@ async function signImages(images: { id: number; doc_sys_name: string; doc_og_nam
     }))
   );
 }
- 
+
 // ─── Summary (stat cards + bar charts) ───────────────────────────────────────
- 
+
 export const getDefectSummaryService = async (vendor_id: number) => {
   try {
     const [total, pending, completed, rework, replace] = await Promise.all([
@@ -4486,7 +4486,7 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       prisma.defectedItem.count({ where: { vendor_id, action: "rework" } }),
       prisma.defectedItem.count({ where: { vendor_id, action: "replace" } }),
     ]);
- 
+
     // Breakdown by defect type
     const byDefectType = await prisma.defectedItem.groupBy({
       by: ["defect_id"],
@@ -4499,7 +4499,7 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       select: { id: true, defect_name: true },
     });
     const defectMap = new Map(defectMasters.map(d => [d.id, d.defect_name]));
- 
+
     // Breakdown by machine
     const byMachine = await prisma.defectedItem.groupBy({
       by: ["machine_id"],
@@ -4512,7 +4512,7 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       select: { id: true, machine_name: true },
     });
     const machineMap = new Map(machines.map(m => [m.id, m.machine_name]));
- 
+
     // Breakdown by project (top 10)
     const byProject = await prisma.defectedItem.groupBy({
       by: ["project_id"],
@@ -4526,7 +4526,7 @@ export const getDefectSummaryService = async (vendor_id: number) => {
       select: { id: true, project_name: true },
     });
     const projectMap = new Map(projects.map(p => [p.id, p.project_name]));
- 
+
     // Avg resolution time
     const completedWithTime = await prisma.defectedItem.findMany({
       where: { vendor_id, defect_status: "Completed", defect_completed_at: { not: null } },
@@ -4534,9 +4534,9 @@ export const getDefectSummaryService = async (vendor_id: number) => {
     });
     const avgResolutionMs = completedWithTime.length > 0
       ? completedWithTime.reduce((s, d) => s + (d.defect_completed_at!.getTime() - d.created_at.getTime()), 0)
-        / completedWithTime.length
+      / completedWithTime.length
       : null;
- 
+
     return validationResponse(1, "Defect summary fetched", {
       summary: {
         total, pending, completed, rework, replace,
@@ -4546,19 +4546,19 @@ export const getDefectSummaryService = async (vendor_id: number) => {
           : null,
       },
       by_defect_type: byDefectType.map(d => ({
-        defect_id:   d.defect_id,
+        defect_id: d.defect_id,
         defect_name: d.defect_id ? (defectMap.get(d.defect_id) ?? "Unknown") : "Unknown",
-        count:       d._count.id,
+        count: d._count.id,
       })),
       by_machine: byMachine.map(m => ({
-        machine_id:   m.machine_id,
+        machine_id: m.machine_id,
         machine_name: machineMap.get(m.machine_id) ?? "Unknown",
-        count:        m._count.id,
+        count: m._count.id,
       })),
       by_project: byProject.map(p => ({
-        project_id:   p.project_id,
+        project_id: p.project_id,
         project_name: projectMap.get(p.project_id) ?? "Unknown",
-        count:        p._count.id,
+        count: p._count.id,
       })),
     });
   } catch (error) {
@@ -4566,13 +4566,13 @@ export const getDefectSummaryService = async (vendor_id: number) => {
     return validationResponse(0, "Failed to fetch defect summary");
   }
 };
- 
+
 // ─── Pending Defects (paginated) ─────────────────────────────────────────────
- 
+
 export const getPendingDefectsService = async (vendor_id: number, page: number) => {
   try {
     const skip = (page - 1) * PAGE_SIZE;
- 
+
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id, defect_status: "Pending" } }),
       prisma.defectedItem.findMany({
@@ -4586,16 +4586,16 @@ export const getPendingDefectsService = async (vendor_id: number, page: number) 
           action: true,
           remark: true,
           created_at: true,
-          defect:   { select: { id: true, defect_name: true } },
-          project:  { select: { id: true, project_name: true, unique_project_id: true } },
-          machine:  { select: { id: true, machine_name: true } },
-          cutList:  { select: { id: true, item_name: true, unique_code: true } },
-          createdBy:{ select: { id: true, user_name: true } },
-          images:   { select: { id: true, doc_sys_name: true, doc_og_name: true } },
+          defect: { select: { id: true, defect_name: true } },
+          project: { select: { id: true, project_name: true, unique_project_id: true } },
+          machine: { select: { id: true, machine_name: true } },
+          cutList: { select: { id: true, item_name: true, unique_code: true } },
+          createdBy: { select: { id: true, user_name: true } },
+          images: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
         },
       }),
     ]);
- 
+
     // Generate signed URLs for defect images
     const defectsWithUrls = await Promise.all(
       items.map(async (d) => ({
@@ -4603,26 +4603,26 @@ export const getPendingDefectsService = async (vendor_id: number, page: number) 
         images: await signImages(d.images),
       }))
     );
- 
+
     return validationResponse(1, "Pending defects fetched", {
-      defects:      defectsWithUrls,
+      defects: defectsWithUrls,
       total,
       page,
-      page_size:    PAGE_SIZE,
-      total_pages:  Math.ceil(total / PAGE_SIZE),
+      page_size: PAGE_SIZE,
+      total_pages: Math.ceil(total / PAGE_SIZE),
     });
   } catch (error) {
     console.error("getPendingDefectsService error:", error);
     return validationResponse(0, "Failed to fetch pending defects");
   }
 };
- 
+
 // ─── Resolved Defects (paginated) ────────────────────────────────────────────
- 
+
 export const getResolvedDefectsService = async (vendor_id: number, page: number) => {
   try {
     const skip = (page - 1) * PAGE_SIZE;
- 
+
     const [total, items] = await Promise.all([
       prisma.defectedItem.count({ where: { vendor_id, defect_status: "Completed" } }),
       prisma.defectedItem.findMany({
@@ -4637,36 +4637,397 @@ export const getResolvedDefectsService = async (vendor_id: number, page: number)
           remark: true,
           created_at: true,
           defect_completed_at: true,
-          defect:           { select: { id: true, defect_name: true } },
-          project:          { select: { id: true, project_name: true, unique_project_id: true } },
-          machine:          { select: { id: true, machine_name: true } },
-          cutList:          { select: { id: true, item_name: true, unique_code: true } },
-          createdBy:        { select: { id: true, user_name: true } },
+          defect: { select: { id: true, defect_name: true } },
+          project: { select: { id: true, project_name: true, unique_project_id: true } },
+          machine: { select: { id: true, machine_name: true } },
+          cutList: { select: { id: true, item_name: true, unique_code: true } },
+          createdBy: { select: { id: true, user_name: true } },
           // Defect images (original problem photos)
-          images:           { select: { id: true, doc_sys_name: true, doc_og_name: true } },
+          images: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
           // Completion/resolution photos
           completionPhotos: { select: { id: true, doc_sys_name: true, doc_og_name: true } },
         },
       }),
     ]);
- 
+
     const defectsWithUrls = await Promise.all(
       items.map(async (d) => ({
         ...d,
-        images:           await signImages(d.images),
+        images: await signImages(d.images),
         completionPhotos: await signImages(d.completionPhotos),
       }))
     );
- 
+
     return validationResponse(1, "Resolved defects fetched", {
-      defects:      defectsWithUrls,
+      defects: defectsWithUrls,
       total,
       page,
-      page_size:    PAGE_SIZE,
-      total_pages:  Math.ceil(total / PAGE_SIZE),
+      page_size: PAGE_SIZE,
+      total_pages: Math.ceil(total / PAGE_SIZE),
     });
   } catch (error) {
     console.error("getResolvedDefectsService error:", error);
     return validationResponse(0, "Failed to fetch resolved defects");
+  }
+};
+
+
+const CADBID_PRODUCT_API_URL =
+  process.env.CADBID_URL + "/api/product/get-pt";
+
+const PAGE_LIMIT = 100;
+
+export const syncProductsFromExternalService = async (vendor_id: number) => {
+  try {
+    // ─────────────────────────────────────────────
+    // 1) Check token
+    // ─────────────────────────────────────────────
+    const tokenRecord = await prisma.externalPlatformToken.findFirst({
+      where: {
+        vendor_id,
+        external_platform_id: CADBID_PLATFORM_ID,
+        active: "Yes",
+      },
+      select: {
+        token: true,
+      },
+    });
+
+    if (!tokenRecord) {
+      return validationResponse(
+        0,
+        "No active token found for this vendor. Please connect CadBid first."
+      );
+    }
+
+
+
+    
+
+    // ─────────────────────────────────────────────
+    // 2) Fetch all pages
+    // ─────────────────────────────────────────────
+    let allProducts: any[] = [];
+    let page = 1;
+    let totalCount = 0;
+    let totalPages = 1;
+
+    try {
+      while (page <= totalPages) {
+        console.log(`Fetching products page ${page}/${totalPages}`);
+
+        const response = await axios.get(CADBID_PRODUCT_API_URL, {
+          params: {
+            page,
+            limit: PAGE_LIMIT,
+          },
+          headers: {
+            Authorization: `Bearer ${tokenRecord.token}`,
+          },
+          timeout: 30000,
+        });
+
+        const products = Array.isArray(response.data?.products)
+          ? response.data.products
+          : [];
+
+        totalCount = Number(response.data?.totalCount || 0);
+        totalPages = Math.ceil(totalCount / PAGE_LIMIT);
+
+        allProducts.push(...products);
+        page++;
+      }
+    } catch (apiErr: any) {
+      console.error(
+        "CadBid Product API Error:",
+        apiErr?.response?.data ?? apiErr.message
+      );
+
+      return validationResponse(
+        0,
+        "Failed to fetch products from CadBid."
+      );
+    }
+
+     try {
+      await prisma.apiRequestLog.create({
+        data: {
+          endpoint: "syncProductsFromExternalService",
+          vendor_token: tokenRecord.token,
+          vendor_id: vendor_id,
+          payload: JSON.stringify(allProducts) as any,
+          success: false,
+          response: '',
+          error: null,
+          project_id: 0,
+        }
+      });
+    } catch (logError) {
+      console.error("Failed to write api log:", logError);
+    }
+
+    if (!allProducts.length) {
+      return validationResponse(0, "No products returned from CadBid");
+    }
+
+    console.log("Total Products:", allProducts.length);
+
+
+     const invalidProducts = allProducts.filter(
+      (p) =>
+        !p?.nItemId ||
+        p?.nItemId === 0 
+        ||
+        !p?.sCode ||
+        !String(p.sCode).trim()
+    );
+
+    if (invalidProducts.length > 0) {
+      console.error(
+        "Product validation failed:",
+        invalidProducts.slice(0, 20)
+      );
+
+      return validationResponse(
+        0,
+        `Validation failed. ${invalidProducts.length} product(s) missing mandatory fields nItemId  / sCode.`,
+        {
+          invalidCount: invalidProducts.length,
+          sampleInvalidRecords: invalidProducts.slice(0, 20),
+        }
+      );
+    }
+
+    // ─────────────────────────────────────────────
+    // 3) Cache existing brands/categories
+    // ─────────────────────────────────────────────
+    const existingBrands = await prisma.brandMaster.findMany({
+      where: { vendor_id },
+      select: {
+        id: true,
+        brand_name: true,
+      },
+    });
+
+    const existingCategories = await prisma.projectCategoriesMaster.findMany({
+      where: { vendor_id },
+      select: {
+        id: true,
+        category_name: true,
+      },
+    });
+
+    const brandMap = new Map<string, number>();
+    const categoryMap = new Map<string, number>();
+
+    existingBrands.forEach((b) => {
+      brandMap.set(b.brand_name.trim().toLowerCase(), b.id);
+    });
+
+    existingCategories.forEach((c) => {
+      categoryMap.set(c.category_name.trim().toLowerCase(), c.id);
+    });
+
+    // ─────────────────────────────────────────────
+    // 4) Upsert products
+    // ────────────────────────────────────────────
+
+    // ─────────────────────────────────────────────
+    // 3 + 4) Transaction: brands + products upsert
+    // ─────────────────────────────────────────────
+    let created = 0;
+    let updated = 0;
+    let skipped = 0;
+    let brandsCreated = 0;
+
+    await prisma.$transaction(
+      async (tx) => {
+        // preload
+        const existingBrands = await tx.brandMaster.findMany({
+          where: { vendor_id },
+          select: {
+            id: true,
+            brand_name: true,
+          },
+        });
+
+        const existingCategories =
+          await tx.projectCategoriesMaster.findMany({
+            where: { vendor_id },
+            select: {
+              id: true,
+              category_name: true,
+            },
+          });
+
+        const existingProducts = await tx.productMaster.findMany({
+          where: { vendor_id },
+          select: {
+            id: true,
+            item_id: true,
+          },
+        });
+
+        const brandMap = new Map<string, number>();
+        const categoryMap = new Map<string, number>();
+        const productMap = new Map<number, number>();
+
+        existingBrands.forEach((b) => {
+          brandMap.set(b.brand_name.trim().toLowerCase(), b.id);
+        });
+
+        existingCategories.forEach((c) => {
+          categoryMap.set(c.category_name.trim().toLowerCase(), c.id);
+        });
+
+        existingProducts.forEach((p) => {
+          productMap.set(p.item_id, p.id);
+        });
+
+        for (const p of allProducts) {
+          if (!p.nItemId || !p.sCode) {
+            skipped++;
+            continue;
+          }
+
+          // ───────────────────
+          // BRAND
+          // ───────────────────
+          let brandId: number | null = null;
+
+          if (p.sBrand?.trim()) {
+            const brandKey = p.sBrand.trim().toLowerCase();
+
+            brandId = brandMap.get(brandKey) || null;
+
+            if (!brandId) {
+              const brand = await tx.brandMaster.create({
+                data: {
+                  vendor_id,
+                  brand_name: p.sBrand.trim(),
+                  active: "Yes",
+                },
+              });
+
+              brandId = brand.id;
+              brandMap.set(brandKey, brand.id);
+              brandsCreated++;
+            }
+          }
+
+          // ───────────────────
+          // CATEGORY
+          // ───────────────────
+          let categoryId: number | null = null;
+
+          if (p.sCategory?.trim()) {
+            const categoryKey = p.sCategory.trim().toLowerCase();
+            categoryId = categoryMap.get(categoryKey) || null;
+          }
+
+          if (!categoryId) {
+            skipped++;
+            continue;
+          }
+
+          const payload = {
+            vendor_id,
+            item_id: Number(p.nItemId),
+
+            rotation: Number(p.bRotation || 0),
+            alt_conv_factor: Number(p.nAltConvFactor || 0),
+
+            board_length: Number(p.nBoardLength || 0),
+            board_width: Number(p.nBoardWidth || 0),
+
+            dimension_1: Number(p.nDimension1 || 0),
+            dimension_2: Number(p.nDimension2 || 0),
+            dimension_3: Number(p.nDimension3 || 0),
+
+            installation_charges: Number(p.nInstallationCharges || 0),
+            item1_weight: Number(p.nItemW1eight || 0),
+
+            level1_price: Number(p.nLevel1Price || 0),
+            level2_price: Number(p.nLevel2Price || 0),
+            level3_price: Number(p.nLevel3Price || 0),
+
+            moq: Number(p.nMoq || 0),
+            no_of_drill_holes: Number(p.nNoofDrillHoles || 0),
+            pre_mill_width: Number(p.nPreMillWidth || 0),
+
+            alt_uom_text: p.sAltUomText || null,
+
+            brand_id: brandId??null,
+            category_id: categoryId,
+
+            article_code: p.sCode || null,
+            core_material: p.sCoreMaterial || null,
+            edge_banding_color: p.sEdgeBandingColor || null,
+            finish: p.sFinish || null,
+            group: p.sGroup || null,
+
+            hsn_code: p.sHsnCode
+              ? parseInt(String(p.sHsnCode).replace(/\D/g, "")) || null
+              : null,
+
+            product_name: p.sName,
+            procurement: p.sProcurement || null,
+            unit_of_measure: p.sUom || null,
+            vendor_code: p.sVendorCode || null,
+
+            custom_field_1: p.nCustomField1 || null,
+            custom_field_2: p.nCustomField2 || null,
+            custom_field_3: p.nCustomField3 || null,
+
+            active: "Yes" as const,
+          };
+
+          const existingProductId =
+            productMap.get(Number(p.nItemId));
+
+          if (existingProductId) {
+            await tx.productMaster.update({
+              where: {
+                id: existingProductId,
+              },
+              data: payload,
+            });
+
+            updated++;
+          } else {
+            const createdProduct =
+              await tx.productMaster.create({
+                data: payload,
+              });
+
+            productMap.set(
+              Number(p.nItemId),
+              createdProduct.id
+            );
+
+            created++;
+          }
+        }
+      },
+      {
+        timeout: 600000, // 10 min
+      }
+    );
+
+    return validationResponse(
+      1,
+      "Products synced successfully",
+      {
+        totalCount,
+        fetched: allProducts.length,
+        created,
+        updated,
+        skipped,
+        brandsCreated,
+      }
+    );
+  } catch (error) {
+    console.error("syncProductsFromExternalService:", error);
+    return validationResponse(0, "Sync failed");
   }
 };
