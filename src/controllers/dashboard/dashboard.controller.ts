@@ -147,6 +147,52 @@ export class DashboardController {
     }
   };
 
+  public getSiteSupervisorServiceCounts = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({ success: false, message: "vendor_id and user_id are required" });
+      }
+      const result = await dashboardService.getSiteSupervisorServiceCounts(vendor_id, user_id);
+      return res.status(200).json({ success: true, data: result });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
+  public getSiteSupervisorUpcomingSites = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({ success: false, message: "vendor_id and user_id are required" });
+      }
+
+      const result = await dashboardService.getSiteSupervisorUpcomingSites(vendor_id, user_id);
+      return res.status(200).json({ success: true, data: result });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
+  public getSiteSupervisorMiscItems = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const user_id = Number(req.query.user_id);
+
+      if (!vendor_id || !user_id) {
+        return res.status(400).json({ success: false, message: "vendor_id and user_id are required" });
+      }
+
+      const result = await dashboardService.getSiteSupervisorMiscItems(vendor_id, user_id);
+      return res.status(200).json({ success: true, data: result });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
   public getSiteSupervisorAvgDaysToInstallation = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);

@@ -1983,7 +1983,136 @@ export class DashboardService {
   // Sales Executive : Activity status counts (onHold, lostApproval, lost)
   // -------------------------------------------------------
   // -------------------------------------------------------
-  // Site Supervisor : Avg days from installation start → completion
+  // Site Supervisor : Service schedule counts (total / completed / pending)
+  // -------------------------------------------------------
+  public async getSiteSupervisorServiceCounts(vendor_id: number, user_id: number) {
+    const leadIds = (
+      await prisma.leadUserMapping.findMany({
+        where: { vendor_id, user_id, status: LeadUserStatus.active },
+        select: { lead_id: true },
+      })
+    ).map((m) => m.lead_id);
+
+    if (leadIds.length === 0) return { total: 0, completed: 0, pending: 0 };
+
+    const [total, completed] = await Promise.all([
+      prisma.leadServiceSchedule.count({
+        where: { vendor_id, lead_id: { in: leadIds } },
+      }),
+      prisma.leadServiceSchedule.count({
+        where: { vendor_id, lead_id: { in: leadIds }, completed_at: { not: null } },
+      }),
+    ]);
+
+    return { total, completed, pending: total - completed };
+  }
+
+  // -------------------------------------------------------
+  // Site Supervisor : Upcoming sites (dispatch_date set, no Type 15 log)
+  // -------------------------------------------------------
+  public async getSiteSupervisorUpcomingSites(vendor_id: number, user_id: number) {
+    const type15 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 15" },
+      select: { id: true },
+    });
+
+    if (!type15) return [];
+
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        dispatch_date: { not: null },
+        userMappings: {
+          some: { user_id, status: LeadUserStatus.active },
+        },
+        leadStatusLogs: {
+          none: { vendor_id, status_id: type15.id },
+        },
+      },
+      select: {
+        id: true,
+        lead_code: true,
+        account_id: true,
+        firstname: true,
+        lastname: true,
+        dispatch_date: true,
+        productMappings: {
+          select: { productType: { select: { type: true } } },
+        },
+      },
+      orderBy: { dispatch_date: "asc" },
+      take: 50,
+    });
+
+    return leads.map((lead) => ({
+      id: lead.id,
+      account_id: lead.account_id,
+      lead_code: lead.lead_code ?? "",
+      client: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+      dispatch_date: lead.dispatch_date,
+      furniture_type: lead.productMappings
+        .map((m) => m.productType.type)
+        .filter(Boolean)
+        .join(", ") || "—",
+    }));
+  }
+
+  // -------------------------------------------------------
+  // Site Supervisor : Unresolved misc items on assigned leads
+  // -------------------------------------------------------
+  public async getSiteSupervisorMiscItems(vendor_id: number, user_id: number) {
+    const items = await prisma.miscellaneousMaster.findMany({
+      where: {
+        vendor_id,
+        is_resolved: false,
+        lead: {
+          is_deleted: false,
+          userMappings: {
+            some: { user_id, status: LeadUserStatus.active },
+          },
+        },
+      },
+      select: {
+        id: true,
+        expected_ready_date: true,
+        misc_approved: true,
+        lead: {
+          select: {
+            id: true,
+            lead_code: true,
+            account_id: true,
+            firstname: true,
+            lastname: true,
+          },
+        },
+        type: {
+          select: { name: true },
+        },
+      },
+      orderBy: { expected_ready_date: "asc" },
+      take: 50,
+    });
+
+    return items.map((item) => ({
+      id: item.id,
+      lead_id: item.lead.id,
+      account_id: item.lead.account_id,
+      lead_code: item.lead.lead_code ?? "",
+      client: `${item.lead.firstname ?? ""} ${item.lead.lastname ?? ""}`.trim(),
+      misc_type: item.type.name,
+      expected_ready_date: item.expected_ready_date,
+      status:
+        item.misc_approved === true
+          ? "approved"
+          : item.misc_approved === false
+          ? "rejected"
+          : "pending",
+    }));
+  }
+
+  // -------------------------------------------------------
+  // Site Supervisor : Avg days from installation start → final handover
   // -------------------------------------------------------
   public async getSiteSupervisorAvgDaysToInstallation(
     vendor_id: number,
@@ -1994,14 +2123,14 @@ export class DashboardService {
         vendor_id,
         is_deleted: false,
         actual_installation_start_date: { not: null },
-        actual_installation_completion_at: { not: null },
+        final_handover_marked_at: { not: null },
         userMappings: {
           some: { user_id, status: LeadUserStatus.active },
         },
       },
       select: {
         actual_installation_start_date: true,
-        actual_installation_completion_at: true,
+        final_handover_marked_at: true,
       },
     });
 
@@ -2009,9 +2138,9 @@ export class DashboardService {
     let count = 0;
 
     for (const lead of leads) {
-      if (!lead.actual_installation_start_date || !lead.actual_installation_completion_at) continue;
+      if (!lead.actual_installation_start_date || !lead.final_handover_marked_at) continue;
       const diffMs =
-        lead.actual_installation_completion_at.getTime() -
+        lead.final_handover_marked_at.getTime() -
         lead.actual_installation_start_date.getTime();
       const days = diffMs / (1000 * 60 * 60 * 24);
       if (days >= 0) {

@@ -44,6 +44,18 @@ DashboardRouter.get(
   "/site-supervisor/avg-days-to-installation",
   dashboardController.getSiteSupervisorAvgDaysToInstallation
 );
+DashboardRouter.get(
+  "/site-supervisor/misc-items",
+  dashboardController.getSiteSupervisorMiscItems
+);
+DashboardRouter.get(
+  "/site-supervisor/upcoming-sites",
+  dashboardController.getSiteSupervisorUpcomingSites
+);
+DashboardRouter.get(
+  "/site-supervisor/service-counts",
+  dashboardController.getSiteSupervisorServiceCounts
+);
 
 // Admin
 DashboardRouter.get(
