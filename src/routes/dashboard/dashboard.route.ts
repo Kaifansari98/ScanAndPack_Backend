@@ -40,6 +40,10 @@ DashboardRouter.get(
   "/sales-executive/activity-status-counts",
   dashboardController.getSalesExecutiveActivityStatusCounts
 );
+DashboardRouter.get(
+  "/site-supervisor/avg-days-to-installation",
+  dashboardController.getSiteSupervisorAvgDaysToInstallation
+);
 
 // Admin
 DashboardRouter.get(

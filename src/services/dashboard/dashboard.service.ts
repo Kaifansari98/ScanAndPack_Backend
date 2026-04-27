@@ -1982,6 +1982,56 @@ export class DashboardService {
   // -------------------------------------------------------
   // Sales Executive : Activity status counts (onHold, lostApproval, lost)
   // -------------------------------------------------------
+  // -------------------------------------------------------
+  // Site Supervisor : Avg days from installation start → completion
+  // -------------------------------------------------------
+  public async getSiteSupervisorAvgDaysToInstallation(
+    vendor_id: number,
+    user_id: number
+  ) {
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        actual_installation_start_date: { not: null },
+        actual_installation_completion_at: { not: null },
+        userMappings: {
+          some: { user_id, status: LeadUserStatus.active },
+        },
+      },
+      select: {
+        actual_installation_start_date: true,
+        actual_installation_completion_at: true,
+      },
+    });
+
+    let totalDays = 0;
+    let count = 0;
+
+    for (const lead of leads) {
+      if (!lead.actual_installation_start_date || !lead.actual_installation_completion_at) continue;
+      const diffMs =
+        lead.actual_installation_completion_at.getTime() -
+        lead.actual_installation_start_date.getTime();
+      const days = diffMs / (1000 * 60 * 60 * 24);
+      if (days >= 0) {
+        totalDays += days;
+        count++;
+      }
+    }
+
+    const avgDays = count === 0 ? 0 : Number((totalDays / count).toFixed(2));
+
+    const totalMinutes = avgDays * 24 * 60;
+    const readable = {
+      days: Math.floor(totalMinutes / (24 * 60)),
+      hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+      minutes: Math.floor(totalMinutes % 60),
+    };
+
+    return { avgDays, readable };
+  }
+
   public async getSalesExecutiveActivityStatusCounts(
     vendor_id: number,
     user_id: number
