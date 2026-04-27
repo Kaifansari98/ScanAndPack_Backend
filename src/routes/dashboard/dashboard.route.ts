@@ -56,6 +56,10 @@ DashboardRouter.get(
   "/site-supervisor/service-counts",
   dashboardController.getSiteSupervisorServiceCounts
 );
+DashboardRouter.get(
+  "/site-supervisor/pending-services",
+  dashboardController.getSiteSupervisorPendingServices
+);
 
 // Admin
 DashboardRouter.get(

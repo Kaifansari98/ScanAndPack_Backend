@@ -1986,6 +1986,31 @@ export class DashboardService {
   // Site Supervisor : Service schedule counts (total / completed / pending)
   // -------------------------------------------------------
   public async getSiteSupervisorServiceCounts(vendor_id: number, user_id: number) {
+    const type14 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 14" },
+      select: { id: true },
+    });
+
+    if (!type14) return { count: 0 };
+
+    const count = await prisma.leadMaster.count({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        dispatch_date: { not: null },
+        leadStatusLogs: { some: { status_id: type14.id } },
+        userMappings: { some: { user_id, status: LeadUserStatus.active } },
+      },
+    });
+
+    return { count };
+  }
+
+  public async getSiteSupervisorPendingServices(
+    vendor_id: number,
+    user_id: number,
+    filter: "month" | "year"
+  ) {
     const leadIds = (
       await prisma.leadUserMapping.findMany({
         where: { vendor_id, user_id, status: LeadUserStatus.active },
@@ -1993,18 +2018,56 @@ export class DashboardService {
       })
     ).map((m) => m.lead_id);
 
-    if (leadIds.length === 0) return { total: 0, completed: 0, pending: 0 };
+    if (leadIds.length === 0) return [];
 
-    const [total, completed] = await Promise.all([
-      prisma.leadServiceSchedule.count({
-        where: { vendor_id, lead_id: { in: leadIds } },
-      }),
-      prisma.leadServiceSchedule.count({
-        where: { vendor_id, lead_id: { in: leadIds }, completed_at: { not: null } },
-      }),
-    ]);
+    const now = new Date();
+    const start =
+      filter === "month"
+        ? new Date(now.getFullYear(), now.getMonth(), 1)
+        : new Date(now.getFullYear(), 0, 1);
+    const end =
+      filter === "month"
+        ? new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
+        : new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999);
 
-    return { total, completed, pending: total - completed };
+    const services = await prisma.leadServiceSchedule.findMany({
+      where: {
+        vendor_id,
+        lead_id: { in: leadIds },
+        completed_at: null,
+        scheduled_for: { gte: start, lte: end },
+      },
+      select: {
+        id: true,
+        service_no: true,
+        service_type: true,
+        scheduled_for: true,
+        status: true,
+        lead: {
+          select: {
+            id: true,
+            lead_code: true,
+            account_id: true,
+            firstname: true,
+            lastname: true,
+          },
+        },
+      },
+      orderBy: { scheduled_for: "asc" },
+      take: 100,
+    });
+
+    return services.map((s) => ({
+      id: s.id,
+      lead_id: s.lead.id,
+      account_id: s.lead.account_id,
+      lead_code: s.lead.lead_code ?? "",
+      client: `${s.lead.firstname ?? ""} ${s.lead.lastname ?? ""}`.trim(),
+      service_no: s.service_no,
+      service_type: s.service_type as "free" | "amc",
+      scheduled_for: s.scheduled_for,
+      status: s.status as string,
+    }));
   }
 
   // -------------------------------------------------------
