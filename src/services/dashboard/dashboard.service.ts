@@ -1790,6 +1790,7 @@ export class DashboardService {
   public async getAdminTaskOverview(
     vendor_id: number,
     franchise_id?: number,
+    sales_executive_id?: number,
     page = 1,
     limit = 20,
     search = "",
@@ -1834,6 +1835,7 @@ export class DashboardService {
       vendor_id,
       status: statusFilter,
       ...(franchise_id ? { franchise_id } : {}),
+      ...(sales_executive_id ? { user_id: sales_executive_id } : {}),
       user: { user_type: { user_type: "sales-executive" } },
       ...(andConditions.length ? { AND: andConditions } : {}),
       ...(search

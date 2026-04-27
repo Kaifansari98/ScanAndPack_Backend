@@ -338,6 +338,9 @@ export class DashboardController {
     try {
       const vendor_id = Number(req.query.vendor_id);
       const franchise_id = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+      const sales_executive_id = req.query.sales_executive_id
+        ? Number(req.query.sales_executive_id)
+        : undefined;
       const page = req.query.page ? Number(req.query.page) : 1;
       const limit = req.query.limit ? Number(req.query.limit) : 20;
       const search = req.query.search ? String(req.query.search) : "";
@@ -351,6 +354,7 @@ export class DashboardController {
       const data = await dashboardService.getAdminTaskOverview(
         vendor_id,
         franchise_id,
+        sales_executive_id,
         page,
         limit,
         search,
