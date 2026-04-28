@@ -15,6 +15,7 @@ interface LeadsOverviewReportRow {
   franchise_store: string;
   client_number: string;
   address: string;
+  current_stage: string;
   site_type: string;
   source: string;
   furniture_type: string;
@@ -56,6 +57,7 @@ interface LeadTrackingReportRow {
   client_name: string;
   franchise_store: string;
   designer: string;
+  current_stage: string;
   furniture_type: string;
   furniture_structure: string;
   lead_creation_date: Date | null;
@@ -223,6 +225,11 @@ export const getLeadsOverviewReportData = async (
       contact_no: true,
       site_address: true,
       archetech_name: true,
+      statusType: {
+        select: {
+          type: true,
+        },
+      },
       franchise: {
         select: {
           franchise_name: true,
@@ -349,6 +356,7 @@ export const getLeadsOverviewReportData = async (
           franchise_store: lead.franchise?.franchise_name ?? "-",
           client_number: lead.contact_no ?? "-",
           address: lead.site_address ?? "-",
+          current_stage: lead.statusType?.type ?? "-",
           site_type: lead.siteType?.type ?? "-",
           source: lead.source?.type ?? "-",
           furniture_type: defaultFurnitureTypes.join(", ") || "-",
@@ -394,6 +402,7 @@ export const getLeadsOverviewReportData = async (
         franchise_store: lead.franchise?.franchise_name ?? "-",
         client_number: lead.contact_no ?? "-",
         address: lead.site_address ?? "-",
+        current_stage: lead.statusType?.type ?? "-",
         site_type: lead.siteType?.type ?? "-",
         source: lead.source?.type ?? "-",
         furniture_type: instance.productType?.type ?? "-",
@@ -658,6 +667,11 @@ export const getLeadTrackingReportData = async (
       shutter_installation_completion_date: true,
       usable_handover_completed_at: true,
       final_handover_marked_at: true,
+      statusType: {
+        select: {
+          type: true,
+        },
+      },
       franchise: {
         select: {
           franchise_name: true,
@@ -854,6 +868,7 @@ export const getLeadTrackingReportData = async (
         client_name: `${lead.firstname} ${lead.lastname}`.trim(),
         franchise_store: lead.franchise?.franchise_name ?? "-",
         designer,
+        current_stage: lead.statusType?.type ?? "-",
         furniture_type: instance.productType?.type ?? "-",
         furniture_structure: instance.productStructure?.type ?? "-",
         lead_creation_date: lead.created_at,
