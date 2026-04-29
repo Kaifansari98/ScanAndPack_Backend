@@ -53,6 +53,10 @@ DashboardRouter.get(
   dashboardController.getSiteSupervisorUpcomingSites
 );
 DashboardRouter.get(
+  "/site-supervisor/supervisor-leads",
+  dashboardController.getSupervisorLeads
+);
+DashboardRouter.get(
   "/site-supervisor/service-counts",
   dashboardController.getSiteSupervisorServiceCounts
 );

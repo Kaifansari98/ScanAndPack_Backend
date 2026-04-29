@@ -161,6 +161,41 @@ export class DashboardController {
     }
   };
 
+  public getSupervisorLeads = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      const site_supervisor_id = req.query.site_supervisor_id
+        ? Number(req.query.site_supervisor_id)
+        : undefined;
+      const page = req.query.page ? Number(req.query.page) : 1;
+      const limit = req.query.limit ? Number(req.query.limit) : 12;
+
+      if (!vendor_id) {
+        return res.status(400).json({
+          success: false,
+          message: "vendor_id is required",
+        });
+      }
+
+      const result = await dashboardService.getSupervisorLeads(
+        vendor_id,
+        site_supervisor_id,
+        page,
+        limit,
+      );
+
+      return res.status(200).json({
+        success: true,
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  };
+
   public getSiteSupervisorUpcomingSites = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);

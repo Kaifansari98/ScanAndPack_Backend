@@ -2005,6 +2005,80 @@ export class DashboardService {
     return { count };
   }
 
+  public async getSupervisorLeads(
+    vendor_id: number,
+    site_supervisor_id?: number,
+    page = 1,
+    limit = 12,
+  ) {
+    const safePage = Math.max(1, Number(page) || 1);
+    const safeLimit = Math.max(1, Math.min(50, Number(limit) || 12));
+    const skip = (safePage - 1) * safeLimit;
+
+    const where = {
+      vendor_id,
+      is_deleted: false,
+      activity_status: {
+        not: ActivityStatus.lost,
+      },
+      userMappings: {
+        some: {
+          status: LeadUserStatus.active,
+          ...(site_supervisor_id ? { user_id: site_supervisor_id } : {}),
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive" as const,
+              },
+            },
+          },
+        },
+      },
+    };
+
+    const [total, leads] = await Promise.all([
+      prisma.leadMaster.count({ where }),
+      prisma.leadMaster.findMany({
+        where,
+        select: {
+          id: true,
+          lead_code: true,
+          account_id: true,
+          firstname: true,
+          lastname: true,
+          statusType: {
+            select: {
+              type: true,
+              tag: true,
+            },
+          },
+        },
+        orderBy: { created_at: "desc" },
+        skip,
+        take: safeLimit,
+      }),
+    ]);
+
+    return {
+      rows: leads.map((lead) => ({
+        id: lead.id,
+        lead_id: lead.id,
+        account_id: lead.account_id,
+        lead_code: lead.lead_code ?? "",
+        client: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim() || "—",
+        stage: lead.statusType?.type ?? lead.statusType?.tag ?? "—",
+      })),
+      pagination: {
+        page: safePage,
+        limit: safeLimit,
+        total,
+        totalPages: Math.ceil(total / safeLimit),
+        hasNext: skip + leads.length < total,
+      },
+    };
+  }
+
   public async getSiteSupervisorPendingServices(
     vendor_id: number,
     user_id: number,
