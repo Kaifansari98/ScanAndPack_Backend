@@ -1305,6 +1305,11 @@ export class BookingStageService {
     const normalizedTag = String(tag || "")
       .trim()
       .toLowerCase();
+    const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
+    const shouldExcludeLaterStageTags =
+      normalizedTag === "type 8" ||
+      normalizedTag === "type 9" ||
+      normalizedTag === "type 10";
 
     let statusIds: number[] | null = null; // null means "all statuses"
 
@@ -1706,6 +1711,12 @@ export class BookingStageService {
       franchise_id: franchiseId,
       is_deleted: false,
       ...(statusIds !== null && { status_id: { in: statusIds } }),
+      ...(shouldExcludeLaterStageTags && {
+        statusType: {
+          vendor_id: vendorId,
+          tag: { notIn: excludedProductionStageTags },
+        },
+      }),
       activity_status: "onGoing",
       ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
     });
@@ -2850,6 +2861,9 @@ export class BookingStageService {
     const isOrderLoginStage = normalizedTag === "Type 9";
     const isProductionStage = normalizedTag === "Type 10";
     const isInstallationStage = normalizedTag === "Type 15";
+    const excludedProductionStageTags = ["Type 15", "Type 16", "Type 17"];
+    const shouldExcludeLaterStageTags =
+      isTechCheckStage || isOrderLoginStage || isProductionStage;
     const isInstanceDrivenStage =
       isTechCheckStage ||
       isOrderLoginStage ||
@@ -3408,7 +3422,12 @@ const statusTags =
         vendor_id: vendorId,
         is_deleted: false,
         status_id: { in: statusIds },
-        statusType: { vendor_id: vendorId },
+        statusType: shouldExcludeLaterStageTags
+          ? {
+              vendor_id: vendorId,
+              tag: { notIn: excludedProductionStageTags },
+            }
+          : { vendor_id: vendorId },
         activity_status: isAllStages
           ? "onGoing"
           : { in: ["onGoing", "lostApproval"] },
@@ -3501,7 +3520,12 @@ const statusTags =
       is_deleted: false,
       vendor_id: vendorId,
       status_id: { in: statusIds },
-      statusType: { vendor_id: vendorId },
+      statusType: shouldExcludeLaterStageTags
+        ? {
+            vendor_id: vendorId,
+            tag: { notIn: excludedProductionStageTags },
+          }
+        : { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
         : { in: ["onGoing", "lostApproval"] },
