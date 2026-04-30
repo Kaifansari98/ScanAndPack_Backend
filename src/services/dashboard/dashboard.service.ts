@@ -2838,15 +2838,16 @@ export class DashboardService {
     };
 
     const [preProdCount, underProdCount] = await Promise.all([
+      // Under Production tab disabled → is_pre_prod_done not yet true
       prisma.leadProductStructureInstance.count({
-        where: { ...sharedWhere, is_pre_prod_done: false, is_under_production: false },
+        where: { ...sharedWhere, is_pre_prod_done: false },
       }),
+      // Under Production tab enabled, Post Production tab still disabled → is_pre_prod_done true but is_post_production not yet true
       prisma.leadProductStructureInstance.count({
         where: {
           ...sharedWhere,
           is_pre_prod_done: true,
-          is_under_production: false,
-          is_production_completed: false,
+          is_post_production: { not: true },
         },
       }),
     ]);
