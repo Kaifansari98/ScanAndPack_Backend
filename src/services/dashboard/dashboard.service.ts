@@ -2816,4 +2816,41 @@ export class DashboardService {
       lost: mapResult("lost"),
     };
   }
+
+  // -------------------------------------------------------
+  // Factory Dashboard : Lead Bifurcation
+  // -------------------------------------------------------
+  public async getFactoryLeadBifurcation(vendor_id: number) {
+    const productionStatusIds = await prisma.statusTypeMaster
+      .findMany({
+        where: { vendor_id, tag: { in: ["Type 8", "Type 9", "Type 10"] } },
+        select: { id: true },
+      })
+      .then((rows) => rows.map((r) => r.id));
+
+    const sharedWhere = {
+      vendor_id,
+      is_order_login_completed: true,
+      lead: {
+        is_deleted: false,
+        status_id: { in: productionStatusIds },
+      },
+    };
+
+    const [preProdCount, underProdCount] = await Promise.all([
+      prisma.leadProductStructureInstance.count({
+        where: { ...sharedWhere, is_pre_prod_done: false, is_under_production: false },
+      }),
+      prisma.leadProductStructureInstance.count({
+        where: {
+          ...sharedWhere,
+          is_pre_prod_done: true,
+          is_under_production: false,
+          is_production_completed: false,
+        },
+      }),
+    ]);
+
+    return { preProdCount, underProdCount };
+  }
 }

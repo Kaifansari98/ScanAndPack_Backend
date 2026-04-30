@@ -155,4 +155,10 @@ DashboardRouter.get(
   dashboardController.getAdminTaskOverview
 );
 
+// Factory
+DashboardRouter.get(
+  "/factory/lead-bifurcation",
+  dashboardController.getFactoryLeadBifurcation
+);
+
 export default DashboardRouter;
