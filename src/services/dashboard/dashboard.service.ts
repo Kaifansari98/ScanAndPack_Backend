@@ -2866,6 +2866,42 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Factory Dashboard : ERD Calendar
+  // -------------------------------------------------------
+  public async getFactoryERDCalendar(vendor_id: number) {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        vendor_id,
+        production_erd_date: { not: null },
+        lead: { is_deleted: false },
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        production_erd_date: true,
+        lead: {
+          select: {
+            lead_code: true,
+            account_id: true,
+            firstname: true,
+            lastname: true,
+          },
+        },
+      },
+      orderBy: { production_erd_date: "asc" },
+    });
+
+    return instances.map((i) => ({
+      id: i.id,
+      lead_id: i.lead_id,
+      account_id: i.lead.account_id,
+      lead_code: i.lead.lead_code ?? "",
+      name: `${i.lead.firstname ?? ""} ${i.lead.lastname ?? ""}`.trim(),
+      production_erd_date: i.production_erd_date,
+    }));
+  }
+
+  // -------------------------------------------------------
   // Factory Dashboard : Avg Timeline – Production to RTD
   // Type 10 (Production Stage) → Type 11 (Ready to Dispatch)
   // -------------------------------------------------------

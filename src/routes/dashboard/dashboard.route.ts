@@ -164,5 +164,9 @@ DashboardRouter.get(
   "/factory/avg-production-to-rtd",
   dashboardController.getFactoryAvgProductionToRTD
 );
+DashboardRouter.get(
+  "/factory/erd-calendar",
+  dashboardController.getFactoryERDCalendar
+);
 
 export default DashboardRouter;
