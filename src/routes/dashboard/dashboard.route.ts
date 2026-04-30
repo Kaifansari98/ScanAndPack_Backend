@@ -155,6 +155,9 @@ DashboardRouter.get(
   dashboardController.getAdminTaskOverview
 );
 
+// Tech-Check User
+DashboardRouter.get("/tech-check/new-leads", dashboardController.getTechCheckNewLeads);
+
 // Backend User
 DashboardRouter.get("/backend/new-order-login-leads", dashboardController.getBackendNewOrderLoginLeads);
 DashboardRouter.get("/backend/avg-ol-to-production", dashboardController.getBackendAvgOLToProduction);

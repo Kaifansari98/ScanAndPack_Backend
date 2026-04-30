@@ -2866,6 +2866,31 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Tech-Check Dashboard : New Leads shifted to Tech Check (Type 8)
+  // -------------------------------------------------------
+  public async getTechCheckNewLeads(vendor_id: number) {
+    const type8 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 8" },
+      select: { id: true },
+    });
+
+    if (!type8) return { count: 0 };
+
+    const count = await prisma.leadProductStructureInstance.count({
+      where: {
+        vendor_id,
+        is_tech_check_completed: false,
+        lead: {
+          is_deleted: false,
+          status_id: type8.id,
+        },
+      },
+    });
+
+    return { count };
+  }
+
+  // -------------------------------------------------------
   // Backend User Dashboard : New Leads in Order Login Stage (Type 9)
   // -------------------------------------------------------
   public async getBackendNewOrderLoginLeads(vendor_id: number) {
