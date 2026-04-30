@@ -2902,6 +2902,46 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Factory Dashboard : Upcoming Dispatches
+  // LeadMaster with status Type 14 and dispatch_date set
+  // -------------------------------------------------------
+  public async getFactoryUpcomingDispatches(vendor_id: number) {
+    const type14 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 14" },
+      select: { id: true },
+    });
+
+    if (!type14) return [];
+
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        status_id: type14.id,
+        dispatch_date: { not: null },
+      },
+      select: {
+        id: true,
+        lead_code: true,
+        account_id: true,
+        firstname: true,
+        lastname: true,
+        dispatch_date: true,
+      },
+      orderBy: { dispatch_date: "asc" },
+    });
+
+    return leads.map((l) => ({
+      id: l.id,
+      lead_id: l.id,
+      account_id: l.account_id,
+      lead_code: l.lead_code ?? "",
+      name: `${l.firstname ?? ""} ${l.lastname ?? ""}`.trim(),
+      dispatch_date: l.dispatch_date,
+    }));
+  }
+
+  // -------------------------------------------------------
   // Factory Dashboard : Avg Timeline – Production to RTD
   // Type 10 (Production Stage) → Type 11 (Ready to Dispatch)
   // -------------------------------------------------------

@@ -168,5 +168,9 @@ DashboardRouter.get(
   "/factory/erd-calendar",
   dashboardController.getFactoryERDCalendar
 );
+DashboardRouter.get(
+  "/factory/upcoming-dispatches",
+  dashboardController.getFactoryUpcomingDispatches
+);
 
 export default DashboardRouter;
