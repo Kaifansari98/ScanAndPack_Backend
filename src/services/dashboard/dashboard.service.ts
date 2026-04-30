@@ -2830,6 +2830,7 @@ export class DashboardService {
 
     const sharedWhere = {
       vendor_id,
+      is_tech_check_completed: true,
       is_order_login_completed: true,
       lead: {
         is_deleted: false,
@@ -2838,16 +2839,25 @@ export class DashboardService {
     };
 
     const [preProdCount, underProdCount] = await Promise.all([
-      // Under Production tab disabled → is_pre_prod_done not yet true
-      prisma.leadProductStructureInstance.count({
-        where: { ...sharedWhere, is_pre_prod_done: false },
-      }),
-      // Under Production tab enabled, Post Production tab still disabled → is_pre_prod_done true but is_post_production not yet true
+      // Pre-production dashboard card maps to the "Pre Prod Done" bucket
+      // shown in the production stage table.
       prisma.leadProductStructureInstance.count({
         where: {
           ...sharedWhere,
           is_pre_prod_done: true,
+          is_under_production: { not: true },
           is_post_production: { not: true },
+          is_production_completed: { not: true },
+        },
+      }),
+      // Under Production dashboard card maps to the explicit "Under Production"
+      // bucket shown in the production stage table.
+      prisma.leadProductStructureInstance.count({
+        where: {
+          ...sharedWhere,
+          is_under_production: true,
+          is_post_production: { not: true },
+          is_production_completed: { not: true },
         },
       }),
     ]);
