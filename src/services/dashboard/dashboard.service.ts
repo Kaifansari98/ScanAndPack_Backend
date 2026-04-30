@@ -2866,6 +2866,94 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Backend User Dashboard : New Leads in Order Login Stage (Type 9)
+  // -------------------------------------------------------
+  public async getBackendNewOrderLoginLeads(vendor_id: number) {
+    const type9 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 9" },
+      select: { id: true },
+    });
+
+    if (!type9) return { count: 0 };
+
+    const count = await prisma.leadMaster.count({
+      where: {
+        vendor_id,
+        is_deleted: false,
+        status_id: type9.id,
+      },
+    });
+
+    return { count };
+  }
+
+  // -------------------------------------------------------
+  // Backend User Dashboard : Avg Timeline – OL (Type 9) → Production (Type 10)
+  // -------------------------------------------------------
+  public async getBackendAvgOLToProduction(vendor_id: number) {
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id, tag: { in: ["Type 9", "Type 10"] } },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map(statuses.map((s) => [s.tag, s.id]));
+    const type9Id = statusMap.get("Type 9");
+    const type10Id = statusMap.get("Type 10");
+
+    if (!type9Id || !type10Id) {
+      return { avgDays: 0, readable: { days: 0, hours: 0, minutes: 0 } };
+    }
+
+    const [type9Logs, type10Logs] = await Promise.all([
+      prisma.leadStatusLogs.findMany({
+        where: { vendor_id, status_id: type9Id },
+        select: { lead_id: true, created_at: true },
+        orderBy: { created_at: "asc" },
+      }),
+      prisma.leadStatusLogs.findMany({
+        where: { vendor_id, status_id: type10Id },
+        select: { lead_id: true, created_at: true },
+        orderBy: { created_at: "asc" },
+      }),
+    ]);
+
+    const type9Map = new Map<number, Date>();
+    for (const log of type9Logs) {
+      if (!type9Map.has(log.lead_id)) type9Map.set(log.lead_id, log.created_at);
+    }
+
+    const type10Map = new Map<number, Date>();
+    for (const log of type10Logs) {
+      if (!type10Map.has(log.lead_id)) type10Map.set(log.lead_id, log.created_at);
+    }
+
+    let totalMs = 0;
+    let count = 0;
+
+    for (const [leadId, type9Date] of type9Map) {
+      const type10Date = type10Map.get(leadId);
+      if (!type10Date) continue;
+      const diffMs = type10Date.getTime() - type9Date.getTime();
+      if (diffMs >= 0) {
+        totalMs += diffMs;
+        count++;
+      }
+    }
+
+    const avgDays = count === 0 ? 0 : Number((totalMs / count / (1000 * 60 * 60 * 24)).toFixed(2));
+    const totalMinutes = avgDays * 24 * 60;
+
+    return {
+      avgDays,
+      readable: {
+        days: Math.floor(totalMinutes / (24 * 60)),
+        hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+        minutes: Math.floor(totalMinutes % 60),
+      },
+    };
+  }
+
+  // -------------------------------------------------------
   // Pre-Prod Dashboard : New Sites in Production Stage
   // -------------------------------------------------------
   public async getPreProdNewSites(vendor_id: number) {

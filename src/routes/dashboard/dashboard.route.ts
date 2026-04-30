@@ -155,6 +155,10 @@ DashboardRouter.get(
   dashboardController.getAdminTaskOverview
 );
 
+// Backend User
+DashboardRouter.get("/backend/new-order-login-leads", dashboardController.getBackendNewOrderLoginLeads);
+DashboardRouter.get("/backend/avg-ol-to-production", dashboardController.getBackendAvgOLToProduction);
+
 // Pre-Prod
 DashboardRouter.get("/pre-prod/new-sites", dashboardController.getPreProdNewSites);
 DashboardRouter.get("/pre-prod/avg-timeline", dashboardController.getPreProdAvgTimeline);
