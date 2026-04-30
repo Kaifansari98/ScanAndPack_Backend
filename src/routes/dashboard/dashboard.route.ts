@@ -157,6 +157,7 @@ DashboardRouter.get(
 
 // Tech-Check User
 DashboardRouter.get("/tech-check/new-leads", dashboardController.getTechCheckNewLeads);
+DashboardRouter.get("/tech-check/avg-approval-timeline", dashboardController.getTechCheckAvgApprovalTimeline);
 
 // Backend User
 DashboardRouter.get("/backend/new-order-login-leads", dashboardController.getBackendNewOrderLoginLeads);

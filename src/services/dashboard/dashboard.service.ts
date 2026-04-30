@@ -2891,6 +2891,77 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Tech-Check Dashboard : Avg Timeline – Type 7 log → tech_check_completed_at
+  // -------------------------------------------------------
+  public async getTechCheckAvgApprovalTimeline(vendor_id: number) {
+    const type7 = await prisma.statusTypeMaster.findFirst({
+      where: { vendor_id, tag: "Type 7" },
+      select: { id: true },
+    });
+
+    if (!type7) return { avgDays: 0, readable: { days: 0, hours: 0, minutes: 0 } };
+
+    // Instances that have been tech-check completed and whose lead is at Type 7
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        vendor_id,
+        tech_check_completed_at: { not: null },
+        lead: {
+          is_deleted: false,
+          status_id: type7.id,
+        },
+      },
+      select: {
+        lead_id: true,
+        tech_check_completed_at: true,
+      },
+    });
+
+    if (instances.length === 0) {
+      return { avgDays: 0, readable: { days: 0, hours: 0, minutes: 0 } };
+    }
+
+    const leadIds = [...new Set(instances.map((i) => i.lead_id))];
+
+    // Earliest Type 7 log per lead
+    const type7Logs = await prisma.leadStatusLogs.findMany({
+      where: { vendor_id, status_id: type7.id, lead_id: { in: leadIds } },
+      select: { lead_id: true, created_at: true },
+      orderBy: { created_at: "asc" },
+    });
+
+    const type7Map = new Map<number, Date>();
+    for (const log of type7Logs) {
+      if (!type7Map.has(log.lead_id)) type7Map.set(log.lead_id, log.created_at);
+    }
+
+    let totalMs = 0;
+    let count = 0;
+
+    for (const instance of instances) {
+      const type7Date = type7Map.get(instance.lead_id);
+      if (!type7Date || !instance.tech_check_completed_at) continue;
+      const diffMs = instance.tech_check_completed_at.getTime() - type7Date.getTime();
+      if (diffMs >= 0) {
+        totalMs += diffMs;
+        count++;
+      }
+    }
+
+    const avgDays = count === 0 ? 0 : Number((totalMs / count / (1000 * 60 * 60 * 24)).toFixed(2));
+    const totalMinutes = avgDays * 24 * 60;
+
+    return {
+      avgDays,
+      readable: {
+        days: Math.floor(totalMinutes / (24 * 60)),
+        hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+        minutes: Math.floor(totalMinutes % 60),
+      },
+    };
+  }
+
+  // -------------------------------------------------------
   // Backend User Dashboard : New Leads in Order Login Stage (Type 9)
   // -------------------------------------------------------
   public async getBackendNewOrderLoginLeads(vendor_id: number) {
