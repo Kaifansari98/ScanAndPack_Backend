@@ -155,6 +155,10 @@ DashboardRouter.get(
   dashboardController.getAdminTaskOverview
 );
 
+// Pre-Prod
+DashboardRouter.get("/pre-prod/new-sites", dashboardController.getPreProdNewSites);
+DashboardRouter.get("/pre-prod/avg-timeline", dashboardController.getPreProdAvgTimeline);
+
 // Factory
 DashboardRouter.get(
   "/factory/lead-bifurcation",

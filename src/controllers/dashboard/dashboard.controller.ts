@@ -877,6 +877,32 @@ export class DashboardController {
     }
   };
 
+  public getPreProdNewSites = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      if (!vendor_id) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
+      }
+      const data = await dashboardService.getPreProdNewSites(vendor_id);
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
+  public getPreProdAvgTimeline = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.query.vendor_id);
+      if (!vendor_id) {
+        return res.status(400).json({ success: false, message: "vendor_id is required" });
+      }
+      const data = await dashboardService.getPreProdAvgTimeline(vendor_id);
+      return res.status(200).json({ success: true, data });
+    } catch (error: any) {
+      return res.status(500).json({ success: false, message: error.message || "Internal server error" });
+    }
+  };
+
   public getFactoryUpcomingDispatches = async (req: Request, res: Response) => {
     try {
       const vendor_id = Number(req.query.vendor_id);

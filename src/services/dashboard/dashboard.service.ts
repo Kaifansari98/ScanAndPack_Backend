@@ -2866,6 +2866,73 @@ export class DashboardService {
   }
 
   // -------------------------------------------------------
+  // Pre-Prod Dashboard : New Sites in Production Stage
+  // -------------------------------------------------------
+  public async getPreProdNewSites(vendor_id: number) {
+    const productionStatusIds = await prisma.statusTypeMaster
+      .findMany({
+        where: { vendor_id, tag: { in: ["Type 8", "Type 9", "Type 10"] } },
+        select: { id: true },
+      })
+      .then((rows) => rows.map((r) => r.id));
+
+    const count = await prisma.leadProductStructureInstance.count({
+      where: {
+        vendor_id,
+        is_order_login_completed: true,
+        is_pre_prod_done: false,
+        lead: {
+          is_deleted: false,
+          status_id: { in: productionStatusIds },
+        },
+      },
+    });
+
+    return { count };
+  }
+
+  // -------------------------------------------------------
+  // Pre-Prod Dashboard : Avg Timeline – Order Login Done → Pre-Prod Done
+  // -------------------------------------------------------
+  public async getPreProdAvgTimeline(vendor_id: number) {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        vendor_id,
+        order_login_completed_at: { not: null },
+        pre_prod_done_at: { not: null },
+      },
+      select: {
+        order_login_completed_at: true,
+        pre_prod_done_at: true,
+      },
+    });
+
+    let totalMs = 0;
+    let count = 0;
+
+    for (const i of instances) {
+      if (!i.order_login_completed_at || !i.pre_prod_done_at) continue;
+      const diffMs = i.pre_prod_done_at.getTime() - i.order_login_completed_at.getTime();
+      if (diffMs >= 0) {
+        totalMs += diffMs;
+        count++;
+      }
+    }
+
+    const avgDays = count === 0 ? 0 : Number((totalMs / count / (1000 * 60 * 60 * 24)).toFixed(2));
+    const totalMinutes = avgDays * 24 * 60;
+
+    return {
+      avgDays,
+      readable: {
+        days: Math.floor(totalMinutes / (24 * 60)),
+        hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+        minutes: Math.floor(totalMinutes % 60),
+      },
+    };
+  }
+
+  // -------------------------------------------------------
   // Factory Dashboard : ERD Calendar
   // -------------------------------------------------------
   public async getFactoryERDCalendar(vendor_id: number) {
