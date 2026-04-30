@@ -160,5 +160,9 @@ DashboardRouter.get(
   "/factory/lead-bifurcation",
   dashboardController.getFactoryLeadBifurcation
 );
+DashboardRouter.get(
+  "/factory/avg-production-to-rtd",
+  dashboardController.getFactoryAvgProductionToRTD
+);
 
 export default DashboardRouter;

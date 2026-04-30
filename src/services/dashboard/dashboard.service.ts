@@ -2854,4 +2854,73 @@ export class DashboardService {
 
     return { preProdCount, underProdCount };
   }
+
+  // -------------------------------------------------------
+  // Factory Dashboard : Avg Timeline – Production to RTD
+  // Type 10 (Production Stage) → Type 11 (Ready to Dispatch)
+  // -------------------------------------------------------
+  public async getFactoryAvgProductionToRTD(vendor_id: number) {
+    const statuses = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id, tag: { in: ["Type 10", "Type 11"] } },
+      select: { id: true, tag: true },
+    });
+
+    const statusMap = new Map(statuses.map((s) => [s.tag, s.id]));
+    const type10Id = statusMap.get("Type 10");
+    const type11Id = statusMap.get("Type 11");
+
+    if (!type10Id || !type11Id) {
+      return { avgDays: 0, readable: { days: 0, hours: 0, minutes: 0 } };
+    }
+
+    const [type10Logs, type11Logs] = await Promise.all([
+      prisma.leadStatusLogs.findMany({
+        where: { vendor_id, status_id: type10Id },
+        select: { lead_id: true, created_at: true },
+        orderBy: { created_at: "asc" },
+      }),
+      prisma.leadStatusLogs.findMany({
+        where: { vendor_id, status_id: type11Id },
+        select: { lead_id: true, created_at: true },
+        orderBy: { created_at: "asc" },
+      }),
+    ]);
+
+    // Earliest Type 10 log per lead
+    const type10Map = new Map<number, Date>();
+    for (const log of type10Logs) {
+      if (!type10Map.has(log.lead_id)) type10Map.set(log.lead_id, log.created_at);
+    }
+
+    // Earliest Type 11 log per lead
+    const type11Map = new Map<number, Date>();
+    for (const log of type11Logs) {
+      if (!type11Map.has(log.lead_id)) type11Map.set(log.lead_id, log.created_at);
+    }
+
+    let totalMs = 0;
+    let count = 0;
+
+    for (const [leadId, type10Date] of type10Map) {
+      const type11Date = type11Map.get(leadId);
+      if (!type11Date) continue;
+      const diffMs = type11Date.getTime() - type10Date.getTime();
+      if (diffMs >= 0) {
+        totalMs += diffMs;
+        count++;
+      }
+    }
+
+    const avgDays = count === 0 ? 0 : Number((totalMs / count / (1000 * 60 * 60 * 24)).toFixed(2));
+    const totalMinutes = avgDays * 24 * 60;
+
+    return {
+      avgDays,
+      readable: {
+        days: Math.floor(totalMinutes / (24 * 60)),
+        hours: Math.floor((totalMinutes % (24 * 60)) / 60),
+        minutes: Math.floor(totalMinutes % 60),
+      },
+    };
+  }
 }
