@@ -24,8 +24,8 @@ const prioritySchema = Joi.string()
   .valid("High", "Medium", "Low");
 
 export const createLeadSchema = Joi.object({
-  firstname: Joi.string().trim().min(2).max(50).required(),
-  lastname: Joi.string().trim().min(2).max(50).required(),
+  firstname: Joi.string().trim().min(1).max(50).required(),
+  lastname: Joi.string().trim().min(1).max(50).required(),
 
   country_code: Joi.string()
     .pattern(/^\+\d{1,4}$/)
