@@ -7,7 +7,10 @@ import {
 } from "../../../types/leadModule.types";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
-import { assignTaskISMService } from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
+import {
+  assignTaskISMService,
+  getInitialSiteMeasurementTaskConflicts,
+} from "../../../services/leadModuleServices/leadsGeneration/initial-site_measurement.service";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
 
@@ -104,6 +107,38 @@ export class PaymentUploadController {
         success: false,
         message: "Internal server error",
         error: error.message,
+      });
+    }
+  };
+
+  public getTaskConflicts = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = getNumberParam(req.params.leadId);
+
+      if (!leadId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+        return;
+      }
+
+      const conflicts = await getInitialSiteMeasurementTaskConflicts(leadId);
+
+      res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] getISMTaskConflicts:", { err: error });
+      res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
       });
     }
   };
@@ -237,13 +272,21 @@ export class PaymentUploadController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed");
+
       logger.error("[ERROR] assignTaskISM:", { err: error });
 
-      return res.status(500).json({
+      return res.status(isConflict ? 409 : 500).json({
         success: false,
-        error: "Internal server error",
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
         details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       });
     }
   }

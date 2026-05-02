@@ -255,6 +255,11 @@ router.post(
   paymentUploadController.assignTaskISM
 );
 
+router.get(
+  "/leadId/:leadId/task-conflicts",
+  paymentUploadController.getTaskConflicts
+);
+
 // GET ISM details by leadId
 router.get("/leadId/:leadId", paymentUploadController.getISMDetailsByLeadId);
 
