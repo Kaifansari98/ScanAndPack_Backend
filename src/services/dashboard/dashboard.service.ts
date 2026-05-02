@@ -2838,31 +2838,69 @@ export class DashboardService {
       },
     };
 
-    const [preProdCount, underProdCount] = await Promise.all([
-      // Pre-production dashboard card maps to the "Pre Prod Done" bucket
-      // shown in the production stage table.
-      prisma.leadProductStructureInstance.count({
-        where: {
-          ...sharedWhere,
-          is_pre_prod_done: true,
-          is_under_production: { not: true },
-          is_post_production: { not: true },
-          is_production_completed: { not: true },
-        },
-      }),
-      // Under Production dashboard card maps to the explicit "Under Production"
-      // bucket shown in the production stage table.
-      prisma.leadProductStructureInstance.count({
-        where: {
-          ...sharedWhere,
-          is_under_production: true,
-          is_post_production: { not: true },
-          is_production_completed: { not: true },
-        },
-      }),
-    ]);
+    const [pendingCount, preProdDoneCount, underProdCount, completedCount] =
+      await Promise.all([
+        prisma.leadProductStructureInstance.count({
+          where: {
+            ...sharedWhere,
+            AND: [
+              {
+                OR: [
+                  { is_pre_prod_done: false },
+                  { is_pre_prod_done: null },
+                ],
+              },
+              {
+                OR: [
+                  { is_under_production: false },
+                  { is_under_production: null },
+                ],
+              },
+              {
+                OR: [
+                  { is_post_production: false },
+                  { is_post_production: null },
+                ],
+              },
+              {
+                OR: [
+                  { is_production_completed: false },
+                  { is_production_completed: null },
+                ],
+              },
+            ],
+          },
+        }),
+        // Pre-production dashboard card maps to the "Pre Prod Done" bucket
+        // shown in the production stage table.
+        prisma.leadProductStructureInstance.count({
+          where: {
+            ...sharedWhere,
+            is_pre_prod_done: true,
+            is_under_production: { not: true },
+            is_post_production: { not: true },
+            is_production_completed: { not: true },
+          },
+        }),
+        // Under Production dashboard card maps to the explicit "Under Production"
+        // bucket shown in the production stage table.
+        prisma.leadProductStructureInstance.count({
+          where: {
+            ...sharedWhere,
+            is_under_production: true,
+            is_post_production: { not: true },
+            is_production_completed: { not: true },
+          },
+        }),
+        prisma.leadProductStructureInstance.count({
+          where: {
+            ...sharedWhere,
+            is_production_completed: true,
+          },
+        }),
+      ]);
 
-    return { preProdCount, underProdCount };
+    return { pendingCount, preProdDoneCount, underProdCount, completedCount };
   }
 
   // -------------------------------------------------------
