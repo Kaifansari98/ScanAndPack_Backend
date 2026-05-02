@@ -841,4 +841,65 @@ export class FinalMeasurementController {
       });
     }
   }
+
+  public async rescheduleFinalMeasurementTask(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { due_date, remark, updated_by } = req.body;
+
+      if (!leadId || !taskId || !due_date || !remark || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "Validation failed",
+          details: [
+            !leadId && {
+              field: "leadId",
+              message: "leadId (param) is required",
+            },
+            !taskId && {
+              field: "taskId",
+              message: "taskId (param) is required",
+            },
+            !due_date && {
+              field: "due_date",
+              message: "due_date is required",
+            },
+            !remark && {
+              field: "remark",
+              message: "remark is required",
+            },
+            !updated_by && {
+              field: "updated_by",
+              message: "updated_by is required",
+            },
+          ].filter(Boolean),
+        });
+      }
+
+      const result = await finalMeasurementService.rescheduleFinalMeasurementTask(
+        {
+          lead_id: leadId,
+          task_id: taskId,
+          due_date,
+          remark,
+          updated_by: Number(updated_by),
+        },
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Final Measurement task rescheduled successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Internal server error",
+      });
+    }
+  }
 }

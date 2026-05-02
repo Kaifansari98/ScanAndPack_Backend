@@ -1354,4 +1354,72 @@ export class FinalMeasurementService {
 
     return result;
   }
+
+  public async rescheduleFinalMeasurementTask(payload: {
+    lead_id: number;
+    task_id: number;
+    due_date: string;
+    remark: string;
+    updated_by: number;
+  }) {
+    const { lead_id, task_id, due_date, remark, updated_by } = payload;
+
+    return prisma.$transaction(async (tx) => {
+      const task = await tx.userLeadTask.findFirst({
+        where: {
+          id: task_id,
+          lead_id,
+        },
+        include: {
+          lead: {
+            select: {
+              vendor_id: true,
+              account_id: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        throw new Error(`Task ${task_id} not found for lead ${lead_id}`);
+      }
+
+      if (task.task_type !== "Final Measurements") {
+        throw new Error("Only Final Measurements tasks can be rescheduled");
+      }
+
+      const updatedTask = await tx.userLeadTask.update({
+        where: { id: task_id },
+        data: {
+          due_date: new Date(due_date),
+          remark,
+          updated_by,
+          updated_at: new Date(),
+        },
+      });
+
+      const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+
+      await tx.leadDetailedLogs.create({
+        data: {
+          vendor_id: task.lead.vendor_id,
+          lead_id,
+          account_id: task.lead.account_id!,
+          action: `Lead's Final Measurements task has been rescheduled on ${formattedDate}. — Remark: ${remark.trim()}`,
+          action_type: "UPDATE",
+          created_by: updated_by,
+          created_at: new Date(),
+        },
+      });
+
+      await cache.del(`dashboard:tasks:${task.lead.vendor_id}:${task.user_id}`);
+      await cache.del(`dashboard:tasks:${task.lead.vendor_id}:${updated_by}`);
+
+      return updatedTask;
+    });
+  }
 }

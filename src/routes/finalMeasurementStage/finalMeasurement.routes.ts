@@ -31,6 +31,11 @@ finalMeasurementRouter.get(
     finalMeasurementController.getRestrictedTaskConflicts
 );
 
+finalMeasurementRouter.patch(
+    "/leadId/:leadId/taskId/:taskId/reschedule",
+    finalMeasurementController.rescheduleFinalMeasurementTask
+);
+
 finalMeasurementRouter.put(
     "/vendorId/:vendorId/leadId/:leadId/notes",
     finalMeasurementController.updateCriticalDiscussionNotes

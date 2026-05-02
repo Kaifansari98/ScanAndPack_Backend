@@ -214,6 +214,11 @@ leadsRouter.patch(
   leadController.editTaskISM
 );
 
+leadsRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/reschedule-initial-site-measurement",
+  leadController.rescheduleInitialSiteMeasurementTask,
+);
+
 leadsRouter.get(
   "/vendor-token/:token/verify",
   leadController.verifyUserTokenController

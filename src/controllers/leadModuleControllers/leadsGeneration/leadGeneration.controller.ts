@@ -2104,6 +2104,95 @@ export class LeadController {
     }
   }
 
+  async rescheduleInitialSiteMeasurementTask(
+    req: Request,
+    res: Response,
+  ): Promise<Response> {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const due_date = getSingleBodyValue(req.body.due_date);
+      const remark = getSingleBodyValue(req.body.remark);
+      const updated_by = Number(getSingleBodyValue(req.body.updated_by));
+
+      if (!leadId || !taskId || !due_date || !remark || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          error: "Validation failed",
+          details: [
+            !leadId && {
+              field: "leadId",
+              message: "leadId (param) is required",
+            },
+            !taskId && {
+              field: "taskId",
+              message: "taskId (param) is required",
+            },
+            !due_date && {
+              field: "due_date",
+              message: "due_date is required",
+            },
+            !remark && {
+              field: "remark",
+              message: "remark is required",
+            },
+            !updated_by && {
+              field: "updated_by",
+              message: "updated_by is required",
+            },
+          ].filter(Boolean),
+        });
+      }
+
+      const task = await prisma.userLeadTask.findFirst({
+        where: { id: taskId, lead_id: leadId },
+        select: {
+          id: true,
+          task_type: true,
+        },
+      });
+
+      if (!task) {
+        return res.status(404).json({
+          success: false,
+          error: "Task not found",
+        });
+      }
+
+      if (task.task_type !== "Initial Site Measurement") {
+        return res.status(400).json({
+          success: false,
+          error:
+            "Only Initial Site Measurement tasks can be rescheduled from this endpoint",
+        });
+      }
+
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        due_date,
+        remark,
+        updated_by,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Initial Site Measurement task rescheduled successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] rescheduleInitialSiteMeasurementTask:", {
+        err: error,
+      });
+      return res.status(500).json({
+        success: false,
+        error: "Internal server error",
+        details:
+          process.env.NODE_ENV === "development" ? error.message : undefined,
+      });
+    }
+  }
+
   verifyUserTokenController = async (req: Request, res: Response) => {
     const token = getParam(req.params.token);
     if (!token) {

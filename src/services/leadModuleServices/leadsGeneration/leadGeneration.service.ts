@@ -2624,6 +2624,9 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       await cache.del(`dashboard:tasks:${vendor_id}:${updatedTask.closed_by}`);
     }
 
+    const taskLabel =
+      task.task_type === "Follow Up" ? "Follow Up" : `${task.task_type} task`;
+
     // 5️⃣ Prepare LeadDetailedLogs entry
     let actionMessage = "";
 
@@ -2634,17 +2637,17 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
         month: "short",
         year: "numeric",
       });
-      actionMessage = `Lead's Follow-up has been rescheduled on ${formattedDate}.`;
+      actionMessage = `Lead's ${taskLabel} has been rescheduled on ${formattedDate}.`;
     }
 
     // Case 2️⃣ - Completed
     if (status === "completed") {
-      actionMessage = "Lead's Follow-up has been marked as Completed.";
+      actionMessage = `Lead's ${taskLabel} has been marked as Completed.`;
     }
 
     // Case 3️⃣ - Cancelled
     if (status === "cancelled") {
-      actionMessage = "Lead's Follow-up has been marked as Cancelled.";
+      actionMessage = `Lead's ${taskLabel} has been marked as Cancelled.`;
     }
 
     // ✅ Append remark if present
