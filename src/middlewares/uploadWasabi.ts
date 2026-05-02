@@ -484,7 +484,7 @@ export const uploadUnderInstallationFiles = multer({
       cb(null, `${Date.now()}-${file.originalname}`);
     },
   }),
-  limits: { fileSize: 200 * 1024 * 1024, files: 10 },
+  limits: { fileSize: 200 * 1024 * 1024, files: 20 },
 });
 
 export const uploadFinalHandoverFiles = multer({
@@ -578,7 +578,7 @@ export const uploadCSPBookingFiles = multer({
 
 export const uploadToWasabiUnderInstallationDayWiseDocs = multer({
   storage: multer.memoryStorage(),
-  limits: { files: 10 },
+  limits: { files: 20 },
   fileFilter: (req, file, cb) => {
     const allowed = [".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".mp4"];
     const ext = path.extname(file.originalname).toLowerCase();

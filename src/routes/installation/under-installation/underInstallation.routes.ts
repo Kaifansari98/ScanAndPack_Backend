@@ -68,7 +68,7 @@ underInstallationStageRoutes.put(
 /** ✅ POST → Upload Installation Updates (Day Wise) */
 underInstallationStageRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-installation-updates-day-wise",
-  uploadUnderInstallationFiles.array("files", 10),
+  uploadUnderInstallationFiles.array("files", 20),
   controller.uploadInstallationUpdatesDayWise,
 );
 
