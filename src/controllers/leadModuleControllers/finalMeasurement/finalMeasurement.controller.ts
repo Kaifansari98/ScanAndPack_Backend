@@ -826,9 +826,10 @@ export class FinalMeasurementController {
       const errorMessage = error?.message || "Internal server error";
       const isConflict =
         typeof errorMessage === "string" &&
-        errorMessage
+        (errorMessage
           .toLowerCase()
-          .includes("already exists for this lead and is not completed");
+          .includes("already exists for this lead and is not completed") ||
+          errorMessage.toLowerCase().includes("follow up task is already assigned"));
 
       logger.error("[ERROR] assignTaskISM:", { err: error });
       return res.status(isConflict ? 409 : 500).json({

@@ -58,6 +58,7 @@ const assignTaskISMSchema = Joi.object({
 });
 
 const RESTRICTED_TASK_TYPE = "Initial Site Measurement" as const;
+const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
 
 export const getInitialSiteMeasurementTaskConflicts = async (leadId: number) => {
   const lead = await prisma.leadMaster.findUnique({
@@ -69,7 +70,7 @@ export const getInitialSiteMeasurementTaskConflicts = async (leadId: number) => 
     throw new Error(`Lead ${leadId} not found`);
   }
 
-  const conflicts = await prisma.userLeadTask.findMany({
+  const restrictedTaskConflicts = await prisma.userLeadTask.findMany({
     where: {
       lead_id: leadId,
       task_type: RESTRICTED_TASK_TYPE,
@@ -92,13 +93,45 @@ export const getInitialSiteMeasurementTaskConflicts = async (leadId: number) => 
     },
   });
 
-  return conflicts.map((task) => ({
-    id: task.id,
-    task_type: task.task_type,
-    status: task.status,
-    due_date: task.due_date,
-    assignee: task.user,
-  }));
+  const followUpConflicts = await prisma.userLeadTask.findMany({
+    where: {
+      lead_id: leadId,
+      task_type: FOLLOW_UP_TASK_TYPE,
+      status: { not: "completed" },
+    },
+    select: {
+      id: true,
+      task_type: true,
+      status: true,
+      due_date: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return {
+    restrictedTaskConflicts: restrictedTaskConflicts.map((task) => ({
+      id: task.id,
+      task_type: task.task_type,
+      status: task.status,
+      due_date: task.due_date,
+      assignee: task.user,
+    })),
+    followUpConflicts: followUpConflicts.map((task) => ({
+      id: task.id,
+      task_type: task.task_type,
+      status: task.status,
+      due_date: task.due_date,
+      assignee: task.user,
+    })),
+  };
 };
 
 export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
@@ -146,6 +179,28 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       throw new Error(
         `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
       );
+    }
+
+    if (
+      task_type === FOLLOW_UP_TASK_TYPE &&
+      assignee_user_id !== created_by
+    ) {
+      const existingFollowUpTask = await tx.userLeadTask.findFirst({
+        where: {
+          lead_id: lead.id,
+          task_type: FOLLOW_UP_TASK_TYPE,
+          user_id: assignee_user_id,
+          status: { not: "completed" },
+        },
+        select: { id: true },
+        orderBy: { created_at: "desc" },
+      });
+
+      if (existingFollowUpTask) {
+        throw new Error(
+          "A Follow Up Task is already assigned to this user, which is not yet completed",
+        );
+      }
     }
 
     if (task_type === RESTRICTED_TASK_TYPE) {

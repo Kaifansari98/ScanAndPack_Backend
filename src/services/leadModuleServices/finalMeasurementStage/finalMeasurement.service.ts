@@ -30,6 +30,7 @@ const RESTRICTED_TASK_TYPES = [
 ] as const;
 
 type RestrictedTaskType = (typeof RESTRICTED_TASK_TYPES)[number];
+const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
 
 const assignTaskISMSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
@@ -53,7 +54,7 @@ export class FinalMeasurementService {
       throw new Error(`Lead ${leadId} not found`);
     }
 
-    const conflicts = await prisma.userLeadTask.findMany({
+    const restrictedTaskConflicts = await prisma.userLeadTask.findMany({
       where: {
         lead_id: leadId,
         task_type: { in: [...RESTRICTED_TASK_TYPES] },
@@ -76,13 +77,45 @@ export class FinalMeasurementService {
       },
     });
 
-    return conflicts.map((task) => ({
-      id: task.id,
-      task_type: task.task_type as RestrictedTaskType,
-      status: task.status,
-      due_date: task.due_date,
-      assignee: task.user,
-    }));
+    const followUpConflicts = await prisma.userLeadTask.findMany({
+      where: {
+        lead_id: leadId,
+        task_type: FOLLOW_UP_TASK_TYPE,
+        status: { not: "completed" },
+      },
+      select: {
+        id: true,
+        task_type: true,
+        status: true,
+        due_date: true,
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return {
+      restrictedTaskConflicts: restrictedTaskConflicts.map((task) => ({
+        id: task.id,
+        task_type: task.task_type as RestrictedTaskType,
+        status: task.status,
+        due_date: task.due_date,
+        assignee: task.user,
+      })),
+      followUpConflicts: followUpConflicts.map((task) => ({
+        id: task.id,
+        task_type: task.task_type,
+        status: task.status,
+        due_date: task.due_date,
+        assignee: task.user,
+      })),
+    };
   }
 
   public async createFinalMeasurementStage(data: FinalMeasurementDto) {
@@ -1030,6 +1063,28 @@ export class FinalMeasurementService {
         throw new Error(
           `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
         );
+      }
+
+      if (
+        task_type === FOLLOW_UP_TASK_TYPE &&
+        assignee_user_id !== created_by
+      ) {
+        const existingFollowUpTask = await tx.userLeadTask.findFirst({
+          where: {
+            lead_id: lead.id,
+            task_type: FOLLOW_UP_TASK_TYPE,
+            user_id: assignee_user_id,
+            status: { not: "completed" },
+          },
+          select: { id: true },
+          orderBy: { created_at: "desc" },
+        });
+
+        if (existingFollowUpTask) {
+          throw new Error(
+            "A Follow Up Task is already assigned to this user, which is not yet completed",
+          );
+        }
       }
 
       if (RESTRICTED_TASK_TYPES.includes(task_type as RestrictedTaskType)) {
