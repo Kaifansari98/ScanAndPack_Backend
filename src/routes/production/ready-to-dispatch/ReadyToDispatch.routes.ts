@@ -29,6 +29,11 @@ readyToDispatchRoutes.get(
   controller.getCurrentSitePhotosCountAtReadyToDispatch
 );
 
+readyToDispatchRoutes.get(
+  "/leadId/:leadId/task-conflicts",
+  controller.getSiteReadinessTaskConflicts
+);
+
 // ✅ Assign Site Readiness Task
 readyToDispatchRoutes.post(
   "/leadId/:leadId/tasks/assign-site-readiness",

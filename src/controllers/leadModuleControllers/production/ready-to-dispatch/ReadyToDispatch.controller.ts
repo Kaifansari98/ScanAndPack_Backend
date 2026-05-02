@@ -222,6 +222,37 @@ export class ReadyToDispatchController {
     }
   }
 
+  public async getSiteReadinessTaskConflicts(
+    req: Request,
+    res: Response
+  ): Promise<Response> {
+    try {
+      const leadId = Number(req.params.leadId);
+
+      if (!leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+      }
+
+      const conflicts = await service.getSiteReadinessTaskConflicts(leadId);
+
+      return res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[ERROR] getSiteReadinessTaskConflicts:", { err: error });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
+      });
+    }
+  }
+
   /** ✅ Assign Site Readiness Task */
   public async assignTaskSiteReadiness(
     req: Request,
@@ -484,12 +515,20 @@ export class ReadyToDispatchController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed");
+
       logger.error("[ERROR] assignTaskSiteReadiness:", { err: error });
-      return res.status(500).json({
+      return res.status(isConflict ? 409 : 500).json({
         success: false,
-        error: "Internal server error",
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
         details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       });
     }
   }

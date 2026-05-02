@@ -26,6 +26,11 @@ finalMeasurementRouter.get(
     finalMeasurementController.getFinalMeasurementLead
 );  
 
+finalMeasurementRouter.get(
+    "/leadId/:leadId/task-conflicts",
+    finalMeasurementController.getRestrictedTaskConflicts
+);
+
 finalMeasurementRouter.put(
     "/vendorId/:vendorId/leadId/:leadId/notes",
     finalMeasurementController.updateCriticalDiscussionNotes

@@ -16,7 +16,51 @@ const assignTaskSiteReadinessSchema = Joi.object({
   created_by: Joi.number().required(),
 });
 
+const RESTRICTED_TASK_TYPE = "Site Readiness" as const;
+
 export class ReadyToDispatchService {
+  async getSiteReadinessTaskConflicts(leadId: number) {
+    const lead = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: { id: true },
+    });
+
+    if (!lead) {
+      throw new Error(`Lead ${leadId} not found`);
+    }
+
+    const conflicts = await prisma.userLeadTask.findMany({
+      where: {
+        lead_id: leadId,
+        task_type: RESTRICTED_TASK_TYPE,
+        status: { not: "completed" },
+      },
+      select: {
+        id: true,
+        task_type: true,
+        status: true,
+        due_date: true,
+        user: {
+          select: {
+            id: true,
+            user_name: true,
+          },
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+    });
+
+    return conflicts.map((task) => ({
+      id: task.id,
+      task_type: task.task_type,
+      status: task.status,
+      due_date: task.due_date,
+      assignee: task.user,
+    }));
+  }
+
   async getLeadsWithStatusReadyToDispatch(
     vendorId: number,
     userId: number,
@@ -325,6 +369,29 @@ export class ReadyToDispatchService {
         throw new Error(
           `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
         );
+      }
+
+      if (task_type === RESTRICTED_TASK_TYPE) {
+        const existingTask = await tx.userLeadTask.findFirst({
+          where: {
+            lead_id: lead.id,
+            task_type,
+            status: { not: "completed" },
+          },
+          select: {
+            id: true,
+            status: true,
+          },
+          orderBy: {
+            created_at: "desc",
+          },
+        });
+
+        if (existingTask) {
+          throw new Error(
+            `${task_type} task already exists for this lead and is not completed`
+          );
+        }
       }
 
       // 3️⃣ Create task record

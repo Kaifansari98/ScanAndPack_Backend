@@ -60,6 +60,39 @@ const safeUnlink = async (filePath?: string) => {
 };
 
 export class FinalMeasurementController {
+  public getRestrictedTaskConflicts = async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const leadId = Number(getParam(req.params.leadId));
+
+      if (!leadId) {
+        res.status(400).json({
+          success: false,
+          message: "leadId is required",
+        });
+        return;
+      }
+
+      const conflicts =
+        await finalMeasurementService.getRestrictedTaskConflicts(leadId);
+
+      res.status(200).json({
+        success: true,
+        data: {
+          conflicts,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[FinalMeasurementController] getRestrictedTaskConflicts error", error);
+      res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch task conflicts",
+      });
+    }
+  };
+
   public createFinalMeasurementStage = async (
     req: Request,
     res: Response
@@ -790,12 +823,20 @@ export class FinalMeasurementController {
         data: result,
       });
     } catch (error: any) {
+      const errorMessage = error?.message || "Internal server error";
+      const isConflict =
+        typeof errorMessage === "string" &&
+        errorMessage
+          .toLowerCase()
+          .includes("already exists for this lead and is not completed");
+
       logger.error("[ERROR] assignTaskISM:", { err: error });
-      return res.status(500).json({
+      return res.status(isConflict ? 409 : 500).json({
         success: false,
-        error: "Internal server error",
+        message: errorMessage,
+        error: isConflict ? "Conflict" : "Internal server error",
         details:
-          process.env.NODE_ENV === "development" ? error.message : undefined,
+          process.env.NODE_ENV === "development" ? errorMessage : undefined,
       });
     }
   }
