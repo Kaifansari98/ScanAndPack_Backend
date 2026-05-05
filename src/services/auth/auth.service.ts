@@ -65,6 +65,39 @@ const getSessionTtlSeconds = (expiresAt: Date) =>
 const VENDOR_SESSION_INDEX_TTL_SECONDS = ACCESS_TOKEN_TTL_DAYS * 24 * 60 * 60;
 
 export class AuthService {
+  private async getCustomPrivilegeCodes(
+    userId: number,
+    vendorId: number,
+    userType: string,
+  ) {
+    if (userType.trim().toLowerCase() !== "custom") {
+      return [] as string[];
+    }
+
+    const mappings = await prisma.userPrivilegeMapping.findMany({
+      where: {
+        user_id: userId,
+        vendor_id: vendorId,
+        is_allowed: true,
+        privilege: {
+          is_active: true,
+        },
+      },
+      select: {
+        privilege: {
+          select: {
+            code: true,
+          },
+        },
+      },
+      orderBy: {
+        privilege_id: "asc",
+      },
+    });
+
+    return [...new Set(mappings.map((mapping) => mapping.privilege.code))];
+  }
+
   private async cacheSession(session: {
     id: number;
     user_id: number;
@@ -313,6 +346,12 @@ export class AuthService {
       is_ho_user = franchise?.is_head_office ?? false;
     }
 
+    const customPrivileges = await this.getCustomPrivilegeCodes(
+      user.id,
+      user.vendor_id,
+      user.user_type.user_type,
+    );
+
     const token = jwt.sign(
       {
         id: user.id,
@@ -351,6 +390,7 @@ export class AuthService {
         token,
         session_id: session.id,
         franchise_id: user.franchise_id,
+        customPrivileges,
         user: { ...user, is_ho_user },
       },
     };

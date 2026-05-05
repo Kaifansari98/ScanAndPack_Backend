@@ -1,5 +1,83 @@
 import { prisma } from "../../prisma/client";
 import bcrypt from "bcryptjs";
+import { redis } from "../../config/redis";
+
+const sessionCacheKey = (sessionId: number) => `auth:session:${sessionId}`;
+const vendorSessionsKey = (vendorId: number) => `auth:vendor-sessions:${vendorId}`;
+
+const ensureCustomUserPrivilegeMappings = async (
+  vendorId: number,
+  userId: number,
+) => {
+  const activePrivileges = await prisma.privilegeMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      is_active: true,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (activePrivileges.length === 0) return;
+
+  await prisma.userPrivilegeMapping.createMany({
+    data: activePrivileges.map((privilege) => ({
+      vendor_id: vendorId,
+      user_id: userId,
+      privilege_id: privilege.id,
+      is_allowed: false,
+    })),
+    skipDuplicates: true,
+  });
+};
+
+const revokeUserActiveSessionsForPrivilegeChange = async (
+  vendorId: number,
+  userId: number,
+) => {
+  const now = new Date();
+
+  const activeSessions = await prisma.userSession.findMany({
+    where: {
+      vendor_id: vendorId,
+      user_id: userId,
+      status: "active",
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (activeSessions.length === 0) return 0;
+
+  await prisma.userSession.updateMany({
+    where: {
+      vendor_id: vendorId,
+      user_id: userId,
+      status: "active",
+    },
+    data: {
+      status: "revoked",
+      is_current: false,
+      revoked_at: now,
+      revoke_reason: "User privileges updated",
+      last_seen_at: now,
+    },
+  });
+
+  try {
+    await redis.del(activeSessions.map((session) => sessionCacheKey(session.id)));
+    await redis.sRem(
+      vendorSessionsKey(vendorId),
+      activeSessions.map((session) => String(session.id)),
+    );
+  } catch (error) {
+    console.error("Failed to evict user session cache after privilege update:", error);
+  }
+
+  return activeSessions.length;
+};
 
 export const createUserService = async (data: {
   vendor_id: number;
@@ -33,13 +111,32 @@ export const createUserService = async (data: {
   }
 
   const hashedPassword = await bcrypt.hash(data.password, 10);
+  const userType = await prisma.userTypeMaster.findUnique({
+    where: { id: Number(data.user_type_id) },
+    select: { user_type: true },
+  });
 
-  return prisma.userMaster.create({
+  if (!userType) {
+    const error = new Error("Invalid user_type_id.");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const createdUser = await prisma.userMaster.create({
     data: {
       ...data,
       password: hashedPassword,
     },
   });
+
+  if (userType.user_type.trim().toLowerCase() === "custom") {
+    await ensureCustomUserPrivilegeMappings(
+      Number(data.vendor_id),
+      createdUser.id,
+    );
+  }
+
+  return createdUser;
 };
 
 export const MasterResetPasswordService = async ({
@@ -116,10 +213,28 @@ export const updateUserService = async (
     return { message: "No changes to update" };
   }
 
-  return prisma.userMaster.update({
+  const updatedUser = await prisma.userMaster.update({
     where: { id: userId },
     data: updateData,
   });
+
+  const effectiveUserTypeId = updateData.user_type_id ?? undefined;
+
+  if (effectiveUserTypeId !== undefined) {
+    const userType = await prisma.userTypeMaster.findUnique({
+      where: { id: Number(effectiveUserTypeId) },
+      select: { user_type: true },
+    });
+
+    if (userType?.user_type.trim().toLowerCase() === "custom") {
+      await ensureCustomUserPrivilegeMappings(
+        updatedUser.vendor_id,
+        updatedUser.id,
+      );
+    }
+  }
+
+  return updatedUser;
 };
 
 export const getUsersByVendorService = async ({
@@ -214,5 +329,245 @@ export const getUsersByVendorService = async ({
       hasNext: pageNum < Math.ceil(count / limitNum),
       hasPrev: pageNum > 1,
     },
+  };
+};
+
+export const getPrivilegeMastersByVendorService = async (
+  vendorId: number,
+  search = "",
+  userId?: number,
+) => {
+  if (!vendorId) {
+    const error = new Error("vendorId is required");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const normalizedSearch = search.trim();
+  let selectedPrivilegeIds = new Set<number>();
+
+  if (userId) {
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: userId,
+        vendor_id: vendorId,
+      },
+      select: { id: true },
+    });
+
+    if (!user) {
+      const error = new Error("User not found for this vendor");
+      (error as any).statusCode = 404;
+      throw error;
+    }
+
+    const mappings = await prisma.userPrivilegeMapping.findMany({
+      where: {
+        vendor_id: vendorId,
+        user_id: userId,
+        is_allowed: true,
+      },
+      select: {
+        privilege_id: true,
+      },
+    });
+
+    selectedPrivilegeIds = new Set(
+      mappings.map((mapping) => mapping.privilege_id),
+    );
+  }
+
+  const privileges = await prisma.privilegeMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      is_active: true,
+      ...(normalizedSearch
+        ? {
+            OR: [
+              {
+                code: {
+                  contains: normalizedSearch,
+                  mode: "insensitive" as const,
+                },
+              },
+              {
+                action: {
+                  contains: normalizedSearch,
+                  mode: "insensitive" as const,
+                },
+              },
+            ],
+          }
+        : {}),
+    },
+    orderBy: [
+      { parent_module: "asc" },
+      { child_module: "asc" },
+      { action: "asc" },
+    ],
+    select: {
+      id: true,
+      vendor_id: true,
+      code: true,
+      parent_module: true,
+      child_module: true,
+      action: true,
+      label: true,
+      description: true,
+      is_active: true,
+    },
+  });
+
+  return privileges.map((privilege) => ({
+    ...privilege,
+    is_selected: selectedPrivilegeIds.has(privilege.id),
+  }));
+};
+
+export const updateUserPrivilegeMappingsService = async ({
+  vendorId,
+  userId,
+  privilegeIds,
+}: {
+  vendorId: number;
+  userId: number;
+  privilegeIds: number[];
+}) => {
+  if (!vendorId || !userId) {
+    const error = new Error("vendorId and userId are required");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const user = await prisma.userMaster.findFirst({
+    where: {
+      id: userId,
+      vendor_id: vendorId,
+    },
+    select: {
+      id: true,
+      user_type: {
+        select: {
+          user_type: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    const error = new Error("User not found for this vendor");
+    (error as any).statusCode = 404;
+    throw error;
+  }
+
+  if (user.user_type?.user_type.trim().toLowerCase() !== "custom") {
+    const error = new Error("Privilege mappings can only be updated for custom users");
+    (error as any).statusCode = 400;
+    throw error;
+  }
+
+  const activePrivileges = await prisma.privilegeMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      is_active: true,
+    },
+    select: { id: true },
+  });
+
+  const activePrivilegeIds = activePrivileges.map((privilege) => privilege.id);
+
+  if (activePrivilegeIds.length === 0) {
+    return { updated: 0 };
+  }
+
+  const requestedPrivilegeIds = Array.from(
+    new Set(
+      privilegeIds
+        .map((value) => Number(value))
+        .filter((value) => Number.isInteger(value) && value > 0),
+    ),
+  );
+
+  const allowedPrivilegeIdSet = new Set(activePrivilegeIds);
+  const filteredRequestedPrivilegeIds = requestedPrivilegeIds.filter((id) =>
+    allowedPrivilegeIdSet.has(id),
+  );
+  const existingAllowedMappings = await prisma.userPrivilegeMapping.findMany({
+    where: {
+      vendor_id: vendorId,
+      user_id: userId,
+      privilege_id: {
+        in: activePrivilegeIds,
+      },
+      is_allowed: true,
+    },
+    select: {
+      privilege_id: true,
+    },
+  });
+  const existingAllowedPrivilegeIds = existingAllowedMappings
+    .map((mapping) => mapping.privilege_id)
+    .sort((left, right) => left - right);
+  const normalizedRequestedPrivilegeIds = [...filteredRequestedPrivilegeIds].sort(
+    (left, right) => left - right,
+  );
+  const hasChanged =
+    existingAllowedPrivilegeIds.length !== normalizedRequestedPrivilegeIds.length ||
+    existingAllowedPrivilegeIds.some(
+      (privilegeId, index) => privilegeId !== normalizedRequestedPrivilegeIds[index],
+    );
+
+  if (!hasChanged) {
+    return { updated: filteredRequestedPrivilegeIds.length, sessions_revoked: 0 };
+  }
+
+  await prisma.$transaction(async (tx) => {
+    await tx.userPrivilegeMapping.createMany({
+      data: activePrivilegeIds.map((privilegeId) => ({
+        vendor_id: vendorId,
+        user_id: userId,
+        privilege_id: privilegeId,
+        is_allowed: false,
+      })),
+      skipDuplicates: true,
+    });
+
+    await tx.userPrivilegeMapping.updateMany({
+      where: {
+        vendor_id: vendorId,
+        user_id: userId,
+        privilege_id: {
+          in: activePrivilegeIds,
+        },
+      },
+      data: {
+        is_allowed: false,
+      },
+    });
+
+    if (filteredRequestedPrivilegeIds.length > 0) {
+      await tx.userPrivilegeMapping.updateMany({
+        where: {
+          vendor_id: vendorId,
+          user_id: userId,
+          privilege_id: {
+            in: filteredRequestedPrivilegeIds,
+          },
+        },
+        data: {
+          is_allowed: true,
+        },
+      });
+    }
+  });
+
+  const revokedSessions = await revokeUserActiveSessionsForPrivilegeChange(
+    vendorId,
+    userId,
+  );
+
+  return {
+    updated: filteredRequestedPrivilegeIds.length,
+    sessions_revoked: revokedSessions,
   };
 };

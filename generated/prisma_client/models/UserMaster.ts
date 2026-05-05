@@ -346,6 +346,7 @@ export type UserMasterWhereInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessListRelationFilter
   activityLogs?: Prisma.UserActivityLogListRelationFilter
   documents?: Prisma.UserDocumentListRelationFilter
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingListRelationFilter
   userGeographicalMappings?: Prisma.UserGeographicalMappingListRelationFilter
   leadTasksClosed?: Prisma.UserLeadTaskListRelationFilter
   leadTasksCreated?: Prisma.UserLeadTaskListRelationFilter
@@ -450,6 +451,7 @@ export type UserMasterOrderByWithRelationInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessOrderByRelationAggregateInput
   activityLogs?: Prisma.UserActivityLogOrderByRelationAggregateInput
   documents?: Prisma.UserDocumentOrderByRelationAggregateInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingOrderByRelationAggregateInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingOrderByRelationAggregateInput
   leadTasksClosed?: Prisma.UserLeadTaskOrderByRelationAggregateInput
   leadTasksCreated?: Prisma.UserLeadTaskOrderByRelationAggregateInput
@@ -557,6 +559,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   siteReadinessUpdated?: Prisma.SiteReadinessListRelationFilter
   activityLogs?: Prisma.UserActivityLogListRelationFilter
   documents?: Prisma.UserDocumentListRelationFilter
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingListRelationFilter
   userGeographicalMappings?: Prisma.UserGeographicalMappingListRelationFilter
   leadTasksClosed?: Prisma.UserLeadTaskListRelationFilter
   leadTasksCreated?: Prisma.UserLeadTaskListRelationFilter
@@ -695,6 +698,7 @@ export type UserMasterCreateInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -799,6 +803,7 @@ export type UserMasterUncheckedCreateInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -896,6 +901,7 @@ export type UserMasterUpdateInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -1000,6 +1006,7 @@ export type UserMasterUncheckedUpdateInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -1272,6 +1279,20 @@ export type UserMasterUpdateOneWithoutRevokedSessionsNestedInput = {
   delete?: Prisma.UserMasterWhereInput | boolean
   connect?: Prisma.UserMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutRevokedSessionsInput, Prisma.UserMasterUpdateWithoutRevokedSessionsInput>, Prisma.UserMasterUncheckedUpdateWithoutRevokedSessionsInput>
+}
+
+export type UserMasterCreateNestedOneWithoutUserPrivilegeMappingsInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutUserPrivilegeMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput
+  upsert?: Prisma.UserMasterUpsertWithoutUserPrivilegeMappingsInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUpdateWithoutUserPrivilegeMappingsInput>, Prisma.UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput>
 }
 
 export type UserMasterCreateNestedOneWithoutCreatedProjectsInput = {
@@ -2605,6 +2626,7 @@ export type UserMasterCreateWithoutVendorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -2707,6 +2729,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -2848,6 +2871,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -2950,6 +2974,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -3072,6 +3097,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -3175,6 +3201,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -3287,6 +3314,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -3390,6 +3418,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -3487,6 +3516,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -3590,6 +3620,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -3691,6 +3722,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -3794,6 +3826,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -3906,6 +3939,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -4009,6 +4043,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -4116,6 +4151,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -4219,6 +4255,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -4233,6 +4270,424 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
   leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+}
+
+export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+}
+
+export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+}
+
+export type UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput>
+}
+
+export type UserMasterUpsertWithoutUserPrivilegeMappingsInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutUserPrivilegeMappingsInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutUserPrivilegeMappingsInput, Prisma.UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput>
+}
+
+export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
   pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
   externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
   externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
@@ -4314,6 +4769,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -4417,6 +4873,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4529,6 +4986,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -4632,6 +5090,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -4729,6 +5188,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -4832,6 +5292,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -4933,6 +5394,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -5036,6 +5498,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5148,6 +5611,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -5251,6 +5715,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5358,6 +5823,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -5461,6 +5927,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5556,6 +6023,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -5659,6 +6127,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -5771,6 +6240,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -5874,6 +6344,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -5970,6 +6441,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -6073,6 +6545,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6174,6 +6647,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -6277,6 +6751,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6378,6 +6853,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -6481,6 +6957,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6582,6 +7059,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -6685,6 +7163,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -6797,6 +7276,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -6900,6 +7380,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7007,6 +7488,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -7110,6 +7592,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7217,6 +7700,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -7320,6 +7804,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7427,6 +7912,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -7530,6 +8016,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -7626,6 +8113,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -7729,6 +8217,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -7830,6 +8319,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -7933,6 +8423,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8045,6 +8536,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -8148,6 +8640,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8255,6 +8748,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -8358,6 +8852,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -8454,6 +8949,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -8557,6 +9053,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8658,6 +9155,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -8761,6 +9259,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -8862,6 +9361,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -8965,6 +9465,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9077,6 +9578,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -9180,6 +9682,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9287,6 +9790,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -9390,6 +9894,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9497,6 +10002,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -9600,6 +10106,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -9696,6 +10203,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -9799,6 +10307,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -9911,6 +10420,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -10014,6 +10524,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10110,6 +10621,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -10213,6 +10725,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10314,6 +10827,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -10417,6 +10931,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -10529,6 +11044,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -10632,6 +11148,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10739,6 +11256,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -10842,6 +11360,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -10938,6 +11457,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -11041,6 +11561,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11153,6 +11674,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -11256,6 +11778,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11352,6 +11875,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -11455,6 +11979,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11556,6 +12081,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -11659,6 +12185,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -11771,6 +12298,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -11874,6 +12402,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -11981,6 +12510,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -12084,6 +12614,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12180,6 +12711,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -12283,6 +12815,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12384,6 +12917,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -12487,6 +13021,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -12599,6 +13134,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -12702,6 +13238,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -12809,6 +13346,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -12912,6 +13450,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13008,6 +13547,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -13111,6 +13651,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13223,6 +13764,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -13326,6 +13868,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13422,6 +13965,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -13525,6 +14069,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -13637,6 +14182,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -13740,6 +14286,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -13836,6 +14383,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -13939,6 +14487,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14040,6 +14589,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -14143,6 +14693,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14255,6 +14806,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -14358,6 +14910,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14465,6 +15018,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -14568,6 +15122,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -14664,6 +15219,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -14767,6 +15323,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -14879,6 +15436,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -14982,6 +15540,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15078,6 +15637,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -15181,6 +15741,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15293,6 +15854,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -15396,6 +15958,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15492,6 +16055,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -15595,6 +16159,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -15707,6 +16272,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -15810,6 +16376,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -15907,6 +16474,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -16010,6 +16578,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16111,6 +16680,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -16214,6 +16784,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16326,6 +16897,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -16429,6 +17001,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16536,6 +17109,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -16639,6 +17213,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -16735,6 +17310,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -16838,6 +17414,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -16939,6 +17516,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -17042,6 +17620,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17143,6 +17722,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -17246,6 +17826,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17347,6 +17928,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -17450,6 +18032,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -17562,6 +18145,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -17665,6 +18249,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17772,6 +18357,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -17875,6 +18461,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -17982,6 +18569,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -18085,6 +18673,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18192,6 +18781,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -18295,6 +18885,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18390,6 +18981,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -18493,6 +19085,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -18605,6 +19198,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -18708,6 +19302,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -18804,6 +19399,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -18907,6 +19503,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19008,6 +19605,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -19111,6 +19709,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19223,6 +19822,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -19326,6 +19926,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19433,6 +20034,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -19536,6 +20138,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -19632,6 +20235,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -19735,6 +20339,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -19847,6 +20452,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -19950,6 +20556,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20046,6 +20653,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -20149,6 +20757,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20250,6 +20859,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -20353,6 +20963,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -20465,6 +21076,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -20568,6 +21180,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20675,6 +21288,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -20778,6 +21392,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -20874,6 +21489,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -20977,6 +21593,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21078,6 +21695,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -21181,6 +21799,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21293,6 +21912,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -21396,6 +22016,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21503,6 +22124,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -21606,6 +22228,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -21702,6 +22325,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -21805,6 +22429,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -21906,6 +22531,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -22009,6 +22635,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -22121,6 +22748,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -22224,6 +22852,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22331,6 +22960,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -22434,6 +23064,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -22531,6 +23162,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
@@ -22634,6 +23266,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
@@ -22735,6 +23368,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
@@ -22838,6 +23472,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
@@ -22939,6 +23574,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -23042,6 +23678,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23154,6 +23791,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
@@ -23257,6 +23895,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
@@ -23364,6 +24003,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
@@ -23467,6 +24107,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
@@ -23574,6 +24215,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -23677,6 +24319,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -23772,6 +24415,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -23875,6 +24519,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -23987,6 +24632,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -24090,6 +24736,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24186,6 +24833,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -24289,6 +24937,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24401,6 +25050,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -24504,6 +25154,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -24600,6 +25251,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -24703,6 +25355,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -24804,6 +25457,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -24907,6 +25561,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25008,6 +25663,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -25111,6 +25767,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -25223,6 +25880,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -25326,6 +25984,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25433,6 +26092,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -25536,6 +26196,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25643,6 +26304,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -25746,6 +26408,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -25842,6 +26505,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -25945,6 +26609,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26046,6 +26711,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -26149,6 +26815,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26261,6 +26928,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -26364,6 +27032,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26471,6 +27140,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -26574,6 +27244,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -26670,6 +27341,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -26773,6 +27445,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -26874,6 +27547,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -26977,6 +27651,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27089,6 +27764,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -27192,6 +27868,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27299,6 +27976,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -27402,6 +28080,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27498,6 +28177,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -27601,6 +28281,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -27713,6 +28394,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -27816,6 +28498,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -27912,6 +28595,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -28015,6 +28699,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28127,6 +28812,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -28230,6 +28916,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28326,6 +29013,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -28429,6 +29117,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28541,6 +29230,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -28644,6 +29334,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -28740,6 +29431,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -28843,6 +29535,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -28944,6 +29637,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -29047,6 +29741,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29159,6 +29854,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -29262,6 +29958,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29369,6 +30066,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -29472,6 +30170,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29568,6 +30267,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -29671,6 +30371,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -29783,6 +30484,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -29886,6 +30588,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -29982,6 +30685,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -30085,6 +30789,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30197,6 +30902,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -30300,6 +31006,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -30396,6 +31103,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -30499,6 +31207,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30600,6 +31309,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -30703,6 +31413,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -30815,6 +31526,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -30918,6 +31630,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31025,6 +31738,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -31128,6 +31842,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31225,6 +31940,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -31328,6 +32044,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -31440,6 +32157,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -31543,6 +32261,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -31638,6 +32357,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -31741,6 +32461,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -31843,6 +32564,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -31946,6 +32668,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32057,6 +32780,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -32160,6 +32884,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32268,6 +32993,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -32371,6 +33097,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -32467,6 +33194,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -32570,6 +33298,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32671,6 +33400,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -32774,6 +33504,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -32875,6 +33606,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -32978,6 +33710,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33090,6 +33823,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -33193,6 +33927,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -33300,6 +34035,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -33403,6 +34139,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -33510,6 +34247,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -33613,6 +34351,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -33708,6 +34447,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -33811,6 +34551,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -33912,6 +34653,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -34015,6 +34757,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -34127,6 +34870,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -34230,6 +34974,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34337,6 +35082,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -34440,6 +35186,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34536,6 +35283,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -34639,6 +35387,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -34751,6 +35500,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -34854,6 +35604,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -34951,6 +35702,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -35053,6 +35805,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -35175,6 +35928,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -35278,6 +36032,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -35379,6 +36134,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -35482,6 +36238,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -35594,6 +36351,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -35697,6 +36455,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -35804,6 +36563,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -35907,6 +36667,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -36004,6 +36765,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
@@ -36107,6 +36869,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
@@ -36219,6 +36982,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
@@ -36322,6 +37086,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
   leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
@@ -36417,6 +37182,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -36520,6 +37286,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -36632,6 +37399,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -36735,6 +37503,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -36832,6 +37601,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -36935,6 +37705,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -37036,6 +37807,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -37139,6 +37911,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -37251,6 +38024,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -37354,6 +38128,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37461,6 +38236,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -37564,6 +38340,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -37660,6 +38437,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -37763,6 +38541,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -37875,6 +38654,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -37978,6 +38758,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38074,6 +38855,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -38177,6 +38959,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -38278,6 +39061,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
@@ -38381,6 +39165,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
   activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
@@ -38493,6 +39278,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -38596,6 +39382,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38703,6 +39490,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -38806,6 +39594,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -38916,6 +39705,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -39018,6 +39808,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39143,6 +39934,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -39245,6 +40037,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39370,6 +40163,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
@@ -39472,6 +40266,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
   activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
   userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
   leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
   leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
@@ -39580,6 +40375,7 @@ export type UserMasterCountOutputType = {
   siteReadinessUpdated: number
   activityLogs: number
   documents: number
+  userPrivilegeMappings: number
   userGeographicalMappings: number
   leadTasksClosed: number
   leadTasksCreated: number
@@ -39669,6 +40465,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   siteReadinessUpdated?: boolean | UserMasterCountOutputTypeCountSiteReadinessUpdatedArgs
   activityLogs?: boolean | UserMasterCountOutputTypeCountActivityLogsArgs
   documents?: boolean | UserMasterCountOutputTypeCountDocumentsArgs
+  userPrivilegeMappings?: boolean | UserMasterCountOutputTypeCountUserPrivilegeMappingsArgs
   userGeographicalMappings?: boolean | UserMasterCountOutputTypeCountUserGeographicalMappingsArgs
   leadTasksClosed?: boolean | UserMasterCountOutputTypeCountLeadTasksClosedArgs
   leadTasksCreated?: boolean | UserMasterCountOutputTypeCountLeadTasksCreatedArgs
@@ -40142,6 +40939,13 @@ export type UserMasterCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.
 /**
  * UserMasterCountOutputType without action
  */
+export type UserMasterCountOutputTypeCountUserPrivilegeMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserPrivilegeMappingWhereInput
+}
+
+/**
+ * UserMasterCountOutputType without action
+ */
 export type UserMasterCountOutputTypeCountUserGeographicalMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.UserGeographicalMappingWhereInput
 }
@@ -40383,6 +41187,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   siteReadinessUpdated?: boolean | Prisma.UserMaster$siteReadinessUpdatedArgs<ExtArgs>
   activityLogs?: boolean | Prisma.UserMaster$activityLogsArgs<ExtArgs>
   documents?: boolean | Prisma.UserMaster$documentsArgs<ExtArgs>
+  userPrivilegeMappings?: boolean | Prisma.UserMaster$userPrivilegeMappingsArgs<ExtArgs>
   userGeographicalMappings?: boolean | Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>
   leadTasksClosed?: boolean | Prisma.UserMaster$leadTasksClosedArgs<ExtArgs>
   leadTasksCreated?: boolean | Prisma.UserMaster$leadTasksCreatedArgs<ExtArgs>
@@ -40528,6 +41333,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   siteReadinessUpdated?: boolean | Prisma.UserMaster$siteReadinessUpdatedArgs<ExtArgs>
   activityLogs?: boolean | Prisma.UserMaster$activityLogsArgs<ExtArgs>
   documents?: boolean | Prisma.UserMaster$documentsArgs<ExtArgs>
+  userPrivilegeMappings?: boolean | Prisma.UserMaster$userPrivilegeMappingsArgs<ExtArgs>
   userGeographicalMappings?: boolean | Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>
   leadTasksClosed?: boolean | Prisma.UserMaster$leadTasksClosedArgs<ExtArgs>
   leadTasksCreated?: boolean | Prisma.UserMaster$leadTasksCreatedArgs<ExtArgs>
@@ -40633,6 +41439,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     siteReadinessUpdated: Prisma.$SiteReadinessPayload<ExtArgs>[]
     activityLogs: Prisma.$UserActivityLogPayload<ExtArgs>[]
     documents: Prisma.$UserDocumentPayload<ExtArgs>[]
+    userPrivilegeMappings: Prisma.$UserPrivilegeMappingPayload<ExtArgs>[]
     userGeographicalMappings: Prisma.$UserGeographicalMappingPayload<ExtArgs>[]
     leadTasksClosed: Prisma.$UserLeadTaskPayload<ExtArgs>[]
     leadTasksCreated: Prisma.$UserLeadTaskPayload<ExtArgs>[]
@@ -41130,6 +41937,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   siteReadinessUpdated<T extends Prisma.UserMaster$siteReadinessUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$siteReadinessUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SiteReadinessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activityLogs<T extends Prisma.UserMaster$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.UserMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  userPrivilegeMappings<T extends Prisma.UserMaster$userPrivilegeMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$userPrivilegeMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPrivilegeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userGeographicalMappings<T extends Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$userGeographicalMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserGeographicalMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadTasksClosed<T extends Prisma.UserMaster$leadTasksClosedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadTasksClosedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadTasksCreated<T extends Prisma.UserMaster$leadTasksCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadTasksCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -43084,6 +43892,30 @@ export type UserMaster$documentsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.UserDocumentScalarFieldEnum | Prisma.UserDocumentScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.userPrivilegeMappings
+ */
+export type UserMaster$userPrivilegeMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserPrivilegeMapping
+   */
+  select?: Prisma.UserPrivilegeMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserPrivilegeMapping
+   */
+  omit?: Prisma.UserPrivilegeMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserPrivilegeMappingInclude<ExtArgs> | null
+  where?: Prisma.UserPrivilegeMappingWhereInput
+  orderBy?: Prisma.UserPrivilegeMappingOrderByWithRelationInput | Prisma.UserPrivilegeMappingOrderByWithRelationInput[]
+  cursor?: Prisma.UserPrivilegeMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserPrivilegeMappingScalarFieldEnum | Prisma.UserPrivilegeMappingScalarFieldEnum[]
 }
 
 /**

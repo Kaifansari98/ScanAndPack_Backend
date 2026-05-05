@@ -87,6 +87,8 @@ model VendorMaster {
   themes                              ThemeMaster[]
   userLeadTasks                       UserLeadTask[]
   userMachineMapping                  UserMachineMapping[]
+  privilegeMasters                    PrivilegeMaster[]
+  userPrivilegeMappings               UserPrivilegeMapping[]
   users                               UserMaster[]
   userSessions                        UserSession[]
   userPushTokens                      UserPushToken[]
@@ -132,6 +134,25 @@ model UserTypeMaster {
   id        Int          @id @default(autoincrement())
   user_type String
   users     UserMaster[]
+}
+
+model PrivilegeMaster {
+  id                    Int                    @id @default(autoincrement())
+  vendor_id             Int
+  code                  String
+  parent_module         String
+  child_module          String
+  action                String
+  label                 String
+  description           String?
+  is_active             Boolean                @default(true)
+  created_at            DateTime               @default(now())
+  updated_at            DateTime               @updatedAt
+  vendor                VendorMaster           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  userPrivilegeMappings UserPrivilegeMapping[]
+
+  @@unique([vendor_id, code])
+  @@index([vendor_id])
 }
 
 model UserMaster {
@@ -209,6 +230,7 @@ model UserMaster {
   siteReadinessUpdated                       SiteReadiness[]                        @relation("SiteReadinessUpdatedBy")
   activityLogs                               UserActivityLog[]
   documents                                  UserDocument[]
+  userPrivilegeMappings                      UserPrivilegeMapping[]
   userGeographicalMappings                   UserGeographicalMapping[]
   leadTasksClosed                            UserLeadTask[]                         @relation("LeadTask_ClosedBy")
   leadTasksCreated                           UserLeadTask[]                         @relation("LeadTask_CreatedBy")
@@ -277,6 +299,24 @@ model UserSession {
   @@index([user_id, created_at])
   @@index([vendor_id, status])
   @@index([device_id])
+}
+
+model UserPrivilegeMapping {
+  id           Int             @id @default(autoincrement())
+  vendor_id    Int
+  user_id      Int
+  privilege_id Int
+  is_allowed   Boolean         @default(false)
+  created_at   DateTime        @default(now())
+  updated_at   DateTime        @updatedAt
+  vendor       VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  user         UserMaster      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  privilege    PrivilegeMaster @relation(fields: [privilege_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, user_id, privilege_id])
+  @@index([vendor_id])
+  @@index([user_id])
+  @@index([privilege_id])
 }
 
 model ProjectMaster {

@@ -38,6 +38,11 @@ export type VendorTaxInfo = Prisma.VendorTaxInfoModel
  */
 export type UserTypeMaster = Prisma.UserTypeMasterModel
 /**
+ * Model PrivilegeMaster
+ * 
+ */
+export type PrivilegeMaster = Prisma.PrivilegeMasterModel
+/**
  * Model UserMaster
  * 
  */
@@ -52,6 +57,11 @@ export type UserDocument = Prisma.UserDocumentModel
  * 
  */
 export type UserSession = Prisma.UserSessionModel
+/**
+ * Model UserPrivilegeMapping
+ * 
+ */
+export type UserPrivilegeMapping = Prisma.UserPrivilegeMappingModel
 /**
  * Model ProjectMaster
  * 

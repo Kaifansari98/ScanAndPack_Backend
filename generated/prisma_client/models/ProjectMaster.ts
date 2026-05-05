@@ -658,10 +658,6 @@ export type ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput = {
   deleteMany?: Prisma.ProjectMasterScalarWhereInput | Prisma.ProjectMasterScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ProjectMasterCreateNestedOneWithoutDetailsInput = {
   create?: Prisma.XOR<Prisma.ProjectMasterCreateWithoutDetailsInput, Prisma.ProjectMasterUncheckedCreateWithoutDetailsInput>
   connectOrCreate?: Prisma.ProjectMasterCreateOrConnectWithoutDetailsInput

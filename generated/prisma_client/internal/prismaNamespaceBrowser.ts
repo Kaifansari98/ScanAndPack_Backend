@@ -55,9 +55,11 @@ export const ModelName = {
   VendorAddress: 'VendorAddress',
   VendorTaxInfo: 'VendorTaxInfo',
   UserTypeMaster: 'UserTypeMaster',
+  PrivilegeMaster: 'PrivilegeMaster',
   UserMaster: 'UserMaster',
   UserDocument: 'UserDocument',
   UserSession: 'UserSession',
+  UserPrivilegeMapping: 'UserPrivilegeMapping',
   ProjectMaster: 'ProjectMaster',
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
@@ -235,6 +237,23 @@ export const UserTypeMasterScalarFieldEnum = {
 export type UserTypeMasterScalarFieldEnum = (typeof UserTypeMasterScalarFieldEnum)[keyof typeof UserTypeMasterScalarFieldEnum]
 
 
+export const PrivilegeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  code: 'code',
+  parent_module: 'parent_module',
+  child_module: 'child_module',
+  action: 'action',
+  label: 'label',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrivilegeMasterScalarFieldEnum = (typeof PrivilegeMasterScalarFieldEnum)[keyof typeof PrivilegeMasterScalarFieldEnum]
+
+
 export const UserMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -289,6 +308,19 @@ export const UserSessionScalarFieldEnum = {
 } as const
 
 export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+
+
+export const UserPrivilegeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  privilege_id: 'privilege_id',
+  is_allowed: 'is_allowed',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserPrivilegeMappingScalarFieldEnum = (typeof UserPrivilegeMappingScalarFieldEnum)[keyof typeof UserPrivilegeMappingScalarFieldEnum]
 
 
 export const ProjectMasterScalarFieldEnum = {

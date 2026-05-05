@@ -873,6 +873,22 @@ export const getLeadById = async (
     const userInfo = await getUserRole(userId, vendorId);
     if (!userInfo.isValid) throw new Error("User not found or inactive");
     const userType = userInfo.userType?.toLowerCase() ?? "";
+    const customViewPrivilegeCode = "leads.open_leads.details_of_lead.view";
+    const customViewPrivilege =
+      userType === "custom"
+        ? await prisma.userPrivilegeMapping.findFirst({
+            where: {
+              user_id: userId,
+              vendor_id: vendorId,
+              is_allowed: true,
+              privilege: {
+                code: customViewPrivilegeCode,
+                is_active: true,
+              },
+            },
+            select: { id: true },
+          })
+        : null;
 
     // 2️⃣ Base condition (vendor-scoped)
     let whereCondition: any = {
@@ -890,7 +906,8 @@ export const getLeadById = async (
       userType === "tech-check" ||
       userType === "backend" ||
       userType === "factory" ||
-      userType === "pre-prod"
+      userType === "pre-prod" ||
+      (userType === "custom" && !!customViewPrivilege)
     ) {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
     } else if (["admin", "super-admin"].includes(userType)) {

@@ -388,9 +388,11 @@ export const ModelName = {
   VendorAddress: 'VendorAddress',
   VendorTaxInfo: 'VendorTaxInfo',
   UserTypeMaster: 'UserTypeMaster',
+  PrivilegeMaster: 'PrivilegeMaster',
   UserMaster: 'UserMaster',
   UserDocument: 'UserDocument',
   UserSession: 'UserSession',
+  UserPrivilegeMapping: 'UserPrivilegeMapping',
   ProjectMaster: 'ProjectMaster',
   ProjectDetails: 'ProjectDetails',
   ProjectItemsMaster: 'ProjectItemsMaster',
@@ -509,7 +511,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "userMaster" | "userDocument" | "userSession" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -809,6 +811,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PrivilegeMaster: {
+      payload: Prisma.$PrivilegeMasterPayload<ExtArgs>
+      fields: Prisma.PrivilegeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PrivilegeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PrivilegeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.PrivilegeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PrivilegeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.PrivilegeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.PrivilegeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.PrivilegeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PrivilegeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.PrivilegeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        update: {
+          args: Prisma.PrivilegeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.PrivilegeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PrivilegeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PrivilegeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.PrivilegeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PrivilegeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.PrivilegeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePrivilegeMaster>
+        }
+        groupBy: {
+          args: Prisma.PrivilegeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrivilegeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PrivilegeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PrivilegeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
     UserMaster: {
       payload: Prisma.$UserMasterPayload<ExtArgs>
       fields: Prisma.UserMasterFieldRefs
@@ -1028,6 +1104,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserSessionCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserSessionCountAggregateOutputType> | number
+        }
+      }
+    }
+    UserPrivilegeMapping: {
+      payload: Prisma.$UserPrivilegeMappingPayload<ExtArgs>
+      fields: Prisma.UserPrivilegeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserPrivilegeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserPrivilegeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.UserPrivilegeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserPrivilegeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.UserPrivilegeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.UserPrivilegeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.UserPrivilegeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserPrivilegeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.UserPrivilegeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        update: {
+          args: Prisma.UserPrivilegeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserPrivilegeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserPrivilegeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserPrivilegeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserPrivilegeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserPrivilegeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.UserPrivilegeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserPrivilegeMapping>
+        }
+        groupBy: {
+          args: Prisma.UserPrivilegeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPrivilegeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserPrivilegeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserPrivilegeMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -8748,6 +8898,23 @@ export const UserTypeMasterScalarFieldEnum = {
 export type UserTypeMasterScalarFieldEnum = (typeof UserTypeMasterScalarFieldEnum)[keyof typeof UserTypeMasterScalarFieldEnum]
 
 
+export const PrivilegeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  code: 'code',
+  parent_module: 'parent_module',
+  child_module: 'child_module',
+  action: 'action',
+  label: 'label',
+  description: 'description',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PrivilegeMasterScalarFieldEnum = (typeof PrivilegeMasterScalarFieldEnum)[keyof typeof PrivilegeMasterScalarFieldEnum]
+
+
 export const UserMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -8802,6 +8969,19 @@ export const UserSessionScalarFieldEnum = {
 } as const
 
 export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+
+
+export const UserPrivilegeMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  user_id: 'user_id',
+  privilege_id: 'privilege_id',
+  is_allowed: 'is_allowed',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UserPrivilegeMappingScalarFieldEnum = (typeof UserPrivilegeMappingScalarFieldEnum)[keyof typeof UserPrivilegeMappingScalarFieldEnum]
 
 
 export const ProjectMasterScalarFieldEnum = {
@@ -11086,9 +11266,11 @@ export type GlobalOmitConfig = {
   vendorAddress?: Prisma.VendorAddressOmit
   vendorTaxInfo?: Prisma.VendorTaxInfoOmit
   userTypeMaster?: Prisma.UserTypeMasterOmit
+  privilegeMaster?: Prisma.PrivilegeMasterOmit
   userMaster?: Prisma.UserMasterOmit
   userDocument?: Prisma.UserDocumentOmit
   userSession?: Prisma.UserSessionOmit
+  userPrivilegeMapping?: Prisma.UserPrivilegeMappingOmit
   projectMaster?: Prisma.ProjectMasterOmit
   projectDetails?: Prisma.ProjectDetailsOmit
   projectItemsMaster?: Prisma.ProjectItemsMasterOmit
