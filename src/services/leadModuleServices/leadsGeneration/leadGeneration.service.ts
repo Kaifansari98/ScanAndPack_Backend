@@ -1901,11 +1901,78 @@ export const isContactOrEmailExists = async (
 export const getSalesExecutivesByVendor = async (
   vendorId: number,
   franchiseId?: number,
+  options?: {
+    assigneeUserType?: string;
+    requiredPrivilegeCode?: string;
+  },
 ): Promise<SalesExecutiveData[]> => {
   try {
     console.log(
       `[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`,
     );
+
+    const normalizedAssigneeUserType =
+      options?.assigneeUserType?.trim().toLowerCase() ?? null;
+
+    if (normalizedAssigneeUserType === "custom") {
+      const customUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+          user_type: {
+            user_type: {
+              equals: "custom",
+              mode: "insensitive",
+            },
+          },
+          ...(options?.requiredPrivilegeCode
+            ? {
+                userPrivilegeMappings: {
+                  some: {
+                    is_allowed: true,
+                    privilege: {
+                      code: options.requiredPrivilegeCode,
+                      is_active: true,
+                    },
+                  },
+                },
+              }
+            : {}),
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${customUsers.length} eligible custom users`);
+
+      return customUsers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+    }
 
     // First, find the user type ID for 'sales-executive'
     const salesExecutiveType = await prisma.userTypeMaster.findFirst({

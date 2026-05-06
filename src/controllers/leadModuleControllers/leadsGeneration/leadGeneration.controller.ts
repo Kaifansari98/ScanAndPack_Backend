@@ -1484,6 +1484,12 @@ export class LeadController {
       const franchiseId = req.query.franchise_id
         ? Number(req.query.franchise_id)
         : undefined;
+      const assigneeUserType = req.query.assignee_user_type
+        ? String(req.query.assignee_user_type)
+        : undefined;
+      const requiredPrivilegeCode = req.query.required_privilege_code
+        ? String(req.query.required_privilege_code)
+        : undefined;
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1507,6 +1513,10 @@ export class LeadController {
       const salesExecutives = await getSalesExecutivesByVendor(
         vendorId,
         franchiseId,
+        {
+          assigneeUserType,
+          requiredPrivilegeCode,
+        },
       );
 
       // Check if any sales executives were found
