@@ -26,6 +26,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 
 export interface CreateBDISMPaymentUploadDto {
   lead_id: number;
@@ -962,6 +963,7 @@ export class PaymentUploadService {
               lead_code: true,
               vendor_id: true,
               account_id: true, // ✅ added
+              franchise_id: true,
             },
           }),
 
@@ -993,25 +995,13 @@ export class PaymentUploadService {
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"] },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId: lead.vendor_id,
+          franchiseId: lead.franchise_id ?? null,
+          excludeUserId: actorId,
         });
 
         for (const admin of admins) {
-          // ❌ Self block
-          if (admin.id === actorId) continue;
-
           // 🔔 In-App
           await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,

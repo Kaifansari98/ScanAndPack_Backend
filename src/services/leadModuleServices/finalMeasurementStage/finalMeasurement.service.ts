@@ -320,6 +320,7 @@ export class FinalMeasurementService {
           lead_code: true,
           vendor_id: true,
           account_id: true,
+          franchise_id: true,
         },
       });
 
@@ -332,26 +333,14 @@ export class FinalMeasurementService {
         lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
 
 
-      // Fetch Active Admin Users
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      // Fetch Active Admin Users for the lead franchise only
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id ?? null,
+        excludeUserId: actorId,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self notification
-        if (admin.id === actorId) continue;
-
         // 🔔 In-App Notification
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,

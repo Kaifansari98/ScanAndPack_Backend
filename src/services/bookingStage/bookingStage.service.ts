@@ -526,25 +526,13 @@ export class BookingStageService {
       const franchiseId = lead?.franchise_id ?? null;
 
       // Fetch Active Admins
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId,
+        excludeUserId: actorId,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self-trigger notification
-        if (admin.id === actorId) continue;
-
         // 🔔 In-App Notification
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,
@@ -693,25 +681,13 @@ export class BookingStageService {
         const franchiseId = lead?.franchise_id ?? null;
 
         // Fetch Active Admins
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"] },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId: lead.vendor_id,
+          franchiseId,
+          excludeUserId: actorId,
         });
 
         for (const admin of admins) {
-          // ❌ Prevent self-trigger notification
-          if (admin.id === actorId) continue;
-
           // 🔔 In-App Notification
           await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,
