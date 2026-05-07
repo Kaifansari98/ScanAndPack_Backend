@@ -49,6 +49,7 @@ export class LeadStatsService {
       ].includes(userType);
       const shouldUseMapping = [
         "sales-executive",
+        "custom",
         "site-supervisor",
         "backend",
         "tech-check",
