@@ -3,6 +3,7 @@ import { FinalMeasurementService } from "../../../services/leadModuleServices/fi
 import logger from "../../../utils/logger";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 import {
   sendMajorMilestoneEmail,
@@ -756,14 +757,10 @@ export class FinalMeasurementController {
               : `/dashboard/leads/details/${leadId}`;
 
             // Only admin users (matching franchise) receive the milestone notification and email
-            const users = await prisma.userMaster.findMany({
-              where: {
-                id: { in: Array.from(recipientIds) },
-                status: "active",
-                user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-                ...(franchiseId ? { franchise_id: franchiseId } : {}),
-              },
-              select: { id: true, user_name: true, user_email: true },
+            const users = await getFranchiseAdminRecipients({
+              vendorId,
+              franchiseId,
+              candidateUserIds: Array.from(recipientIds),
             });
 
             await Promise.all(

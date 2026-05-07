@@ -3,6 +3,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import {
   sendOrderLoginEnabledEmail,
   sendRevisedDocumentsUploadedEmail,
@@ -406,6 +407,7 @@ export class ClientDocumentationService {
           lead_code: true,
           vendor_id: true,
           account_id: true,
+          franchise_id: true,
         },
       });
 
@@ -426,21 +428,13 @@ export class ClientDocumentationService {
       const redirectPath = `/dashboard/leads/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
 
       // Fetch active admins
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: leadInfo.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: leadInfo.vendor_id,
+        franchiseId: leadInfo.franchise_id ?? null,
+        excludeUserId: data.updated_by,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self-notification
-        if (admin.id === data.updated_by) continue;
-
         // 🔔 In-App Notification
         await NotificationService.createAndSend({
           vendor_id: leadInfo.vendor_id,

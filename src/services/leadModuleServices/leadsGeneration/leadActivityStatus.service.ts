@@ -5,6 +5,7 @@ import {
   Prisma,
 } from "../../../prisma/generated";
 import { NotificationService } from "../../notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
 import {
@@ -273,16 +274,10 @@ export class LeadActivityStatusService {
         status === ActivityStatus.onHold ||
         status === ActivityStatus.lostApproval
       ) {
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-            },
-            ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: createdBy,
         });
 
         const isOnHold = status === ActivityStatus.onHold;
@@ -290,9 +285,7 @@ export class LeadActivityStatusService {
         const leadUrl = isOnHold ? onHoldUrl : lostApprovalUrl;
 
         await Promise.allSettled(
-          admins
-            .filter((admin) => admin.id !== createdBy)
-            .map(async (admin) => {
+          admins.map(async (admin) => {
               await NotificationService.createAndSend({
                 vendor_id: vendorId,
                 user_id: admin.id,
@@ -601,19 +594,10 @@ export class LeadActivityStatusService {
 
       // 🔔 Handle onHold → onGoing revert notifications
       if (previousStatus === ActivityStatus.onHold) {
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: {
-              user_type: {
-                in: ["admin", "super-admin"],
-                mode: "insensitive",
-              },
-            },
-            ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: createdBy,
         });
 
         await Promise.allSettled(

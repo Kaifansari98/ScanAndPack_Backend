@@ -26,6 +26,7 @@ import Joi from "joi";
 import { generateLeadCode } from "../../../utils/generateLeadCode";
 import { logDbError } from "../../../utils/prismaErrorLogger";
 import { NotificationService } from "../../notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 import { resolveLeadStagePath } from "./leadActivityStatus.service";
 import {
@@ -1787,21 +1788,13 @@ export const updateLeadService = async (
       await sendLeadCreatedEmail(payload);
 
       // Also notify franchise-filtered admins (mirrors createLead behaviour)
-      const adminUsers = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: payload.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-          },
-          ...(leadFranchiseId ? { franchise_id: leadFranchiseId } : {}),
-        },
-        select: { id: true, user_email: true, user_name: true },
+      const adminUsers = await getFranchiseAdminRecipients({
+        vendorId: payload.vendor_id,
+        franchiseId: leadFranchiseId,
+        excludeUserId: updated_by ?? null,
       });
 
-      const adminRecipients = adminUsers.filter(
-        (u) => u.id !== updated_by && u.user_email,
-      );
+      const adminRecipients = adminUsers.filter((u) => u.user_email);
 
       if (adminRecipients.length > 0) {
         const redirectUrl = resolveLeadStagePath(

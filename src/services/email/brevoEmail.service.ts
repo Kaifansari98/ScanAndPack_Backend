@@ -3135,7 +3135,7 @@ export const sendMiscERDUpdatedEmail = async (
   payload: MiscERDUpdatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
   const identity = await resolveEmailIdentity(payload.vendor_id);
-  const defaultSubject = `Miscellaneous Fulfillment Date Updated for ${payload.leadCode} - ${payload.leadName}`;
+  const defaultSubject = `Miscellaneous ERD Date has been Updated for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -3214,7 +3214,7 @@ export const sendMiscERDUpdatedEmail = async (
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
 
       <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
-        Miscellaneous Fulfillment Date Updated
+        Miscellaneous ERD Date has been Updated
       </h2>
 
       <p style="margin:0 0 12px;color:#111827;">

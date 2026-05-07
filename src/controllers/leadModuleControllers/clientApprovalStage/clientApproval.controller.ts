@@ -5,6 +5,7 @@ import { uploadToWasabClientApprovalDocumentationFile } from "../../../utils/was
 import fs from "node:fs/promises";
 import { prisma } from "../../../prisma/client";
 import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 import {
   sendLeadAssignedEmail,
@@ -596,14 +597,10 @@ export class ClientApprovalController {
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const users = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: dto.vendor_id,
-            status: "active",
-            user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-            ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        const users = await getFranchiseAdminRecipients({
+          vendorId: dto.vendor_id,
+          franchiseId,
+          excludeUserId: dto.created_by,
         });
 
         await Promise.all(

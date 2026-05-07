@@ -6,6 +6,7 @@ import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { cache } from "../../../utils/cache";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import {
   sendMajorMilestoneEmail,
   sendFinalMeasurementUploadedEmail,
@@ -1308,14 +1309,10 @@ export class FinalMeasurementService {
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
 
         if (recipientIds.size > 0) {
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-              ...(franchiseId ? { franchise_id: franchiseId } : {}),
-            },
-            select: { id: true, user_name: true, user_email: true },
+          const users = await getFranchiseAdminRecipients({
+            vendorId: result.lead.vendor_id,
+            franchiseId,
+            candidateUserIds: Array.from(recipientIds),
           });
 
           const detailsUrl = result.lead.account_id

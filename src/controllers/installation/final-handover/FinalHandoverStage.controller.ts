@@ -16,6 +16,7 @@ import {
   sendFinalHandoverCompletedEmail,
 } from "../../../services/email/brevoEmail.service";
 import { NotificationService } from "../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../prisma/generated";
 
 const resolveClientBaseUrl = (req: Request): string => {
@@ -439,15 +440,7 @@ export class FinalHandoverStageController {
       })();
 
       try {
-        const [admins, mappings, lead] = await Promise.all([
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: vendorId,
-              status: "active",
-              user_type: { user_type: { in: ["admin", "super-admin"] } },
-            },
-            select: { id: true },
-          }),
+        const [mappings, lead] = await Promise.all([
           prisma.leadUserMapping.findMany({
             where: {
               vendor_id: vendorId,
@@ -466,19 +459,10 @@ export class FinalHandoverStageController {
         const leadCode =
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const franchiseId = lead?.franchise_id ?? null;
-        const recipientIds = new Set<number>();
-        admins.forEach((admin) => recipientIds.add(admin.id));
-        mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
-
-        if (recipientIds.size > 0) {
-          const users = await prisma.userMaster.findMany({
-            where: {
-              id: { in: Array.from(recipientIds) },
-              status: "active",
-              user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-              ...(franchiseId ? { franchise_id: franchiseId } : {}),
-            },
-            select: { id: true, user_name: true, user_email: true },
+        if (mappings.length > 0 || franchiseId != null) {
+          const users = await getFranchiseAdminRecipients({
+            vendorId,
+            franchiseId,
           });
           const clientBaseUrl = resolveClientBaseUrl(req);
           const detailsUrl = lead?.account_id

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../../../prisma/client";
 import { NotificationService } from "../../../../services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../services/notification/adminRecipients.service";
 import { NotificationType } from "../../../../prisma/generated";
 import {
   sendTaskAssignedEmail,
@@ -446,14 +447,10 @@ export class ReadyToDispatchController {
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const users = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-            ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        const users = await getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: Number(actorId) || null,
         });
 
         await Promise.all(

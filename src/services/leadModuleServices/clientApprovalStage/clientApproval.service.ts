@@ -6,6 +6,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import logger from '../../../utils/logger'
 import { NotificationService } from "../../notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import { sendPaymentAddedEmail } from "../../email/brevoEmail.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
@@ -200,18 +201,10 @@ export class ClientApprovalService {
           }),
         ]);
 
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: data.vendor_id,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin", "super-admin"], mode: "insensitive" },
-            },
-            ...(leadInfo?.franchise_id
-              ? { franchise_id: leadInfo.franchise_id }
-              : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId: data.vendor_id,
+          franchiseId: leadInfo?.franchise_id ?? null,
+          excludeUserId: data.created_by,
         });
 
         const leadCode =

@@ -4,6 +4,7 @@ import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
@@ -232,14 +233,10 @@ export class UnderInstallationStageService {
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // Admins — franchise-filtered, no super-admin
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-          ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        },
-        select: { id: true, user_name: true, user_email: true },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId,
+        excludeUserId: actorId,
       });
 
       // Site supervisor from lead mapping
@@ -259,9 +256,7 @@ export class UnderInstallationStageService {
 
       // Deduplicate recipients, exclude actor
       const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
-      for (const u of admins) {
-        if (u.id !== actorId) recipientMap.set(u.id, u);
-      }
+      for (const u of admins) recipientMap.set(u.id, u);
       if (siteSupervisorMapping?.user && siteSupervisorMapping.user.id !== actorId) {
         recipientMap.set(siteSupervisorMapping.user.id, siteSupervisorMapping.user);
       }
@@ -2423,7 +2418,7 @@ export class UnderInstallationStageService {
             user_id: user.id,
             sender_id: updated_by,
             type: NotificationType.LEAD_ACTION,
-            title: "Miscellaneous Fulfillment Date Updated",
+            title: "Miscellaneous ERD Date has been Updated",
             message: `Factory has updated the fulfillment date for a miscellaneous requirement on ${leadCode} - ${leadName}. Expected Date: ${fulfillmentDate}`,
             entity_type: "miscellaneous",
             entity_id: misc_id,
@@ -3010,14 +3005,10 @@ export class UnderInstallationStageService {
       const salesUserIds = Array.from(new Set(mappedUsers.map((m) => m.user_id)));
 
       const [admins, salesExecutives] = await Promise.all([
-        prisma.userMaster.findMany({
-          where: {
-            vendor_id: vendorId,
-            status: "active",
-            user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-            ...(franchiseId ? { franchise_id: franchiseId } : {}),
-          },
-          select: { id: true, user_name: true, user_email: true },
+        getFranchiseAdminRecipients({
+          vendorId,
+          franchiseId,
+          excludeUserId: updatedBy,
         }),
         salesUserIds.length > 0
           ? prisma.userMaster.findMany({

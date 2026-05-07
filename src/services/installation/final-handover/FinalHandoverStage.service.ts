@@ -4,6 +4,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { sendProjectCompletedEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
@@ -802,14 +803,9 @@ export class FinalHandoverStageService {
 
       const franchiseId = leadMeta?.franchise_id ?? null;
 
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: vendorId,
-          status: "active",
-          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-          ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        },
-        select: { id: true, user_name: true, user_email: true },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId,
+        franchiseId,
       });
 
       const salesUserIds = Array.from(new Set(leadUsers.map((m) => m.user_id)));

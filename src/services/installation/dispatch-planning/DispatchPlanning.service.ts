@@ -2,6 +2,7 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
@@ -748,14 +749,10 @@ export class DispatchPlanningService {
       );
 
       // Admins — franchise-filtered, no super-admin
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: { user_type: { equals: "admin", mode: "insensitive" } },
-          ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        },
-        select: { id: true, user_name: true, user_email: true },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId,
+        excludeUserId: actorId,
       });
 
       // Deduplicate all recipients, exclude actor
