@@ -8,103 +8,104 @@ datasource db {
 }
 
 model VendorMaster {
-  id                                  Int                                  @id @default(autoincrement())
-  vendor_name                         String
-  vendor_code                         String
-  vendor_report_code                  String?                              @map("vendor-report-code")
-  primary_contact_number              String
-  primary_contact_email               String
-  primary_contact_name                String
-  country_code                        String
-  head_office_id                      Int?
-  status                              String                               @default("inactive")
-  logo                                String
-  time_zone                           String
-  IsAccountLocInEnabled               Boolean?                             @default(false)
-  createdAt                           DateTime                             @default(now())
-  updatedAt                           DateTime                             @updatedAt
-  accounts                            AccountMaster[]
-  boxes                               BoxMaster[]
-  CompanyVendorsMaster                CompanyVendorsMaster[]
-  CutList                             CutList[]
-  cutListMachineMapping               CutListMachineMapping[]
-  defectMaster                        DefectMaster[]
-  defectedItems                       DefectedItem[]
-  documentTypes                       DocumentTypeMaster[]
-  notificationMasters                 EmailNotificationMaster[]
-  franchises                          FranchiseMaster[]
-  headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
-  installationIssueLogMaster          InstallationIssueLogMaster[]
-  installationUpdates                 InstallationUpdate[]
-  installationUpdateDocs              InstallationUpdateDocuments[]
-  installerMappings                   InstallerUserMapping[]
-  installers                          InstallerUserMaster[]
-  issueLogTypeMaster                  IssueLogTypeMaster[]
-  carcassTypes                        CarcassTypeMaster[]
-  shutterTypes                        ShutterTypeMaster[]
-  handleTypes                         HandleTypeMaster[]
-  timelineRules                       TimelineRule[]
-  leadActivityStatusLog               LeadActivityStatusLog[]
-  leadChatDocuments                   LeadChatDocument[]
-  leadChatRooms                       LeadChatRoom[]
-  designMeeting                       LeadDesignMeeting[]
-  designMeetingDocsMapping            LeadDesignMeetingDocumentsMapping[]
-  designSelection                     LeadDesignSelection[]
-  chsSelectionMappings                CHSSelectionTypeMapping[]
-  leadDetailedLogs                    LeadDetailedLogs[]
-  leadDocumentLogs                    LeadDocumentLogs[]
-  documents                           LeadDocuments[]
-  leads                               LeadMaster[]
-  leadAmcContracts                    LeadAmcContract[]
-  leadSuperAdminApprovalLocIns        LeadSuperAdminApprovalLocIns[]
-  leadProductMaps                     LeadProductMapping[]
-  productStructureInstances           LeadProductStructureInstance[]
-  leadProductStructureMapping         LeadProductStructureMapping[]
-  leadServiceSchedules                LeadServiceSchedule[]
-  siteSupervisors                     LeadSiteSupervisorMapping[]
-  leadStatusLogs                      LeadStatusLogs[]
-  leadUserMappings                    LeadUserMapping[]
-  ledgers                             Ledger[]
-  machineMaster                       MachineMaster[]
-  miscellaneousDocument               MiscellaneousDocument[]
-  miscellaneousMaster                 MiscellaneousMaster[]
-  miscellaneousTeamMaster             MiscellaneousTeamMaster[]
-  miscellaneousTypeMaster             MiscellaneousTypeMaster[]
-  notifications                       Notification[]
-  orderLoginDetails                   OrderLoginDetails[]
-  payments                            PaymentInfo[]
-  paymentTypeMaster                   PaymentTypeMaster[]
-  productStructure                    ProductStructure[]
-  productTypes                        ProductTypeMaster[]
-  projectDetails                      ProjectDetails[]
-  projectItems                        ProjectItemsMaster[]
-  projects                            ProjectMaster[]
-  scanItems                           ScanAndPackItem[]
-  siteReadiness                       SiteReadiness[]
-  siteTypes                           SiteTypeMaster[]
-  sources                             SourceMaster[]
-  statusTypes                         StatusTypeMaster[]
-  themes                              ThemeMaster[]
-  userLeadTasks                       UserLeadTask[]
-  userMachineMapping                  UserMachineMapping[]
-  privilegeMasters                    PrivilegeMaster[]
-  userPrivilegeMappings               UserPrivilegeMapping[]
-  users                               UserMaster[]
-  userSessions                        UserSession[]
-  userPushTokens                      UserPushToken[]
-  addresses                           VendorAddress[]
-  vendorModulesMappings               VendorModulesMapping[]
-  vendorSetting                       VendorSetting[]
-  taxInfo                             VendorTaxInfo[]
-  tokens                              VendorTokens[]
-  externalPlatformTokens              ExternalPlatformToken[]
+  id                                     Int                                  @id @default(autoincrement())
+  vendor_name                            String
+  vendor_code                            String
+  vendor_report_code                     String?                              @map("vendor-report-code")
+  primary_contact_number                 String
+  primary_contact_email                  String
+  primary_contact_name                   String
+  country_code                           String
+  head_office_id                         Int?
+  status                                 String                               @default("inactive")
+  logo                                   String
+  time_zone                              String
+  IsAccountLocInEnabled                  Boolean?                             @default(false)
+  is_this_vendor_is_custom_usertype_only Boolean? // true : only custom user, false : custom user + all the user types and null : no custom user at all.
+  createdAt                              DateTime                             @default(now())
+  updatedAt                              DateTime                             @updatedAt
+  accounts                               AccountMaster[]
+  boxes                                  BoxMaster[]
+  CompanyVendorsMaster                   CompanyVendorsMaster[]
+  CutList                                CutList[]
+  cutListMachineMapping                  CutListMachineMapping[]
+  defectMaster                           DefectMaster[]
+  defectedItems                          DefectedItem[]
+  documentTypes                          DocumentTypeMaster[]
+  notificationMasters                    EmailNotificationMaster[]
+  franchises                             FranchiseMaster[]
+  headSiteSupervisorFranchiseMappings    HeadSiteSupervisorFranchiseMapping[]
+  installationIssueLogMaster             InstallationIssueLogMaster[]
+  installationUpdates                    InstallationUpdate[]
+  installationUpdateDocs                 InstallationUpdateDocuments[]
+  installerMappings                      InstallerUserMapping[]
+  installers                             InstallerUserMaster[]
+  issueLogTypeMaster                     IssueLogTypeMaster[]
+  carcassTypes                           CarcassTypeMaster[]
+  shutterTypes                           ShutterTypeMaster[]
+  handleTypes                            HandleTypeMaster[]
+  timelineRules                          TimelineRule[]
+  leadActivityStatusLog                  LeadActivityStatusLog[]
+  leadChatDocuments                      LeadChatDocument[]
+  leadChatRooms                          LeadChatRoom[]
+  designMeeting                          LeadDesignMeeting[]
+  designMeetingDocsMapping               LeadDesignMeetingDocumentsMapping[]
+  designSelection                        LeadDesignSelection[]
+  chsSelectionMappings                   CHSSelectionTypeMapping[]
+  leadDetailedLogs                       LeadDetailedLogs[]
+  leadDocumentLogs                       LeadDocumentLogs[]
+  documents                              LeadDocuments[]
+  leads                                  LeadMaster[]
+  leadAmcContracts                       LeadAmcContract[]
+  leadSuperAdminApprovalLocIns           LeadSuperAdminApprovalLocIns[]
+  leadProductMaps                        LeadProductMapping[]
+  productStructureInstances              LeadProductStructureInstance[]
+  leadProductStructureMapping            LeadProductStructureMapping[]
+  leadServiceSchedules                   LeadServiceSchedule[]
+  siteSupervisors                        LeadSiteSupervisorMapping[]
+  leadStatusLogs                         LeadStatusLogs[]
+  leadUserMappings                       LeadUserMapping[]
+  ledgers                                Ledger[]
+  machineMaster                          MachineMaster[]
+  miscellaneousDocument                  MiscellaneousDocument[]
+  miscellaneousMaster                    MiscellaneousMaster[]
+  miscellaneousTeamMaster                MiscellaneousTeamMaster[]
+  miscellaneousTypeMaster                MiscellaneousTypeMaster[]
+  notifications                          Notification[]
+  orderLoginDetails                      OrderLoginDetails[]
+  payments                               PaymentInfo[]
+  paymentTypeMaster                      PaymentTypeMaster[]
+  productStructure                       ProductStructure[]
+  productTypes                           ProductTypeMaster[]
+  projectDetails                         ProjectDetails[]
+  projectItems                           ProjectItemsMaster[]
+  projects                               ProjectMaster[]
+  scanItems                              ScanAndPackItem[]
+  siteReadiness                          SiteReadiness[]
+  siteTypes                              SiteTypeMaster[]
+  sources                                SourceMaster[]
+  statusTypes                            StatusTypeMaster[]
+  themes                                 ThemeMaster[]
+  userLeadTasks                          UserLeadTask[]
+  userMachineMapping                     UserMachineMapping[]
+  privilegeMasters                       PrivilegeMaster[]
+  userPrivilegeMappings                  UserPrivilegeMapping[]
+  users                                  UserMaster[]
+  userSessions                           UserSession[]
+  userPushTokens                         UserPushToken[]
+  addresses                              VendorAddress[]
+  vendorModulesMappings                  VendorModulesMapping[]
+  vendorSetting                          VendorSetting[]
+  taxInfo                                VendorTaxInfo[]
+  tokens                                 VendorTokens[]
+  externalPlatformTokens                 ExternalPlatformToken[]
 
   completionPhotos                     DefectCompletionPhoto[]
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
   projectCategoriesMaster              ProjectCategoriesMaster[]
   projectCategoriesVendorMappings      ProjectCategoriesMasterVendorMapping[]
-  brands   BrandMaster[]
-products ProductMaster[]
+  brands                               BrandMaster[]
+  products                             ProductMaster[]
 }
 
 model VendorAddress {
@@ -2117,7 +2118,7 @@ model ProjectCategoriesMaster {
   external_category_id                 Int?
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
-  products ProductMaster[]
+  products                             ProductMaster[]
 }
 
 model ProjectCategoriesMasterVendorMapping {
@@ -2137,15 +2138,13 @@ model ProjectCategoriesMasterVendorMapping {
   updatedBy                   UserMaster                  @relation("ProjectCategoriesVendorMapping_updatedBy", fields: [updated_by], references: [id])
 }
 
-
-
 model BrandMaster {
-  id         Int         @id @default(autoincrement())
+  id         Int             @id @default(autoincrement())
   vendor_id  Int
   brand_name String
-  active     BrandActiveFlag  @default(Yes)
+  active     BrandActiveFlag @default(Yes)
 
-  vendor   VendorMaster   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   products ProductMaster[]
 
   created_at DateTime @default(now())
@@ -2155,49 +2154,49 @@ model BrandMaster {
 }
 
 model ProductMaster {
-  id                    Int         @id @default(autoincrement())
-  vendor_id             Int
-  item_id               Int
-  rotation              Int         @default(0)
-  alt_conv_factor       Float       @default(0)
-  board_length          Float       @default(0)
-  board_width           Float       @default(0)
-  dimension_1           Float       @default(0)
-  dimension_2           Float       @default(0)
-  dimension_3           Float       @default(0)
-  installation_charges  Decimal?    @db.Decimal(12, 2)
-  item1_weight          Decimal?    @db.Decimal(12, 2)
-  level1_price          Decimal?    @db.Decimal(12, 2)
-  level2_price          Decimal?    @db.Decimal(12, 2)
-  level3_price          Decimal?    @db.Decimal(12, 2)
-  moq                   Int         @default(0)
-  no_of_drill_holes     Int         @default(0)
-  pre_mill_width        Float       @default(0)
-  alt_uom_text          String?
-  brand_id              Int?
-  category_id           Int
-  article_code          String?
-  core_material         String?
-  edge_banding_color    String?
-  finish                String?
-  group                 String?
-  hsn_code              Int?
-  product_name          String
-  procurement           String?
-  unit_of_measure       String?
-  vendor_code           String?
-  custom_field_1        String?
-  custom_field_2        String?
-  custom_field_3        String?
-  created_by            Int?
-  created_at            DateTime    @default(now())
-  updated_at            DateTime    @updatedAt
-  updated_by            Int?
-  active                ProductActiveFlag  @default(Yes)
+  id                   Int               @id @default(autoincrement())
+  vendor_id            Int
+  item_id              Int
+  rotation             Int               @default(0)
+  alt_conv_factor      Float             @default(0)
+  board_length         Float             @default(0)
+  board_width          Float             @default(0)
+  dimension_1          Float             @default(0)
+  dimension_2          Float             @default(0)
+  dimension_3          Float             @default(0)
+  installation_charges Decimal?          @db.Decimal(12, 2)
+  item1_weight         Decimal?          @db.Decimal(12, 2)
+  level1_price         Decimal?          @db.Decimal(12, 2)
+  level2_price         Decimal?          @db.Decimal(12, 2)
+  level3_price         Decimal?          @db.Decimal(12, 2)
+  moq                  Int               @default(0)
+  no_of_drill_holes    Int               @default(0)
+  pre_mill_width       Float             @default(0)
+  alt_uom_text         String?
+  brand_id             Int?
+  category_id          Int
+  article_code         String?
+  core_material        String?
+  edge_banding_color   String?
+  finish               String?
+  group                String?
+  hsn_code             Int?
+  product_name         String
+  procurement          String?
+  unit_of_measure      String?
+  vendor_code          String?
+  custom_field_1       String?
+  custom_field_2       String?
+  custom_field_3       String?
+  created_by           Int?
+  created_at           DateTime          @default(now())
+  updated_at           DateTime          @updatedAt
+  updated_by           Int?
+  active               ProductActiveFlag @default(Yes)
 
-  vendor   VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  brand                 BrandMaster?              @relation(fields: [brand_id], references: [id], onDelete: SetNull)
-  category ProjectCategoriesMaster  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  vendor   VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  brand    BrandMaster?            @relation(fields: [brand_id], references: [id], onDelete: SetNull)
+  category ProjectCategoriesMaster @relation(fields: [category_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([brand_id])

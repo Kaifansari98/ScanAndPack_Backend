@@ -6,13 +6,27 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "dist",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "paths": {
-      "*": ["./*"],
-      "@prisma/client": ["./generated/prisma_client/client"]
+      "*": [
+        "./*"
+      ],
+      "@prisma/client": [
+        "./generated/prisma_client/client"
+      ]
     },
     "rootDir": "."
   },
-  "include": ["src/**/*.ts", "generated/**/*.ts"],
-  "exclude": ["node_modules", "dist", "prisma/**", "prisma.config.ts"]
+  "include": [
+    "src/**/*.ts",
+    "generated/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "prisma/**",
+    "prisma.config.ts"
+  ]
 }
