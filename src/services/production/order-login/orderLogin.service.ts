@@ -1372,6 +1372,7 @@ export class OrderLoginService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         });
 
@@ -1655,20 +1656,10 @@ export class OrderLoginService {
       const orderLoginRedirectUrl = `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?${olPendingParams.toString()}`;
 
       // Fetch users for notifications (safe — outside transaction)
-      const [factoryUser, admins, backendMappingData] =
+      const [factoryUser, backendMappingData] =
         await Promise.all([
           prisma.userMaster.findUnique({
             where: { id: assignToUserId },
-            select: { id: true, user_name: true, user_email: true },
-          }),
-          prisma.userMaster.findMany({
-            where: {
-              vendor_id: vendorId,
-              status: "active",
-              user_type: {
-                user_type: { equals: "admin", mode: "insensitive" },
-              },
-            },
             select: { id: true, user_name: true, user_email: true },
           }),
           prisma.leadUserMapping.findFirst({
@@ -1689,6 +1680,12 @@ export class OrderLoginService {
             },
           }),
         ]);
+
+      const admins = await getFranchiseAdminRecipients({
+        vendorId,
+        franchiseId: leadMeta?.franchise_id ?? null,
+        excludeUserId: userId,
+      });
 
       // Validate order login status (safe — outside transaction)
       // 🔑 Direct DB truth source
