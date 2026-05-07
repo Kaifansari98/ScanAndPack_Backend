@@ -2,6 +2,7 @@ import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
@@ -460,6 +461,7 @@ export class TechCheckService {
             lead_code: true,
             vendor_id: true,
             account_id: true,
+            franchise_id: true,
           },
         });
 
@@ -471,24 +473,13 @@ export class TechCheckService {
         // ✅ redirectPath with instance_id
         const redirectPath = buildRedirectPath(lead.account_id);
 
-        const admins = await prisma.userMaster.findMany({
-          where: {
-            vendor_id: lead.vendor_id,
-            status: "active",
-            user_type: {
-              user_type: { in: ["admin"] },
-            },
-          },
-          select: {
-            id: true,
-            user_name: true,
-            user_email: true,
-          },
+        const admins = await getFranchiseAdminRecipients({
+          vendorId: lead.vendor_id,
+          franchiseId: lead.franchise_id ?? null,
+          excludeUserId: actorId,
         });
 
         for (const admin of admins) {
-          if (admin.id === actorId) continue;
-
           await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,
             user_id: admin.id,

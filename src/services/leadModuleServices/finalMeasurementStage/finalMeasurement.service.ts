@@ -355,7 +355,6 @@ export class FinalMeasurementService {
             ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
             : `/dashboard/leads/details/${data.lead_id}`,
         });
-
       }
     } catch (err: any) {
       logger.warn("⚠️ Client documentation admin notification failed", {

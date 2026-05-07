@@ -3,6 +3,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
@@ -2187,6 +2188,7 @@ export class OrderLoginService {
         lead_code: true,
         vendor_id: true,
         account_id: true,
+        franchise_id: true,
       },
     });
 
@@ -2222,15 +2224,10 @@ export class OrderLoginService {
         year: "numeric",
       });
 
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: leadMeta.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { equals: "admin", mode: "insensitive" },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: leadMeta.vendor_id,
+        franchiseId: leadMeta.franchise_id ?? null,
+        excludeUserId: userId,
       });
 
       for (const admin of admins) {

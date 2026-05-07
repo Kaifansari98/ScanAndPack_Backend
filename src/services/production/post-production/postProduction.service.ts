@@ -4,6 +4,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { sendReadyToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { NotificationType } from "../../../prisma/generated";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 
@@ -1285,6 +1286,7 @@ export class PostProductionService {
           lead_code: true,
           vendor_id: true,
           account_id: true,
+          franchise_id: true,
         },
       });
 
@@ -1309,26 +1311,14 @@ export class PostProductionService {
       const adminRtdQs = adminRtdParams.toString();
       const redirectPath = adminRtdQs ? `${adminLeadDetailsBase}?${adminRtdQs}` : adminLeadDetailsBase;
 
-      // Fetch Active Admin Users
-      const admins = await prisma.userMaster.findMany({
-        where: {
-          vendor_id: lead.vendor_id,
-          status: "active",
-          user_type: {
-            user_type: { in: ["admin"] },
-          },
-        },
-        select: {
-          id: true,
-          user_name: true,
-          user_email: true,
-        },
+      // Fetch Active Admin Users for the lead franchise only
+      const admins = await getFranchiseAdminRecipients({
+        vendorId: lead.vendor_id,
+        franchiseId: lead.franchise_id ?? null,
+        excludeUserId: actorId,
       });
 
       for (const admin of admins) {
-        // ❌ Prevent self notification
-        if (admin.id === actorId) continue;
-
         // 🔔 In-App Notification (ADMIN)
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,
