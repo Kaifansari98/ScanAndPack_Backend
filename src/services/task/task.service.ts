@@ -1,6 +1,14 @@
 import { prisma, Prisma } from "../../prisma/client";
 
 export class TaskService {
+private static activeLeadWhere() {
+  return {
+    lead: {
+      is_deleted: false,
+    },
+  } satisfies Prisma.UserLeadTaskWhereInput;
+}
+
 private static taskIncludes() {
   return {
     select: {
@@ -188,6 +196,7 @@ private static mapTaskWithLead(task: any) {
         vendor_id: vendorId,
         user_id: userId,
         status: "open",
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
@@ -593,6 +602,7 @@ private static mapTaskWithLead(task: any) {
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
         user_id: userId,
+        ...TaskService.activeLeadWhere(),
         ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
       };
       if (includeFranchise) {
@@ -603,6 +613,7 @@ private static mapTaskWithLead(task: any) {
       const filteredBaseWhereClause = addFilterConditions({
         vendor_id: vendorId,
         user_id: userId,
+        ...TaskService.activeLeadWhere(),
         ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
       });
       if (includeFranchise) {
@@ -749,6 +760,7 @@ private static mapTaskWithLead(task: any) {
       where: {
         vendor_id: vendorId,
         user_id: userId,
+        ...TaskService.activeLeadWhere(),
         ...(includeFranchise ? { franchise_id: franchiseId } : {}),
       },
       select: { id: true },
@@ -768,6 +780,7 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
+      ...TaskService.activeLeadWhere(),
       ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     };
     if (includeFranchise) {
@@ -778,6 +791,7 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause = addFilterConditions({
       id: { in: taskIds },
       vendor_id: vendorId,
+      ...TaskService.activeLeadWhere(),
       ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     });
     if (includeFranchise) {
@@ -924,6 +938,7 @@ private static mapTaskWithLead(task: any) {
       where: {
         vendor_id: vendorId,
         status: { in: ["open", "in_progress"] },
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
@@ -1306,6 +1321,7 @@ private static mapTaskWithLead(task: any) {
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
       franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
       ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     };
 
@@ -1316,6 +1332,7 @@ private static mapTaskWithLead(task: any) {
     const filteredBaseWhereClause: any = addFilterConditions({
       vendor_id: vendorId,
       franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
       ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
     });
 
@@ -1490,6 +1507,7 @@ private static mapTaskWithLead(task: any) {
         lead_id: leadId,
         task_type: taskType,
         status: "open", // ✅ only open tasks
+        ...TaskService.activeLeadWhere(),
       },
       select: {
         id: true,
