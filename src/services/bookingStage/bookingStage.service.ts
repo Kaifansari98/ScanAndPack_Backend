@@ -38,9 +38,45 @@ const assignTaskBookingSchema = Joi.object({
 export class BookingStageService {
   private leadSuperAdminApprovalLockInService =
     new LeadSuperAdminApprovalLockInService();
+  private static readonly statusLogSortedStageTags = new Set([
+    "Type 1",
+    "Type 2",
+    "Type 3",
+    "Type 4",
+    "Type 5",
+    "Type 6",
+    "Type 7",
+    "Type 8",
+    "Type 11",
+    "Type 12",
+    "Type 13",
+    "Type 14",
+    "Type 15",
+    "Type 16",
+    "Type 17",
+  ]);
 
   // Helper to avoid repeating include structure
-  private static leadIncludes() {
+  private static leadIncludes(stageTag?: string) {
+    const normalizedStageTag = String(stageTag ?? "").trim();
+    const productStructureInstancesOrderBy =
+      normalizedStageTag === "Type 9"
+        ? [
+            { tech_check_completed_at: Prisma.SortOrder.desc },
+            { product_structure_id: Prisma.SortOrder.asc },
+            { quantity_index: Prisma.SortOrder.asc },
+          ]
+        : normalizedStageTag === "Type 10"
+          ? [
+              { order_login_completed_at: Prisma.SortOrder.desc },
+              { product_structure_id: Prisma.SortOrder.asc },
+              { quantity_index: Prisma.SortOrder.asc },
+            ]
+          : [
+              { product_structure_id: Prisma.SortOrder.asc },
+              { quantity_index: Prisma.SortOrder.asc },
+            ];
+
     return {
       account: { select: { id: true, name: true } },
       siteType: true,
@@ -82,11 +118,30 @@ export class BookingStageService {
             },
           },
         },
-        orderBy: [
-          { product_structure_id: Prisma.SortOrder.asc },
-          { quantity_index: Prisma.SortOrder.asc },
-        ],
+        orderBy: productStructureInstancesOrderBy,
       },
+      ...(BookingStageService.statusLogSortedStageTags.has(normalizedStageTag)
+        ? {
+            leadStatusLogs: {
+              where: {
+                statusType: {
+                  tag: normalizedStageTag,
+                },
+              },
+              select: {
+                created_at: true,
+                statusType: {
+                  select: {
+                    tag: true,
+                  },
+                },
+              },
+              orderBy: {
+                created_at: Prisma.SortOrder.desc,
+              },
+            },
+          }
+        : {}),
       payments: {
         where: { paymentType: { tag: "Type 2" } },
         select: {
@@ -134,6 +189,37 @@ export class BookingStageService {
         ],
       },
     };
+  }
+
+  private static getStageSortTimestamp(lead: any, stageTag: string): number {
+    if (BookingStageService.statusLogSortedStageTags.has(stageTag)) {
+      const latestType8Log = Array.isArray(lead?.leadStatusLogs)
+        ? lead.leadStatusLogs[0]
+        : null;
+      return latestType8Log?.created_at
+        ? new Date(latestType8Log.created_at).getTime()
+        : Number.NEGATIVE_INFINITY;
+    }
+
+    if (stageTag === "Type 9") {
+      const latestInstance = Array.isArray(lead?.productStructureInstances)
+        ? lead.productStructureInstances.find((instance: any) => instance?.tech_check_completed_at)
+        : null;
+      return latestInstance?.tech_check_completed_at
+        ? new Date(latestInstance.tech_check_completed_at).getTime()
+        : Number.NEGATIVE_INFINITY;
+    }
+
+    if (stageTag === "Type 10") {
+      const latestInstance = Array.isArray(lead?.productStructureInstances)
+        ? lead.productStructureInstances.find((instance: any) => instance?.order_login_completed_at)
+        : null;
+      return latestInstance?.order_login_completed_at
+        ? new Date(latestInstance.order_login_completed_at).getTime()
+        : Number.NEGATIVE_INFINITY;
+    }
+
+    return Number.NEGATIVE_INFINITY;
   }
 
   // Generate signed URL for file access
@@ -1720,10 +1806,12 @@ export class BookingStageService {
       );
     }
 
+    const includeConfig = BookingStageService.leadIncludes(tag);
+
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
-        include: BookingStageService.leadIncludes(),
+        include: includeConfig,
         orderBy,
         skip,
         take: limit,
@@ -1760,7 +1848,20 @@ export class BookingStageService {
       }),
     );
 
-    return { leads: processed, count: total };
+    const shouldApplyStageSort =
+      BookingStageService.statusLogSortedStageTags.has(normalizedTag) ||
+      normalizedTag === "Type 9" ||
+      normalizedTag === "Type 10";
+
+    const sortedProcessed = shouldApplyStageSort
+      ? [...processed].sort(
+          (a, b) =>
+            BookingStageService.getStageSortTimestamp(b, normalizedTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedTag),
+        )
+      : processed;
+
+    return { leads: sortedProcessed, count: total };
   }
 
   // post filter service
