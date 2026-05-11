@@ -39,7 +39,6 @@ export class BookingStageService {
   private leadSuperAdminApprovalLockInService =
     new LeadSuperAdminApprovalLockInService();
   private static readonly statusLogSortedStageTags = new Set([
-    "Type 1",
     "Type 2",
     "Type 3",
     "Type 4",
