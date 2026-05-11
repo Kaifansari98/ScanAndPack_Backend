@@ -1805,15 +1805,19 @@ export class BookingStageService {
       );
     }
 
-    const includeConfig = BookingStageService.leadIncludes(tag);
+    const normalizedStageTag = String(tag || "").trim();
+    const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
+    const shouldApplyStageSort =
+      BookingStageService.statusLogSortedStageTags.has(normalizedStageTag) ||
+      normalizedStageTag === "Type 9" ||
+      normalizedStageTag === "Type 10";
 
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
         include: includeConfig,
         orderBy,
-        skip,
-        take: limit,
+        ...(shouldApplyStageSort ? {} : { skip, take: limit }),
       }),
 
       prisma.leadMaster.count({
@@ -1847,20 +1851,19 @@ export class BookingStageService {
       }),
     );
 
-    const shouldApplyStageSort =
-      BookingStageService.statusLogSortedStageTags.has(normalizedTag) ||
-      normalizedTag === "Type 9" ||
-      normalizedTag === "Type 10";
-
     const sortedProcessed = shouldApplyStageSort
       ? [...processed].sort(
           (a, b) =>
-            BookingStageService.getStageSortTimestamp(b, normalizedTag) -
-            BookingStageService.getStageSortTimestamp(a, normalizedTag),
+            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
         )
       : processed;
 
-    return { leads: sortedProcessed, count: total };
+    const paginatedLeads = shouldApplyStageSort
+      ? sortedProcessed.slice(skip, skip + limit)
+      : sortedProcessed;
+
+    return { leads: paginatedLeads, count: total };
   }
 
   // post filter service
