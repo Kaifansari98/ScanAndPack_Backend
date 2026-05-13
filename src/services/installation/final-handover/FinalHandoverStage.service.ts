@@ -532,7 +532,7 @@ export class FinalHandoverStageService {
     }
 
     const role = user.user_type?.user_type?.toLowerCase() ?? "";
-    const canSetTrue = ["site-supervisor", "admin", "super-admin"].includes(
+    const canSetTrue = ["site-supervisor", "admin", "super-admin", "custom"].includes(
       role,
     );
     const canSetFalse = ["admin", "super-admin"].includes(role);
