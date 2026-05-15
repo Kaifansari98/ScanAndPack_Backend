@@ -47,9 +47,10 @@ export type ProductMasterAvgAggregateOutputType = {
   pre_mill_width: number | null
   brand_id: number | null
   category_id: number | null
-  hsn_code: number | null
+  hsn_id: number | null
   created_by: number | null
   updated_by: number | null
+  current_stock: runtime.Decimal | null
 }
 
 export type ProductMasterSumAggregateOutputType = {
@@ -73,9 +74,10 @@ export type ProductMasterSumAggregateOutputType = {
   pre_mill_width: number | null
   brand_id: number | null
   category_id: number | null
-  hsn_code: number | null
+  hsn_id: number | null
   created_by: number | null
   updated_by: number | null
+  current_stock: runtime.Decimal | null
 }
 
 export type ProductMasterMinAggregateOutputType = {
@@ -105,7 +107,8 @@ export type ProductMasterMinAggregateOutputType = {
   edge_banding_color: string | null
   finish: string | null
   group: string | null
-  hsn_code: number | null
+  hsn_code: string | null
+  hsn_id: number | null
   product_name: string | null
   procurement: string | null
   unit_of_measure: string | null
@@ -118,6 +121,8 @@ export type ProductMasterMinAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   active: $Enums.ProductActiveFlag | null
+  current_stock: runtime.Decimal | null
+  stock_updated_at: Date | null
 }
 
 export type ProductMasterMaxAggregateOutputType = {
@@ -147,7 +152,8 @@ export type ProductMasterMaxAggregateOutputType = {
   edge_banding_color: string | null
   finish: string | null
   group: string | null
-  hsn_code: number | null
+  hsn_code: string | null
+  hsn_id: number | null
   product_name: string | null
   procurement: string | null
   unit_of_measure: string | null
@@ -160,6 +166,8 @@ export type ProductMasterMaxAggregateOutputType = {
   updated_at: Date | null
   updated_by: number | null
   active: $Enums.ProductActiveFlag | null
+  current_stock: runtime.Decimal | null
+  stock_updated_at: Date | null
 }
 
 export type ProductMasterCountAggregateOutputType = {
@@ -190,6 +198,7 @@ export type ProductMasterCountAggregateOutputType = {
   finish: number
   group: number
   hsn_code: number
+  hsn_id: number
   product_name: number
   procurement: number
   unit_of_measure: number
@@ -202,6 +211,8 @@ export type ProductMasterCountAggregateOutputType = {
   updated_at: number
   updated_by: number
   active: number
+  current_stock: number
+  stock_updated_at: number
   _all: number
 }
 
@@ -227,9 +238,10 @@ export type ProductMasterAvgAggregateInputType = {
   pre_mill_width?: true
   brand_id?: true
   category_id?: true
-  hsn_code?: true
+  hsn_id?: true
   created_by?: true
   updated_by?: true
+  current_stock?: true
 }
 
 export type ProductMasterSumAggregateInputType = {
@@ -253,9 +265,10 @@ export type ProductMasterSumAggregateInputType = {
   pre_mill_width?: true
   brand_id?: true
   category_id?: true
-  hsn_code?: true
+  hsn_id?: true
   created_by?: true
   updated_by?: true
+  current_stock?: true
 }
 
 export type ProductMasterMinAggregateInputType = {
@@ -286,6 +299,7 @@ export type ProductMasterMinAggregateInputType = {
   finish?: true
   group?: true
   hsn_code?: true
+  hsn_id?: true
   product_name?: true
   procurement?: true
   unit_of_measure?: true
@@ -298,6 +312,8 @@ export type ProductMasterMinAggregateInputType = {
   updated_at?: true
   updated_by?: true
   active?: true
+  current_stock?: true
+  stock_updated_at?: true
 }
 
 export type ProductMasterMaxAggregateInputType = {
@@ -328,6 +344,7 @@ export type ProductMasterMaxAggregateInputType = {
   finish?: true
   group?: true
   hsn_code?: true
+  hsn_id?: true
   product_name?: true
   procurement?: true
   unit_of_measure?: true
@@ -340,6 +357,8 @@ export type ProductMasterMaxAggregateInputType = {
   updated_at?: true
   updated_by?: true
   active?: true
+  current_stock?: true
+  stock_updated_at?: true
 }
 
 export type ProductMasterCountAggregateInputType = {
@@ -370,6 +389,7 @@ export type ProductMasterCountAggregateInputType = {
   finish?: true
   group?: true
   hsn_code?: true
+  hsn_id?: true
   product_name?: true
   procurement?: true
   unit_of_measure?: true
@@ -382,6 +402,8 @@ export type ProductMasterCountAggregateInputType = {
   updated_at?: true
   updated_by?: true
   active?: true
+  current_stock?: true
+  stock_updated_at?: true
   _all?: true
 }
 
@@ -498,7 +520,8 @@ export type ProductMasterGroupByOutputType = {
   edge_banding_color: string | null
   finish: string | null
   group: string | null
-  hsn_code: number | null
+  hsn_code: string | null
+  hsn_id: number | null
   product_name: string
   procurement: string | null
   unit_of_measure: string | null
@@ -511,6 +534,8 @@ export type ProductMasterGroupByOutputType = {
   updated_at: Date
   updated_by: number | null
   active: $Enums.ProductActiveFlag
+  current_stock: runtime.Decimal
+  stock_updated_at: Date | null
   _count: ProductMasterCountAggregateOutputType | null
   _avg: ProductMasterAvgAggregateOutputType | null
   _sum: ProductMasterSumAggregateOutputType | null
@@ -563,7 +588,8 @@ export type ProductMasterWhereInput = {
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   group?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  hsn_code?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  hsn_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  hsn_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   product_name?: Prisma.StringFilter<"ProductMaster"> | string
   procurement?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   unit_of_measure?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -576,9 +602,16 @@ export type ProductMasterWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"ProductMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   active?: Prisma.EnumProductActiveFlagFilter<"ProductMaster"> | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.DateTimeNullableFilter<"ProductMaster"> | Date | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   brand?: Prisma.XOR<Prisma.BrandMasterNullableScalarRelationFilter, Prisma.BrandMasterWhereInput> | null
   category?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
+  purchaseIntentItems?: Prisma.PurchaseIntentItemListRelationFilter
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
+  grnItems?: Prisma.GRNItemListRelationFilter
+  hsn?: Prisma.XOR<Prisma.HsnProductMappingNullableScalarRelationFilter, Prisma.HsnProductMappingWhereInput> | null
+  stockHistories?: Prisma.ProductStockHistoryListRelationFilter
 }
 
 export type ProductMasterOrderByWithRelationInput = {
@@ -609,6 +642,7 @@ export type ProductMasterOrderByWithRelationInput = {
   finish?: Prisma.SortOrderInput | Prisma.SortOrder
   group?: Prisma.SortOrderInput | Prisma.SortOrder
   hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsn_id?: Prisma.SortOrderInput | Prisma.SortOrder
   product_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
   unit_of_measure?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -621,9 +655,16 @@ export type ProductMasterOrderByWithRelationInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+  stock_updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   brand?: Prisma.BrandMasterOrderByWithRelationInput
   category?: Prisma.ProjectCategoriesMasterOrderByWithRelationInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemOrderByRelationAggregateInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
+  grnItems?: Prisma.GRNItemOrderByRelationAggregateInput
+  hsn?: Prisma.HsnProductMappingOrderByWithRelationInput
+  stockHistories?: Prisma.ProductStockHistoryOrderByRelationAggregateInput
 }
 
 export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -656,7 +697,8 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   group?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  hsn_code?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  hsn_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  hsn_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   product_name?: Prisma.StringFilter<"ProductMaster"> | string
   procurement?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   unit_of_measure?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -669,9 +711,16 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   updated_at?: Prisma.DateTimeFilter<"ProductMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   active?: Prisma.EnumProductActiveFlagFilter<"ProductMaster"> | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.DateTimeNullableFilter<"ProductMaster"> | Date | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   brand?: Prisma.XOR<Prisma.BrandMasterNullableScalarRelationFilter, Prisma.BrandMasterWhereInput> | null
   category?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
+  purchaseIntentItems?: Prisma.PurchaseIntentItemListRelationFilter
+  purchaseOrderItems?: Prisma.PurchaseOrderItemListRelationFilter
+  grnItems?: Prisma.GRNItemListRelationFilter
+  hsn?: Prisma.XOR<Prisma.HsnProductMappingNullableScalarRelationFilter, Prisma.HsnProductMappingWhereInput> | null
+  stockHistories?: Prisma.ProductStockHistoryListRelationFilter
 }, "id">
 
 export type ProductMasterOrderByWithAggregationInput = {
@@ -702,6 +751,7 @@ export type ProductMasterOrderByWithAggregationInput = {
   finish?: Prisma.SortOrderInput | Prisma.SortOrder
   group?: Prisma.SortOrderInput | Prisma.SortOrder
   hsn_code?: Prisma.SortOrderInput | Prisma.SortOrder
+  hsn_id?: Prisma.SortOrderInput | Prisma.SortOrder
   product_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrderInput | Prisma.SortOrder
   unit_of_measure?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -714,6 +764,8 @@ export type ProductMasterOrderByWithAggregationInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+  stock_updated_at?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProductMasterCountOrderByAggregateInput
   _avg?: Prisma.ProductMasterAvgOrderByAggregateInput
   _max?: Prisma.ProductMasterMaxOrderByAggregateInput
@@ -751,7 +803,8 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   edge_banding_color?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   group?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
-  hsn_code?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
+  hsn_code?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
+  hsn_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   product_name?: Prisma.StringWithAggregatesFilter<"ProductMaster"> | string
   procurement?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
   unit_of_measure?: Prisma.StringNullableWithAggregatesFilter<"ProductMaster"> | string | null
@@ -764,6 +817,8 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"ProductMaster"> | Date | string
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   active?: Prisma.EnumProductActiveFlagWithAggregatesFilter<"ProductMaster"> | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.DateTimeNullableWithAggregatesFilter<"ProductMaster"> | Date | string | null
 }
 
 export type ProductMasterCreateInput = {
@@ -789,7 +844,7 @@ export type ProductMasterCreateInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -802,9 +857,16 @@ export type ProductMasterCreateInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateInput = {
@@ -834,7 +896,8 @@ export type ProductMasterUncheckedCreateInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -847,6 +910,12 @@ export type ProductMasterUncheckedCreateInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUpdateInput = {
@@ -872,7 +941,7 @@ export type ProductMasterUpdateInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -885,9 +954,16 @@ export type ProductMasterUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateInput = {
@@ -917,7 +993,8 @@ export type ProductMasterUncheckedUpdateInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -930,6 +1007,12 @@ export type ProductMasterUncheckedUpdateInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateManyInput = {
@@ -959,7 +1042,8 @@ export type ProductMasterCreateManyInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -972,6 +1056,8 @@ export type ProductMasterCreateManyInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
 }
 
 export type ProductMasterUpdateManyMutationInput = {
@@ -997,7 +1083,7 @@ export type ProductMasterUpdateManyMutationInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1010,6 +1096,8 @@ export type ProductMasterUpdateManyMutationInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductMasterUncheckedUpdateManyInput = {
@@ -1039,7 +1127,8 @@ export type ProductMasterUncheckedUpdateManyInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1052,6 +1141,8 @@ export type ProductMasterUncheckedUpdateManyInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductMasterListRelationFilter = {
@@ -1092,6 +1183,7 @@ export type ProductMasterCountOrderByAggregateInput = {
   finish?: Prisma.SortOrder
   group?: Prisma.SortOrder
   hsn_code?: Prisma.SortOrder
+  hsn_id?: Prisma.SortOrder
   product_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   unit_of_measure?: Prisma.SortOrder
@@ -1104,6 +1196,8 @@ export type ProductMasterCountOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+  stock_updated_at?: Prisma.SortOrder
 }
 
 export type ProductMasterAvgOrderByAggregateInput = {
@@ -1127,9 +1221,10 @@ export type ProductMasterAvgOrderByAggregateInput = {
   pre_mill_width?: Prisma.SortOrder
   brand_id?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
-  hsn_code?: Prisma.SortOrder
+  hsn_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
 }
 
 export type ProductMasterMaxOrderByAggregateInput = {
@@ -1160,6 +1255,7 @@ export type ProductMasterMaxOrderByAggregateInput = {
   finish?: Prisma.SortOrder
   group?: Prisma.SortOrder
   hsn_code?: Prisma.SortOrder
+  hsn_id?: Prisma.SortOrder
   product_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   unit_of_measure?: Prisma.SortOrder
@@ -1172,6 +1268,8 @@ export type ProductMasterMaxOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+  stock_updated_at?: Prisma.SortOrder
 }
 
 export type ProductMasterMinOrderByAggregateInput = {
@@ -1202,6 +1300,7 @@ export type ProductMasterMinOrderByAggregateInput = {
   finish?: Prisma.SortOrder
   group?: Prisma.SortOrder
   hsn_code?: Prisma.SortOrder
+  hsn_id?: Prisma.SortOrder
   product_name?: Prisma.SortOrder
   procurement?: Prisma.SortOrder
   unit_of_measure?: Prisma.SortOrder
@@ -1214,6 +1313,8 @@ export type ProductMasterMinOrderByAggregateInput = {
   updated_at?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   active?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+  stock_updated_at?: Prisma.SortOrder
 }
 
 export type ProductMasterSumOrderByAggregateInput = {
@@ -1237,9 +1338,15 @@ export type ProductMasterSumOrderByAggregateInput = {
   pre_mill_width?: Prisma.SortOrder
   brand_id?: Prisma.SortOrder
   category_id?: Prisma.SortOrder
-  hsn_code?: Prisma.SortOrder
+  hsn_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
+  current_stock?: Prisma.SortOrder
+}
+
+export type ProductMasterScalarRelationFilter = {
+  is?: Prisma.ProductMasterWhereInput
+  isNot?: Prisma.ProductMasterWhereInput
 }
 
 export type ProductMasterCreateNestedManyWithoutVendorInput = {
@@ -1372,6 +1479,112 @@ export type EnumProductActiveFlagFieldUpdateOperationsInput = {
   set?: $Enums.ProductActiveFlag
 }
 
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type ProductMasterCreateNestedOneWithoutPurchaseIntentItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutPurchaseIntentItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+}
+
+export type ProductMasterUpdateOneRequiredWithoutPurchaseIntentItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutPurchaseIntentItemsInput
+  upsert?: Prisma.ProductMasterUpsertWithoutPurchaseIntentItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductMasterUpdateToOneWithWhereWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUpdateWithoutPurchaseIntentItemsInput>, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput>
+}
+
+export type ProductMasterCreateNestedOneWithoutPurchaseOrderItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutPurchaseOrderItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+}
+
+export type ProductMasterUpdateOneRequiredWithoutPurchaseOrderItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutPurchaseOrderItemsInput
+  upsert?: Prisma.ProductMasterUpsertWithoutPurchaseOrderItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductMasterUpdateToOneWithWhereWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUpdateWithoutPurchaseOrderItemsInput>, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput>
+}
+
+export type ProductMasterCreateNestedOneWithoutGrnItemsInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedCreateWithoutGrnItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutGrnItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+}
+
+export type ProductMasterUpdateOneRequiredWithoutGrnItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedCreateWithoutGrnItemsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutGrnItemsInput
+  upsert?: Prisma.ProductMasterUpsertWithoutGrnItemsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductMasterUpdateToOneWithWhereWithoutGrnItemsInput, Prisma.ProductMasterUpdateWithoutGrnItemsInput>, Prisma.ProductMasterUncheckedUpdateWithoutGrnItemsInput>
+}
+
+export type ProductMasterCreateNestedManyWithoutHsnInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput> | Prisma.ProductMasterCreateWithoutHsnInput[] | Prisma.ProductMasterUncheckedCreateWithoutHsnInput[]
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutHsnInput | Prisma.ProductMasterCreateOrConnectWithoutHsnInput[]
+  createMany?: Prisma.ProductMasterCreateManyHsnInputEnvelope
+  connect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+}
+
+export type ProductMasterUncheckedCreateNestedManyWithoutHsnInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput> | Prisma.ProductMasterCreateWithoutHsnInput[] | Prisma.ProductMasterUncheckedCreateWithoutHsnInput[]
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutHsnInput | Prisma.ProductMasterCreateOrConnectWithoutHsnInput[]
+  createMany?: Prisma.ProductMasterCreateManyHsnInputEnvelope
+  connect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+}
+
+export type ProductMasterUpdateManyWithoutHsnNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput> | Prisma.ProductMasterCreateWithoutHsnInput[] | Prisma.ProductMasterUncheckedCreateWithoutHsnInput[]
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutHsnInput | Prisma.ProductMasterCreateOrConnectWithoutHsnInput[]
+  upsert?: Prisma.ProductMasterUpsertWithWhereUniqueWithoutHsnInput | Prisma.ProductMasterUpsertWithWhereUniqueWithoutHsnInput[]
+  createMany?: Prisma.ProductMasterCreateManyHsnInputEnvelope
+  set?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  disconnect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  delete?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  connect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  update?: Prisma.ProductMasterUpdateWithWhereUniqueWithoutHsnInput | Prisma.ProductMasterUpdateWithWhereUniqueWithoutHsnInput[]
+  updateMany?: Prisma.ProductMasterUpdateManyWithWhereWithoutHsnInput | Prisma.ProductMasterUpdateManyWithWhereWithoutHsnInput[]
+  deleteMany?: Prisma.ProductMasterScalarWhereInput | Prisma.ProductMasterScalarWhereInput[]
+}
+
+export type ProductMasterUncheckedUpdateManyWithoutHsnNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput> | Prisma.ProductMasterCreateWithoutHsnInput[] | Prisma.ProductMasterUncheckedCreateWithoutHsnInput[]
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutHsnInput | Prisma.ProductMasterCreateOrConnectWithoutHsnInput[]
+  upsert?: Prisma.ProductMasterUpsertWithWhereUniqueWithoutHsnInput | Prisma.ProductMasterUpsertWithWhereUniqueWithoutHsnInput[]
+  createMany?: Prisma.ProductMasterCreateManyHsnInputEnvelope
+  set?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  disconnect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  delete?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  connect?: Prisma.ProductMasterWhereUniqueInput | Prisma.ProductMasterWhereUniqueInput[]
+  update?: Prisma.ProductMasterUpdateWithWhereUniqueWithoutHsnInput | Prisma.ProductMasterUpdateWithWhereUniqueWithoutHsnInput[]
+  updateMany?: Prisma.ProductMasterUpdateManyWithWhereWithoutHsnInput | Prisma.ProductMasterUpdateManyWithWhereWithoutHsnInput[]
+  deleteMany?: Prisma.ProductMasterScalarWhereInput | Prisma.ProductMasterScalarWhereInput[]
+}
+
+export type ProductMasterCreateNestedOneWithoutStockHistoriesInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedCreateWithoutStockHistoriesInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutStockHistoriesInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+}
+
+export type ProductMasterUpdateOneRequiredWithoutStockHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedCreateWithoutStockHistoriesInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutStockHistoriesInput
+  upsert?: Prisma.ProductMasterUpsertWithoutStockHistoriesInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductMasterUpdateToOneWithWhereWithoutStockHistoriesInput, Prisma.ProductMasterUpdateWithoutStockHistoriesInput>, Prisma.ProductMasterUncheckedUpdateWithoutStockHistoriesInput>
+}
+
 export type ProductMasterCreateWithoutVendorInput = {
   item_id: number
   rotation?: number
@@ -1395,7 +1608,7 @@ export type ProductMasterCreateWithoutVendorInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1408,8 +1621,15 @@ export type ProductMasterCreateWithoutVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutVendorInput = {
@@ -1438,7 +1658,8 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1451,6 +1672,12 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutVendorInput = {
@@ -1509,7 +1736,8 @@ export type ProductMasterScalarWhereInput = {
   edge_banding_color?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   finish?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   group?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
-  hsn_code?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
+  hsn_code?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
+  hsn_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   product_name?: Prisma.StringFilter<"ProductMaster"> | string
   procurement?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
   unit_of_measure?: Prisma.StringNullableFilter<"ProductMaster"> | string | null
@@ -1522,6 +1750,8 @@ export type ProductMasterScalarWhereInput = {
   updated_at?: Prisma.DateTimeFilter<"ProductMaster"> | Date | string
   updated_by?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   active?: Prisma.EnumProductActiveFlagFilter<"ProductMaster"> | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.DateTimeNullableFilter<"ProductMaster"> | Date | string | null
 }
 
 export type ProductMasterCreateWithoutCategoryInput = {
@@ -1547,7 +1777,7 @@ export type ProductMasterCreateWithoutCategoryInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1560,8 +1790,15 @@ export type ProductMasterCreateWithoutCategoryInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
   brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutCategoryInput = {
@@ -1590,7 +1827,8 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1603,6 +1841,12 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutCategoryInput = {
@@ -1654,7 +1898,7 @@ export type ProductMasterCreateWithoutBrandInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1667,8 +1911,15 @@ export type ProductMasterCreateWithoutBrandInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
   category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutBrandInput = {
@@ -1697,7 +1948,8 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1710,6 +1962,12 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutBrandInput = {
@@ -1738,6 +1996,951 @@ export type ProductMasterUpdateManyWithWhereWithoutBrandInput = {
   data: Prisma.XOR<Prisma.ProductMasterUpdateManyMutationInput, Prisma.ProductMasterUncheckedUpdateManyWithoutBrandInput>
 }
 
+export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  hsn_id?: number | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterCreateOrConnectWithoutPurchaseIntentItemsInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput>
+}
+
+export type ProductMasterUpsertWithoutPurchaseIntentItemsInput = {
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput>
+  where?: Prisma.ProductMasterWhereInput
+}
+
+export type ProductMasterUpdateToOneWithWhereWithoutPurchaseIntentItemsInput = {
+  where?: Prisma.ProductMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutPurchaseIntentItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput>
+}
+
+export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  hsn_id?: number | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterCreateOrConnectWithoutPurchaseOrderItemsInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput>
+}
+
+export type ProductMasterUpsertWithoutPurchaseOrderItemsInput = {
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput>
+  where?: Prisma.ProductMasterWhereInput
+}
+
+export type ProductMasterUpdateToOneWithWhereWithoutPurchaseOrderItemsInput = {
+  where?: Prisma.ProductMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutPurchaseOrderItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput>
+}
+
+export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterCreateWithoutGrnItemsInput = {
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  hsn_id?: number | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterCreateOrConnectWithoutGrnItemsInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedCreateWithoutGrnItemsInput>
+}
+
+export type ProductMasterUpsertWithoutGrnItemsInput = {
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutGrnItemsInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedCreateWithoutGrnItemsInput>
+  where?: Prisma.ProductMasterWhereInput
+}
+
+export type ProductMasterUpdateToOneWithWhereWithoutGrnItemsInput = {
+  where?: Prisma.ProductMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutGrnItemsInput, Prisma.ProductMasterUncheckedUpdateWithoutGrnItemsInput>
+}
+
+export type ProductMasterUpdateWithoutGrnItemsInput = {
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterCreateWithoutHsnInput = {
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterUncheckedCreateWithoutHsnInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterCreateOrConnectWithoutHsnInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput>
+}
+
+export type ProductMasterCreateManyHsnInputEnvelope = {
+  data: Prisma.ProductMasterCreateManyHsnInput | Prisma.ProductMasterCreateManyHsnInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProductMasterUpsertWithWhereUniqueWithoutHsnInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutHsnInput, Prisma.ProductMasterUncheckedUpdateWithoutHsnInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutHsnInput, Prisma.ProductMasterUncheckedCreateWithoutHsnInput>
+}
+
+export type ProductMasterUpdateWithWhereUniqueWithoutHsnInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutHsnInput, Prisma.ProductMasterUncheckedUpdateWithoutHsnInput>
+}
+
+export type ProductMasterUpdateManyWithWhereWithoutHsnInput = {
+  where: Prisma.ProductMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateManyMutationInput, Prisma.ProductMasterUncheckedUpdateManyWithoutHsnInput>
+}
+
+export type ProductMasterCreateWithoutStockHistoriesInput = {
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+}
+
+export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  hsn_id?: number | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterCreateOrConnectWithoutStockHistoriesInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedCreateWithoutStockHistoriesInput>
+}
+
+export type ProductMasterUpsertWithoutStockHistoriesInput = {
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedUpdateWithoutStockHistoriesInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedCreateWithoutStockHistoriesInput>
+  where?: Prisma.ProductMasterWhereInput
+}
+
+export type ProductMasterUpdateToOneWithWhereWithoutStockHistoriesInput = {
+  where?: Prisma.ProductMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutStockHistoriesInput, Prisma.ProductMasterUncheckedUpdateWithoutStockHistoriesInput>
+}
+
+export type ProductMasterUpdateWithoutStockHistoriesInput = {
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+}
+
 export type ProductMasterCreateManyVendorInput = {
   id?: number
   item_id: number
@@ -1764,7 +2967,8 @@ export type ProductMasterCreateManyVendorInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1777,6 +2981,8 @@ export type ProductMasterCreateManyVendorInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
 }
 
 export type ProductMasterUpdateWithoutVendorInput = {
@@ -1802,7 +3008,7 @@ export type ProductMasterUpdateWithoutVendorInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1815,8 +3021,15 @@ export type ProductMasterUpdateWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutVendorInput = {
@@ -1845,7 +3058,8 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1858,6 +3072,12 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1886,7 +3106,8 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1899,6 +3120,8 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductMasterCreateManyCategoryInput = {
@@ -1927,7 +3150,8 @@ export type ProductMasterCreateManyCategoryInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -1940,6 +3164,8 @@ export type ProductMasterCreateManyCategoryInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
 }
 
 export type ProductMasterUpdateWithoutCategoryInput = {
@@ -1965,7 +3191,7 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1978,8 +3204,15 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
   brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
@@ -2008,7 +3241,8 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2021,6 +3255,12 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
@@ -2049,7 +3289,8 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2062,6 +3303,8 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ProductMasterCreateManyBrandInput = {
@@ -2090,7 +3333,8 @@ export type ProductMasterCreateManyBrandInput = {
   edge_banding_color?: string | null
   finish?: string | null
   group?: string | null
-  hsn_code?: number | null
+  hsn_code?: string | null
+  hsn_id?: number | null
   product_name: string
   procurement?: string | null
   unit_of_measure?: string | null
@@ -2103,6 +3347,8 @@ export type ProductMasterCreateManyBrandInput = {
   updated_at?: Date | string
   updated_by?: number | null
   active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
 }
 
 export type ProductMasterUpdateWithoutBrandInput = {
@@ -2128,7 +3374,7 @@ export type ProductMasterUpdateWithoutBrandInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2141,8 +3387,15 @@ export type ProductMasterUpdateWithoutBrandInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
   category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutBrandInput = {
@@ -2171,7 +3424,8 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2184,6 +3438,12 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
@@ -2212,7 +3472,8 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  hsn_code?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   product_name?: Prisma.StringFieldUpdateOperationsInput | string
   procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2225,8 +3486,249 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+export type ProductMasterCreateManyHsnInput = {
+  id?: number
+  vendor_id: number
+  item_id: number
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+}
+
+export type ProductMasterUpdateWithoutHsnInput = {
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutHsnInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+
+/**
+ * Count Type ProductMasterCountOutputType
+ */
+
+export type ProductMasterCountOutputType = {
+  purchaseIntentItems: number
+  purchaseOrderItems: number
+  grnItems: number
+  stockHistories: number
+}
+
+export type ProductMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  purchaseIntentItems?: boolean | ProductMasterCountOutputTypeCountPurchaseIntentItemsArgs
+  purchaseOrderItems?: boolean | ProductMasterCountOutputTypeCountPurchaseOrderItemsArgs
+  grnItems?: boolean | ProductMasterCountOutputTypeCountGrnItemsArgs
+  stockHistories?: boolean | ProductMasterCountOutputTypeCountStockHistoriesArgs
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductMasterCountOutputType
+   */
+  select?: Prisma.ProductMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeCountPurchaseIntentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseIntentItemWhereInput
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeCountPurchaseOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderItemWhereInput
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeCountGrnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GRNItemWhereInput
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeCountStockHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductStockHistoryWhereInput
+}
 
 
 export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2257,6 +3759,7 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   finish?: boolean
   group?: boolean
   hsn_code?: boolean
+  hsn_id?: boolean
   product_name?: boolean
   procurement?: boolean
   unit_of_measure?: boolean
@@ -2269,9 +3772,17 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   updated_at?: boolean
   updated_by?: boolean
   active?: boolean
+  current_stock?: boolean
+  stock_updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  purchaseIntentItems?: boolean | Prisma.ProductMaster$purchaseIntentItemsArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.ProductMaster$purchaseOrderItemsArgs<ExtArgs>
+  grnItems?: boolean | Prisma.ProductMaster$grnItemsArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
+  stockHistories?: boolean | Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>
+  _count?: boolean | Prisma.ProductMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productMaster"]>
 
 export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2302,6 +3813,7 @@ export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   finish?: boolean
   group?: boolean
   hsn_code?: boolean
+  hsn_id?: boolean
   product_name?: boolean
   procurement?: boolean
   unit_of_measure?: boolean
@@ -2314,9 +3826,12 @@ export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   updated_at?: boolean
   updated_by?: boolean
   active?: boolean
+  current_stock?: boolean
+  stock_updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
 }, ExtArgs["result"]["productMaster"]>
 
 export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2347,6 +3862,7 @@ export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   finish?: boolean
   group?: boolean
   hsn_code?: boolean
+  hsn_id?: boolean
   product_name?: boolean
   procurement?: boolean
   unit_of_measure?: boolean
@@ -2359,9 +3875,12 @@ export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   updated_at?: boolean
   updated_by?: boolean
   active?: boolean
+  current_stock?: boolean
+  stock_updated_at?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
 }, ExtArgs["result"]["productMaster"]>
 
 export type ProductMasterSelectScalar = {
@@ -2392,6 +3911,7 @@ export type ProductMasterSelectScalar = {
   finish?: boolean
   group?: boolean
   hsn_code?: boolean
+  hsn_id?: boolean
   product_name?: boolean
   procurement?: boolean
   unit_of_measure?: boolean
@@ -2404,23 +3924,33 @@ export type ProductMasterSelectScalar = {
   updated_at?: boolean
   updated_by?: boolean
   active?: boolean
+  current_stock?: boolean
+  stock_updated_at?: boolean
 }
 
-export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active", ExtArgs["result"]["productMaster"]>
+export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "hsn_id" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "stock_updated_at", ExtArgs["result"]["productMaster"]>
 export type ProductMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  purchaseIntentItems?: boolean | Prisma.ProductMaster$purchaseIntentItemsArgs<ExtArgs>
+  purchaseOrderItems?: boolean | Prisma.ProductMaster$purchaseOrderItemsArgs<ExtArgs>
+  grnItems?: boolean | Prisma.ProductMaster$grnItemsArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
+  stockHistories?: boolean | Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>
+  _count?: boolean | Prisma.ProductMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
 }
 export type ProductMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
   category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  hsn?: boolean | Prisma.ProductMaster$hsnArgs<ExtArgs>
 }
 
 export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2429,6 +3959,11 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     brand: Prisma.$BrandMasterPayload<ExtArgs> | null
     category: Prisma.$ProjectCategoriesMasterPayload<ExtArgs>
+    purchaseIntentItems: Prisma.$PurchaseIntentItemPayload<ExtArgs>[]
+    purchaseOrderItems: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
+    grnItems: Prisma.$GRNItemPayload<ExtArgs>[]
+    hsn: Prisma.$HsnProductMappingPayload<ExtArgs> | null
+    stockHistories: Prisma.$ProductStockHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2457,7 +3992,8 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     edge_banding_color: string | null
     finish: string | null
     group: string | null
-    hsn_code: number | null
+    hsn_code: string | null
+    hsn_id: number | null
     product_name: string
     procurement: string | null
     unit_of_measure: string | null
@@ -2470,6 +4006,8 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     updated_at: Date
     updated_by: number | null
     active: $Enums.ProductActiveFlag
+    current_stock: runtime.Decimal
+    stock_updated_at: Date | null
   }, ExtArgs["result"]["productMaster"]>
   composites: {}
 }
@@ -2867,6 +4405,11 @@ export interface Prisma__ProductMasterClient<T, Null = never, ExtArgs extends ru
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   brand<T extends Prisma.ProductMaster$brandArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$brandArgs<ExtArgs>>): Prisma.Prisma__BrandMasterClient<runtime.Types.Result.GetResult<Prisma.$BrandMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  purchaseIntentItems<T extends Prisma.ProductMaster$purchaseIntentItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$purchaseIntentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrderItems<T extends Prisma.ProductMaster$purchaseOrderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$purchaseOrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  grnItems<T extends Prisma.ProductMaster$grnItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$grnItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hsn<T extends Prisma.ProductMaster$hsnArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$hsnArgs<ExtArgs>>): Prisma.Prisma__HsnProductMappingClient<runtime.Types.Result.GetResult<Prisma.$HsnProductMappingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  stockHistories<T extends Prisma.ProductMaster$stockHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductStockHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2922,7 +4465,8 @@ export interface ProductMasterFieldRefs {
   readonly edge_banding_color: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly finish: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly group: Prisma.FieldRef<"ProductMaster", 'String'>
-  readonly hsn_code: Prisma.FieldRef<"ProductMaster", 'Int'>
+  readonly hsn_code: Prisma.FieldRef<"ProductMaster", 'String'>
+  readonly hsn_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly product_name: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly procurement: Prisma.FieldRef<"ProductMaster", 'String'>
   readonly unit_of_measure: Prisma.FieldRef<"ProductMaster", 'String'>
@@ -2935,6 +4479,8 @@ export interface ProductMasterFieldRefs {
   readonly updated_at: Prisma.FieldRef<"ProductMaster", 'DateTime'>
   readonly updated_by: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly active: Prisma.FieldRef<"ProductMaster", 'ProductActiveFlag'>
+  readonly current_stock: Prisma.FieldRef<"ProductMaster", 'Decimal'>
+  readonly stock_updated_at: Prisma.FieldRef<"ProductMaster", 'DateTime'>
 }
     
 
@@ -3352,6 +4898,121 @@ export type ProductMaster$brandArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   include?: Prisma.BrandMasterInclude<ExtArgs> | null
   where?: Prisma.BrandMasterWhereInput
+}
+
+/**
+ * ProductMaster.purchaseIntentItems
+ */
+export type ProductMaster$purchaseIntentItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseIntentItem
+   */
+  select?: Prisma.PurchaseIntentItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseIntentItem
+   */
+  omit?: Prisma.PurchaseIntentItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseIntentItemInclude<ExtArgs> | null
+  where?: Prisma.PurchaseIntentItemWhereInput
+  orderBy?: Prisma.PurchaseIntentItemOrderByWithRelationInput | Prisma.PurchaseIntentItemOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseIntentItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseIntentItemScalarFieldEnum | Prisma.PurchaseIntentItemScalarFieldEnum[]
+}
+
+/**
+ * ProductMaster.purchaseOrderItems
+ */
+export type ProductMaster$purchaseOrderItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrderItem
+   */
+  select?: Prisma.PurchaseOrderItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrderItem
+   */
+  omit?: Prisma.PurchaseOrderItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderItemInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderItemWhereInput
+  orderBy?: Prisma.PurchaseOrderItemOrderByWithRelationInput | Prisma.PurchaseOrderItemOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderItemScalarFieldEnum | Prisma.PurchaseOrderItemScalarFieldEnum[]
+}
+
+/**
+ * ProductMaster.grnItems
+ */
+export type ProductMaster$grnItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GRNItem
+   */
+  select?: Prisma.GRNItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GRNItem
+   */
+  omit?: Prisma.GRNItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GRNItemInclude<ExtArgs> | null
+  where?: Prisma.GRNItemWhereInput
+  orderBy?: Prisma.GRNItemOrderByWithRelationInput | Prisma.GRNItemOrderByWithRelationInput[]
+  cursor?: Prisma.GRNItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GRNItemScalarFieldEnum | Prisma.GRNItemScalarFieldEnum[]
+}
+
+/**
+ * ProductMaster.hsn
+ */
+export type ProductMaster$hsnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HsnProductMapping
+   */
+  select?: Prisma.HsnProductMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HsnProductMapping
+   */
+  omit?: Prisma.HsnProductMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HsnProductMappingInclude<ExtArgs> | null
+  where?: Prisma.HsnProductMappingWhereInput
+}
+
+/**
+ * ProductMaster.stockHistories
+ */
+export type ProductMaster$stockHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductStockHistory
+   */
+  select?: Prisma.ProductStockHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductStockHistory
+   */
+  omit?: Prisma.ProductStockHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductStockHistoryInclude<ExtArgs> | null
+  where?: Prisma.ProductStockHistoryWhereInput
+  orderBy?: Prisma.ProductStockHistoryOrderByWithRelationInput | Prisma.ProductStockHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.ProductStockHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductStockHistoryScalarFieldEnum | Prisma.ProductStockHistoryScalarFieldEnum[]
 }
 
 /**

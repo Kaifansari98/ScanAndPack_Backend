@@ -23,6 +23,10 @@ model VendorMaster {
   IsAccountLocInEnabled               Boolean?                             @default(false)
   createdAt                           DateTime                             @default(now())
   updatedAt                           DateTime                             @updatedAt
+  state_id   Int?
+  
+
+
   accounts                            AccountMaster[]
   boxes                               BoxMaster[]
   CompanyVendorsMaster                CompanyVendorsMaster[]
@@ -103,6 +107,25 @@ model VendorMaster {
   projectCategoriesVendorMappings      ProjectCategoriesMasterVendorMapping[]
   brands   BrandMaster[]
 products ProductMaster[]
+purchaseIntents   PurchaseIntentMaster[]  @relation("PIVendor")
+purchaseOrders   PurchaseOrderMaster[]  @relation("POVendor")
+grns              GRNMaster[]          @relation("GRNVendor")
+debitCreditNotes  DebitCreditNote[]    @relation("DCNVendor")
+redeliveryRequests RedeliveryRequest[] @relation("RDVendor")
+hsnMappings  HsnProductMapping[]  @relation("HsnVendor")
+state      StateMaster? @relation("VendorState", fields: [state_id], references: [id], onDelete: SetNull)
+ stockHistories  ProductStockHistory[] @relation("StockHistoryVendor")
+
+
+paymentTerms PaymentTermMaster[]
+
+poPaymentSchedules POPaymentSchedule[]
+
+poPayments POPayment[]
+
+  @@index([state_id])
+
+
 }
 
 model VendorAddress {
@@ -236,6 +259,24 @@ model UserMaster {
   boxesFactoryOut                            BoxMaster[]                            @relation("BoxFactoryOutBy")
   boxesSiteIn                                BoxMaster[]                            @relation("BoxSiteInBy")
   mappingSiteIns                             CutListMachineMapping[]                @relation("MappingSiteInBy")
+  purchaseIntentsCreated    PurchaseIntentMaster[]    @relation("PICreatedBy")
+  purchaseIntentsUpdated    PurchaseIntentMaster[]    @relation("PIUpdatedBy")
+  purchaseIntentsApproved   PurchaseIntentMaster[]    @relation("PIApprovedBy")
+  purchaseIntentsRejected   PurchaseIntentMaster[]    @relation("PIRejectedBy")
+  purchaseIntentsDeleted    PurchaseIntentMaster[]    @relation("PIDeletedBy")
+  purchaseIntentStatusLogs  PurchaseIntentStatusLog[] @relation("PIStatusLogChangedBy")
+  purchaseOrdersCreated  PurchaseOrderMaster[]  @relation("POCreatedBy")
+  purchaseOrdersUpdated  PurchaseOrderMaster[]  @relation("POUpdatedBy")
+   grnsCreated       GRNMaster[]   @relation("GRNCreatedBy")
+ grnsUpdated       GRNMaster[]   @relation("GRNUpdatedBy")
+   grnsConfirmed     GRNMaster[]   @relation("GRNConfirmedBy")
+   dcnsCreated       DebitCreditNote[] @relation("DCNCreatedBy")
+   dcnsSettled       DebitCreditNote[] @relation("DCNSettledBy")
+redeliveriesCreated RedeliveryRequest[] @relation("RDCreatedBy")
+poItemsCreated PurchaseOrderItem[] @relation("POItemCreatedBy")
+poItemsUpdated PurchaseOrderItem[] @relation("POItemUpdatedBy")
+poItemsDeleted PurchaseOrderItem[] @relation("POItemDeletedBy")
+stockHistories  ProductStockHistory[] @relation("StockHistoryUser")
 }
 
 model UserDocument {
@@ -291,6 +332,8 @@ model ProjectMaster {
   is_grouping           Boolean                 @default(false)
   lead_id               Int?
   track_trace_status    String                  @default("Not Started")
+  track_started_at            DateTime?
+  track_completed_at          DateTime?
   boxes                 BoxMaster[]
   CutList               CutList[]
   cutListMachineMapping CutListMachineMapping[]
@@ -1265,8 +1308,26 @@ model CompanyVendorsMaster {
   createdBy        UserMaster          @relation("CompanyVendorCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   deletedBy        UserMaster?         @relation("CompanyVendorDeletedBy", fields: [deleted_by], references: [id])
   updatedBy        UserMaster          @relation("CompanyVendorUpdatedBy", fields: [updated_by], references: [id])
+  state_id   Int?
+  default_payment_term_id Int?
+  state      StateMaster? @relation("CompanyVendorState", fields: [state_id], references: [id], onDelete: SetNull)
+
   vendor           VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   orderLoginLinks  OrderLoginDetails[]
+  purchaseIntentVendorMappings  PurchaseIntentItemVendorMapping[]  @relation("PIItemVendor")
+  purchaseOrders   PurchaseOrderMaster[]  @relation("POSupplier")
+  grns              GRNMaster[]          @relation("GRNSupplier")
+debitCreditNotes  DebitCreditNote[]    @relation("DCNSupplier")
+redeliveryRequests RedeliveryRequest[] @relation("RDSupplier")
+
+
+defaultPaymentTerm PaymentTermMaster? @relation("SupplierDefaultPaymentTerm", fields: [default_payment_term_id], references: [id], onDelete: SetNull)
+
+paymentTerms PaymentTermMaster[] @relation("SupplierPaymentTerms")
+
+@@index([default_payment_term_id])
+
+ @@index([state_id])
 }
 
 model OrderLoginDetails {
@@ -1890,6 +1951,9 @@ model StateMaster {
   region_id Int
   cities    CityMaster[]
   region    RegionMaster @relation(fields: [region_id], references: [id])
+  vendors            VendorMaster[]          @relation("VendorState")
+  companyVendors     CompanyVendorsMaster[]  @relation("CompanyVendorState")
+
 }
 
 model CityMaster {
@@ -2078,6 +2142,7 @@ model ProjectCategoriesMaster {
   vendor                               VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   projectCategoriesMasterVendorMapping ProjectCategoriesMasterVendorMapping[]
   products ProductMaster[]
+  purchaseIntents   PurchaseIntentMaster[]  @relation("PICategory")
 }
 
 model ProjectCategoriesMasterVendorMapping {
@@ -2141,7 +2206,8 @@ model ProductMaster {
   edge_banding_color    String?
   finish                String?
   group                 String?
-  hsn_code              Int?
+  hsn_code              String?
+  hsn_id                Int?
   product_name          String
   procurement           String?
   unit_of_measure       String?
@@ -2154,15 +2220,664 @@ model ProductMaster {
   updated_at            DateTime    @updatedAt
   updated_by            Int?
   active                ProductActiveFlag  @default(Yes)
+  current_stock     Decimal   @default(0) @db.Decimal(12, 2) 
+  stock_updated_at  DateTime?
 
   vendor   VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   brand                 BrandMaster?              @relation(fields: [brand_id], references: [id], onDelete: SetNull)
   category ProjectCategoriesMaster  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  purchaseIntentItems  PurchaseIntentItem[]  @relation("PIItemProduct")
+  purchaseOrderItems  PurchaseOrderItem[]  @relation("POItemProduct")
+   grnItems          GRNItem[]  @relation("GRNItemProduct")
+   hsn       HsnProductMapping? @relation("ProductHsnMapping", fields: [hsn_id], references: [id], onDelete: SetNull)
+
+   stockHistories  ProductStockHistory[] @relation("StockHistoryProduct")
+
+   
+   
 
   @@index([vendor_id])
   @@index([brand_id])
   @@index([category_id])
   @@index([item_id])
+   @@index([hsn_id])
+}
+
+model PurchaseIntentMaster {
+  id               Int                      @id @default(autoincrement())
+  vendor_id        Int
+  intent_no        String                   @unique                   // PI-000001
+  category_id      Int
+  status           PurchaseIntentStatus     @default(Draft)
+  priority         PurchaseIntentPriority   @default(Medium)
+  remarks          String?
+  created_by       Int
+  updated_by       Int?
+  approved_by      Int?
+  approved_at      DateTime?
+  rejected_by      Int?
+  rejected_at      DateTime?
+  rejection_reason String?
+  is_deleted       Boolean                  @default(false)
+  deleted_at       DateTime?
+  deleted_by       Int?
+  created_at       DateTime                 @default(now())
+  updated_at       DateTime                 @updatedAt
+  amount        Decimal? @db.Decimal(18,2)
+  tax_amount    Decimal? @db.Decimal(18,2)
+  total_amount  Decimal? @db.Decimal(18,2)
+
+
+  // Relations
+  vendor           VendorMaster             @relation("PIVendor",        fields: [vendor_id],   references: [id], onDelete: Cascade)
+  category         ProjectCategoriesMaster  @relation("PICategory",      fields: [category_id], references: [id])
+  createdBy        UserMaster               @relation("PICreatedBy",     fields: [created_by],  references: [id])
+  updatedBy        UserMaster?              @relation("PIUpdatedBy",     fields: [updated_by],  references: [id])
+  approvedBy       UserMaster?              @relation("PIApprovedBy",    fields: [approved_by], references: [id])
+  rejectedBy       UserMaster?              @relation("PIRejectedBy",    fields: [rejected_by], references: [id])
+  deletedBy        UserMaster?              @relation("PIDeletedBy",     fields: [deleted_by],  references: [id])
+
+  items            PurchaseIntentItem[]
+  statusLogs       PurchaseIntentStatusLog[]
+  purchaseOrders   PurchaseOrderMaster[]  @relation("POIntent")
+
+  @@index([vendor_id])
+  @@index([category_id])
+  @@index([status])
+  @@index([created_by])
+}
+
+model PurchaseIntentItem {
+  id                  Int                      @id @default(autoincrement())
+  purchase_intent_id  Int
+  product_id          Int
+  uom                 String?
+  remarks             String?
+  created_at          DateTime                 @default(now())
+  updated_at          DateTime                 @updatedAt
+
+  purchaseIntent      PurchaseIntentMaster     @relation(fields: [purchase_intent_id], references: [id], onDelete: Cascade)
+  product             ProductMaster            @relation("PIItemProduct", fields: [product_id], references: [id])
+
+  vendorMappings      PurchaseIntentItemVendorMapping[]
+
+  @@index([purchase_intent_id])
+  @@index([product_id])
+}
+
+model PurchaseIntentItemVendorMapping {
+  id                      Int                  @id @default(autoincrement())
+  purchase_intent_item_id Int
+  company_vendor_id       Int
+  required_qty            Decimal              @db.Decimal(12, 2)   // ← moved here
+  required_by_date        DateTime?                                  // ← moved here
+  estimated_price         Decimal?             @db.Decimal(12, 2)
+  remarks                 String?
+  is_selected             Boolean              @default(false)
+  created_at              DateTime             @default(now())
+  updated_at              DateTime             @updatedAt
+
+    mrp               Decimal?  @db.Decimal(12, 2)   // Max Retail Price
+  discount_pct      Decimal?  @db.Decimal(5, 2)    // % discount on MRP
+   rate              Decimal?  @db.Decimal(12, 2)   // = MRP * (1 - discount/100), editable
+   tax_pct           Decimal?  @db.Decimal(5, 2)    // total GST % (pulled from HsnProductMapping)
+   cgst_pct          Decimal?  @db.Decimal(5, 2)
+   sgst_pct          Decimal?  @db.Decimal(5, 2)
+   igst_pct          Decimal?  @db.Decimal(5, 2)
+   tax_amount        Decimal?  @db.Decimal(12, 2)   // = rate * qty * tax_pct / 100
+   amount            Decimal?  @db.Decimal(12, 2)   // = rate * qty (before tax)
+   total_amount      Decimal?  @db.Decimal(12, 2)   // = amount + tax_amount
+  payment_term_id Int?
+
+
+  purchaseIntentItem      PurchaseIntentItem   @relation(fields: [purchase_intent_item_id], references: [id], onDelete: Cascade)
+  companyVendor           CompanyVendorsMaster @relation("PIItemVendor", fields: [company_vendor_id], references: [id])
+purchaseOrderItems  PurchaseOrderItem[]  @relation("POFromPI")
+paymentTerm PaymentTermMaster? @relation("PIVendorPaymentTerm", fields: [payment_term_id], references: [id], onDelete: SetNull)
+
+@@index([payment_term_id])
+  @@index([purchase_intent_item_id])
+  @@index([company_vendor_id])
+}
+
+model PurchaseIntentStatusLog {
+  id                  Int                    @id @default(autoincrement())
+  purchase_intent_id  Int
+  from_status         PurchaseIntentStatus?
+  to_status           PurchaseIntentStatus
+  changed_by          Int
+  remarks             String?
+  created_at          DateTime               @default(now())
+
+  purchaseIntent      PurchaseIntentMaster   @relation(fields: [purchase_intent_id], references: [id], onDelete: Cascade)
+  changedBy           UserMaster             @relation("PIStatusLogChangedBy", fields: [changed_by], references: [id])
+
+  @@index([purchase_intent_id])
+}
+
+model PurchaseOrderMaster {
+  id                   Int                   @id @default(autoincrement())
+  vendor_id            Int
+  po_no                String                @unique          // PO-000001
+  purchase_intent_id   Int
+  company_vendor_id    Int                                    // supplier this PO is for
+  status               PurchaseOrderStatus   @default(Draft)
+  remarks              String?
+  expected_delivery_date DateTime?
+  created_by           Int
+  updated_by           Int?
+  is_deleted           Boolean               @default(false)
+  deleted_at           DateTime?
+  deleted_by           Int?                                       // who cancelled/deleted
+  created_at           DateTime              @default(now())
+  updated_at           DateTime              @updatedAt
+  amount                 Decimal?  @db.Decimal(18, 2)
+  tax_amount             Decimal?  @db.Decimal(18, 2)
+  total_amount           Decimal?  @db.Decimal(18, 2)
+  payment_term_id     Int?
+
+
+  vendor               VendorMaster          @relation("POVendor",      fields: [vendor_id],          references: [id], onDelete: Cascade)
+  purchaseIntent       PurchaseIntentMaster  @relation("POIntent",      fields: [purchase_intent_id], references: [id])
+  companyVendor        CompanyVendorsMaster  @relation("POSupplier",    fields: [company_vendor_id],  references: [id])
+  createdBy            UserMaster            @relation("POCreatedBy",   fields: [created_by],         references: [id])
+  updatedBy            UserMaster?           @relation("POUpdatedBy",   fields: [updated_by],         references: [id])
+
+  items                PurchaseOrderItem[]
+  paymentTerm PaymentTermMaster? @relation(fields: [payment_term_id], references: [id], onDelete: SetNull)
+
+paymentSchedules POPaymentSchedule[]
+
+@@index([payment_term_id])
+
+  @@index([vendor_id])
+  @@index([purchase_intent_id])
+  @@index([company_vendor_id])
+  @@index([status])
+  grns              GRNMaster[]   @relation("GRNPurchaseOrder")
+}
+
+
+model PurchaseOrderItem {
+  id                       Int                   @id @default(autoincrement())
+  purchase_order_id        Int
+  product_id               Int
+  pi_item_vendor_mapping_id Int?                               // links back to the PI mapping row
+  ordered_qty              Decimal               @db.Decimal(12, 2)
+  received_qty             Decimal               @default(0)  @db.Decimal(12, 2)
+  unit_price               Decimal?              @db.Decimal(12, 2)
+  uom                      String?
+  expected_delivery_date   DateTime?
+  remarks                  String?
+  created_at               DateTime              @default(now())
+  updated_at               DateTime              @updatedAt
+  created_by             Int?
+  updated_by             Int?
+
+  mrp               Decimal?  @db.Decimal(12, 2)
+   discount_pct      Decimal?  @db.Decimal(5, 2)
+   rate              Decimal?  @db.Decimal(12, 2)   // editable in PO
+   tax_pct           Decimal?  @db.Decimal(5, 2)
+   cgst_pct          Decimal?  @db.Decimal(5, 2)
+   sgst_pct          Decimal?  @db.Decimal(5, 2)
+   igst_pct          Decimal?  @db.Decimal(5, 2)
+   tax_amount        Decimal?  @db.Decimal(12, 2)
+   amount            Decimal?  @db.Decimal(12, 2)   // rate * ordered_qty
+   total_amount      Decimal?  @db.Decimal(12, 2)   // amount + tax_amount
+   is_deleted Boolean @default(false)
+deleted_at DateTime?
+deleted_by Int?
+
+  purchaseOrder            PurchaseOrderMaster   @relation(fields: [purchase_order_id], references: [id], onDelete: Cascade)
+  product                  ProductMaster         @relation("POItemProduct", fields: [product_id], references: [id])
+  piVendorMapping          PurchaseIntentItemVendorMapping? @relation("POFromPI", fields: [pi_item_vendor_mapping_id], references: [id])
+  createdBy UserMaster? @relation("POItemCreatedBy", fields: [created_by], references: [id], onDelete: SetNull)
+updatedBy UserMaster? @relation("POItemUpdatedBy", fields: [updated_by], references: [id], onDelete: SetNull)
+deletedBy UserMaster? @relation("POItemDeletedBy", fields: [deleted_by], references: [id], onDelete: SetNull)
+
+  @@index([purchase_order_id])
+  @@index([product_id])
+  grnItems          GRNItem[]     @relation("GRNFromPOItem")
+}
+
+
+model GRNMaster {
+  id                   Int          @id @default(autoincrement())
+  vendor_id            Int
+  grn_no               String       @unique               // GRN-000001
+  purchase_order_id    Int
+  company_vendor_id    Int
+  status               GRNStatus    @default(Draft)
+  received_date        DateTime
+  vehicle_no           String?
+  gate_entry_no        String?
+  invoice_no           String?
+  invoice_date         DateTime?
+  invoice_amount       Decimal?     @db.Decimal(12, 2)
+  remarks              String?
+  created_by           Int
+  updated_by           Int?
+  confirmed_by         Int?
+  confirmed_at         DateTime?
+  created_at           DateTime     @default(now())
+  updated_at           DateTime     @updatedAt
+  subtotal_amount        Decimal? @db.Decimal(18,2)
+
+cgst_amount            Decimal? @default(0) @db.Decimal(18,2)
+sgst_amount            Decimal? @default(0) @db.Decimal(18,2)
+igst_amount            Decimal? @default(0) @db.Decimal(18,2)
+cess_amount            Decimal? @default(0) @db.Decimal(18,2)
+
+discount_amount        Decimal? @default(0) @db.Decimal(18,2)
+packing_amount         Decimal? @default(0) @db.Decimal(18,2)
+freight_amount         Decimal? @default(0) @db.Decimal(18,2)
+other_charges_amount   Decimal? @default(0) @db.Decimal(18,2)
+
+roundoff_amount        Decimal? @default(0) @db.Decimal(18,2)
+
+taxable_amount         Decimal? @db.Decimal(18,2)
+total_amount           Decimal? @db.Decimal(18,2)
+eway_bill_no           String?
+transporter_name       String?
+lr_no                  String?
+lr_date                DateTime?
+
+  vendor               VendorMaster          @relation("GRNVendor",       fields: [vendor_id],          references: [id], onDelete: Cascade)
+  purchaseOrder        PurchaseOrderMaster   @relation("GRNPurchaseOrder", fields: [purchase_order_id],  references: [id])
+  companyVendor        CompanyVendorsMaster  @relation("GRNSupplier",      fields: [company_vendor_id],  references: [id])
+  createdBy            UserMaster            @relation("GRNCreatedBy",     fields: [created_by],         references: [id])
+  updatedBy            UserMaster?           @relation("GRNUpdatedBy",     fields: [updated_by],         references: [id])
+  confirmedBy          UserMaster?           @relation("GRNConfirmedBy",   fields: [confirmed_by],       references: [id])
+
+  items                GRNItem[]
+  debitCreditNotes     DebitCreditNote[]
+
+  @@index([vendor_id])
+  @@index([purchase_order_id])
+  @@index([company_vendor_id])
+  @@index([grn_no])
+}
+
+
+model GRNItem {
+  id                   Int           @id @default(autoincrement())
+  grn_id               Int
+  po_item_id           Int                                    // links to PurchaseOrderItem
+  product_id           Int
+  received_qty         Decimal       @db.Decimal(12, 2)
+  accepted_qty         Decimal       @db.Decimal(12, 2)
+  rejected_qty         Decimal       @default(0)   @db.Decimal(12, 2)
+  unit_price           Decimal?      @db.Decimal(12, 2)
+  uom                  String?
+  status               GRNItemStatus @default(Accepted)
+  rejection_reason     String?        // why goods were rejected
+  created_at           DateTime      @default(now())
+  updated_at           DateTime      @updatedAt
+     mrp               Decimal?  @db.Decimal(12, 2)
+   discount_pct      Decimal?  @db.Decimal(5, 2)
+   rate              Decimal?  @db.Decimal(12, 2)
+   tax_pct           Decimal?  @db.Decimal(5, 2)
+   cgst_pct          Decimal?  @db.Decimal(5, 2)
+   sgst_pct          Decimal?  @db.Decimal(5, 2)
+   igst_pct          Decimal?  @db.Decimal(5, 2)
+   tax_amount        Decimal?  @db.Decimal(12, 2)   // tax on accepted qty
+   amount            Decimal?  @db.Decimal(12, 2)   // rate * accepted_qty
+   total_amount      Decimal?  @db.Decimal(12, 2)   // amount + tax_amount
+   hsn_code               String?
+gst_percentage         Decimal? @db.Decimal(5,2)
+
+taxable_amount         Decimal? @db.Decimal(18,2)
+
+cgst_percentage        Decimal? @db.Decimal(5,2)
+sgst_percentage        Decimal? @db.Decimal(5,2)
+igst_percentage        Decimal? @db.Decimal(5,2)
+
+cgst_amount            Decimal? @default(0) @db.Decimal(18,2)
+sgst_amount            Decimal? @default(0) @db.Decimal(18,2)
+igst_amount            Decimal? @default(0) @db.Decimal(18,2)
+
+discount_percentage    Decimal? @default(0) @db.Decimal(5,2)
+discount_amount        Decimal? @default(0) @db.Decimal(18,2)
+
+line_total             Decimal? @db.Decimal(18,2)
+
+  grn                  GRNMaster           @relation(fields: [grn_id],        references: [id], onDelete: Cascade)
+  poItem               PurchaseOrderItem   @relation("GRNFromPOItem",   fields: [po_item_id],  references: [id])
+  product              ProductMaster       @relation("GRNItemProduct",  fields: [product_id],  references: [id])
+
+  redeliveryRequests   RedeliveryRequest[]
+
+  @@index([grn_id])
+  @@index([po_item_id])
+  @@index([product_id])
+}
+
+
+model DebitCreditNote {
+  id                   Int                    @id @default(autoincrement())
+  vendor_id            Int
+  note_no              String                 @unique          // DCN-000001
+  grn_id               Int
+  company_vendor_id    Int
+  type                 DebitCreditNoteType
+  status               DebitCreditNoteStatus  @default(Open)
+  amount               Decimal                @db.Decimal(12, 2)
+  reason               String
+  remarks              String?
+  settled_at           DateTime?
+  settled_by           Int?
+  created_by           Int
+  created_at           DateTime               @default(now())
+  updated_at           DateTime               @updatedAt
+
+  vendor               VendorMaster          @relation("DCNVendor",   fields: [vendor_id],         references: [id], onDelete: Cascade)
+  grn                  GRNMaster             @relation(fields: [grn_id],              references: [id])
+  companyVendor        CompanyVendorsMaster  @relation("DCNSupplier", fields: [company_vendor_id],  references: [id])
+  createdBy            UserMaster            @relation("DCNCreatedBy",fields: [created_by],          references: [id])
+  settledBy            UserMaster?           @relation("DCNSettledBy",fields: [settled_by],          references: [id])
+
+  @@index([vendor_id])
+  @@index([grn_id])
+  @@index([company_vendor_id])
+}
+
+
+model RedeliveryRequest {
+  id                   Int               @id @default(autoincrement())
+  vendor_id            Int
+  grn_item_id          Int
+  company_vendor_id    Int
+  requested_qty        Decimal           @db.Decimal(12, 2)
+  expected_date        DateTime?
+  received_date        DateTime?
+  status               RedeliveryStatus  @default(Requested)
+  remarks              String?
+  created_by           Int
+  created_at           DateTime          @default(now())
+  updated_at           DateTime          @updatedAt
+
+  vendor               VendorMaster          @relation("RDVendor",    fields: [vendor_id],         references: [id], onDelete: Cascade)
+  grnItem              GRNItem               @relation(fields: [grn_item_id],        references: [id])
+  companyVendor        CompanyVendorsMaster  @relation("RDSupplier",  fields: [company_vendor_id],  references: [id])
+  createdBy            UserMaster            @relation("RDCreatedBy", fields: [created_by],          references: [id])
+
+  @@index([vendor_id])
+  @@index([grn_item_id])
+}
+
+model HsnProductMapping {
+  id             Int      @id @default(autoincrement())
+  vendor_id      Int
+  hsn_code       String   // e.g. "94036000"
+  description    String?
+  cgst_rate      Decimal  @default(0) @db.Decimal(5, 2)   // e.g. 9.00
+  sgst_rate      Decimal  @default(0) @db.Decimal(5, 2)   // e.g. 9.00
+  igst_rate      Decimal  @default(0) @db.Decimal(5, 2)   // e.g. 18.00
+  cess_rate      Decimal  @default(0) @db.Decimal(5, 2)
+  effective_from DateTime @default(now())
+  is_active      Boolean  @default(true)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  vendor         VendorMaster @relation("HsnVendor", fields: [vendor_id], references: [id], onDelete: Cascade)
+  products  ProductMaster[] @relation("ProductHsnMapping")
+
+
+  @@unique([vendor_id, hsn_code])
+  @@index([vendor_id])
+  @@index([hsn_code])
+}
+
+model ProductStockHistory {
+  id              Int      @id @default(autoincrement())
+  vendor_id       Int
+  product_id      Int
+  old_stock       Decimal  @db.Decimal(12, 2)
+  new_stock       Decimal  @db.Decimal(12, 2)
+  change          Decimal  @db.Decimal(12, 2)   // new - old (can be negative)
+  source          StockChangeSource              // who/what changed it
+  changed_by      Int?                           // user who uploaded
+  upload_batch_id String?                        // groups rows from same upload
+  remarks         String?
+  created_at      DateTime @default(now())
+
+  vendor   VendorMaster  @relation("StockHistoryVendor",  fields: [vendor_id],  references: [id], onDelete: Cascade)
+  product  ProductMaster @relation("StockHistoryProduct", fields: [product_id], references: [id], onDelete: Cascade)
+  changedBy UserMaster?  @relation("StockHistoryUser",    fields: [changed_by], references: [id])
+
+  @@index([vendor_id])
+  @@index([product_id])
+  @@index([upload_batch_id])
+  @@index([created_at])
+}
+
+
+model PaymentTermMaster {
+  id                Int      @id @default(autoincrement())
+
+  vendor_id         Int
+  company_vendor_id Int?
+
+  term_name         String
+  description       String?
+
+  is_active         Boolean  @default(true)
+
+  created_by        Int?
+  updated_by        Int?
+
+  created_at        DateTime @default(now())
+  updated_at        DateTime @updatedAt
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  companyVendor CompanyVendorsMaster? @relation("SupplierPaymentTerms", fields: [company_vendor_id], references: [id], onDelete: Cascade)
+
+  defaultForSuppliers CompanyVendorsMaster[] @relation("SupplierDefaultPaymentTerm")
+
+  stages PaymentTermStage[]
+
+  purchaseOrders PurchaseOrderMaster[]
+
+  piVendorMappings PurchaseIntentItemVendorMapping[] @relation("PIVendorPaymentTerm")
+
+  @@index([vendor_id])
+  @@index([company_vendor_id])
+}
+
+model PaymentTermStage {
+  id                      Int       @id @default(autoincrement())
+
+  payment_term_id         Int
+
+  stage_no                Int
+
+  stage_name              String
+
+  trigger_type            PaymentTriggerType
+
+  percentage              Decimal?  @db.Decimal(5,2)
+
+  fixed_amount            Decimal?  @db.Decimal(12,2)
+
+  due_after_days          Int?
+
+  specific_date           DateTime?
+
+  requires_approval       Boolean   @default(false)
+
+  remarks                 String?
+
+  created_at              DateTime  @default(now())
+  updated_at              DateTime  @updatedAt
+
+  paymentTerm             PaymentTermMaster @relation(fields: [payment_term_id], references: [id], onDelete: Cascade)
+
+  @@index([payment_term_id])
+}
+
+model POPaymentSchedule {
+  id                    Int      @id @default(autoincrement())
+
+  vendor_id             Int
+
+  purchase_order_id     Int
+
+  stage_no              Int
+
+  stage_name            String
+
+  trigger_type          PaymentTriggerType
+
+  percentage            Decimal? @db.Decimal(5,2)
+
+  scheduled_amount      Decimal? @db.Decimal(12,2)
+
+  paid_amount           Decimal? @default(0) @db.Decimal(12,2)
+
+  pending_amount        Decimal? @default(0) @db.Decimal(12,2)
+
+  due_date              DateTime?
+
+  status                PaymentScheduleStatus @default(Pending)
+
+  remarks               String?
+
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+
+  vendor                VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  purchaseOrder         PurchaseOrderMaster @relation(fields: [purchase_order_id], references: [id], onDelete: Cascade)
+
+  payments              POPayment[]
+
+  @@index([vendor_id])
+  @@index([purchase_order_id])
+}
+
+
+model POPayment {
+  id                     Int      @id @default(autoincrement())
+
+  vendor_id              Int
+  po_payment_schedule_id Int
+
+  payment_date           DateTime
+
+  amount                 Decimal  @db.Decimal(12, 2)
+
+  payment_mode           PaymentMode
+
+  reference_no           String?
+
+  remarks                String?
+
+  created_by             Int?
+
+  created_at             DateTime @default(now())
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  paymentSchedule POPaymentSchedule @relation(fields: [po_payment_schedule_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([po_payment_schedule_id])
+}
+
+enum PaymentMode {
+  Cash
+  BankTransfer
+  Cheque
+  UPI
+  RTGS
+  NEFT
+}
+
+enum PaymentScheduleStatus {
+  Pending
+  PartiallyPaid
+  Paid
+  Overdue
+  Cancelled
+}
+
+
+
+
+enum PaymentTriggerType {
+  ADVANCE
+  ON_PO_APPROVAL
+  ON_DISPATCH
+  ON_GRN
+  ON_INSTALLATION
+  ON_DELIVERY
+  AFTER_INVOICE_DAYS
+  SPECIFIC_DATE
+  CUSTOM
+}
+
+enum StockChangeSource {
+  GRNConfirmation    // auto on GRN confirm
+  ExcelUpload        // manual upload
+  ManualAdjustment   // future
+}
+
+
+enum GRNStatus {
+  Draft
+  Confirmed
+  Closed
+}
+
+enum GRNItemStatus {
+  Accepted
+  PartiallyAccepted
+  Rejected
+}
+
+enum DebitCreditNoteType {
+  DebitNote    // we debit the supplier (price reduction / refund owed to us)
+  CreditNote   // we credit the supplier (return goods)
+}
+
+enum DebitCreditNoteStatus {
+  Open
+  Settled
+  Cancelled
+}
+
+enum RedeliveryStatus {
+  Requested
+  Scheduled
+  Received
+  Cancelled
+}
+
+enum PurchaseOrderStatus {
+  Draft
+  Approved
+  PartiallyReceived
+  Received
+  Cancelled
+}
+
+
+
+enum PurchaseIntentStatus {
+  Draft
+  PendingApproval
+  Approved
+  Rejected
+  ConvertedToPO
+  Cancelled
+}
+
+enum PurchaseIntentPriority {
+  Low
+  Medium
+  High
+  Urgent
 }
 
 enum ProductActiveFlag {

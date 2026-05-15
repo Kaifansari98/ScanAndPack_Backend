@@ -418,9 +418,7 @@ export const updateScannedItem_old = async (payload: TrackTracePayload, is_check
         });
 
         console.log("currentMapping.project.track_trace_status", currentMapping.project.track_trace_status);
-        if (currentMapping.project.track_trace_status == "Not Started") {
-          await updateProjectStatus(currentMapping.project_id);
-        }
+        await updateProjectStatus(currentMapping.project_id,currentMapping.project.track_trace_status);        
 
         return validationResponse(1, 'Scan done');
       }
@@ -762,9 +760,8 @@ export const updateScannedItem = async (
           }
         }
 
-        if (currentMapping.project.track_trace_status == "Not Started") {
-          await updateProjectStatus(currentMapping.project_id);
-        }
+        await updateProjectStatus(currentMapping.project_id,currentMapping.project.track_trace_status);
+
 
         return validationResponse(1, 'Scan done');
       }
@@ -838,26 +835,78 @@ export const check_defect = async (payload: TrackTracePayload) => {
   }
 };
 
-export const updateProjectStatus = async (project_id: Number) => {
 
 
+export const updateProjectStatus = async (
+  project_id: number,
+  current_status: string
+) => {
   try {
-    const updatedProject = await prisma.projectMaster.update({
-      where: {
-        id: Number(project_id),
-      },
-      data: {
-        track_trace_status: "Started"
-      },
-    });
+    const projectId = Number(project_id);
 
-    console.log("Updated project:", updatedProject);
-    return updatedProject;
+    if (current_status === "Not Started") {
+      return await prisma.projectMaster.update({
+        where: {
+          id: projectId,
+        },
+        data: {
+          track_trace_status: "Started",
+          track_started_at: new Date(),
+        },
+      });
+    }
+
+    if (current_status === "Started") {
+      const pendingCount = await getPendingCutListMachineMappings(projectId);
+
+      if (pendingCount === 0) {
+        return await prisma.projectMaster.update({
+          where: {
+            id: projectId,
+          },
+          data: {
+            track_trace_status: "Completed",
+            track_completed_at: new Date(),
+          },
+        });
+      }
+
+      return await prisma.projectMaster.findUnique({
+        where: {
+          id: projectId,
+        },
+      });
+    }
+   
   } catch (error) {
     console.error("Error updating project:", error);
     throw error;
   }
 };
+
+export const getPendingCutListMachineMappings = async (
+  project_id: number
+) => {
+  try {
+    const projectId = Number(project_id);
+
+    const count = await prisma.cutListMachineMapping.count({
+      where: {
+        project_id: projectId,
+        actual_in_at: null,
+      },
+    });
+
+    return count;
+  } catch (error) {
+    console.error("Error fetching pending machine mappings:", error);
+    throw error;
+  }
+};
+
+
+
+
 
 
 
@@ -4672,362 +4721,3 @@ export const getResolvedDefectsService = async (vendor_id: number, page: number)
 };
 
 
-const CADBID_PRODUCT_API_URL =
-  process.env.CADBID_URL + "/api/product/get-pt";
-
-const PAGE_LIMIT = 100;
-
-export const syncProductsFromExternalService = async (vendor_id: number) => {
-  try {
-    // ─────────────────────────────────────────────
-    // 1) Check token
-    // ─────────────────────────────────────────────
-    const tokenRecord = await prisma.externalPlatformToken.findFirst({
-      where: {
-        vendor_id,
-        external_platform_id: CADBID_PLATFORM_ID,
-        active: "Yes",
-      },
-      select: {
-        token: true,
-      },
-    });
-
-    if (!tokenRecord) {
-      return validationResponse(
-        0,
-        "No active token found for this vendor. Please connect CadBid first."
-      );
-    }
-
-
-
-    
-
-    // ─────────────────────────────────────────────
-    // 2) Fetch all pages
-    // ─────────────────────────────────────────────
-    let allProducts: any[] = [];
-    let page = 1;
-    let totalCount = 0;
-    let totalPages = 1;
-
-    try {
-      while (page <= totalPages) {
-        console.log(`Fetching products page ${page}/${totalPages}`);
-
-        const response = await axios.get(CADBID_PRODUCT_API_URL, {
-          params: {
-            page,
-            limit: PAGE_LIMIT,
-          },
-          headers: {
-            Authorization: `Bearer ${tokenRecord.token}`,
-          },
-          timeout: 30000,
-        });
-
-        const products = Array.isArray(response.data?.products)
-          ? response.data.products
-          : [];
-
-        totalCount = Number(response.data?.totalCount || 0);
-        totalPages = Math.ceil(totalCount / PAGE_LIMIT);
-
-        allProducts.push(...products);
-        page++;
-      }
-    } catch (apiErr: any) {
-      console.error(
-        "CadBid Product API Error:",
-        apiErr?.response?.data ?? apiErr.message
-      );
-
-      return validationResponse(
-        0,
-        "Failed to fetch products from CadBid."
-      );
-    }
-
-     try {
-      await prisma.apiRequestLog.create({
-        data: {
-          endpoint: "syncProductsFromExternalService",
-          vendor_token: tokenRecord.token,
-          vendor_id: vendor_id,
-          payload: JSON.stringify(allProducts) as any,
-          success: false,
-          response: '',
-          error: null,
-          project_id: 0,
-        }
-      });
-    } catch (logError) {
-      console.error("Failed to write api log:", logError);
-    }
-
-    if (!allProducts.length) {
-      return validationResponse(0, "No products returned from CadBid");
-    }
-
-    console.log("Total Products:", allProducts.length);
-
-
-     const invalidProducts = allProducts.filter(
-      (p) =>
-        !p?.nItemId ||
-        p?.nItemId === 0 
-        ||
-        !p?.sCode ||
-        !String(p.sCode).trim()
-    );
-
-    if (invalidProducts.length > 0) {
-      console.error(
-        "Product validation failed:",
-        invalidProducts.slice(0, 20)
-      );
-
-      return validationResponse(
-        0,
-        `Validation failed. ${invalidProducts.length} product(s) missing mandatory fields nItemId  / sCode.`,
-        {
-          invalidCount: invalidProducts.length,
-          sampleInvalidRecords: invalidProducts.slice(0, 20),
-        }
-      );
-    }
-
-    // ─────────────────────────────────────────────
-    // 3) Cache existing brands/categories
-    // ─────────────────────────────────────────────
-    const existingBrands = await prisma.brandMaster.findMany({
-      where: { vendor_id },
-      select: {
-        id: true,
-        brand_name: true,
-      },
-    });
-
-    const existingCategories = await prisma.projectCategoriesMaster.findMany({
-      where: { vendor_id },
-      select: {
-        id: true,
-        category_name: true,
-      },
-    });
-
-    const brandMap = new Map<string, number>();
-    const categoryMap = new Map<string, number>();
-
-    existingBrands.forEach((b) => {
-      brandMap.set(b.brand_name.trim().toLowerCase(), b.id);
-    });
-
-    existingCategories.forEach((c) => {
-      categoryMap.set(c.category_name.trim().toLowerCase(), c.id);
-    });
-
-    // ─────────────────────────────────────────────
-    // 4) Upsert products
-    // ────────────────────────────────────────────
-
-    // ─────────────────────────────────────────────
-    // 3 + 4) Transaction: brands + products upsert
-    // ─────────────────────────────────────────────
-    let created = 0;
-    let updated = 0;
-    let skipped = 0;
-    let brandsCreated = 0;
-
-    await prisma.$transaction(
-      async (tx) => {
-        // preload
-        const existingBrands = await tx.brandMaster.findMany({
-          where: { vendor_id },
-          select: {
-            id: true,
-            brand_name: true,
-          },
-        });
-
-        const existingCategories =
-          await tx.projectCategoriesMaster.findMany({
-            where: { vendor_id },
-            select: {
-              id: true,
-              category_name: true,
-            },
-          });
-
-        const existingProducts = await tx.productMaster.findMany({
-          where: { vendor_id },
-          select: {
-            id: true,
-            item_id: true,
-          },
-        });
-
-        const brandMap = new Map<string, number>();
-        const categoryMap = new Map<string, number>();
-        const productMap = new Map<number, number>();
-
-        existingBrands.forEach((b) => {
-          brandMap.set(b.brand_name.trim().toLowerCase(), b.id);
-        });
-
-        existingCategories.forEach((c) => {
-          categoryMap.set(c.category_name.trim().toLowerCase(), c.id);
-        });
-
-        existingProducts.forEach((p) => {
-          productMap.set(p.item_id, p.id);
-        });
-
-        for (const p of allProducts) {
-          if (!p.nItemId || !p.sCode) {
-            skipped++;
-            continue;
-          }
-
-          // ───────────────────
-          // BRAND
-          // ───────────────────
-          let brandId: number | null = null;
-
-          if (p.sBrand?.trim()) {
-            const brandKey = p.sBrand.trim().toLowerCase();
-
-            brandId = brandMap.get(brandKey) || null;
-
-            if (!brandId) {
-              const brand = await tx.brandMaster.create({
-                data: {
-                  vendor_id,
-                  brand_name: p.sBrand.trim(),
-                  active: "Yes",
-                },
-              });
-
-              brandId = brand.id;
-              brandMap.set(brandKey, brand.id);
-              brandsCreated++;
-            }
-          }
-
-          // ───────────────────
-          // CATEGORY
-          // ───────────────────
-          let categoryId: number | null = null;
-
-          if (p.sCategory?.trim()) {
-            const categoryKey = p.sCategory.trim().toLowerCase();
-            categoryId = categoryMap.get(categoryKey) || null;
-          }
-
-          if (!categoryId) {
-            skipped++;
-            continue;
-          }
-
-          const payload = {
-            vendor_id,
-            item_id: Number(p.nItemId),
-
-            rotation: Number(p.bRotation || 0),
-            alt_conv_factor: Number(p.nAltConvFactor || 0),
-
-            board_length: Number(p.nBoardLength || 0),
-            board_width: Number(p.nBoardWidth || 0),
-
-            dimension_1: Number(p.nDimension1 || 0),
-            dimension_2: Number(p.nDimension2 || 0),
-            dimension_3: Number(p.nDimension3 || 0),
-
-            installation_charges: Number(p.nInstallationCharges || 0),
-            item1_weight: Number(p.nItemW1eight || 0),
-
-            level1_price: Number(p.nLevel1Price || 0),
-            level2_price: Number(p.nLevel2Price || 0),
-            level3_price: Number(p.nLevel3Price || 0),
-
-            moq: Number(p.nMoq || 0),
-            no_of_drill_holes: Number(p.nNoofDrillHoles || 0),
-            pre_mill_width: Number(p.nPreMillWidth || 0),
-
-            alt_uom_text: p.sAltUomText || null,
-
-            brand_id: brandId??null,
-            category_id: categoryId,
-
-            article_code: p.sCode || null,
-            core_material: p.sCoreMaterial || null,
-            edge_banding_color: p.sEdgeBandingColor || null,
-            finish: p.sFinish || null,
-            group: p.sGroup || null,
-
-            hsn_code: p.sHsnCode
-              ? parseInt(String(p.sHsnCode).replace(/\D/g, "")) || null
-              : null,
-
-            product_name: p.sName,
-            procurement: p.sProcurement || null,
-            unit_of_measure: p.sUom || null,
-            vendor_code: p.sVendorCode || null,
-
-            custom_field_1: p.nCustomField1 || null,
-            custom_field_2: p.nCustomField2 || null,
-            custom_field_3: p.nCustomField3 || null,
-
-            active: "Yes" as const,
-          };
-
-          const existingProductId =
-            productMap.get(Number(p.nItemId));
-
-          if (existingProductId) {
-            await tx.productMaster.update({
-              where: {
-                id: existingProductId,
-              },
-              data: payload,
-            });
-
-            updated++;
-          } else {
-            const createdProduct =
-              await tx.productMaster.create({
-                data: payload,
-              });
-
-            productMap.set(
-              Number(p.nItemId),
-              createdProduct.id
-            );
-
-            created++;
-          }
-        }
-      },
-      {
-        timeout: 600000, // 10 min
-      }
-    );
-
-    return validationResponse(
-      1,
-      "Products synced successfully",
-      {
-        totalCount,
-        fetched: allProducts.length,
-        created,
-        updated,
-        skipped,
-        brandsCreated,
-      }
-    );
-  } catch (error) {
-    console.error("syncProductsFromExternalService:", error);
-    return validationResponse(0, "Sync failed");
-  }
-};

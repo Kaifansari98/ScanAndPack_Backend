@@ -45,7 +45,7 @@ import {
   getDefectSummary,
   getPendingDefects,
   getResolvedDefects,
-  syncProducts
+  
 
 } from "../../controllers/trackTraceController/trackTrace.controller";
 
@@ -158,7 +158,7 @@ router.get("/defect-dashboard/:vendor_id/summary",  getDefectSummary);
 router.get("/defect-dashboard/:vendor_id/pending",  getPendingDefects);
 router.get("/defect-dashboard/:vendor_id/resolved", getResolvedDefects);
 
-router.post("/sync-cadbid-products", syncProducts);
+
 
 
 
