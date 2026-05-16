@@ -2775,8 +2775,69 @@ export class OrderLoginService {
 
     const leadForLog = await prisma.leadMaster.findUnique({
       where: { id: leadId },
-      select: { account_id: true },
+      select: {
+        account_id: true,
+        franchise_id: true,
+        firstname: true,
+        lastname: true,
+      },
     });
+
+    const instanceCode = await resolveLeadCode(vendorId, leadId, instanceId);
+    const factoryMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+        user: {
+          user_type: {
+            user_type: { equals: "factory", mode: "insensitive" },
+          },
+        },
+      },
+      select: { user_id: true },
+    });
+
+    if (factoryMapping?.user_id && leadForLog?.account_id) {
+      const existingFactoryTask = await prisma.userLeadTask.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          instance_id: instanceId,
+          user_id: factoryMapping.user_id,
+          task_type: "Order Login Completed",
+          status: { in: ["open", "in_progress"] },
+        },
+        select: { id: true },
+      });
+
+      if (!existingFactoryTask) {
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 1);
+
+        const leadName =
+          `${leadForLog.firstname ?? ""} ${leadForLog.lastname ?? ""}`.trim() ||
+          "this lead";
+        const remark = `${instanceCode} - ${leadName}: Order Login has been filled successfully. Please review the production requirements and continue with the production process for this instance.`;
+
+        await prisma.userLeadTask.create({
+          data: {
+            lead_id: leadId,
+            account_id: leadForLog.account_id,
+            vendor_id: vendorId,
+            franchise_id: leadForLog.franchise_id ?? null,
+            user_id: factoryMapping.user_id,
+            instance_id: instanceId,
+            task_type: "Order Login Completed",
+            lead_stage: "production-stage",
+            due_date: dueDate,
+            remark,
+            status: "open",
+            created_by: updatedBy,
+          },
+        });
+      }
+    }
 
     if (leadForLog?.account_id) {
       await prisma.leadDetailedLogs.create({
