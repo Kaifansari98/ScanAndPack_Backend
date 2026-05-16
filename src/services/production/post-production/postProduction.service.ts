@@ -908,7 +908,7 @@ export class PostProductionService {
     vendorId: number,
     leadId: number,
     instanceId: number,
-    _userId: number,
+    userId: number,
   ) {
     const instance = await prisma.leadProductStructureInstance.findFirst({
       where: { id: instanceId, lead_id: leadId, vendor_id: vendorId },
@@ -936,6 +936,66 @@ export class PostProductionService {
           : {}),
       },
     });
+
+    const leadMeta = await prisma.leadMaster.findUnique({
+      where: { id: leadId },
+      select: {
+        account_id: true,
+        franchise_id: true,
+        firstname: true,
+        lastname: true,
+      },
+    });
+
+    const factoryMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        status: "active",
+        user: {
+          user_type: {
+            user_type: { equals: "factory", mode: "insensitive" },
+          },
+        },
+      },
+      select: { user_id: true },
+    });
+
+    if (factoryMapping?.user_id && leadMeta?.account_id) {
+      const existingTask = await prisma.userLeadTask.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          instance_id: instanceId,
+          user_id: factoryMapping.user_id,
+          task_type: "Pre Prod Completed",
+          status: { in: ["open", "in_progress"] },
+        },
+        select: { id: true },
+      });
+
+      if (!existingTask) {
+        const dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 1);
+
+        await prisma.userLeadTask.create({
+          data: {
+            lead_id: leadId,
+            account_id: leadMeta.account_id,
+            vendor_id: vendorId,
+            franchise_id: leadMeta.franchise_id ?? null,
+            user_id: factoryMapping.user_id,
+            instance_id: instanceId,
+            task_type: "Pre Prod Completed",
+            lead_stage: "production-stage",
+            due_date: dueDate,
+            remark: "Pre Prod Completed",
+            status: "open",
+            created_by: userId,
+          },
+        });
+      }
+    }
 
     return {
       instanceId,
