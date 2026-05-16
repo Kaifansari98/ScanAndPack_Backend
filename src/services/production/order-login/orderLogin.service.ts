@@ -2784,27 +2784,56 @@ export class OrderLoginService {
     });
 
     const instanceCode = await resolveLeadCode(vendorId, leadId, instanceId);
-    const factoryMapping = await prisma.leadUserMapping.findFirst({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        status: "active",
-        user: {
-          user_type: {
-            user_type: { equals: "factory", mode: "insensitive" },
+    const [factoryMapping, productionStageMapping, fallbackFactoryUser] =
+      await Promise.all([
+        prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            status: "active",
+            user: {
+              user_type: {
+                user_type: { equals: "factory", mode: "insensitive" },
+              },
+            },
           },
-        },
-      },
-      select: { user_id: true },
-    });
+          select: { user_id: true },
+        }),
+        prisma.leadUserMapping.findFirst({
+          where: {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            status: "active",
+            type: "production-stage",
+          },
+          select: { user_id: true },
+          orderBy: { id: "desc" },
+        }),
+        prisma.userMaster.findFirst({
+          where: {
+            vendor_id: vendorId,
+            status: "active",
+            user_type: {
+              user_type: { equals: "factory", mode: "insensitive" },
+            },
+          },
+          select: { id: true },
+          orderBy: { id: "asc" },
+        }),
+      ]);
 
-    if (factoryMapping?.user_id && leadForLog?.account_id) {
+    const factoryUserId =
+      factoryMapping?.user_id ??
+      productionStageMapping?.user_id ??
+      fallbackFactoryUser?.id;
+
+    if (factoryUserId && leadForLog?.account_id) {
       const existingFactoryTask = await prisma.userLeadTask.findFirst({
         where: {
           vendor_id: vendorId,
           lead_id: leadId,
           instance_id: instanceId,
-          user_id: factoryMapping.user_id,
+          user_id: factoryUserId,
           task_type: "Order Login Completed",
           status: { in: ["open", "in_progress"] },
         },
@@ -2826,7 +2855,7 @@ export class OrderLoginService {
             account_id: leadForLog.account_id,
             vendor_id: vendorId,
             franchise_id: leadForLog.franchise_id ?? null,
-            user_id: factoryMapping.user_id,
+            user_id: factoryUserId,
             instance_id: instanceId,
             task_type: "Order Login Completed",
             lead_stage: "production-stage",
