@@ -3036,6 +3036,12 @@ const statusTags =
           ? Prisma.SortOrder.asc
           : Prisma.SortOrder.desc,
     };
+    const normalizedStageTag = String(tag || "").trim();
+    const includeConfig = BookingStageService.leadIncludes(normalizedStageTag);
+    const shouldApplyStageSort =
+      BookingStageService.statusLogSortedStageTags.has(normalizedStageTag) ||
+      normalizedStageTag === "Type 9" ||
+      normalizedStageTag === "Type 10";
 
     const addFilterConditions = (
       whereClause: Prisma.LeadMasterWhereInput,
@@ -3517,10 +3523,9 @@ const statusTags =
       const [leads, total] = await Promise.all([
         prisma.leadMaster.findMany({
           where: whereClause,
-          include: BookingStageService.leadIncludes(),
+          include: includeConfig,
           orderBy,
-          skip,
-          take: limit,
+          ...(shouldApplyStageSort ? {} : { skip, take: limit }),
         }),
         prisma.leadMaster.count({ where: whereClause }),
       ]);
@@ -3549,7 +3554,19 @@ const statusTags =
           return { ...lead, documents: docsWithUrls };
         }),
       );
-      return { leads: processed, count: total };
+      const sortedProcessed = shouldApplyStageSort
+        ? [...processed].sort(
+            (a, b) =>
+              BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+              BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+          )
+        : processed;
+
+      const paginatedLeads = shouldApplyStageSort
+        ? sortedProcessed.slice(skip, skip + limit)
+        : sortedProcessed;
+
+      return { leads: paginatedLeads, count: total };
     }
 
     // ============= Non-Admin Flow =============
@@ -3619,10 +3636,9 @@ const statusTags =
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
         where: whereClause,
-        include: BookingStageService.leadIncludes(),
+        include: includeConfig,
         orderBy,
-        skip,
-        take: limit,
+        ...(shouldApplyStageSort ? {} : { skip, take: limit }),
       }),
       prisma.leadMaster.count({ where: whereClause }),
     ]);
@@ -3652,7 +3668,19 @@ const statusTags =
       }),
     );
 
-    return { leads: processed, count: total };
+    const sortedProcessed = shouldApplyStageSort
+      ? [...processed].sort(
+          (a, b) =>
+            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+        )
+      : processed;
+
+    const paginatedLeads = shouldApplyStageSort
+      ? sortedProcessed.slice(skip, skip + limit)
+      : sortedProcessed;
+
+    return { leads: paginatedLeads, count: total };
   }
 
   public async assignTaskBookingService(payload: AssignTaskBookingInput) {
