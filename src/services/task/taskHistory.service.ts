@@ -28,6 +28,10 @@ const formatDueDate = (dueDate?: Date | null) => {
   });
 };
 
+const resolveHistoryType = (taskType?: string | null) => {
+  return taskType?.trim().toLowerCase() === "follow up" ? "FollowUp" : "Task";
+};
+
 const buildDefaultAction = ({
   task,
   actionType,
@@ -73,7 +77,7 @@ export const createTaskHistoryLog = async ({
       account_id: task.account_id,
       action: action ?? buildDefaultAction({ task, actionType }),
       action_type: actionType,
-      history_type: "Task",
+      history_type: resolveHistoryType(task.task_type),
       created_by: createdBy,
       created_at: new Date(),
     } as any,
