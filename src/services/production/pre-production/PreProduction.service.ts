@@ -1,6 +1,7 @@
 import { LeadTaskStatus, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../../src/utils/logger";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class PreProductionService {
   private addThreeDayBuffer(date: Date) {
@@ -698,7 +699,7 @@ export class PreProductionService {
 
         // ─── Task UPDATE or CREATE ─────────────────────────────────
         if (existingTask) {
-          await prisma.userLeadTask.update({
+          const updatedTask = await prisma.userLeadTask.update({
             where: { id: existingTask.id },
             data: {
               due_date: new Date(dueDate),
@@ -712,6 +713,18 @@ export class PreProductionService {
                 closed_at: new Date(),
               }),
             },
+          });
+          await createTaskHistoryLog({
+            db: prisma,
+            task: {
+              ...updatedTask,
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              task_type: "Production Ready",
+            },
+            createdBy: userId,
+            actionType: "UPDATE",
           });
           logger.info(`[OrderLoginCompletion] task UPDATED [${index}]`, {
             taskId: existingTask.id,
@@ -740,6 +753,12 @@ export class PreProductionService {
                 closed_at: new Date(),
               }),
             },
+          });
+          await createTaskHistoryLog({
+            db: prisma,
+            task: created,
+            createdBy: userId,
+            actionType: "CREATE",
           });
           logger.info(`[OrderLoginCompletion] task CREATED [${index}]`, {
             newTaskId: created.id,

@@ -8,6 +8,7 @@ import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 // 🧩 Define this at the top of your service file
 
@@ -1993,7 +1994,7 @@ export class OrderLoginService {
           });
 
           if (!existingTask) {
-            await prisma.userLeadTask.create({
+            const task = await prisma.userLeadTask.create({
               data: {
                 lead_id: leadId,
                 account_id: effectiveAccountId,
@@ -2008,6 +2009,12 @@ export class OrderLoginService {
                 status: "open",
                 created_by: userId,
               },
+            });
+            await createTaskHistoryLog({
+              db: prisma,
+              task,
+              createdBy: userId,
+              actionType: "CREATE",
             });
           }
         }
@@ -2102,7 +2109,7 @@ export class OrderLoginService {
         });
 
         if (!existingTask) {
-          await prisma.userLeadTask.create({
+          const task = await prisma.userLeadTask.create({
             data: {
               lead_id: leadId,
               account_id: accountId,
@@ -2116,6 +2123,12 @@ export class OrderLoginService {
               status: "open",
               created_by: userId,
             },
+          });
+          await createTaskHistoryLog({
+            db: prisma,
+            task,
+            createdBy: userId,
+            actionType: "CREATE",
           });
         }
       }
@@ -2849,7 +2862,7 @@ export class OrderLoginService {
           "this lead";
         const remark = `${instanceCode} - ${leadName}: Order Login has been filled successfully. Please review the production requirements and continue with the production process for this instance.`;
 
-        await prisma.userLeadTask.create({
+        const task = await prisma.userLeadTask.create({
           data: {
             lead_id: leadId,
             account_id: leadForLog.account_id,
@@ -2864,6 +2877,12 @@ export class OrderLoginService {
             status: "open",
             created_by: updatedBy,
           },
+        });
+        await createTaskHistoryLog({
+          db: prisma,
+          task,
+          createdBy: updatedBy,
+          actionType: "CREATE",
         });
       }
     }

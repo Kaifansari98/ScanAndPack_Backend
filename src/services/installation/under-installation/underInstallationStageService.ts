@@ -8,6 +8,7 @@ import { getFranchiseAdminRecipients } from "../../../../src/services/notificati
 import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -148,7 +149,7 @@ export class UnderInstallationStageService {
       });
 
       if (dispatchTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: dispatchTask.id },
           data: {
             status: "completed",
@@ -160,6 +161,13 @@ export class UnderInstallationStageService {
               (dispatchTask.remark ?? "") +
               " | Auto-closed after lead moved to Dispatch stage.",
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: updatedTask,
+          createdBy: updatedBy,
+          actionType: "UPDATE",
         });
 
         await tx.leadDetailedLogs.create({
@@ -1136,6 +1144,13 @@ export class UnderInstallationStageService {
         },
       });
 
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
+      });
+
       // -----------------------------
       // Teams Mapping
       // -----------------------------
@@ -1791,7 +1806,7 @@ export class UnderInstallationStageService {
       });
 
       if (existingDeliveryTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingDeliveryTask.id },
           data: {
             due_date: new Date(required_delivery_date),
@@ -1799,12 +1814,25 @@ export class UnderInstallationStageService {
             updated_at: new Date(),
           },
         });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: "Miscellaneous",
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
+        });
       } else {
         const leadFranchise = await tx.leadMaster.findUnique({
           where: { id: existing.lead_id },
           select: { franchise_id: true },
         });
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             vendor_id,
             lead_id: existing.lead_id,
@@ -1818,6 +1846,13 @@ export class UnderInstallationStageService {
             status: "open",
             created_by: updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updated_by,
+          actionType: "CREATE",
         });
       }
 
@@ -2272,12 +2307,25 @@ export class UnderInstallationStageService {
       let taskId: number;
 
       if (existingTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingTask.id },
           data: {
             due_date: new Date(expected_ready_date),
             updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: "Miscellaneous",
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
         });
 
         taskId = existingTask.id;
@@ -2299,6 +2347,13 @@ export class UnderInstallationStageService {
             status: "open",
             created_by: updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: newTask,
+          createdBy: updated_by,
+          actionType: "CREATE",
         });
 
         taskId = newTask.id;

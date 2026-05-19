@@ -13,6 +13,7 @@ import {
 } from "../../email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -1116,6 +1117,13 @@ export class FinalMeasurementService {
         },
       });
 
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
+      });
+
       // ✅ Ensure assignee is in lead chat members
       let chatRoom = await tx.leadChatRoom.findFirst({
         where: {
@@ -1381,6 +1389,13 @@ export class FinalMeasurementService {
           updated_by,
           updated_at: new Date(),
         },
+      });
+
+      await createTaskHistoryLog({
+        db: tx,
+        task: updatedTask,
+        createdBy: updated_by,
+        actionType: "UPDATE",
       });
 
       const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {

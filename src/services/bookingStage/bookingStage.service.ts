@@ -22,6 +22,7 @@ import {
 } from "../email/brevoEmail.service";
 import { AssignTaskBookingInput } from "../../types/leadModule.types";
 import Joi from "joi";
+import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { LeadSuperAdminApprovalLockInService } from "../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 const assignTaskBookingSchema = Joi.object({
@@ -3730,6 +3731,13 @@ const statusTags =
           status: "open",
           created_by,
         },
+      });
+
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
       });
 
       return task;

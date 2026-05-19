@@ -22,6 +22,7 @@ import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
 import { NotificationType, Prisma } from "../../../prisma/generated";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
@@ -242,6 +243,13 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         status: "open",
         created_by,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: tx,
+      task,
+      createdBy: created_by,
+      actionType: "CREATE",
     });
 
     // 3B) Create LeadUserMapping for ISM task assignment

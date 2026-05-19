@@ -8,6 +8,7 @@ import { NotificationService } from "../../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import {
   sendLeadLostApprovalEmail,
   sendLeadLostApprovedEmail,
@@ -152,7 +153,7 @@ export class LeadActivityStatusService {
             )?.type ?? null)
           : null;
 
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             lead_id: leadId,
             account_id: accountId,
@@ -166,6 +167,13 @@ export class LeadActivityStatusService {
             status: "open",
             created_by: createdBy,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: createdBy,
+          actionType: "CREATE",
         });
       }
 

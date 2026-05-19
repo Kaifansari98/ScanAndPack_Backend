@@ -17,6 +17,7 @@ import {
   sendOrderLoginApprovedEmail,
 } from "../email/brevoEmail2.service";
 import { NotificationService } from "../notification/notification.service";
+import { createTaskHistoryLog } from "../task/taskHistory.service";
 
 type TxClient = Prisma.TransactionClient;
 
@@ -244,6 +245,12 @@ export class LeadSuperAdminApprovalLockInService {
           created_by: input.created_by,
         },
       });
+      await createTaskHistoryLog({
+        db,
+        task,
+        createdBy: input.created_by,
+        actionType: "CREATE",
+      });
       isNewTask = true;
     }
 
@@ -469,6 +476,12 @@ export class LeadSuperAdminApprovalLockInService {
             : {}),
         },
       });
+      await createTaskHistoryLog({
+        db,
+        task,
+        createdBy: input.created_by,
+        actionType: "CREATE",
+      });
       isNewTask = true;
     }
 
@@ -672,6 +685,12 @@ export class LeadSuperAdminApprovalLockInService {
           status: "open",
           created_by: input.created_by,
         },
+      });
+      await createTaskHistoryLog({
+        db,
+        task,
+        createdBy: input.created_by,
+        actionType: "CREATE",
       });
       isNewTask = true;
     }
@@ -894,6 +913,12 @@ export class LeadSuperAdminApprovalLockInService {
             : {}),
         },
       });
+      await createTaskHistoryLog({
+        db: tx,
+        task: completedTask,
+        createdBy: input.approved_by,
+        actionType: "UPDATE",
+      });
 
       let actionMessage =
         "Super Admin approved the Booking Done Approval.";
@@ -1086,6 +1111,12 @@ export class LeadSuperAdminApprovalLockInService {
             ? { remark: input.approval_remark }
             : {}),
         },
+      });
+      await createTaskHistoryLog({
+        db: tx,
+        task: completedTask,
+        createdBy: input.approved_by,
+        actionType: "UPDATE",
       });
 
       let actionMessage =
@@ -1366,6 +1397,12 @@ export class LeadSuperAdminApprovalLockInService {
             ? { remark: input.approval_remark }
             : {}),
         },
+      });
+      await createTaskHistoryLog({
+        db: tx,
+        task: completedTask,
+        createdBy: input.approved_by,
+        actionType: "UPDATE",
       });
 
       let actionMessage =

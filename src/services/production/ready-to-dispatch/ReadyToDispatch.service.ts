@@ -6,6 +6,7 @@ import { AssignTaskFMInput } from "../../../types/leadModule.types";
 import Joi from "joi";
 import { cache } from "../../../utils/cache";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -464,6 +465,12 @@ export class ReadyToDispatchService {
           status: "open",
           created_by,
         },
+      });
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
       });
 
       // 🧹 Refresh Sales-Executive Dashboard Task Cache

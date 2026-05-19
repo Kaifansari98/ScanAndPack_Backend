@@ -35,6 +35,7 @@ import {
   type LeadCreatedEmailPayload,
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -2675,6 +2676,13 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
     const updatedTask = await tx.userLeadTask.update({
       where: { id: task_id },
       data: updateData,
+    });
+
+    await createTaskHistoryLog({
+      db: tx,
+      task: updatedTask,
+      createdBy: updated_by,
+      actionType: "UPDATE",
     });
 
     // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)

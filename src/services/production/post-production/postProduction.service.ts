@@ -7,6 +7,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -978,7 +979,7 @@ export class PostProductionService {
         const dueDate = new Date();
         dueDate.setDate(dueDate.getDate() + 1);
 
-        await prisma.userLeadTask.create({
+        const task = await prisma.userLeadTask.create({
           data: {
             lead_id: leadId,
             account_id: leadMeta.account_id,
@@ -993,6 +994,12 @@ export class PostProductionService {
             status: "open",
             created_by: userId,
           },
+        });
+        await createTaskHistoryLog({
+          db: prisma,
+          task,
+          createdBy: userId,
+          actionType: "CREATE",
         });
       }
     }

@@ -7,6 +7,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class FinalHandoverStageService {
   private formatDateTimeInIndia(date: Date) {
@@ -731,7 +732,7 @@ export class FinalHandoverStageService {
         });
 
         if (!existingTask) {
-          await tx.userLeadTask.create({
+          const task = await tx.userLeadTask.create({
             data: {
               vendor_id: vendorId,
               lead_id: leadId,
@@ -745,6 +746,12 @@ export class FinalHandoverStageService {
               status: "open",
               created_by: updatedBy,
             },
+          });
+          await createTaskHistoryLog({
+            db: tx,
+            task,
+            createdBy: updatedBy,
+            actionType: "CREATE",
           });
         }
       }

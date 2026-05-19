@@ -2,6 +2,7 @@ import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
@@ -526,6 +527,13 @@ export class DispatchStageService {
       },
     });
 
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
+    });
+
     // 🧹 Clear Redis cache for dashboard tasks of this user
     const redisKey = `dashboard:tasks:${vendorId}:${assigneeUserId}`;
     await cache.del(redisKey);
@@ -569,6 +577,13 @@ export class DispatchStageService {
         remark: remark || null,
         created_by: createdBy,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
     });
 
     // 🧹 Clear Redis Cache for Sales Executive Dashboard

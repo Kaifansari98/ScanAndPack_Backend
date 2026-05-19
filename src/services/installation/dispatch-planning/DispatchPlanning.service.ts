@@ -6,6 +6,7 @@ import { getFranchiseAdminRecipients } from "../../../../src/services/notificati
 import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -634,7 +635,7 @@ export class DispatchPlanningService {
       });
 
       if (existingTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingTask.id },
           data: {
             due_date: leadPlanningData.required_date_for_dispatch,
@@ -642,8 +643,21 @@ export class DispatchPlanningService {
             updated_at: new Date(),
           },
         });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: leadPlanningData.account_id,
+            task_type: "Dispatch",
+          },
+          createdBy: updatedBy,
+          actionType: "UPDATE",
+        });
       } else {
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
@@ -659,6 +673,13 @@ export class DispatchPlanningService {
             created_by: updatedBy,
             lead_stage: "dispatch-planning-stage",
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updatedBy,
+          actionType: "CREATE",
         });
       }
 
