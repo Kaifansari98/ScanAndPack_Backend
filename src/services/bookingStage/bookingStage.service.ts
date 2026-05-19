@@ -2640,8 +2640,8 @@ export class BookingStageService {
       }
 
       const logAction = hasExistingActiveSupervisor
-        ? `Site supervisor reassigned: ${supervisor.user_name}`
-        : `Site supervisor assigned: ${supervisor.user_name}`;
+        ? `${supervisor.user_name} has been reassigned as the site supervisor for this lead.`
+        : `${supervisor.user_name} has been assigned as the site supervisor for this lead.`;
 
       await tx.leadDetailedLogs.create({
         data: {

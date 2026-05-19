@@ -1652,7 +1652,7 @@ export class OrderLoginService {
               vendor_id: vendorId,
               lead_id: leadId,
               account_id: effectiveAccountId,
-              action: `All instances order login completed. Lead moved to Production and assigned to ${assignedUserNameForProd}. Required completion date: ${requiredDate.toLocaleDateString()}`,
+              action: `All instances order login completed. Lead moved to Production, Required completion date: ${requiredDate.toLocaleDateString()}`,
               action_type: "STATUS_CHANGE",
               created_by: userId,
             },
@@ -2543,6 +2543,7 @@ export class OrderLoginService {
             account_id: lead.account_id,
             action: `PO files uploaded for "${orderLoginLabel}": ${files.length} file(s)`,
             action_type: "CREATE",
+            history_type: "Lead",
             created_by: userId,
           },
         });
@@ -2712,6 +2713,7 @@ export class OrderLoginService {
             account_id: mapping.lead.account_id,
             action: `PO file deleted: ${mapping.document.doc_og_name ?? "Unknown file"}`,
             action_type: "DELETE",
+            history_type: "Lead",
             created_by: userId,
           },
         });

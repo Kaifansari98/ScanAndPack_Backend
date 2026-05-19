@@ -515,20 +515,19 @@ export class ReadyToDispatchService {
         });
       }
 
-      // 5️⃣ Create log entry
-      let actionMessage = "";
-      if (task_type.toLowerCase() === "follow up") {
-        actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
-      } else {
-        actionMessage = `Lead has been assigned to ${assignee.user_name} for Site Readiness.`;
-      }
-
       const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       });
-      actionMessage += ` Due Date: ${formattedDate}.`;
+
+      // 5️⃣ Create log entry
+      let actionMessage = "";
+      if (task_type.toLowerCase() === "follow up") {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
+      } else {
+        actionMessage = `Site Readiness task has been created for ${assignee.user_name}. Due Date: ${formattedDate}.`;
+      }
 
       if (remark && remark.trim()) {
         actionMessage += ` — Remark: ${remark.trim()}`;

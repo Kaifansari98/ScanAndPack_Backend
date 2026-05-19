@@ -62,7 +62,9 @@ const assignTaskISMSchema = Joi.object({
 const RESTRICTED_TASK_TYPE = "Initial Site Measurement" as const;
 const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
 
-export const getInitialSiteMeasurementTaskConflicts = async (leadId: number) => {
+export const getInitialSiteMeasurementTaskConflicts = async (
+  leadId: number,
+) => {
   const lead = await prisma.leadMaster.findUnique({
     where: { id: leadId },
     select: { id: true },
@@ -183,10 +185,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       );
     }
 
-    if (
-      task_type === FOLLOW_UP_TASK_TYPE &&
-      assignee_user_id !== created_by
-    ) {
+    if (task_type === FOLLOW_UP_TASK_TYPE && assignee_user_id !== created_by) {
       const existingFollowUpTask = await tx.userLeadTask.findFirst({
         where: {
           lead_id: lead.id,
@@ -365,7 +364,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     });
 
     if (task_type === "Initial Site Measurement") {
-      actionMessage = `Lead has been assigned to ${assignee.user_name} for Initial Site Measurement on ${formattedDate}.`;
+      actionMessage = `Initial Site Measurement task is been created for ${assignee.user_name} Due Date : ${formattedDate}.`;
     } else if (task_type === "Follow Up") {
       actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up on ${formattedDate}.`;
     }
@@ -995,8 +994,6 @@ export class PaymentUploadService {
           year: "numeric",
         });
 
-
-
         const baseUrl = data.baseUrl;
         // ✅ Account aware deep-link
         const projectUrl = lead.account_id
@@ -1024,7 +1021,6 @@ export class PaymentUploadService {
               ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
               : `/dashboard/leads/details/${data.lead_id}`,
           });
-
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
@@ -2391,7 +2387,6 @@ export class PaymentUploadService {
         );
       }
 
-
       await tx.leadDocuments.update({
         where: { id: documentId },
         data: {
@@ -2429,7 +2424,7 @@ export class PaymentUploadService {
 
       const signed_url = await generateSignedUrl(pdfS3Key);
 
-      await tx.leadDetailedLogs.create({
+      const detailedLog = await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: existingDoc.lead_id!,
@@ -2439,6 +2434,20 @@ export class PaymentUploadService {
           created_by: userId,
           created_at: new Date(),
         },
+      });
+
+      await tx.leadDocumentLogs.createMany({
+        data: [
+          {
+            vendor_id: vendorId,
+            lead_id: existingDoc.lead_id!,
+            account_id: existingDoc.account_id!,
+            doc_id: newDocument.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          },
+        ],
       });
 
       return {

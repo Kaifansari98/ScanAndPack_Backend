@@ -708,7 +708,7 @@ export class ClientApprovalService {
         vendor_id: data.vendor_id,
         lead_id: data.lead_id,
         account_id: data.account_id,
-        action: `Lead moved to Tech Check stage. Client's Required order-login completion date is ${data.required_date.toLocaleDateString()}`,
+        action: `Client approval received, lead is requested for Tech-Check.`,
         action_type: "UPDATE",
         created_by: data.created_by,
       },

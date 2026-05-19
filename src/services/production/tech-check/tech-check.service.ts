@@ -404,7 +404,7 @@ export class TechCheckService {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Tech Check approved. Lead moved to Order Login and assigned to ${assignedUserNameForLog}`,
+            action: `Tech Check approved, Lead moved to Order Login.`,
             action_type: "STATUS_CHANGE",
             created_by: userId,
           },

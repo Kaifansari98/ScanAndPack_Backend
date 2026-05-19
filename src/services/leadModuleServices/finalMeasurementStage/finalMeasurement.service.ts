@@ -252,7 +252,7 @@ export class FinalMeasurementService {
             : "Final Measurement document has";
         const pluralSP = spCount > 1 ? "Site Photos have" : "Site Photo has";
 
-        let actionMessage = `Final Measurement stage completed successfully — ${fmCount} ${pluralFM} and ${spCount} ${pluralSP} been uploaded successfully.`;
+        let actionMessage = `Final Measurement completed successfully ${fmCount} ${pluralFM} and ${spCount} ${pluralSP} uploaded successfully.`;
 
         if (
           data.critical_discussion_notes &&
@@ -260,7 +260,7 @@ export class FinalMeasurementService {
         ) {
           actionMessage += ` — Remark: ${data.critical_discussion_notes.trim()}`;
         } else {
-          actionMessage += ` — Remark: No remark provided.`;
+          actionMessage += ` — Remark: N/A`;
         }
 
         const detailedLog = await tx.leadDetailedLogs.create({

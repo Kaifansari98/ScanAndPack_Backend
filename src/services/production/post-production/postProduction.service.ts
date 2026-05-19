@@ -330,6 +330,7 @@ export class PostProductionService {
               ? `Woodwork Packing Details remark added/updated for instance "${instanceTitle}": "${remark}"`
               : `Woodwork Packing Details remark added/updated: "${remark}"`,
             action_type: "UPDATE",
+            history_type: "Lead",
             created_by: userId,
           },
         });
@@ -371,6 +372,7 @@ export class PostProductionService {
             account_id: accountId,
             action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
             action_type: "CREATE",
+            history_type: "Lead",
             created_by: userId,
           },
         });
@@ -609,13 +611,19 @@ export class PostProductionService {
       });
 
       if (accountId) {
+        const action =
+          instance.no_of_boxes == null
+            ? `Number of boxes set to ${noOfBoxes} for instance "${instance.title}"`
+            : `Number of boxes updated from ${instance.no_of_boxes} to ${noOfBoxes} for instance "${instance.title}"`;
+
         await prisma.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
             account_id: accountId,
-            action: `Number of boxes updated to ${noOfBoxes} for instance "${instance.title}"`,
+            action,
             action_type: "UPDATE",
+            history_type: "Lead",
             created_by: userId,
           },
         });
@@ -651,13 +659,19 @@ export class PostProductionService {
 
     // ✅ Log the update
     if (accountId) {
+      const action =
+        lead.no_of_boxes == null
+          ? `Number of boxes set to ${noOfBoxes}`
+          : `Number of boxes updated from ${lead.no_of_boxes} to ${noOfBoxes}`;
+
       await prisma.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: accountId,
-          action: `Number of boxes updated to ${noOfBoxes}`,
+          action,
           action_type: "UPDATE",
+          history_type: "Lead",
           created_by: userId,
         },
       });
@@ -1161,25 +1175,41 @@ export class PostProductionService {
         throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
       }
 
-      // 3️⃣ Update lead status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: leadId },
+      // 3️⃣ Update lead status only if it is not already in Ready To Dispatch.
+      // This keeps the action idempotent and prevents duplicate history rows
+      // if the endpoint is triggered multiple times.
+      const updateResult = await tx.leadMaster.updateMany({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+          NOT: { status_id: readyToDispatchStatus.id },
+        },
         data: {
           status_id: readyToDispatchStatus.id,
           updated_by: updatedBy,
         },
       });
 
-      await ensureLeadStatusLog(tx, {
-        vendorId,
-        leadId,
-        accountId: currentLead.account_id,
-        statusId: readyToDispatchStatus.id,
-        createdBy: updatedBy,
-      });
+      const updatedLead =
+        updateResult.count > 0
+          ? await tx.leadMaster.findUniqueOrThrow({
+              where: { id: leadId },
+            })
+          : currentLead;
+
+      if (updateResult.count > 0) {
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId,
+          accountId: currentLead.account_id,
+          statusId: readyToDispatchStatus.id,
+          createdBy: updatedBy,
+        });
+      }
 
       // 4️⃣ Audit log
-      if (currentLead.account_id) {
+      if (updateResult.count > 0 && currentLead.account_id) {
         await tx.leadDetailedLogs.create({
           data: {
             vendor_id: vendorId,

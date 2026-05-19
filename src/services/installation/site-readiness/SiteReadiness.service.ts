@@ -555,7 +555,7 @@ export class SiteReadinessService {
       }
 
       // 4️⃣ Add Detailed Log Entry
-      const actionMessage = `Lead moved to Dispatch Planning stage.`;
+      const actionMessage = `Site readiness task is been completed and lead moved to Dispatch Planning.`;
 
       await tx.leadDetailedLogs.create({
         data: {

@@ -159,7 +159,7 @@ export class ClientDocumentationService {
       // Add logs
       const docCount = response.documents.length;
       const plural = docCount > 1 ? "documents have" : "document has";
-      const actionMessage = `Client Documentation stage completed successfully — ${docCount} Client Documentation ${plural} been uploaded successfully.`;
+      const actionMessage = `Client Documentation Done Successfully and Lead Moved to Client Approval`;
 
       const detailedLog = await tx.leadDetailedLogs.create({
         data: {
@@ -1110,7 +1110,7 @@ export class ClientDocumentationService {
           vendor_id: data.vendor_id,
           lead_id: data.lead_id,
           account_id: data.account_id,
-          action: `${docCount} additional Client Documentation uploaded.`,
+          action: `${docCount} Revised Documents uploaded Successfully.`,
           action_type: "UPLOAD",
           created_by: data.created_by,
         },

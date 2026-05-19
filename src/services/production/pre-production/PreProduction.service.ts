@@ -319,15 +319,22 @@ export class PreProductionService {
 
     // Log the change
     if (lead.account_id) {
+      const formattedDate = new Date(date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+
       await prisma.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: lead.account_id,
           action: instanceId
-            ? `Instance ERD updated to ${new Date(date).toLocaleDateString()} and lead ERD recalculated`
-            : `Expected Order Login ready date updated to ${new Date(date).toLocaleDateString()}`,
+            ? `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
+            : `Expected Order Login ready date updated to ${formattedDate}`,
           action_type: "UPDATE",
+          history_type: "Lead",
           created_by: updatedBy,
         },
       });
@@ -596,6 +603,7 @@ export class PreProductionService {
               account_id: existing.account_id,
               action: logAction,
               action_type: "UPDATE",
+              history_type: "Lead",
               created_by: Number(updated_by),
             },
           });
