@@ -2235,6 +2235,11 @@ export class LeadController {
       const { lead_id, vendor_id } = req.params;
       const limit = Number(req.query.limit) || 10;
       const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
+      const history_type = req.query.history_type as
+        | "Lead"
+        | "Task"
+        | "FollowUp"
+        | undefined;
 
       if (!lead_id || !vendor_id) {
         return res.status(400).json({
@@ -2248,6 +2253,7 @@ export class LeadController {
         vendor_id: Number(vendor_id),
         limit,
         cursor,
+        history_type,
       });
 
       return res.status(200).json({

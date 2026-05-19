@@ -2803,11 +2803,16 @@ export const getLeadLogsWithDocuments = async (params: {
   vendor_id: number;
   limit?: number;
   cursor?: number;
+  history_type?: "Lead" | "Task" | "FollowUp";
 }) => {
-  const { lead_id, vendor_id, limit = 10, cursor } = params;
+  const { lead_id, vendor_id, limit = 10, cursor, history_type } = params;
 
   const logs = await prisma.leadDetailedLogs.findMany({
-    where: { lead_id, vendor_id },
+    where: {
+      lead_id,
+      vendor_id,
+      ...(history_type && { history_type }),
+    },
     include: {
       user: {
         select: {
