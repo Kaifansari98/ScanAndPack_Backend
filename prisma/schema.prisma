@@ -1097,6 +1097,7 @@ model StatusTypeMaster {
   vendor_id      Int
   tag            String
   leads          LeadMaster[]
+  leadDetailedLogs LeadDetailedLogs[] @relation("LeadDetailedLogStage")
   leadStatusLogs LeadStatusLogs[]
   payments       PaymentInfo[]
   vendor         VendorMaster     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1261,11 +1262,13 @@ model LeadDetailedLogs {
   action      String
   action_type ActionType
   history_type HistoryType       @default(Lead) @map("HistoryType")
+  stage_id    Int?
   created_at  DateTime           @default(now())
   created_by  Int
   account     AccountMaster      @relation(fields: [account_id], references: [id])
   user        UserMaster         @relation(fields: [created_by], references: [id])
   lead        LeadMaster         @relation(fields: [lead_id], references: [id])
+  stage       StatusTypeMaster?  @relation("LeadDetailedLogStage", fields: [stage_id], references: [id])
   vendor      VendorMaster       @relation(fields: [vendor_id], references: [id])
   docLogs     LeadDocumentLogs[]
 }

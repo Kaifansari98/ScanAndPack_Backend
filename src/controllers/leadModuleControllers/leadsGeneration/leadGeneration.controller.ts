@@ -2240,6 +2240,7 @@ export class LeadController {
         | "Task"
         | "FollowUp"
         | undefined;
+      const search = req.query.search as string | undefined;
 
       if (!lead_id || !vendor_id) {
         return res.status(400).json({
@@ -2254,6 +2255,7 @@ export class LeadController {
         limit,
         cursor,
         history_type,
+        search,
       });
 
       return res.status(200).json({

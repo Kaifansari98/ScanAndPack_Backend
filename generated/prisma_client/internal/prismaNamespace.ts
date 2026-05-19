@@ -9741,6 +9741,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
+  stage_id: 'stage_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
