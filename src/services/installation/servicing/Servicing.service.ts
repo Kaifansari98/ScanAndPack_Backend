@@ -19,16 +19,27 @@ export class ServicingService {
     }).format(date);
   }
 
-  private formatServiceLogLabel(serviceType: "free" | "amc", serviceNo: number) {
+  private formatServiceLogLabel(
+    serviceType: "free" | "amc",
+    serviceNo: number,
+  ) {
     const ordinal =
-      serviceNo === 1 ? "1st" : serviceNo === 2 ? "2nd" : serviceNo === 3 ? "3rd" : `${serviceNo}th`;
-    return serviceType === "amc" ? `AMC ${ordinal} Service` : `${ordinal} Service`;
+      serviceNo === 1
+        ? "1st"
+        : serviceNo === 2
+          ? "2nd"
+          : serviceNo === 3
+            ? "3rd"
+            : `${serviceNo}th`;
+    return serviceType === "amc"
+      ? `AMC ${ordinal} Service`
+      : `${ordinal} Service`;
   }
 
   private async createAmcSchedulesIfEligible(
     tx: Pick<
       typeof prisma,
-      "leadMaster" | "leadServiceSchedule" | "leadDetailedLogs"
+      "leadMaster" | "leadServiceSchedule" | "leadDetailedLogs" | "leadProductStructureInstance" | "statusTypeMaster"
     >,
     vendorId: number,
     leadId: number,
@@ -61,7 +72,8 @@ export class ServicingService {
       return;
     }
 
-    const createdSchedules: Array<{ service_no: number; scheduled_for: Date }> = [];
+    const createdSchedules: Array<{ service_no: number; scheduled_for: Date }> =
+      [];
 
     for (const serviceNo of [1, 2, 3]) {
       const existing = await tx.leadServiceSchedule.findFirst({
@@ -78,7 +90,10 @@ export class ServicingService {
         continue;
       }
 
-      const scheduledFor = this.addMonthsPreservingDay(completedAt, serviceNo * 4);
+      const scheduledFor = this.addMonthsPreservingDay(
+        completedAt,
+        serviceNo * 4,
+      );
 
       await tx.leadServiceSchedule.create({
         data: {
@@ -606,9 +621,12 @@ export class ServicingService {
       }
 
       if (service.status !== "rejected") {
-        throw Object.assign(new Error("Only rejected services can be reopened"), {
-          statusCode: 400,
-        });
+        throw Object.assign(
+          new Error("Only rejected services can be reopened"),
+          {
+            statusCode: 400,
+          },
+        );
       }
 
       const reopenedAt = new Date();
@@ -954,10 +972,7 @@ export class ServicingService {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: {
         vendor_id: vendorId,
-        OR: [
-          { tag: this.amcDocTag },
-          { type: this.amcDocType },
-        ],
+        OR: [{ tag: this.amcDocTag }, { type: this.amcDocType }],
       },
       select: { id: true },
     });
@@ -1016,10 +1031,7 @@ export class ServicingService {
     const docType = await prisma.documentTypeMaster.findFirst({
       where: {
         vendor_id: vendorId,
-        OR: [
-          { tag: this.amcDocTag },
-          { type: this.amcDocType },
-        ],
+        OR: [{ tag: this.amcDocTag }, { type: this.amcDocType }],
       },
       select: { id: true, tag: true },
     });
