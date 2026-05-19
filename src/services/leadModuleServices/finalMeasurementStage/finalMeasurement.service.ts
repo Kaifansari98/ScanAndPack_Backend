@@ -14,6 +14,7 @@ import {
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -263,16 +264,14 @@ export class FinalMeasurementService {
           actionMessage += ` — Remark: N/A`;
         }
 
-        const detailedLog = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: data.vendor_id,
-            lead_id: data.lead_id,
-            account_id: data.account_id,
-            action: actionMessage,
-            action_type: "CREATE",
-            created_by: data.created_by,
-            created_at: new Date(),
-          },
+        const detailedLog = await createLeadLog(tx, {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
         });
 
         // 7️⃣ Create LeadDocumentLogs
@@ -1240,16 +1239,14 @@ export class FinalMeasurementService {
         actionMessage += ` — Remark: No remark provided.`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Final Measurement task assigned successfully", {
@@ -1404,16 +1401,14 @@ export class FinalMeasurementService {
         year: "numeric",
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: task.lead.vendor_id,
-          lead_id,
-          account_id: task.lead.account_id!,
-          action: `Lead's Final Measurements task has been rescheduled on ${formattedDate}. — Remark: ${remark.trim()}`,
-          action_type: "UPDATE",
-          created_by: updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: task.lead.vendor_id,
+        lead_id,
+        account_id: task.lead.account_id!,
+        action: `Lead's Final Measurements task has been rescheduled on ${formattedDate}. — Remark: ${remark.trim()}`,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
       });
 
       await cache.del(`dashboard:tasks:${task.lead.vendor_id}:${task.user_id}`);

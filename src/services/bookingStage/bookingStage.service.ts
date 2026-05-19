@@ -24,6 +24,7 @@ import { AssignTaskBookingInput } from "../../types/leadModule.types";
 import Joi from "joi";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { LeadSuperAdminApprovalLockInService } from "../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { createLeadLog } from "../../utils/leadDetailedLog";
 
 const assignTaskBookingSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
@@ -541,16 +542,14 @@ export class BookingStageService {
         }
 
         // Create LeadDetailedLogs entry
-        const detailedLog = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: data.vendor_id,
-            lead_id: data.lead_id,
-            account_id: data.account_id,
-            action: actionMessage,
-            action_type: "CREATE",
-            created_by: data.created_by,
-            created_at: new Date(),
-          },
+        const detailedLog = await createLeadLog(tx, {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
         });
 
         // Map uploaded documents to LeadDocumentLogs if any
@@ -703,16 +702,14 @@ export class BookingStageService {
       }
 
       // Create LeadDetailedLogs entry
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by: data.created_by,
+        created_at: new Date(),
       });
 
       // Create LeadDocumentLogs if applicable
@@ -2140,16 +2137,14 @@ export class BookingStageService {
         actionMessage += ` — ${docCount} payment proof ${plural} been uploaded successfully.`;
       }
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by: data.created_by,
+        created_at: new Date(),
       });
 
       // 9️⃣ Map Uploaded Documents to LeadDocumentLogs
@@ -2395,17 +2390,15 @@ export class BookingStageService {
       }
 
       // 3️⃣ Create LeadDetailedLogs (parent log)
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action:
-            "Current site photos uploaded at Booking stage for Final Measurement.",
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action:
+          "Current site photos uploaded at Booking stage for Final Measurement.",
+        action_type: "CREATE",
+        created_by: data.created_by,
+        created_at: new Date(),
       });
 
       // 4️⃣ Create LeadDocumentLogs (child logs for each document)
@@ -2643,16 +2636,14 @@ export class BookingStageService {
         ? `${supervisor.user_name} has been reassigned as the site supervisor for this lead.`
         : `${supervisor.user_name} has been assigned as the site supervisor for this lead.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: logAction,
-          action_type: "UPDATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: logAction,
+        action_type: "UPDATE",
+        created_by: data.created_by,
+        created_at: new Date(),
       });
 
       // Complete any open/in_progress "Assign a Site Supervisor" tasks for this lead

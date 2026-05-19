@@ -7,6 +7,7 @@ import Joi from "joi";
 import { cache } from "../../../utils/cache";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -535,16 +536,14 @@ export class ReadyToDispatchService {
         actionMessage += ` — Remark: No remark provided.`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Site Readiness task assigned successfully", {

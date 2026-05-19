@@ -4,6 +4,7 @@ import {
   uploadToWasabiMeetingDocs,
   uploadToWasabiDesignQuotationFile,
 } from "../../../utils/wasabiClient";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { z } from "zod";
 import { Prisma } from "../../../prisma/generated";
 import fs from "node:fs/promises";
@@ -76,16 +77,14 @@ export class DesigingStage {
     });
 
     // ⭐ 6. LeadDetailedLogs entry (REQUIRED)
-    const detailedLog = await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id,
-        account_id: lead.account_id!,
-        action: `Lead has moved to Designing stage.`,
-        action_type: "UPDATE",
-        created_by: user_id,
-        created_at: new Date(),
-      },
+    const detailedLog = await createLeadLog(prisma, {
+      vendor_id,
+      lead_id,
+      account_id: lead.account_id!,
+      action: `Lead has moved to Designing stage.`,
+      action_type: "UPDATE",
+      created_by: user_id,
+      created_at: new Date(),
     });
 
     return { updatedLead, log };
@@ -464,16 +463,14 @@ export class DesigingStage {
           ? `${count} Quotations have been uploaded successfully.`
           : "Quotation has been uploaded successfully.";
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendorId,
-          lead_id: data.leadId,
-          account_id: accountId,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.userId,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendorId,
+        lead_id: data.leadId,
+        account_id: accountId,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by: data.userId,
+        created_at: new Date(),
       });
 
       await tx.leadDocumentLogs.createMany({

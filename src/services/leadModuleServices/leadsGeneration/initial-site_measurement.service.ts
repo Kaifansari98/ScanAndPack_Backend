@@ -1,3 +1,4 @@
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi from "../../../utils/wasabiClient";
 import { uploadToWasabiInitialSiteMeasurementFile } from "../../../utils/wasabiClient";
@@ -381,16 +382,14 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 
     // 6️⃣ Insert into LeadDetailedLogs
     if (actionMessage) {
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for ISM task assignment", {
@@ -914,16 +913,14 @@ export class PaymentUploadService {
             "Initial Site Measurements have been uploaded successfully.";
 
           // Create parent log entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           // Log each document (if any)
@@ -1277,16 +1274,14 @@ export class PaymentUploadService {
           /* ----------------------------------
              6️⃣ Logs
           ---------------------------------- */
-          const log = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: "Booking Done – ISM documents uploaded successfully.",
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const log = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: "Booking Done – ISM documents uploaded successfully.",
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           if (response.documentsUploaded.length) {
@@ -2153,16 +2148,14 @@ export class PaymentUploadService {
               : "Payment details updated successfully.";
 
           // Create LeadDetailedLogs entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "UPDATE",
-              created_by: data.updated_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "UPDATE",
+            created_by: data.updated_by,
+            created_at: new Date(),
           });
 
           // If new documents were uploaded → create mapping logs
@@ -2424,16 +2417,14 @@ export class PaymentUploadService {
 
       const signed_url = await generateSignedUrl(pdfS3Key);
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id!,
-          action: "Initial Site Measurement document updated successfully.",
-          action_type: "UPDATE",
-          created_by: userId,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: existingDoc.lead_id!,
+        account_id: existingDoc.account_id!,
+        action: "Initial Site Measurement document updated successfully.",
+        action_type: "UPDATE",
+        created_by: userId,
+        created_at: new Date(),
       });
 
       await tx.leadDocumentLogs.createMany({

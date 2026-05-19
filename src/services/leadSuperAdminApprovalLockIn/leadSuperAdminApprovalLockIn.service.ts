@@ -18,6 +18,7 @@ import {
 } from "../email/brevoEmail2.service";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
+import { createLeadLog } from "../../utils/leadDetailedLog";
 
 type TxClient = Prisma.TransactionClient;
 
@@ -255,16 +256,14 @@ export class LeadSuperAdminApprovalLockInService {
     }
 
     if (isNewApproval) {
-      await db.leadDetailedLogs.create({
-        data: {
-          vendor_id: input.vendor_id,
-          lead_id: input.lead_id,
-          account_id: lead.account_id,
-          action: `Lead moved to Booking Done and is now waiting for Accounts approval before Final Measurement can be assigned.`,
-          action_type: "CREATE",
-          created_by: input.created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(db, {
+        vendor_id: input.vendor_id,
+        lead_id: input.lead_id,
+        account_id: lead.account_id,
+        action: `Lead moved to Booking Done and is now waiting for Accounts approval before Final Measurement can be assigned.`,
+        action_type: "CREATE",
+        created_by: input.created_by,
+        created_at: new Date(),
       });
     }
 
@@ -486,17 +485,15 @@ export class LeadSuperAdminApprovalLockInService {
     }
 
     if (isNewApproval) {
-      await db.leadDetailedLogs.create({
-        data: {
-          vendor_id: input.vendor_id,
-          lead_id: input.lead_id,
-          account_id: lead.account_id,
-          action:
-            "Lead moved to Order Login and is now waiting for Accounts approval before Production Files and Order Login can be filled.",
-          action_type: "CREATE",
-          created_by: input.created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(db, {
+        vendor_id: input.vendor_id,
+        lead_id: input.lead_id,
+        account_id: lead.account_id,
+        action:
+          "Lead moved to Order Login and is now waiting for Accounts approval before Production Files and Order Login can be filled.",
+        action_type: "CREATE",
+        created_by: input.created_by,
+        created_at: new Date(),
       });
     }
 
@@ -696,17 +693,15 @@ export class LeadSuperAdminApprovalLockInService {
     }
 
     if (isNewApproval) {
-      await db.leadDetailedLogs.create({
-        data: {
-          vendor_id: input.vendor_id,
-          lead_id: input.lead_id,
-          account_id: lead.account_id,
-          action:
-            "Lead moved to Dispatch Planning and is now waiting for Accounts approval before Dispatch Planning inputs can be filled.",
-          action_type: "CREATE",
-          created_by: input.created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(db, {
+        vendor_id: input.vendor_id,
+        lead_id: input.lead_id,
+        account_id: lead.account_id,
+        action:
+          "Lead moved to Dispatch Planning and is now waiting for Accounts approval before Dispatch Planning inputs can be filled.",
+        action_type: "CREATE",
+        created_by: input.created_by,
+        created_at: new Date(),
       });
     }
 
@@ -927,16 +922,14 @@ export class LeadSuperAdminApprovalLockInService {
         actionMessage += ` — Remark: ${input.approval_remark.trim()}`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: task.vendor_id,
-          lead_id: input.lead_id,
-          account_id: task.account_id,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: input.approved_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: task.vendor_id,
+        lead_id: input.lead_id,
+        account_id: task.account_id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: input.approved_by,
+        created_at: new Date(),
       });
 
       return {
@@ -1126,16 +1119,14 @@ export class LeadSuperAdminApprovalLockInService {
         actionMessage += ` — Remark: ${input.approval_remark.trim()}`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: task.vendor_id,
-          lead_id: input.lead_id,
-          account_id: task.account_id,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: input.approved_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: task.vendor_id,
+        lead_id: input.lead_id,
+        account_id: task.account_id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: input.approved_by,
+        created_at: new Date(),
       });
 
       return {
@@ -1412,16 +1403,14 @@ export class LeadSuperAdminApprovalLockInService {
         actionMessage += ` — Remark: ${input.approval_remark.trim()}`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: task.vendor_id,
-          lead_id: input.lead_id,
-          account_id: task.account_id,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: input.approved_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: task.vendor_id,
+        lead_id: input.lead_id,
+        account_id: task.account_id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: input.approved_by,
+        created_at: new Date(),
       });
 
       return {

@@ -1,3 +1,5 @@
+import { createLeadLog } from "../../utils/leadDetailedLog";
+
 type TaskHistoryTask = {
   id?: number;
   vendor_id: number;
@@ -70,17 +72,15 @@ export const createTaskHistoryLog = async ({
   action,
   documentIds = [],
 }: CreateTaskHistoryLogInput) => {
-  const detailedLog = await db.leadDetailedLogs.create({
-    data: {
-      vendor_id: task.vendor_id,
-      lead_id: task.lead_id,
-      account_id: task.account_id,
-      action: action ?? buildDefaultAction({ task, actionType }),
-      action_type: actionType,
-      history_type: resolveHistoryType(task.task_type),
-      created_by: createdBy,
-      created_at: new Date(),
-    } as any,
+  const detailedLog = await createLeadLog(db, {
+    vendor_id: task.vendor_id,
+    lead_id: task.lead_id,
+    account_id: task.account_id,
+    action: action ?? buildDefaultAction({ task, actionType }),
+    action_type: actionType,
+    history_type: resolveHistoryType(task.task_type),
+    created_by: createdBy,
+    created_at: new Date(),
   });
 
   if (documentIds.length > 0) {

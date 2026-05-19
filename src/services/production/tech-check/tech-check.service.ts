@@ -5,6 +5,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export type ApproveTechCheckResult =
   | {
@@ -124,15 +125,13 @@ export class TechCheckService {
             });
           }
 
-          await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: effectiveAccountId,
-              action: `Tech Check completed for instance ${instance.title}`,
-              action_type: "UPDATE",
-              created_by: userId,
-            },
+          await createLeadLog(tx, {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: effectiveAccountId,
+            action: `Tech Check completed for instance ${instance.title}`,
+            action_type: "UPDATE",
+            created_by: userId,
           });
 
           const pendingInstances = await tx.leadProductStructureInstance.count({
@@ -253,15 +252,13 @@ export class TechCheckService {
             });
             const assignedUserName = assignedUser?.user_name ?? `User #${assignToUserId}`;
 
-            await tx.leadDetailedLogs.create({
-              data: {
-                vendor_id: vendorId,
-                lead_id: leadId,
-                account_id: effectiveAccountId,
-                action: `All instances tech check completed. Lead moved to Order Login and assigned to ${assignedUserName}`,
-                action_type: "STATUS_CHANGE",
-                created_by: userId,
-              },
+            await createLeadLog(tx, {
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: effectiveAccountId,
+              action: `All instances tech check completed. Lead moved to Order Login and assigned to ${assignedUserName}`,
+              action_type: "STATUS_CHANGE",
+              created_by: userId,
             });
 
             if (!orderLoginLockIn && isAccountLocInEnabled) {
@@ -399,15 +396,13 @@ export class TechCheckService {
         });
         const assignedUserNameForLog = assignedUserForLog?.user_name ?? `User #${assignToUserId}`;
 
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: `Tech Check approved, Lead moved to Order Login.`,
-            action_type: "STATUS_CHANGE",
-            created_by: userId,
-          },
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Tech Check approved, Lead moved to Order Login.`,
+          action_type: "STATUS_CHANGE",
+          created_by: userId,
         });
 
         const orderLoginLockIn = isAccountLocInEnabled
@@ -631,15 +626,13 @@ export class TechCheckService {
         },
       });
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Tech check approved ${approvedDocs.length} documents`,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `Tech check approved ${approvedDocs.length} documents`,
+        action_type: "UPDATE",
+        created_by: userId,
       });
 
       if (approvedDocs.length) {
@@ -783,15 +776,13 @@ export class TechCheckService {
         ? `Tech check rejected ${rejectedDocs.length} documents — Remark: ${remark}`
         : `Tech check rejected ${rejectedDocs.length} documents`;
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: actionText,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: actionText,
+        action_type: "UPDATE",
+        created_by: userId,
       });
 
       const updateRes = await tx.leadDocuments.updateMany({

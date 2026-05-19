@@ -9,6 +9,7 @@ import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/lead
 import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 // 🧩 Define this at the top of your service file
 
@@ -591,15 +592,13 @@ export class OrderLoginService {
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: Number(lead_id),
-        account_id: Number(account_id),
-        action: `Order Login entry created: ${item_type} — ${item_desc}`,
-        action_type: "CREATE",
-        created_by: Number(created_by),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: Number(lead_id),
+      account_id: Number(account_id),
+      action: `Order Login entry created: ${item_type} — ${item_desc}`,
+      action_type: "CREATE",
+      created_by: Number(created_by),
     });
 
     return newOrderLogin;
@@ -694,15 +693,13 @@ export class OrderLoginService {
 
     if (results.length > 0) {
       const firstCreatedBy = breakups.find((b) => b.created_by)?.created_by;
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Order Login entries submitted: ${results.length} created/updated`,
-          action_type: "CREATE",
-          created_by: Number(firstCreatedBy),
-        },
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `Order Login entries submitted: ${results.length} created/updated`,
+        action_type: "CREATE",
+        created_by: Number(firstCreatedBy),
       });
     }
 
@@ -853,15 +850,13 @@ export class OrderLoginService {
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: Number(lead_id),
-        account_id: existing.account_id,
-        action: `Order Login entry updated: ${item_type} — ${item_desc}`,
-        action_type: "UPDATE",
-        created_by: Number(updated_by),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: Number(lead_id),
+      account_id: existing.account_id,
+      action: `Order Login entry updated: ${item_type} — ${item_desc}`,
+      action_type: "UPDATE",
+      created_by: Number(updated_by),
     });
 
     return updated;
@@ -940,15 +935,13 @@ export class OrderLoginService {
           },
         });
 
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: existing.account_id,
-            action: `Order Login entry updated: ${item_type} — ${item_desc}`,
-            action_type: "UPDATE",
-            created_by: Number(updated_by),
-          },
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: existing.account_id,
+          action: `Order Login entry updated: ${item_type} — ${item_desc}`,
+          action_type: "UPDATE",
+          created_by: Number(updated_by),
         });
 
         results.push(updated);
@@ -981,15 +974,13 @@ export class OrderLoginService {
       where: { id: orderLoginId },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: existing.lead_id,
-        account_id: existing.account_id,
-        action: `Order Login entry deleted: ${existing.item_type} — ${existing.item_desc}`,
-        action_type: "DELETE",
-        created_by: userId,
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: existing.lead_id,
+      account_id: existing.account_id,
+      action: `Order Login entry deleted: ${existing.item_type} — ${existing.item_desc}`,
+      action_type: "DELETE",
+      created_by: userId,
     });
 
     return deleted;
@@ -1151,15 +1142,13 @@ export class OrderLoginService {
     }
 
     if (accountId) {
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Production files uploaded: ${files.length} file(s)`,
-          action_type: "CREATE",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `Production files uploaded: ${files.length} file(s)`,
+        action_type: "CREATE",
+        created_by: userId,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -1546,15 +1535,13 @@ export class OrderLoginService {
             ? `${rawLeadCode}.${instance.quantity_index}`
             : rawLeadCode;
 
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: effectiveAccountId,
-            action: `Order Login stage completed for instance ${instance.title} (${instanceCode})`,
-            action_type: "UPDATE",
-            created_by: userId,
-          },
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: effectiveAccountId,
+          action: `Order Login stage completed for instance ${instance.title} (${instanceCode})`,
+          action_type: "UPDATE",
+          created_by: userId,
         });
 
         // 6. Check pending instances
@@ -1647,15 +1634,13 @@ export class OrderLoginService {
           });
           const assignedUserNameForProd = assignedUserForProd?.user_name ?? `User #${assignToUserId}`;
 
-          await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: effectiveAccountId,
-              action: `All instances order login completed. Lead moved to Production, Required completion date: ${requiredDate.toLocaleDateString()}`,
-              action_type: "STATUS_CHANGE",
-              created_by: userId,
-            },
+          await createLeadLog(tx, {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: effectiveAccountId,
+            action: `All instances order login completed. Lead moved to Production, Required completion date: ${requiredDate.toLocaleDateString()}`,
+            action_type: "STATUS_CHANGE",
+            created_by: userId,
           });
 
           leadMoved = true;
@@ -2235,15 +2220,13 @@ export class OrderLoginService {
     });
     const assignedUserNameForLog = assignedUserForLog?.user_name ?? `User #${assignToUserId}`;
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: accountId,
-        action: `Lead moved to Production Stage and assigned to ${assignedUserNameForLog}. Required completion date: ${requiredDate.toLocaleDateString()}`,
-        action_type: "STATUS_CHANGE",
-        created_by: userId,
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: accountId,
+      action: `Lead moved to Production Stage and assigned to ${assignedUserNameForLog}. Required completion date: ${requiredDate.toLocaleDateString()}`,
+      action_type: "STATUS_CHANGE",
+      created_by: userId,
     });
 
     const leadMeta = await prisma.leadMaster.findUnique({
@@ -2536,16 +2519,14 @@ export class OrderLoginService {
 
       if (lead?.account_id) {
         const orderLoginLabel = orderLoginRecord?.item_type ?? `Order Login #${orderLoginId}`;
-        const detailedLog = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: lead.account_id,
-            action: `PO files uploaded for "${orderLoginLabel}": ${files.length} file(s)`,
-            action_type: "CREATE",
-            history_type: "Lead",
-            created_by: userId,
-          },
+        const detailedLog = await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id,
+          action: `PO files uploaded for "${orderLoginLabel}": ${files.length} file(s)`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by: userId,
         });
 
         await tx.leadDocumentLogs.createMany({
@@ -2706,16 +2687,14 @@ export class OrderLoginService {
       });
 
       if (mapping.lead?.account_id) {
-        const detailedLog = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: mapping.lead_id,
-            account_id: mapping.lead.account_id,
-            action: `PO file deleted: ${mapping.document.doc_og_name ?? "Unknown file"}`,
-            action_type: "DELETE",
-            history_type: "Lead",
-            created_by: userId,
-          },
+        const detailedLog = await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: mapping.lead_id,
+          account_id: mapping.lead.account_id,
+          action: `PO file deleted: ${mapping.document.doc_og_name ?? "Unknown file"}`,
+          action_type: "DELETE",
+          history_type: "Lead",
+          created_by: userId,
         });
 
         await tx.leadDocumentLogs.create({
@@ -2890,15 +2869,13 @@ export class OrderLoginService {
     }
 
     if (leadForLog?.account_id) {
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: leadForLog.account_id,
-          action: `Order Login marked as filled for instance "${instance.title}"`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: leadForLog.account_id,
+        action: `Order Login marked as filled for instance "${instance.title}"`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
       });
     }
 
@@ -2963,15 +2940,13 @@ export class OrderLoginService {
     });
 
     if (lead.account_id) {
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id,
-          action: `Production files remark updated: ${remark.trim() || "N/A"}`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action: `Production files remark updated: ${remark.trim() || "N/A"}`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
       });
     }
 

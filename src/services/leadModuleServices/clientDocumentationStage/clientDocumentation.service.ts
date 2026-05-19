@@ -11,6 +11,7 @@ import {
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export type DocTypeTag = "Type 11" | "Type 12";
 
@@ -161,16 +162,14 @@ export class ClientDocumentationService {
       const plural = docCount > 1 ? "documents have" : "document has";
       const actionMessage = `Client Documentation Done Successfully and Lead Moved to Client Approval`;
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by: data.created_by,
+        created_at: new Date(),
       });
 
       if (response.documents.length > 0) {
@@ -380,16 +379,14 @@ export class ClientDocumentationService {
         createdBy: data.updated_by,
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: lead.account_id,
-          action: `Lead has been moved to Client Approval stage.`,
-          action_type: "UPDATE",
-          created_by: data.updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: lead.account_id,
+        action: `Lead has been moved to Client Approval stage.`,
+        action_type: "UPDATE",
+        created_by: data.updated_by,
+        created_at: new Date(),
       });
 
       return { moved: true, status_id: clientApprovalStatus.id };
@@ -1105,15 +1102,13 @@ export class ClientDocumentationService {
 
       const docCount = response.documents.length;
 
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: `${docCount} Revised Documents uploaded Successfully.`,
-          action_type: "UPLOAD",
-          created_by: data.created_by,
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: `${docCount} Revised Documents uploaded Successfully.`,
+        action_type: "UPLOAD",
+        created_by: data.created_by,
       });
 
       await tx.leadDocumentLogs.createMany({
