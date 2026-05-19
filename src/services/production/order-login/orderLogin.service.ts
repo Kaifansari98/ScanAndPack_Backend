@@ -693,6 +693,7 @@ export class OrderLoginService {
 
     if (results.length > 0) {
       const firstCreatedBy = breakups.find((b) => b.created_by)?.created_by;
+      const firstInstanceId = breakups.find((b) => b.instance_id != null)?.instance_id;
       await createLeadLog(prisma, {
         vendor_id: vendorId,
         lead_id: leadId,
@@ -700,6 +701,7 @@ export class OrderLoginService {
         action: `Order Login entries submitted: ${results.length} created/updated`,
         action_type: "CREATE",
         created_by: Number(firstCreatedBy),
+        instance_id: firstInstanceId ? Number(firstInstanceId) : undefined,
       });
     }
 
@@ -1149,6 +1151,7 @@ export class OrderLoginService {
         action: `Production files uploaded: ${files.length} file(s)`,
         action_type: "CREATE",
         created_by: userId,
+        instance_id: instanceId ?? undefined,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -1542,6 +1545,7 @@ export class OrderLoginService {
           action: `Order Login stage completed for instance ${instance.title} (${instanceCode})`,
           action_type: "UPDATE",
           created_by: userId,
+          instance_id: instanceId ?? undefined,
         });
 
         // 6. Check pending instances
@@ -1641,6 +1645,7 @@ export class OrderLoginService {
             action: `All instances order login completed. Lead moved to Production, Required completion date: ${requiredDate.toLocaleDateString()}`,
             action_type: "STATUS_CHANGE",
             created_by: userId,
+            instance_id: instanceId ?? undefined,
           });
 
           leadMoved = true;
@@ -2876,6 +2881,7 @@ export class OrderLoginService {
         action: `Order Login marked as filled for instance "${instance.title}"`,
         action_type: "UPDATE",
         created_by: updatedBy,
+        instance_id: instanceId,
       });
     }
 

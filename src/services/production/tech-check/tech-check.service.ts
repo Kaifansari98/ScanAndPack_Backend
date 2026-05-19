@@ -132,6 +132,7 @@ export class TechCheckService {
             action: `Tech Check completed for instance ${instance.title}`,
             action_type: "UPDATE",
             created_by: userId,
+            instance_id: productStructureInstanceId,
           });
 
           const pendingInstances = await tx.leadProductStructureInstance.count({
@@ -259,6 +260,7 @@ export class TechCheckService {
               action: `All instances tech check completed. Lead moved to Order Login and assigned to ${assignedUserName}`,
               action_type: "STATUS_CHANGE",
               created_by: userId,
+              instance_id: productStructureInstanceId,
             });
 
             if (!orderLoginLockIn && isAccountLocInEnabled) {
@@ -633,6 +635,7 @@ export class TechCheckService {
         action: `Tech check approved ${approvedDocs.length} documents`,
         action_type: "UPDATE",
         created_by: userId,
+        instance_id: instanceId,
       });
 
       if (approvedDocs.length) {

@@ -75,6 +75,7 @@ export class PostProductionService {
         action: `QC Photos uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
         action_type: "CREATE",
         created_by: userId,
+        instance_id: instanceId ?? undefined,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -218,6 +219,7 @@ export class PostProductionService {
           action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
           action_type: "CREATE",
           created_by: userId,
+          instance_id: instanceId ?? undefined,
         });
 
         await prisma.leadDocumentLogs.createMany({
@@ -366,6 +368,7 @@ export class PostProductionService {
           action_type: "CREATE",
           history_type: "Lead",
           created_by: userId,
+          instance_id: instanceId ?? undefined,
         });
 
         await prisma.leadDocumentLogs.createMany({
@@ -615,6 +618,7 @@ export class PostProductionService {
           action_type: "UPDATE",
           history_type: "Lead",
           created_by: userId,
+          instance_id: instanceId,
         });
       }
 
@@ -887,6 +891,7 @@ export class PostProductionService {
         action: `Pre-production files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
         action_type: "CREATE",
         created_by: userId,
+        instance_id: instanceId ?? undefined,
       });
 
       await prisma.leadDocumentLogs.createMany({

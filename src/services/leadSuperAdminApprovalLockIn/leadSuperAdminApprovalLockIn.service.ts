@@ -494,6 +494,7 @@ export class LeadSuperAdminApprovalLockInService {
         action_type: "CREATE",
         created_by: input.created_by,
         created_at: new Date(),
+        instance_id: input.instance_id ?? undefined,
       });
     }
 

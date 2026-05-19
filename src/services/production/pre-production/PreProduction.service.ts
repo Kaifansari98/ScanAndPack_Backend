@@ -334,6 +334,7 @@ export class PreProductionService {
         action_type: "UPDATE",
         history_type: "Lead",
         created_by: updatedBy,
+        instance_id: instanceId ?? undefined,
       });
     }
 
@@ -601,6 +602,7 @@ export class PreProductionService {
             action_type: "UPDATE",
             history_type: "Lead",
             created_by: Number(updated_by),
+            instance_id: Number(instance_id),
           });
         }
 
