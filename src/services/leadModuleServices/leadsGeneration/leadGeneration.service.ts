@@ -2818,6 +2818,12 @@ export const getLeadLogsWithDocuments = async (params: {
       }),
     },
     include: {
+      stage: {
+        select: {
+          id: true,
+          type: true,
+        },
+      },
       user: {
         select: {
           id: true,
@@ -2871,6 +2877,12 @@ export const getLeadLogsWithDocuments = async (params: {
         id: log.id,
         action: log.action,
         action_type: log.action_type,
+        stage: log.stage
+          ? {
+              id: log.stage.id,
+              name: log.stage.type,
+            }
+          : null,
         created_at: log.created_at,
         created_by: {
           id: log.user.id,
