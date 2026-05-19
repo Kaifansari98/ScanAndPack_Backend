@@ -1,5 +1,6 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
@@ -225,16 +226,14 @@ export class DispatchStageService {
         ? `Dispatch details updated. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`
         : `Dispatch details added. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`;
 
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id,
-          action,
-          action_type: hadDispatchDetails ? "UPDATE" : "CREATE",
-          history_type: "Lead",
-          created_by: data.updated_by,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action,
+        action_type: hadDispatchDetails ? "UPDATE" : "CREATE",
+        history_type: "Lead",
+        created_by: data.updated_by,
       });
     }
 
@@ -313,16 +312,14 @@ export class DispatchStageService {
     }
 
     if (accountId && uploadedDocs.length > 0) {
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
-          action_type: "CREATE",
-          history_type: "Lead",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -506,16 +503,14 @@ export class DispatchStageService {
     }
 
     if (accountId && uploadedDocs.length > 0) {
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `${uploadedDocs.length} Post Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
-          action_type: "CREATE",
-          history_type: "Lead",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Post Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
       });
 
       await prisma.leadDocumentLogs.createMany({

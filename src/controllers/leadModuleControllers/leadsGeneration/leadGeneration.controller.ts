@@ -33,6 +33,7 @@ import {
   editTaskISMService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
@@ -1441,16 +1442,14 @@ export class LeadController {
         const newLabel = newType?.type || "Unknown";
         const actionMessage = `Product Type has been updated from "${oldLabel}" to "${newLabel}".`;
 
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: lead.vendor_id,
-            lead_id: leadId,
-            account_id: lead.account_id!,
-            action: actionMessage,
-            action_type: "UPDATE",
-            created_by: updatedBy,
-            created_at: new Date(),
-          },
+        await createLeadLog(prisma, {
+          vendor_id: lead.vendor_id,
+          lead_id: leadId,
+          account_id: lead.account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
         });
       }
 
@@ -2341,16 +2340,14 @@ export class LeadController {
                           ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
               : `Document "${existingDoc.doc_og_name}" was deleted.`;
 
-        const detailedLog = await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: Number(vendorId),
-            lead_id: existingDoc.lead_id!,
-            account_id: existingDoc.account_id,
-            action,
-            action_type: "DELETE",
-            history_type: "Lead",
-            created_by: Number(deleted_by),
-          },
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: Number(vendorId),
+          lead_id: existingDoc.lead_id!,
+          account_id: existingDoc.account_id,
+          action,
+          action_type: "DELETE",
+          history_type: "Lead",
+          created_by: Number(deleted_by),
         });
 
         await prisma.leadDocumentLogs.create({

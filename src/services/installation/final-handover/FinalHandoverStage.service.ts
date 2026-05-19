@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
@@ -311,16 +312,14 @@ export class FinalHandoverStageService {
       const docs = uploadedBySection[section.key];
       if (!docs.length) continue;
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `${docs.length} ${section.label}${docs.length > 1 ? "s" : ""} uploaded successfully.`,
-          action_type: "CREATE",
-          history_type: "Lead",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${docs.length} ${section.label}${docs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -627,18 +626,16 @@ export class FinalHandoverStageService {
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: lead.account_id!,
-        action: isAmcOpted
-          ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
-          : "AMC opted in marked as No and AMC date/time cleared.",
-        action_type: "UPDATE",
-        created_by: updatedBy,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: lead.account_id!,
+      action: isAmcOpted
+        ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
+        : "AMC opted in marked as No and AMC date/time cleared.",
+      action_type: "UPDATE",
+      created_by: updatedBy,
+      created_at: new Date(),
     });
 
     return updatedLead;
@@ -807,16 +804,14 @@ export class FinalHandoverStageService {
       // 4. Insert Audit Log
       const actionMessage = `Lead moved to Project Completed Stage.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("✅ Project Completed DB update done", {

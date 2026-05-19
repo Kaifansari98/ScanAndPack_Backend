@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 
 export class ServicingService {
@@ -121,16 +122,14 @@ export class ServicingService {
       )
       .join(", ");
 
-    await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: service.account_id,
-        action: `AMC service schedule created after 3rd free service completion. ${scheduleSummary}.`,
-        action_type: "UPDATE",
-        created_by: completedBy,
-        created_at: completedAt,
-      },
+    await createLeadLog(tx, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: service.account_id,
+      action: `AMC service schedule created after 3rd free service completion. ${scheduleSummary}.`,
+      action_type: "UPDATE",
+      created_by: completedBy,
+      created_at: completedAt,
     });
   }
 
@@ -414,18 +413,16 @@ export class ServicingService {
         });
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} rescheduled from ${this.formatDateTimeInIndia(
-            currentScheduledFor,
-          )} to ${this.formatDateTimeInIndia(nextScheduledFor)}.`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: service.account_id,
+        action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} rescheduled from ${this.formatDateTimeInIndia(
+          currentScheduledFor,
+        )} to ${this.formatDateTimeInIndia(nextScheduledFor)}.`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       return updatedService;
@@ -548,16 +545,14 @@ export class ServicingService {
         });
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} marked as rejected. Remark: ${remark.trim()}`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: rejectedAt,
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: service.account_id,
+        action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} marked as rejected. Remark: ${remark.trim()}`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: rejectedAt,
       });
 
       return updatedService;
@@ -659,16 +654,14 @@ export class ServicingService {
         });
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} status changed from rejected to open.`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: reopenedAt,
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: service.account_id,
+        action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} status changed from rejected to open.`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: reopenedAt,
       });
 
       return updatedService;
@@ -909,16 +902,14 @@ export class ServicingService {
               amcDocCount > 1 ? "documents have" : "document has"
             } been uploaded successfully.`
           : "";
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: service.account_id,
-          action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${amcDocMessage}${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
-          action_type: "UPDATE",
-          created_by: completedBy,
-          created_at: completedAt,
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: service.account_id,
+        action: `${this.formatServiceLogLabel(service.service_type, service.service_no)} completed successfully — ${docCount} servicing completion ${plural} been uploaded successfully.${amcDocMessage}${remark?.trim() ? ` Remark: ${remark.trim()}` : ""}`,
+        action_type: "UPDATE",
+        created_by: completedBy,
+        created_at: completedAt,
       });
 
       await tx.leadDocumentLogs.createMany({
@@ -996,16 +987,14 @@ export class ServicingService {
     }
 
     if (accountId && uploadedDocs.length > 0) {
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `${uploadedDocs.length} AMC Contract Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
-          action_type: "CREATE",
-          history_type: "Lead",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} AMC Contract Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
       });
 
       await prisma.leadDocumentLogs.createMany({

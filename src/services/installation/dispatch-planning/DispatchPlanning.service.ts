@@ -1,5 +1,6 @@
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
@@ -341,15 +342,13 @@ export class DispatchPlanningService {
       }
 
       // 5️⃣ Create LeadDetailedLogs Entry
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id,
-          created_by,
-          action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
-          action_type: "UPDATE", // or "create" depending on your enum usage
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id,
+        created_by,
+        action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
+        action_type: "UPDATE",
       });
 
       // 6️⃣ If document uploaded → create LeadDocumentLogs entry
@@ -583,16 +582,14 @@ export class DispatchPlanningService {
         createdBy: updatedBy,
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Dispatch stage.",
-          action_type: "UPDATE",
-          history_type: "Lead",
-          created_by: updatedBy,
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Dispatch stage.",
+        action_type: "UPDATE",
+        history_type: "Lead",
+        created_by: updatedBy,
       });
 
       const leadPlanningData = await tx.leadMaster.findUnique({

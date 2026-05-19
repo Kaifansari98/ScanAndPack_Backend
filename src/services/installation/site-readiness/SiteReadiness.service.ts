@@ -1,6 +1,7 @@
 import { UserLeadTask } from "./../../../../generated/prisma_client/browser";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -557,16 +558,14 @@ export class SiteReadinessService {
       // 4️⃣ Add Detailed Log Entry
       const actionMessage = `Site readiness task is been completed and lead moved to Dispatch Planning.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       // 4️⃣ Actually move lead to Dispatch Planning (UPDATE STATUS)

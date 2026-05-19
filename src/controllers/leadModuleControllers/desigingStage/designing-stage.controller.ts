@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import { ApiResponse } from "../../../utils/apiResponse";
 import { DesigingStage } from "../../../services/leadModuleServices/desigingStage/designing-stage.service";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
   generateSignedUrl,
   uploadToWasabi,
@@ -496,16 +497,14 @@ export class DesigingStageController {
           const actionMessage = `Meeting scheduled on ${formattedDate} has been added successfully.`;
           const remarkText = desc || "No description provided.";
 
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: Number(vendorId),
-              lead_id: Number(leadId),
-              account_id: Number(accountId),
-              action: actionMessage,
-              action_type: "CREATE",
-              created_by: Number(userId),
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: Number(userId),
+            created_at: new Date(),
           });
 
           logs.push({ leadDetailedLogCreated: detailedLog });
@@ -644,16 +643,14 @@ export class DesigingStageController {
 
         // ✅ 3. Log into LeadDetailedLogs
         const actionMsg = `${newDocs.length} meeting file(s) added`;
-        const logEntry = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: Number(vendorId),
-            lead_id: Number(leadId),
-            account_id: Number(accountId),
-            action: actionMsg,
-            action_type: "UPDATE",
-            created_by: Number(userId),
-            created_at: new Date(),
-          },
+        const logEntry = await createLeadLog(tx, {
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+          account_id: Number(accountId),
+          action: actionMsg,
+          action_type: "UPDATE",
+          created_by: Number(userId),
+          created_at: new Date(),
         });
 
         // ✅ 4. Link documents to logs
@@ -845,16 +842,14 @@ export class DesigingStageController {
               ? `${newDocs.length} Designs have been added successfully.`
               : "Design has been added successfully.";
 
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: Number(vendorId),
-              lead_id: Number(leadId),
-              account_id: Number(accountId),
-              action: message,
-              action_type: "CREATE",
-              created_by: Number(userId),
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            action: message,
+            action_type: "CREATE",
+            created_by: Number(userId),
+            created_at: new Date(),
           });
 
           await tx.leadDocumentLogs.createMany({
@@ -1256,16 +1251,14 @@ export class DesigingStageController {
         actionMessage += ` — Remark: ${String(desc).trim()}`;
       }
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: Number(vendor_id),
-          lead_id: Number(lead_id),
-          account_id: Number(account_id),
-          action: actionMessage, // includes the remark now
-          action_type: "CREATE",
-          created_by: Number(created_by),
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: Number(vendor_id),
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        action: actionMessage, // includes the remark now
+        action_type: "CREATE",
+        created_by: Number(created_by),
+        created_at: new Date(),
       });
 
       logs.push({ leadDetailedLogCreated: detailedLog });
@@ -1590,16 +1583,14 @@ export class DesigingStageController {
         actionMessage += ` — Remark: ${String(desc).trim()}`;
       }
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendor_id,
-          lead_id: lead_id,
-          account_id: account_id,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: Number(updated_by),
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendor_id,
+        lead_id: lead_id,
+        account_id: account_id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: Number(updated_by),
+        created_at: new Date(),
       });
 
       logs.push({ leadDetailedLogCreated: detailedLog });

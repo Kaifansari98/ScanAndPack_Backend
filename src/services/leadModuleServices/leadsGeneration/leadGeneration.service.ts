@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
   CreateLeadDTO,
   SiteSupervisorData,
@@ -467,16 +468,14 @@ export const createLeadService = async (
         });
 
         // 7. LeadDetailedLogs entry
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id,
-            lead_id: lead.id,
-            account_id: account.id,
-            action: "Lead has been created successfully",
-            action_type: "CREATE",
-            created_by,
-            created_at: new Date(),
-          },
+        await createLeadLog(tx, {
+          vendor_id,
+          lead_id: lead.id,
+          account_id: account.id,
+          action: "Lead has been created successfully",
+          action_type: "CREATE",
+          created_by,
+          created_at: new Date(),
         });
         logger.info("✅ LeadDetailedLogs entry created for lead creation", {
           lead_id: lead.id,
@@ -658,16 +657,14 @@ export const uploadMoreSitePhotosService = async (
       uploadedDocs.push(document);
     }
 
-    const detailedLog = await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id: lead.id,
-        account_id: lead.account_id!,
-        action: `Additional site photos uploaded (${uploadedDocs.length})`,
-        action_type: "CREATE",
-        created_by,
-        created_at: new Date(),
-      },
+    const detailedLog = await createLeadLog(tx, {
+      vendor_id,
+      lead_id: lead.id,
+      account_id: lead.account_id!,
+      action: `Additional site photos uploaded (${uploadedDocs.length})`,
+      action_type: "CREATE",
+      created_by,
+      created_at: new Date(),
     });
 
     await tx.leadDocumentLogs.createMany({
@@ -1096,16 +1093,14 @@ export const deleteLeadProductStructureInstance = async (
       where: { id: existing.id },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: existing.account_id,
-        action: `Product structure instance deleted : ${existing.title}`,
-        action_type: "DELETE",
-        created_by: deletedBy ?? existing.updated_by ?? existing.created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: existing.account_id,
+      action: `Product structure instance deleted : ${existing.title}`,
+      action_type: "DELETE",
+      created_by: deletedBy ?? existing.updated_by ?? existing.created_by,
+      created_at: new Date(),
     });
 
     return { count: 1 };
@@ -1185,16 +1180,14 @@ export const updateLeadProductStructureInstance = async ({
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: existing.account_id,
-        action: `Product structure instance updated for ${updated.title}`,
-        action_type: "UPDATE",
-        created_by: updated_by ?? existing.updated_by ?? existing.created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: existing.account_id,
+      action: `Product structure instance updated for ${updated.title}`,
+      action_type: "UPDATE",
+      created_by: updated_by ?? existing.updated_by ?? existing.created_by,
+      created_at: new Date(),
     });
 
     return updated;
@@ -1370,16 +1363,14 @@ export const createLeadProductStructureInstance = async ({
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: lead.account_id,
-        action: `Product structure instance added : ${instance.title}`,
-        action_type: "UPDATE",
-        created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: lead.account_id,
+      action: `Product structure instance added : ${instance.title}`,
+      action_type: "UPDATE",
+      created_by,
+      created_at: new Date(),
     });
 
     return instance;
@@ -1456,16 +1447,14 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
     });
 
     // 3️⃣ Add log entry in LeadDetailedLogs
-    await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id: lead.vendor_id,
-        lead_id: lead.id,
-        account_id: lead.account_id!,
-        action: "Lead has been deleted successfully",
-        action_type: "DELETE",
-        created_by: deletedBy,
-        created_at: new Date(),
-      },
+    await createLeadLog(tx, {
+      vendor_id: lead.vendor_id,
+      lead_id: lead.id,
+      account_id: lead.account_id!,
+      action: "Lead has been deleted successfully",
+      action_type: "DELETE",
+      created_by: deletedBy,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead deletion", {
@@ -1755,16 +1744,14 @@ export const updateLeadService = async (
     }
 
     // Insert into LeadDetailedLogs
-    await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id: updatedLead.id,
-        account_id: updatedAccount.id,
-        action: actionMessage,
-        action_type: "UPDATE",
-        created_by: updated_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(tx, {
+      vendor_id,
+      lead_id: updatedLead.id,
+      account_id: updatedAccount.id,
+      action: actionMessage,
+      action_type: "UPDATE",
+      created_by: updated_by,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead update", {
@@ -2414,16 +2401,14 @@ export const assignLeadToUser = async (
         ? `Lead has been assigned to ${newAssigneeName}.`
         : `Lead has been reassigned from ${oldAssigneeName} to ${newAssigneeName}.`;
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: lead.id,
-        account_id: lead.account?.id!,
-        action: actionMessage,
-        action_type: "UPDATE",
-        created_by: payload.assign_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: lead.id,
+      account_id: lead.account?.id!,
+      action: actionMessage,
+      action_type: "UPDATE",
+      created_by: payload.assign_by,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead assignment", {
@@ -2742,16 +2727,14 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
     // 6️⃣ Insert into LeadDetailedLogs (if applicable)
     if (actionMessage) {
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id: account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id: account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for task update", {
