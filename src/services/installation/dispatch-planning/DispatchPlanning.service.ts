@@ -590,6 +590,7 @@ export class DispatchPlanningService {
           account_id: lead.account_id!,
           action: "Lead moved to Dispatch stage.",
           action_type: "UPDATE",
+          history_type: "Lead",
           created_by: updatedBy,
         },
       });

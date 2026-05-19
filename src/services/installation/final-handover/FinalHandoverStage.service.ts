@@ -163,6 +163,13 @@ export class FinalHandoverStageService {
     },
   ) {
     const uploadedDocs: any[] = [];
+    const uploadedBySection: Record<string, any[]> = {
+      final_site_photos: [],
+      warranty_card: [],
+      handover_booklet: [],
+      final_handover_form: [],
+      qc_documents: [],
+    };
 
     // Get doc types
     const docTypes = await prisma.documentTypeMaster.findMany({
@@ -200,6 +207,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_site_photos.push(saved);
       }
     }
 
@@ -221,6 +229,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.warranty_card.push(saved);
       }
     }
 
@@ -242,6 +251,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.handover_booklet.push(saved);
       }
     }
 
@@ -263,6 +273,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_handover_form.push(saved);
       }
     }
 
@@ -284,7 +295,44 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.qc_documents.push(saved);
       }
+    }
+
+    const sectionMessages: Array<{ key: keyof typeof uploadedBySection; label: string }> = [
+      { key: "final_site_photos", label: "Final Site Photo" },
+      { key: "warranty_card", label: "Warranty Card Photo" },
+      { key: "handover_booklet", label: "Handover Booklet" },
+      { key: "final_handover_form", label: "Final Handover Form" },
+      { key: "qc_documents", label: "QC Document" },
+    ];
+
+    for (const section of sectionMessages) {
+      const docs = uploadedBySection[section.key];
+      if (!docs.length) continue;
+
+      const detailedLog = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `${docs.length} ${section.label}${docs.length > 1 ? "s" : ""} uploaded successfully.`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by: userId,
+        },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: docs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;

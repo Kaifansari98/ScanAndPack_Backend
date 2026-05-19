@@ -586,13 +586,22 @@ export class UnderInstallationStageService {
         data: mappingsData,
       });
 
+      const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+        "en-GB",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        },
+      );
+
       // 5️⃣ Log action in detailed logs
       await tx.leadDetailedLogs.create({
         data: {
           vendor_id: vendorId,
           lead_id: lead.id,
           account_id: lead.account_id!,
-          action: `Set expected installation end date (${expectedEndDate.toISOString()}) & added ${
+          action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${
             installers.length
           } installer(s)`,
           action_type: "UPDATE",
@@ -693,6 +702,15 @@ export class UnderInstallationStageService {
 
       // 2️⃣ Update expected installation end date (if provided)
       if (expectedEndDate) {
+        const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+          "en-GB",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          },
+        );
+
         await tx.leadMaster.update({
           where: { id: lead.id },
           data: {
@@ -702,7 +720,7 @@ export class UnderInstallationStageService {
           },
         });
         updates.push(
-          `expected installation end date → ${expectedEndDate.toISOString()}`,
+          `expected installation end date → ${formattedExpectedEndDate}`,
         );
       }
 
@@ -2733,6 +2751,8 @@ export class UnderInstallationStageService {
     // 3️⃣ Save Documents
     // -----------------------------------------
     const uploadedDocs = [];
+    const uploadedFinalSitePhotos: any[] = [];
+    const uploadedHandoverDocuments: any[] = [];
 
     for (const file of files) {
       const docTypeId = file.isImage
@@ -2752,6 +2772,61 @@ export class UnderInstallationStageService {
       });
 
       uploadedDocs.push(savedDoc);
+      if (file.isImage) {
+        uploadedFinalSitePhotos.push(savedDoc);
+      } else {
+        uploadedHandoverDocuments.push(savedDoc);
+      }
+    }
+
+    if (account_id && uploadedFinalSitePhotos.length > 0) {
+      const detailedLog = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id,
+          action: `${uploadedFinalSitePhotos.length} Final Site Photo${uploadedFinalSitePhotos.length > 1 ? "s" : ""} uploaded successfully.`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by,
+        },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedFinalSitePhotos.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
+    }
+
+    if (account_id && uploadedHandoverDocuments.length > 0) {
+      const detailedLog = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id,
+          lead_id,
+          account_id,
+          action: `${uploadedHandoverDocuments.length} Handover Document${uploadedHandoverDocuments.length > 1 ? "s" : ""} uploaded successfully.`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by,
+        },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedHandoverDocuments.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
     }
 
     return {

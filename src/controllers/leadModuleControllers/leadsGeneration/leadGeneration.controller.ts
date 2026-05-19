@@ -2294,6 +2294,11 @@ export class LeadController {
         include: {
           lead: true,
           account: true,
+          documentType: {
+            select: {
+              tag: true,
+            },
+          },
         },
       });
 
@@ -2315,13 +2320,33 @@ export class LeadController {
       });
 
       if (existingDoc.account_id) {
+        const action =
+          existingDoc.documentType?.tag === "Type 25"
+            ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+            : existingDoc.documentType?.tag === "Type 26"
+              ? `Handover Document "${existingDoc.doc_og_name}" was deleted.`
+              : existingDoc.documentType?.tag === "Type 27"
+                ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+                : existingDoc.documentType?.tag === "Type 28"
+                  ? `Warranty Card Photo "${existingDoc.doc_og_name}" was deleted.`
+                  : existingDoc.documentType?.tag === "Type 29"
+                    ? `Handover Booklet "${existingDoc.doc_og_name}" was deleted.`
+                    : existingDoc.documentType?.tag === "Type 30"
+                      ? `Final Handover Form "${existingDoc.doc_og_name}" was deleted.`
+                      : existingDoc.documentType?.tag === "Type 31"
+                        ? `QC Document "${existingDoc.doc_og_name}" was deleted.`
+                        : existingDoc.documentType?.tag === "Type 39"
+                          ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
+              : `Document "${existingDoc.doc_og_name}" was deleted.`;
+
         const detailedLog = await prisma.leadDetailedLogs.create({
           data: {
             vendor_id: Number(vendorId),
             lead_id: existingDoc.lead_id!,
             account_id: existingDoc.account_id,
-            action: `Document "${existingDoc.doc_og_name}" was deleted.`,
+            action,
             action_type: "DELETE",
+            history_type: "Lead",
             created_by: Number(deleted_by),
           },
         });

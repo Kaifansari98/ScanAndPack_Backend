@@ -995,6 +995,31 @@ export class ServicingService {
       uploadedDocs.push(saved);
     }
 
+    if (accountId && uploadedDocs.length > 0) {
+      const detailedLog = await prisma.leadDetailedLogs.create({
+        data: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `${uploadedDocs.length} AMC Contract Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by: userId,
+        },
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
+    }
+
     return uploadedDocs;
   }
 
