@@ -548,6 +548,13 @@ export type EnumActionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumActionTypeFilter<$PrismaModel> | $Enums.ActionType
 }
 
+export type EnumHistoryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.HistoryType | Prisma.EnumHistoryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel> | $Enums.HistoryType
+}
+
 export type EnumActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ActionType | Prisma.EnumActionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ActionType[] | Prisma.ListEnumActionTypeFieldRefInput<$PrismaModel>
@@ -556,6 +563,16 @@ export type EnumActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumActionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumActionTypeFilter<$PrismaModel>
+}
+
+export type EnumHistoryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HistoryType | Prisma.EnumHistoryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHistoryTypeWithAggregatesFilter<$PrismaModel> | $Enums.HistoryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
 }
 
 export type EnumNotificationTypeFilter<$PrismaModel = never> = {
@@ -1450,6 +1467,13 @@ export type NestedEnumActionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumActionTypeFilter<$PrismaModel> | $Enums.ActionType
 }
 
+export type NestedEnumHistoryTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.HistoryType | Prisma.EnumHistoryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel> | $Enums.HistoryType
+}
+
 export type NestedEnumActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ActionType | Prisma.EnumActionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ActionType[] | Prisma.ListEnumActionTypeFieldRefInput<$PrismaModel>
@@ -1458,6 +1482,16 @@ export type NestedEnumActionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumActionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumActionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumHistoryTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.HistoryType | Prisma.EnumHistoryTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.HistoryType[] | Prisma.ListEnumHistoryTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumHistoryTypeWithAggregatesFilter<$PrismaModel> | $Enums.HistoryType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {

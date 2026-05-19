@@ -1260,6 +1260,7 @@ model LeadDetailedLogs {
   account_id  Int
   action      String
   action_type ActionType
+  history_type HistoryType       @default(Lead) @map("HistoryType")
   created_at  DateTime           @default(now())
   created_by  Int
   account     AccountMaster      @relation(fields: [account_id], references: [id])
@@ -2306,6 +2307,12 @@ enum ActionType {
   UPLOAD
   STATUS_CHANGE
   OTHER
+}
+
+enum HistoryType {
+  Lead
+  Task
+  FollowUp
 }
 
 enum LeadChatMessageType {

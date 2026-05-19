@@ -167,6 +167,15 @@ export const ActionType = {
 export type ActionType = (typeof ActionType)[keyof typeof ActionType]
 
 
+export const HistoryType = {
+  Lead: 'Lead',
+  Task: 'Task',
+  FollowUp: 'FollowUp'
+} as const
+
+export type HistoryType = (typeof HistoryType)[keyof typeof HistoryType]
+
+
 export const LeadChatMessageType = {
   text: 'text',
   attachment: 'attachment',

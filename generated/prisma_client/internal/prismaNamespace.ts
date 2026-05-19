@@ -9740,6 +9740,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   account_id: 'account_id',
   action: 'action',
   action_type: 'action_type',
+  history_type: 'history_type',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -10942,6 +10943,20 @@ export type EnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'ActionType[]'
  */
 export type ListEnumActionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ActionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'HistoryType'
+ */
+export type EnumHistoryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HistoryType'>
+    
+
+
+/**
+ * Reference to a field of type 'HistoryType[]'
+ */
+export type ListEnumHistoryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HistoryType[]'>
     
 
 
