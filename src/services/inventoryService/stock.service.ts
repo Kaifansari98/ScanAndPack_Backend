@@ -1,5 +1,5 @@
 import { prisma } from "../../prisma/client";
-import { ProductActiveFlag } from "@prisma/client";
+import { ProductActiveFlag } from "../../prisma/generated";
 import { validationResponse } from "../../utils/validationResponse";
 import ExcelJS from "exceljs";
 import { v4 as uuidv4 } from "uuid";

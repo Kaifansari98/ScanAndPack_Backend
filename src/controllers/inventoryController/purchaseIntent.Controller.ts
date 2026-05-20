@@ -13,7 +13,7 @@ import {
   updatePurchaseIntentService,
   getVendorStateIdService,
 } from "../../services/inventoryService/purchaseIntent.service";
-import { PurchaseIntentStatus } from "@prisma/client";
+import { PurchaseIntentStatus } from "../../prisma/generated";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

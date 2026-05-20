@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "../../prisma/generated";
 import { prisma } from "../../../src/prisma/client";
 
 // ─────────────────────────────────────────────
