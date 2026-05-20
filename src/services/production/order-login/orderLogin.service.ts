@@ -327,9 +327,9 @@ export async function triggerOrderLoginCompletionNotification(
       type: NotificationType.LEAD_ACTION,
       title: "Order Login Completed",
       ...(instanceId
-        ? { metadata: { path: ["instance_id"], equals: instanceId } }
+        ? { message: { startsWith: `${instanceCode} - ` } }
         : {}),
-    },
+    },  
   });
 
   if (alreadySent) {
