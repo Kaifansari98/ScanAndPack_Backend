@@ -1005,14 +1005,14 @@ export class BookingStageController {
     try {
       const leadId = Number(getParam(req.params.leadId));
       const vendorId = Number(getParam(req.params.vendorId));
-      const siteSupervisorId = parseInt(req.body.siteSupervisorId);
+      const siteSupervisorId = req.body.siteSupervisorId ? parseInt(req.body.siteSupervisorId) : undefined;
       const createdBy = parseInt(req.body.created_by);
 
-      if (!leadId || !vendorId || !siteSupervisorId || !createdBy) {
+     if (!leadId || !vendorId || !createdBy || !siteSupervisorId) {
         res.status(400).json({
           success: false,
           message:
-            "leadId, vendorId, siteSupervisorId, and created_by are required",
+            "leadId, vendorId, and created_by are required",
         });
         return;
       }
