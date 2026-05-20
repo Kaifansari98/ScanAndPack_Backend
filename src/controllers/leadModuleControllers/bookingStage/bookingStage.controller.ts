@@ -78,20 +78,37 @@ export class BookingStageController {
         mrpValue,
       } = req.body;
 
+      const vendorIdNum = Number(vendor_id);
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorIdNum },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+      const useCustomUsersOnly =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+
       if (
         !lead_id ||
         !account_id ||
         !vendor_id ||
         !created_by ||
         !client_id ||
-        !bookingAmount ||
         !finalBookingAmount ||
-        !siteSupervisorId ||
         !mrpValue
       ) {
         res
           .status(400)
           .json({ success: false, message: "Missing required fields" });
+        return;
+      }
+
+      if (
+        !useCustomUsersOnly &&
+        (!siteSupervisorId || Number(siteSupervisorId) <= 0)
+      ) {
+        res.status(400).json({
+          success: false,
+          message: "Site supervisor is required",
+        });
         return;
       }
 
@@ -164,7 +181,10 @@ export class BookingStageController {
         mrpValue: parseFloat(mrpValue),
         bookingAmountPaymentDetailsText,
         finalBookingAmount: parseFloat(finalBookingAmount),
-        siteSupervisorId: parseInt(siteSupervisorId),
+        siteSupervisorId:
+          siteSupervisorId && Number(siteSupervisorId) > 0
+            ? parseInt(siteSupervisorId)
+            : undefined,
         baseUrl,
         finalDocuments: uploadedFinalDocuments,
         bookingAmountPaymentDetailsFile: uploadedPaymentFile,
@@ -173,7 +193,10 @@ export class BookingStageController {
       const result = await this.bookingStageService.createBookingStage(dto);
 
       try {
-        if (dto.siteSupervisorId !== dto.created_by) {
+        if (
+          dto.siteSupervisorId &&
+          dto.siteSupervisorId !== dto.created_by
+        ) {
           const [supervisor, createdBy, lead] = await Promise.all([
             prisma.userMaster.findUnique({
               where: { id: dto.siteSupervisorId },

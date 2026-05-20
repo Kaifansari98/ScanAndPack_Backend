@@ -556,10 +556,6 @@ export type PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.PrivilegeMasterScalarWhereInput | Prisma.PrivilegeMasterScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type PrivilegeMasterCreateNestedOneWithoutUserPrivilegeMappingsInput = {
   create?: Prisma.XOR<Prisma.PrivilegeMasterCreateWithoutUserPrivilegeMappingsInput, Prisma.PrivilegeMasterUncheckedCreateWithoutUserPrivilegeMappingsInput>
   connectOrCreate?: Prisma.PrivilegeMasterCreateOrConnectWithoutUserPrivilegeMappingsInput
