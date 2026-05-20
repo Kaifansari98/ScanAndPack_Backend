@@ -1008,6 +1008,22 @@ export const getLeadById = async (
       },
     });
 
+    const oldestIsmMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        status: "active",
+        type: "ISM",
+      },
+      orderBy: { created_at: "asc" },
+      select: {
+        id: true,
+        user_id: true,
+        created_at: true,
+        user: { select: { id: true, user_name: true } },
+      },
+    });
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -1028,6 +1044,13 @@ export const getLeadById = async (
               user_id: oldestSiteSupervisorMapping.user_id,
               user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
               created_at: oldestSiteSupervisorMapping.created_at,
+            }
+          : null,
+        assigned_ism_user_from_mapping: oldestIsmMapping
+          ? {
+              user_id: oldestIsmMapping.user_id,
+              user_name: oldestIsmMapping.user?.user_name ?? null,
+              created_at: oldestIsmMapping.created_at,
             }
           : null,
       },
