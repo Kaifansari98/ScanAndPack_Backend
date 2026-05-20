@@ -1117,6 +1117,7 @@ export class PostProductionService {
         action: `Production marked as completed for instance "${instance.title}"`,
         action_type: "UPDATE",
         created_by: updatedBy,
+        instance_id: instanceId,
       });
     }
 
