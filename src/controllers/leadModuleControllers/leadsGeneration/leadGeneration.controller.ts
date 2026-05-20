@@ -1623,6 +1623,9 @@ export class LeadController {
       const requiredPrivilegeCode = req.query.required_privilege_code
         ? String(req.query.required_privilege_code)
         : undefined;
+      const taskType = req.query.task_type
+        ? String(req.query.task_type)
+        : undefined;
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1649,6 +1652,7 @@ export class LeadController {
         {
           assigneeUserType,
           requiredPrivilegeCode,
+          taskType,
         },
       );
 
