@@ -53,6 +53,10 @@ import configureRoutes from "./trackTraceRoutes/configure.routes";
 import tracktraceProjectRoutes from "./trackTraceRoutes/track-trace-project.routes";
 import themeRoutes from "./theme/theme.routes";
 import cadbidIntegrationWithFurnixcrmRoutes from "./cadbid-integration-with-furnixcrm/CadbidIntegrationWithFurnixcrm.routes";
+
+import inventoryRoutes from "./inventoryRoutes/inventory.routes";
+import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
+import grnRoutes from "./grnRoutes/grn.routes";
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -119,6 +123,10 @@ router.use("/track-trace-master", trackTraceMasterRoutes);
 router.use("/track-trace-configure", configureRoutes);
 router.use("/track-trace-project", tracktraceProjectRoutes);
 router.use("/themes", themeRoutes);
+router.use("/inventory", inventoryRoutes);
+router.use("/purchase-orders", purchaseOrderRoutes);
+router.use("/grn", grnRoutes);
+
 router.use(
   "/cadbid-integration-with-furnixcrm",
   cadbidIntegrationWithFurnixcrmRoutes,

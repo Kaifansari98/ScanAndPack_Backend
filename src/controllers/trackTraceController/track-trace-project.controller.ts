@@ -1,16 +1,15 @@
 import { Request, Response } from "express";
-import { createProjectService } from "../../../src/services/trackTraceServices/track-trace-project.service";
+import { createProjectService,searchTrackTraceLeadsService } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 
 export const createProjectController = async (req: Request, res: Response) => {
   try {
-    const { vendorToken, projectName, vendorId } = req.body;
+    const { projectName, vendorId, lead_id } = req.body;
 
-    /* ── Basic field guards ── */
-    if (!vendorToken || !projectName || !vendorId) {
+    if (!projectName || !vendorId) {
       return res.status(400).json({
         success: false,
-        message: "vendorToken, vendorId and projectName are required",
+        message: "vendorId and projectName are required",
       });
     }
 
@@ -22,29 +21,68 @@ export const createProjectController = async (req: Request, res: Response) => {
     }
 
     const result = await createProjectService(
-      vendorToken,
       projectName,
       Number(vendorId),
+      Number(lead_id),
       req.file,
     );
 
     return res.status(201).json({
       ...result,
-      message: "Project created successfully",
+      message: result.message || "Project created successfully",
     });
   } catch (error: any) {
-    logger.error("createProjectController error", { error: error.message });
+    logger.error("createProjectController error", {
+      error: error.message,
+    });
 
-    /* Validation errors come as a readable comma-separated string from service */
     const isValidationError =
-      error.message.includes("is required") ||
-      error.message.includes("is missing") ||
+      error.message.includes("missing") ||
+      error.message.includes("blank") ||
+      error.message.includes("required") ||
       error.message.includes("must be") ||
-      error.message.includes("Excel file is empty");
+      error.message.includes("Excel file is empty") ||
+      error.message.includes("Duplicate barcodes") ||
+      error.message.includes("lead not mapped") ||
+      error.message.includes("Invalid or expired vendor token") ||
+      error.message.includes("Vendor not found") ||
+      error.message.includes("Vendor token not found");
 
     return res.status(isValidationError ? 422 : 500).json({
       success: false,
       message: error.message,
+    });
+  }
+};
+
+
+export const searchTrackTraceLeadsController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+    const search = String(req.query.search || "");
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+      });
+    }
+
+    const result = await searchTrackTraceLeadsService(vendorId, search);
+
+    return res.status(result.success ? 200 : 400).json(result);
+  } catch (error: any) {
+    logger.error("searchTrackTraceLeadsController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch leads",
+      data: [],
     });
   }
 };

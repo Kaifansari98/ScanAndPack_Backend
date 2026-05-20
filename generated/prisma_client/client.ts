@@ -599,3 +599,83 @@ export type BrandMaster = Prisma.BrandMasterModel
  * 
  */
 export type ProductMaster = Prisma.ProductMasterModel
+/**
+ * Model PurchaseIntentMaster
+ * 
+ */
+export type PurchaseIntentMaster = Prisma.PurchaseIntentMasterModel
+/**
+ * Model PurchaseIntentItem
+ * 
+ */
+export type PurchaseIntentItem = Prisma.PurchaseIntentItemModel
+/**
+ * Model PurchaseIntentItemVendorMapping
+ * 
+ */
+export type PurchaseIntentItemVendorMapping = Prisma.PurchaseIntentItemVendorMappingModel
+/**
+ * Model PurchaseIntentStatusLog
+ * 
+ */
+export type PurchaseIntentStatusLog = Prisma.PurchaseIntentStatusLogModel
+/**
+ * Model PurchaseOrderMaster
+ * 
+ */
+export type PurchaseOrderMaster = Prisma.PurchaseOrderMasterModel
+/**
+ * Model PurchaseOrderItem
+ * 
+ */
+export type PurchaseOrderItem = Prisma.PurchaseOrderItemModel
+/**
+ * Model GRNMaster
+ * 
+ */
+export type GRNMaster = Prisma.GRNMasterModel
+/**
+ * Model GRNItem
+ * 
+ */
+export type GRNItem = Prisma.GRNItemModel
+/**
+ * Model DebitCreditNote
+ * 
+ */
+export type DebitCreditNote = Prisma.DebitCreditNoteModel
+/**
+ * Model RedeliveryRequest
+ * 
+ */
+export type RedeliveryRequest = Prisma.RedeliveryRequestModel
+/**
+ * Model HsnProductMapping
+ * 
+ */
+export type HsnProductMapping = Prisma.HsnProductMappingModel
+/**
+ * Model ProductStockHistory
+ * 
+ */
+export type ProductStockHistory = Prisma.ProductStockHistoryModel
+/**
+ * Model PaymentTermMaster
+ * 
+ */
+export type PaymentTermMaster = Prisma.PaymentTermMasterModel
+/**
+ * Model PaymentTermStage
+ * 
+ */
+export type PaymentTermStage = Prisma.PaymentTermStageModel
+/**
+ * Model POPaymentSchedule
+ * 
+ */
+export type POPaymentSchedule = Prisma.POPaymentScheduleModel
+/**
+ * Model POPayment
+ * 
+ */
+export type POPayment = Prisma.POPaymentModel
