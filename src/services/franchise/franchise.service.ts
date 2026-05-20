@@ -228,26 +228,20 @@ export const getHeadSiteSupervisorFranchiseMapping = async (
     throw error;
   }
 
-  return await prisma.headSiteSupervisorFranchiseMapping.findFirst({
-    where: {
-      vendor_id: Number(vendorId),
-      franchise_id: Number(franchiseId),
-      status: true,
-    },
-    select: {
-      id: true,
-      vendor_id: true,
-      franchise_id: true,
-      user_id: true,
-      status: true,
-      created_by: true,
-      created_at: true,
-      user: {
-        select: {
-          id: true,
-          user_name: true,
-        },
-      },
-    },
-  });
+return await prisma.userMaster.findMany({
+  where: {
+    vendor_id: Number(vendorId),
+    franchise_id: Number(franchiseId),
+    user_type: {
+      user_type: "head-site-supervisor"
+    }
+  },
+  select: {
+    id: true,
+    user_name: true,
+    user_contact: true,
+  }
+});
 };
+
+
