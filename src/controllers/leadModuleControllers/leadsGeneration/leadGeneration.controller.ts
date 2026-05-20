@@ -2240,6 +2240,13 @@ export class LeadController {
         | "FollowUp"
         | undefined;
       const search = req.query.search as string | undefined;
+      const parsedUserTypeId = req.query.user_type_id
+        ? Number(req.query.user_type_id)
+        : undefined;
+      const user_type_id =
+        parsedUserTypeId != null && Number.isFinite(parsedUserTypeId)
+          ? parsedUserTypeId
+          : undefined;
 
       if (!lead_id || !vendor_id) {
         return res.status(400).json({
@@ -2255,6 +2262,7 @@ export class LeadController {
         cursor,
         history_type,
         search,
+        user_type_id,
       });
 
       return res.status(200).json({

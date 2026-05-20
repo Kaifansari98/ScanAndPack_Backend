@@ -2788,18 +2788,125 @@ export const getLeadLogsWithDocuments = async (params: {
   cursor?: number;
   history_type?: "Lead" | "Task" | "FollowUp";
   search?: string;
+  user_type_id?: number;
 }) => {
-  const { lead_id, vendor_id, limit = 10, cursor, history_type, search } = params;
+  const {
+    lead_id,
+    vendor_id,
+    limit = 10,
+    cursor,
+    history_type,
+    search,
+    user_type_id,
+  } = params;
+
+  const normalizeUserType = (value?: string | null) =>
+    value?.trim().toLowerCase() ?? null;
+
+  const resolvedUserType =
+    user_type_id != null
+      ? await prisma.userTypeMaster.findFirst({
+          where: { id: user_type_id },
+          select: { user_type: true },
+        })
+      : null;
+
+  const role = normalizeUserType(resolvedUserType?.user_type);
+  const isFullAccessRole = role === "super-admin" || role === "custom";
+  const isTaskAndFollowUpOnlyRole =
+    role === "admin" ||
+    role === "sales-executive" ||
+    role === "site-supervisor" ||
+    role === "head-site-supervisor" ||
+    role === "tech-check" ||
+    role === "backend" ||
+    role === "factory" ||
+    role === "pre-prod";
+
+  const allowedHistoryTypes = isFullAccessRole
+    ? null
+    : isTaskAndFollowUpOnlyRole
+      ? ["Task", "FollowUp"]
+      : null;
+
+  const restrictedTaskStageTags =
+    role === "backend"
+      ? ["Type 10"]
+      : role === "admin" ||
+          role === "sales-executive" ||
+          role === "site-supervisor" ||
+          role === "head-site-supervisor" ||
+          role === "tech-check"
+        ? ["Type 9", "Type 10"]
+        : [];
+
+  if (
+    allowedHistoryTypes &&
+    history_type &&
+    !allowedHistoryTypes.includes(history_type)
+  ) {
+    return {
+      data: [],
+      meta: {
+        hasMore: false,
+        nextCursor: null,
+        count: 0,
+      },
+    };
+  }
+
+  const where: any = {
+    lead_id,
+    vendor_id,
+    ...(allowedHistoryTypes
+      ? {
+          history_type: history_type
+            ? history_type
+            : { in: allowedHistoryTypes },
+        }
+      : history_type
+        ? { history_type }
+        : {}),
+    ...(search && {
+      action: { contains: search, mode: "insensitive" },
+    }),
+  };
+
+  if (restrictedTaskStageTags.length > 0) {
+    const taskStageVisibilityWhere = {
+      OR: [
+        { stage_id: null },
+        {
+          stage: {
+            is: {
+              tag: {
+                notIn: restrictedTaskStageTags,
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    if (history_type === "Task") {
+      where.AND = [...(where.AND ?? []), taskStageVisibilityWhere];
+    } else if (!history_type) {
+      where.AND = [
+        ...(where.AND ?? []),
+        {
+          OR: [
+            { history_type: { not: "Task" } },
+            {
+              AND: [{ history_type: "Task" }, taskStageVisibilityWhere],
+            },
+          ],
+        },
+      ];
+    }
+  }
 
   const logs = await prisma.leadDetailedLogs.findMany({
-    where: {
-      lead_id,
-      vendor_id,
-      ...(history_type && { history_type }),
-      ...(search && {
-        action: { contains: search, mode: "insensitive" },
-      }),
-    },
+    where,
     include: {
       stage: {
         select: {
