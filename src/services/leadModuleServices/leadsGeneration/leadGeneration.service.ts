@@ -1897,12 +1897,56 @@ export const getSalesExecutivesByVendor = async (
   options?: {
     assigneeUserType?: string;
     requiredPrivilegeCode?: string;
+    taskType?: string;
   },
 ): Promise<SalesExecutiveData[]> => {
   try {
     console.log(
       `[SERVICE] Fetching sales executives for vendor ID: ${vendorId}`,
     );
+
+    const normalizedTaskType = options?.taskType?.trim().toLowerCase();
+
+    if (normalizedTaskType === "followup") {
+      const allUsers = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          status: "active",
+          ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
+        },
+        include: {
+          user_type: true,
+          documents: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      console.log(`[SERVICE] Found ${allUsers.length} eligible users for followup task`);
+
+      return allUsers.map((user) => ({
+        id: user.id,
+        vendor_id: user.vendor_id,
+        user_name: user.user_name,
+        user_contact: user.user_contact,
+        user_email: user.user_email,
+        user_timezone: user.user_timezone,
+        status: user.status,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+        user_type: {
+          id: user.user_type.id,
+          user_type: user.user_type.user_type,
+        },
+        documents: user.documents.map((doc) => ({
+          id: doc.id,
+          document_name: doc.document_name,
+          document_number: doc.document_number,
+          filename: doc.filename,
+        })),
+      }));
+    }
 
     const normalizedAssigneeUserType =
       options?.assigneeUserType?.trim().toLowerCase() ?? null;
