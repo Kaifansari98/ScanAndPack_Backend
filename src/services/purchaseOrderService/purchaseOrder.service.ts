@@ -1,3 +1,4 @@
+import { tr } from "node_modules/zod/v4/locales/index.cjs";
 import { prisma } from "../../prisma/client";
 import { validationResponse } from "../../utils/validationResponse";
 
@@ -46,6 +47,11 @@ export const getPIForConversionService = async (
                     contact_no: true, email: true, point_of_contact: true,
                   },
                 },
+                paymentTerm: {
+                  select: {
+                    id: true, term_name: true, description: true
+                  }
+                }
               },
             },
           },
@@ -69,20 +75,24 @@ export const getPIForConversionService = async (
 // Creates one PO per unique supplier, with all their products as line items.
 
 interface ConvertPayload {
-  vendor_id:           number;
-  user_id:             number;
-  purchase_intent_id:  number;
-  expected_delivery_date?: string; // global fallback date
-  remarks?:            string;
+  vendor_id: number;
+  user_id: number;
+  purchase_intent_id: number;
+  expected_delivery_date?: string;
+  remarks?: string;
+
   selections: {
     pi_item_vendor_mapping_id: number;
-    company_vendor_id:         number;
-    product_id:                number;
-    ordered_qty:               number;
-    unit_price?:               number;
-    uom?:                      string;
-    expected_delivery_date?:   string; // per-item override
-    remarks?:                  string;
+    company_vendor_id: number;
+    product_id: number;
+
+    payment_term_id?: number | null;
+
+    ordered_qty: number;
+    unit_price?: number;
+    uom?: string;
+    expected_delivery_date?: string;
+    remarks?: string;
   }[];
 }
 
@@ -161,6 +171,9 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
       );
     }
 
+
+
+
     const mappingMap = new Map(
       mappings.map((m) => [m.id, m])
     );
@@ -168,26 +181,69 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
     /**
      * Group by supplier
      */
-    const bySupplier = new Map<number, any[]>();
+    const bySupplier = new Map<
+      string,
+      {
+        company_vendor_id: number;
+        payment_term_id: number | null;
+        items: any[];
+      }
+    >();
 
     for (const sel of selections) {
-      const mapping = mappingMap.get(
-        sel.pi_item_vendor_mapping_id
-      );
+      const mapping = mappingMap.get(sel.pi_item_vendor_mapping_id);
 
       if (!mapping) continue;
 
-      const supplierId = mapping.company_vendor_id;
+      const companyVendorId = mapping.company_vendor_id;
 
-      if (!bySupplier.has(supplierId)) {
-        bySupplier.set(supplierId, []);
+      const finalPaymentTermId =
+        sel.payment_term_id ?? mapping.payment_term_id ?? null;
+
+      const groupKey = `${companyVendorId}_${finalPaymentTermId ?? "no-term"}`;
+
+      if (!bySupplier.has(groupKey)) {
+        bySupplier.set(groupKey, {
+          company_vendor_id: companyVendorId,
+          payment_term_id: finalPaymentTermId,
+          items: [],
+        });
       }
 
-      bySupplier.get(supplierId)!.push({
+      bySupplier.get(groupKey)!.items.push({
         selection: sel,
         mapping,
       });
     }
+
+
+    const paymentTermIds = [
+      ...new Set(
+        selections
+          .map((s) => s.payment_term_id)
+          .filter((id): id is number => !!id)
+      ),
+    ];
+
+    if (paymentTermIds.length) {
+      const validPaymentTerms = await prisma.paymentTermMaster.findMany({
+        where: {
+          id: {
+            in: paymentTermIds,
+          },
+          vendor_id,
+          is_active: true,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (validPaymentTerms.length !== paymentTermIds.length) {
+        return validationResponse(0, "One or more payment terms are invalid");
+      }
+    }
+
 
     /**
      * Generate PO numbers
@@ -224,6 +280,9 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
         `PO-${String(nextPoNum + i).padStart(6, "0")}`
     );
 
+
+
+
     /**
      * Transaction
      */
@@ -232,10 +291,10 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
         const pos: any[] = [];
         let poIndex = 0;
 
-        for (const [
-          company_vendor_id,
-          items,
-        ] of bySupplier) {
+        for (const [, group] of bySupplier) {
+          const company_vendor_id = group.company_vendor_id;
+          const payment_term_id = group.payment_term_id;
+          const items = group.items;
           let amount = 0;
           let tax_amount = 0;
           let total_amount = 0;
@@ -256,7 +315,7 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
                 po_no: poNumbers[poIndex++],
                 purchase_intent_id,
                 company_vendor_id,
-
+                payment_term_id,
                 remarks,
                 expected_delivery_date:
                   expected_delivery_date
@@ -270,6 +329,7 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
                 status: "Draft",
                 created_by: user_id,
                 updated_by: user_id,
+
               },
             });
 
@@ -302,16 +362,16 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
                 expected_delivery_date:
                   selection.expected_delivery_date
                     ? new Date(
-                        selection.expected_delivery_date
-                      )
+                      selection.expected_delivery_date
+                    )
                     : mapping.required_by_date
                       ? new Date(
-                          mapping.required_by_date
-                        )
+                        mapping.required_by_date
+                      )
                       : expected_delivery_date
                         ? new Date(
-                            expected_delivery_date
-                          )
+                          expected_delivery_date
+                        )
                         : null,
 
                 remarks:
@@ -370,11 +430,10 @@ export const convertPIToPOService = async (payload: ConvertPayload) => {
             from_status: pi.status as any,
             to_status: "ConvertedToPO",
             changed_by: user_id,
-            remarks: `Converted to ${
-              pos.length
-            } PO${pos.length > 1 ? "s" : ""}: ${pos
-              .map((x) => x.po_no)
-              .join(", ")}`,
+            remarks: `Converted to ${pos.length
+              } PO${pos.length > 1 ? "s" : ""}: ${pos
+                .map((x) => x.po_no)
+                .join(", ")}`,
           },
         });
 
@@ -417,7 +476,7 @@ export const listPurchaseOrdersService = async (
     const where: any = {
       vendor_id, is_deleted: false,
       ...(status ? { status } : {}),
-      ...(search  ? { po_no: { contains: search, mode: "insensitive" } } : {}),
+      ...(search ? { po_no: { contains: search, mode: "insensitive" } } : {}),
     };
 
     const [total, pos] = await Promise.all([
@@ -426,10 +485,11 @@ export const listPurchaseOrdersService = async (
         where, skip, take: PAGE_SIZE,
         orderBy: { created_at: "desc" },
         include: {
-          companyVendor:  { select: { id: true, company_name: true, vendor_code: true } },
+          companyVendor: { select: { id: true, company_name: true, vendor_code: true } },
           purchaseIntent: { select: { id: true, intent_no: true } },
-          createdBy:      { select: { id: true, user_name: true } },
-          _count:         { select: { items: true } },
+          paymentTerm:{select:{id:true, term_name:true, description:true}},
+          createdBy: { select: { id: true, user_name: true } },
+          _count: { select: { items: true } },
         },
       }),
     ]);
@@ -452,9 +512,9 @@ export const getPurchaseOrderByIdService = async (id: number, vendor_id: number)
     const po = await prisma.purchaseOrderMaster.findFirst({
       where: { id, vendor_id, is_deleted: false },
       include: {
-        companyVendor:  { select: { id: true, company_name: true, vendor_code: true, contact_no: true, email: true } },
+        companyVendor: { select: { id: true, company_name: true, vendor_code: true, contact_no: true, email: true } },
         purchaseIntent: { select: { id: true, intent_no: true } },
-        createdBy:      { select: { id: true, user_name: true } },
+        createdBy: { select: { id: true, user_name: true } },
         items: {
           include: {
             product: { select: { id: true, product_name: true, article_code: true, unit_of_measure: true } },
@@ -463,7 +523,7 @@ export const getPurchaseOrderByIdService = async (id: number, vendor_id: number)
         grns: {
           orderBy: { created_at: "asc" },
           include: {
-            createdBy:   { select: { id: true, user_name: true } },
+            createdBy: { select: { id: true, user_name: true } },
             confirmedBy: { select: { id: true, user_name: true } },
             items: {
               include: {
@@ -584,10 +644,10 @@ export const updatePOItemService = async (
 
           ...(data.expected_delivery_date !== undefined
             ? {
-                expected_delivery_date: data.expected_delivery_date
-                  ? new Date(data.expected_delivery_date)
-                  : null,
-              }
+              expected_delivery_date: data.expected_delivery_date
+                ? new Date(data.expected_delivery_date)
+                : null,
+            }
             : {}),
 
           ...(data.remarks !== undefined
@@ -668,11 +728,11 @@ export const deletePOItemService = async (
 // ─── PATCH PO status (approve / cancel / etc.) ────────────────────────────────
 
 const ALLOWED_TRANSITIONS: Record<string, string[]> = {
-  Draft:             ["Approved", "Cancelled"],
-  Approved:          ["Cancelled"],           // PartiallyReceived/Received set by GRN only
+  Draft: ["Approved", "Cancelled"],
+  Approved: ["Cancelled"],           // PartiallyReceived/Received set by GRN only
   PartiallyReceived: ["Cancelled"],           // PartiallyReceived/Received set by GRN only
-  Received:          [],
-  Cancelled:         [],
+  Received: [],
+  Cancelled: [],
 };
 
 export const updatePOStatusService = async (
@@ -701,7 +761,7 @@ export const updatePOStatusService = async (
     const updated = await prisma.purchaseOrderMaster.update({
       where: { id },
       data: {
-        status:     to_status as any,
+        status: to_status as any,
         updated_by: user_id,
         ...(remarks ? { remarks } : {}),
       },
@@ -726,13 +786,13 @@ export const cancelPOService = async (
       select: { id: true, status: true },
     });
     if (!po) return validationResponse(0, "Purchase order not found");
-    if (po.status === "Received")  return validationResponse(0, "Cannot cancel a received PO");
+    if (po.status === "Received") return validationResponse(0, "Cannot cancel a received PO");
     if (po.status === "Cancelled") return validationResponse(0, "PO is already cancelled");
 
     await prisma.purchaseOrderMaster.update({
       where: { id },
       data: {
-        status:     "Cancelled",
+        status: "Cancelled",
         updated_by: user_id,
         deleted_by: user_id,   // track who cancelled
         ...(remarks ? { remarks } : {}),
