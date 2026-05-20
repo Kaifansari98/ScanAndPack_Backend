@@ -1159,7 +1159,6 @@ export const grnSummaryService = async (
         sgst_amount: true,
         igst_amount: true,
         cess_amount: true,
-        tax_amount: true,
         discount_amount: true,
         packing_amount: true,
         freight_amount: true,
@@ -1192,6 +1191,15 @@ export const grnSummaryService = async (
     (itemQtySummary._sum.rejected_qty ?? 0).toString()
   );
 
+  const toNumber = (value: { toString(): string } | null | undefined) =>
+    parseFloat((value ?? 0).toString());
+
+  const totalTaxAmount =
+    toNumber(amountSummary._sum?.cgst_amount) +
+    toNumber(amountSummary._sum?.sgst_amount) +
+    toNumber(amountSummary._sum?.igst_amount) +
+    toNumber(amountSummary._sum?.cess_amount);
+
   return validationResponse(1, "GRN summary", {
     total_grns: totalGRNs,
     confirmed_grns: confirmedGRNs,
@@ -1211,35 +1219,21 @@ export const grnSummaryService = async (
     pending_redeliveries: pendingRedeliveries,
     open_debit_credit_notes: openDCNs,
 
-    subtotal_amount: parseFloat(
-      (amountSummary._sum.subtotal_amount ?? 0).toString()
-    ),
-    taxable_amount: parseFloat(
-      (amountSummary._sum.taxable_amount ?? 0).toString()
-    ),
+    subtotal_amount: toNumber(amountSummary._sum?.subtotal_amount),
+    taxable_amount: toNumber(amountSummary._sum?.taxable_amount),
 
-    cgst_amount: parseFloat((amountSummary._sum.cgst_amount ?? 0).toString()),
-    sgst_amount: parseFloat((amountSummary._sum.sgst_amount ?? 0).toString()),
-    igst_amount: parseFloat((amountSummary._sum.igst_amount ?? 0).toString()),
-    cess_amount: parseFloat((amountSummary._sum.cess_amount ?? 0).toString()),
-    tax_amount: parseFloat((amountSummary._sum.tax_amount ?? 0).toString()),
+    cgst_amount: toNumber(amountSummary._sum?.cgst_amount),
+    sgst_amount: toNumber(amountSummary._sum?.sgst_amount),
+    igst_amount: toNumber(amountSummary._sum?.igst_amount),
+    cess_amount: toNumber(amountSummary._sum?.cess_amount),
+    tax_amount: totalTaxAmount,
 
-    discount_amount: parseFloat(
-      (amountSummary._sum.discount_amount ?? 0).toString()
-    ),
-    packing_amount: parseFloat(
-      (amountSummary._sum.packing_amount ?? 0).toString()
-    ),
-    freight_amount: parseFloat(
-      (amountSummary._sum.freight_amount ?? 0).toString()
-    ),
-    other_charges_amount: parseFloat(
-      (amountSummary._sum.other_charges_amount ?? 0).toString()
-    ),
-    roundoff_amount: parseFloat(
-      (amountSummary._sum.roundoff_amount ?? 0).toString()
-    ),
+    discount_amount: toNumber(amountSummary._sum?.discount_amount),
+    packing_amount: toNumber(amountSummary._sum?.packing_amount),
+    freight_amount: toNumber(amountSummary._sum?.freight_amount),
+    other_charges_amount: toNumber(amountSummary._sum?.other_charges_amount),
+    roundoff_amount: toNumber(amountSummary._sum?.roundoff_amount),
 
-    total_amount: parseFloat((amountSummary._sum.total_amount ?? 0).toString()),
+    total_amount: toNumber(amountSummary._sum?.total_amount),
   });
 };

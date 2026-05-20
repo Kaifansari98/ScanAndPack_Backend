@@ -10,7 +10,7 @@ import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
 
 export interface CadbidPayload {
   projectName: string;
-  customer_id: number;
+  lead_id: number;
   items: CadbidItem[];
 }
 
@@ -337,7 +337,7 @@ const payloadSchema = z.object({
 
 type ValidationSuccess = {
   success: true;
-  data: CadbidPayload;
+  data: z.infer<typeof payloadSchema>;
 };
 
 type ValidationFailure = {
@@ -372,7 +372,7 @@ export const validateCutlistPayload = (payload: unknown): ValidationResult => {
 
   return {
     success: true,
-    data: result.data as CadbidPayload,
+    data: result.data,
   };
 };
 
@@ -1040,5 +1040,4 @@ export const searchTrackTraceLeadsService = async (
     };
   }
 };
-
 

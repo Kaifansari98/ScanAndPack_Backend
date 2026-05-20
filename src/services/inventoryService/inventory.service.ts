@@ -301,7 +301,7 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
             group: p.sGroup || null,
 
             hsn_code: p.sHsnCode
-              ? parseInt(String(p.sHsnCode).replace(/\D/g, "")) || null
+              ? String(p.sHsnCode).replace(/\D/g, "") || null
               : null,
 
             product_name: p.sName,

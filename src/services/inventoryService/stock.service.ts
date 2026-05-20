@@ -203,7 +203,7 @@ export const uploadStockSheetService = async (
 ): Promise<ReturnType<typeof validationResponse>> => {
   try {
     const wb = new ExcelJS.Workbook();
-    await wb.xlsx.load(fileBuffer);
+    await wb.xlsx.load(fileBuffer as any);
     const ws = wb.worksheets[0];
     if (!ws) return validationResponse(0, "Could not read worksheet");
 
