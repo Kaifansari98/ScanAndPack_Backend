@@ -9,7 +9,7 @@ export interface CreateBookingStageDto {
   bookingAmount: number;
   bookingAmountPaymentDetailsText?: string;
   finalBookingAmount: number;
-  siteSupervisorId: number;
+  siteSupervisorId?: number;
   mrpValue: number;
   baseUrl: string;
   // Files
