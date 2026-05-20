@@ -1,6 +1,7 @@
 import { UserLeadTask } from "./../../../../generated/prisma_client/browser";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -9,6 +10,7 @@ import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/e
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 interface SiteReadinessPayload {
   account_id: number;
@@ -516,7 +518,7 @@ export class SiteReadinessService {
       });
 
       if (siteReadinessTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: siteReadinessTask.id },
           data: {
             status: "completed",
@@ -524,6 +526,19 @@ export class SiteReadinessService {
             closed_at: new Date(),
             updated_by: updatedBy,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: lead.account_id!,
+            task_type: "Site Readiness",
+          },
+          createdBy: updatedBy,
+          actionType: "UPDATE",
         });
 
         logger.info("[SERVICE] Site Readiness task marked completed", {
@@ -541,18 +556,16 @@ export class SiteReadinessService {
       }
 
       // 4️⃣ Add Detailed Log Entry
-      const actionMessage = `Lead moved to Dispatch Planning stage.`;
+      const actionMessage = `Site readiness task is been completed and lead moved to Dispatch Planning.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       // 4️⃣ Actually move lead to Dispatch Planning (UPDATE STATUS)

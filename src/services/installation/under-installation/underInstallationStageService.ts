@@ -1,5 +1,6 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
@@ -8,6 +9,7 @@ import { getFranchiseAdminRecipients } from "../../../../src/services/notificati
 import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -125,15 +127,13 @@ export class UnderInstallationStageService {
       });
 
       // 4️⃣ Activity Log
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Under Installation stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Under Installation stage.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
       });
 
       // 5️⃣ Close Dispatch Planning Task (if any)
@@ -148,7 +148,7 @@ export class UnderInstallationStageService {
       });
 
       if (dispatchTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: dispatchTask.id },
           data: {
             status: "completed",
@@ -162,15 +162,20 @@ export class UnderInstallationStageService {
           },
         });
 
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: lead.account_id!,
-            action: "Dispatch preparation task marked as Completed.",
-            action_type: "UPDATE",
-            created_by: updatedBy,
-          },
+        await createTaskHistoryLog({
+          db: tx,
+          task: updatedTask,
+          createdBy: updatedBy,
+          actionType: "UPDATE",
+        });
+
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id!,
+          action: "Dispatch preparation task marked as Completed.",
+          action_type: "UPDATE",
+          created_by: updatedBy,
         });
       }
 
@@ -472,16 +477,14 @@ export class UnderInstallationStageService {
       });
 
       // 3️⃣ Log the update
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: `Installation has been started`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: `Installation has been started`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Actual installation start date set", {
@@ -578,19 +581,26 @@ export class UnderInstallationStageService {
         data: mappingsData,
       });
 
-      // 5️⃣ Log action in detailed logs
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: `Set expected installation end date (${expectedEndDate.toISOString()}) & added ${
-            installers.length
-          } installer(s)`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
+      const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+        "en-GB",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
         },
+      );
+
+      // 5️⃣ Log action in detailed logs
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${
+          installers.length
+        } installer(s)`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installers added & expected end date set", {
@@ -685,6 +695,15 @@ export class UnderInstallationStageService {
 
       // 2️⃣ Update expected installation end date (if provided)
       if (expectedEndDate) {
+        const formattedExpectedEndDate = expectedEndDate.toLocaleDateString(
+          "en-GB",
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          },
+        );
+
         await tx.leadMaster.update({
           where: { id: lead.id },
           data: {
@@ -694,7 +713,7 @@ export class UnderInstallationStageService {
           },
         });
         updates.push(
-          `expected installation end date → ${expectedEndDate.toISOString()}`,
+          `expected installation end date → ${formattedExpectedEndDate}`,
         );
       }
 
@@ -728,16 +747,14 @@ export class UnderInstallationStageService {
           ? `Updated ${updates.join(" and ")}`
           : "No changes were made";
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installation details updated", {
@@ -827,16 +844,14 @@ export class UnderInstallationStageService {
       // 5️⃣ Log the action
       const logMessage = actionMessages.join(" & ");
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: logMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: logMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Installation completion status updated", {
@@ -947,16 +962,14 @@ export class UnderInstallationStageService {
       }
 
       // Log action
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: finalAccountId,
-          action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
-          action_type: "UPLOAD",
-          created_by: userId,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: finalAccountId,
+        action: `Uploaded ${files.length} Installation Update document(s) for ${updateDate.toDateString()}`,
+        action_type: "UPLOAD",
+        created_by: userId,
+        created_at: new Date(),
       });
 
       return uploadedDocs;
@@ -1134,6 +1147,13 @@ export class UnderInstallationStageService {
           status: "open",
           created_by,
         },
+      });
+
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
       });
 
       // -----------------------------
@@ -1791,7 +1811,7 @@ export class UnderInstallationStageService {
       });
 
       if (existingDeliveryTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingDeliveryTask.id },
           data: {
             due_date: new Date(required_delivery_date),
@@ -1799,12 +1819,25 @@ export class UnderInstallationStageService {
             updated_at: new Date(),
           },
         });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: "Miscellaneous",
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
+        });
       } else {
         const leadFranchise = await tx.leadMaster.findUnique({
           where: { id: existing.lead_id },
           select: { franchise_id: true },
         });
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             vendor_id,
             lead_id: existing.lead_id,
@@ -1818,6 +1851,13 @@ export class UnderInstallationStageService {
             status: "open",
             created_by: updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updated_by,
+          actionType: "CREATE",
         });
       }
 
@@ -2272,12 +2312,25 @@ export class UnderInstallationStageService {
       let taskId: number;
 
       if (existingTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingTask.id },
           data: {
             due_date: new Date(expected_ready_date),
             updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id,
+            lead_id: existing.lead_id,
+            account_id: existing.account_id,
+            task_type: "Miscellaneous",
+          },
+          createdBy: updated_by,
+          actionType: "UPDATE",
         });
 
         taskId = existingTask.id;
@@ -2299,6 +2352,13 @@ export class UnderInstallationStageService {
             status: "open",
             created_by: updated_by,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: newTask,
+          createdBy: updated_by,
+          actionType: "CREATE",
         });
 
         taskId = newTask.id;
@@ -2678,6 +2738,8 @@ export class UnderInstallationStageService {
     // 3️⃣ Save Documents
     // -----------------------------------------
     const uploadedDocs = [];
+    const uploadedFinalSitePhotos: any[] = [];
+    const uploadedHandoverDocuments: any[] = [];
 
     for (const file of files) {
       const docTypeId = file.isImage
@@ -2697,6 +2759,57 @@ export class UnderInstallationStageService {
       });
 
       uploadedDocs.push(savedDoc);
+      if (file.isImage) {
+        uploadedFinalSitePhotos.push(savedDoc);
+      } else {
+        uploadedHandoverDocuments.push(savedDoc);
+      }
+    }
+
+    if (account_id && uploadedFinalSitePhotos.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id,
+        lead_id,
+        account_id,
+        action: `${uploadedFinalSitePhotos.length} Final Site Photo${uploadedFinalSitePhotos.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedFinalSitePhotos.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
+    }
+
+    if (account_id && uploadedHandoverDocuments.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id,
+        lead_id,
+        account_id,
+        action: `${uploadedHandoverDocuments.length} Handover Document${uploadedHandoverDocuments.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedHandoverDocuments.map((doc) => ({
+          vendor_id,
+          lead_id,
+          account_id,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by,
+        })),
+      });
     }
 
     return {
@@ -2861,16 +2974,14 @@ export class UnderInstallationStageService {
         }
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id: existingLead.account_id,
-          action: "Usable handover marked as completed.",
-          action_type: "UPDATE",
-          created_by: updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id: existingLead.account_id,
+        action: "Usable handover marked as completed.",
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
       });
 
       return updatedLead;
@@ -2950,16 +3061,14 @@ export class UnderInstallationStageService {
       });
 
       // Detailed Log
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Final Handover stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Final Handover stage.",
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       return {

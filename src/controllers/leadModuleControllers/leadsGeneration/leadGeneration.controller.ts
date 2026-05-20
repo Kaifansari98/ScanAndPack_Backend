@@ -33,6 +33,7 @@ import {
   editTaskISMService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
@@ -1441,16 +1442,14 @@ export class LeadController {
         const newLabel = newType?.type || "Unknown";
         const actionMessage = `Product Type has been updated from "${oldLabel}" to "${newLabel}".`;
 
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: lead.vendor_id,
-            lead_id: leadId,
-            account_id: lead.account_id!,
-            action: actionMessage,
-            action_type: "UPDATE",
-            created_by: updatedBy,
-            created_at: new Date(),
-          },
+        await createLeadLog(prisma, {
+          vendor_id: lead.vendor_id,
+          lead_id: leadId,
+          account_id: lead.account_id!,
+          action: actionMessage,
+          action_type: "UPDATE",
+          created_by: updatedBy,
+          created_at: new Date(),
         });
       }
 
@@ -2239,6 +2238,19 @@ export class LeadController {
       const { lead_id, vendor_id } = req.params;
       const limit = Number(req.query.limit) || 10;
       const cursor = req.query.cursor ? Number(req.query.cursor) : undefined;
+      const history_type = req.query.history_type as
+        | "Lead"
+        | "Task"
+        | "FollowUp"
+        | undefined;
+      const search = req.query.search as string | undefined;
+      const parsedUserTypeId = req.query.user_type_id
+        ? Number(req.query.user_type_id)
+        : undefined;
+      const user_type_id =
+        parsedUserTypeId != null && Number.isFinite(parsedUserTypeId)
+          ? parsedUserTypeId
+          : undefined;
 
       if (!lead_id || !vendor_id) {
         return res.status(400).json({
@@ -2252,6 +2264,9 @@ export class LeadController {
         vendor_id: Number(vendor_id),
         limit,
         cursor,
+        history_type,
+        search,
+        user_type_id,
       });
 
       return res.status(200).json({
@@ -2292,6 +2307,11 @@ export class LeadController {
         include: {
           lead: true,
           account: true,
+          documentType: {
+            select: {
+              tag: true,
+            },
+          },
         },
       });
 
@@ -2313,15 +2333,33 @@ export class LeadController {
       });
 
       if (existingDoc.account_id) {
-        const detailedLog = await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: Number(vendorId),
-            lead_id: existingDoc.lead_id!,
-            account_id: existingDoc.account_id,
-            action: `Document "${existingDoc.doc_og_name}" was deleted.`,
-            action_type: "DELETE",
-            created_by: Number(deleted_by),
-          },
+        const action =
+          existingDoc.documentType?.tag === "Type 25"
+            ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+            : existingDoc.documentType?.tag === "Type 26"
+              ? `Handover Document "${existingDoc.doc_og_name}" was deleted.`
+              : existingDoc.documentType?.tag === "Type 27"
+                ? `Final Site Photo "${existingDoc.doc_og_name}" was deleted.`
+                : existingDoc.documentType?.tag === "Type 28"
+                  ? `Warranty Card Photo "${existingDoc.doc_og_name}" was deleted.`
+                  : existingDoc.documentType?.tag === "Type 29"
+                    ? `Handover Booklet "${existingDoc.doc_og_name}" was deleted.`
+                    : existingDoc.documentType?.tag === "Type 30"
+                      ? `Final Handover Form "${existingDoc.doc_og_name}" was deleted.`
+                      : existingDoc.documentType?.tag === "Type 31"
+                        ? `QC Document "${existingDoc.doc_og_name}" was deleted.`
+                        : existingDoc.documentType?.tag === "Type 39"
+                          ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
+              : `Document "${existingDoc.doc_og_name}" was deleted.`;
+
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: Number(vendorId),
+          lead_id: existingDoc.lead_id!,
+          account_id: existingDoc.account_id,
+          action,
+          action_type: "DELETE",
+          history_type: "Lead",
+          created_by: Number(deleted_by),
         });
 
         await prisma.leadDocumentLogs.create({

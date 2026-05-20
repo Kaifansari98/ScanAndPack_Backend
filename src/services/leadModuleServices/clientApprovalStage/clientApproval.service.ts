@@ -9,6 +9,7 @@ import { NotificationService } from "../../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import { sendPaymentAddedEmail } from "../../email/brevoEmail.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export class ClientApprovalService {
   public async addApprovalDocuments(data: {
@@ -170,17 +171,15 @@ export class ClientApprovalService {
       }
 
       // ✅ Step 5: Log this event in LeadDetailedLogs
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: `₹${formatIndianCurrency(
-            data.amount_paid
-          )} has been received during Client Approval`,
-          action_type: "CREATE", // enum ActionType
-          created_by: data.created_by,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: data.vendor_id,
+        lead_id: data.lead_id,
+        account_id: data.account_id,
+        action: `₹${formatIndianCurrency(
+          data.amount_paid
+        )} has been received during Client Approval`,
+        action_type: "CREATE",
+        created_by: data.created_by,
       });
 
       try {
@@ -703,15 +702,13 @@ export class ClientApprovalService {
     }
 
     // Step 4. Log the action
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: data.vendor_id,
-        lead_id: data.lead_id,
-        account_id: data.account_id,
-        action: `Lead moved to Tech Check stage. Client's Required order-login completion date is ${data.required_date.toLocaleDateString()}`,
-        action_type: "UPDATE",
-        created_by: data.created_by,
-      },
+    await createLeadLog(prisma, {
+      vendor_id: data.vendor_id,
+      lead_id: data.lead_id,
+      account_id: data.account_id,
+      action: `Client approval received, lead is requested for Tech-Check.`,
+      action_type: "UPDATE",
+      created_by: data.created_by,
     });
 
     response.lead = updatedLead;

@@ -47,6 +47,11 @@ export class LeadStatsService {
         "admin",
         "super-admin",
       ].includes(userType);
+      const shouldIncludeFranchiseForMyTasks = [
+        "sales-executive",
+        "custom",
+        "admin",
+      ].includes(userType);
       const shouldUseMapping = [
         "sales-executive",
         "custom",
@@ -73,7 +78,7 @@ export class LeadStatsService {
       totalMyTasks = await prisma.userLeadTask.count({
         where: {
           vendor_id: vendorId,
-          ...(shouldIncludeFranchise && franchiseId
+          ...(shouldIncludeFranchiseForMyTasks && franchiseId
             ? { franchise_id: franchiseId }
             : {}),
           user_id: userId,

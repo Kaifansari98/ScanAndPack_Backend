@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
   CreateLeadDTO,
   SiteSupervisorData,
@@ -35,6 +36,7 @@ import {
   type LeadCreatedEmailPayload,
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -466,16 +468,14 @@ export const createLeadService = async (
         });
 
         // 7. LeadDetailedLogs entry
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id,
-            lead_id: lead.id,
-            account_id: account.id,
-            action: "Lead has been created successfully",
-            action_type: "CREATE",
-            created_by,
-            created_at: new Date(),
-          },
+        await createLeadLog(tx, {
+          vendor_id,
+          lead_id: lead.id,
+          account_id: account.id,
+          action: "Lead has been created successfully",
+          action_type: "CREATE",
+          created_by,
+          created_at: new Date(),
         });
         logger.info("✅ LeadDetailedLogs entry created for lead creation", {
           lead_id: lead.id,
@@ -657,16 +657,14 @@ export const uploadMoreSitePhotosService = async (
       uploadedDocs.push(document);
     }
 
-    const detailedLog = await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id: lead.id,
-        account_id: lead.account_id!,
-        action: `Additional site photos uploaded (${uploadedDocs.length})`,
-        action_type: "CREATE",
-        created_by,
-        created_at: new Date(),
-      },
+    const detailedLog = await createLeadLog(tx, {
+      vendor_id,
+      lead_id: lead.id,
+      account_id: lead.account_id!,
+      action: `Additional site photos uploaded (${uploadedDocs.length})`,
+      action_type: "CREATE",
+      created_by,
+      created_at: new Date(),
     });
 
     await tx.leadDocumentLogs.createMany({
@@ -1010,6 +1008,22 @@ export const getLeadById = async (
       },
     });
 
+    const oldestIsmMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        status: "active",
+        type: "ISM",
+      },
+      orderBy: { created_at: "asc" },
+      select: {
+        id: true,
+        user_id: true,
+        created_at: true,
+        user: { select: { id: true, user_name: true } },
+      },
+    });
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -1030,6 +1044,13 @@ export const getLeadById = async (
               user_id: oldestSiteSupervisorMapping.user_id,
               user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
               created_at: oldestSiteSupervisorMapping.created_at,
+            }
+          : null,
+        assigned_ism_user_from_mapping: oldestIsmMapping
+          ? {
+              user_id: oldestIsmMapping.user_id,
+              user_name: oldestIsmMapping.user?.user_name ?? null,
+              created_at: oldestIsmMapping.created_at,
             }
           : null,
       },
@@ -1095,16 +1116,14 @@ export const deleteLeadProductStructureInstance = async (
       where: { id: existing.id },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: existing.account_id,
-        action: `Product structure instance deleted : ${existing.title}`,
-        action_type: "DELETE",
-        created_by: deletedBy ?? existing.updated_by ?? existing.created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: existing.account_id,
+      action: `Product structure instance deleted : ${existing.title}`,
+      action_type: "DELETE",
+      created_by: deletedBy ?? existing.updated_by ?? existing.created_by,
+      created_at: new Date(),
     });
 
     return { count: 1 };
@@ -1184,16 +1203,14 @@ export const updateLeadProductStructureInstance = async ({
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: existing.account_id,
-        action: `Product structure instance updated for ${updated.title}`,
-        action_type: "UPDATE",
-        created_by: updated_by ?? existing.updated_by ?? existing.created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: existing.account_id,
+      action: `Product structure instance updated for ${updated.title}`,
+      action_type: "UPDATE",
+      created_by: updated_by ?? existing.updated_by ?? existing.created_by,
+      created_at: new Date(),
     });
 
     return updated;
@@ -1369,16 +1386,14 @@ export const createLeadProductStructureInstance = async ({
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: lead.account_id,
-        action: `Product structure instance added : ${instance.title}`,
-        action_type: "UPDATE",
-        created_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: lead.account_id,
+      action: `Product structure instance added : ${instance.title}`,
+      action_type: "UPDATE",
+      created_by,
+      created_at: new Date(),
     });
 
     return instance;
@@ -1455,16 +1470,14 @@ export const softDeleteLead = async (leadId: number, deletedBy: number) => {
     });
 
     // 3️⃣ Add log entry in LeadDetailedLogs
-    await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id: lead.vendor_id,
-        lead_id: lead.id,
-        account_id: lead.account_id!,
-        action: "Lead has been deleted successfully",
-        action_type: "DELETE",
-        created_by: deletedBy,
-        created_at: new Date(),
-      },
+    await createLeadLog(tx, {
+      vendor_id: lead.vendor_id,
+      lead_id: lead.id,
+      account_id: lead.account_id!,
+      action: "Lead has been deleted successfully",
+      action_type: "DELETE",
+      created_by: deletedBy,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead deletion", {
@@ -1754,16 +1767,14 @@ export const updateLeadService = async (
     }
 
     // Insert into LeadDetailedLogs
-    await tx.leadDetailedLogs.create({
-      data: {
-        vendor_id,
-        lead_id: updatedLead.id,
-        account_id: updatedAccount.id,
-        action: actionMessage,
-        action_type: "UPDATE",
-        created_by: updated_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(tx, {
+      vendor_id,
+      lead_id: updatedLead.id,
+      account_id: updatedAccount.id,
+      action: actionMessage,
+      action_type: "UPDATE",
+      created_by: updated_by,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead update", {
@@ -2457,16 +2468,14 @@ export const assignLeadToUser = async (
         ? `Lead has been assigned to ${newAssigneeName}.`
         : `Lead has been reassigned from ${oldAssigneeName} to ${newAssigneeName}.`;
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: lead.id,
-        account_id: lead.account?.id!,
-        action: actionMessage,
-        action_type: "UPDATE",
-        created_by: payload.assign_by,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: lead.id,
+      account_id: lead.account?.id!,
+      action: actionMessage,
+      action_type: "UPDATE",
+      created_by: payload.assign_by,
+      created_at: new Date(),
     });
 
     logger.info("✅ LeadDetailedLogs entry created for lead assignment", {
@@ -2721,6 +2730,13 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
       data: updateData,
     });
 
+    await createTaskHistoryLog({
+      db: tx,
+      task: updatedTask,
+      createdBy: updated_by,
+      actionType: "UPDATE",
+    });
+
     // 🧹 Invalidate Dashboard Task Cache (Sales Executive Dashboard)
     const oldUserId = task.user_id; // user before update
     const newUserId = updatedTask.user_id; // user after update
@@ -2778,16 +2794,14 @@ export const editTaskISMService = async (payload: EditTaskISMInput) => {
 
     // 6️⃣ Insert into LeadDetailedLogs (if applicable)
     if (actionMessage) {
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id: account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id: account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for task update", {
@@ -2839,12 +2853,134 @@ export const getLeadLogsWithDocuments = async (params: {
   vendor_id: number;
   limit?: number;
   cursor?: number;
+  history_type?: "Lead" | "Task" | "FollowUp";
+  search?: string;
+  user_type_id?: number;
 }) => {
-  const { lead_id, vendor_id, limit = 10, cursor } = params;
+  const {
+    lead_id,
+    vendor_id,
+    limit = 10,
+    cursor,
+    history_type,
+    search,
+    user_type_id,
+  } = params;
+
+  const normalizeUserType = (value?: string | null) =>
+    value?.trim().toLowerCase() ?? null;
+
+  const resolvedUserType =
+    user_type_id != null
+      ? await prisma.userTypeMaster.findFirst({
+          where: { id: user_type_id },
+          select: { user_type: true },
+        })
+      : null;
+
+  const role = normalizeUserType(resolvedUserType?.user_type);
+  const isFullAccessRole = role === "super-admin" || role === "custom";
+  const isTaskAndFollowUpOnlyRole =
+    role === "admin" ||
+    role === "sales-executive" ||
+    role === "site-supervisor" ||
+    role === "head-site-supervisor" ||
+    role === "tech-check" ||
+    role === "backend" ||
+    role === "factory" ||
+    role === "pre-prod";
+
+  const allowedHistoryTypes = isFullAccessRole
+    ? null
+    : isTaskAndFollowUpOnlyRole
+      ? ["Task", "FollowUp"]
+      : null;
+
+  const restrictedTaskStageTags =
+    role === "backend"
+      ? ["Type 10"]
+      : role === "admin" ||
+          role === "sales-executive" ||
+          role === "site-supervisor" ||
+          role === "head-site-supervisor" ||
+          role === "tech-check"
+        ? ["Type 9", "Type 10"]
+        : [];
+
+  if (
+    allowedHistoryTypes &&
+    history_type &&
+    !allowedHistoryTypes.includes(history_type)
+  ) {
+    return {
+      data: [],
+      meta: {
+        hasMore: false,
+        nextCursor: null,
+        count: 0,
+      },
+    };
+  }
+
+  const where: any = {
+    lead_id,
+    vendor_id,
+    ...(allowedHistoryTypes
+      ? {
+          history_type: history_type
+            ? history_type
+            : { in: allowedHistoryTypes },
+        }
+      : history_type
+        ? { history_type }
+        : {}),
+    ...(search && {
+      action: { contains: search, mode: "insensitive" },
+    }),
+  };
+
+  if (restrictedTaskStageTags.length > 0) {
+    const taskStageVisibilityWhere = {
+      OR: [
+        { stage_id: null },
+        {
+          stage: {
+            is: {
+              tag: {
+                notIn: restrictedTaskStageTags,
+              },
+            },
+          },
+        },
+      ],
+    };
+
+    if (history_type === "Task") {
+      where.AND = [...(where.AND ?? []), taskStageVisibilityWhere];
+    } else if (!history_type) {
+      where.AND = [
+        ...(where.AND ?? []),
+        {
+          OR: [
+            { history_type: { not: "Task" } },
+            {
+              AND: [{ history_type: "Task" }, taskStageVisibilityWhere],
+            },
+          ],
+        },
+      ];
+    }
+  }
 
   const logs = await prisma.leadDetailedLogs.findMany({
-    where: { lead_id, vendor_id },
+    where,
     include: {
+      stage: {
+        select: {
+          id: true,
+          type: true,
+        },
+      },
       user: {
         select: {
           id: true,
@@ -2898,6 +3034,12 @@ export const getLeadLogsWithDocuments = async (params: {
         id: log.id,
         action: log.action,
         action_type: log.action_type,
+        stage: log.stage
+          ? {
+              id: log.stage.id,
+              name: log.stage.type,
+            }
+          : null,
         created_at: log.created_at,
         created_by: {
           id: log.user.id,

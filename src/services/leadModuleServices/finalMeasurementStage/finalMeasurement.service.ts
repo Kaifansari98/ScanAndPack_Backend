@@ -13,6 +13,8 @@ import {
 } from "../../email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -251,7 +253,7 @@ export class FinalMeasurementService {
             : "Final Measurement document has";
         const pluralSP = spCount > 1 ? "Site Photos have" : "Site Photo has";
 
-        let actionMessage = `Final Measurement stage completed successfully — ${fmCount} ${pluralFM} and ${spCount} ${pluralSP} been uploaded successfully.`;
+        let actionMessage = `Final Measurement completed successfully ${fmCount} ${pluralFM} and ${spCount} ${pluralSP} uploaded successfully.`;
 
         if (
           data.critical_discussion_notes &&
@@ -259,19 +261,17 @@ export class FinalMeasurementService {
         ) {
           actionMessage += ` — Remark: ${data.critical_discussion_notes.trim()}`;
         } else {
-          actionMessage += ` — Remark: No remark provided.`;
+          actionMessage += ` — Remark: N/A`;
         }
 
-        const detailedLog = await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: data.vendor_id,
-            lead_id: data.lead_id,
-            account_id: data.account_id,
-            action: actionMessage,
-            action_type: "CREATE",
-            created_by: data.created_by,
-            created_at: new Date(),
-          },
+        const detailedLog = await createLeadLog(tx, {
+          vendor_id: data.vendor_id,
+          lead_id: data.lead_id,
+          account_id: data.account_id,
+          action: actionMessage,
+          action_type: "CREATE",
+          created_by: data.created_by,
+          created_at: new Date(),
         });
 
         // 7️⃣ Create LeadDocumentLogs
@@ -1116,6 +1116,13 @@ export class FinalMeasurementService {
         },
       });
 
+      await createTaskHistoryLog({
+        db: tx,
+        task,
+        createdBy: created_by,
+        actionType: "CREATE",
+      });
+
       // ✅ Ensure assignee is in lead chat members
       let chatRoom = await tx.leadChatRoom.findFirst({
         where: {
@@ -1232,16 +1239,14 @@ export class FinalMeasurementService {
         actionMessage += ` — Remark: No remark provided.`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("[SERVICE] Final Measurement task assigned successfully", {
@@ -1383,22 +1388,27 @@ export class FinalMeasurementService {
         },
       });
 
+      await createTaskHistoryLog({
+        db: tx,
+        task: updatedTask,
+        createdBy: updated_by,
+        actionType: "UPDATE",
+      });
+
       const formattedDate = new Date(due_date).toLocaleDateString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: task.lead.vendor_id,
-          lead_id,
-          account_id: task.lead.account_id!,
-          action: `Lead's Final Measurements task has been rescheduled on ${formattedDate}. — Remark: ${remark.trim()}`,
-          action_type: "UPDATE",
-          created_by: updated_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: task.lead.vendor_id,
+        lead_id,
+        account_id: task.lead.account_id!,
+        action: `Lead's Final Measurements task has been rescheduled on ${formattedDate}. — Remark: ${remark.trim()}`,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
       });
 
       await cache.del(`dashboard:tasks:${task.lead.vendor_id}:${task.user_id}`);

@@ -8,6 +8,8 @@ import { NotificationService } from "../../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 import logger from "../../../utils/logger";
 import { cache } from "../../../utils/cache";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import {
   sendLeadLostApprovalEmail,
   sendLeadLostApprovedEmail,
@@ -152,7 +154,7 @@ export class LeadActivityStatusService {
             )?.type ?? null)
           : null;
 
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             lead_id: leadId,
             account_id: accountId,
@@ -166,6 +168,13 @@ export class LeadActivityStatusService {
             status: "open",
             created_by: createdBy,
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: createdBy,
+          actionType: "CREATE",
         });
       }
 
@@ -197,16 +206,14 @@ export class LeadActivityStatusService {
         actionMessage += ` — Remark: ${remark.trim()}`;
       }
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: createdBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: createdBy,
+        created_at: new Date(),
       });
 
       logger.info(
@@ -519,16 +526,14 @@ export class LeadActivityStatusService {
       }
 
       // 4️⃣ Insert into LeadDetailedLogs (Audit Trail)
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: createdBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: createdBy,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for revert to Active", {

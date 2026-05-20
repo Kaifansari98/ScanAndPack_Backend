@@ -7,6 +7,8 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export class PostProductionService {
   async uploadQcPhotos(
@@ -66,15 +68,14 @@ export class PostProductionService {
         instanceTitle = inst?.title ?? undefined;
       }
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `QC Photos uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
-          action_type: "CREATE",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `QC Photos uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+        action_type: "CREATE",
+        created_by: userId,
+        instance_id: instanceId ?? undefined,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -171,15 +172,13 @@ export class PostProductionService {
 
       // Log the remark update
       if (accountId) {
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: `Hardware Packing Details remark added/updated${instanceTitle ? ` for instance "${instanceTitle}"` : ""}: "${remark}"`,
-            action_type: "UPDATE",
-            created_by: userId,
-          },
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Hardware Packing Details remark added/updated${instanceTitle ? ` for instance "${instanceTitle}"` : ""}: "${remark}"`,
+          action_type: "UPDATE",
+          created_by: userId,
         });
       }
     }
@@ -213,15 +212,14 @@ export class PostProductionService {
           instanceTitle = inst?.title ?? undefined;
         }
 
-        const detailedLog = await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
-            action_type: "CREATE",
-            created_by: userId,
-          },
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Hardware Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+          action_type: "CREATE",
+          created_by: userId,
+          instance_id: instanceId ?? undefined,
         });
 
         await prisma.leadDocumentLogs.createMany({
@@ -320,17 +318,16 @@ export class PostProductionService {
       }
 
       if (accountId) {
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: instanceTitle
-              ? `Woodwork Packing Details remark added/updated for instance "${instanceTitle}": "${remark}"`
-              : `Woodwork Packing Details remark added/updated: "${remark}"`,
-            action_type: "UPDATE",
-            created_by: userId,
-          },
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: instanceTitle
+            ? `Woodwork Packing Details remark added/updated for instance "${instanceTitle}": "${remark}"`
+            : `Woodwork Packing Details remark added/updated: "${remark}"`,
+          action_type: "UPDATE",
+          history_type: "Lead",
+          created_by: userId,
         });
       }
     }
@@ -363,15 +360,15 @@ export class PostProductionService {
           instanceTitle = inst?.title ?? undefined;
         }
 
-        const detailedLog = await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
-            action_type: "CREATE",
-            created_by: userId,
-          },
+        const detailedLog = await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action: `Woodwork Packing Details files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+          action_type: "CREATE",
+          history_type: "Lead",
+          created_by: userId,
+          instance_id: instanceId ?? undefined,
         });
 
         await prisma.leadDocumentLogs.createMany({
@@ -608,15 +605,20 @@ export class PostProductionService {
       });
 
       if (accountId) {
-        await prisma.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: accountId,
-            action: `Number of boxes updated to ${noOfBoxes} for instance "${instance.title}"`,
-            action_type: "UPDATE",
-            created_by: userId,
-          },
+        const action =
+          instance.no_of_boxes == null
+            ? `Number of boxes set to ${noOfBoxes} for instance "${instance.title}"`
+            : `Number of boxes updated from ${instance.no_of_boxes} to ${noOfBoxes} for instance "${instance.title}"`;
+
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          action,
+          action_type: "UPDATE",
+          history_type: "Lead",
+          created_by: userId,
+          instance_id: instanceId,
         });
       }
 
@@ -650,15 +652,19 @@ export class PostProductionService {
 
     // ✅ Log the update
     if (accountId) {
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Number of boxes updated to ${noOfBoxes}`,
-          action_type: "UPDATE",
-          created_by: userId,
-        },
+      const action =
+        lead.no_of_boxes == null
+          ? `Number of boxes set to ${noOfBoxes}`
+          : `Number of boxes updated from ${lead.no_of_boxes} to ${noOfBoxes}`;
+
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action,
+        action_type: "UPDATE",
+        history_type: "Lead",
+        created_by: userId,
       });
     }
 
@@ -878,15 +884,14 @@ export class PostProductionService {
         instanceTitle = inst?.title ?? undefined;
       }
 
-      const detailedLog = await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: accountId,
-          action: `Pre-production files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
-          action_type: "CREATE",
-          created_by: userId,
-        },
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `Pre-production files uploaded: ${files.length} file(s)${instanceTitle ? ` for instance "${instanceTitle}"` : ""}`,
+        action_type: "CREATE",
+        created_by: userId,
+        instance_id: instanceId ?? undefined,
       });
 
       await prisma.leadDocumentLogs.createMany({
@@ -978,7 +983,7 @@ export class PostProductionService {
         const dueDate = new Date();
         dueDate.setDate(dueDate.getDate() + 1);
 
-        await prisma.userLeadTask.create({
+        const task = await prisma.userLeadTask.create({
           data: {
             lead_id: leadId,
             account_id: leadMeta.account_id,
@@ -993,6 +998,12 @@ export class PostProductionService {
             status: "open",
             created_by: userId,
           },
+        });
+        await createTaskHistoryLog({
+          db: prisma,
+          task,
+          createdBy: userId,
+          actionType: "CREATE",
         });
       }
     }
@@ -1099,15 +1110,14 @@ export class PostProductionService {
     });
 
     if (instance.account_id) {
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: instance.account_id,
-          action: `Production marked as completed for instance "${instance.title}"`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: instance.account_id,
+        action: `Production marked as completed for instance "${instance.title}"`,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        instance_id: instanceId,
       });
     }
 
@@ -1154,34 +1164,48 @@ export class PostProductionService {
         throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
       }
 
-      // 3️⃣ Update lead status
-      const updatedLead = await tx.leadMaster.update({
-        where: { id: leadId },
+      // 3️⃣ Update lead status only if it is not already in Ready To Dispatch.
+      // This keeps the action idempotent and prevents duplicate history rows
+      // if the endpoint is triggered multiple times.
+      const updateResult = await tx.leadMaster.updateMany({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+          NOT: { status_id: readyToDispatchStatus.id },
+        },
         data: {
           status_id: readyToDispatchStatus.id,
           updated_by: updatedBy,
         },
       });
 
-      await ensureLeadStatusLog(tx, {
-        vendorId,
-        leadId,
-        accountId: currentLead.account_id,
-        statusId: readyToDispatchStatus.id,
-        createdBy: updatedBy,
-      });
+      const updatedLead =
+        updateResult.count > 0
+          ? await tx.leadMaster.findUniqueOrThrow({
+              where: { id: leadId },
+            })
+          : currentLead;
+
+      if (updateResult.count > 0) {
+        await ensureLeadStatusLog(tx, {
+          vendorId,
+          leadId,
+          accountId: currentLead.account_id,
+          statusId: readyToDispatchStatus.id,
+          createdBy: updatedBy,
+        });
+      }
 
       // 4️⃣ Audit log
-      if (currentLead.account_id) {
-        await tx.leadDetailedLogs.create({
-          data: {
-            vendor_id: vendorId,
-            lead_id: leadId,
-            account_id: currentLead.account_id,
-            action: "Lead moved to Ready To Dispatch stage",
-            action_type: "STATUS_CHANGE",
-            created_by: updatedBy,
-          },
+      if (updateResult.count > 0 && currentLead.account_id) {
+        await createLeadLog(tx, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: currentLead.account_id,
+          action: "Lead moved to Ready To Dispatch stage",
+          action_type: "STATUS_CHANGE",
+          created_by: updatedBy,
         });
       }
 

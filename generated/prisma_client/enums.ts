@@ -9,6 +9,131 @@
 * 🟢 You can import this file directly.
 */
 
+export const PaymentMode = {
+  Cash: 'Cash',
+  BankTransfer: 'BankTransfer',
+  Cheque: 'Cheque',
+  UPI: 'UPI',
+  RTGS: 'RTGS',
+  NEFT: 'NEFT'
+} as const
+
+export type PaymentMode = (typeof PaymentMode)[keyof typeof PaymentMode]
+
+
+export const PaymentScheduleStatus = {
+  Pending: 'Pending',
+  PartiallyPaid: 'PartiallyPaid',
+  Paid: 'Paid',
+  Overdue: 'Overdue',
+  Cancelled: 'Cancelled'
+} as const
+
+export type PaymentScheduleStatus = (typeof PaymentScheduleStatus)[keyof typeof PaymentScheduleStatus]
+
+
+export const PaymentTriggerType = {
+  ADVANCE: 'ADVANCE',
+  ON_PO_APPROVAL: 'ON_PO_APPROVAL',
+  ON_DISPATCH: 'ON_DISPATCH',
+  ON_GRN: 'ON_GRN',
+  ON_INSTALLATION: 'ON_INSTALLATION',
+  ON_DELIVERY: 'ON_DELIVERY',
+  AFTER_INVOICE_DAYS: 'AFTER_INVOICE_DAYS',
+  SPECIFIC_DATE: 'SPECIFIC_DATE',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type PaymentTriggerType = (typeof PaymentTriggerType)[keyof typeof PaymentTriggerType]
+
+
+export const StockChangeSource = {
+  GRNConfirmation: 'GRNConfirmation',
+  ExcelUpload: 'ExcelUpload',
+  ManualAdjustment: 'ManualAdjustment'
+} as const
+
+export type StockChangeSource = (typeof StockChangeSource)[keyof typeof StockChangeSource]
+
+
+export const GRNStatus = {
+  Draft: 'Draft',
+  Confirmed: 'Confirmed',
+  Closed: 'Closed'
+} as const
+
+export type GRNStatus = (typeof GRNStatus)[keyof typeof GRNStatus]
+
+
+export const GRNItemStatus = {
+  Accepted: 'Accepted',
+  PartiallyAccepted: 'PartiallyAccepted',
+  Rejected: 'Rejected'
+} as const
+
+export type GRNItemStatus = (typeof GRNItemStatus)[keyof typeof GRNItemStatus]
+
+
+export const DebitCreditNoteType = {
+  DebitNote: 'DebitNote',
+  CreditNote: 'CreditNote'
+} as const
+
+export type DebitCreditNoteType = (typeof DebitCreditNoteType)[keyof typeof DebitCreditNoteType]
+
+
+export const DebitCreditNoteStatus = {
+  Open: 'Open',
+  Settled: 'Settled',
+  Cancelled: 'Cancelled'
+} as const
+
+export type DebitCreditNoteStatus = (typeof DebitCreditNoteStatus)[keyof typeof DebitCreditNoteStatus]
+
+
+export const RedeliveryStatus = {
+  Requested: 'Requested',
+  Scheduled: 'Scheduled',
+  Received: 'Received',
+  Cancelled: 'Cancelled'
+} as const
+
+export type RedeliveryStatus = (typeof RedeliveryStatus)[keyof typeof RedeliveryStatus]
+
+
+export const PurchaseOrderStatus = {
+  Draft: 'Draft',
+  Approved: 'Approved',
+  PartiallyReceived: 'PartiallyReceived',
+  Received: 'Received',
+  Cancelled: 'Cancelled'
+} as const
+
+export type PurchaseOrderStatus = (typeof PurchaseOrderStatus)[keyof typeof PurchaseOrderStatus]
+
+
+export const PurchaseIntentStatus = {
+  Draft: 'Draft',
+  PendingApproval: 'PendingApproval',
+  Approved: 'Approved',
+  Rejected: 'Rejected',
+  ConvertedToPO: 'ConvertedToPO',
+  Cancelled: 'Cancelled'
+} as const
+
+export type PurchaseIntentStatus = (typeof PurchaseIntentStatus)[keyof typeof PurchaseIntentStatus]
+
+
+export const PurchaseIntentPriority = {
+  Low: 'Low',
+  Medium: 'Medium',
+  High: 'High',
+  Urgent: 'Urgent'
+} as const
+
+export type PurchaseIntentPriority = (typeof PurchaseIntentPriority)[keyof typeof PurchaseIntentPriority]
+
+
 export const ProductActiveFlag = {
   Yes: 'Yes',
   No: 'No'
@@ -165,6 +290,15 @@ export const ActionType = {
 } as const
 
 export type ActionType = (typeof ActionType)[keyof typeof ActionType]
+
+
+export const HistoryType = {
+  Lead: 'Lead',
+  Task: 'Task',
+  FollowUp: 'FollowUp'
+} as const
+
+export type HistoryType = (typeof HistoryType)[keyof typeof HistoryType]
 
 
 export const LeadChatMessageType = {

@@ -1,7 +1,9 @@
 import { Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchStageService {
   /** ✅ Fetch all leads with status = Type 14 (Dispatch Stage) */
@@ -181,6 +183,14 @@ export class DispatchStageService {
       );
     }
 
+    const hadDispatchDetails = Boolean(
+      lead.dispatch_date ||
+        lead.vehicle_no ||
+        lead.driver_name ||
+        lead.driver_number ||
+        lead.dispatch_remark,
+    );
+
     const updated = await prisma.leadMaster.update({
       where: { id: leadId },
       data: {
@@ -202,6 +212,30 @@ export class DispatchStageService {
         dispatch_remark: true,
       },
     });
+
+    if (lead.account_id) {
+      const formattedDispatchDate = data.dispatch_date
+        ? new Date(data.dispatch_date).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })
+        : "N/A";
+
+      const action = hadDispatchDetails
+        ? `Dispatch details updated. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`
+        : `Dispatch details added. Dispatch Date: ${formattedDispatchDate}, Vehicle No: ${data.vehicle_no}, Driver Name: ${data.driver_name?.trim() || "N/A"}, Driver Number: ${data.driver_number?.trim() || "N/A"}, Remark: ${data.dispatch_remark?.trim() || "N/A"}.`;
+
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action,
+        action_type: hadDispatchDetails ? "UPDATE" : "CREATE",
+        history_type: "Lead",
+        created_by: data.updated_by,
+      });
+    }
 
     return updated;
   }
@@ -275,6 +309,29 @@ export class DispatchStageService {
       });
 
       uploadedDocs.push(doc);
+    }
+
+    if (accountId && uploadedDocs.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -445,6 +502,29 @@ export class DispatchStageService {
       uploadedDocs.push(doc);
     }
 
+    if (accountId && uploadedDocs.length > 0) {
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${uploadedDocs.length} Post Dispatch Document${uploadedDocs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: uploadedDocs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
+    }
+
     return uploadedDocs;
   }
 
@@ -526,6 +606,13 @@ export class DispatchStageService {
       },
     });
 
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
+    });
+
     // 🧹 Clear Redis cache for dashboard tasks of this user
     const redisKey = `dashboard:tasks:${vendorId}:${assigneeUserId}`;
     await cache.del(redisKey);
@@ -569,6 +656,13 @@ export class DispatchStageService {
         remark: remark || null,
         created_by: createdBy,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: prisma,
+      task,
+      createdBy,
+      actionType: "CREATE",
     });
 
     // 🧹 Clear Redis Cache for Sales Executive Dashboard

@@ -1,3 +1,4 @@
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import wasabi from "../../../utils/wasabiClient";
 import { uploadToWasabiInitialSiteMeasurementFile } from "../../../utils/wasabiClient";
@@ -22,6 +23,7 @@ import { prisma } from "../../../prisma/client";
 import Joi from "joi";
 import logger from "../../../utils/logger";
 import { NotificationType, Prisma } from "../../../prisma/generated";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
@@ -61,7 +63,9 @@ const assignTaskISMSchema = Joi.object({
 const RESTRICTED_TASK_TYPE = "Initial Site Measurement" as const;
 const FOLLOW_UP_TASK_TYPE = "Follow Up" as const;
 
-export const getInitialSiteMeasurementTaskConflicts = async (leadId: number) => {
+export const getInitialSiteMeasurementTaskConflicts = async (
+  leadId: number,
+) => {
   const lead = await prisma.leadMaster.findUnique({
     where: { id: leadId },
     select: { id: true },
@@ -182,10 +186,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       );
     }
 
-    if (
-      task_type === FOLLOW_UP_TASK_TYPE &&
-      assignee_user_id !== created_by
-    ) {
+    if (task_type === FOLLOW_UP_TASK_TYPE && assignee_user_id !== created_by) {
       const existingFollowUpTask = await tx.userLeadTask.findFirst({
         where: {
           lead_id: lead.id,
@@ -242,6 +243,13 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         status: "open",
         created_by,
       },
+    });
+
+    await createTaskHistoryLog({
+      db: tx,
+      task,
+      createdBy: created_by,
+      actionType: "CREATE",
     });
 
     // 3B) Create LeadUserMapping for ISM task assignment
@@ -357,7 +365,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     });
 
     if (task_type === "Initial Site Measurement") {
-      actionMessage = `Lead has been assigned to ${assignee.user_name} for Initial Site Measurement on ${formattedDate}.`;
+      actionMessage = `Initial Site Measurement task is been created for ${assignee.user_name} Due Date : ${formattedDate}.`;
     } else if (task_type === "Follow Up") {
       actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up on ${formattedDate}.`;
     }
@@ -374,16 +382,14 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
 
     // 6️⃣ Insert into LeadDetailedLogs
     if (actionMessage) {
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: lead.vendor_id,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: lead.vendor_id,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "CREATE",
+        created_by,
+        created_at: new Date(),
       });
 
       logger.info("✅ LeadDetailedLogs entry created for ISM task assignment", {
@@ -907,16 +913,14 @@ export class PaymentUploadService {
             "Initial Site Measurements have been uploaded successfully.";
 
           // Create parent log entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           // Log each document (if any)
@@ -987,8 +991,6 @@ export class PaymentUploadService {
           year: "numeric",
         });
 
-
-
         const baseUrl = data.baseUrl;
         // ✅ Account aware deep-link
         const projectUrl = lead.account_id
@@ -1016,7 +1018,6 @@ export class PaymentUploadService {
               ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
               : `/dashboard/leads/details/${data.lead_id}`,
           });
-
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
@@ -1273,16 +1274,14 @@ export class PaymentUploadService {
           /* ----------------------------------
              6️⃣ Logs
           ---------------------------------- */
-          const log = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: "Booking Done – ISM documents uploaded successfully.",
-              action_type: "CREATE",
-              created_by: data.created_by,
-              created_at: new Date(),
-            },
+          const log = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: "Booking Done – ISM documents uploaded successfully.",
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
           });
 
           if (response.documentsUploaded.length) {
@@ -2149,16 +2148,14 @@ export class PaymentUploadService {
               : "Payment details updated successfully.";
 
           // Create LeadDetailedLogs entry
-          const detailedLog = await tx.leadDetailedLogs.create({
-            data: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              action: actionMessage,
-              action_type: "UPDATE",
-              created_by: data.updated_by,
-              created_at: new Date(),
-            },
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "UPDATE",
+            created_by: data.updated_by,
+            created_at: new Date(),
           });
 
           // If new documents were uploaded → create mapping logs
@@ -2383,7 +2380,6 @@ export class PaymentUploadService {
         );
       }
 
-
       await tx.leadDocuments.update({
         where: { id: documentId },
         data: {
@@ -2421,16 +2417,28 @@ export class PaymentUploadService {
 
       const signed_url = await generateSignedUrl(pdfS3Key);
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: existingDoc.lead_id!,
-          account_id: existingDoc.account_id!,
-          action: "Initial Site Measurement document updated successfully.",
-          action_type: "UPDATE",
-          created_by: userId,
-          created_at: new Date(),
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: existingDoc.lead_id!,
+        account_id: existingDoc.account_id!,
+        action: "Initial Site Measurement document updated successfully.",
+        action_type: "UPDATE",
+        created_by: userId,
+        created_at: new Date(),
+      });
+
+      await tx.leadDocumentLogs.createMany({
+        data: [
+          {
+            vendor_id: vendorId,
+            lead_id: existingDoc.lead_id!,
+            account_id: existingDoc.account_id!,
+            doc_id: newDocument.id,
+            lead_logs_id: detailedLog.id,
+            created_by: userId,
+            created_at: new Date(),
+          },
+        ],
       });
 
       return {

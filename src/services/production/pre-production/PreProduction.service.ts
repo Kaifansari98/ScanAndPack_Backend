@@ -1,6 +1,8 @@
 import { LeadTaskStatus, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
 import logger from "../../../../src/utils/logger";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 
 export class PreProductionService {
   private addThreeDayBuffer(date: Date) {
@@ -250,15 +252,13 @@ export class PreProductionService {
             ? `Factory vendor selected for Order Login: ${existing.item_type}`
             : `Factory vendor cleared for Order Login: ${existing.item_type}`;
 
-          await prisma.leadDetailedLogs.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: existing.account_id,
-              action,
-              action_type: "UPDATE",
-              created_by: Number(updated_by),
-            },
+          await createLeadLog(prisma, {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: existing.account_id,
+            action,
+            action_type: "UPDATE",
+            created_by: Number(updated_by),
           });
         }
 
@@ -318,17 +318,23 @@ export class PreProductionService {
 
     // Log the change
     if (lead.account_id) {
-      await prisma.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id,
-          action: instanceId
-            ? `Instance ERD updated to ${new Date(date).toLocaleDateString()} and lead ERD recalculated`
-            : `Expected Order Login ready date updated to ${new Date(date).toLocaleDateString()}`,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      const formattedDate = new Date(date).toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+
+      await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id,
+        action: instanceId
+          ? `Instance ERD updated to ${formattedDate} and lead ERD recalculated`
+          : `Expected Order Login ready date updated to ${formattedDate}`,
+        action_type: "UPDATE",
+        history_type: "Lead",
+        created_by: updatedBy,
+        instance_id: instanceId ?? undefined,
       });
     }
 
@@ -588,15 +594,15 @@ export class PreProductionService {
             ? `Order Login item marked as completed: ${existing.item_type}`
             : `Order Login item estimated date updated: ${existing.item_type} → ${estimated_completion_date ?? "N/A"}`;
 
-          await prisma.leadDetailedLogs.create({
-            data: {
-              vendor_id: vendorId,
-              lead_id: leadId,
-              account_id: existing.account_id,
-              action: logAction,
-              action_type: "UPDATE",
-              created_by: Number(updated_by),
-            },
+          await createLeadLog(prisma, {
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: existing.account_id,
+            action: logAction,
+            action_type: "UPDATE",
+            history_type: "Lead",
+            created_by: Number(updated_by),
+            instance_id: Number(instance_id),
           });
         }
 
@@ -698,7 +704,7 @@ export class PreProductionService {
 
         // ─── Task UPDATE or CREATE ─────────────────────────────────
         if (existingTask) {
-          await prisma.userLeadTask.update({
+          const updatedTask = await prisma.userLeadTask.update({
             where: { id: existingTask.id },
             data: {
               due_date: new Date(dueDate),
@@ -712,6 +718,18 @@ export class PreProductionService {
                 closed_at: new Date(),
               }),
             },
+          });
+          await createTaskHistoryLog({
+            db: prisma,
+            task: {
+              ...updatedTask,
+              vendor_id: vendorId,
+              lead_id: leadId,
+              account_id: existing.account_id,
+              task_type: "Production Ready",
+            },
+            createdBy: userId,
+            actionType: "UPDATE",
           });
           logger.info(`[OrderLoginCompletion] task UPDATED [${index}]`, {
             taskId: existingTask.id,
@@ -740,6 +758,12 @@ export class PreProductionService {
                 closed_at: new Date(),
               }),
             },
+          });
+          await createTaskHistoryLog({
+            db: prisma,
+            task: created,
+            createdBy: userId,
+            actionType: "CREATE",
           });
           logger.info(`[OrderLoginCompletion] task CREATED [${index}]`, {
             newTaskId: created.id,

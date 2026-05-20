@@ -32,6 +32,8 @@ export type CompanyVendorsMasterAvgAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
+  state_id: number | null
+  default_payment_term_id: number | null
 }
 
 export type CompanyVendorsMasterSumAggregateOutputType = {
@@ -40,6 +42,8 @@ export type CompanyVendorsMasterSumAggregateOutputType = {
   created_by: number | null
   updated_by: number | null
   deleted_by: number | null
+  state_id: number | null
+  default_payment_term_id: number | null
 }
 
 export type CompanyVendorsMasterMinAggregateOutputType = {
@@ -59,6 +63,8 @@ export type CompanyVendorsMasterMinAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   in_house: boolean | null
+  state_id: number | null
+  default_payment_term_id: number | null
 }
 
 export type CompanyVendorsMasterMaxAggregateOutputType = {
@@ -78,6 +84,8 @@ export type CompanyVendorsMasterMaxAggregateOutputType = {
   deleted_by: number | null
   is_deleted: boolean | null
   in_house: boolean | null
+  state_id: number | null
+  default_payment_term_id: number | null
 }
 
 export type CompanyVendorsMasterCountAggregateOutputType = {
@@ -97,6 +105,8 @@ export type CompanyVendorsMasterCountAggregateOutputType = {
   deleted_by: number
   is_deleted: number
   in_house: number
+  state_id: number
+  default_payment_term_id: number
   _all: number
 }
 
@@ -107,6 +117,8 @@ export type CompanyVendorsMasterAvgAggregateInputType = {
   created_by?: true
   updated_by?: true
   deleted_by?: true
+  state_id?: true
+  default_payment_term_id?: true
 }
 
 export type CompanyVendorsMasterSumAggregateInputType = {
@@ -115,6 +127,8 @@ export type CompanyVendorsMasterSumAggregateInputType = {
   created_by?: true
   updated_by?: true
   deleted_by?: true
+  state_id?: true
+  default_payment_term_id?: true
 }
 
 export type CompanyVendorsMasterMinAggregateInputType = {
@@ -134,6 +148,8 @@ export type CompanyVendorsMasterMinAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
+  state_id?: true
+  default_payment_term_id?: true
 }
 
 export type CompanyVendorsMasterMaxAggregateInputType = {
@@ -153,6 +169,8 @@ export type CompanyVendorsMasterMaxAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
+  state_id?: true
+  default_payment_term_id?: true
 }
 
 export type CompanyVendorsMasterCountAggregateInputType = {
@@ -172,6 +190,8 @@ export type CompanyVendorsMasterCountAggregateInputType = {
   deleted_by?: true
   is_deleted?: true
   in_house?: true
+  state_id?: true
+  default_payment_term_id?: true
   _all?: true
 }
 
@@ -278,6 +298,8 @@ export type CompanyVendorsMasterGroupByOutputType = {
   deleted_by: number | null
   is_deleted: boolean
   in_house: boolean
+  state_id: number | null
+  default_payment_term_id: number | null
   _count: CompanyVendorsMasterCountAggregateOutputType | null
   _avg: CompanyVendorsMasterAvgAggregateOutputType | null
   _sum: CompanyVendorsMasterSumAggregateOutputType | null
@@ -320,11 +342,21 @@ export type CompanyVendorsMasterWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  state?: Prisma.XOR<Prisma.StateMasterNullableScalarRelationFilter, Prisma.StateMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   orderLoginLinks?: Prisma.OrderLoginDetailsListRelationFilter
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
+  grns?: Prisma.GRNMasterListRelationFilter
+  debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
+  redeliveryRequests?: Prisma.RedeliveryRequestListRelationFilter
+  defaultPaymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  paymentTerms?: Prisma.PaymentTermMasterListRelationFilter
 }
 
 export type CompanyVendorsMasterOrderByWithRelationInput = {
@@ -344,11 +376,21 @@ export type CompanyVendorsMasterOrderByWithRelationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
+  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
+  state?: Prisma.StateMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   orderLoginLinks?: Prisma.OrderLoginDetailsOrderByRelationAggregateInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingOrderByRelationAggregateInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterOrderByRelationAggregateInput
+  grns?: Prisma.GRNMasterOrderByRelationAggregateInput
+  debitCreditNotes?: Prisma.DebitCreditNoteOrderByRelationAggregateInput
+  redeliveryRequests?: Prisma.RedeliveryRequestOrderByRelationAggregateInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterOrderByWithRelationInput
+  paymentTerms?: Prisma.PaymentTermMasterOrderByRelationAggregateInput
 }
 
 export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -371,11 +413,21 @@ export type CompanyVendorsMasterWhereUniqueInput = Prisma.AtLeast<{
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  state?: Prisma.XOR<Prisma.StateMasterNullableScalarRelationFilter, Prisma.StateMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   orderLoginLinks?: Prisma.OrderLoginDetailsListRelationFilter
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingListRelationFilter
+  purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
+  grns?: Prisma.GRNMasterListRelationFilter
+  debitCreditNotes?: Prisma.DebitCreditNoteListRelationFilter
+  redeliveryRequests?: Prisma.RedeliveryRequestListRelationFilter
+  defaultPaymentTerm?: Prisma.XOR<Prisma.PaymentTermMasterNullableScalarRelationFilter, Prisma.PaymentTermMasterWhereInput> | null
+  paymentTerms?: Prisma.PaymentTermMasterListRelationFilter
 }, "id">
 
 export type CompanyVendorsMasterOrderByWithAggregationInput = {
@@ -395,6 +447,8 @@ export type CompanyVendorsMasterOrderByWithAggregationInput = {
   deleted_by?: Prisma.SortOrderInput | Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
+  state_id?: Prisma.SortOrderInput | Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.CompanyVendorsMasterCountOrderByAggregateInput
   _avg?: Prisma.CompanyVendorsMasterAvgOrderByAggregateInput
   _max?: Prisma.CompanyVendorsMasterMaxOrderByAggregateInput
@@ -422,6 +476,8 @@ export type CompanyVendorsMasterScalarWhereWithAggregatesInput = {
   deleted_by?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolWithAggregatesFilter<"CompanyVendorsMaster"> | boolean
+  state_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
+  default_payment_term_id?: Prisma.IntNullableWithAggregatesFilter<"CompanyVendorsMaster"> | number | null
 }
 
 export type CompanyVendorsMasterCreateInput = {
@@ -439,8 +495,16 @@ export type CompanyVendorsMasterCreateInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateInput = {
@@ -460,7 +524,15 @@ export type CompanyVendorsMasterUncheckedCreateInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUpdateInput = {
@@ -478,8 +550,16 @@ export type CompanyVendorsMasterUpdateInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateInput = {
@@ -499,7 +579,15 @@ export type CompanyVendorsMasterUncheckedUpdateInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterCreateManyInput = {
@@ -519,6 +607,8 @@ export type CompanyVendorsMasterCreateManyInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
 }
 
 export type CompanyVendorsMasterUpdateManyMutationInput = {
@@ -552,6 +642,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type CompanyVendorsMasterListRelationFilter = {
@@ -581,6 +673,8 @@ export type CompanyVendorsMasterCountOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterAvgOrderByAggregateInput = {
@@ -589,6 +683,8 @@ export type CompanyVendorsMasterAvgOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterMaxOrderByAggregateInput = {
@@ -608,6 +704,8 @@ export type CompanyVendorsMasterMaxOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterMinOrderByAggregateInput = {
@@ -627,6 +725,8 @@ export type CompanyVendorsMasterMinOrderByAggregateInput = {
   deleted_by?: Prisma.SortOrder
   is_deleted?: Prisma.SortOrder
   in_house?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterSumOrderByAggregateInput = {
@@ -635,11 +735,18 @@ export type CompanyVendorsMasterSumOrderByAggregateInput = {
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   deleted_by?: Prisma.SortOrder
+  state_id?: Prisma.SortOrder
+  default_payment_term_id?: Prisma.SortOrder
 }
 
 export type CompanyVendorsMasterNullableScalarRelationFilter = {
   is?: Prisma.CompanyVendorsMasterWhereInput | null
   isNot?: Prisma.CompanyVendorsMasterWhereInput | null
+}
+
+export type CompanyVendorsMasterScalarRelationFilter = {
+  is?: Prisma.CompanyVendorsMasterWhereInput
+  isNot?: Prisma.CompanyVendorsMasterWhereInput
 }
 
 export type CompanyVendorsMasterCreateNestedManyWithoutVendorInput = {
@@ -826,6 +933,176 @@ export type CompanyVendorsMasterUpdateOneWithoutOrderLoginLinksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutOrderLoginLinksInput, Prisma.CompanyVendorsMasterUpdateWithoutOrderLoginLinksInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput>
 }
 
+export type CompanyVendorsMasterCreateNestedManyWithoutStateInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput> | Prisma.CompanyVendorsMasterCreateWithoutStateInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyStateInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput> | Prisma.CompanyVendorsMasterCreateWithoutStateInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyStateInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterUpdateManyWithoutStateNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput> | Prisma.CompanyVendorsMasterCreateWithoutStateInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutStateInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutStateInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyStateInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutStateInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutStateInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutStateInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutStateInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput> | Prisma.CompanyVendorsMasterCreateWithoutStateInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutStateInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutStateInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutStateInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyStateInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutStateInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutStateInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutStateInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutStateInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutPurchaseIntentVendorMappingsInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappingsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPurchaseIntentVendorMappingsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseIntentVendorMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappingsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPurchaseIntentVendorMappingsInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutPurchaseIntentVendorMappingsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUpdateWithoutPurchaseIntentVendorMappingsInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappingsInput>
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutPurchaseOrdersInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPurchaseOrdersInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPurchaseOrdersInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutPurchaseOrdersInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUpdateWithoutPurchaseOrdersInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutGrnsInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutGrnsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutGrnsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterUpdateOneRequiredWithoutGrnsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutGrnsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutGrnsInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutGrnsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutGrnsInput, Prisma.CompanyVendorsMasterUpdateWithoutGrnsInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput>
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutDebitCreditNotesInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDebitCreditNotesInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterUpdateOneRequiredWithoutDebitCreditNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDebitCreditNotesInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutDebitCreditNotesInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUpdateWithoutDebitCreditNotesInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput>
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutRedeliveryRequestsInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutRedeliveryRequestsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterUpdateOneRequiredWithoutRedeliveryRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutRedeliveryRequestsInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutRedeliveryRequestsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUpdateWithoutRedeliveryRequestsInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput>
+}
+
+export type CompanyVendorsMasterCreateNestedOneWithoutPaymentTermsInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPaymentTermsInput
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+}
+
+export type CompanyVendorsMasterCreateNestedManyWithoutDefaultPaymentTermInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput> | Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterUncheckedCreateNestedManyWithoutDefaultPaymentTermInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput> | Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInputEnvelope
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+}
+
+export type CompanyVendorsMasterUpdateOneWithoutPaymentTermsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput>
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutPaymentTermsInput
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithoutPaymentTermsInput
+  disconnect?: Prisma.CompanyVendorsMasterWhereInput | boolean
+  delete?: Prisma.CompanyVendorsMasterWhereInput | boolean
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompanyVendorsMasterUpdateToOneWithWhereWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUpdateWithoutPaymentTermsInput>, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput>
+}
+
+export type CompanyVendorsMasterUpdateManyWithoutDefaultPaymentTermNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput> | Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutDefaultPaymentTermInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDefaultPaymentTermInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDefaultPaymentTermInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermNestedInput = {
+  create?: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput> | Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput[] | Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput[]
+  connectOrCreate?: Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput[]
+  upsert?: Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpsertWithWhereUniqueWithoutDefaultPaymentTermInput[]
+  createMany?: Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInputEnvelope
+  set?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  disconnect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  delete?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  connect?: Prisma.CompanyVendorsMasterWhereUniqueInput | Prisma.CompanyVendorsMasterWhereUniqueInput[]
+  update?: Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpdateWithWhereUniqueWithoutDefaultPaymentTermInput[]
+  updateMany?: Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDefaultPaymentTermInput | Prisma.CompanyVendorsMasterUpdateManyWithWhereWithoutDefaultPaymentTermInput[]
+  deleteMany?: Prisma.CompanyVendorsMasterScalarWhereInput | Prisma.CompanyVendorsMasterScalarWhereInput[]
+}
+
 export type CompanyVendorsMasterCreateWithoutVendorInput = {
   vendor_code: string
   company_name: string
@@ -841,7 +1118,15 @@ export type CompanyVendorsMasterCreateWithoutVendorInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
@@ -860,7 +1145,15 @@ export type CompanyVendorsMasterUncheckedCreateWithoutVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutVendorInput = {
@@ -909,6 +1202,8 @@ export type CompanyVendorsMasterScalarWhereInput = {
   deleted_by?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
   is_deleted?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
   in_house?: Prisma.BoolFilter<"CompanyVendorsMaster"> | boolean
+  state_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
+  default_payment_term_id?: Prisma.IntNullableFilter<"CompanyVendorsMaster"> | number | null
 }
 
 export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
@@ -925,8 +1220,16 @@ export type CompanyVendorsMasterCreateWithoutCreatedByInput = {
   in_house?: boolean
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
@@ -945,7 +1248,15 @@ export type CompanyVendorsMasterUncheckedCreateWithoutCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutCreatedByInput = {
@@ -972,8 +1283,16 @@ export type CompanyVendorsMasterCreateWithoutDeletedByInput = {
   in_house?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
@@ -992,7 +1311,15 @@ export type CompanyVendorsMasterUncheckedCreateWithoutDeletedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutDeletedByInput = {
@@ -1019,8 +1346,16 @@ export type CompanyVendorsMasterCreateWithoutUpdatedByInput = {
   in_house?: boolean
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
   orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -1039,7 +1374,15 @@ export type CompanyVendorsMasterUncheckedCreateWithoutUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -1115,7 +1458,15 @@ export type CompanyVendorsMasterCreateWithoutOrderLoginLinksInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
   updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
@@ -1135,6 +1486,14 @@ export type CompanyVendorsMasterUncheckedCreateWithoutOrderLoginLinksInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
 }
 
 export type CompanyVendorsMasterCreateOrConnectWithoutOrderLoginLinksInput = {
@@ -1168,7 +1527,15 @@ export type CompanyVendorsMasterUpdateWithoutOrderLoginLinksInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
@@ -1188,6 +1555,904 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutOrderLoginLinksInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutStateInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutStateInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutStateInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput>
+}
+
+export type CompanyVendorsMasterCreateManyStateInputEnvelope = {
+  data: Prisma.CompanyVendorsMasterCreateManyStateInput | Prisma.CompanyVendorsMasterCreateManyStateInput[]
+  skipDuplicates?: boolean
+}
+
+export type CompanyVendorsMasterUpsertWithWhereUniqueWithoutStateInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutStateInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutStateInput>
+}
+
+export type CompanyVendorsMasterUpdateWithWhereUniqueWithoutStateInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutStateInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutStateInput>
+}
+
+export type CompanyVendorsMasterUpdateManyWithWhereWithoutStateInput = {
+  where: Prisma.CompanyVendorsMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateInput>
+}
+
+export type CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappingsInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutPurchaseIntentVendorMappingsInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappingsInput>
+}
+
+export type CompanyVendorsMasterUpsertWithoutPurchaseIntentVendorMappingsInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappingsInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseIntentVendorMappingsInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutPurchaseIntentVendorMappingsInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPurchaseIntentVendorMappingsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappingsInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutPurchaseIntentVendorMappingsInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseIntentVendorMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutPurchaseOrdersInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutPurchaseOrdersInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput>
+}
+
+export type CompanyVendorsMasterUpsertWithoutPurchaseOrdersInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPurchaseOrdersInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutPurchaseOrdersInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPurchaseOrdersInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutPurchaseOrdersInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutGrnsInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutGrnsInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutGrnsInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutGrnsInput>
+}
+
+export type CompanyVendorsMasterUpsertWithoutGrnsInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutGrnsInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutGrnsInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutGrnsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutGrnsInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutGrnsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutDebitCreditNotesInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutDebitCreditNotesInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput>
+}
+
+export type CompanyVendorsMasterUpsertWithoutDebitCreditNotesInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDebitCreditNotesInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutDebitCreditNotesInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutDebitCreditNotesInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutDebitCreditNotesInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutRedeliveryRequestsInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput>
+}
+
+export type CompanyVendorsMasterUpsertWithoutRedeliveryRequestsInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutRedeliveryRequestsInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutRedeliveryRequestsInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutRedeliveryRequestsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutRedeliveryRequestsInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterCreateWithoutPaymentTermsInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterCreateNestedOneWithoutDefaultForSuppliersInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutPaymentTermsInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput>
+}
+
+export type CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput = {
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  in_house?: boolean
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsDeletedInput
+  updatedBy: Prisma.UserMasterCreateNestedOneWithoutCompanyVendorsUpdatedInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutCompanyVendorsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedCreateNestedManyWithoutCompanyVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCompanyVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCompanyVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutCompanyVendorInput
+}
+
+export type CompanyVendorsMasterCreateOrConnectWithoutDefaultPaymentTermInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput>
+}
+
+export type CompanyVendorsMasterCreateManyDefaultPaymentTermInputEnvelope = {
+  data: Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInput | Prisma.CompanyVendorsMasterCreateManyDefaultPaymentTermInput[]
+  skipDuplicates?: boolean
+}
+
+export type CompanyVendorsMasterUpsertWithoutPaymentTermsInput = {
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutPaymentTermsInput>
+  where?: Prisma.CompanyVendorsMasterWhereInput
+}
+
+export type CompanyVendorsMasterUpdateToOneWithWhereWithoutPaymentTermsInput = {
+  where?: Prisma.CompanyVendorsMasterWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutPaymentTermsInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput>
+}
+
+export type CompanyVendorsMasterUpdateWithoutPaymentTermsInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutPaymentTermsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUpsertWithWhereUniqueWithoutDefaultPaymentTermInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDefaultPaymentTermInput>
+  create: Prisma.XOR<Prisma.CompanyVendorsMasterCreateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedCreateWithoutDefaultPaymentTermInput>
+}
+
+export type CompanyVendorsMasterUpdateWithWhereUniqueWithoutDefaultPaymentTermInput = {
+  where: Prisma.CompanyVendorsMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateWithoutDefaultPaymentTermInput, Prisma.CompanyVendorsMasterUncheckedUpdateWithoutDefaultPaymentTermInput>
+}
+
+export type CompanyVendorsMasterUpdateManyWithWhereWithoutDefaultPaymentTermInput = {
+  where: Prisma.CompanyVendorsMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.CompanyVendorsMasterUpdateManyMutationInput, Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermInput>
 }
 
 export type CompanyVendorsMasterCreateManyVendorInput = {
@@ -1206,6 +2471,8 @@ export type CompanyVendorsMasterCreateManyVendorInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
 }
 
 export type CompanyVendorsMasterUpdateWithoutVendorInput = {
@@ -1223,7 +2490,15 @@ export type CompanyVendorsMasterUpdateWithoutVendorInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
@@ -1242,7 +2517,15 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -1261,6 +2544,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutVendorInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type CompanyVendorsMasterCreateManyCreatedByInput = {
@@ -1279,6 +2564,8 @@ export type CompanyVendorsMasterCreateManyCreatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
 }
 
 export type CompanyVendorsMasterCreateManyDeletedByInput = {
@@ -1297,6 +2584,8 @@ export type CompanyVendorsMasterCreateManyDeletedByInput = {
   deleted_at?: Date | string | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
 }
 
 export type CompanyVendorsMasterCreateManyUpdatedByInput = {
@@ -1315,6 +2604,8 @@ export type CompanyVendorsMasterCreateManyUpdatedByInput = {
   deleted_by?: number | null
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: number | null
+  default_payment_term_id?: number | null
 }
 
 export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
@@ -1331,8 +2622,16 @@ export type CompanyVendorsMasterUpdateWithoutCreatedByInput = {
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -1351,7 +2650,15 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1370,6 +2677,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
@@ -1386,8 +2695,16 @@ export type CompanyVendorsMasterUpdateWithoutDeletedByInput = {
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
@@ -1406,7 +2723,15 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
@@ -1425,6 +2750,8 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByInput = {
   deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
@@ -1441,8 +2768,16 @@ export type CompanyVendorsMasterUpdateWithoutUpdatedByInput = {
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
   orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -1461,7 +2796,15 @@ export type CompanyVendorsMasterUncheckedUpdateWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
 }
 
 export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1480,6 +2823,194 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type CompanyVendorsMasterCreateManyStateInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  default_payment_term_id?: number | null
+}
+
+export type CompanyVendorsMasterUpdateWithoutStateInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  defaultPaymentTerm?: Prisma.PaymentTermMasterUpdateOneWithoutDefaultForSuppliersNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutStateInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutStateInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_payment_term_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type CompanyVendorsMasterCreateManyDefaultPaymentTermInput = {
+  id?: number
+  vendor_id: number
+  vendor_code: string
+  company_name: string
+  point_of_contact: string
+  contact_no: string
+  email?: string | null
+  address?: string | null
+  created_at?: Date | string
+  created_by: number
+  updated_at?: Date | string
+  updated_by: number
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  in_house?: boolean
+  state_id?: number | null
+}
+
+export type CompanyVendorsMasterUpdateWithoutDefaultPaymentTermInput = {
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutCompanyVendorsDeletedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneRequiredWithoutCompanyVendorsUpdatedNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutCompanyVendorsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCompanyVendorsMasterNestedInput
+  orderLoginLinks?: Prisma.OrderLoginDetailsUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateWithoutDefaultPaymentTermInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  orderLoginLinks?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseIntentVendorMappings?: Prisma.PurchaseIntentItemVendorMappingUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCompanyVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutCompanyVendorNestedInput
+}
+
+export type CompanyVendorsMasterUncheckedUpdateManyWithoutDefaultPaymentTermInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  company_name?: Prisma.StringFieldUpdateOperationsInput | string
+  point_of_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.IntFieldUpdateOperationsInput | number
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  in_house?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 
@@ -1489,10 +3020,22 @@ export type CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByInput = {
 
 export type CompanyVendorsMasterCountOutputType = {
   orderLoginLinks: number
+  purchaseIntentVendorMappings: number
+  purchaseOrders: number
+  grns: number
+  debitCreditNotes: number
+  redeliveryRequests: number
+  paymentTerms: number
 }
 
 export type CompanyVendorsMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderLoginLinks?: boolean | CompanyVendorsMasterCountOutputTypeCountOrderLoginLinksArgs
+  purchaseIntentVendorMappings?: boolean | CompanyVendorsMasterCountOutputTypeCountPurchaseIntentVendorMappingsArgs
+  purchaseOrders?: boolean | CompanyVendorsMasterCountOutputTypeCountPurchaseOrdersArgs
+  grns?: boolean | CompanyVendorsMasterCountOutputTypeCountGrnsArgs
+  debitCreditNotes?: boolean | CompanyVendorsMasterCountOutputTypeCountDebitCreditNotesArgs
+  redeliveryRequests?: boolean | CompanyVendorsMasterCountOutputTypeCountRedeliveryRequestsArgs
+  paymentTerms?: boolean | CompanyVendorsMasterCountOutputTypeCountPaymentTermsArgs
 }
 
 /**
@@ -1510,6 +3053,48 @@ export type CompanyVendorsMasterCountOutputTypeDefaultArgs<ExtArgs extends runti
  */
 export type CompanyVendorsMasterCountOutputTypeCountOrderLoginLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.OrderLoginDetailsWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountPurchaseIntentVendorMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountPurchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseOrderMasterWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountGrnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GRNMasterWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountDebitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DebitCreditNoteWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountRedeliveryRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RedeliveryRequestWhereInput
+}
+
+/**
+ * CompanyVendorsMasterCountOutputType without action
+ */
+export type CompanyVendorsMasterCountOutputTypeCountPaymentTermsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentTermMasterWhereInput
 }
 
 
@@ -1530,11 +3115,21 @@ export type CompanyVendorsMasterSelect<ExtArgs extends runtime.Types.Extensions.
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: boolean
+  default_payment_term_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   orderLoginLinks?: boolean | Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>
+  purchaseIntentVendorMappings?: boolean | Prisma.CompanyVendorsMaster$purchaseIntentVendorMappingsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.CompanyVendorsMaster$purchaseOrdersArgs<ExtArgs>
+  grns?: boolean | Prisma.CompanyVendorsMaster$grnsArgs<ExtArgs>
+  debitCreditNotes?: boolean | Prisma.CompanyVendorsMaster$debitCreditNotesArgs<ExtArgs>
+  redeliveryRequests?: boolean | Prisma.CompanyVendorsMaster$redeliveryRequestsArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
+  paymentTerms?: boolean | Prisma.CompanyVendorsMaster$paymentTermsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyVendorsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
 
@@ -1555,10 +3150,14 @@ export type CompanyVendorsMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: boolean
+  default_payment_term_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
 
 export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1578,10 +3177,14 @@ export type CompanyVendorsMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: boolean
+  default_payment_term_id?: boolean
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
 }, ExtArgs["result"]["companyVendorsMaster"]>
 
 export type CompanyVendorsMasterSelectScalar = {
@@ -1601,28 +3204,42 @@ export type CompanyVendorsMasterSelectScalar = {
   deleted_by?: boolean
   is_deleted?: boolean
   in_house?: boolean
+  state_id?: boolean
+  default_payment_term_id?: boolean
 }
 
-export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house", ExtArgs["result"]["companyVendorsMaster"]>
+export type CompanyVendorsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "vendor_code" | "company_name" | "point_of_contact" | "contact_no" | "email" | "address" | "created_at" | "created_by" | "updated_at" | "updated_by" | "deleted_at" | "deleted_by" | "is_deleted" | "in_house" | "state_id" | "default_payment_term_id", ExtArgs["result"]["companyVendorsMaster"]>
 export type CompanyVendorsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   orderLoginLinks?: boolean | Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>
+  purchaseIntentVendorMappings?: boolean | Prisma.CompanyVendorsMaster$purchaseIntentVendorMappingsArgs<ExtArgs>
+  purchaseOrders?: boolean | Prisma.CompanyVendorsMaster$purchaseOrdersArgs<ExtArgs>
+  grns?: boolean | Prisma.CompanyVendorsMaster$grnsArgs<ExtArgs>
+  debitCreditNotes?: boolean | Prisma.CompanyVendorsMaster$debitCreditNotesArgs<ExtArgs>
+  redeliveryRequests?: boolean | Prisma.CompanyVendorsMaster$redeliveryRequestsArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
+  paymentTerms?: boolean | Prisma.CompanyVendorsMaster$paymentTermsArgs<ExtArgs>
   _count?: boolean | Prisma.CompanyVendorsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompanyVendorsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
 }
 export type CompanyVendorsMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   deletedBy?: boolean | Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>
   updatedBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  state?: boolean | Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  defaultPaymentTerm?: boolean | Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>
 }
 
 export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1631,8 +3248,16 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs>
+    state: Prisma.$StateMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     orderLoginLinks: Prisma.$OrderLoginDetailsPayload<ExtArgs>[]
+    purchaseIntentVendorMappings: Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>[]
+    purchaseOrders: Prisma.$PurchaseOrderMasterPayload<ExtArgs>[]
+    grns: Prisma.$GRNMasterPayload<ExtArgs>[]
+    debitCreditNotes: Prisma.$DebitCreditNotePayload<ExtArgs>[]
+    redeliveryRequests: Prisma.$RedeliveryRequestPayload<ExtArgs>[]
+    defaultPaymentTerm: Prisma.$PaymentTermMasterPayload<ExtArgs> | null
+    paymentTerms: Prisma.$PaymentTermMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1651,6 +3276,8 @@ export type $CompanyVendorsMasterPayload<ExtArgs extends runtime.Types.Extension
     deleted_by: number | null
     is_deleted: boolean
     in_house: boolean
+    state_id: number | null
+    default_payment_term_id: number | null
   }, ExtArgs["result"]["companyVendorsMaster"]>
   composites: {}
 }
@@ -2048,8 +3675,16 @@ export interface Prisma__CompanyVendorsMasterClient<T, Null = never, ExtArgs ext
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  state<T extends Prisma.CompanyVendorsMaster$stateArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$stateArgs<ExtArgs>>): Prisma.Prisma__StateMasterClient<runtime.Types.Result.GetResult<Prisma.$StateMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   orderLoginLinks<T extends Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderLoginDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseIntentVendorMappings<T extends Prisma.CompanyVendorsMaster$purchaseIntentVendorMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$purchaseIntentVendorMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemVendorMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchaseOrders<T extends Prisma.CompanyVendorsMaster$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  grns<T extends Prisma.CompanyVendorsMaster$grnsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$grnsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GRNMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  debitCreditNotes<T extends Prisma.CompanyVendorsMaster$debitCreditNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$debitCreditNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DebitCreditNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  redeliveryRequests<T extends Prisma.CompanyVendorsMaster$redeliveryRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$redeliveryRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RedeliveryRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  defaultPaymentTerm<T extends Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs>>): Prisma.Prisma__PaymentTermMasterClient<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  paymentTerms<T extends Prisma.CompanyVendorsMaster$paymentTermsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CompanyVendorsMaster$paymentTermsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentTermMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2095,6 +3730,8 @@ export interface CompanyVendorsMasterFieldRefs {
   readonly deleted_by: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
   readonly is_deleted: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
   readonly in_house: Prisma.FieldRef<"CompanyVendorsMaster", 'Boolean'>
+  readonly state_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
+  readonly default_payment_term_id: Prisma.FieldRef<"CompanyVendorsMaster", 'Int'>
 }
     
 
@@ -2515,6 +4152,25 @@ export type CompanyVendorsMaster$deletedByArgs<ExtArgs extends runtime.Types.Ext
 }
 
 /**
+ * CompanyVendorsMaster.state
+ */
+export type CompanyVendorsMaster$stateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StateMaster
+   */
+  select?: Prisma.StateMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StateMaster
+   */
+  omit?: Prisma.StateMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StateMasterInclude<ExtArgs> | null
+  where?: Prisma.StateMasterWhereInput
+}
+
+/**
  * CompanyVendorsMaster.orderLoginLinks
  */
 export type CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2536,6 +4192,169 @@ export type CompanyVendorsMaster$orderLoginLinksArgs<ExtArgs extends runtime.Typ
   take?: number
   skip?: number
   distinct?: Prisma.OrderLoginDetailsScalarFieldEnum | Prisma.OrderLoginDetailsScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.purchaseIntentVendorMappings
+ */
+export type CompanyVendorsMaster$purchaseIntentVendorMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseIntentItemVendorMapping
+   */
+  select?: Prisma.PurchaseIntentItemVendorMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseIntentItemVendorMapping
+   */
+  omit?: Prisma.PurchaseIntentItemVendorMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseIntentItemVendorMappingInclude<ExtArgs> | null
+  where?: Prisma.PurchaseIntentItemVendorMappingWhereInput
+  orderBy?: Prisma.PurchaseIntentItemVendorMappingOrderByWithRelationInput | Prisma.PurchaseIntentItemVendorMappingOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseIntentItemVendorMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseIntentItemVendorMappingScalarFieldEnum | Prisma.PurchaseIntentItemVendorMappingScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.purchaseOrders
+ */
+export type CompanyVendorsMaster$purchaseOrdersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseOrderMaster
+   */
+  select?: Prisma.PurchaseOrderMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseOrderMaster
+   */
+  omit?: Prisma.PurchaseOrderMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseOrderMasterInclude<ExtArgs> | null
+  where?: Prisma.PurchaseOrderMasterWhereInput
+  orderBy?: Prisma.PurchaseOrderMasterOrderByWithRelationInput | Prisma.PurchaseOrderMasterOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseOrderMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseOrderMasterScalarFieldEnum | Prisma.PurchaseOrderMasterScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.grns
+ */
+export type CompanyVendorsMaster$grnsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GRNMaster
+   */
+  select?: Prisma.GRNMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GRNMaster
+   */
+  omit?: Prisma.GRNMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GRNMasterInclude<ExtArgs> | null
+  where?: Prisma.GRNMasterWhereInput
+  orderBy?: Prisma.GRNMasterOrderByWithRelationInput | Prisma.GRNMasterOrderByWithRelationInput[]
+  cursor?: Prisma.GRNMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GRNMasterScalarFieldEnum | Prisma.GRNMasterScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.debitCreditNotes
+ */
+export type CompanyVendorsMaster$debitCreditNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DebitCreditNote
+   */
+  select?: Prisma.DebitCreditNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DebitCreditNote
+   */
+  omit?: Prisma.DebitCreditNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DebitCreditNoteInclude<ExtArgs> | null
+  where?: Prisma.DebitCreditNoteWhereInput
+  orderBy?: Prisma.DebitCreditNoteOrderByWithRelationInput | Prisma.DebitCreditNoteOrderByWithRelationInput[]
+  cursor?: Prisma.DebitCreditNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DebitCreditNoteScalarFieldEnum | Prisma.DebitCreditNoteScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.redeliveryRequests
+ */
+export type CompanyVendorsMaster$redeliveryRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RedeliveryRequest
+   */
+  select?: Prisma.RedeliveryRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RedeliveryRequest
+   */
+  omit?: Prisma.RedeliveryRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RedeliveryRequestInclude<ExtArgs> | null
+  where?: Prisma.RedeliveryRequestWhereInput
+  orderBy?: Prisma.RedeliveryRequestOrderByWithRelationInput | Prisma.RedeliveryRequestOrderByWithRelationInput[]
+  cursor?: Prisma.RedeliveryRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RedeliveryRequestScalarFieldEnum | Prisma.RedeliveryRequestScalarFieldEnum[]
+}
+
+/**
+ * CompanyVendorsMaster.defaultPaymentTerm
+ */
+export type CompanyVendorsMaster$defaultPaymentTermArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentTermMaster
+   */
+  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentTermMaster
+   */
+  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
+  where?: Prisma.PaymentTermMasterWhereInput
+}
+
+/**
+ * CompanyVendorsMaster.paymentTerms
+ */
+export type CompanyVendorsMaster$paymentTermsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PaymentTermMaster
+   */
+  select?: Prisma.PaymentTermMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PaymentTermMaster
+   */
+  omit?: Prisma.PaymentTermMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentTermMasterInclude<ExtArgs> | null
+  where?: Prisma.PaymentTermMasterWhereInput
+  orderBy?: Prisma.PaymentTermMasterOrderByWithRelationInput | Prisma.PaymentTermMasterOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentTermMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentTermMasterScalarFieldEnum | Prisma.PaymentTermMasterScalarFieldEnum[]
 }
 
 /**

@@ -1,11 +1,13 @@
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class DispatchPlanningService {
   /** ✅ Fetch all leads with status = Type 13 (Dispatch Planning) */
@@ -340,15 +342,13 @@ export class DispatchPlanningService {
       }
 
       // 5️⃣ Create LeadDetailedLogs Entry
-      const detailedLog = await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id,
-          lead_id,
-          account_id,
-          created_by,
-          action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
-          action_type: "UPDATE", // or "create" depending on your enum usage
-        },
+      const detailedLog = await createLeadLog(tx, {
+        vendor_id,
+        lead_id,
+        account_id,
+        created_by,
+        action: `Dispatch Planning Payment of ₹${pending_payment} recorded.`,
+        action_type: "UPDATE",
       });
 
       // 6️⃣ If document uploaded → create LeadDocumentLogs entry
@@ -582,15 +582,14 @@ export class DispatchPlanningService {
         createdBy: updatedBy,
       });
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: lead.id,
-          account_id: lead.account_id!,
-          action: "Lead moved to Dispatch stage.",
-          action_type: "UPDATE",
-          created_by: updatedBy,
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        account_id: lead.account_id!,
+        action: "Lead moved to Dispatch stage.",
+        action_type: "UPDATE",
+        history_type: "Lead",
+        created_by: updatedBy,
       });
 
       const leadPlanningData = await tx.leadMaster.findUnique({
@@ -634,7 +633,7 @@ export class DispatchPlanningService {
       });
 
       if (existingTask) {
-        await tx.userLeadTask.update({
+        const updatedTask = await tx.userLeadTask.update({
           where: { id: existingTask.id },
           data: {
             due_date: leadPlanningData.required_date_for_dispatch,
@@ -642,8 +641,21 @@ export class DispatchPlanningService {
             updated_at: new Date(),
           },
         });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task: {
+            ...updatedTask,
+            vendor_id: vendorId,
+            lead_id: leadId,
+            account_id: leadPlanningData.account_id,
+            task_type: "Dispatch",
+          },
+          createdBy: updatedBy,
+          actionType: "UPDATE",
+        });
       } else {
-        await tx.userLeadTask.create({
+        const task = await tx.userLeadTask.create({
           data: {
             vendor_id: vendorId,
             lead_id: leadId,
@@ -659,6 +671,13 @@ export class DispatchPlanningService {
             created_by: updatedBy,
             lead_stage: "dispatch-planning-stage",
           },
+        });
+
+        await createTaskHistoryLog({
+          db: tx,
+          task,
+          createdBy: updatedBy,
+          actionType: "CREATE",
         });
       }
 

@@ -137,71 +137,70 @@ export const getBoxesByVendorAndProject = async (vendorId: number, projectId: nu
   return enriched;
 };
 
-// export const getBoxDetailsWithItems = async (
-//   vendorId: number,
-//   projectId: number,
-//   clientId: number,
-//   boxId: number
-// ) => {
-//   const vendor = await prisma.vendorMaster.findUnique({
-//     where: { id: vendorId },
-//   });
+export const getBoxDetailsWithItems = async (
+  vendorId: number,
+  projectId: number,
+  clientId: number,
+  boxId: number
+) => {
+  const vendor = await prisma.vendorMaster.findUnique({
+    where: { id: vendorId },
+  });
 
-//   const box = await prisma.boxMaster.findFirst({
-//     where: {
-//       id: boxId,
-//       project_id: projectId,
-//     },
-//     include: {
-//       details: true,
-//       project: {
-//         include: {
-//           client: true,
-//         },
-//       },
-//     },
-//   });
+  const box = await prisma.boxMaster.findFirst({
+    where: {
+      id: boxId,
+      project_id: projectId,
+    },
+    include: {
+      details: true,
+      project: {
+        include: {
+          client: true,
+        },
+      },
+    },
+  });
 
-//   const items = await prisma.scanAndPackItem.findMany({
-//     where: {
-//       vendor_id: vendorId,
-//       project_id: projectId,
-//       client_id: clientId,
-//       box_id: boxId,
-//       is_deleted: false,
-//     },
-//     include: {
-//       user: true,
-//       details: true,
-//     },
-//   });
+  const items = await prisma.scanAndPackItem.findMany({
+    where: {
+      vendor_id: vendorId,
+      project_id: projectId,
+      client_id: clientId,
+      box_id: boxId,
+      is_deleted: false,
+    },
+    include: {
+      user: true,
+      details: true,
+    },
+  });
 
-//   // 🔥 Enrich each item with its ProjectItemsMaster record
-//   const enrichedItems = await Promise.all(
-//     items.map(async (item) => {
-//       const projectItem = await prisma.projectItemsMaster.findFirst({
-//         where: {
-//           project_id: item.project_id,
-//           vendor_id: item.vendor_id,
-//           lead_id: item.lead_id,
-//           unique_id: item.unique_id,
-//         },
-//       });
+  // 🔥 Enrich each item with its ProjectItemsMaster record
+  const enrichedItems = await Promise.all(
+    items.map(async (item) => {
+      const projectItem = await prisma.projectItemsMaster.findFirst({
+        where: {
+          project_id: item.project_id,
+          vendor_id: item.vendor_id,
+          unique_id: item.unique_id,
+        },
+      });
 
-//       return {
-//         ...item,
-//         projectItem,
-//       };
-//     })
-//   );
+      return {
+        ...item,
+        projectItem,
+      };
+    })
+  );
 
-//   return {
-//     vendor,
-//     box,
-//     client: box?.project?.client,
-//     items: enrichedItems,
-//   };
-// };
+  return {
+    vendor,
+    box,
+    client: box?.project?.client,
+    items: enrichedItems,
+  };
+};
 
 export const getAllBoxesWithItemCountService = async (
   vendorId: number,
@@ -436,6 +435,34 @@ const escapeHtml = (str: string) =>
 // ─── Main service ─────────────────────────────────────────────────────────────
 
 
+export const generateBoxPdfServiceWeb = async (
+  box_id: number,
+  project_id: string,
+  vendor_id: number
+) => {
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      unique_project_id: project_id,
+      vendor_id: vendor_id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  
+
+  if (!project) {
+    return validationResponse(0, "Project not found");
+  }
+
+  return await generateBoxPdfService(
+    box_id,
+    project.id,
+    vendor_id
+  );
+};
+
+
 
 export const generateBoxPdfService = async (
   box_id: number,
@@ -443,6 +470,7 @@ export const generateBoxPdfService = async (
   vendor_id: number
 ) => {
   const tempDir = path.join(process.cwd(), "tmp");
+  // console.log("tempDir",tempDir);
   if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 
   let tempFilePath: string | null = null;
@@ -651,33 +679,17 @@ export const generateBoxPdfService = async (
 </html>`;
 
     // ── 6. Write PDF to temp file ────────────────────────────────────────────
-    const fileName = `box_${sanitizeFileName(box.project.project_name)}_${sanitizeFileName(box.box_name)}_${Date.now()}.pdf`;
+    const fileName = `box_${sanitizeFileName(
+      box.project.project_name
+    )}_${sanitizeFileName(box.box_name)}_${Date.now()}.pdf`;
+
     tempFilePath = path.join(tempDir, fileName);
 
-    // const pdfBuffer = await htmlPdfNode.generatePdf(
-    //   { content: html },
-    //   {
-    //     format: "A4",
-    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-    //     printBackground: true,
-    //   }
-    // );
+    const pdfBuffer = await generatePdf(html, tempFilePath);
 
-    // fs.writeFileSync(tempFilePath, pdfBuffer);
-
-
-    const pdfBuffer = await generatePdf(html,tempFilePath);
-
-    // const pdfBuffer = await htmlPdfNode.generatePdf(
-    //   { content: html },
-    //   {
-    //     format: "A4",
-    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-    //     printBackground: true,
-    //   }
-    // ) as unknown as Buffer;
-
-    // fs.writeFileSync(tempFilePath, pdfBuffer);
+    if (!pdfBuffer || !fs.existsSync(tempFilePath)) {
+      throw new Error("PDF generation failed. File was not created.");
+    }
 
     // ── 7. Upload to Wasabi + get signed URL + delete temp file ──────────────
     const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
@@ -686,6 +698,11 @@ export const generateBoxPdfService = async (
       box_id,
       fileName
     );
+
+    if (tempFilePath && fs.existsSync(tempFilePath)) {
+      fs.unlinkSync(tempFilePath);
+    }
+
     tempFilePath = null;
 
     return validationResponse(1, "PDF generated successfully", {
@@ -705,37 +722,133 @@ export const generateBoxPdfService = async (
   }
 };
 
+// import { randomUUID } from "crypto";
 
+
+// export async function generatePdfAndUploadToWasabi({
+//   html,
+//   vendorId,
+//   fileNamePrefix = "box-pdf",
+// }: {
+//   html: string;
+//   vendorId: number;
+//   fileNamePrefix?: string;
+// }) {
+//   let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null;
+//   let tempFilePath = "";
+
+//   try {
+//     const tempDir = path.join(process.cwd(), "tmp", "pdfs");
+
+//     if (!fs.existsSync(tempDir)) {
+//       fs.mkdirSync(tempDir, { recursive: true });
+//     }
+
+//     const safeFileName = `${fileNamePrefix}-${Date.now()}-${randomUUID()}.pdf`;
+//     tempFilePath = path.join(tempDir, safeFileName);
+
+//     browser = await puppeteer.launch({
+//       headless: true,
+//       args: ["--no-sandbox", "--disable-setuid-sandbox"],
+
+//       // Use this only if you are using puppeteer-core or local Chrome path is needed:
+//       // executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+//     });
+
+//     const page = await browser.newPage();
+
+//     await page.setContent(html, {
+//       waitUntil: "networkidle0",
+//     });
+
+//     const pdfBuffer = await page.pdf({
+//       format: "A4",
+//       printBackground: true,
+//       margin: {
+//         top: "10mm",
+//         bottom: "10mm",
+//         left: "10mm",
+//         right: "10mm",
+//       },
+//     });
+
+//     fs.writeFileSync(tempFilePath, pdfBuffer);
+
+//     const uploaded = await uploadPdfToWasabi({
+//       filePath: tempFilePath,
+//       vendorId,
+//       fileName: safeFileName,
+//       mimeType: "application/pdf",
+//     });
+
+//     return {
+//       success: true,
+//       file_name: safeFileName,
+//       pdf_url: uploaded.url,
+//       storage_key: uploaded.key,
+//       buffer: Buffer.from(pdfBuffer),
+//     };
+//   } catch (error) {
+//     console.error("generatePdfAndUploadToWasabi error:", error);
+//     throw error;
+//   } finally {
+//     if (browser) {
+//       await browser.close();
+//     }
+
+//     if (tempFilePath && fs.existsSync(tempFilePath)) {
+//       fs.unlinkSync(tempFilePath);
+//     }
+//   }
+// }
 
 export async function generatePdf(html: string, filePath: string) {
-  const browser = await puppeteer.launch({
-    headless:true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"], // required on VPS
-  });
+  let browser;
 
-  const page = await browser.newPage();
+  try {
+    const dir = path.dirname(filePath);
 
-  await page.setContent(html, {
-    waitUntil: "networkidle0",
-  });
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
 
-  const pdfBuffer = await page.pdf({
-    format: "A4",
-    printBackground: true,
-    margin: {
-      top: "10mm",
-      bottom: "10mm",
-      left: "10mm",
-      right: "10mm",
-    },
-  });
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
 
-  await browser.close();
+      // Only use this on local Mac if puppeteer-core cannot find Chrome:
+      // executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    });
 
-  fs.writeFileSync(filePath, pdfBuffer);
-  return pdfBuffer;
+    const page = await browser.newPage();
+
+    await page.setContent(html, {
+      waitUntil: "networkidle0",
+    });
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+      margin: {
+        top: "10mm",
+        bottom: "10mm",
+        left: "10mm",
+        right: "10mm",
+      },
+    });
+
+    fs.writeFileSync(filePath, Buffer.from(pdfBuffer));
+
+    return Buffer.from(pdfBuffer);
+  } catch (error) {
+    console.error("generatePdf error:", error);
+    throw error;
+  } finally {
+    if (browser) {
+      await browser.close();
+    }
+  }
 }
-
 
 export const generateProjectBoxPdfService = async (
   project_id: number,
@@ -950,7 +1063,7 @@ export const generateProjectBoxPdfService = async (
     tempFilePath = path.join(tempDir, fileName);
 
 
-    const pdfBuffer = await generatePdf(html,tempFilePath);
+    const pdfBuffer = await generatePdf(html, tempFilePath);
     // const pdfBuffer = await htmlPdfNode.generatePdf(
     //   { content: html },
     //   {
@@ -1253,7 +1366,7 @@ export const generateAllBoxesPdfService = async (
     const fileName = `all_boxes_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
     tempFilePath = path.join(tempDir, fileName);
 
-    const pdfBuffer = await generatePdf(html,tempFilePath);
+    const pdfBuffer = await generatePdf(html, tempFilePath);
     // const pdfBuffer = await htmlPdfNode.generatePdf(
     //   { content: html },
     //   {
@@ -1292,6 +1405,30 @@ export const generateAllBoxesPdfService = async (
   }
 };
 
+export const generateProjectFullReportServiceWeb = async (
+  project_id: string,
+  vendor_id: number
+) => {
+  const project = await prisma.projectMaster.findFirst({
+    where: {
+      unique_project_id: project_id,
+      vendor_id: vendor_id,
+    },
+    select: {
+      id: true,
+    },
+  });
+  
+
+  if (!project) {
+    return validationResponse(0, "Project not found");
+  }
+
+  return await generateProjectFullReportService(    
+    project.id,
+    vendor_id
+  );
+};
 
 export const generateProjectFullReportService = async (
   project_id: number,
@@ -1645,7 +1782,7 @@ export const generateProjectFullReportService = async (
     const fileName = `report_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
     tempFilePath = path.join(tempDir, fileName);
 
-    const pdfBuffer = await generatePdf(html,tempFilePath);
+    const pdfBuffer = await generatePdf(html, tempFilePath);
 
     // const pdfBuffer = await htmlPdfNode.generatePdf(
     //   { content: html },

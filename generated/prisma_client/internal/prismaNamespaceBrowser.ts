@@ -162,7 +162,23 @@ export const ModelName = {
   ProjectCategoriesMaster: 'ProjectCategoriesMaster',
   ProjectCategoriesMasterVendorMapping: 'ProjectCategoriesMasterVendorMapping',
   BrandMaster: 'BrandMaster',
-  ProductMaster: 'ProductMaster'
+  ProductMaster: 'ProductMaster',
+  PurchaseIntentMaster: 'PurchaseIntentMaster',
+  PurchaseIntentItem: 'PurchaseIntentItem',
+  PurchaseIntentItemVendorMapping: 'PurchaseIntentItemVendorMapping',
+  PurchaseIntentStatusLog: 'PurchaseIntentStatusLog',
+  PurchaseOrderMaster: 'PurchaseOrderMaster',
+  PurchaseOrderItem: 'PurchaseOrderItem',
+  GRNMaster: 'GRNMaster',
+  GRNItem: 'GRNItem',
+  DebitCreditNote: 'DebitCreditNote',
+  RedeliveryRequest: 'RedeliveryRequest',
+  HsnProductMapping: 'HsnProductMapping',
+  ProductStockHistory: 'ProductStockHistory',
+  PaymentTermMaster: 'PaymentTermMaster',
+  PaymentTermStage: 'PaymentTermStage',
+  POPaymentSchedule: 'POPaymentSchedule',
+  POPayment: 'POPayment'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -197,7 +213,8 @@ export const VendorMasterScalarFieldEnum = {
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  state_id: 'state_id'
 } as const
 
 export type VendorMasterScalarFieldEnum = (typeof VendorMasterScalarFieldEnum)[keyof typeof VendorMasterScalarFieldEnum]
@@ -335,7 +352,9 @@ export const ProjectMasterScalarFieldEnum = {
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
   lead_id: 'lead_id',
-  track_trace_status: 'track_trace_status'
+  track_trace_status: 'track_trace_status',
+  track_started_at: 'track_started_at',
+  track_completed_at: 'track_completed_at'
 } as const
 
 export type ProjectMasterScalarFieldEnum = (typeof ProjectMasterScalarFieldEnum)[keyof typeof ProjectMasterScalarFieldEnum]
@@ -1079,6 +1098,8 @@ export const LeadDetailedLogsScalarFieldEnum = {
   account_id: 'account_id',
   action: 'action',
   action_type: 'action_type',
+  history_type: 'history_type',
+  stage_id: 'stage_id',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -1116,7 +1137,9 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   is_deleted: 'is_deleted',
-  in_house: 'in_house'
+  in_house: 'in_house',
+  state_id: 'state_id',
+  default_payment_term_id: 'default_payment_term_id'
 } as const
 
 export type CompanyVendorsMasterScalarFieldEnum = (typeof CompanyVendorsMasterScalarFieldEnum)[keyof typeof CompanyVendorsMasterScalarFieldEnum]
@@ -1912,6 +1935,7 @@ export const ProductMasterScalarFieldEnum = {
   finish: 'finish',
   group: 'group',
   hsn_code: 'hsn_code',
+  hsn_id: 'hsn_id',
   product_name: 'product_name',
   procurement: 'procurement',
   unit_of_measure: 'unit_of_measure',
@@ -1923,10 +1947,379 @@ export const ProductMasterScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   updated_by: 'updated_by',
-  active: 'active'
+  active: 'active',
+  current_stock: 'current_stock',
+  stock_updated_at: 'stock_updated_at'
 } as const
 
 export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
+
+
+export const PurchaseIntentMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  intent_no: 'intent_no',
+  category_id: 'category_id',
+  status: 'status',
+  priority: 'priority',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  approved_by: 'approved_by',
+  approved_at: 'approved_at',
+  rejected_by: 'rejected_by',
+  rejected_at: 'rejected_at',
+  rejection_reason: 'rejection_reason',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  amount: 'amount',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount'
+} as const
+
+export type PurchaseIntentMasterScalarFieldEnum = (typeof PurchaseIntentMasterScalarFieldEnum)[keyof typeof PurchaseIntentMasterScalarFieldEnum]
+
+
+export const PurchaseIntentItemScalarFieldEnum = {
+  id: 'id',
+  purchase_intent_id: 'purchase_intent_id',
+  product_id: 'product_id',
+  uom: 'uom',
+  remarks: 'remarks',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PurchaseIntentItemScalarFieldEnum = (typeof PurchaseIntentItemScalarFieldEnum)[keyof typeof PurchaseIntentItemScalarFieldEnum]
+
+
+export const PurchaseIntentItemVendorMappingScalarFieldEnum = {
+  id: 'id',
+  purchase_intent_item_id: 'purchase_intent_item_id',
+  company_vendor_id: 'company_vendor_id',
+  required_qty: 'required_qty',
+  required_by_date: 'required_by_date',
+  estimated_price: 'estimated_price',
+  remarks: 'remarks',
+  is_selected: 'is_selected',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  mrp: 'mrp',
+  discount_pct: 'discount_pct',
+  rate: 'rate',
+  tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
+  total_amount: 'total_amount',
+  payment_term_id: 'payment_term_id'
+} as const
+
+export type PurchaseIntentItemVendorMappingScalarFieldEnum = (typeof PurchaseIntentItemVendorMappingScalarFieldEnum)[keyof typeof PurchaseIntentItemVendorMappingScalarFieldEnum]
+
+
+export const PurchaseIntentStatusLogScalarFieldEnum = {
+  id: 'id',
+  purchase_intent_id: 'purchase_intent_id',
+  from_status: 'from_status',
+  to_status: 'to_status',
+  changed_by: 'changed_by',
+  remarks: 'remarks',
+  created_at: 'created_at'
+} as const
+
+export type PurchaseIntentStatusLogScalarFieldEnum = (typeof PurchaseIntentStatusLogScalarFieldEnum)[keyof typeof PurchaseIntentStatusLogScalarFieldEnum]
+
+
+export const PurchaseOrderMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  po_no: 'po_no',
+  purchase_intent_id: 'purchase_intent_id',
+  company_vendor_id: 'company_vendor_id',
+  status: 'status',
+  remarks: 'remarks',
+  expected_delivery_date: 'expected_delivery_date',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  amount: 'amount',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount',
+  payment_term_id: 'payment_term_id'
+} as const
+
+export type PurchaseOrderMasterScalarFieldEnum = (typeof PurchaseOrderMasterScalarFieldEnum)[keyof typeof PurchaseOrderMasterScalarFieldEnum]
+
+
+export const PurchaseOrderItemScalarFieldEnum = {
+  id: 'id',
+  purchase_order_id: 'purchase_order_id',
+  product_id: 'product_id',
+  pi_item_vendor_mapping_id: 'pi_item_vendor_mapping_id',
+  ordered_qty: 'ordered_qty',
+  received_qty: 'received_qty',
+  unit_price: 'unit_price',
+  uom: 'uom',
+  expected_delivery_date: 'expected_delivery_date',
+  remarks: 'remarks',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  mrp: 'mrp',
+  discount_pct: 'discount_pct',
+  rate: 'rate',
+  tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
+  total_amount: 'total_amount',
+  is_deleted: 'is_deleted',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by'
+} as const
+
+export type PurchaseOrderItemScalarFieldEnum = (typeof PurchaseOrderItemScalarFieldEnum)[keyof typeof PurchaseOrderItemScalarFieldEnum]
+
+
+export const GRNMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  grn_no: 'grn_no',
+  purchase_order_id: 'purchase_order_id',
+  company_vendor_id: 'company_vendor_id',
+  status: 'status',
+  received_date: 'received_date',
+  vehicle_no: 'vehicle_no',
+  gate_entry_no: 'gate_entry_no',
+  invoice_no: 'invoice_no',
+  invoice_date: 'invoice_date',
+  invoice_amount: 'invoice_amount',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  confirmed_by: 'confirmed_by',
+  confirmed_at: 'confirmed_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  subtotal_amount: 'subtotal_amount',
+  cgst_amount: 'cgst_amount',
+  sgst_amount: 'sgst_amount',
+  igst_amount: 'igst_amount',
+  cess_amount: 'cess_amount',
+  discount_amount: 'discount_amount',
+  packing_amount: 'packing_amount',
+  freight_amount: 'freight_amount',
+  other_charges_amount: 'other_charges_amount',
+  roundoff_amount: 'roundoff_amount',
+  taxable_amount: 'taxable_amount',
+  total_amount: 'total_amount',
+  eway_bill_no: 'eway_bill_no',
+  transporter_name: 'transporter_name',
+  lr_no: 'lr_no',
+  lr_date: 'lr_date'
+} as const
+
+export type GRNMasterScalarFieldEnum = (typeof GRNMasterScalarFieldEnum)[keyof typeof GRNMasterScalarFieldEnum]
+
+
+export const GRNItemScalarFieldEnum = {
+  id: 'id',
+  grn_id: 'grn_id',
+  po_item_id: 'po_item_id',
+  product_id: 'product_id',
+  received_qty: 'received_qty',
+  accepted_qty: 'accepted_qty',
+  rejected_qty: 'rejected_qty',
+  unit_price: 'unit_price',
+  uom: 'uom',
+  status: 'status',
+  rejection_reason: 'rejection_reason',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  mrp: 'mrp',
+  discount_pct: 'discount_pct',
+  rate: 'rate',
+  tax_pct: 'tax_pct',
+  cgst_pct: 'cgst_pct',
+  sgst_pct: 'sgst_pct',
+  igst_pct: 'igst_pct',
+  tax_amount: 'tax_amount',
+  amount: 'amount',
+  total_amount: 'total_amount',
+  hsn_code: 'hsn_code',
+  gst_percentage: 'gst_percentage',
+  taxable_amount: 'taxable_amount',
+  cgst_percentage: 'cgst_percentage',
+  sgst_percentage: 'sgst_percentage',
+  igst_percentage: 'igst_percentage',
+  cgst_amount: 'cgst_amount',
+  sgst_amount: 'sgst_amount',
+  igst_amount: 'igst_amount',
+  discount_percentage: 'discount_percentage',
+  discount_amount: 'discount_amount',
+  line_total: 'line_total'
+} as const
+
+export type GRNItemScalarFieldEnum = (typeof GRNItemScalarFieldEnum)[keyof typeof GRNItemScalarFieldEnum]
+
+
+export const DebitCreditNoteScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  note_no: 'note_no',
+  grn_id: 'grn_id',
+  company_vendor_id: 'company_vendor_id',
+  type: 'type',
+  status: 'status',
+  amount: 'amount',
+  reason: 'reason',
+  remarks: 'remarks',
+  settled_at: 'settled_at',
+  settled_by: 'settled_by',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type DebitCreditNoteScalarFieldEnum = (typeof DebitCreditNoteScalarFieldEnum)[keyof typeof DebitCreditNoteScalarFieldEnum]
+
+
+export const RedeliveryRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  grn_item_id: 'grn_item_id',
+  company_vendor_id: 'company_vendor_id',
+  requested_qty: 'requested_qty',
+  expected_date: 'expected_date',
+  received_date: 'received_date',
+  status: 'status',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type RedeliveryRequestScalarFieldEnum = (typeof RedeliveryRequestScalarFieldEnum)[keyof typeof RedeliveryRequestScalarFieldEnum]
+
+
+export const HsnProductMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  hsn_code: 'hsn_code',
+  description: 'description',
+  cgst_rate: 'cgst_rate',
+  sgst_rate: 'sgst_rate',
+  igst_rate: 'igst_rate',
+  cess_rate: 'cess_rate',
+  effective_from: 'effective_from',
+  is_active: 'is_active',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type HsnProductMappingScalarFieldEnum = (typeof HsnProductMappingScalarFieldEnum)[keyof typeof HsnProductMappingScalarFieldEnum]
+
+
+export const ProductStockHistoryScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_id: 'product_id',
+  old_stock: 'old_stock',
+  new_stock: 'new_stock',
+  change: 'change',
+  source: 'source',
+  changed_by: 'changed_by',
+  upload_batch_id: 'upload_batch_id',
+  remarks: 'remarks',
+  created_at: 'created_at'
+} as const
+
+export type ProductStockHistoryScalarFieldEnum = (typeof ProductStockHistoryScalarFieldEnum)[keyof typeof ProductStockHistoryScalarFieldEnum]
+
+
+export const PaymentTermMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  company_vendor_id: 'company_vendor_id',
+  term_name: 'term_name',
+  description: 'description',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PaymentTermMasterScalarFieldEnum = (typeof PaymentTermMasterScalarFieldEnum)[keyof typeof PaymentTermMasterScalarFieldEnum]
+
+
+export const PaymentTermStageScalarFieldEnum = {
+  id: 'id',
+  payment_term_id: 'payment_term_id',
+  stage_no: 'stage_no',
+  stage_name: 'stage_name',
+  trigger_type: 'trigger_type',
+  percentage: 'percentage',
+  fixed_amount: 'fixed_amount',
+  due_after_days: 'due_after_days',
+  specific_date: 'specific_date',
+  requires_approval: 'requires_approval',
+  remarks: 'remarks',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PaymentTermStageScalarFieldEnum = (typeof PaymentTermStageScalarFieldEnum)[keyof typeof PaymentTermStageScalarFieldEnum]
+
+
+export const POPaymentScheduleScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  purchase_order_id: 'purchase_order_id',
+  stage_no: 'stage_no',
+  stage_name: 'stage_name',
+  trigger_type: 'trigger_type',
+  percentage: 'percentage',
+  scheduled_amount: 'scheduled_amount',
+  paid_amount: 'paid_amount',
+  pending_amount: 'pending_amount',
+  due_date: 'due_date',
+  status: 'status',
+  remarks: 'remarks',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type POPaymentScheduleScalarFieldEnum = (typeof POPaymentScheduleScalarFieldEnum)[keyof typeof POPaymentScheduleScalarFieldEnum]
+
+
+export const POPaymentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  po_payment_schedule_id: 'po_payment_schedule_id',
+  payment_date: 'payment_date',
+  amount: 'amount',
+  payment_mode: 'payment_mode',
+  reference_no: 'reference_no',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
 
 
 export const SortOrder = {

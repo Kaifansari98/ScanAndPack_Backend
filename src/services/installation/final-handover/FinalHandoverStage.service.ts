@@ -1,4 +1,5 @@
 import { prisma } from "../../../prisma/client";
+import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { NotificationType, Prisma } from "../../../prisma/generated";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import logger from "../../../utils/logger";
@@ -7,6 +8,7 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
+import { createTaskHistoryLog } from "../../task/taskHistory.service";
 
 export class FinalHandoverStageService {
   private formatDateTimeInIndia(date: Date) {
@@ -162,6 +164,13 @@ export class FinalHandoverStageService {
     },
   ) {
     const uploadedDocs: any[] = [];
+    const uploadedBySection: Record<string, any[]> = {
+      final_site_photos: [],
+      warranty_card: [],
+      handover_booklet: [],
+      final_handover_form: [],
+      qc_documents: [],
+    };
 
     // Get doc types
     const docTypes = await prisma.documentTypeMaster.findMany({
@@ -199,6 +208,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_site_photos.push(saved);
       }
     }
 
@@ -220,6 +230,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.warranty_card.push(saved);
       }
     }
 
@@ -241,6 +252,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.handover_booklet.push(saved);
       }
     }
 
@@ -262,6 +274,7 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.final_handover_form.push(saved);
       }
     }
 
@@ -283,7 +296,42 @@ export class FinalHandoverStageService {
         });
 
         uploadedDocs.push(saved);
+        uploadedBySection.qc_documents.push(saved);
       }
+    }
+
+    const sectionMessages: Array<{ key: keyof typeof uploadedBySection; label: string }> = [
+      { key: "final_site_photos", label: "Final Site Photo" },
+      { key: "warranty_card", label: "Warranty Card Photo" },
+      { key: "handover_booklet", label: "Handover Booklet" },
+      { key: "final_handover_form", label: "Final Handover Form" },
+      { key: "qc_documents", label: "QC Document" },
+    ];
+
+    for (const section of sectionMessages) {
+      const docs = uploadedBySection[section.key];
+      if (!docs.length) continue;
+
+      const detailedLog = await createLeadLog(prisma, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        action: `${docs.length} ${section.label}${docs.length > 1 ? "s" : ""} uploaded successfully.`,
+        action_type: "CREATE",
+        history_type: "Lead",
+        created_by: userId,
+      });
+
+      await prisma.leadDocumentLogs.createMany({
+        data: docs.map((doc) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: accountId,
+          doc_id: doc.id,
+          lead_logs_id: detailedLog.id,
+          created_by: userId,
+        })),
+      });
     }
 
     return uploadedDocs;
@@ -578,18 +626,16 @@ export class FinalHandoverStageService {
       },
     });
 
-    await prisma.leadDetailedLogs.create({
-      data: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        account_id: lead.account_id!,
-        action: isAmcOpted
-          ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
-          : "AMC opted in marked as No and AMC date/time cleared.",
-        action_type: "UPDATE",
-        created_by: updatedBy,
-        created_at: new Date(),
-      },
+    await createLeadLog(prisma, {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      account_id: lead.account_id!,
+      action: isAmcOpted
+        ? `AMC opted in marked as Yes on ${this.formatDateTimeInIndia(amcOptedAt!)}.`
+        : "AMC opted in marked as No and AMC date/time cleared.",
+      action_type: "UPDATE",
+      created_by: updatedBy,
+      created_at: new Date(),
     });
 
     return updatedLead;
@@ -731,7 +777,7 @@ export class FinalHandoverStageService {
         });
 
         if (!existingTask) {
-          await tx.userLeadTask.create({
+          const task = await tx.userLeadTask.create({
             data: {
               vendor_id: vendorId,
               lead_id: leadId,
@@ -746,22 +792,26 @@ export class FinalHandoverStageService {
               created_by: updatedBy,
             },
           });
+          await createTaskHistoryLog({
+            db: tx,
+            task,
+            createdBy: updatedBy,
+            actionType: "CREATE",
+          });
         }
       }
 
       // 4. Insert Audit Log
       const actionMessage = `Lead moved to Project Completed Stage.`;
 
-      await tx.leadDetailedLogs.create({
-        data: {
-          vendor_id: vendorId,
-          lead_id: leadId,
-          account_id: lead.account_id!,
-          action: actionMessage,
-          action_type: "UPDATE",
-          created_by: updatedBy,
-          created_at: new Date(),
-        },
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: lead.account_id!,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updatedBy,
+        created_at: new Date(),
       });
 
       logger.info("✅ Project Completed DB update done", {
