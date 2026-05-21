@@ -53,6 +53,7 @@ export type VendorMasterMinAggregateOutputType = {
   time_zone: string | null
   IsAccountLocInEnabled: boolean | null
   is_inventory_enabled: boolean | null
+  is_tracktrace_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -74,6 +75,7 @@ export type VendorMasterMaxAggregateOutputType = {
   time_zone: string | null
   IsAccountLocInEnabled: boolean | null
   is_inventory_enabled: boolean | null
+  is_tracktrace_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -95,6 +97,7 @@ export type VendorMasterCountAggregateOutputType = {
   time_zone: number
   IsAccountLocInEnabled: number
   is_inventory_enabled: number
+  is_tracktrace_enabled: number
   is_this_vendor_is_custom_usertype_only: number
   createdAt: number
   updatedAt: number
@@ -130,6 +133,7 @@ export type VendorMasterMinAggregateInputType = {
   time_zone?: true
   IsAccountLocInEnabled?: true
   is_inventory_enabled?: true
+  is_tracktrace_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   createdAt?: true
   updatedAt?: true
@@ -151,6 +155,7 @@ export type VendorMasterMaxAggregateInputType = {
   time_zone?: true
   IsAccountLocInEnabled?: true
   is_inventory_enabled?: true
+  is_tracktrace_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   createdAt?: true
   updatedAt?: true
@@ -172,6 +177,7 @@ export type VendorMasterCountAggregateInputType = {
   time_zone?: true
   IsAccountLocInEnabled?: true
   is_inventory_enabled?: true
+  is_tracktrace_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   createdAt?: true
   updatedAt?: true
@@ -280,6 +286,7 @@ export type VendorMasterGroupByOutputType = {
   time_zone: string
   IsAccountLocInEnabled: boolean | null
   is_inventory_enabled: boolean
+  is_tracktrace_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
   createdAt: Date
   updatedAt: Date
@@ -324,6 +331,7 @@ export type VendorMasterWhereInput = {
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -437,6 +445,7 @@ export type VendorMasterOrderByWithRelationInput = {
   time_zone?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
+  is_tracktrace_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -553,6 +562,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -666,6 +676,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   time_zone?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
+  is_tracktrace_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -695,6 +706,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   time_zone?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   IsAccountLocInEnabled?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
@@ -715,6 +727,7 @@ export type VendorMasterCreateInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -827,6 +840,7 @@ export type VendorMasterUncheckedCreateInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -938,6 +952,7 @@ export type VendorMasterUpdateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1050,6 +1065,7 @@ export type VendorMasterUncheckedUpdateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1162,6 +1178,7 @@ export type VendorMasterCreateManyInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1182,6 +1199,7 @@ export type VendorMasterUpdateManyMutationInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1202,6 +1220,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1223,6 +1242,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
+  is_tracktrace_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1250,6 +1270,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
+  is_tracktrace_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -1271,6 +1292,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
+  is_tracktrace_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -2671,6 +2693,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2782,6 +2805,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -2908,6 +2932,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3019,6 +3044,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3129,6 +3155,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3240,6 +3267,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3366,6 +3394,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3477,6 +3506,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3587,6 +3617,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3698,6 +3729,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -3824,6 +3856,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3935,6 +3968,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4045,6 +4079,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4156,6 +4191,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4282,6 +4318,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4393,6 +4430,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4503,6 +4541,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4614,6 +4653,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -4740,6 +4780,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4851,6 +4892,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4961,6 +5003,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5072,6 +5115,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5198,6 +5242,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5309,6 +5354,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5419,6 +5465,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5530,6 +5577,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5656,6 +5704,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5767,6 +5816,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5877,6 +5927,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -5988,6 +6039,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6114,6 +6166,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6225,6 +6278,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6335,6 +6389,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6446,6 +6501,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6572,6 +6628,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6683,6 +6740,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6793,6 +6851,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -6904,6 +6963,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7030,6 +7090,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7141,6 +7202,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7251,6 +7313,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7362,6 +7425,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7488,6 +7552,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7599,6 +7664,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7709,6 +7775,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7820,6 +7887,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -7946,6 +8014,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8057,6 +8126,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8167,6 +8237,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8278,6 +8349,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8404,6 +8476,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8515,6 +8588,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8625,6 +8699,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8736,6 +8811,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -8862,6 +8938,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8973,6 +9050,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9083,6 +9161,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9194,6 +9273,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9320,6 +9400,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9431,6 +9512,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9541,6 +9623,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9652,6 +9735,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -9778,6 +9862,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9889,6 +9974,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9999,6 +10085,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10110,6 +10197,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10236,6 +10324,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10347,6 +10436,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10457,6 +10547,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10568,6 +10659,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -10694,6 +10786,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10805,6 +10898,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10915,6 +11009,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11026,6 +11121,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11152,6 +11248,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11263,6 +11360,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11373,6 +11471,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11484,6 +11583,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11610,6 +11710,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11721,6 +11822,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11831,6 +11933,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -11942,6 +12045,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12068,6 +12172,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12179,6 +12284,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12289,6 +12395,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12400,6 +12507,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12526,6 +12634,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12637,6 +12746,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12747,6 +12857,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12858,6 +12969,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -12984,6 +13096,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13095,6 +13208,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13205,6 +13319,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -13316,6 +13431,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -13442,6 +13558,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13553,6 +13670,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13663,6 +13781,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -13774,6 +13893,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -13900,6 +14020,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14011,6 +14132,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14121,6 +14243,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -14232,6 +14355,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -14358,6 +14482,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14469,6 +14594,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14579,6 +14705,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -14690,6 +14817,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -14816,6 +14944,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14927,6 +15056,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15037,6 +15167,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -15148,6 +15279,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -15274,6 +15406,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15385,6 +15518,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15495,6 +15629,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -15606,6 +15741,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -15732,6 +15868,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15843,6 +15980,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15953,6 +16091,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -16064,6 +16203,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -16190,6 +16330,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16301,6 +16442,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16411,6 +16553,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -16522,6 +16665,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -16648,6 +16792,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16759,6 +16904,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16869,6 +17015,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -16980,6 +17127,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -17106,6 +17254,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17217,6 +17366,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17327,6 +17477,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -17438,6 +17589,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -17564,6 +17716,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17675,6 +17828,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17785,6 +17939,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -17896,6 +18051,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -18022,6 +18178,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18133,6 +18290,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18243,6 +18401,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -18354,6 +18513,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -18480,6 +18640,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18591,6 +18752,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18701,6 +18863,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -18812,6 +18975,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -18938,6 +19102,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19049,6 +19214,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19159,6 +19325,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -19270,6 +19437,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -19396,6 +19564,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19507,6 +19676,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19617,6 +19787,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -19728,6 +19899,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -19854,6 +20026,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19965,6 +20138,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20075,6 +20249,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -20186,6 +20361,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -20312,6 +20488,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20423,6 +20600,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20533,6 +20711,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -20644,6 +20823,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -20770,6 +20950,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20881,6 +21062,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20991,6 +21173,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -21102,6 +21285,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -21228,6 +21412,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21339,6 +21524,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21449,6 +21635,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -21560,6 +21747,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -21686,6 +21874,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21797,6 +21986,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21907,6 +22097,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -22018,6 +22209,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -22144,6 +22336,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22255,6 +22448,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22365,6 +22559,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -22476,6 +22671,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -22602,6 +22798,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22713,6 +22910,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22823,6 +23021,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -22934,6 +23133,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -23060,6 +23260,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23171,6 +23372,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23281,6 +23483,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -23392,6 +23595,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -23518,6 +23722,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23629,6 +23834,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23739,6 +23945,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -23850,6 +24057,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -23976,6 +24184,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24087,6 +24296,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24197,6 +24407,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -24308,6 +24519,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -24434,6 +24646,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24545,6 +24758,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24655,6 +24869,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -24766,6 +24981,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -24892,6 +25108,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25003,6 +25220,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25113,6 +25331,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -25224,6 +25443,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -25350,6 +25570,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25461,6 +25682,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25571,6 +25793,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -25682,6 +25905,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -25808,6 +26032,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25919,6 +26144,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26029,6 +26255,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -26140,6 +26367,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -26266,6 +26494,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26377,6 +26606,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26487,6 +26717,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -26598,6 +26829,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -26724,6 +26956,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26835,6 +27068,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26945,6 +27179,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -27056,6 +27291,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -27182,6 +27418,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27293,6 +27530,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27403,6 +27641,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -27514,6 +27753,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -27640,6 +27880,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27751,6 +27992,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27861,6 +28103,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -27972,6 +28215,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -28098,6 +28342,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28209,6 +28454,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28319,6 +28565,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -28430,6 +28677,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -28556,6 +28804,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28667,6 +28916,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28777,6 +29027,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -28888,6 +29139,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -29014,6 +29266,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29125,6 +29378,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29235,6 +29489,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -29346,6 +29601,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -29472,6 +29728,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29583,6 +29840,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29693,6 +29951,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -29804,6 +30063,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -29930,6 +30190,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30041,6 +30302,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30151,6 +30413,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -30262,6 +30525,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -30388,6 +30652,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30499,6 +30764,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30609,6 +30875,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -30720,6 +30987,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -30846,6 +31114,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30957,6 +31226,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31067,6 +31337,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -31178,6 +31449,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -31304,6 +31576,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31415,6 +31688,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31525,6 +31799,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -31636,6 +31911,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -31762,6 +32038,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31873,6 +32150,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31983,6 +32261,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -32094,6 +32373,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -32220,6 +32500,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32331,6 +32612,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32441,6 +32723,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -32552,6 +32835,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -32678,6 +32962,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32789,6 +33074,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32899,6 +33185,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -33010,6 +33297,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -33136,6 +33424,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33247,6 +33536,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33357,6 +33647,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -33468,6 +33759,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -33594,6 +33886,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33705,6 +33998,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33815,6 +34109,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -33926,6 +34221,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -34052,6 +34348,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34163,6 +34460,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34273,6 +34571,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -34384,6 +34683,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -34510,6 +34810,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34621,6 +34922,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34731,6 +35033,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -34842,6 +35145,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -34968,6 +35272,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35079,6 +35384,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35189,6 +35495,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -35300,6 +35607,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -35426,6 +35734,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35537,6 +35846,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35647,6 +35957,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -35758,6 +36069,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -35884,6 +36196,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35995,6 +36308,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36105,6 +36419,7 @@ export type VendorMasterCreateWithoutStateInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -36216,6 +36531,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -36356,6 +36672,7 @@ export type VendorMasterScalarWhereInput = {
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -36376,6 +36693,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -36487,6 +36805,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -36613,6 +36932,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36724,6 +37044,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36834,6 +37155,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -36945,6 +37267,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -37071,6 +37394,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37182,6 +37506,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37292,6 +37617,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -37403,6 +37729,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -37529,6 +37856,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37640,6 +37968,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37750,6 +38079,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -37861,6 +38191,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -37987,6 +38318,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38098,6 +38430,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38208,6 +38541,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -38319,6 +38653,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -38445,6 +38780,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38556,6 +38892,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38666,6 +39003,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -38777,6 +39115,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -38903,6 +39242,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39014,6 +39354,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39124,6 +39465,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -39235,6 +39577,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -39361,6 +39704,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39472,6 +39816,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39582,6 +39927,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -39693,6 +40039,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -39819,6 +40166,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39930,6 +40278,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40040,6 +40389,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -40151,6 +40501,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -40277,6 +40628,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40388,6 +40740,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40498,6 +40851,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -40609,6 +40963,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -40735,6 +41090,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40846,6 +41202,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40956,6 +41313,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -41067,6 +41425,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -41193,6 +41552,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41304,6 +41664,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41414,6 +41775,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -41525,6 +41887,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -41651,6 +42014,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41762,6 +42126,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41872,6 +42237,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -41983,6 +42349,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -42109,6 +42476,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42220,6 +42588,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42330,6 +42699,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -42441,6 +42811,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -42567,6 +42938,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42678,6 +43050,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42788,6 +43161,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -42899,6 +43273,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -43025,6 +43400,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43136,6 +43512,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43246,6 +43623,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -43357,6 +43735,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -43483,6 +43862,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43594,6 +43974,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43704,6 +44085,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -43815,6 +44197,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -43941,6 +44324,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44052,6 +44436,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44162,6 +44547,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -44273,6 +44659,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -44399,6 +44786,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44510,6 +44898,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44621,6 +45010,7 @@ export type VendorMasterCreateManyStateInput = {
   time_zone: string
   IsAccountLocInEnabled?: boolean | null
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -44640,6 +45030,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44751,6 +45142,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44862,6 +45254,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -45723,6 +46116,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   time_zone?: boolean
   IsAccountLocInEnabled?: boolean
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -45837,6 +46231,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   time_zone?: boolean
   IsAccountLocInEnabled?: boolean
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -45859,6 +46254,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   time_zone?: boolean
   IsAccountLocInEnabled?: boolean
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -45881,13 +46277,14 @@ export type VendorMasterSelectScalar = {
   time_zone?: boolean
   IsAccountLocInEnabled?: boolean
   is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_this_vendor_is_custom_usertype_only" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_this_vendor_is_custom_usertype_only" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -46101,6 +46498,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     time_zone: string
     IsAccountLocInEnabled: boolean | null
     is_inventory_enabled: boolean
+    is_tracktrace_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
     createdAt: Date
     updatedAt: Date
@@ -46634,6 +47032,7 @@ export interface VendorMasterFieldRefs {
   readonly time_zone: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly IsAccountLocInEnabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
