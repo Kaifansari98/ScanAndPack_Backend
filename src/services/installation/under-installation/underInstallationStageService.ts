@@ -1061,20 +1061,71 @@ export class UnderInstallationStageService {
     // 1️⃣ TRANSACTION LAYER
     // ====================================
 
+
+    if (
+      !reorder_material_details ||
+      !reorder_material_details.trim()
+    ) {
+      throw new Error(
+        "Reorder material details is required"
+      );
+    }
+
+
     const misc = await prisma.$transaction(async (tx) => {
+      // -----------------------------
+      // Validation
+      // -----------------------------
+
+      if (
+        !reorder_material_details ||
+        !reorder_material_details.trim()
+      ) {
+        throw new Error(
+          "Reorder material details is required"
+        );
+      }
+
       const misc = await tx.miscellaneousMaster.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
           misc_type_id,
-          problem_description,
-          reorder_material_details,
-          quantity,
-          cost,
-          supervisor_remark,
-          expected_ready_date,
-          is_resolved,
+
+          // String fields
+          problem_description:
+            problem_description?.trim() || "",
+
+          reorder_material_details:
+            reorder_material_details.trim(),
+
+          supervisor_remark:
+            supervisor_remark?.trim() || null,
+
+          // Number fields
+          quantity:
+            quantity !== undefined &&
+              quantity !== null
+              ? Number(quantity)
+              : null,
+
+          cost:
+            cost !== undefined &&
+              cost !== null
+              ? Number(cost)
+              : null,
+
+          // Date fields
+          expected_ready_date:
+            expected_ready_date
+              ? new Date(expected_ready_date)
+              : null,
+
+          // Boolean
+          is_resolved:
+            is_resolved ?? false,
+
           created_by,
         },
       });
