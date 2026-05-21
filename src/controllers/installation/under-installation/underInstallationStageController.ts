@@ -1397,19 +1397,19 @@ export class UnderInstallationStageController {
         const isImage = file.mimetype.startsWith("image/");
         const sysName = isImage
           ? await uploadToWasabiUnderInstallationUsableHandoverFinalSitePhotosFile(
-              file.path,
-              Number(vendor_id),
-              Number(lead_id),
-              file.originalname,
-              file.mimetype,
-            )
+            file.path,
+            Number(vendor_id),
+            Number(lead_id),
+            file.originalname,
+            file.mimetype,
+          )
           : await uploadToWasabiUnderInstallationUsableHandoverDocumentsFile(
-              file.path,
-              Number(vendor_id),
-              Number(lead_id),
-              file.originalname,
-              file.mimetype,
-            );
+            file.path,
+            Number(vendor_id),
+            Number(lead_id),
+            file.originalname,
+            file.mimetype,
+          );
 
         await fs.unlink(file.path);
 
@@ -1783,43 +1783,81 @@ export class UnderInstallationStageController {
    * GET /leads/installation/under-installation/vendorId/:vendorId/report/misc-issue-log-data
    * Query params: franchise_id (optional), from_date (optional), to_date (optional)
    */
-  getMiscIssueLogReportData = async (req: Request, res: Response) => {
+  getMiscIssueLogReportData = async (
+    req: Request,
+    res: Response,
+  ) => {
     try {
       const vendorId = Number(req.params.vendorId);
-      const franchiseId = req.query.franchise_id
-        ? Number(req.query.franchise_id)
-        : null;
-      const leadId = req.query.lead_id ? Number(req.query.lead_id) : null;
-      const fromDate = req.query.from_date ? String(req.query.from_date) : null;
-      const toDate = req.query.to_date ? String(req.query.to_date) : null;
+
+      const franchiseId =
+        req.query.franchise_id
+          ? Number(req.query.franchise_id)
+          : null;
+
+      const leadId =
+        req.query.lead_id
+          ? Number(req.query.lead_id)
+          : null;
+
+      const fromDate =
+        req.query.from_date
+          ? String(req.query.from_date)
+          : null;
+
+      const toDate =
+        req.query.to_date
+          ? String(req.query.to_date)
+          : null;
+
+      // NEW
+      const teamIds =
+        req.query.team_ids
+          ? String(req.query.team_ids)
+            .split(",")
+            .map((id) => Number(id))
+            .filter((id) => !isNaN(id))
+          : undefined;
 
       if (!vendorId) {
         return res
           .status(400)
-          .json(ApiResponse.error("vendorId is required", 400));
+          .json(
+            ApiResponse.error(
+              "vendorId is required",
+              400,
+            ),
+          );
       }
 
-      const data = await UnderInstallationStageService.getMiscIssueLogReportData(
-        vendorId,
-        franchiseId,
-        leadId,
-        fromDate,
-        toDate,
+      const data =
+        await UnderInstallationStageService.getMiscIssueLogReportData(
+          vendorId,
+          franchiseId,
+          leadId,
+          fromDate,
+          toDate,
+          teamIds, // NEW
+        );
+
+      return res.status(200).json(
+        ApiResponse.success(
+          data,
+          `Fetched ${data.length} misc and issue log rows`,
+        ),
       );
 
-      return res
-        .status(200)
-        .json(
-          ApiResponse.success(
-            data,
-            `Fetched ${data.length} misc and issue log rows`,
-          ),
-        );
     } catch (error: any) {
-      console.error("[MiscIssueLogReport] Error:", error);
-      return res
-        .status(500)
-        .json(ApiResponse.error("Failed to fetch misc and issue log report data"));
+      console.error(
+        "[MiscIssueLogReport] Error:",
+        error,
+      );
+
+      return res.status(500).json(
+        ApiResponse.error(
+          "Failed to fetch misc and issue log report data",
+        ),
+      );
     }
   };
 }
