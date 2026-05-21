@@ -440,6 +440,8 @@ export const ModelName = {
   UserLeadTask: 'UserLeadTask',
   LeadDetailedLogs: 'LeadDetailedLogs',
   LeadDocumentLogs: 'LeadDocumentLogs',
+  LeadApprovalRequest: 'LeadApprovalRequest',
+  LeadApprovalRequestDocumentMapping: 'LeadApprovalRequestDocumentMapping',
   CompanyVendorsMaster: 'CompanyVendorsMaster',
   OrderLoginDetails: 'OrderLoginDetails',
   SiteReadiness: 'SiteReadiness',
@@ -527,7 +529,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4672,6 +4674,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadDocumentLogsCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadDocumentLogsCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadApprovalRequest: {
+      payload: Prisma.$LeadApprovalRequestPayload<ExtArgs>
+      fields: Prisma.LeadApprovalRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadApprovalRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadApprovalRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadApprovalRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadApprovalRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        findMany: {
+          args: Prisma.LeadApprovalRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>[]
+        }
+        create: {
+          args: Prisma.LeadApprovalRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        createMany: {
+          args: Prisma.LeadApprovalRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadApprovalRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadApprovalRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        update: {
+          args: Prisma.LeadApprovalRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadApprovalRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadApprovalRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadApprovalRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadApprovalRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadApprovalRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadApprovalRequest>
+        }
+        groupBy: {
+          args: Prisma.LeadApprovalRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadApprovalRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadApprovalRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadApprovalRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadApprovalRequestDocumentMapping: {
+      payload: Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>
+      fields: Prisma.LeadApprovalRequestDocumentMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadApprovalRequestDocumentMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadApprovalRequestDocumentMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadApprovalRequestDocumentMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadApprovalRequestDocumentMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        findMany: {
+          args: Prisma.LeadApprovalRequestDocumentMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>[]
+        }
+        create: {
+          args: Prisma.LeadApprovalRequestDocumentMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        createMany: {
+          args: Prisma.LeadApprovalRequestDocumentMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadApprovalRequestDocumentMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadApprovalRequestDocumentMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        update: {
+          args: Prisma.LeadApprovalRequestDocumentMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadApprovalRequestDocumentMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadApprovalRequestDocumentMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadApprovalRequestDocumentMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadApprovalRequestDocumentMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadApprovalRequestDocumentMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadApprovalRequestDocumentMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadApprovalRequestDocumentMapping>
+        }
+        groupBy: {
+          args: Prisma.LeadApprovalRequestDocumentMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadApprovalRequestDocumentMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadApprovalRequestDocumentMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadApprovalRequestDocumentMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -10968,6 +11118,43 @@ export const LeadDocumentLogsScalarFieldEnum = {
 export type LeadDocumentLogsScalarFieldEnum = (typeof LeadDocumentLogsScalarFieldEnum)[keyof typeof LeadDocumentLogsScalarFieldEnum]
 
 
+export const LeadApprovalRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  franchise_id: 'franchise_id',
+  task_id: 'task_id',
+  requester_user_id: 'requester_user_id',
+  approver_user_id: 'approver_user_id',
+  request_remark: 'request_remark',
+  status: 'status',
+  response_remark: 'response_remark',
+  responded_at: 'responded_at',
+  responded_by: 'responded_by',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadApprovalRequestScalarFieldEnum = (typeof LeadApprovalRequestScalarFieldEnum)[keyof typeof LeadApprovalRequestScalarFieldEnum]
+
+
+export const LeadApprovalRequestDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  approval_request_id: 'approval_request_id',
+  document_id: 'document_id',
+  document_role: 'document_role',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type LeadApprovalRequestDocumentMappingScalarFieldEnum = (typeof LeadApprovalRequestDocumentMappingScalarFieldEnum)[keyof typeof LeadApprovalRequestDocumentMappingScalarFieldEnum]
+
+
 export const CompanyVendorsMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -12539,6 +12726,34 @@ export type ListEnumHistoryTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$
 
 
 /**
+ * Reference to a field of type 'ApprovalRequestStatus'
+ */
+export type EnumApprovalRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ApprovalRequestStatus[]'
+ */
+export type ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ApprovalRequestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadApprovalRequestDocumentRole'
+ */
+export type EnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadApprovalRequestDocumentRole'>
+    
+
+
+/**
+ * Reference to a field of type 'LeadApprovalRequestDocumentRole[]'
+ */
+export type ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadApprovalRequestDocumentRole[]'>
+    
+
+
+/**
  * Reference to a field of type 'NotificationType'
  */
 export type EnumNotificationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'NotificationType'>
@@ -13080,6 +13295,8 @@ export type GlobalOmitConfig = {
   userLeadTask?: Prisma.UserLeadTaskOmit
   leadDetailedLogs?: Prisma.LeadDetailedLogsOmit
   leadDocumentLogs?: Prisma.LeadDocumentLogsOmit
+  leadApprovalRequest?: Prisma.LeadApprovalRequestOmit
+  leadApprovalRequestDocumentMapping?: Prisma.LeadApprovalRequestDocumentMappingOmit
   companyVendorsMaster?: Prisma.CompanyVendorsMasterOmit
   orderLoginDetails?: Prisma.OrderLoginDetailsOmit
   siteReadiness?: Prisma.SiteReadinessOmit

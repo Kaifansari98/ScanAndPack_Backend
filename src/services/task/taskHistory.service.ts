@@ -31,7 +31,17 @@ const formatDueDate = (dueDate?: Date | null) => {
 };
 
 const resolveHistoryType = (taskType?: string | null) => {
-  return taskType?.trim().toLowerCase() === "follow up" ? "FollowUp" : "Task";
+  const normalizedTaskType = taskType?.trim().toLowerCase();
+
+  if (normalizedTaskType === "follow up") {
+    return "FollowUp";
+  }
+
+  if (normalizedTaskType?.includes("approval")) {
+    return "Approval";
+  }
+
+  return "Task";
 };
 
 const buildDefaultAction = ({

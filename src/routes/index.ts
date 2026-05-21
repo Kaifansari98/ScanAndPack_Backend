@@ -46,6 +46,7 @@ import contactUsRoutes from "./generic/contactUs.routes";
 import franchiseRoutes from "./franchise/franchise.routes";
 import geographyMasterRoutes from "./generic/geographyMaster.routes";
 import leadSuperAdminApprovalLockInRouter from "./leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.routes";
+import approvalRequestRouter from "./approval-request/approvalRequest.routes";
 
 import trackTraceRoutes from "./trackTraceRoutes/track-trace.routes";
 import trackTraceMasterRoutes from "./trackTraceRoutes/trackTraceMaster.routes";
@@ -88,6 +89,7 @@ router.use(
   "/leads/super-admin-approval-lockins",
   leadSuperAdminApprovalLockInRouter,
 );
+router.use("/leads/approval-requests", approvalRequestRouter);
 router.use("/leads/lead-activity-status", leadActivityStatusRouter);
 router.use("/leads/client-approval", clientApprovalRouter);
 

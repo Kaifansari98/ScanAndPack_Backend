@@ -295,10 +295,28 @@ export type ActionType = (typeof ActionType)[keyof typeof ActionType]
 export const HistoryType = {
   Lead: 'Lead',
   Task: 'Task',
-  FollowUp: 'FollowUp'
+  FollowUp: 'FollowUp',
+  Approval: 'Approval'
 } as const
 
 export type HistoryType = (typeof HistoryType)[keyof typeof HistoryType]
+
+
+export const ApprovalRequestStatus = {
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected'
+} as const
+
+export type ApprovalRequestStatus = (typeof ApprovalRequestStatus)[keyof typeof ApprovalRequestStatus]
+
+
+export const LeadApprovalRequestDocumentRole = {
+  request: 'request',
+  response: 'response'
+} as const
+
+export type LeadApprovalRequestDocumentRole = (typeof LeadApprovalRequestDocumentRole)[keyof typeof LeadApprovalRequestDocumentRole]
 
 
 export const LeadChatMessageType = {

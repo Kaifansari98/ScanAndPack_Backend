@@ -575,6 +575,40 @@ export type EnumHistoryTypeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
 }
 
+export type EnumApprovalRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalRequestStatus | Prisma.EnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel> | $Enums.ApprovalRequestStatus
+}
+
+export type EnumApprovalRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalRequestStatus | Prisma.EnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel>
+}
+
+export type EnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadApprovalRequestDocumentRole | Prisma.EnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel> | $Enums.LeadApprovalRequestDocumentRole
+}
+
+export type EnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadApprovalRequestDocumentRole | Prisma.EnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$PrismaModel> | $Enums.LeadApprovalRequestDocumentRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
+}
+
 export type EnumNotificationTypeFilter<$PrismaModel = never> = {
   equals?: $Enums.NotificationType | Prisma.EnumNotificationTypeFieldRefInput<$PrismaModel>
   in?: $Enums.NotificationType[] | Prisma.ListEnumNotificationTypeFieldRefInput<$PrismaModel>
@@ -1740,6 +1774,40 @@ export type NestedEnumHistoryTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumHistoryTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumApprovalRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalRequestStatus | Prisma.EnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel> | $Enums.ApprovalRequestStatus
+}
+
+export type NestedEnumApprovalRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ApprovalRequestStatus | Prisma.EnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ApprovalRequestStatus[] | Prisma.ListEnumApprovalRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumApprovalRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.ApprovalRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumApprovalRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadApprovalRequestDocumentRole | Prisma.EnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel> | $Enums.LeadApprovalRequestDocumentRole
+}
+
+export type NestedEnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.LeadApprovalRequestDocumentRole | Prisma.EnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.LeadApprovalRequestDocumentRole[] | Prisma.ListEnumLeadApprovalRequestDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleWithAggregatesFilter<$PrismaModel> | $Enums.LeadApprovalRequestDocumentRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumLeadApprovalRequestDocumentRoleFilter<$PrismaModel>
 }
 
 export type NestedEnumNotificationTypeFilter<$PrismaModel = never> = {

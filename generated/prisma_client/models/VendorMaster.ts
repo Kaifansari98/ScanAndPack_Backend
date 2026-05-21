@@ -365,6 +365,7 @@ export type VendorMasterWhereInput = {
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
@@ -479,6 +480,7 @@ export type VendorMasterOrderByWithRelationInput = {
   designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   documents?: Prisma.LeadDocumentsOrderByRelationAggregateInput
   leads?: Prisma.LeadMasterOrderByRelationAggregateInput
@@ -596,6 +598,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   documents?: Prisma.LeadDocumentsListRelationFilter
   leads?: Prisma.LeadMasterListRelationFilter
@@ -760,6 +763,7 @@ export type VendorMasterCreateInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -874,6 +878,7 @@ export type VendorMasterUncheckedCreateInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -985,6 +990,7 @@ export type VendorMasterUpdateInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -1099,6 +1105,7 @@ export type VendorMasterUncheckedUpdateInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -2019,6 +2026,20 @@ export type VendorMasterUpdateOneRequiredWithoutLeadDocumentLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutLeadDocumentLogsInput, Prisma.VendorMasterUpdateWithoutLeadDocumentLogsInput>, Prisma.VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutLeadApprovalRequestDocumentMappingsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutLeadApprovalRequestDocumentMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutLeadApprovalRequestDocumentMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput>, Prisma.VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput>
+}
+
 export type VendorMasterCreateNestedOneWithoutCompanyVendorsMasterInput = {
   create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutCompanyVendorsMasterInput, Prisma.VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput>
   connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutCompanyVendorsMasterInput
@@ -2726,6 +2747,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -2839,6 +2861,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -2965,6 +2988,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -3078,6 +3102,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -3188,6 +3213,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -3301,6 +3327,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -3427,6 +3454,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -3540,6 +3568,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -3650,6 +3679,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -3763,6 +3793,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -3889,6 +3920,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -4002,6 +4034,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4112,6 +4145,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -4225,6 +4259,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4351,6 +4386,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -4464,6 +4500,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -4574,6 +4611,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -4687,6 +4725,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -4813,6 +4852,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -4926,6 +4966,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5036,6 +5077,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -5149,6 +5191,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5275,6 +5318,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -5388,6 +5432,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5498,6 +5543,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -5611,6 +5657,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -5737,6 +5784,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -5850,6 +5898,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -5960,6 +6009,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -6073,6 +6123,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6199,6 +6250,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -6312,6 +6364,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6422,6 +6475,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -6535,6 +6589,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -6661,6 +6716,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -6774,6 +6830,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -6883,6 +6940,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -6996,6 +7054,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7122,6 +7181,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -7235,6 +7295,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7346,6 +7407,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -7459,6 +7521,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -7585,6 +7648,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -7698,6 +7762,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -7808,6 +7873,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -7921,6 +7987,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8047,6 +8114,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -8160,6 +8228,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -8270,6 +8339,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
@@ -8383,6 +8453,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
@@ -8509,6 +8580,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
@@ -8622,6 +8694,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
@@ -8732,6 +8805,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -8845,6 +8919,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -8971,6 +9046,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -9084,6 +9160,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9194,6 +9271,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -9307,6 +9385,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9433,6 +9512,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -9546,6 +9626,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -9655,6 +9736,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -9768,6 +9850,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -9894,6 +9977,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -10007,6 +10091,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10118,6 +10203,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -10231,6 +10317,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10357,6 +10444,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -10470,6 +10558,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -10580,6 +10669,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -10693,6 +10783,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -10819,6 +10910,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -10932,6 +11024,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11041,6 +11134,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -11154,6 +11248,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11280,6 +11375,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -11393,6 +11489,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11504,6 +11601,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -11617,6 +11715,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -11743,6 +11842,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -11856,6 +11956,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -11966,6 +12067,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -12079,6 +12181,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12205,6 +12308,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -12318,6 +12422,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12427,6 +12532,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -12540,6 +12646,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -12666,6 +12773,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -12779,6 +12887,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -12889,6 +12998,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -13002,6 +13112,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13128,6 +13239,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -13241,6 +13353,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13351,6 +13464,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -13464,6 +13578,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -13590,6 +13705,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -13703,6 +13819,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -13813,6 +13930,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -13926,6 +14044,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14052,6 +14171,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -14165,6 +14285,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -14276,6 +14397,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
@@ -14389,6 +14511,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
@@ -14515,6 +14638,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
@@ -14628,6 +14752,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
@@ -14737,6 +14862,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -14850,6 +14976,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -14976,6 +15103,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -15089,6 +15217,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15199,6 +15328,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -15312,6 +15442,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15438,6 +15569,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -15551,6 +15683,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -15662,6 +15795,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -15775,6 +15909,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -15901,6 +16036,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -16014,6 +16150,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16124,6 +16261,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -16237,6 +16375,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16363,6 +16502,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -16476,6 +16616,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -16586,6 +16727,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -16699,6 +16841,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -16825,6 +16968,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -16938,6 +17082,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17048,6 +17193,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -17161,6 +17307,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17287,6 +17434,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -17400,6 +17548,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17510,6 +17659,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -17623,6 +17773,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -17749,6 +17900,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -17862,6 +18014,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -17971,6 +18124,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -18084,6 +18238,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18210,6 +18365,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -18323,6 +18479,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18434,6 +18591,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -18547,6 +18705,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -18673,6 +18832,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -18786,6 +18946,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -18896,6 +19057,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -19009,6 +19171,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19135,6 +19298,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -19248,6 +19412,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19358,6 +19523,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -19471,6 +19637,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -19597,6 +19764,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -19710,6 +19878,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -19820,6 +19989,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -19933,6 +20103,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20059,6 +20230,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -20172,6 +20344,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20281,6 +20454,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -20394,6 +20568,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20520,6 +20695,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -20633,6 +20809,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -20743,6 +20920,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -20856,6 +21034,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -20982,6 +21161,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -21095,6 +21275,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21205,6 +21386,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -21318,6 +21500,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21444,6 +21627,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -21557,6 +21741,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -21667,6 +21852,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -21780,6 +21966,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -21906,6 +22093,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -22019,6 +22207,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22130,6 +22319,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -22243,6 +22433,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22369,6 +22560,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -22482,6 +22674,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -22592,6 +22785,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -22705,6 +22899,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -22831,6 +23026,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -22944,6 +23140,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23054,6 +23251,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -23167,6 +23365,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23293,6 +23492,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -23406,6 +23606,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23515,6 +23716,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -23628,6 +23830,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -23754,6 +23957,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -23867,6 +24071,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -23978,6 +24183,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
@@ -24091,6 +24297,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
@@ -24217,6 +24424,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
@@ -24330,6 +24538,473 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput>
+}
+
+export type VendorMasterUpsertWithoutLeadApprovalRequestDocumentMappingsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutLeadApprovalRequestDocumentMappingsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput>
+}
+
+export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
@@ -24439,6 +25114,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -24552,6 +25228,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -24678,6 +25355,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -24791,6 +25469,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -24902,6 +25581,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -25015,6 +25695,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25141,6 +25822,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -25254,6 +25936,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25364,6 +26047,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -25477,6 +26161,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -25603,6 +26288,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -25716,6 +26402,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -25825,6 +26512,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -25938,6 +26626,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26064,6 +26753,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -26177,6 +26867,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26287,6 +26978,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -26400,6 +27092,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26526,6 +27219,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -26639,6 +27333,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -26749,6 +27444,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -26862,6 +27558,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -26988,6 +27685,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -27101,6 +27799,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27211,6 +27910,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -27324,6 +28024,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27450,6 +28151,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -27563,6 +28265,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -27674,6 +28377,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -27787,6 +28491,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -27913,6 +28618,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -28026,6 +28732,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28136,6 +28843,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -28249,6 +28957,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28375,6 +29084,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -28488,6 +29198,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -28598,6 +29309,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -28711,6 +29423,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -28837,6 +29550,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -28950,6 +29664,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29060,6 +29775,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -29173,6 +29889,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29299,6 +30016,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -29412,6 +30130,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29521,6 +30240,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -29634,6 +30354,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -29760,6 +30481,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -29873,6 +30595,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -29983,6 +30706,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -30096,6 +30820,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30222,6 +30947,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -30335,6 +31061,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30445,6 +31172,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -30558,6 +31286,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -30684,6 +31413,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -30797,6 +31527,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -30908,6 +31639,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -31021,6 +31753,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31147,6 +31880,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -31260,6 +31994,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31370,6 +32105,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -31483,6 +32219,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -31609,6 +32346,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -31722,6 +32460,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -31832,6 +32571,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -31945,6 +32685,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32071,6 +32812,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -32184,6 +32926,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32294,6 +33037,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -32407,6 +33151,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32533,6 +33278,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -32646,6 +33392,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -32755,6 +33502,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -32868,6 +33616,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -32994,6 +33743,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -33107,6 +33857,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33217,6 +33968,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -33330,6 +34082,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33456,6 +34209,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -33569,6 +34323,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -33680,6 +34435,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -33793,6 +34549,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -33919,6 +34676,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -34032,6 +34790,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34142,6 +34901,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -34255,6 +35015,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34381,6 +35142,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -34494,6 +35256,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -34603,6 +35366,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -34716,6 +35480,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -34842,6 +35607,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -34955,6 +35721,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35065,6 +35832,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -35178,6 +35946,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35304,6 +36073,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -35417,6 +36187,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35527,6 +36298,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -35640,6 +36412,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -35766,6 +36539,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -35879,6 +36653,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -35989,6 +36764,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -36102,6 +36878,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36228,6 +37005,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -36341,6 +37119,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -36452,6 +37231,7 @@ export type VendorMasterCreateWithoutStateInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -36564,6 +37344,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36726,6 +37507,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -36839,6 +37621,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -36965,6 +37748,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -37078,6 +37862,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37188,6 +37973,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -37301,6 +38087,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37427,6 +38214,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -37540,6 +38328,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -37650,6 +38439,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -37763,6 +38553,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -37889,6 +38680,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -38002,6 +38794,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38112,6 +38905,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -38225,6 +39019,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38351,6 +39146,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -38464,6 +39260,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -38574,6 +39371,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -38687,6 +39485,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38813,6 +39612,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -38926,6 +39726,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39036,6 +39837,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -39149,6 +39951,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39275,6 +40078,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -39388,6 +40192,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39498,6 +40303,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -39611,6 +40417,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -39737,6 +40544,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -39850,6 +40658,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -39960,6 +40769,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -40073,6 +40883,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40199,6 +41010,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -40312,6 +41124,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40422,6 +41235,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -40535,6 +41349,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -40661,6 +41476,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -40774,6 +41590,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -40884,6 +41701,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -40997,6 +41815,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41123,6 +41942,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -41236,6 +42056,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41346,6 +42167,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -41459,6 +42281,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -41585,6 +42408,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -41698,6 +42522,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -41808,6 +42633,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -41921,6 +42747,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42047,6 +42874,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -42160,6 +42988,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42270,6 +43099,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -42383,6 +43213,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42509,6 +43340,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -42622,6 +43454,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -42732,6 +43565,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -42845,6 +43679,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -42971,6 +43806,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -43084,6 +43920,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43194,6 +44031,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -43307,6 +44145,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43433,6 +44272,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -43546,6 +44386,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -43656,6 +44497,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -43769,6 +44611,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -43895,6 +44738,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -44008,6 +44852,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44118,6 +44963,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -44231,6 +45077,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44357,6 +45204,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -44470,6 +45318,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -44580,6 +45429,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
@@ -44693,6 +45543,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
   documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
   leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -44819,6 +45670,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -44932,6 +45784,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45063,6 +45916,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
@@ -45175,6 +46029,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
   documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
   leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -45295,6 +46150,7 @@ export type VendorMasterCountOutputType = {
   designSelection: number
   chsSelectionMappings: number
   leadDetailedLogs: number
+  leadApprovalRequestDocumentMappings: number
   leadDocumentLogs: number
   documents: number
   leads: number
@@ -45389,6 +46245,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   designSelection?: boolean | VendorMasterCountOutputTypeCountDesignSelectionArgs
   chsSelectionMappings?: boolean | VendorMasterCountOutputTypeCountChsSelectionMappingsArgs
   leadDetailedLogs?: boolean | VendorMasterCountOutputTypeCountLeadDetailedLogsArgs
+  leadApprovalRequestDocumentMappings?: boolean | VendorMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs
   leadDocumentLogs?: boolean | VendorMasterCountOutputTypeCountLeadDocumentLogsArgs
   documents?: boolean | VendorMasterCountOutputTypeCountDocumentsArgs
   leads?: boolean | VendorMasterCountOutputTypeCountLeadsArgs
@@ -45664,6 +46521,13 @@ export type VendorMasterCountOutputTypeCountChsSelectionMappingsArgs<ExtArgs ext
  */
 export type VendorMasterCountOutputTypeCountLeadDetailedLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDetailedLogsWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountLeadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
 }
 
 /**
@@ -46150,6 +47014,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   designSelection?: boolean | Prisma.VendorMaster$designSelectionArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>
+  leadApprovalRequestDocumentMappings?: boolean | Prisma.VendorMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.VendorMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.VendorMaster$documentsArgs<ExtArgs>
   leads?: boolean | Prisma.VendorMaster$leadsArgs<ExtArgs>
@@ -46315,6 +47180,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   designSelection?: boolean | Prisma.VendorMaster$designSelectionArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>
+  leadApprovalRequestDocumentMappings?: boolean | Prisma.VendorMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.VendorMaster$leadDocumentLogsArgs<ExtArgs>
   documents?: boolean | Prisma.VendorMaster$documentsArgs<ExtArgs>
   leads?: boolean | Prisma.VendorMaster$leadsArgs<ExtArgs>
@@ -46419,6 +47285,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
     chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
+    leadApprovalRequestDocumentMappings: Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     documents: Prisma.$LeadDocumentsPayload<ExtArgs>[]
     leads: Prisma.$LeadMasterPayload<ExtArgs>[]
@@ -46926,6 +47793,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   designSelection<T extends Prisma.VendorMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chsSelectionMappings<T extends Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadApprovalRequestDocumentMappings<T extends Prisma.VendorMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadApprovalRequestDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.VendorMaster$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.VendorMaster$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.VendorMaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -48131,6 +48999,30 @@ export type VendorMaster$leadDetailedLogsArgs<ExtArgs extends runtime.Types.Exte
   take?: number
   skip?: number
   distinct?: Prisma.LeadDetailedLogsScalarFieldEnum | Prisma.LeadDetailedLogsScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.leadApprovalRequestDocumentMappings
+ */
+export type VendorMaster$leadApprovalRequestDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadApprovalRequestDocumentMapping
+   */
+  select?: Prisma.LeadApprovalRequestDocumentMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadApprovalRequestDocumentMapping
+   */
+  omit?: Prisma.LeadApprovalRequestDocumentMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadApprovalRequestDocumentMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadApprovalRequestDocumentMappingWhereInput
+  orderBy?: Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput | Prisma.LeadApprovalRequestDocumentMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadApprovalRequestDocumentMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum | Prisma.LeadApprovalRequestDocumentMappingScalarFieldEnum[]
 }
 
 /**

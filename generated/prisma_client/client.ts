@@ -320,6 +320,16 @@ export type LeadDetailedLogs = Prisma.LeadDetailedLogsModel
  */
 export type LeadDocumentLogs = Prisma.LeadDocumentLogsModel
 /**
+ * Model LeadApprovalRequest
+ * 
+ */
+export type LeadApprovalRequest = Prisma.LeadApprovalRequestModel
+/**
+ * Model LeadApprovalRequestDocumentMapping
+ * 
+ */
+export type LeadApprovalRequestDocumentMapping = Prisma.LeadApprovalRequestDocumentMappingModel
+/**
  * Model CompanyVendorsMaster
  * 
  */

@@ -107,6 +107,8 @@ export const ModelName = {
   UserLeadTask: 'UserLeadTask',
   LeadDetailedLogs: 'LeadDetailedLogs',
   LeadDocumentLogs: 'LeadDocumentLogs',
+  LeadApprovalRequest: 'LeadApprovalRequest',
+  LeadApprovalRequestDocumentMapping: 'LeadApprovalRequestDocumentMapping',
   CompanyVendorsMaster: 'CompanyVendorsMaster',
   OrderLoginDetails: 'OrderLoginDetails',
   SiteReadiness: 'SiteReadiness',
@@ -1121,6 +1123,43 @@ export const LeadDocumentLogsScalarFieldEnum = {
 } as const
 
 export type LeadDocumentLogsScalarFieldEnum = (typeof LeadDocumentLogsScalarFieldEnum)[keyof typeof LeadDocumentLogsScalarFieldEnum]
+
+
+export const LeadApprovalRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  franchise_id: 'franchise_id',
+  task_id: 'task_id',
+  requester_user_id: 'requester_user_id',
+  approver_user_id: 'approver_user_id',
+  request_remark: 'request_remark',
+  status: 'status',
+  response_remark: 'response_remark',
+  responded_at: 'responded_at',
+  responded_by: 'responded_by',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadApprovalRequestScalarFieldEnum = (typeof LeadApprovalRequestScalarFieldEnum)[keyof typeof LeadApprovalRequestScalarFieldEnum]
+
+
+export const LeadApprovalRequestDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  approval_request_id: 'approval_request_id',
+  document_id: 'document_id',
+  document_role: 'document_role',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type LeadApprovalRequestDocumentMappingScalarFieldEnum = (typeof LeadApprovalRequestDocumentMappingScalarFieldEnum)[keyof typeof LeadApprovalRequestDocumentMappingScalarFieldEnum]
 
 
 export const CompanyVendorsMasterScalarFieldEnum = {

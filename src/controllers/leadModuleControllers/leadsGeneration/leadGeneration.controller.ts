@@ -2238,6 +2238,7 @@ export class LeadController {
         | "Lead"
         | "Task"
         | "FollowUp"
+        | "Approval"
         | undefined;
       const search = req.query.search as string | undefined;
       const parsedUserTypeId = req.query.user_type_id
