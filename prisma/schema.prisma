@@ -23,6 +23,7 @@ model VendorMaster {
   IsAccountLocInEnabled                  Boolean?                             @default(false)
   is_inventory_enabled                   Boolean                              @default(false)
   is_tracktrace_enabled                  Boolean                              @default(false)
+  is_approval_task_enabled               Boolean                              @default(true)
   is_this_vendor_is_custom_usertype_only Boolean? // true : only custom user, false : custom user + all the user types and null : no custom user at all.
   createdAt                              DateTime                             @default(now())
   updatedAt                              DateTime                             @updatedAt

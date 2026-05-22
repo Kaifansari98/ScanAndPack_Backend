@@ -215,6 +215,7 @@ export const VendorMasterScalarFieldEnum = {
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
+  is_approval_task_enabled: 'is_approval_task_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
