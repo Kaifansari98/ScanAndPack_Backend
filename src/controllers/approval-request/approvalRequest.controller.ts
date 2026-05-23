@@ -12,6 +12,38 @@ const getSingleValue = (value: string | string[] | undefined) =>
   Array.isArray(value) ? value[0] : value;
 
 export class ApprovalRequestController {
+  public async getDetails(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+
+      if (!leadId || !taskId) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("leadId and taskId are required", 400));
+      }
+
+      const result = await approvalRequestService.getApprovalRequestDetails(
+        leadId,
+        taskId,
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Approval request details fetched", 200));
+    } catch (error: any) {
+      logger.error("[ApprovalRequestController] getDetails:", error);
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error(
+            error.message || "Failed to fetch approval request details",
+            500,
+          ),
+        );
+    }
+  }
+
   public async getAssignableUsers(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

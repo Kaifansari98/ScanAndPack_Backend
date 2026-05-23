@@ -10,6 +10,11 @@ approvalRequestRouter.get(
   approvalRequestController.getAssignableUsers,
 );
 
+approvalRequestRouter.get(
+  "/leadId/:leadId/taskId/:taskId",
+  approvalRequestController.getDetails,
+);
+
 approvalRequestRouter.post(
   "/leadId/:leadId",
   uploadApprovalRequest.fields([{ name: "files", maxCount: 20 }]),

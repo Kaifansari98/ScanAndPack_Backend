@@ -2,7 +2,10 @@ import Joi from "joi";
 import fs from "node:fs/promises";
 import { prisma } from "../../prisma/client";
 import { NotificationType } from "../../prisma/generated";
-import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiInitialSiteMeasurementFile,
+} from "../../utils/wasabiClient";
 import { cache } from "../../utils/cache";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
@@ -120,6 +123,104 @@ const uploadApprovalRequestFiles = async (
 };
 
 export class ApprovalRequestService {
+  public async getApprovalRequestDetails(leadId: number, taskId: number) {
+    const approvalRequest = await prisma.leadApprovalRequest.findFirst({
+      where: {
+        lead_id: leadId,
+        task_id: taskId,
+      },
+      select: {
+        id: true,
+        task_id: true,
+        status: true,
+        request_remark: true,
+        response_remark: true,
+        created_at: true,
+        responded_at: true,
+        requester_user_id: true,
+        approver_user_id: true,
+        responded_by: true,
+        documents: {
+          select: {
+            id: true,
+            document_role: true,
+            created_at: true,
+            document: {
+              select: {
+                id: true,
+                doc_og_name: true,
+                doc_sys_name: true,
+                created_at: true,
+              },
+            },
+          },
+          orderBy: {
+            created_at: "asc",
+          },
+        },
+      },
+    });
+
+    if (!approvalRequest) {
+      throw new Error("Approval request not found");
+    }
+
+    const userIds = [
+      approvalRequest.requester_user_id,
+      approvalRequest.approver_user_id,
+      approvalRequest.responded_by,
+    ].filter((value): value is number => typeof value === "number");
+
+    const users = userIds.length
+      ? await prisma.userMaster.findMany({
+          where: {
+            id: {
+              in: Array.from(new Set(userIds)),
+            },
+          },
+          select: {
+            id: true,
+            user_name: true,
+            user_email: true,
+          },
+        })
+      : [];
+
+    const userMap = new Map(users.map((user) => [user.id, user]));
+
+    const documents = await Promise.all(
+      approvalRequest.documents.map(async (mapping) => ({
+        id: mapping.document.id,
+        role: mapping.document_role,
+        original_name: mapping.document.doc_og_name,
+        signedUrl: await generateSignedUrl(
+          mapping.document.doc_sys_name,
+          3600,
+          "inline",
+        ),
+        created_at: mapping.document.created_at,
+      })),
+    );
+
+    return {
+      id: approvalRequest.id,
+      task_id: approvalRequest.task_id,
+      status: approvalRequest.status,
+      request_remark: approvalRequest.request_remark,
+      response_remark: approvalRequest.response_remark,
+      created_at: approvalRequest.created_at,
+      responded_at: approvalRequest.responded_at,
+      requester: userMap.get(approvalRequest.requester_user_id) ?? null,
+      approver: userMap.get(approvalRequest.approver_user_id) ?? null,
+      responder:
+        approvalRequest.responded_by != null
+          ? userMap.get(approvalRequest.responded_by) ?? null
+          : null,
+      request_documents: documents.filter((doc) => doc.role === "request"),
+      response_documents: documents.filter((doc) => doc.role === "response"),
+    };
+  }
+
   public async getAssignableUsers(vendorId: number, leadId: number) {
     const lead = await prisma.leadMaster.findUnique({
       where: { id: leadId },
