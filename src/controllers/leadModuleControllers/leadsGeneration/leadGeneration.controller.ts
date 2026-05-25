@@ -994,6 +994,10 @@ export class LeadController {
       const title = String(req.body.title || "").trim();
       const description =
         req.body.description !== undefined ? String(req.body.description) : "";
+      const preProdRemark =
+        req.body.pre_prod_remark !== undefined
+          ? String(req.body.pre_prod_remark)
+          : undefined;
       const updatedBy = req.body.updated_by
         ? Number(req.body.updated_by)
         : null;
@@ -1037,6 +1041,7 @@ export class LeadController {
         product_structure_id: productStructureId,
         title,
         description,
+        pre_prod_remark: preProdRemark,
         updated_by: updatedBy,
       });
 

@@ -1004,6 +1004,7 @@ model LeadProductStructureInstance {
   is_production_completed                    Boolean?
   production_completed_at                    DateTime?
   production_erd_date                        DateTime?
+  pre_prod_remark                            String?               @db.VarChar(2000)
   woodwork_packing_details_remark            String?               @db.VarChar(2000)
   hardware_packing_details_remark            String?               @db.VarChar(2000)
   no_of_boxes                                Int?

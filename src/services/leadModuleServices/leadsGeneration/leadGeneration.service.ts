@@ -1145,6 +1145,7 @@ export const updateLeadProductStructureInstance = async ({
   product_structure_id,
   title,
   description,
+  pre_prod_remark,
   updated_by,
 }: {
   leadId: number;
@@ -1153,6 +1154,7 @@ export const updateLeadProductStructureInstance = async ({
   product_structure_id: number;
   title: string;
   description?: string | null;
+  pre_prod_remark?: string | null;
   updated_by?: number | null;
 }) => {
   try {
@@ -1199,6 +1201,9 @@ export const updateLeadProductStructureInstance = async ({
         quantity_index: nextQuantityIndex,
         title: title.trim(),
         description: description?.trim() || null,
+        ...(pre_prod_remark !== undefined
+          ? { pre_prod_remark: pre_prod_remark.trim() || null }
+          : {}),
         updated_by: updated_by ?? null,
       },
     });
