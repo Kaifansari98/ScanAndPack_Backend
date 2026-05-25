@@ -157,9 +157,10 @@ model VendorTaxInfo {
 }
 
 model UserTypeMaster {
-  id        Int          @id @default(autoincrement())
-  user_type String
-  users     UserMaster[]
+  id                        Int                        @id @default(autoincrement())
+  user_type                 String
+  users                     UserMaster[]
+  selfAssignTaskTypeMasters SelfAssignTaskTypeMaster[]
 }
 
 model PrivilegeMaster {
