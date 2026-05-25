@@ -217,6 +217,7 @@ export const VendorMasterScalarFieldEnum = {
   is_tracktrace_enabled: 'is_tracktrace_enabled',
   is_approval_task_enabled: 'is_approval_task_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
+  eligible_booking_days: 'eligible_booking_days',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id'
