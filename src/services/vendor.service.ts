@@ -72,6 +72,8 @@ interface LeadTrackingReportRow {
   ol_date: Date | null;
   production_start_date: Date | null;
   production_completion_date: Date | null;
+  ready_to_dispatch_date: Date | null;
+  production_erd_date: Date | null;
   site_readiness_scheduled_date: Date | null;
   site_readiness_completion_date: Date | null;
   dispatch_planning_done_date: Date | null;
@@ -621,6 +623,8 @@ export const getErdReportData = async (
   }));
 };
 
+
+
 export const getLeadTrackingReportData = async (
   vendorId: number,
   franchiseId: number | null,
@@ -683,6 +687,7 @@ export const getLeadTrackingReportData = async (
           quantity_index: true,
           order_login_completed_at: true,
           production_completed_at: true,
+          production_erd_date: true,
           productType: {
             select: {
               type: true,
@@ -744,7 +749,7 @@ export const getLeadTrackingReportData = async (
         where: {
           statusType: {
             tag: {
-              in: ["Type 3", "Type 4", "Type 7", "Type 8", "Type 9", "Type 14", "Type 15"],
+              in: ["Type 3", "Type 4", "Type 7", "Type 8", "Type 9", "Type 11", "Type 14", "Type 15"],
             },
           },
         },
@@ -796,6 +801,9 @@ export const getLeadTrackingReportData = async (
       created_at: "asc",
     },
   });
+
+
+
 
   const roleMatchesLead = (lead: (typeof leads)[number]) => {
     if (!normalizedUserType) return true;
@@ -883,6 +891,8 @@ export const getLeadTrackingReportData = async (
         ol_date: instance.order_login_completed_at,
         production_start_date: instance.order_login_completed_at,
         production_completion_date: instance.production_completed_at,
+        ready_to_dispatch_date: firstStatusDate("Type 11"),
+        production_erd_date: instance.production_erd_date,
         site_readiness_scheduled_date: firstTaskCreatedAt("Site Readiness"),
         site_readiness_completion_date: firstTaskClosedAt("Site Readiness"),
         dispatch_planning_done_date: firstStatusDate("Type 14"),
@@ -897,6 +907,8 @@ export const getLeadTrackingReportData = async (
       }));
     });
 };
+
+
 
 export const getPaymentsBetweenClientAndStoreReportData = async (
   vendorId: number,
