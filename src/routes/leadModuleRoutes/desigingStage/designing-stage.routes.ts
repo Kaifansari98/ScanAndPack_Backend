@@ -57,6 +57,11 @@ DesigningStageRouter.get(
   DesigingStageController.getDesignMeetings,
 );
 
+DesigningStageRouter.get(
+  "/vendor/:vendorId/meeting-types",
+  DesigingStageController.getMeetingTypes,
+);
+
 // POST /api/leads/designing-stage/upload-designs
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(

@@ -372,7 +372,7 @@ export class DesigingStageController {
         return res.status(400).json({ success: false, logs: errors.array() });
       }
 
-      const { leadId, vendorId, userId, date, desc } = req.body;
+      const { leadId, vendorId, userId, date, desc, meeting_type_id } = req.body;
       const logs: any[] = [];
       const files = (req.files as Express.Multer.File[]) || [];
 
@@ -408,6 +408,42 @@ export class DesigingStageController {
           .status(400)
           .json({ success: false, logs: ["No account linked with this lead"] });
 
+      const meetingTypes = await prisma.meetingTypeMaster.findMany({
+        where: { vendor_id: Number(vendorId) },
+        select: { id: true },
+      });
+
+      if (meetingTypes.length > 0 && !meeting_type_id) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_type_id is required when meeting types are configured"],
+        });
+      }
+
+      if (meetingTypes.length === 0 && !desc?.trim()) {
+        return res.status(400).json({
+          success: false,
+          logs: ["Meeting description is required"],
+        });
+      }
+
+      if (meeting_type_id) {
+        const meetingType = await prisma.meetingTypeMaster.findFirst({
+          where: {
+            id: Number(meeting_type_id),
+            vendor_id: Number(vendorId),
+          },
+          select: { id: true },
+        });
+
+        if (!meetingType) {
+          return res.status(400).json({
+            success: false,
+            logs: ["Invalid meeting_type_id for this vendor"],
+          });
+        }
+      }
+
       const uploadedFiles: { originalName: string; sysName: string }[] = [];
 
       for (const file of files) {
@@ -433,8 +469,11 @@ export class DesigingStageController {
               lead_id: Number(leadId),
               account_id: Number(accountId),
               vendor_id: Number(vendorId),
+              meeting_type_id: meeting_type_id
+                ? Number(meeting_type_id)
+                : null,
               date: new Date(date),
-              desc,
+              desc: desc?.trim() || "",
               created_by: Number(userId),
             },
           });
@@ -698,6 +737,7 @@ export class DesigingStageController {
           vendor_id: Number(vendorId),
         },
         include: {
+          meetingType: true,
           designMeetingDocsMapping: true,
         },
         orderBy: { created_at: "desc" },
@@ -748,6 +788,35 @@ export class DesigingStageController {
       return res.status(500).json({
         success: false,
         logs: [error.message],
+      });
+    }
+  }
+
+  public static async getMeetingTypes(req: Request, res: Response) {
+    try {
+      const { vendorId } = req.params;
+
+      if (!vendorId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId is required",
+        });
+      }
+
+      const meetingTypes = await prisma.meetingTypeMaster.findMany({
+        where: { vendor_id: Number(vendorId) },
+        orderBy: { created_at: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Meeting types fetched successfully",
+        data: meetingTypes,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch meeting types",
       });
     }
   }
