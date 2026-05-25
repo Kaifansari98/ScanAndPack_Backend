@@ -26,6 +26,7 @@ model VendorMaster {
   is_approval_task_enabled               Boolean  @default(true)
   is_this_vendor_is_custom_usertype_only Boolean? // true : only custom user, false : custom user + all the user types and null : no custom user at all.
   eligible_booking_days                  Int?
+  is_self_assign_task_type_master_enabed Boolean  @default(true)
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
@@ -103,6 +104,7 @@ model VendorMaster {
   addresses                           VendorAddress[]
   vendorModulesMappings               VendorModulesMapping[]
   vendorSetting                       VendorSetting[]
+  selfAssignTaskTypeMasters           SelfAssignTaskTypeMaster[]
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
   externalPlatformTokens              ExternalPlatformToken[]
@@ -1023,6 +1025,19 @@ model LeadProductStructureInstance {
   tasks                                      UserLeadTask[]
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
+}
+
+model SelfAssignTaskTypeMaster {
+  id         Int          @id @default(autoincrement())
+  vendor_id  Int
+  user_type_id Int
+  type       String
+  created_at DateTime     @default(now())
+  vendor     VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  userType   UserTypeMaster @relation(fields: [user_type_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([user_type_id])
 }
 
 model PaymentInfo {

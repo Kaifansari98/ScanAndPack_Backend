@@ -91,6 +91,7 @@ export const ModelName = {
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   LeadProductStructureInstance: 'LeadProductStructureInstance',
+  SelfAssignTaskTypeMaster: 'SelfAssignTaskTypeMaster',
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
@@ -218,6 +219,7 @@ export const VendorMasterScalarFieldEnum = {
   is_approval_task_enabled: 'is_approval_task_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   eligible_booking_days: 'eligible_booking_days',
+  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id'
@@ -867,6 +869,16 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
+
+
+export const SelfAssignTaskTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  created_at: 'created_at'
+} as const
+
+export type SelfAssignTaskTypeMasterScalarFieldEnum = (typeof SelfAssignTaskTypeMasterScalarFieldEnum)[keyof typeof SelfAssignTaskTypeMasterScalarFieldEnum]
 
 
 export const PaymentInfoScalarFieldEnum = {

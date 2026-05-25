@@ -59,6 +59,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_approval_task_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   eligible_booking_days: number | null
+  is_self_assign_task_type_master_enabed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -83,6 +84,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_approval_task_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   eligible_booking_days: number | null
+  is_self_assign_task_type_master_enabed: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -107,6 +109,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_approval_task_enabled: number
   is_this_vendor_is_custom_usertype_only: number
   eligible_booking_days: number
+  is_self_assign_task_type_master_enabed: number
   createdAt: number
   updatedAt: number
   state_id: number
@@ -147,6 +150,7 @@ export type VendorMasterMinAggregateInputType = {
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   eligible_booking_days?: true
+  is_self_assign_task_type_master_enabed?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -171,6 +175,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   eligible_booking_days?: true
+  is_self_assign_task_type_master_enabed?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -195,6 +200,7 @@ export type VendorMasterCountAggregateInputType = {
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   eligible_booking_days?: true
+  is_self_assign_task_type_master_enabed?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -306,6 +312,7 @@ export type VendorMasterGroupByOutputType = {
   is_approval_task_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
   eligible_booking_days: number | null
+  is_self_assign_task_type_master_enabed: boolean
   createdAt: Date
   updatedAt: Date
   state_id: number | null
@@ -353,6 +360,7 @@ export type VendorMasterWhereInput = {
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -429,6 +437,7 @@ export type VendorMasterWhereInput = {
   addresses?: Prisma.VendorAddressListRelationFilter
   vendorModulesMappings?: Prisma.VendorModulesMappingListRelationFilter
   vendorSetting?: Prisma.VendorSettingListRelationFilter
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
   taxInfo?: Prisma.VendorTaxInfoListRelationFilter
   tokens?: Prisma.VendorTokensListRelationFilter
   externalPlatformTokens?: Prisma.ExternalPlatformTokenListRelationFilter
@@ -470,6 +479,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -546,6 +556,7 @@ export type VendorMasterOrderByWithRelationInput = {
   addresses?: Prisma.VendorAddressOrderByRelationAggregateInput
   vendorModulesMappings?: Prisma.VendorModulesMappingOrderByRelationAggregateInput
   vendorSetting?: Prisma.VendorSettingOrderByRelationAggregateInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterOrderByRelationAggregateInput
   taxInfo?: Prisma.VendorTaxInfoOrderByRelationAggregateInput
   tokens?: Prisma.VendorTokensOrderByRelationAggregateInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenOrderByRelationAggregateInput
@@ -590,6 +601,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -666,6 +678,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   addresses?: Prisma.VendorAddressListRelationFilter
   vendorModulesMappings?: Prisma.VendorModulesMappingListRelationFilter
   vendorSetting?: Prisma.VendorSettingListRelationFilter
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
   taxInfo?: Prisma.VendorTaxInfoListRelationFilter
   tokens?: Prisma.VendorTokensListRelationFilter
   externalPlatformTokens?: Prisma.ExternalPlatformTokenListRelationFilter
@@ -707,6 +720,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -739,6 +753,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
@@ -762,6 +777,7 @@ export type VendorMasterCreateInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -837,6 +853,7 @@ export type VendorMasterCreateInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -878,6 +895,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -954,6 +972,7 @@ export type VendorMasterUncheckedCreateInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -993,6 +1012,7 @@ export type VendorMasterUpdateInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -1068,6 +1088,7 @@ export type VendorMasterUpdateInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -1109,6 +1130,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1185,6 +1207,7 @@ export type VendorMasterUncheckedUpdateInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -1225,6 +1248,7 @@ export type VendorMasterCreateManyInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -1248,6 +1272,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1271,6 +1296,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1295,6 +1321,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
+  is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1326,6 +1353,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
+  is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1350,6 +1378,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
+  is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1850,6 +1879,20 @@ export type VendorMasterUpdateOneRequiredWithoutProductStructureInstancesNestedI
   upsert?: Prisma.VendorMasterUpsertWithoutProductStructureInstancesInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutProductStructureInstancesInput, Prisma.VendorMasterUpdateWithoutProductStructureInstancesInput>, Prisma.VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutSelfAssignTaskTypeMastersInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput
+  upsert?: Prisma.VendorMasterUpsertWithoutSelfAssignTaskTypeMastersInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput>, Prisma.VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutPaymentsInput = {
@@ -2768,6 +2811,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -2842,6 +2886,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -2883,6 +2928,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -2958,6 +3004,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -3013,6 +3060,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -3087,6 +3135,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -3128,6 +3177,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3203,6 +3253,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -3242,6 +3293,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3317,6 +3369,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
@@ -3357,6 +3410,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -3433,6 +3487,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
@@ -3487,6 +3542,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -3562,6 +3618,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
@@ -3602,6 +3659,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3678,6 +3736,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
@@ -3716,6 +3775,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3790,6 +3850,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -3831,6 +3892,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -3906,6 +3968,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -3961,6 +4024,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4035,6 +4099,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -4076,6 +4141,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4151,6 +4217,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -4190,6 +4257,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4264,6 +4332,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -4305,6 +4374,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4380,6 +4450,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -4435,6 +4506,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4509,6 +4581,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -4550,6 +4623,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4625,6 +4699,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -4664,6 +4739,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4738,6 +4814,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -4779,6 +4856,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4854,6 +4932,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -4909,6 +4988,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4983,6 +5063,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -5024,6 +5105,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5099,6 +5181,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -5138,6 +5221,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5212,6 +5296,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -5253,6 +5338,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -5328,6 +5414,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -5383,6 +5470,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5457,6 +5545,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -5498,6 +5587,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5573,6 +5663,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -5612,6 +5703,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5686,6 +5778,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -5727,6 +5820,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -5802,6 +5896,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -5857,6 +5952,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5931,6 +6027,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -5972,6 +6069,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6047,6 +6145,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -6086,6 +6185,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6160,6 +6260,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -6201,6 +6302,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -6276,6 +6378,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -6331,6 +6434,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6405,6 +6509,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -6446,6 +6551,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6521,6 +6627,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -6560,6 +6667,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6634,6 +6742,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -6675,6 +6784,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -6750,6 +6860,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -6805,6 +6916,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6879,6 +6991,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -6920,6 +7033,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6995,6 +7109,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -7034,6 +7149,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -7108,6 +7224,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -7149,6 +7266,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7224,6 +7342,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -7279,6 +7398,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7353,6 +7473,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -7394,6 +7515,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7469,6 +7591,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -7508,6 +7631,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -7582,6 +7706,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -7623,6 +7748,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7698,6 +7824,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -7753,6 +7880,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7827,6 +7955,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -7868,6 +7997,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7943,6 +8073,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -7982,6 +8113,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8057,6 +8189,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
@@ -8097,6 +8230,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -8173,6 +8307,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
@@ -8227,6 +8362,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8302,6 +8438,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
@@ -8342,6 +8479,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8418,6 +8556,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
@@ -8456,6 +8595,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8530,6 +8670,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -8571,6 +8712,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -8646,6 +8788,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -8701,6 +8844,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8775,6 +8919,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -8816,6 +8961,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8891,6 +9037,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -8930,6 +9077,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9004,6 +9152,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -9045,6 +9194,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9120,6 +9270,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -9175,6 +9326,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9249,6 +9401,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -9290,6 +9443,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9365,6 +9519,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -9404,6 +9559,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9478,6 +9634,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -9519,6 +9676,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9594,6 +9752,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -9649,6 +9808,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9723,6 +9883,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -9764,6 +9925,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9839,6 +10001,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -9878,6 +10041,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9952,6 +10116,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -9993,6 +10158,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -10068,6 +10234,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -10123,6 +10290,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10197,6 +10365,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -10238,6 +10407,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10313,6 +10483,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -10352,6 +10523,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10426,6 +10598,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -10467,6 +10640,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -10542,6 +10716,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -10597,6 +10772,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10671,6 +10847,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -10712,6 +10889,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10787,6 +10965,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -10826,6 +11005,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10900,6 +11080,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -10941,6 +11122,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -11016,6 +11198,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -11071,6 +11254,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -11145,6 +11329,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -11186,6 +11371,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11261,6 +11447,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -11300,6 +11487,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
@@ -11374,6 +11562,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -11415,6 +11604,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -11490,6 +11680,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -11545,6 +11736,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
@@ -11619,6 +11811,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -11660,6 +11853,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11735,6 +11929,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -11774,6 +11969,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11848,6 +12044,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -11889,6 +12086,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -11964,6 +12162,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -12019,6 +12218,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12093,6 +12293,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -12134,6 +12335,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12209,6 +12411,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -12248,6 +12451,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12322,6 +12526,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -12363,6 +12568,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -12438,6 +12644,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -12493,6 +12700,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12567,6 +12775,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -12608,6 +12817,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12683,6 +12893,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -12722,6 +12933,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12796,6 +13008,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -12837,6 +13050,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -12912,6 +13126,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -12967,6 +13182,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13041,6 +13257,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -13082,6 +13299,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13157,6 +13375,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -13196,6 +13415,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13270,6 +13490,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -13311,6 +13532,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -13386,6 +13608,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -13441,6 +13664,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13515,6 +13739,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -13556,6 +13781,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13631,6 +13857,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -13670,6 +13897,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13744,6 +13972,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -13785,6 +14014,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -13860,6 +14090,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -13915,6 +14146,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13989,6 +14221,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -14030,6 +14263,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14105,6 +14339,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -14144,6 +14379,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14218,6 +14454,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -14259,6 +14496,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -14334,6 +14572,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -14389,6 +14628,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14463,6 +14703,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -14504,6 +14745,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14579,6 +14821,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -14618,6 +14861,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14692,6 +14936,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -14733,6 +14978,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -14808,6 +15054,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -14863,6 +15110,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14937,6 +15185,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -14978,6 +15227,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15053,6 +15303,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -15092,6 +15343,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -15166,6 +15418,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -15207,6 +15460,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -15282,6 +15536,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -15337,6 +15592,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15411,6 +15667,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -15452,6 +15709,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15527,6 +15785,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -15566,6 +15825,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -15640,6 +15900,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -15681,6 +15942,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -15756,6 +16018,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -15811,6 +16074,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15885,6 +16149,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -15926,6 +16191,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16001,6 +16267,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -16040,6 +16307,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16114,6 +16382,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -16155,6 +16424,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16230,6 +16500,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -16285,6 +16556,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16359,6 +16631,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -16400,6 +16673,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16475,6 +16749,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -16514,6 +16789,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16588,6 +16864,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -16629,6 +16906,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16704,6 +16982,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -16759,6 +17038,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16833,6 +17113,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -16874,6 +17155,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16949,6 +17231,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -16988,6 +17271,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17062,6 +17346,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -17103,6 +17388,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -17178,6 +17464,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -17233,6 +17520,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17307,6 +17595,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -17348,6 +17637,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17387,6 +17677,489 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
   leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
   leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+}
+
+export type VendorMasterUpsertWithoutSelfAssignTaskTypeMastersInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput, Prisma.VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
+}
+
+export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
@@ -17462,6 +18235,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17536,6 +18310,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -17577,6 +18352,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -17652,6 +18428,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -17707,6 +18484,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17781,6 +18559,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -17822,6 +18601,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17897,6 +18677,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -17936,6 +18717,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18010,6 +18792,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -18051,6 +18834,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18126,6 +18910,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -18181,6 +18966,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18255,6 +19041,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -18296,6 +19083,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18371,6 +19159,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -18410,6 +19199,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18484,6 +19274,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -18525,6 +19316,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18600,6 +19392,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -18655,6 +19448,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18729,6 +19523,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -18770,6 +19565,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18845,6 +19641,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -18884,6 +19681,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18958,6 +19756,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -18999,6 +19798,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -19074,6 +19874,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -19129,6 +19930,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -19203,6 +20005,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -19244,6 +20047,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19319,6 +20123,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -19358,6 +20163,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19432,6 +20238,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -19473,6 +20280,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -19548,6 +20356,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -19603,6 +20412,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -19677,6 +20487,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -19718,6 +20529,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19793,6 +20605,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -19832,6 +20645,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19906,6 +20720,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -19947,6 +20762,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20022,6 +20838,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -20077,6 +20894,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20151,6 +20969,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -20192,6 +21011,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20267,6 +21087,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -20306,6 +21127,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20380,6 +21202,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -20421,6 +21244,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20496,6 +21320,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -20551,6 +21376,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20625,6 +21451,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -20666,6 +21493,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20741,6 +21569,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -20780,6 +21609,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20854,6 +21684,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -20895,6 +21726,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20970,6 +21802,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -21025,6 +21858,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21099,6 +21933,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -21140,6 +21975,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21215,6 +22051,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -21254,6 +22091,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21328,6 +22166,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -21369,6 +22208,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -21444,6 +22284,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -21499,6 +22340,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21573,6 +22415,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -21614,6 +22457,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21689,6 +22533,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -21728,6 +22573,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21802,6 +22648,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -21843,6 +22690,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -21918,6 +22766,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -21973,6 +22822,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22047,6 +22897,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -22088,6 +22939,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22163,6 +23015,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -22202,6 +23055,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22276,6 +23130,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -22317,6 +23172,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22392,6 +23248,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -22447,6 +23304,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22521,6 +23379,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -22562,6 +23421,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22637,6 +23497,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -22676,6 +23537,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22750,6 +23612,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -22791,6 +23654,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22866,6 +23730,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -22921,6 +23786,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22995,6 +23861,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -23036,6 +23903,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23111,6 +23979,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -23150,6 +24019,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -23224,6 +24094,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -23265,6 +24136,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -23340,6 +24212,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -23395,6 +24268,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23469,6 +24343,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -23510,6 +24385,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23585,6 +24461,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -23624,6 +24501,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -23698,6 +24576,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -23739,6 +24618,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -23814,6 +24694,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -23869,6 +24750,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23943,6 +24825,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -23984,6 +24867,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24059,6 +24943,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -24098,6 +24983,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24172,6 +25058,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -24213,6 +25100,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24288,6 +25176,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -24343,6 +25232,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24417,6 +25307,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -24458,6 +25349,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24533,6 +25425,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -24572,6 +25465,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24646,6 +25540,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -24687,6 +25582,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24762,6 +25658,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -24817,6 +25714,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24891,6 +25789,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -24932,6 +25831,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25007,6 +25907,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -25046,6 +25947,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25120,6 +26022,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -25161,6 +26064,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -25236,6 +26140,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -25291,6 +26196,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25365,6 +26271,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -25406,6 +26313,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25481,6 +26389,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -25520,6 +26429,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25594,6 +26504,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -25635,6 +26546,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -25710,6 +26622,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -25765,6 +26678,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25839,6 +26753,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -25880,6 +26795,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25955,6 +26871,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -25994,6 +26911,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26068,6 +26986,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -26109,6 +27028,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -26184,6 +27104,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -26239,6 +27160,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26313,6 +27235,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -26354,6 +27277,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26429,6 +27353,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -26468,6 +27393,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26542,6 +27468,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -26583,6 +27510,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -26658,6 +27586,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -26713,6 +27642,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26787,6 +27717,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -26828,6 +27759,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26903,6 +27835,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -26942,6 +27875,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27016,6 +27950,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -27057,6 +27992,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27132,6 +28068,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -27187,6 +28124,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -27261,6 +28199,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -27302,6 +28241,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27377,6 +28317,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -27416,6 +28357,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27490,6 +28432,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -27531,6 +28474,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27606,6 +28550,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -27661,6 +28606,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -27735,6 +28681,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -27776,6 +28723,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27851,6 +28799,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -27890,6 +28839,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27964,6 +28914,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -28005,6 +28956,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -28080,6 +29032,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -28135,6 +29088,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28209,6 +29163,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -28250,6 +29205,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28325,6 +29281,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -28364,6 +29321,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28438,6 +29396,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -28479,6 +29438,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -28554,6 +29514,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -28609,6 +29570,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28683,6 +29645,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -28724,6 +29687,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28799,6 +29763,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -28838,6 +29803,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28912,6 +29878,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -28953,6 +29920,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29028,6 +29996,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -29083,6 +30052,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29157,6 +30127,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -29198,6 +30169,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29273,6 +30245,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -29312,6 +30285,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29386,6 +30360,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -29427,6 +30402,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29502,6 +30478,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -29557,6 +30534,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29631,6 +30609,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -29672,6 +30651,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29747,6 +30727,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -29786,6 +30767,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29860,6 +30842,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -29901,6 +30884,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29976,6 +30960,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -30031,6 +31016,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30105,6 +31091,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -30146,6 +31133,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30221,6 +31209,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -30260,6 +31249,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30334,6 +31324,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -30375,6 +31366,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -30450,6 +31442,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -30505,6 +31498,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30579,6 +31573,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -30620,6 +31615,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30695,6 +31691,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -30734,6 +31731,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30808,6 +31806,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -30849,6 +31848,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -30924,6 +31924,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -30979,6 +31980,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -31053,6 +32055,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -31094,6 +32097,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31169,6 +32173,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -31208,6 +32213,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -31282,6 +32288,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -31323,6 +32330,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31398,6 +32406,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -31453,6 +32462,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -31527,6 +32537,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -31568,6 +32579,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31643,6 +32655,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -31682,6 +32695,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -31756,6 +32770,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -31797,6 +32812,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31872,6 +32888,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -31927,6 +32944,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -32001,6 +33019,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -32042,6 +33061,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32117,6 +33137,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -32156,6 +33177,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -32230,6 +33252,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -32271,6 +33294,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -32346,6 +33370,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -32401,6 +33426,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -32475,6 +33501,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -32516,6 +33543,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32591,6 +33619,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -32630,6 +33659,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -32704,6 +33734,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -32745,6 +33776,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -32820,6 +33852,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -32875,6 +33908,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -32949,6 +33983,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -32990,6 +34025,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33065,6 +34101,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -33104,6 +34141,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -33178,6 +34216,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -33219,6 +34258,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33294,6 +34334,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -33349,6 +34390,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -33423,6 +34465,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -33464,6 +34507,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33539,6 +34583,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -33578,6 +34623,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -33652,6 +34698,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -33693,6 +34740,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33768,6 +34816,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -33823,6 +34872,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -33897,6 +34947,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -33938,6 +34989,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34013,6 +35065,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -34052,6 +35105,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -34126,6 +35180,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -34167,6 +35222,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -34242,6 +35298,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -34297,6 +35354,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -34371,6 +35429,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -34412,6 +35471,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34487,6 +35547,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -34526,6 +35587,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -34600,6 +35662,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -34641,6 +35704,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -34716,6 +35780,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -34771,6 +35836,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -34845,6 +35911,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -34886,6 +35953,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34961,6 +36029,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -35000,6 +36069,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -35074,6 +36144,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -35115,6 +36186,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -35190,6 +36262,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -35245,6 +36318,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -35319,6 +36393,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -35360,6 +36435,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35435,6 +36511,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -35474,6 +36551,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -35548,6 +36626,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -35589,6 +36668,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -35664,6 +36744,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -35719,6 +36800,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -35793,6 +36875,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -35834,6 +36917,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35909,6 +36993,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -35948,6 +37033,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -36022,6 +37108,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -36063,6 +37150,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -36138,6 +37226,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -36193,6 +37282,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -36267,6 +37357,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -36308,6 +37399,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36383,6 +37475,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -36422,6 +37515,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -36496,6 +37590,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -36537,6 +37632,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -36612,6 +37708,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -36667,6 +37764,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -36741,6 +37839,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -36782,6 +37881,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36857,6 +37957,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -36896,6 +37997,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -36970,6 +38072,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -37011,6 +38114,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -37086,6 +38190,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -37141,6 +38246,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -37215,6 +38321,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -37256,6 +38363,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37331,6 +38439,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -37370,6 +38479,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -37444,6 +38554,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -37485,6 +38596,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -37560,6 +38672,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -37615,6 +38728,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -37689,6 +38803,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -37730,6 +38845,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37805,6 +38921,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -37844,6 +38961,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -37919,6 +39037,7 @@ export type VendorMasterCreateWithoutStateInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -37959,6 +39078,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -38034,6 +39154,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -38103,6 +39224,7 @@ export type VendorMasterScalarWhereInput = {
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -38126,6 +39248,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -38200,6 +39323,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -38241,6 +39365,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38316,6 +39441,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -38371,6 +39497,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -38445,6 +39572,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -38486,6 +39614,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38561,6 +39690,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -38600,6 +39730,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -38675,6 +39806,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
@@ -38715,6 +39847,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38791,6 +39924,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
@@ -38845,6 +39979,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -38920,6 +40055,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
@@ -38960,6 +40096,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39036,6 +40173,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
@@ -39074,6 +40212,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -39149,6 +40288,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -39189,6 +40329,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -39265,6 +40406,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -39319,6 +40461,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -39394,6 +40537,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -39434,6 +40578,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39510,6 +40655,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -39548,6 +40694,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -39623,6 +40770,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -39663,6 +40811,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -39739,6 +40888,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -39793,6 +40943,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -39868,6 +41019,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -39908,6 +41060,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39984,6 +41137,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -40022,6 +41176,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -40097,6 +41252,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -40137,6 +41293,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40213,6 +41370,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -40267,6 +41425,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -40342,6 +41501,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -40382,6 +41542,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40458,6 +41619,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -40496,6 +41658,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -40571,6 +41734,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -40611,6 +41775,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40687,6 +41852,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -40741,6 +41907,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -40816,6 +41983,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -40856,6 +42024,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40932,6 +42101,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -40970,6 +42140,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -41045,6 +42216,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -41085,6 +42257,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -41161,6 +42334,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -41215,6 +42389,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -41290,6 +42465,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -41330,6 +42506,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41406,6 +42583,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -41444,6 +42622,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -41519,6 +42698,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -41559,6 +42739,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -41635,6 +42816,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -41689,6 +42871,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -41764,6 +42947,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -41804,6 +42988,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41880,6 +43065,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -41918,6 +43104,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -41993,6 +43180,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -42033,6 +43221,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42109,6 +43298,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -42163,6 +43353,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -42238,6 +43429,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -42278,6 +43470,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42354,6 +43547,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -42392,6 +43586,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -42467,6 +43662,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -42507,6 +43703,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42583,6 +43780,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -42637,6 +43835,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -42712,6 +43911,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -42752,6 +43952,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42828,6 +44029,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -42866,6 +44068,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -42941,6 +44144,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -42981,6 +44185,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -43057,6 +44262,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -43111,6 +44317,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -43186,6 +44393,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -43226,6 +44434,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43302,6 +44511,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -43340,6 +44550,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -43415,6 +44626,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -43455,6 +44667,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -43531,6 +44744,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -43585,6 +44799,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -43660,6 +44875,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -43700,6 +44916,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43776,6 +44993,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -43814,6 +45032,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -43889,6 +45108,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -43929,6 +45149,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44005,6 +45226,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -44059,6 +45281,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -44134,6 +45357,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -44174,6 +45398,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44250,6 +45475,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -44288,6 +45514,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -44363,6 +45590,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -44403,6 +45631,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44479,6 +45708,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -44533,6 +45763,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -44608,6 +45839,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -44648,6 +45880,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44724,6 +45957,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -44762,6 +45996,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -44837,6 +46072,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -44877,6 +46113,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44953,6 +46190,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -45007,6 +46245,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -45082,6 +46321,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -45122,6 +46362,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45198,6 +46439,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -45236,6 +46478,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -45311,6 +46554,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -45351,6 +46595,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -45427,6 +46672,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -45481,6 +46727,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -45556,6 +46803,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -45596,6 +46844,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45672,6 +46921,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -45710,6 +46960,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -45785,6 +47036,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -45825,6 +47077,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -45901,6 +47154,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -45955,6 +47209,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -46030,6 +47285,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -46070,6 +47326,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46146,6 +47403,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -46184,6 +47442,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -46259,6 +47518,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
@@ -46299,6 +47559,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -46375,6 +47636,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
   vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
   tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
@@ -46429,6 +47691,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -46504,6 +47767,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -46544,6 +47808,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46620,6 +47885,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -46659,6 +47925,7 @@ export type VendorMasterCreateManyStateInput = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -46681,6 +47948,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -46756,6 +48024,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
@@ -46796,6 +48065,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -46871,6 +48141,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
   vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
   vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
   tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
   externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
@@ -46911,6 +48182,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -46994,6 +48266,7 @@ export type VendorMasterCountOutputType = {
   addresses: number
   vendorModulesMappings: number
   vendorSetting: number
+  selfAssignTaskTypeMasters: number
   taxInfo: number
   tokens: number
   externalPlatformTokens: number
@@ -47089,6 +48362,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   addresses?: boolean | VendorMasterCountOutputTypeCountAddressesArgs
   vendorModulesMappings?: boolean | VendorMasterCountOutputTypeCountVendorModulesMappingsArgs
   vendorSetting?: boolean | VendorMasterCountOutputTypeCountVendorSettingArgs
+  selfAssignTaskTypeMasters?: boolean | VendorMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs
   taxInfo?: boolean | VendorMasterCountOutputTypeCountTaxInfoArgs
   tokens?: boolean | VendorMasterCountOutputTypeCountTokensArgs
   externalPlatformTokens?: boolean | VendorMasterCountOutputTypeCountExternalPlatformTokensArgs
@@ -47634,6 +48908,13 @@ export type VendorMasterCountOutputTypeCountVendorSettingArgs<ExtArgs extends ru
 /**
  * VendorMasterCountOutputType without action
  */
+export type VendorMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
 export type VendorMasterCountOutputTypeCountTaxInfoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.VendorTaxInfoWhereInput
 }
@@ -47784,6 +49065,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   eligible_booking_days?: boolean
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -47860,6 +49142,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   addresses?: boolean | Prisma.VendorMaster$addressesArgs<ExtArgs>
   vendorModulesMappings?: boolean | Prisma.VendorMaster$vendorModulesMappingsArgs<ExtArgs>
   vendorSetting?: boolean | Prisma.VendorMaster$vendorSettingArgs<ExtArgs>
+  selfAssignTaskTypeMasters?: boolean | Prisma.VendorMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
   taxInfo?: boolean | Prisma.VendorMaster$taxInfoArgs<ExtArgs>
   tokens?: boolean | Prisma.VendorMaster$tokensArgs<ExtArgs>
   externalPlatformTokens?: boolean | Prisma.VendorMaster$externalPlatformTokensArgs<ExtArgs>
@@ -47902,6 +49185,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   eligible_booking_days?: boolean
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -47927,6 +49211,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   eligible_booking_days?: boolean
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -47952,12 +49237,13 @@ export type VendorMasterSelectScalar = {
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   eligible_booking_days?: boolean
+  is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_this_vendor_is_custom_usertype_only" | "eligible_booking_days" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_this_vendor_is_custom_usertype_only" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -48032,6 +49318,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   addresses?: boolean | Prisma.VendorMaster$addressesArgs<ExtArgs>
   vendorModulesMappings?: boolean | Prisma.VendorMaster$vendorModulesMappingsArgs<ExtArgs>
   vendorSetting?: boolean | Prisma.VendorMaster$vendorSettingArgs<ExtArgs>
+  selfAssignTaskTypeMasters?: boolean | Prisma.VendorMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
   taxInfo?: boolean | Prisma.VendorMaster$taxInfoArgs<ExtArgs>
   tokens?: boolean | Prisma.VendorMaster$tokensArgs<ExtArgs>
   externalPlatformTokens?: boolean | Prisma.VendorMaster$externalPlatformTokensArgs<ExtArgs>
@@ -48137,6 +49424,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     addresses: Prisma.$VendorAddressPayload<ExtArgs>[]
     vendorModulesMappings: Prisma.$VendorModulesMappingPayload<ExtArgs>[]
     vendorSetting: Prisma.$VendorSettingPayload<ExtArgs>[]
+    selfAssignTaskTypeMasters: Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>[]
     taxInfo: Prisma.$VendorTaxInfoPayload<ExtArgs>[]
     tokens: Prisma.$VendorTokensPayload<ExtArgs>[]
     externalPlatformTokens: Prisma.$ExternalPlatformTokenPayload<ExtArgs>[]
@@ -48177,6 +49465,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_approval_task_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
     eligible_booking_days: number | null
+    is_self_assign_task_type_master_enabed: boolean
     createdAt: Date
     updatedAt: Date
     state_id: number | null
@@ -48647,6 +49936,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   addresses<T extends Prisma.VendorMaster$addressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$addressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendorModulesMappings<T extends Prisma.VendorMaster$vendorModulesMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$vendorModulesMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorModulesMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendorSetting<T extends Prisma.VendorMaster$vendorSettingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$vendorSettingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorSettingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  selfAssignTaskTypeMasters<T extends Prisma.VendorMaster$selfAssignTaskTypeMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$selfAssignTaskTypeMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   taxInfo<T extends Prisma.VendorMaster$taxInfoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$taxInfoArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorTaxInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tokens<T extends Prisma.VendorMaster$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorTokensPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   externalPlatformTokens<T extends Prisma.VendorMaster$externalPlatformTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$externalPlatformTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExternalPlatformTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -48714,6 +50004,7 @@ export interface VendorMasterFieldRefs {
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
+  readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>
@@ -50867,6 +52158,30 @@ export type VendorMaster$vendorSettingArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.VendorSettingScalarFieldEnum | Prisma.VendorSettingScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.selfAssignTaskTypeMasters
+ */
+export type VendorMaster$selfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SelfAssignTaskTypeMaster
+   */
+  select?: Prisma.SelfAssignTaskTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SelfAssignTaskTypeMaster
+   */
+  omit?: Prisma.SelfAssignTaskTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SelfAssignTaskTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
+  orderBy?: Prisma.SelfAssignTaskTypeMasterOrderByWithRelationInput | Prisma.SelfAssignTaskTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.SelfAssignTaskTypeMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SelfAssignTaskTypeMasterScalarFieldEnum | Prisma.SelfAssignTaskTypeMasterScalarFieldEnum[]
 }
 
 /**

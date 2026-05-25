@@ -1202,7 +1202,10 @@ export const updateLeadProductStructureInstance = async ({
         title: title.trim(),
         description: description?.trim() || null,
         ...(pre_prod_remark !== undefined
-          ? { pre_prod_remark: pre_prod_remark.trim() || null }
+          ? {
+              pre_prod_remark:
+                pre_prod_remark == null ? null : pre_prod_remark.trim() || null,
+            }
           : {}),
         updated_by: updated_by ?? null,
       },

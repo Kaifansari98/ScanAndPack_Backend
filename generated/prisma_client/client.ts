@@ -240,6 +240,11 @@ export type LeadProductStructureMapping = Prisma.LeadProductStructureMappingMode
  */
 export type LeadProductStructureInstance = Prisma.LeadProductStructureInstanceModel
 /**
+ * Model SelfAssignTaskTypeMaster
+ * 
+ */
+export type SelfAssignTaskTypeMaster = Prisma.SelfAssignTaskTypeMasterModel
+/**
  * Model PaymentInfo
  * 
  */

@@ -424,6 +424,7 @@ export const ModelName = {
   ProductStructure: 'ProductStructure',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   LeadProductStructureInstance: 'LeadProductStructureInstance',
+  SelfAssignTaskTypeMaster: 'SelfAssignTaskTypeMaster',
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
@@ -529,7 +530,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3490,6 +3491,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadProductStructureInstanceCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadProductStructureInstanceCountAggregateOutputType> | number
+        }
+      }
+    }
+    SelfAssignTaskTypeMaster: {
+      payload: Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>
+      fields: Prisma.SelfAssignTaskTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SelfAssignTaskTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SelfAssignTaskTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.SelfAssignTaskTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SelfAssignTaskTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.SelfAssignTaskTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.SelfAssignTaskTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.SelfAssignTaskTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SelfAssignTaskTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.SelfAssignTaskTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.SelfAssignTaskTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.SelfAssignTaskTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SelfAssignTaskTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SelfAssignTaskTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.SelfAssignTaskTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SelfAssignTaskTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.SelfAssignTaskTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSelfAssignTaskTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.SelfAssignTaskTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SelfAssignTaskTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SelfAssignTaskTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SelfAssignTaskTypeMasterCountAggregateOutputType> | number
         }
       }
     }
@@ -10211,6 +10286,7 @@ export const VendorMasterScalarFieldEnum = {
   is_approval_task_enabled: 'is_approval_task_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   eligible_booking_days: 'eligible_booking_days',
+  is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id'
@@ -10860,6 +10936,16 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
 } as const
 
 export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStructureInstanceScalarFieldEnum)[keyof typeof LeadProductStructureInstanceScalarFieldEnum]
+
+
+export const SelfAssignTaskTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  created_at: 'created_at'
+} as const
+
+export type SelfAssignTaskTypeMasterScalarFieldEnum = (typeof SelfAssignTaskTypeMasterScalarFieldEnum)[keyof typeof SelfAssignTaskTypeMasterScalarFieldEnum]
 
 
 export const PaymentInfoScalarFieldEnum = {
@@ -13282,6 +13368,7 @@ export type GlobalOmitConfig = {
   productStructure?: Prisma.ProductStructureOmit
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOmit
   leadProductStructureInstance?: Prisma.LeadProductStructureInstanceOmit
+  selfAssignTaskTypeMaster?: Prisma.SelfAssignTaskTypeMasterOmit
   paymentInfo?: Prisma.PaymentInfoOmit
   ledger?: Prisma.LedgerOmit
   documentTypeMaster?: Prisma.DocumentTypeMasterOmit
