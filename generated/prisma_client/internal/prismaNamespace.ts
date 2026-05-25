@@ -433,6 +433,7 @@ export const ModelName = {
   StatusTypeMaster: 'StatusTypeMaster',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
+  MeetingTypeMaster: 'MeetingTypeMaster',
   LeadDesignMeetingDocumentsMapping: 'LeadDesignMeetingDocumentsMapping',
   LeadDesignSelection: 'LeadDesignSelection',
   CHSSelectionTypeMapping: 'CHSSelectionTypeMapping',
@@ -530,7 +531,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -4157,6 +4158,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.LeadDesignMeetingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.LeadDesignMeetingCountAggregateOutputType> | number
+        }
+      }
+    }
+    MeetingTypeMaster: {
+      payload: Prisma.$MeetingTypeMasterPayload<ExtArgs>
+      fields: Prisma.MeetingTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.MeetingTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.MeetingTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.MeetingTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.MeetingTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.MeetingTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.MeetingTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.MeetingTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.MeetingTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.MeetingTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.MeetingTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.MeetingTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.MeetingTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.MeetingTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.MeetingTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$MeetingTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.MeetingTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateMeetingTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.MeetingTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeetingTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.MeetingTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.MeetingTypeMasterCountAggregateOutputType> | number
         }
       }
     }
@@ -11070,6 +11145,7 @@ export const LeadDesignMeetingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  meeting_type_id: 'meeting_type_id',
   date: 'date',
   desc: 'desc',
   created_by: 'created_by',
@@ -11079,6 +11155,16 @@ export const LeadDesignMeetingScalarFieldEnum = {
 } as const
 
 export type LeadDesignMeetingScalarFieldEnum = (typeof LeadDesignMeetingScalarFieldEnum)[keyof typeof LeadDesignMeetingScalarFieldEnum]
+
+
+export const MeetingTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  created_at: 'created_at'
+} as const
+
+export type MeetingTypeMasterScalarFieldEnum = (typeof MeetingTypeMasterScalarFieldEnum)[keyof typeof MeetingTypeMasterScalarFieldEnum]
 
 
 export const LeadDesignMeetingDocumentsMappingScalarFieldEnum = {
@@ -11183,6 +11269,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   account_id: 'account_id',
+  task_id: 'task_id',
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
@@ -13378,6 +13465,7 @@ export type GlobalOmitConfig = {
   statusTypeMaster?: Prisma.StatusTypeMasterOmit
   leadStatusLogs?: Prisma.LeadStatusLogsOmit
   leadDesignMeeting?: Prisma.LeadDesignMeetingOmit
+  meetingTypeMaster?: Prisma.MeetingTypeMasterOmit
   leadDesignMeetingDocumentsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOmit
   leadDesignSelection?: Prisma.LeadDesignSelectionOmit
   cHSSelectionTypeMapping?: Prisma.CHSSelectionTypeMappingOmit

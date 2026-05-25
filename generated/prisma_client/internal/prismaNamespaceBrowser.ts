@@ -100,6 +100,7 @@ export const ModelName = {
   StatusTypeMaster: 'StatusTypeMaster',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
+  MeetingTypeMaster: 'MeetingTypeMaster',
   LeadDesignMeetingDocumentsMapping: 'LeadDesignMeetingDocumentsMapping',
   LeadDesignSelection: 'LeadDesignSelection',
   CHSSelectionTypeMapping: 'CHSSelectionTypeMapping',
@@ -1003,6 +1004,7 @@ export const LeadDesignMeetingScalarFieldEnum = {
   lead_id: 'lead_id',
   account_id: 'account_id',
   vendor_id: 'vendor_id',
+  meeting_type_id: 'meeting_type_id',
   date: 'date',
   desc: 'desc',
   created_by: 'created_by',
@@ -1012,6 +1014,16 @@ export const LeadDesignMeetingScalarFieldEnum = {
 } as const
 
 export type LeadDesignMeetingScalarFieldEnum = (typeof LeadDesignMeetingScalarFieldEnum)[keyof typeof LeadDesignMeetingScalarFieldEnum]
+
+
+export const MeetingTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  created_at: 'created_at'
+} as const
+
+export type MeetingTypeMasterScalarFieldEnum = (typeof MeetingTypeMasterScalarFieldEnum)[keyof typeof MeetingTypeMasterScalarFieldEnum]
 
 
 export const LeadDesignMeetingDocumentsMappingScalarFieldEnum = {
@@ -1116,6 +1128,7 @@ export const LeadDetailedLogsScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   account_id: 'account_id',
+  task_id: 'task_id',
   action: 'action',
   action_type: 'action_type',
   history_type: 'history_type',
