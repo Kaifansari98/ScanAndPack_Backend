@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { TaskService } from "../../services/task/task.service";
+import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import logger from "../../../src/utils/logger";
 import { date } from "joi";
 
@@ -405,6 +406,80 @@ export class TaskController {
         success: false,
         message: "Failed to fetch Follow Up tasks",
         error: error.message,
+      });
+    }
+  }
+
+  static async updateSelfAssignTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { status, updated_by, closed_at, closed_by, remark } = req.body;
+
+      if (!leadId || !taskId || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, and updated_by are required",
+        });
+      }
+
+      await TaskService.getValidatedSelfAssignTask(leadId, taskId);
+
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        updated_by: Number(updated_by),
+        status,
+        closed_at,
+        closed_by: closed_by ? Number(closed_by) : undefined,
+        remark,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Self-assign task updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to update self-assign task",
+      });
+    }
+  }
+
+  static async rescheduleSelfAssignTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { due_date, remark, updated_by } = req.body;
+
+      if (!leadId || !taskId || !due_date || !remark || !updated_by) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, due_date, remark, and updated_by are required",
+        });
+      }
+
+      await TaskService.getValidatedSelfAssignTask(leadId, taskId);
+
+      const result = await editTaskISMService({
+        lead_id: leadId,
+        task_id: taskId,
+        due_date,
+        remark,
+        updated_by: Number(updated_by),
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Self-assign task rescheduled successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to reschedule self-assign task",
       });
     }
   }

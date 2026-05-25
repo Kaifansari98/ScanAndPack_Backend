@@ -181,12 +181,12 @@ export const getVendorStatusTypes = async (vendorId: number) => {
 
 export const getSelfAssignTaskTypes = async (
   vendorId: number,
-  userTypeId: number,
+  userTypeId?: number,
 ) => {
   return prisma.selfAssignTaskTypeMaster.findMany({
     where: {
       vendor_id: vendorId,
-      user_type_id: userTypeId,
+      ...(userTypeId ? { user_type_id: userTypeId } : {}),
     },
     select: {
       id: true,

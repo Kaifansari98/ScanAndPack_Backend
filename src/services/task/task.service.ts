@@ -1528,6 +1528,66 @@ private static mapTaskWithLead(task: any) {
     });
   }
 
+  static async getSelfAssignTaskTypeByVendor(
+    vendorId: number,
+    taskType: string,
+  ) {
+    return prisma.selfAssignTaskTypeMaster.findFirst({
+      where: {
+        vendor_id: vendorId,
+        type: taskType,
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        user_type_id: true,
+        type: true,
+      },
+    });
+  }
+
+  static async getValidatedSelfAssignTask(leadId: number, taskId: number) {
+    const task = await prisma.userLeadTask.findFirst({
+      where: {
+        id: taskId,
+        lead_id: leadId,
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        task_type: true,
+        vendor_id: true,
+        user_id: true,
+        user: {
+          select: {
+            user_type_id: true,
+          },
+        },
+      },
+    });
+
+    if (!task) {
+      throw new Error("Task not found");
+    }
+
+    const selfAssignTaskType = await prisma.selfAssignTaskTypeMaster.findFirst({
+      where: {
+        vendor_id: task.vendor_id,
+        user_type_id: task.user.user_type_id,
+        type: task.task_type,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!selfAssignTaskType) {
+      throw new Error("This is not a self-assign task");
+    }
+
+    return task;
+  }
+
   // Convenience wrappers
   static async getInitialSiteMeasurementTasks(userId: number, leadId: number) {
     return this.getTasksByUserAndLead(

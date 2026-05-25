@@ -193,12 +193,14 @@ export type UserTypeMasterWhereInput = {
   id?: Prisma.IntFilter<"UserTypeMaster"> | number
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
   users?: Prisma.UserMasterListRelationFilter
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
 }
 
 export type UserTypeMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   user_type?: Prisma.SortOrder
   users?: Prisma.UserMasterOrderByRelationAggregateInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterOrderByRelationAggregateInput
 }
 
 export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -208,6 +210,7 @@ export type UserTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserTypeMasterWhereInput | Prisma.UserTypeMasterWhereInput[]
   user_type?: Prisma.StringFilter<"UserTypeMaster"> | string
   users?: Prisma.UserMasterListRelationFilter
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterListRelationFilter
 }, "id">
 
 export type UserTypeMasterOrderByWithAggregationInput = {
@@ -231,23 +234,27 @@ export type UserTypeMasterScalarWhereWithAggregatesInput = {
 export type UserTypeMasterCreateInput = {
   user_type: string
   users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
 }
 
 export type UserTypeMasterUncheckedCreateInput = {
   id?: number
   user_type: string
   users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
 }
 
 export type UserTypeMasterUpdateInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
   users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
 }
 
 export type UserTypeMasterCreateManyInput = {
@@ -306,13 +313,29 @@ export type UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserTypeMasterUpdateToOneWithWhereWithoutUsersInput, Prisma.UserTypeMasterUpdateWithoutUsersInput>, Prisma.UserTypeMasterUncheckedUpdateWithoutUsersInput>
 }
 
+export type UserTypeMasterCreateNestedOneWithoutSelfAssignTaskTypeMastersInput = {
+  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput
+  connect?: Prisma.UserTypeMasterWhereUniqueInput
+}
+
+export type UserTypeMasterUpdateOneRequiredWithoutSelfAssignTaskTypeMastersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  connectOrCreate?: Prisma.UserTypeMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput
+  upsert?: Prisma.UserTypeMasterUpsertWithoutSelfAssignTaskTypeMastersInput
+  connect?: Prisma.UserTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserTypeMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput>, Prisma.UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
+}
+
 export type UserTypeMasterCreateWithoutUsersInput = {
   user_type: string
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutUserTypeInput
 }
 
 export type UserTypeMasterUncheckedCreateWithoutUsersInput = {
   id?: number
   user_type: string
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutUserTypeInput
 }
 
 export type UserTypeMasterCreateOrConnectWithoutUsersInput = {
@@ -333,11 +356,51 @@ export type UserTypeMasterUpdateToOneWithWhereWithoutUsersInput = {
 
 export type UserTypeMasterUpdateWithoutUsersInput = {
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutUserTypeNestedInput
 }
 
 export type UserTypeMasterUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   user_type?: Prisma.StringFieldUpdateOperationsInput | string
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutUserTypeNestedInput
+}
+
+export type UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
+  user_type: string
+  users?: Prisma.UserMasterCreateNestedManyWithoutUser_typeInput
+}
+
+export type UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
+  id?: number
+  user_type: string
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutUser_typeInput
+}
+
+export type UserTypeMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
+  where: Prisma.UserTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+}
+
+export type UserTypeMasterUpsertWithoutSelfAssignTaskTypeMastersInput = {
+  update: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
+  create: Prisma.XOR<Prisma.UserTypeMasterCreateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput>
+  where?: Prisma.UserTypeMasterWhereInput
+}
+
+export type UserTypeMasterUpdateToOneWithWhereWithoutSelfAssignTaskTypeMastersInput = {
+  where?: Prisma.UserTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput, Prisma.UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput>
+}
+
+export type UserTypeMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  user_type?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserMasterUpdateManyWithoutUser_typeNestedInput
+}
+
+export type UserTypeMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_type?: Prisma.StringFieldUpdateOperationsInput | string
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutUser_typeNestedInput
 }
 
 
@@ -347,10 +410,12 @@ export type UserTypeMasterUncheckedUpdateWithoutUsersInput = {
 
 export type UserTypeMasterCountOutputType = {
   users: number
+  selfAssignTaskTypeMasters: number
 }
 
 export type UserTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | UserTypeMasterCountOutputTypeCountUsersArgs
+  selfAssignTaskTypeMasters?: boolean | UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs
 }
 
 /**
@@ -370,11 +435,19 @@ export type UserTypeMasterCountOutputTypeCountUsersArgs<ExtArgs extends runtime.
   where?: Prisma.UserMasterWhereInput
 }
 
+/**
+ * UserTypeMasterCountOutputType without action
+ */
+export type UserTypeMasterCountOutputTypeCountSelfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
+}
+
 
 export type UserTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   user_type?: boolean
   users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
+  selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userTypeMaster"]>
 
@@ -396,6 +469,7 @@ export type UserTypeMasterSelectScalar = {
 export type UserTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "user_type", ExtArgs["result"]["userTypeMaster"]>
 export type UserTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.UserTypeMaster$usersArgs<ExtArgs>
+  selfAssignTaskTypeMasters?: boolean | Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>
   _count?: boolean | Prisma.UserTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserTypeMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -405,6 +479,7 @@ export type $UserTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "UserTypeMaster"
   objects: {
     users: Prisma.$UserMasterPayload<ExtArgs>[]
+    selfAssignTaskTypeMasters: Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -804,6 +879,7 @@ readonly fields: UserTypeMasterFieldRefs;
 export interface Prisma__UserTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.UserTypeMaster$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$usersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  selfAssignTaskTypeMasters<T extends Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SelfAssignTaskTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1249,6 +1325,30 @@ export type UserTypeMaster$usersArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.UserMasterScalarFieldEnum | Prisma.UserMasterScalarFieldEnum[]
+}
+
+/**
+ * UserTypeMaster.selfAssignTaskTypeMasters
+ */
+export type UserTypeMaster$selfAssignTaskTypeMastersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SelfAssignTaskTypeMaster
+   */
+  select?: Prisma.SelfAssignTaskTypeMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SelfAssignTaskTypeMaster
+   */
+  omit?: Prisma.SelfAssignTaskTypeMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SelfAssignTaskTypeMasterInclude<ExtArgs> | null
+  where?: Prisma.SelfAssignTaskTypeMasterWhereInput
+  orderBy?: Prisma.SelfAssignTaskTypeMasterOrderByWithRelationInput | Prisma.SelfAssignTaskTypeMasterOrderByWithRelationInput[]
+  cursor?: Prisma.SelfAssignTaskTypeMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SelfAssignTaskTypeMasterScalarFieldEnum | Prisma.SelfAssignTaskTypeMasterScalarFieldEnum[]
 }
 
 /**

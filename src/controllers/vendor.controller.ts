@@ -135,12 +135,21 @@ export const getSelfAssignTaskTypesController = async (
 ) => {
   try {
     const vendorId = Number(req.query.vendor_id);
-    const userTypeId = Number(req.query.user_type_id);
+    const userTypeIdParam = req.query.user_type_id;
+    const userTypeId =
+      userTypeIdParam !== undefined ? Number(userTypeIdParam) : undefined;
 
-    if (!vendorId || !userTypeId) {
+    if (!vendorId) {
       return res.status(400).json({
         success: false,
-        message: "vendor_id and user_type_id are required",
+        message: "vendor_id is required",
+      });
+    }
+
+    if (userTypeIdParam !== undefined && !userTypeId) {
+      return res.status(400).json({
+        success: false,
+        message: "user_type_id must be a valid number",
       });
     }
 

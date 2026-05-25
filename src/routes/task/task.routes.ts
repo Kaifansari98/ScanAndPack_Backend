@@ -59,4 +59,14 @@ taskRouter.get(
   TaskController.getActiveTasksByVendorAndLead,
 );
 
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/update-self-assign-task",
+  TaskController.updateSelfAssignTask,
+);
+
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/reschedule-self-assign-task",
+  TaskController.rescheduleSelfAssignTask,
+);
+
 export default taskRouter;

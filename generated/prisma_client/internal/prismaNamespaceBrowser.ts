@@ -874,6 +874,7 @@ export type LeadProductStructureInstanceScalarFieldEnum = (typeof LeadProductStr
 export const SelfAssignTaskTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
+  user_type_id: 'user_type_id',
   type: 'type',
   created_at: 'created_at'
 } as const
