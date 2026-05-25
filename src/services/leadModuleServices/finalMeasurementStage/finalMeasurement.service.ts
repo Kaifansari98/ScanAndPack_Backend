@@ -1055,7 +1055,7 @@ export class FinalMeasurementService {
         );
       }
 
-      await validateSelfAssignTask({
+      const isSelfAssignTask = await validateSelfAssignTask({
         tx,
         vendorId: lead.vendor_id,
         taskType: task_type,
@@ -1192,7 +1192,8 @@ export class FinalMeasurementService {
       // Treat both "BookingDone - ISM" and "follow up" as special cases (do not update status for them)
       if (
         task_type.toLowerCase() !== "follow up" &&
-        task_type.toLowerCase() !== "bookingdone - ism"
+        task_type.toLowerCase() !== "bookingdone - ism" &&
+        !isSelfAssignTask
       ) {
         const toStatus = await tx.statusTypeMaster.findFirst({
           where: { vendor_id: lead.vendor_id, tag: "Type 5" },
@@ -1229,6 +1230,8 @@ export class FinalMeasurementService {
 
       if (task_type.toLowerCase() === "follow up") {
         actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
+      } else if (isSelfAssignTask) {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type}.`;
       } else {
         actionMessage = `Lead has been assigned to ${assignee.user_name} for Final Measurement.`;
       }

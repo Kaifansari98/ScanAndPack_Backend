@@ -407,7 +407,7 @@ export class ReadyToDispatchService {
         );
       }
 
-      await validateSelfAssignTask({
+      const isSelfAssignTask = await validateSelfAssignTask({
         tx,
         vendorId: lead.vendor_id,
         taskType: task_type,
@@ -494,7 +494,7 @@ export class ReadyToDispatchService {
         status_id: number | null;
       } = { ...lead, status_id: null };
 
-      if (task_type.toLowerCase() !== "follow up") {
+      if (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) {
         const toStatus = await tx.statusTypeMaster.findFirst({
           where: { vendor_id: lead.vendor_id, tag: "Type 12" }, // 🔸 Use Type 12 for Site Readiness
           select: { id: true },
@@ -535,6 +535,8 @@ export class ReadyToDispatchService {
       let actionMessage = "";
       if (task_type.toLowerCase() === "follow up") {
         actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up.`;
+      } else if (isSelfAssignTask) {
+        actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type}. Due Date: ${formattedDate}.`;
       } else {
         actionMessage = `Site Readiness task has been created for ${assignee.user_name}. Due Date: ${formattedDate}.`;
       }

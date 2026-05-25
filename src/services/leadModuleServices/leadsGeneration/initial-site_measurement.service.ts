@@ -187,7 +187,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       );
     }
 
-    await validateSelfAssignTask({
+    const isSelfAssignTask = await validateSelfAssignTask({
       tx,
       vendorId: lead.vendor_id,
       taskType: task_type,
@@ -331,7 +331,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       status_id: number | null; // ✅ explicit, matches Prisma
     } = { ...lead, status_id: null };
 
-    if (task_type.toLowerCase() !== "follow up") {
+    if (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) {
       const toStatus = await tx.statusTypeMaster.findFirst({
         where: { vendor_id: lead.vendor_id, tag: "Type 2" },
         select: { id: true },
@@ -377,6 +377,8 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       actionMessage = `Initial Site Measurement task is been created for ${assignee.user_name} Due Date : ${formattedDate}.`;
     } else if (task_type === "Follow Up") {
       actionMessage = `Lead has been assigned to ${assignee.user_name} for Follow Up on ${formattedDate}.`;
+    } else if (isSelfAssignTask) {
+      actionMessage = `Lead has been assigned to ${assignee.user_name} for ${task_type} on ${formattedDate}.`;
     }
 
     // Append remark if present
