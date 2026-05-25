@@ -2996,6 +2996,7 @@ export const getLeadLogsWithDocuments = async (params: {
 
       return {
         id: log.id,
+        task_id: log.task_id,
         action: log.action,
         action_type: log.action_type,
         stage: log.stage

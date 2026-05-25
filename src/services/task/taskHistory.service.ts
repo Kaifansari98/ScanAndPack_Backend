@@ -86,6 +86,7 @@ export const createTaskHistoryLog = async ({
     vendor_id: task.vendor_id,
     lead_id: task.lead_id,
     account_id: task.account_id,
+    task_id: task.id,
     action: action ?? buildDefaultAction({ task, actionType }),
     action_type: actionType,
     history_type: resolveHistoryType(task.task_type),

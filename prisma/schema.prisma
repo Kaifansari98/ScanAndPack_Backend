@@ -56,6 +56,7 @@ model VendorMaster {
   leadChatDocuments                   LeadChatDocument[]
   leadChatRooms                       LeadChatRoom[]
   designMeeting                       LeadDesignMeeting[]
+  meetingTypes                        MeetingTypeMaster[]
   designMeetingDocsMapping            LeadDesignMeetingDocumentsMapping[]
   designSelection                     LeadDesignSelection[]
   chsSelectionMappings                CHSSelectionTypeMapping[]
@@ -1187,6 +1188,7 @@ model LeadDesignMeeting {
   lead_id                  Int
   account_id               Int
   vendor_id                Int
+  meeting_type_id          Int?
   date                     DateTime
   desc                     String                              @db.VarChar(2000)
   created_by               Int
@@ -1196,9 +1198,23 @@ model LeadDesignMeeting {
   account                  AccountMaster                       @relation(fields: [account_id], references: [id], onDelete: Cascade)
   createdBy                UserMaster                          @relation("DesignMeetingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   lead                     LeadMaster                          @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  meetingType              MeetingTypeMaster?                  @relation(fields: [meeting_type_id], references: [id], onDelete: SetNull)
   updatedBy                UserMaster?                         @relation("DesignMeetingUpdatedBy", fields: [updated_by], references: [id], onDelete: Cascade)
   vendor                   VendorMaster                        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   designMeetingDocsMapping LeadDesignMeetingDocumentsMapping[]
+
+  @@index([meeting_type_id])
+}
+
+model MeetingTypeMaster {
+  id         Int                 @id @default(autoincrement())
+  vendor_id  Int
+  type       String
+  created_at DateTime            @default(now())
+  meetings   LeadDesignMeeting[]
+  vendor     VendorMaster        @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
 }
 
 model LeadDesignMeetingDocumentsMapping {
@@ -1314,6 +1330,7 @@ model UserLeadTask {
   createdBy    UserMaster                    @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
   instance     LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
   lead         LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  detailedLogs LeadDetailedLogs[]
   user         UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
   vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
@@ -1323,6 +1340,7 @@ model LeadDetailedLogs {
   vendor_id    Int
   lead_id      Int
   account_id   Int
+  task_id      Int?
   action       String
   action_type  ActionType
   history_type HistoryType        @default(Lead) @map("HistoryType")
@@ -1333,8 +1351,11 @@ model LeadDetailedLogs {
   user         UserMaster         @relation(fields: [created_by], references: [id])
   lead         LeadMaster         @relation(fields: [lead_id], references: [id])
   stage        StatusTypeMaster?  @relation("LeadDetailedLogStage", fields: [stage_id], references: [id])
+  task         UserLeadTask?      @relation(fields: [task_id], references: [id])
   vendor       VendorMaster       @relation(fields: [vendor_id], references: [id])
   docLogs      LeadDocumentLogs[]
+
+  @@index([task_id])
 }
 
 model LeadDocumentLogs {

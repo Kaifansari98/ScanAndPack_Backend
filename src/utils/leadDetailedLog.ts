@@ -18,6 +18,7 @@ interface CreateLeadLogParams {
   vendor_id: number;
   lead_id: number;
   account_id: number;
+  task_id?: number;
   action: string;
   action_type: "CREATE" | "UPDATE" | "DELETE" | "UPLOAD" | "STATUS_CHANGE";
   created_by: number;
@@ -50,6 +51,7 @@ export async function createLeadLog(
     vendor_id,
     lead_id,
     account_id,
+    task_id,
     action,
     action_type,
     created_by,
@@ -119,6 +121,7 @@ export async function createLeadLog(
       vendor_id,
       lead_id,
       account_id,
+      ...(task_id != null && { task_id }),
       action,
       action_type,
       created_by,
