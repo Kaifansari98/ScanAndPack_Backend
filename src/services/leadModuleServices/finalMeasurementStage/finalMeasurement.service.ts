@@ -15,6 +15,7 @@ import { STAGE_PATH_BY_TAG } from "../leadsGeneration/leadActivityStatus.service
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 
 interface FinalMeasurementDto {
   lead_id: number;
@@ -1053,6 +1054,14 @@ export class FinalMeasurementService {
           `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
         );
       }
+
+      await validateSelfAssignTask({
+        tx,
+        vendorId: lead.vendor_id,
+        taskType: task_type,
+        assigneeUserId: assignee_user_id,
+        createdBy: created_by,
+      });
 
       if (
         task_type === FOLLOW_UP_TASK_TYPE &&

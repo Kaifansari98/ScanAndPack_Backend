@@ -8,6 +8,7 @@ import { cache } from "../../../utils/cache";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 
 const assignTaskSiteReadinessSchema = Joi.object({
   lead_id: Joi.number().required(),
@@ -405,6 +406,14 @@ export class ReadyToDispatchService {
           `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`
         );
       }
+
+      await validateSelfAssignTask({
+        tx,
+        vendorId: lead.vendor_id,
+        taskType: task_type,
+        assigneeUserId: assignee_user_id,
+        createdBy: created_by,
+      });
 
       if (
         task_type === FOLLOW_UP_TASK_TYPE &&

@@ -6,6 +6,7 @@ import {
   getLeadTrackingReportController,
   getLeadsOverviewReportController,
   getPaymentsBetweenClientAndStoreReportController,
+  getSelfAssignTaskTypesController,
   getTechCheckStageReportController,
   getVendorStatusTypesController,
   getVendorUsersController,
@@ -21,6 +22,7 @@ router.post("/seed-masters", seedVendorMastersController);
 router.get("/", getAllVendors);
 router.get("/vendor-users", getVendorUsersController);
 router.get("/status-types", getVendorStatusTypesController);
+router.get("/self-assign-task-types", getSelfAssignTaskTypesController);
 router.get("/reports/leads-overview", getLeadsOverviewReportController);
 router.get("/reports/lead-tracking", getLeadTrackingReportController);
 router.get("/reports/techcheck-stage", getTechCheckStageReportController);

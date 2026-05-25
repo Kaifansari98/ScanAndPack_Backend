@@ -28,6 +28,7 @@ import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { cache } from "../../../utils/cache";
 import fs from "node:fs/promises";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
+import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
 
 export interface CreateBDISMPaymentUploadDto {
@@ -185,6 +186,14 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         `Assignee user ${assignee_user_id} does not belong to vendor ${lead.vendor_id}`,
       );
     }
+
+    await validateSelfAssignTask({
+      tx,
+      vendorId: lead.vendor_id,
+      taskType: task_type,
+      assigneeUserId: assignee_user_id,
+      createdBy: created_by,
+    });
 
     if (task_type === FOLLOW_UP_TASK_TYPE && assignee_user_id !== created_by) {
       const existingFollowUpTask = await tx.userLeadTask.findFirst({

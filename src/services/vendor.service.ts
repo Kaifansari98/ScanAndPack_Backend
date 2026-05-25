@@ -179,6 +179,28 @@ export const getVendorStatusTypes = async (vendorId: number) => {
   return statusTypes;
 };
 
+export const getSelfAssignTaskTypes = async (
+  vendorId: number,
+  userTypeId: number,
+) => {
+  return prisma.selfAssignTaskTypeMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      user_type_id: userTypeId,
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      user_type_id: true,
+      type: true,
+      created_at: true,
+    },
+    orderBy: {
+      created_at: "asc",
+    },
+  });
+};
+
 const normalizeSelectionType = (value: string | null | undefined) =>
   (value ?? "").trim().toLowerCase();
 

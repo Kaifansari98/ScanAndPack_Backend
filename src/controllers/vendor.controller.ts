@@ -129,6 +129,41 @@ export const getVendorStatusTypesController = async (
   }
 };
 
+export const getSelfAssignTaskTypesController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(req.query.vendor_id);
+    const userTypeId = Number(req.query.user_type_id);
+
+    if (!vendorId || !userTypeId) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id and user_type_id are required",
+      });
+    }
+
+    const data = await vendorService.getSelfAssignTaskTypes(
+      vendorId,
+      userTypeId,
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Self assign task types fetched successfully",
+      data,
+    });
+  } catch (error) {
+    console.error("Self Assign Task Types API Error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 export const getLeadsOverviewReportController = async (
   req: Request,
   res: Response,
