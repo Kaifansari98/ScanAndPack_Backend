@@ -51,15 +51,15 @@ DesigningStageRouter.post(
   (req, res) => DesigingStageController.addMeetingDocs(req, res),
 );
 
+DesigningStageRouter.get(
+  "/vendor/:vendorId/meeting-types",
+  DesigingStageController.getMeetingTypes,
+);
+
 // GET /api/leads/:vendorId/:leadId/design-meetings
 DesigningStageRouter.get(
   "/:vendorId/:leadId/design-meetings",
   DesigingStageController.getDesignMeetings,
-);
-
-DesigningStageRouter.get(
-  "/vendor/:vendorId/meeting-types",
-  DesigingStageController.getMeetingTypes,
 );
 
 // POST /api/leads/designing-stage/upload-designs
