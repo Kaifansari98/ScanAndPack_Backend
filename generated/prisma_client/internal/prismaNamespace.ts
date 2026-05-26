@@ -10906,6 +10906,7 @@ export const LeadChatMessageScalarFieldEnum = {
   id: 'id',
   chat_room_id: 'chat_room_id',
   sender_id: 'sender_id',
+  reply_to_message_id: 'reply_to_message_id',
   message_type: 'message_type',
   message_text: 'message_text',
   created_at: 'created_at'

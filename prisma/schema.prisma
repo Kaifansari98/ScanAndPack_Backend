@@ -904,16 +904,19 @@ model LeadChatMember {
 }
 
 model LeadChatMessage {
-  id           Int                  @id @default(autoincrement())
-  chat_room_id Int
-  sender_id    Int
-  message_type LeadChatMessageType  @default(text)
-  message_text String?
-  created_at   DateTime             @default(now())
-  attachments  LeadChatAttachment[]
-  mentions     LeadChatMention[]
-  chatRoom     LeadChatRoom         @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
-  sender       UserMaster           @relation("LeadChatMessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
+  id                  Int                  @id @default(autoincrement())
+  chat_room_id        Int
+  sender_id           Int
+  reply_to_message_id Int?
+  message_type        LeadChatMessageType  @default(text)
+  message_text        String?
+  created_at          DateTime             @default(now())
+  attachments         LeadChatAttachment[]
+  mentions            LeadChatMention[]
+  replies             LeadChatMessage[]    @relation("LeadChatMessageReplies")
+  chatRoom            LeadChatRoom         @relation(fields: [chat_room_id], references: [id], onDelete: Cascade)
+  sender              UserMaster           @relation("LeadChatMessageSender", fields: [sender_id], references: [id], onDelete: Cascade)
+  repliedToMessage    LeadChatMessage?     @relation("LeadChatMessageReplies", fields: [reply_to_message_id], references: [id], onDelete: SetNull)
 }
 
 model LeadChatAttachment {

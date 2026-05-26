@@ -9,6 +9,32 @@ import {
 import fs from "node:fs/promises";
 
 export class ChatService {
+  private static mapReplyPreview(
+    row:
+      | {
+          id: number;
+          sender_id: number;
+          message_text: string | null;
+          sender: { user_name: string | null };
+          attachments: Array<{
+            document: { doc_og_name: string };
+          }>;
+        }
+      | null
+      | undefined,
+  ) {
+    if (!row) return null;
+
+    return {
+      id: row.id,
+      sender_id: row.sender_id,
+      sender_name: row.sender?.user_name ?? "Unknown",
+      message_text: row.message_text,
+      attachment_name: row.attachments[0]?.document?.doc_og_name ?? null,
+      attachment_count: row.attachments.length,
+    };
+  }
+
   private static async resolveChatMemberIds(
     tx: Parameters<Parameters<typeof prisma.$transaction>[0]>[0],
     params: {
@@ -215,6 +241,7 @@ export class ChatService {
     messageText?: string;
     files?: Express.Multer.File[];
     mentionUserIds?: number[];
+    replyToMessageId?: number;
     clientBaseUrl?: string;
   }) {
     const {
@@ -224,6 +251,7 @@ export class ChatService {
       messageText,
       files,
       mentionUserIds,
+      replyToMessageId,
       clientBaseUrl,
     } = params;
   
@@ -283,6 +311,13 @@ export class ChatService {
         (error as any).statusCode = 404;
         throw error;
       }
+
+      let repliedToMessage:
+        | {
+            id: number;
+            chat_room_id: number;
+          }
+        | null = null;
   
       let chatRoom = await tx.leadChatRoom.findFirst({
         where: { lead_id: leadId, vendor_id: vendorId },
@@ -313,11 +348,31 @@ export class ChatService {
           });
         }
       }
+
+      if (replyToMessageId) {
+        repliedToMessage = await tx.leadChatMessage.findFirst({
+          where: {
+            id: replyToMessageId,
+            chat_room_id: chatRoom.id,
+          },
+          select: {
+            id: true,
+            chat_room_id: true,
+          },
+        });
+
+        if (!repliedToMessage) {
+          const error = new Error("Reply target message not found in this chat");
+          (error as any).statusCode = 400;
+          throw error;
+        }
+      }
   
       const message = await tx.leadChatMessage.create({
         data: {
           chat_room_id: chatRoom.id,
           sender_id: userId,
+          reply_to_message_id: repliedToMessage?.id ?? null,
           message_type: uploadedFiles.length ? "attachment" : "text",
           message_text: trimmedText || null,
         },
@@ -325,9 +380,31 @@ export class ChatService {
           id: true,
           chat_room_id: true,
           sender_id: true,
+          reply_to_message_id: true,
           message_type: true,
           message_text: true,
           created_at: true,
+          repliedToMessage: {
+            select: {
+              id: true,
+              sender_id: true,
+              message_text: true,
+              sender: {
+                select: {
+                  user_name: true,
+                },
+              },
+              attachments: {
+                include: {
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
   
@@ -386,6 +463,7 @@ export class ChatService {
       return {
         ...message,
         attachments,
+        reply_to: ChatService.mapReplyPreview(message.repliedToMessage),
       };
     });
 
@@ -510,6 +588,24 @@ export class ChatService {
               document: true,
             },
           },
+          repliedToMessage: {
+            include: {
+              sender: {
+                select: {
+                  user_name: true,
+                },
+              },
+              attachments: {
+                include: {
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
           mentions: {
             include: {
               mentionedUser: {
@@ -547,10 +643,12 @@ export class ChatService {
           id: row.id,
           chat_room_id: row.chat_room_id,
           sender_id: row.sender_id,
+          reply_to_message_id: row.reply_to_message_id,
           message_type: row.message_type,
           message_text: row.message_text,
           created_at: row.created_at,
           attachments,
+          reply_to: ChatService.mapReplyPreview(row.repliedToMessage),
           mentions: row.mentions.map((mention) => ({
             id: mention.mentionedUser.id,
             user_name: mention.mentionedUser.user_name,

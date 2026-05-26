@@ -114,6 +114,13 @@ export class ChatController {
       const vendorId = parseInt(req.body.vendor_id, 10);
       const userId = parseInt(req.body.user_id, 10);
       const messageText = String(req.body.message_text || "").trim();
+      const replyToMessageIdRaw = req.body.reply_to_message_id;
+      const replyToMessageId =
+        typeof replyToMessageIdRaw === "string" && replyToMessageIdRaw.trim()
+          ? parseInt(replyToMessageIdRaw, 10)
+          : typeof replyToMessageIdRaw === "number"
+            ? replyToMessageIdRaw
+            : undefined;
       const files = (req.files || []) as Express.Multer.File[];
       const mentionRaw = req.body.mention_user_ids;
       const mentionUserIds = Array.isArray(mentionRaw)
@@ -126,6 +133,16 @@ export class ChatController {
         return res.status(400).json({
           success: false,
           message: "Invalid lead_id, vendor_id, or user_id",
+        });
+      }
+
+      if (
+        replyToMessageIdRaw !== undefined &&
+        (replyToMessageId === undefined || isNaN(replyToMessageId))
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid reply_to_message_id",
         });
       }
 
@@ -143,6 +160,7 @@ export class ChatController {
         messageText,
         files,
         mentionUserIds,
+        replyToMessageId,
         clientBaseUrl: ChatController.resolveClientBaseUrl(req),
       });
 
