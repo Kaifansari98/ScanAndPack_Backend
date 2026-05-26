@@ -333,12 +333,13 @@ export class LeadController {
         });
       }
 
-      if (files.length > 10) {
+      const maxFilesAllowed = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+      if (files.length > maxFilesAllowed) {
         logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
           success: false,
           error: "Too many files",
-          details: "Maximum 10 files allowed",
+          details: `Maximum ${maxFilesAllowed} files allowed`,
         });
       }
 
@@ -637,12 +638,13 @@ export class LeadController {
         });
       }
 
-      if (files.length > 10) {
+      const maxFilesAllowed = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+      if (files.length > maxFilesAllowed) {
         logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
           success: false,
           error: "Too many files",
-          details: "Maximum 10 files allowed",
+          details: `Maximum ${maxFilesAllowed} files allowed`,
         });
       }
 

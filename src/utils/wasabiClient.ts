@@ -1602,7 +1602,7 @@ export const uploadToWasabiLeadSitePhoto = async (
   contentType: string,
 ) => {
   // 1️⃣ File size check from environment variable (UPLOAD_MAX_SIZE_MB)
-  const maxFileSizeMB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400", 10);
+  const maxFileSizeMB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400");
   const stats = fs.statSync(filePath);
   const fileSizeInMB = stats.size / (1024 * 1024);
   if (fileSizeInMB > maxFileSizeMB) {
