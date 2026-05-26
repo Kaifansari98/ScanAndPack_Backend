@@ -94,7 +94,7 @@ leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
-const UPLOAD_MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+const UPLOAD_MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
 
 const handleMulterUpload = (uploadMiddleware: any) => {
   return (req: Request, res: Response, next: NextFunction) => {
