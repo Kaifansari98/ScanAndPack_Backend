@@ -110,8 +110,14 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
       vendor_id: true,
       franchise_name: true,
       franchise_code: true,
+      contact_person: true,
+      contact_email: true,
+      contact_number: true,
+      address: true,
+      pincode: true,
       is_head_office: true,
       status: true,
+      createdAt: true,
     },
   });
 };

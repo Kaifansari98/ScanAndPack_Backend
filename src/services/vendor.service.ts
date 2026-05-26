@@ -138,6 +138,63 @@ export const getAllVendors = async () => {
   });
 };
 
+export const getAllVendorsPaginated = async ({
+  page = 1,
+  limit = 20,
+  search,
+}: {
+  page?: number;
+  limit?: number;
+  search?: string;
+}) => {
+  const skip = (page - 1) * limit;
+
+  const where = search
+    ? {
+        OR: [
+          { vendor_name: { contains: search, mode: "insensitive" as const } },
+          { vendor_code: { contains: search, mode: "insensitive" as const } },
+          { primary_contact_email: { contains: search, mode: "insensitive" as const } },
+          { primary_contact_name: { contains: search, mode: "insensitive" as const } },
+        ],
+      }
+    : {};
+
+  const [data, totalCount] = await Promise.all([
+    prisma.vendorMaster.findMany({
+      where,
+      skip,
+      take: limit,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        vendor_name: true,
+        vendor_code: true,
+        primary_contact_email: true,
+        primary_contact_number: true,
+        primary_contact_name: true,
+        status: true,
+        is_inventory_enabled: true,
+        is_tracktrace_enabled: true,
+        is_this_vendor_is_custom_usertype_only: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    }),
+    prisma.vendorMaster.count({ where }),
+  ]);
+
+  return {
+    data,
+    pagination: {
+      totalCount,
+      currentPage: page,
+      pageSize: limit,
+      totalPages: Math.ceil(totalCount / limit),
+    },
+  };
+};
+
 export const getVendorUsers = async (vendorId: number) => {
   const users = await prisma.userMaster.findMany({
     where: {

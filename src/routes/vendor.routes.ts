@@ -13,13 +13,14 @@ import {
   onboardVendorController,
   seedVendorMastersController,
 } from "../controllers/vendor.controller";
+import { verifyToken } from "../middlewares/auth.middleware";
 
 const router = Router();
 
 router.post("/", createVendor);
 router.post("/onboard", onboardVendorController);
 router.post("/seed-masters", seedVendorMastersController);
-router.get("/", getAllVendors);
+router.get("/", verifyToken, getAllVendors);
 router.get("/vendor-users", getVendorUsersController);
 router.get("/status-types", getVendorStatusTypesController);
 router.get("/self-assign-task-types", getSelfAssignTaskTypesController);

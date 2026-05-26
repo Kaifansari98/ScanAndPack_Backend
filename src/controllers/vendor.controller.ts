@@ -11,9 +11,24 @@ export const createVendor = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllVendors = async (_req: Request, res: Response) => {
-  const vendors = await vendorService.getAllVendors();
-  res.json(vendors);
+export const getAllVendors = async (req: Request, res: Response) => {
+  try {
+    const page  = Math.max(1, Number(req.query.page)  || 1);
+    const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 20));
+    const search = req.query.search ? String(req.query.search).trim() : undefined;
+
+    const result = await vendorService.getAllVendorsPaginated({ page, limit, search });
+
+    return res.status(200).json({
+      success: true,
+      message: "Vendors fetched successfully",
+      data: result.data,
+      pagination: result.pagination,
+    });
+  } catch (err) {
+    console.error("Get All Vendors Error:", err);
+    return res.status(500).json({ success: false, message: "Internal server error" });
+  }
 };
 
 export const getVendorUsersController = async (req: Request, res: Response) => {

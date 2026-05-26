@@ -243,7 +243,7 @@ export const createLeadService = async (
           if (similarLead) {
             throw Object.assign(
               new Error(
-                "Similar lead already exists in the CRM, Hence it connot be created.",
+                "Similar lead already exists in the CRM, Hence it cannot be created.",
               ),
               {
                 statusCode: 409,
