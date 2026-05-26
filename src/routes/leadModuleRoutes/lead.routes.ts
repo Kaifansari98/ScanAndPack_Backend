@@ -244,6 +244,11 @@ leadsRouter.post(
   leadController.checkContactNumberExists
 );
 
+leadsRouter.post(
+  "/vendorId/:vendorId/check-similar-lead",
+  leadController.checkSimilarLeadExists
+);
+
 leadsRouter.get(
   "/vendorId/:vendorId/leadId/:leadId/check-site-supervisor-assigned",
   leadController.checkSiteSupervisorAssigned

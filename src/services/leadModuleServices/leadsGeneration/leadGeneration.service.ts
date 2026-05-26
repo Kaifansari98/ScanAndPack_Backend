@@ -28,7 +28,7 @@ import { generateLeadCode } from "../../../utils/generateLeadCode";
 import { logDbError } from "../../../utils/prismaErrorLogger";
 import { NotificationService } from "../../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
-import { NotificationType } from "../../../prisma/generated";
+import { NotificationType, Prisma } from "../../../prisma/generated";
 import { resolveLeadStagePath } from "./leadActivityStatus.service";
 import {
   sendLeadAssignedEmail,
@@ -37,6 +37,85 @@ import {
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+
+type TxClient = Prisma.TransactionClient | typeof prisma;
+
+const buildSortedNumberSignature = (values: number[]) =>
+  [...values].sort((a, b) => a - b).join(",");
+
+const toLeadLookupPayload = (lead: {
+  id: number;
+  lead_code: string | null;
+  firstname: string | null;
+  lastname: string | null;
+}) => ({
+  lead_id: lead.id,
+  lead_code: lead.lead_code,
+  lead_name: `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim(),
+});
+
+const findSimilarLeadByContactAndProducts = async (
+  db: TxClient,
+  vendor_id: number,
+  payload: {
+    contact_no: string;
+    product_types: number[];
+    product_structures: number[];
+  },
+) => {
+  const { contact_no, product_types, product_structures } = payload;
+
+  if (!contact_no || product_types.length === 0 || product_structures.length === 0) {
+    return null;
+  }
+
+  const expectedProductTypeSignature = buildSortedNumberSignature(product_types);
+  const expectedProductStructureSignature = buildSortedNumberSignature(
+    product_structures,
+  );
+
+  const existingLeads = await db.leadMaster.findMany({
+    where: {
+      vendor_id,
+      contact_no,
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      lead_code: true,
+      firstname: true,
+      lastname: true,
+      productMappings: {
+        select: {
+          product_type_id: true,
+        },
+      },
+      leadProductStructureMapping: {
+        select: {
+          product_structure_id: true,
+        },
+      },
+    },
+  });
+
+  return (
+    existingLeads.find((lead) => {
+      const leadProductTypeSignature = buildSortedNumberSignature(
+        lead.productMappings.map((mapping) => mapping.product_type_id),
+      );
+      const leadProductStructureSignature = buildSortedNumberSignature(
+        lead.leadProductStructureMapping.map(
+          (mapping) => mapping.product_structure_id,
+        ),
+      );
+
+      return (
+        leadProductTypeSignature === expectedProductTypeSignature &&
+        leadProductStructureSignature === expectedProductStructureSignature
+      );
+    }) ?? null
+  );
+};
 
 type EditTaskISMInput = {
   lead_id: number;
@@ -149,6 +228,31 @@ export const createLeadService = async (
         if (!franchise) {
           throw new Error("Invalid franchise_id for the given vendor_id.");
         }
+
+        if (!payload.is_draft) {
+          const similarLead = await findSimilarLeadByContactAndProducts(
+            tx,
+            vendor_id,
+            {
+              contact_no,
+              product_types,
+              product_structures,
+            },
+          );
+
+          if (similarLead) {
+            throw Object.assign(
+              new Error(
+                "Similar lead already exists in the CRM, Hence it connot be created.",
+              ),
+              {
+                statusCode: 409,
+                lead: toLeadLookupPayload(similarLead),
+              },
+            );
+          }
+        }
+
         // 1. AccountMaster (reuse if same phone/email exists for this vendor)
         const matchConditions: Array<Record<string, string>> = [];
         const normalizedEmail = email?.trim();
@@ -1907,6 +2011,55 @@ export const isContactOrEmailExists = async (
           }`.trim(),
         }
       : null,
+  };
+};
+
+export const isSimilarLeadExists = async (
+  vendor_id: number,
+  payload: {
+    phone_number?: string;
+    product_types?: number[];
+    product_structures?: number[];
+  },
+) => {
+  const phone_number = payload.phone_number?.trim() || "";
+  const product_types = (payload.product_types || []).filter((value) =>
+    Number.isFinite(value),
+  );
+  const product_structures = (payload.product_structures || []).filter((value) =>
+    Number.isFinite(value),
+  );
+
+  if (!phone_number) {
+    throw Object.assign(new Error("phone_number is required"), {
+      statusCode: 400,
+    });
+  }
+
+  if (product_types.length === 0) {
+    throw Object.assign(new Error("At least one product_type is required"), {
+      statusCode: 400,
+    });
+  }
+
+  if (product_structures.length === 0) {
+    throw Object.assign(
+      new Error("At least one product_structure is required"),
+      {
+        statusCode: 400,
+      },
+    );
+  }
+
+  const existingLead = await findSimilarLeadByContactAndProducts(prisma, vendor_id, {
+    contact_no: phone_number,
+    product_types,
+    product_structures,
+  });
+
+  return {
+    exists: Boolean(existingLead),
+    lead: existingLead ? toLeadLookupPayload(existingLead) : null,
   };
 };
 

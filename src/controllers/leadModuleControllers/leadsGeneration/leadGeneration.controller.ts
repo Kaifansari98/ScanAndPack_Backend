@@ -15,6 +15,7 @@ import {
   updateLeadService,
   verifyUserTokenService,
   isContactOrEmailExists,
+  isSimilarLeadExists,
   uploadMoreSitePhotosService,
   checkSiteSupervisorAssigned,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
@@ -2464,6 +2465,42 @@ export class LeadController {
       logger.error("[CONTROLLER] checkContactNumberExists error", error);
       return res
         .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  checkSimilarLeadExists = async (req: Request, res: Response) => {
+    try {
+      const vendor_id = Number(req.params.vendorId);
+      const { phone_number } = req.body || {};
+      const product_types = Array.isArray(req.body?.product_types)
+        ? req.body.product_types.map((value: string | number) => Number(value))
+        : [];
+      const product_structures = Array.isArray(req.body?.product_structures)
+        ? req.body.product_structures.map((value: string | number) =>
+            Number(value),
+          )
+        : [];
+
+      if (!vendor_id) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("vendorId is required", 400));
+      }
+
+      const result = await isSimilarLeadExists(vendor_id, {
+        phone_number,
+        product_types,
+        product_structures,
+      });
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Similar lead lookup completed"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] checkSimilarLeadExists error", error);
+      return res
+        .status(error.statusCode || 500)
         .json(ApiResponse.error(error.message || "Internal server error"));
     }
   };
