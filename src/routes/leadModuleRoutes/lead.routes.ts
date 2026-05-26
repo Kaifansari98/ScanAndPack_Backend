@@ -1,4 +1,5 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
+import multer from "multer";
 import {
   createProductType,
   fetchAllProductTypes,
@@ -93,15 +94,37 @@ leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
+const UPLOAD_MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+
+const handleMulterUpload = (uploadMiddleware: any) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    uploadMiddleware(req, res, (err: any) => {
+      if (err instanceof multer.MulterError) {
+        if (err.code === "LIMIT_FILE_SIZE") {
+          return res.status(400).json({
+            success: false,
+            error: "File size limit exceeded. Maximum allowed size is " + (process.env.UPLOAD_MAX_SIZE_MB || "400") + "MB.",
+            code: err.code,
+          });
+        }
+        return res.status(400).json({ success: false, error: err.message, code: err.code });
+      } else if (err) {
+        return res.status(500).json({ success: false, error: err.message });
+      }
+      next();
+    });
+  };
+};
+
 leadsRouter.post(
   "/create",
-  uploadLeadSitePhotos.array("documents", 10),
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", UPLOAD_MAX_FILES)),
   leadController.createLead
 );
 
 leadsRouter.post(
   "/upload-more-site-photos",
-  uploadLeadSitePhotos.array("documents", 10),
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", UPLOAD_MAX_FILES)),
   leadController.uploadMoreSitePhotos
 );
 

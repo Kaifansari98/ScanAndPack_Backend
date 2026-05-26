@@ -10,6 +10,7 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 import { sanitizeFilename } from "./sanitizeFilename";
+import { prisma } from "../prisma/client";
 
 console.log("[DEBUG] WASABI_ENDPOINT:", process.env.WASABI_ENDPOINT);
 
@@ -1243,6 +1244,9 @@ export const uploadChatAttachments = multer({
   },
 });
 
+const UPLOAD_MAX_SIZE_MB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400", 10);
+const UPLOAD_MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+
 export const uploadLeadSitePhotos = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
@@ -1255,8 +1259,8 @@ export const uploadLeadSitePhotos = multer({
     },
   }),
   limits: {
-    fileSize: 200 * 1024 * 1024, // 200 MB
-    files: 10,
+    fileSize: UPLOAD_MAX_SIZE_MB * 1024 * 1024,
+    files: UPLOAD_MAX_FILES,
   },
 });
 
@@ -1601,6 +1605,36 @@ export const uploadToWasabiLeadSitePhoto = async (
   originalName: string,
   contentType: string,
 ) => {
+  // 1️⃣ File size check from environment variable (UPLOAD_MAX_SIZE_MB)
+  const maxFileSizeMB = parseInt(process.env.UPLOAD_MAX_SIZE_MB || "400", 10);
+  const stats = fs.statSync(filePath);
+  const fileSizeInMB = stats.size / (1024 * 1024);
+  if (fileSizeInMB > maxFileSizeMB) {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+    throw new Error(`File size exceeds the maximum limit of ${maxFileSizeMB} MB`);
+  }
+
+  // 2️⃣ Max files count check from environment variable (UPLOAD_MAX_FILES)
+  const maxFiles = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+  const currentFilesCount = await prisma.leadDocuments.count({
+    where: {
+      lead_id: leadId,
+      deleted_at: null,
+      documentType: {
+        tag: "Type 1",
+      },
+    },
+  });
+
+  if (currentFilesCount >= maxFiles) {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+    throw new Error(`Maximum files upload limit of ${maxFiles} reached for this lead`);
+  }
+
   const ext = originalName.split(".").pop();
   const sysName = `site-photos/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
