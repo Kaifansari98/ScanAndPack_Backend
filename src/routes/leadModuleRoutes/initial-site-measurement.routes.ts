@@ -220,20 +220,16 @@ router.post(
 
 router.put(
   "/:paymentId",
-  handleMulterUpload(
-    memoryUpload.fields([
-      { name: "current_site_photos" },
-      { name: "payment_detail_photos" },
-    ])
-  ),
+  memoryUpload.fields([
+    { name: "current_site_photos", maxCount: 10 },
+    { name: "payment_detail_photos", maxCount: 10 },
+  ]),
   paymentUploadController.updatePaymentUpload
 );
 
 router.put(
   "/documents/:documentId/replace-pdf",
-  handleMulterUpload(
-    memoryUpload.fields([{ name: "upload_pdf" }])
-  ),
+  memoryUpload.fields([{ name: "upload_pdf", maxCount: 1 }]),
   paymentUploadController.replacePdfDocument
 );
 
