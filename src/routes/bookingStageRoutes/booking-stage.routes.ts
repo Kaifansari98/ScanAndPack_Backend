@@ -4,22 +4,26 @@ import {
   uploadCSPBookingFiles,
 } from "../../middlewares/uploadWasabi";
 import { BookingStageController } from "../../controllers/leadModuleControllers/bookingStage/bookingStage.controller";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 const bookingStageController = new BookingStageController();
 const bookingStageRouter = Router();
 
 bookingStageRouter.post(
   "/onboard",
-  uploadBookingStageFiles.fields([
-    { name: "final_documents", maxCount: 10 },
-    { name: "booking_payment_file", maxCount: 1 },
-  ]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([
+      { name: "final_documents", maxCount: 10 },
+    ])
+  ),
   bookingStageController.createBookingStage,
 );
 
 bookingStageRouter.post(
   "/add-more-files",
-  uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }])
+  ),
   bookingStageController.addBookingStageFiles,
 );
 
@@ -86,7 +90,9 @@ bookingStageRouter.put(
 
 bookingStageRouter.post(
   "/add-additional-payment",
-  uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }]),
+  handleMulterUpload(
+    uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }])
+  ),
   bookingStageController.addPayment,
 );
 
@@ -101,7 +107,7 @@ const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
 
 bookingStageRouter.post(
   "/upload-CSP-booking",
-  uploadFinalMeasurement,
+  handleMulterUpload(uploadFinalMeasurement),
   bookingStageController.uploadCSPBooking,
 );
 
