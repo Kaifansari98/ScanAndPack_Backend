@@ -14,13 +14,16 @@ function cleanupFiles(files: Express.Multer.File[]) {
   });
 }
 
-const getFlatFiles = (reqFiles: any): Express.Multer.File[] => {
+const getFlatFiles = (reqFiles: any, skipFields: string[] = []): Express.Multer.File[] => {
   if (!reqFiles) return [];
   if (Array.isArray(reqFiles)) {
     return reqFiles;
   }
   const flatList: Express.Multer.File[] = [];
-  Object.values(reqFiles).forEach((value) => {
+  Object.entries(reqFiles).forEach(([key, value]) => {
+    if (skipFields.includes(key) || key.toLowerCase().includes("payment")) {
+      return;
+    }
     if (Array.isArray(value)) {
       flatList.push(...value);
     }
@@ -28,10 +31,11 @@ const getFlatFiles = (reqFiles: any): Express.Multer.File[] => {
   return flatList;
 };
 
-export const handleMulterUpload = (uploadMiddleware: any) => {
+export const handleMulterUpload = (uploadMiddleware: any, options: { skipFields?: string[] } = {}) => {
   return (req: Request, res: Response, next: NextFunction) => {
     uploadMiddleware(req, res, (err: any) => {
-      const files = getFlatFiles(req.files);
+      const skipFields = options.skipFields || [];
+      const files = getFlatFiles(req.files, skipFields);
 
       try {
         // Multer built-in errors
