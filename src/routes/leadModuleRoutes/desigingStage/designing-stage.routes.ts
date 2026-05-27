@@ -33,7 +33,7 @@ DesigningStageRouter.get(
 
 DesigningStageRouter.post(
   "/upload-quotation",
-  handleMulterUpload(uploadDesignQuotationFiles.array("files", 10)), // file field in form-data
+  handleMulterUpload(uploadDesignQuotationFiles.array("files")), // file field in form-data
   (req, res) => DesigingStageController.upload(req, res),
 );
 
@@ -48,7 +48,7 @@ DesigningStageRouter.post(
 // POST /api/leads/designing-stage/add-meeting-docs
 DesigningStageRouter.post(
   "/add-meeting-docs",
-  handleMulterUpload(uploadMeetingDocs.array("files", 10)), // same multer setup
+  handleMulterUpload(uploadMeetingDocs.array("files")), // same multer setup
   (req, res) => DesigingStageController.addMeetingDocs(req, res),
 );
 
@@ -62,7 +62,7 @@ DesigningStageRouter.get(
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
   "/upload-designs",
-  handleMulterUpload(uploadDesigns.array("files", 10)), // multiple files
+  handleMulterUpload(uploadDesigns.array("files")), // multiple files
   (req, res) => DesigingStageController.uploadDesigns(req, res),
 );
 
