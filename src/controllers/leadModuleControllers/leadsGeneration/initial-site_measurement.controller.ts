@@ -354,29 +354,7 @@ export class PaymentUploadController {
         "image/avif",
         "image/svg+xml",
       ];
-      const validImageExtensions = [
-        ".jpg",
-        ".jpeg",
-        ".png",
-        ".gif",
-        ".webp",
-        ".bmp",
-        ".tif",
-        ".tiff",
-        ".heic",
-        ".heif",
-        ".avif",
-        ".svg",
-        ".jfif",
-      ];
-      const isValidImage = (file: Express.Multer.File) => {
-        const ext = path.extname(file.originalname || "").toLowerCase();
-        return (
-          file.mimetype.startsWith("image/") ||
-          validImageTypes.includes(file.mimetype) ||
-          validImageExtensions.includes(ext)
-        );
-      };
+
       for (const photo of sitePhotos) {
         if (!validImageTypes.includes(photo.mimetype)) {
           res.status(400).json({
