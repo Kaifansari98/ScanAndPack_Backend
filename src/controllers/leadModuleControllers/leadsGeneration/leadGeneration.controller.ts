@@ -2476,11 +2476,6 @@ export class LeadController {
       const product_types = Array.isArray(req.body?.product_types)
         ? req.body.product_types.map((value: string | number) => Number(value))
         : [];
-      const product_structures = Array.isArray(req.body?.product_structures)
-        ? req.body.product_structures.map((value: string | number) =>
-            Number(value),
-          )
-        : [];
 
       if (!vendor_id) {
         return res
@@ -2491,7 +2486,6 @@ export class LeadController {
       const result = await isSimilarLeadExists(vendor_id, {
         phone_number,
         product_types,
-        product_structures,
       });
 
       return res

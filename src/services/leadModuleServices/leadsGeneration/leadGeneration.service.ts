@@ -60,19 +60,15 @@ const findSimilarLeadByContactAndProducts = async (
   payload: {
     contact_no: string;
     product_types: number[];
-    product_structures: number[];
   },
 ) => {
-  const { contact_no, product_types, product_structures } = payload;
+  const { contact_no, product_types } = payload;
 
-  if (!contact_no || product_types.length === 0 || product_structures.length === 0) {
+  if (!contact_no || product_types.length === 0) {
     return null;
   }
 
   const expectedProductTypeSignature = buildSortedNumberSignature(product_types);
-  const expectedProductStructureSignature = buildSortedNumberSignature(
-    product_structures,
-  );
 
   const existingLeads = await db.leadMaster.findMany({
     where: {
@@ -90,11 +86,6 @@ const findSimilarLeadByContactAndProducts = async (
           product_type_id: true,
         },
       },
-      leadProductStructureMapping: {
-        select: {
-          product_structure_id: true,
-        },
-      },
     },
   });
 
@@ -103,16 +94,8 @@ const findSimilarLeadByContactAndProducts = async (
       const leadProductTypeSignature = buildSortedNumberSignature(
         lead.productMappings.map((mapping) => mapping.product_type_id),
       );
-      const leadProductStructureSignature = buildSortedNumberSignature(
-        lead.leadProductStructureMapping.map(
-          (mapping) => mapping.product_structure_id,
-        ),
-      );
 
-      return (
-        leadProductTypeSignature === expectedProductTypeSignature &&
-        leadProductStructureSignature === expectedProductStructureSignature
-      );
+      return leadProductTypeSignature === expectedProductTypeSignature;
     }) ?? null
   );
 };
@@ -236,7 +219,6 @@ export const createLeadService = async (
             {
               contact_no,
               product_types,
-              product_structures,
             },
           );
 
@@ -2075,14 +2057,10 @@ export const isSimilarLeadExists = async (
   payload: {
     phone_number?: string;
     product_types?: number[];
-    product_structures?: number[];
   },
 ) => {
   const phone_number = payload.phone_number?.trim() || "";
   const product_types = (payload.product_types || []).filter((value) =>
-    Number.isFinite(value),
-  );
-  const product_structures = (payload.product_structures || []).filter((value) =>
     Number.isFinite(value),
   );
 
@@ -2098,19 +2076,9 @@ export const isSimilarLeadExists = async (
     });
   }
 
-  if (product_structures.length === 0) {
-    throw Object.assign(
-      new Error("At least one product_structure is required"),
-      {
-        statusCode: 400,
-      },
-    );
-  }
-
   const existingLead = await findSimilarLeadByContactAndProducts(prisma, vendor_id, {
     contact_no: phone_number,
     product_types,
-    product_structures,
   });
 
   return {
