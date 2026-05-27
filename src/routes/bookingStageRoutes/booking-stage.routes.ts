@@ -14,6 +14,7 @@ bookingStageRouter.post(
   handleMulterUpload(
     uploadBookingStageFiles.fields([
       { name: "final_documents" },
+      { name: "booking_payment_file" },
     ])
   ),
   bookingStageController.createBookingStage,
