@@ -90,7 +90,7 @@ DesigningStageRouter.get(
 // Form-data: lead_id, account_id, vendor_id, type, desc, created_by
 DesigningStageRouter.post(
   "/design-selection",
-  upload.none(), // Handle form-data without files
+  handleMulterUpload(upload.none()), // Handle form-data without files
   createDesignSelectionValidation,
   DesigingStageController.createDesignSelection,
 );
@@ -119,7 +119,7 @@ DesigningStageRouter.get(
 // Form-data: type, desc, updated_by
 DesigningStageRouter.put(
   "/design-selection/:id",
-  upload.none(), // Handle form-data without files
+  handleMulterUpload(upload.none()), // Handle form-data without files
   updateDesignSelectionValidation,
   DesigingStageController.updateDesignSelection,
 );
