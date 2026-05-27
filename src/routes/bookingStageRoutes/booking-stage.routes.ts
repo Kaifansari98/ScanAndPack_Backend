@@ -13,7 +13,7 @@ bookingStageRouter.post(
   "/onboard",
   handleMulterUpload(
     uploadBookingStageFiles.fields([
-      { name: "final_documents", maxCount: 10 },
+      { name: "final_documents" },
     ])
   ),
   bookingStageController.createBookingStage,
@@ -22,7 +22,7 @@ bookingStageRouter.post(
 bookingStageRouter.post(
   "/add-more-files",
   handleMulterUpload(
-    uploadBookingStageFiles.fields([{ name: "final_documents", maxCount: 10 }])
+    uploadBookingStageFiles.fields([{ name: "final_documents" }])
   ),
   bookingStageController.addBookingStageFiles,
 );
@@ -91,7 +91,7 @@ bookingStageRouter.put(
 bookingStageRouter.post(
   "/add-additional-payment",
   handleMulterUpload(
-    uploadBookingStageFiles.fields([{ name: "payment_file", maxCount: 1 }])
+    uploadBookingStageFiles.fields([{ name: "payment_file" }])
   ),
   bookingStageController.addPayment,
 );
@@ -102,7 +102,7 @@ bookingStageRouter.get(
 );
 
 const uploadFinalMeasurement = uploadCSPBookingFiles.fields([
-  { name: "current_site_photos", maxCount: 10 },
+  { name: "current_site_photos" },
 ]);
 
 bookingStageRouter.post(
