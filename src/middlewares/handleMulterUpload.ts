@@ -14,10 +14,24 @@ function cleanupFiles(files: Express.Multer.File[]) {
   });
 }
 
+const getFlatFiles = (reqFiles: any): Express.Multer.File[] => {
+  if (!reqFiles) return [];
+  if (Array.isArray(reqFiles)) {
+    return reqFiles;
+  }
+  const flatList: Express.Multer.File[] = [];
+  Object.values(reqFiles).forEach((value) => {
+    if (Array.isArray(value)) {
+      flatList.push(...value);
+    }
+  });
+  return flatList;
+};
+
 export const handleMulterUpload = (uploadMiddleware: any) => {
   return (req: Request, res: Response, next: NextFunction) => {
     uploadMiddleware(req, res, (err: any) => {
-      const files = (req.files as Express.Multer.File[]) || [];
+      const files = getFlatFiles(req.files);
 
       try {
         // Multer built-in errors

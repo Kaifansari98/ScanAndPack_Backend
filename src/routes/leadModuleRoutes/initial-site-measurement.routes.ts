@@ -4,13 +4,13 @@ import path from "path";
 import { PaymentUploadController } from "../../controllers/leadModuleControllers/leadsGeneration/initial-site_measurement.controller";
 import {
   validatePaymentUpload,
-  handleMulterError,
   validateFiles,
   validateGetRequest,
   validatePaginationRequest,
   handleGetErrors,
 } from "../../middlewares/initial-site-measurement.middleware";
 import { uploadInitialSiteMeasurement } from "../../utils/wasabiClient";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 const router = Router();
 const paymentUploadController = new PaymentUploadController();
@@ -86,8 +86,7 @@ const memoryUploadFields = memoryUpload.fields([
  */
 router.post(
   "/payment-upload",
-  diskUploadFields,
-  handleMulterError,
+  handleMulterUpload(diskUploadFields),
   validatePaymentUpload,
   validateFiles,
   paymentUploadController.createPaymentUpload
@@ -95,8 +94,7 @@ router.post(
 
 router.post(
   "/booking-done-ism/upload",
-  diskUploadFields,
-  handleMulterError,
+  handleMulterUpload(diskUploadFields),
   validatePaymentUpload,
   validateFiles,
   paymentUploadController.createBookingDoneIsmUpload
