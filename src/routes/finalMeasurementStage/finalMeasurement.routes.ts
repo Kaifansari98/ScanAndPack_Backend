@@ -1,17 +1,17 @@
 import { Router } from "express";
 import { FinalMeasurementController } from "../../controllers/leadModuleControllers/finalMeasurement/finalMeasurement.controller";
 import { uploadFinalMeasurement } from "../../middlewares/uploadWasabi"; // assuming you already have multer setup
-
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 const finalMeasurementRouter = Router();
 const finalMeasurementController = new FinalMeasurementController();
 
 finalMeasurementRouter.post(
     "/onboard",
-    uploadFinalMeasurement.fields([
-        { name: "final_measurement_doc", maxCount: 20 },
-        { name: "site_photos", maxCount: 20 },
-        { name: "site_photos[]", maxCount: 20 },
-    ]),
+    handleMulterUpload(uploadFinalMeasurement.fields([
+        { name: "final_measurement_doc" },
+        { name: "site_photos" },
+        { name: "site_photos[]" },
+    ])),
     finalMeasurementController.createFinalMeasurementStage
 );
 
@@ -43,26 +43,26 @@ finalMeasurementRouter.put(
 
 finalMeasurementRouter.post(
     "/add-files",
-    uploadFinalMeasurement.fields([
-        { name: "site_photos", maxCount: 20 },
-        { name: "site_photos[]", maxCount: 20 },
-    ]),
+    handleMulterUpload(uploadFinalMeasurement.fields([
+        { name: "site_photos" },
+        { name: "site_photos[]" },
+    ])),
     finalMeasurementController.addMoreFinalMeasurementFiles
 );
 
 
 finalMeasurementRouter.post(
     "/add-site-photos",
-    uploadFinalMeasurement.fields([
-        { name: "site_photos", maxCount: 20 },
-        { name: "site_photos[]", maxCount: 20 },
-    ]),
+    handleMulterUpload(uploadFinalMeasurement.fields([
+        { name: "site_photos" },
+        { name: "site_photos[]" },
+    ])),
     finalMeasurementController.addMoreFinalMeasurementSitePhotos
 );
 
 finalMeasurementRouter.post(
     "/add-final-measurement-docs",
-    uploadFinalMeasurement.fields([{ name: "final_measurement_doc", maxCount: 20 }]),
+    handleMulterUpload(uploadFinalMeasurement.fields([{ name: "final_measurement_doc" }])),
     finalMeasurementController.addMoreFinalMeasurementDocs
 );
 

@@ -1,15 +1,16 @@
 import { Router } from "express";
 import { ClientDocumentationController } from "../../controllers/leadModuleControllers/clientDocumentationStage/clientDocumentation.controller";
 import { uploadClientDocumentation } from "../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 const ClientDocumentationRouter = Router();
 
 ClientDocumentationRouter.post(
   "/submit-documents",
-  uploadClientDocumentation.fields([
-    { name: "client_documentations_ppt", maxCount: 10 },
-    { name: "client_documentations_pytha", maxCount: 10 },
-  ]),
+  handleMulterUpload(uploadClientDocumentation.fields([
+    { name: "client_documentations_ppt" },
+    { name: "client_documentations_pytha" },
+  ])),
   ClientDocumentationController.create,
 );
 
@@ -21,10 +22,10 @@ ClientDocumentationRouter.get(
 
 ClientDocumentationRouter.post(
   "/add-documents",
-  uploadClientDocumentation.fields([
-    { name: "client_documentations_ppt", maxCount: 10 },
-    { name: "client_documentations_pytha", maxCount: 10 },
-  ]),
+  handleMulterUpload(uploadClientDocumentation.fields([
+    { name: "client_documentations_ppt" },
+    { name: "client_documentations_pytha" },
+  ])),
   ClientDocumentationController.addMoreDocuments,
 );
 

@@ -5,6 +5,7 @@ import {
   uploadOrderLoginPoFiles,
   uploadProductionFiles,
 } from "../../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const upload = multer();
 const orderLoginRoutes = Router();
@@ -57,7 +58,7 @@ orderLoginRoutes.get(
 
 orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-production-files",
-  uploadProductionFiles.array("files", 10), // ✅ accept up to 10 files
+  handleMulterUpload(uploadProductionFiles.array("files")), // ✅ accept multiple files
   controller.uploadProductionFiles,
 );
 
@@ -84,7 +85,7 @@ orderLoginRoutes.get(
 
 orderLoginRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/order-login-id/:orderLoginId/upload-po-files",
-  uploadOrderLoginPoFiles.array("files", 10),
+  handleMulterUpload(uploadOrderLoginPoFiles.array("files")),
   controller.uploadOrderLoginPoFile,
 );
 

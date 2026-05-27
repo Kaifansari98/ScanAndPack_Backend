@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 import { ClientApprovalController } from "../../controllers/leadModuleControllers/clientApprovalStage/clientApproval.controller";
 import { uploadClientApproval } from "../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 
 // Initialize Router
 const clientApprovalRouter = Router();
@@ -10,17 +11,17 @@ const clientApprovalRouter = Router();
 // Endpoint: POST /client-approval/vendor/:vendorId/lead/:leadId
 clientApprovalRouter.post(
   "/vendorId/:vendorId/leadId/:leadId",
-  uploadClientApproval.fields([
-    { name: "approvalScreenshots", maxCount: 10 }, // multiple screenshots allowed
-    { name: "payment_files", maxCount: 5 }, // multiple payment proof files allowed
-  ]),
+  handleMulterUpload(uploadClientApproval.fields([
+    { name: "approvalScreenshots" }, // multiple screenshots allowed
+    { name: "payment_files" }, // multiple payment proof files allowed
+  ])),
   ClientApprovalController.submitApproval
 );
 
 // Upload more client approval screenshots
 clientApprovalRouter.post(
   "/add-documents",
-  uploadClientApproval.fields([{ name: "documents", maxCount: 10 }]),
+  handleMulterUpload(uploadClientApproval.fields([{ name: "documents" }])),
   ClientApprovalController.addApprovalDocuments
 );
 
