@@ -135,10 +135,12 @@ export const isLeadComplete = (lead: any): boolean => {
   const requiredFields = {
     firstname: lead.firstname,
     lastname: lead.lastname,
+    country_code: lead.country_code,
     contact_no: lead.contact_no,
     site_type_id: lead.site_type_id,
     site_address: lead.site_address,
     source_id: lead.source_id,
+    priority: lead.priority,
   };
 
   // Check if all required fields are filled

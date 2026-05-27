@@ -1802,97 +1802,153 @@ export const updateLeadService = async (
       }
     }
 
-    // 10. LeadDetailedLogs entry (audit trail)
-    const changes: string[] = [];
-    const fromValues: string[] = [];
-    const toValues: string[] = [];
-
-    // Helper to compare and collect changes
-    const collectChange = (label: string, oldVal: any, newVal: any) => {
-      if (newVal !== undefined && newVal !== oldVal) {
-        changes.push(label);
-        fromValues.push(oldVal ?? "null");
-        toValues.push(newVal ?? "null");
+    const normalizeLogValue = (value: unknown): string | null => {
+      if (value === null || value === undefined) return null;
+      if (value instanceof Date) {
+        return value.toISOString().split("T")[0];
       }
+
+      const stringValue = String(value).trim();
+      return stringValue.length > 0 ? stringValue : null;
     };
 
-    // Compare important fields
-    collectChange(
-      "Name",
-      `${existingLead.firstname} ${existingLead.lastname}`,
-      `${updatedLead.firstname} ${updatedLead.lastname}`,
+    const [oldSiteType, newSiteType, oldSource, newSource] =
+      await Promise.all([
+        existingLead.site_type_id
+          ? tx.siteTypeMaster.findFirst({
+              where: {
+                id: existingLead.site_type_id,
+                vendor_id,
+              },
+              select: { type: true },
+            })
+          : Promise.resolve(null),
+        updatedLead.site_type_id
+          ? tx.siteTypeMaster.findFirst({
+              where: {
+                id: updatedLead.site_type_id,
+                vendor_id,
+              },
+              select: { type: true },
+            })
+          : Promise.resolve(null),
+        existingLead.source_id
+          ? tx.sourceMaster.findFirst({
+              where: {
+                id: existingLead.source_id,
+                vendor_id,
+              },
+              select: { type: true },
+            })
+          : Promise.resolve(null),
+        updatedLead.source_id
+          ? tx.sourceMaster.findFirst({
+              where: {
+                id: updatedLead.source_id,
+                vendor_id,
+              },
+              select: { type: true },
+            })
+          : Promise.resolve(null),
+      ]);
+
+    const logEntries: string[] = [];
+    const pushChangeLog = (label: string, oldVal: unknown, newVal: unknown) => {
+      if (newVal === undefined) return;
+
+      const previousValue = normalizeLogValue(oldVal);
+      const nextValue = normalizeLogValue(newVal);
+
+      if (previousValue === nextValue) return;
+
+      if (!previousValue && nextValue) {
+        logEntries.push(`${label} has been added as "${nextValue}".`);
+        return;
+      }
+
+      if (previousValue && !nextValue) {
+        logEntries.push(`${label} has been cleared from "${previousValue}".`);
+        return;
+      }
+
+      logEntries.push(
+        `${label} has been updated from "${previousValue}" to "${nextValue}".`,
+      );
+    };
+
+    pushChangeLog("First Name", existingLead.firstname, updatedLead.firstname);
+    pushChangeLog("Last Name", existingLead.lastname, updatedLead.lastname);
+    pushChangeLog(
+      "Country Code",
+      existingLead.country_code,
+      updatedLead.country_code,
     );
-    collectChange("Email", existingLead.email, updatedLead.email);
-    collectChange(
+    pushChangeLog("Email", existingLead.email, updatedLead.email);
+    pushChangeLog(
       "Contact Number",
       existingLead.contact_no,
       updatedLead.contact_no,
     );
-    collectChange(
+    pushChangeLog(
       "Alternate Contact Number",
       existingLead.alt_contact_no,
       updatedLead.alt_contact_no,
     );
-    collectChange(
+    pushChangeLog(
+      "Site Type",
+      oldSiteType?.type ?? existingLead.site_type_id,
+      newSiteType?.type ?? updatedLead.site_type_id,
+    );
+    pushChangeLog(
+      "Source",
+      oldSource?.type ?? existingLead.source_id,
+      newSource?.type ?? updatedLead.source_id,
+    );
+    pushChangeLog("Priority", existingLead.priority, updatedLead.priority);
+    pushChangeLog(
       "Site Address",
       existingLead.site_address,
       updatedLead.site_address,
     );
-    collectChange(
+    pushChangeLog(
       "Site Map Link",
       existingLead.site_map_link,
       updatedLead.site_map_link,
     );
-    collectChange(
+    pushChangeLog(
       "Architect Name",
       existingLead.archetech_name,
       updatedLead.archetech_name,
     );
-    collectChange(
+    pushChangeLog(
       "Designer Remark",
       existingLead.designer_remark,
       updatedLead.designer_remark,
     );
-    collectChange(
+    pushChangeLog(
       "Initial Site Measurement Date",
-      existingLead.initial_site_measurement_date?.toISOString(),
-      updatedLead.initial_site_measurement_date?.toISOString(),
+      existingLead.initial_site_measurement_date,
+      updatedLead.initial_site_measurement_date,
     );
 
-    // Helper to join list with commas and "and" before the last item
-    const joinWithAnd = (arr: string[]): string => {
-      if (arr.length === 1) return arr[0];
-      if (arr.length === 2) return `${arr[0]} and ${arr[1]}`;
-      return `${arr.slice(0, -1).join(", ")} and ${arr[arr.length - 1]}`;
-    };
-
-    // Build dynamic message
-    let actionMessage = "Lead has been updated.";
-    if (changes.length > 0) {
-      const fieldList = joinWithAnd(changes);
-      const fromList = joinWithAnd(fromValues.map((v) => `"${v}"`));
-      const toList = joinWithAnd(toValues.map((v) => `"${v}"`));
-
-      actionMessage = `${fieldList} ${
-        changes.length > 1 ? "have" : "has"
-      } been updated from ${fromList} to ${toList}.`;
+    for (const actionMessage of logEntries) {
+      await createLeadLog(tx, {
+        vendor_id,
+        lead_id: updatedLead.id,
+        account_id: updatedAccount.id,
+        action: actionMessage,
+        action_type: "UPDATE",
+        created_by: updated_by,
+        created_at: new Date(),
+      });
     }
 
-    // Insert into LeadDetailedLogs
-    await createLeadLog(tx, {
-      vendor_id,
-      lead_id: updatedLead.id,
-      account_id: updatedAccount.id,
-      action: actionMessage,
-      action_type: "UPDATE",
-      created_by: updated_by,
-      created_at: new Date(),
-    });
-
-    logger.info("✅ LeadDetailedLogs entry created for lead update", {
-      lead_id: updatedLead.id,
-      actionMessage,
-    });
+    if (logEntries.length > 0) {
+      logger.info("✅ LeadDetailedLogs entry created for lead update", {
+        lead_id: updatedLead.id,
+        actionMessages: logEntries,
+      });
+    }
 
     console.log("[INFO] Lead updated successfully:", {
       leadId,
