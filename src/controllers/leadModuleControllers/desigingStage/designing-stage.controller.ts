@@ -862,41 +862,53 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id; // ✅ derived safely
+          const vendor = await tx.vendorMaster.findUnique({
+            where: { id: Number(vendorId) },
+            select: { is_this_vendor_is_custom_usertype_only: true },
+          });
+          const useCustomVendorFlow =
+            vendor?.is_this_vendor_is_custom_usertype_only === true;
           const requestedInstanceIds = Array.isArray(rawInstanceIds)
             ? rawInstanceIds
             : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
               ? [rawInstanceIds]
               : [];
-          const parsedInstanceIds = [...new Set(
-            requestedInstanceIds
-              .map((value) => Number(value))
-              .filter((value) => Number.isFinite(value) && value > 0),
-          )];
+          const parsedInstanceIds = useCustomVendorFlow
+            ? [...new Set(
+                requestedInstanceIds
+                  .map((value) => Number(value))
+                  .filter((value) => Number.isFinite(value) && value > 0),
+              )]
+            : [];
 
-          const allLeadInstances = await tx.leadProductStructureInstance.findMany({
-            where: {
-              lead_id: Number(leadId),
-              vendor_id: Number(vendorId),
-              account_id: Number(accountId),
-            },
-            select: {
-              id: true,
-              title: true,
-              productStructure: {
-                select: { type: true },
-              },
-            },
-            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-          });
+          const allLeadInstances = useCustomVendorFlow
+            ? await tx.leadProductStructureInstance.findMany({
+                where: {
+                  lead_id: Number(leadId),
+                  vendor_id: Number(vendorId),
+                  account_id: Number(accountId),
+                },
+                select: {
+                  id: true,
+                  title: true,
+                  productStructure: {
+                    select: { type: true },
+                  },
+                },
+                orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+              })
+            : [];
 
-          const selectedInstances =
-            parsedInstanceIds.length > 0
+          const selectedInstances = useCustomVendorFlow
+            ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
                   parsedInstanceIds.includes(instance.id),
                 )
-              : allLeadInstances;
+              : allLeadInstances
+            : [];
 
           if (
+            useCustomVendorFlow &&
             parsedInstanceIds.length > 0 &&
             selectedInstances.length !== parsedInstanceIds.length
           ) {
@@ -916,64 +928,77 @@ export class DesigingStageController {
           }
 
           const newDocs: any[] = [];
-          const structureLabelSource =
-            selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
-          const uniqueStructureNames = [
-            ...new Set(
-              structureLabelSource
-                .map((instance) => instance.productStructure?.type || instance.title)
-                .filter(Boolean),
-            ),
-          ];
-          const structureSegment = sanitizeFilename(
-            uniqueStructureNames.length > 0
-              ? uniqueStructureNames.join("_")
-              : "General",
-          )
-            .replace(/_+/g, "_")
-            .slice(0, 80);
-          const clientNameSegment = sanitizeFilename(
-            `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
-          )
-            .replace(/_+/g, "_")
-            .slice(0, 50);
-          const now = new Date();
-          const dateSegment = [
-            now.getFullYear(),
-            String(now.getMonth() + 1).padStart(2, "0"),
-            String(now.getDate()).padStart(2, "0"),
-          ].join("-");
-          const existingDesignDocs = await tx.leadDocuments.findMany({
-            where: {
-              vendor_id: Number(vendorId),
-              lead_id: Number(leadId),
-              doc_type_id: designDocType.id,
-              is_deleted: false,
-            },
-            select: { doc_og_name: true },
-          });
-          let nextRevision =
-            existingDesignDocs.reduce((maxRevision, doc) => {
-              const match = doc.doc_og_name?.match(/^R(\d+)-/i);
-              const revision = match ? Number(match[1]) : -1;
-              return Number.isFinite(revision)
-                ? Math.max(maxRevision, revision)
-                : maxRevision;
-            }, -1) + 1;
+          let nextRevision = 0;
+          let clientNameSegment = "";
+          let structureSegment = "";
+          let dateSegment = "";
+          let instanceIdToPersist: number | null = null;
 
-          const instanceIdToPersist =
-            selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          if (useCustomVendorFlow) {
+            const structureLabelSource =
+              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+            const uniqueStructureNames = [
+              ...new Set(
+                structureLabelSource
+                  .map((instance) => instance.productStructure?.type || instance.title)
+                  .filter(Boolean),
+              ),
+            ];
+            structureSegment = sanitizeFilename(
+              uniqueStructureNames.length > 0
+                ? uniqueStructureNames.join("_")
+                : "General",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 80);
+            clientNameSegment = sanitizeFilename(
+              `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 50);
+            const now = new Date();
+            dateSegment = [
+              now.getFullYear(),
+              String(now.getMonth() + 1).padStart(2, "0"),
+              String(now.getDate()).padStart(2, "0"),
+            ].join("-");
+            const existingDesignDocs = await tx.leadDocuments.findMany({
+              where: {
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                doc_type_id: designDocType.id,
+                is_deleted: false,
+              },
+              select: { doc_og_name: true },
+            });
+            nextRevision =
+              existingDesignDocs.reduce((maxRevision, doc) => {
+                const match = doc.doc_og_name?.match(/^R(\d+)-/i);
+                const revision = match ? Number(match[1]) : -1;
+                return Number.isFinite(revision)
+                  ? Math.max(maxRevision, revision)
+                  : maxRevision;
+              }, -1) + 1;
+
+            instanceIdToPersist =
+              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          }
 
           // 3️⃣ DB insert
           for (const file of files) {
-            const extension = path.extname(file.originalname || "");
-            const renamedOriginalName = `R${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
-            nextRevision += 1;
+            const finalOriginalName = useCustomVendorFlow
+              ? (() => {
+                  const extension = path.extname(file.originalname || "");
+                  const renamedOriginalName = `R${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  nextRevision += 1;
+                  return renamedOriginalName;
+                })()
+              : file.originalname;
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
               Number(vendorId),
               Number(leadId),
-              renamedOriginalName,
+              finalOriginalName,
               file.mimetype,
             );
 
@@ -981,7 +1006,7 @@ export class DesigingStageController {
 
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: renamedOriginalName,
+                doc_og_name: finalOriginalName,
                 doc_sys_name: sysName,
                 vendor_id: Number(vendorId),
                 lead_id: Number(leadId),
