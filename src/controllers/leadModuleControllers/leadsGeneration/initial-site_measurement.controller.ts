@@ -321,24 +321,8 @@ export class PaymentUploadController {
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       const sitePhotos = files?.current_site_photos || [];
-      const pdfFile = files?.upload_pdf?.[0];
+      const pdfFiles = files?.upload_pdf || [];
       const paymentImageFile = files?.payment_image?.[0];
-
-      // Validate document file if provided (PDF or image)
-      const validDocumentTypes = [
-        "application/pdf",
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/gif",
-      ];
-      if (pdfFile && !validDocumentTypes.includes(pdfFile.mimetype)) {
-        res.status(400).json({
-          success: false,
-          message: "Upload file must be a PDF or image",
-        });
-        return;
-      }
 
       // Validate image files for site photos
       const validImageTypes = [
@@ -416,7 +400,7 @@ export class PaymentUploadController {
           : undefined,
         payment_text: req.body.payment_text || undefined,
         sitePhotos,
-        pdfFile,
+        pdfFiles,
         paymentImageFile,
       };
 
@@ -496,7 +480,7 @@ export class PaymentUploadController {
           : undefined,
         payment_text: req.body.payment_text || undefined,
         sitePhotos: files?.current_site_photos || [],
-        pdfFile: files?.upload_pdf?.[0],
+        pdfFiles: files?.upload_pdf || [],
         paymentImageFile: files?.payment_image?.[0],
       };
 
@@ -1295,21 +1279,6 @@ export class PaymentUploadController {
         res.status(400).json({
           success: false,
           message: "upload_pdf file is required",
-        });
-        return;
-      }
-
-      const validDocumentTypes = [
-        "application/pdf",
-        "image/jpeg",
-        "image/jpg",
-        "image/png",
-        "image/gif",
-      ];
-      if (!validDocumentTypes.includes(pdfFile.mimetype)) {
-        res.status(400).json({
-          success: false,
-          message: "Upload file must be a PDF or image",
         });
         return;
       }

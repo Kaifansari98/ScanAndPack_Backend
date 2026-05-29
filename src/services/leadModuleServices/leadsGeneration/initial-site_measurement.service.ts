@@ -42,7 +42,7 @@ export interface CreateBDISMPaymentUploadDto {
   payment_date?: Date;
   payment_text?: string;
   sitePhotos?: Express.Multer.File[];
-  pdfFile?: Express.Multer.File;
+  pdfFiles?: Express.Multer.File[];
   paymentImageFile?: Express.Multer.File;
 }
 
@@ -607,8 +607,8 @@ export class PaymentUploadService {
     data: CreatePaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
-      if (!data.pdfFile) {
-        throw new Error("Document file is mandatory");
+      if (!data.pdfFiles?.length) {
+        throw new Error("At least one document file is mandatory");
       }
 
       const response: PaymentUploadResponseDto = {
@@ -638,15 +638,22 @@ export class PaymentUploadService {
         }
       }
 
-      const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
-        data.pdfFile.path,
-        data.vendor_id,
-        data.lead_id,
-        data.pdfFile.originalname,
-        data.pdfFile.mimetype,
-        "initial_site_measurement_documents",
-      );
-      await fs.unlink(data.pdfFile.path);
+      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] = [];
+      for (const pdfFile of data.pdfFiles) {
+        const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          pdfFile.originalname,
+          pdfFile.mimetype,
+          "initial_site_measurement_documents",
+        );
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: pdfFile.originalname,
+          s3Key: pdfS3Key,
+        });
+      }
 
       let paymentImageS3Key: string | null = null;
       if (data.paymentImageFile) {
@@ -709,24 +716,26 @@ export class PaymentUploadService {
             );
           }
 
-          const pdfDocument = await tx.leadDocuments.create({
-            data: {
-              doc_og_name: data.pdfFile!.originalname,
-              doc_sys_name: pdfS3Key,
-              created_by: data.created_by,
-              doc_type_id: pdfDocType.id,
-              account_id: data.account_id,
-              lead_id: data.lead_id,
-              vendor_id: data.vendor_id,
-            },
-          });
+          for (const uploadedPdf of uploadedPdfDocuments) {
+            const pdfDocument = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: uploadedPdf.originalName,
+                doc_sys_name: uploadedPdf.s3Key,
+                created_by: data.created_by,
+                doc_type_id: pdfDocType.id,
+                account_id: data.account_id,
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+              },
+            });
 
-          response.documentsUploaded.push({
-            id: pdfDocument.id,
-            type: "pdf_upload",
-            originalName: data.pdfFile!.originalname,
-            s3Key: pdfS3Key,
-          });
+            response.documentsUploaded.push({
+              id: pdfDocument.id,
+              type: "pdf_upload",
+              originalName: uploadedPdf.originalName,
+              s3Key: uploadedPdf.s3Key,
+            });
+          }
 
           // 3. Handle payment image file (optional)
           let paymentFileId: number | null = null;
@@ -1047,8 +1056,8 @@ export class PaymentUploadService {
     data: CreateBDISMPaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
-      if (!data.pdfFile) {
-        throw new Error("BD-ISM document is mandatory");
+      if (!data.pdfFiles?.length) {
+        throw new Error("At least one BD-ISM document is mandatory");
       }
 
       const response: PaymentUploadResponseDto = {
@@ -1078,15 +1087,22 @@ export class PaymentUploadService {
         }
       }
 
-      const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
-        data.pdfFile.path,
-        data.vendor_id,
-        data.lead_id,
-        data.pdfFile.originalname,
-        data.pdfFile.mimetype,
-        "bd_initial_site_measurement_documents",
-      );
-      await fs.unlink(data.pdfFile.path);
+      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] = [];
+      for (const pdfFile of data.pdfFiles) {
+        const pdfKey = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          pdfFile.originalname,
+          pdfFile.mimetype,
+          "bd_initial_site_measurement_documents",
+        );
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: pdfFile.originalname,
+          s3Key: pdfKey,
+        });
+      }
 
       let paymentKey: string | null = null;
       if (data.paymentImageFile) {
@@ -1148,24 +1164,26 @@ export class PaymentUploadService {
             throw new Error("Document type for BD-ISM document not found");
           }
 
-          const pdfDoc = await tx.leadDocuments.create({
-            data: {
-              doc_og_name: data.pdfFile!.originalname,
-              doc_sys_name: pdfKey,
-              doc_type_id: pdfType.id,
-              created_by: data.created_by,
-              lead_id: data.lead_id,
-              account_id: data.account_id,
-              vendor_id: data.vendor_id,
-            },
-          });
+          for (const uploadedPdf of uploadedPdfDocuments) {
+            const pdfDoc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: uploadedPdf.originalName,
+                doc_sys_name: uploadedPdf.s3Key,
+                doc_type_id: pdfType.id,
+                created_by: data.created_by,
+                lead_id: data.lead_id,
+                account_id: data.account_id,
+                vendor_id: data.vendor_id,
+              },
+            });
 
-          response.documentsUploaded.push({
-            id: pdfDoc.id,
-            type: "bd_ism_pdf",
-            originalName: data.pdfFile!.originalname,
-            s3Key: pdfKey,
-          });
+            response.documentsUploaded.push({
+              id: pdfDoc.id,
+              type: "bd_ism_pdf",
+              originalName: uploadedPdf.originalName,
+              s3Key: uploadedPdf.s3Key,
+            });
+          }
 
           /* ----------------------------------
              3️⃣ Payment Image (Optional)

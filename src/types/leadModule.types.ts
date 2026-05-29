@@ -304,7 +304,7 @@ export interface CreatePaymentUploadDto {
     payment_date?: Date;
     payment_text?: string;
     sitePhotos?: Express.Multer.File[];
-    pdfFile?: Express.Multer.File;
+    pdfFiles?: Express.Multer.File[];
     paymentImageFile?: Express.Multer.File;
   }
   

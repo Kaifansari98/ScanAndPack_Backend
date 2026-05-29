@@ -65,11 +65,11 @@ export const validateFiles = (req: Request, res: Response, next: NextFunction) =
   try {
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     
-    // Check if document file is provided (mandatory)
+    // Check if at least one document file is provided (mandatory)
     if (!files?.upload_pdf || files.upload_pdf.length === 0) {
       return res.status(400).json({
         success: false,
-        message: 'Document file upload is mandatory'
+        message: 'At least one document file upload is mandatory'
       });
     }
 

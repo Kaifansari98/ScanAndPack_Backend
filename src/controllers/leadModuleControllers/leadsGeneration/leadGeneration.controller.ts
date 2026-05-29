@@ -18,6 +18,7 @@ import {
   isSimilarLeadExists,
   uploadMoreSitePhotosService,
   checkSiteSupervisorAssigned,
+  assignDesignerToLead,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -1561,6 +1562,59 @@ export class LeadController {
             "Failed to fetch sales executives",
             500,
             process.env.NODE_ENV === "development" ? error.message : undefined,
+          ),
+        );
+    }
+  }
+
+  async assignDesigner(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const accountId = Number(req.body.account_id);
+      const assignToUserId = Number(req.body.assign_to_user_id);
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        [vendorId, leadId, accountId, assignToUserId, createdBy].some(
+          (value) => Number.isNaN(value) || value <= 0,
+        )
+      ) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid assignment payload", 400));
+      }
+
+      const result = await assignDesignerToLead({
+        lead_id: leadId,
+        account_id: accountId,
+        vendor_id: vendorId,
+        assign_to_user_id: assignToUserId,
+        created_by: createdBy,
+      });
+
+      return res.status(200).json(
+        ApiResponse.success(
+          {
+            mapping_id: result.mappingId,
+            user: result.user,
+          },
+          "Designer assigned successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] assignDesigner error:", error);
+      const statusCode =
+        error?.message === "Lead not found"
+          ? 404
+          : 400;
+      return res
+        .status(statusCode)
+        .json(
+          ApiResponse.error(
+            error?.message || "Failed to assign designer",
+            statusCode,
           ),
         );
     }

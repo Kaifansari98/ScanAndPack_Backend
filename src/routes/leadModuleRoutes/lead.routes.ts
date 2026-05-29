@@ -135,6 +135,11 @@ leadsRouter.get(
   leadController.fetchSalesExecutivesByVendor
 );
 
+leadsRouter.post(
+  "/vendorId/:vendorId/leadId/:leadId/assign-designer",
+  leadController.assignDesigner
+);
+
 // GET /api/site-supervisor/vendor/:vendorId
 // Fetch all site supervisor for a specific vendor
 leadsRouter.get(

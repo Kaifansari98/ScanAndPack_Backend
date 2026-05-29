@@ -113,6 +113,14 @@ type EditTaskISMInput = {
   closed_by?: number;
 };
 
+type AssignDesignerInput = {
+  lead_id: number;
+  account_id: number;
+  vendor_id: number;
+  assign_to_user_id: number;
+  created_by: number;
+};
+
 const editTaskISMSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
   task_id: Joi.number().integer().positive().required(),
@@ -1110,6 +1118,22 @@ export const getLeadById = async (
       },
     });
 
+    const oldestDesignerMapping = await prisma.leadUserMapping.findFirst({
+      where: {
+        lead_id: lead.id,
+        vendor_id: vendorId,
+        status: "active",
+        type: "designer",
+      },
+      orderBy: { created_at: "asc" },
+      select: {
+        id: true,
+        user_id: true,
+        created_at: true,
+        user: { select: { id: true, user_name: true } },
+      },
+    });
+
     // 5️⃣ Add signed URLs
     const documentsWithUrls = await Promise.all(
       lead.documents.map(async (doc) => {
@@ -1139,6 +1163,13 @@ export const getLeadById = async (
               created_at: oldestIsmMapping.created_at,
             }
           : null,
+        assigned_designer_from_mapping: oldestDesignerMapping
+          ? {
+              user_id: oldestDesignerMapping.user_id,
+              user_name: oldestDesignerMapping.user?.user_name ?? null,
+              created_at: oldestDesignerMapping.created_at,
+            }
+          : null,
       },
       userInfo: {
         role: userType,
@@ -1150,6 +1181,134 @@ export const getLeadById = async (
     console.error("[SERVICE] Error fetching lead:", error);
     throw error;
   }
+};
+
+export const assignDesignerToLead = async (
+  data: AssignDesignerInput,
+) => {
+  const requiredPrivilegeCode = "leads.designing_stage.designs.upload";
+
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        account_id: data.account_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        account_id: true,
+        vendor_id: true,
+        franchise_id: true,
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const vendor = await tx.vendorMaster.findUnique({
+      where: { id: data.vendor_id },
+      select: { is_this_vendor_is_custom_usertype_only: true },
+    });
+
+    if (vendor?.is_this_vendor_is_custom_usertype_only !== true) {
+      throw new Error("Designer assignment is available only for custom-user-type vendors");
+    }
+
+    const designerUser = await tx.userMaster.findFirst({
+      where: {
+        id: data.assign_to_user_id,
+        vendor_id: data.vendor_id,
+        status: "active",
+        ...(lead.franchise_id ? { franchise_id: lead.franchise_id } : {}),
+        user_type: {
+          user_type: {
+            equals: "custom",
+            mode: "insensitive",
+          },
+        },
+        userPrivilegeMappings: {
+          some: {
+            is_allowed: true,
+            privilege: {
+              code: requiredPrivilegeCode,
+              is_active: true,
+            },
+          },
+        },
+      },
+      select: {
+        id: true,
+        user_name: true,
+      },
+    });
+
+    if (!designerUser) {
+      throw new Error("Selected user is not eligible for design uploads");
+    }
+
+    const existingActiveDesignerMapping = await tx.leadUserMapping.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        status: "active",
+        type: "designer",
+      },
+      select: {
+        id: true,
+        user_id: true,
+      },
+    });
+
+    if (existingActiveDesignerMapping?.user_id === designerUser.id) {
+      return {
+        mappingId: existingActiveDesignerMapping.id,
+        user: designerUser,
+      };
+    }
+
+    await tx.leadUserMapping.updateMany({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        type: "designer",
+        status: "active",
+      },
+      data: {
+        status: "inactive",
+        updated_by: data.created_by,
+      },
+    });
+
+    const mapping = await tx.leadUserMapping.create({
+      data: {
+        account_id: data.account_id,
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        user_id: designerUser.id,
+        type: "designer",
+        status: "active",
+        created_by: data.created_by,
+      },
+    });
+
+    await createLeadLog(tx, {
+      vendor_id: data.vendor_id,
+      lead_id: data.lead_id,
+      account_id: data.account_id,
+      action: `Designer assigned to ${designerUser.user_name}.`,
+      action_type: "UPDATE",
+      created_by: data.created_by,
+      created_at: new Date(),
+    });
+
+    return {
+      mappingId: mapping.id,
+      user: designerUser,
+    };
+  });
 };
 
 export const getLeadProductStructureInstances = async (

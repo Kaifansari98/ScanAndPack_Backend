@@ -23,8 +23,12 @@ const memoryUpload = multer({
     fileSize: 10 * 1024 * 1024, // 10MB limit per file
   },
   fileFilter: (_req, file, cb) => {
+    if (file.fieldname === "upload_pdf") {
+      cb(null, true);
+      return;
+    }
+
     const isImage = file.mimetype.startsWith("image/");
-    const isPdf = file.mimetype === "application/pdf";
     const ext = path.extname(file.originalname || "").toLowerCase();
     const imageExtensions = [
       ".jpg",
@@ -42,23 +46,23 @@ const memoryUpload = multer({
       ".jfif",
     ];
 
-    if (isImage || isPdf || imageExtensions.includes(ext)) {
+    if (isImage || imageExtensions.includes(ext)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type. Only PDF and image files are allowed."));
+      cb(new Error("Invalid file type. Only image files are allowed for this field."));
     }
   },
 });
 
 const diskUploadFields = uploadInitialSiteMeasurement.fields([
   { name: "current_site_photos", maxCount: 10 },
-  { name: "upload_pdf", maxCount: 1 },
+  { name: "upload_pdf", maxCount: 10 },
   { name: "payment_image", maxCount: 1 },
 ]);
 
 const memoryUploadFields = memoryUpload.fields([
   { name: "current_site_photos", maxCount: 10 }, // Allow up to 10 site photos
-  { name: "upload_pdf", maxCount: 1 }, // Only 1 PDF file
+  { name: "upload_pdf", maxCount: 10 }, // Allow multiple measurement documents
   { name: "payment_image", maxCount: 1 }, // Only 1 payment image
 ]);
 
@@ -77,7 +81,7 @@ const memoryUploadFields = memoryUpload.fields([
  *
  * File fields expected:
  * - current_site_photos (optional): multiple image files (JPEG, JPG, PNG, GIF) - doc_type_id = 1
- * - upload_pdf (required): single PDF or image file - doc_type_id = 3
+ * - upload_pdf (required): one or more files of any type - doc_type_id = 3
  * - payment_image (optional): single image file - if uploaded, payment_text becomes required
  */
 router.post(

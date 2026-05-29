@@ -1292,8 +1292,12 @@ export const uploadInitialSiteMeasurement = multer({
     fileSize: 200 * 1024 * 1024, // 200 MB
   },
   fileFilter: (_req, file, cb) => {
+    if (file.fieldname === "upload_pdf") {
+      cb(null, true);
+      return;
+    }
+
     const isImage = file.mimetype.startsWith("image/");
-    const isPdf = file.mimetype === "application/pdf";
     const ext = path.extname(file.originalname || "").toLowerCase();
     const imageExtensions = [
       ".jpg",
@@ -1311,10 +1315,10 @@ export const uploadInitialSiteMeasurement = multer({
       ".jfif",
     ];
 
-    if (isImage || isPdf || imageExtensions.includes(ext)) {
+    if (isImage || imageExtensions.includes(ext)) {
       cb(null, true);
     } else {
-      cb(new Error("Invalid file type. Only PDF and image files are allowed."));
+      cb(new Error("Invalid file type. Only image files are allowed for this field."));
     }
   },
 });
