@@ -12,6 +12,8 @@ import {
   uploadToWasabStage1DesingsFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import path from "node:path";
+import { sanitizeFilename } from "../../../utils/fileUtils";
 
 export class DesigingStageController {
   public static async addToDesigingStage(req: Request, res: Response) {
@@ -824,6 +826,7 @@ export class DesigingStageController {
   public static async uploadDesigns(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
+      const rawInstanceIds = req.body.product_structure_instance_ids;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -833,22 +836,6 @@ export class DesigingStageController {
       }
 
       const files = req.files as Express.Multer.File[];
-      const uploadedFiles: { originalName: string; sysName: string }[] = [];
-
-      for (const file of files) {
-        const sysName = await uploadToWasabStage1DesingsFile(
-          file.path,
-          Number(vendorId),
-          Number(leadId),
-          file.originalname,
-          file.mimetype,
-        );
-
-        await fs.unlink(file.path);
-
-        uploadedFiles.push({ originalName: file.originalname, sysName });
-      }
-
       const { uploadedDocs, actionMessage } = await prisma.$transaction(
         async (tx) => {
           // 1️⃣ Fetch lead → derive account_id
@@ -861,6 +848,8 @@ export class DesigingStageController {
             select: {
               id: true,
               account_id: true,
+              firstname: true,
+              lastname: true,
             },
           });
 
@@ -873,6 +862,46 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id; // ✅ derived safely
+          const requestedInstanceIds = Array.isArray(rawInstanceIds)
+            ? rawInstanceIds
+            : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
+              ? [rawInstanceIds]
+              : [];
+          const parsedInstanceIds = [...new Set(
+            requestedInstanceIds
+              .map((value) => Number(value))
+              .filter((value) => Number.isFinite(value) && value > 0),
+          )];
+
+          const allLeadInstances = await tx.leadProductStructureInstance.findMany({
+            where: {
+              lead_id: Number(leadId),
+              vendor_id: Number(vendorId),
+              account_id: Number(accountId),
+            },
+            select: {
+              id: true,
+              title: true,
+              productStructure: {
+                select: { type: true },
+              },
+            },
+            orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+          });
+
+          const selectedInstances =
+            parsedInstanceIds.length > 0
+              ? allLeadInstances.filter((instance) =>
+                  parsedInstanceIds.includes(instance.id),
+                )
+              : allLeadInstances;
+
+          if (
+            parsedInstanceIds.length > 0 &&
+            selectedInstances.length !== parsedInstanceIds.length
+          ) {
+            throw new Error("One or more selected product instances are invalid for this lead");
+          }
 
           // 2️⃣ Fetch document type
           const designDocType = await tx.documentTypeMaster.findFirst({
@@ -887,18 +916,79 @@ export class DesigingStageController {
           }
 
           const newDocs: any[] = [];
+          const structureLabelSource =
+            selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+          const uniqueStructureNames = [
+            ...new Set(
+              structureLabelSource
+                .map((instance) => instance.productStructure?.type || instance.title)
+                .filter(Boolean),
+            ),
+          ];
+          const structureSegment = sanitizeFilename(
+            uniqueStructureNames.length > 0
+              ? uniqueStructureNames.join("_")
+              : "General",
+          )
+            .replace(/_+/g, "_")
+            .slice(0, 80);
+          const clientNameSegment = sanitizeFilename(
+            `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+          )
+            .replace(/_+/g, "_")
+            .slice(0, 50);
+          const now = new Date();
+          const dateSegment = [
+            now.getFullYear(),
+            String(now.getMonth() + 1).padStart(2, "0"),
+            String(now.getDate()).padStart(2, "0"),
+          ].join("-");
+          const existingDesignDocs = await tx.leadDocuments.findMany({
+            where: {
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              doc_type_id: designDocType.id,
+              is_deleted: false,
+            },
+            select: { doc_og_name: true },
+          });
+          let nextRevision =
+            existingDesignDocs.reduce((maxRevision, doc) => {
+              const match = doc.doc_og_name?.match(/^R(\d+)-/i);
+              const revision = match ? Number(match[1]) : -1;
+              return Number.isFinite(revision)
+                ? Math.max(maxRevision, revision)
+                : maxRevision;
+            }, -1) + 1;
+
+          const instanceIdToPersist =
+            selectedInstances.length === 1 ? selectedInstances[0].id : null;
 
           // 3️⃣ DB insert
-          for (const file of uploadedFiles) {
+          for (const file of files) {
+            const extension = path.extname(file.originalname || "");
+            const renamedOriginalName = `R${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+            nextRevision += 1;
+            const sysName = await uploadToWasabStage1DesingsFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              renamedOriginalName,
+              file.mimetype,
+            );
+
+            await fs.unlink(file.path);
+
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: file.originalName,
-                doc_sys_name: file.sysName,
+                doc_og_name: renamedOriginalName,
+                doc_sys_name: sysName,
                 vendor_id: Number(vendorId),
                 lead_id: Number(leadId),
                 account_id: Number(accountId), // ✅ backend-owned
                 doc_type_id: designDocType.id,
                 created_by: Number(userId),
+                product_structure_instance_id: instanceIdToPersist,
               },
             });
 
