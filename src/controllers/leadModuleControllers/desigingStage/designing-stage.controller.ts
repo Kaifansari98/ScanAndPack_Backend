@@ -891,7 +891,7 @@ export class DesigingStageController {
                 select: {
                   id: true,
                   title: true,
-                  productStructure: {
+                  productType: {
                     select: { type: true },
                   },
                 },
@@ -940,7 +940,7 @@ export class DesigingStageController {
             const uniqueStructureNames = [
               ...new Set(
                 structureLabelSource
-                  .map((instance) => instance.productStructure?.type || instance.title)
+                  .map((instance) => instance.productType?.type)
                   .filter(Boolean),
               ),
             ];
