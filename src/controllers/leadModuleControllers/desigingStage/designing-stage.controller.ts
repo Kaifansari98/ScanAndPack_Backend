@@ -85,12 +85,19 @@ export class DesigingStageController {
 
   public static async upload(req: Request, res: Response) {
     try {
-      const { vendorId, leadId, userId } = req.body;
+      const { vendorId, leadId, userId, designDocumentId } = req.body;
 
       if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
         return res.status(400).json({
           success: false,
           message: "At least one file is required",
+        });
+      }
+
+      if (!designDocumentId) {
+        return res.status(400).json({
+          success: false,
+          message: "A design file selection is required",
         });
       }
 
@@ -101,6 +108,7 @@ export class DesigingStageController {
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         userId: Number(userId),
+        designDocumentId: Number(designDocumentId),
       });
 
       return res.json({

@@ -8,6 +8,36 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import { z } from "zod";
 import { Prisma } from "../../../prisma/generated";
 import fs from "node:fs/promises";
+import path from "node:path";
+import { sanitizeFilename } from "../../../utils/fileUtils";
+
+function formatDateSegment(date: Date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+}
+
+function buildQuotationNameFromDesign(
+  designOriginalName: string,
+  quotationOriginalName: string,
+) {
+  const designNameWithoutExtension = path.parse(designOriginalName).name;
+  const quotationExtension = path.extname(quotationOriginalName || "");
+  const designMatch = designNameWithoutExtension.match(/^R(\d+)-(.+)-\d{4}-\d{2}-\d{2}$/i);
+
+  if (!designMatch) {
+    throw new Error("Selected design file name is invalid for quotation naming");
+  }
+
+  const [, revisionNumber, baseSegment] = designMatch;
+  const todaySegment = formatDateSegment(new Date());
+
+  return sanitizeFilename(
+    `Q${revisionNumber}-${baseSegment}-${todaySegment}${quotationExtension}`,
+  ).replace(/_+/g, "_");
+}
 export type StageType =
   | "tech-check-stage"
   | "order-login-stage"
@@ -380,38 +410,34 @@ export class DesigingStage {
     vendorId: number;
     leadId: number;
     userId: number;
+    designDocumentId: number;
   }) {
-    const uploadedFiles: { originalName: string; sysName: string }[] = [];
-
-    for (const file of data.files) {
-      const sysName = await uploadToWasabiDesignQuotationFile(
-        file.path,
-        data.vendorId,
-        data.leadId,
-        file.originalname,
-        file.mimetype,
-      );
-
-      await fs.unlink(file.path);
-
-      uploadedFiles.push({
-        originalName: file.originalname,
-        sysName,
-      });
-    }
-
     return prisma.$transaction(async (tx) => {
       // 0️⃣ Fetch lead → derive account_id
-      const lead = await tx.leadMaster.findFirst({
-        where: {
-          id: data.leadId,
-          vendor_id: data.vendorId,
-          is_deleted: false,
-        },
-        select: {
-          account_id: true,
-        },
-      });
+      const [lead, quotationDocType, designDocType] = await Promise.all([
+        tx.leadMaster.findFirst({
+          where: {
+            id: data.leadId,
+            vendor_id: data.vendorId,
+            is_deleted: false,
+          },
+          select: {
+            account_id: true,
+          },
+        }),
+        tx.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: data.vendorId,
+            tag: "Type 5",
+          },
+        }),
+        tx.documentTypeMaster.findFirst({
+          where: {
+            vendor_id: data.vendorId,
+            tag: "Type 6",
+          },
+        }),
+      ]);
 
       if (!lead) {
         throw new Error(`Invalid leadId ${data.leadId} for this vendor`);
@@ -421,30 +447,57 @@ export class DesigingStage {
         throw new Error("No account linked with this lead");
       }
 
-      const accountId = lead.account_id; // ✅ backend-owned
-
-      // 2️⃣ Get quotation doc type
-      const quotationDocType = await tx.documentTypeMaster.findFirst({
-        where: {
-          vendor_id: data.vendorId,
-          tag: "Type 5", // Quotation
-        },
-      });
-
       if (!quotationDocType) {
         throw new Error(
           "Quotation document type (Type 5) is not configured for this vendor",
         );
       }
 
+      if (!designDocType) {
+        throw new Error("Design document type (Type 6) is not configured for this vendor");
+      }
+
+      const selectedDesignDocument = await tx.leadDocuments.findFirst({
+        where: {
+          id: data.designDocumentId,
+          lead_id: data.leadId,
+          vendor_id: data.vendorId,
+          is_deleted: false,
+          doc_type_id: designDocType.id,
+        },
+        select: {
+          id: true,
+          doc_og_name: true,
+        },
+      });
+
+      if (!selectedDesignDocument) {
+        throw new Error("Selected design file was not found for this lead");
+      }
+
+      const accountId = lead.account_id; // ✅ backend-owned
       const uploadedDocs: any[] = [];
 
       // 3️⃣ Upload + LeadDocuments
-      for (const file of uploadedFiles) {
+      for (const file of data.files) {
+        const finalOriginalName = buildQuotationNameFromDesign(
+          selectedDesignDocument.doc_og_name,
+          file.originalname,
+        );
+        const sysName = await uploadToWasabiDesignQuotationFile(
+          file.path,
+          data.vendorId,
+          data.leadId,
+          finalOriginalName,
+          file.mimetype,
+        );
+
+        await fs.unlink(file.path);
+
         const document = await tx.leadDocuments.create({
           data: {
-            doc_og_name: file.originalName,
-            doc_sys_name: file.sysName,
+            doc_og_name: finalOriginalName,
+            doc_sys_name: sysName,
             vendor_id: data.vendorId,
             lead_id: data.leadId,
             account_id: accountId,
