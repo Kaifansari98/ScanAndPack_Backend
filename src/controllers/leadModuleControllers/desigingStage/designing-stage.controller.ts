@@ -94,7 +94,15 @@ export class DesigingStageController {
         });
       }
 
-      if (!designDocumentId) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendorId) },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only === true &&
+        !designDocumentId
+      ) {
         return res.status(400).json({
           success: false,
           message: "A design file selection is required",
@@ -108,7 +116,9 @@ export class DesigingStageController {
         vendorId: Number(vendorId),
         leadId: Number(leadId),
         userId: Number(userId),
-        designDocumentId: Number(designDocumentId),
+        designDocumentId: designDocumentId
+          ? Number(designDocumentId)
+          : undefined,
       });
 
       return res.json({

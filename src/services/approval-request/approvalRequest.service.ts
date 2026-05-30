@@ -243,7 +243,25 @@ export class ApprovalRequestService {
       where: {
         vendor_id: vendorId,
         status: "active",
-        franchise_id: lead.franchise_id ?? undefined,
+        OR: [
+          {
+            user_type: {
+              user_type: {
+                in: ["admin", "sales-executive"],
+                mode: "insensitive",
+              },
+            },
+            franchise_id: lead.franchise_id ?? undefined,
+          },
+          {
+            user_type: {
+              user_type: {
+                notIn: ["admin", "sales-executive"],
+                mode: "insensitive",
+              },
+            },
+          },
+        ],
       },
       select: {
         id: true,

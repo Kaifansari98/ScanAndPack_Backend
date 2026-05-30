@@ -410,11 +410,11 @@ export class DesigingStage {
     vendorId: number;
     leadId: number;
     userId: number;
-    designDocumentId: number;
+    designDocumentId?: number;
   }) {
     return prisma.$transaction(async (tx) => {
       // 0️⃣ Fetch lead → derive account_id
-      const [lead, quotationDocType, designDocType] = await Promise.all([
+      const [lead, quotationDocType, designDocType, vendor] = await Promise.all([
         tx.leadMaster.findFirst({
           where: {
             id: data.leadId,
@@ -437,6 +437,10 @@ export class DesigingStage {
             tag: "Type 6",
           },
         }),
+        tx.vendorMaster.findUnique({
+          where: { id: data.vendorId },
+          select: { is_this_vendor_is_custom_usertype_only: true },
+        }),
       ]);
 
       if (!lead) {
@@ -453,25 +457,33 @@ export class DesigingStage {
         );
       }
 
-      if (!designDocType) {
+      if (
+        vendor?.is_this_vendor_is_custom_usertype_only === true &&
+        !designDocType
+      ) {
         throw new Error("Design document type (Type 6) is not configured for this vendor");
       }
 
-      const selectedDesignDocument = await tx.leadDocuments.findFirst({
-        where: {
-          id: data.designDocumentId,
-          lead_id: data.leadId,
-          vendor_id: data.vendorId,
-          is_deleted: false,
-          doc_type_id: designDocType.id,
-        },
-        select: {
-          id: true,
-          doc_og_name: true,
-        },
-      });
+      const useCustomNaming = vendor?.is_this_vendor_is_custom_usertype_only === true;
 
-      if (!selectedDesignDocument) {
+      const selectedDesignDocument =
+        useCustomNaming && data.designDocumentId && designDocType
+          ? await tx.leadDocuments.findFirst({
+              where: {
+                id: data.designDocumentId,
+                lead_id: data.leadId,
+                vendor_id: data.vendorId,
+                is_deleted: false,
+                doc_type_id: designDocType.id,
+              },
+              select: {
+                id: true,
+                doc_og_name: true,
+              },
+            })
+          : null;
+
+      if (useCustomNaming && !selectedDesignDocument) {
         throw new Error("Selected design file was not found for this lead");
       }
 
@@ -480,10 +492,13 @@ export class DesigingStage {
 
       // 3️⃣ Upload + LeadDocuments
       for (const file of data.files) {
-        const finalOriginalName = buildQuotationNameFromDesign(
-          selectedDesignDocument.doc_og_name,
-          file.originalname,
-        );
+        const finalOriginalName =
+          useCustomNaming && selectedDesignDocument
+            ? buildQuotationNameFromDesign(
+                selectedDesignDocument.doc_og_name,
+                file.originalname,
+              )
+            : file.originalname;
         const sysName = await uploadToWasabiDesignQuotationFile(
           file.path,
           data.vendorId,
