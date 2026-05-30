@@ -25,6 +25,7 @@ model VendorMaster {
   is_tracktrace_enabled                  Boolean  @default(false)
   is_approval_task_enabled               Boolean  @default(true)
   is_this_vendor_is_custom_usertype_only Boolean? // true : only custom user, false : custom user + all the user types and null : no custom user at all.
+  is_year_wise_lead_code_enabled         Boolean  @default(false)
   eligible_booking_days                  Int?
   is_self_assign_task_type_master_enabed Boolean  @default(true)
   createdAt                              DateTime @default(now())

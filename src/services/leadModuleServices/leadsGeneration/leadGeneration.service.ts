@@ -286,7 +286,10 @@ export const createLeadService = async (
           }));
 
         // 2) ⬅️ NEW: generate lead_code for this franchise
-        const lead_code = await generateLeadCode(tx, franchise_id);
+        const lead_code = await generateLeadCode(tx, {
+          franchiseId: franchise_id,
+          vendorId: vendor_id,
+        });
 
         // 3) Create Lead with the generated code
         const leadCreateData: any = {

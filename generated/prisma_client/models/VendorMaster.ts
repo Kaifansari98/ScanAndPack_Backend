@@ -58,6 +58,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
+  is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
   createdAt: Date | null
@@ -83,6 +84,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
+  is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
   createdAt: Date | null
@@ -108,6 +110,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_tracktrace_enabled: number
   is_approval_task_enabled: number
   is_this_vendor_is_custom_usertype_only: number
+  is_year_wise_lead_code_enabled: number
   eligible_booking_days: number
   is_self_assign_task_type_master_enabed: number
   createdAt: number
@@ -149,6 +152,7 @@ export type VendorMasterMinAggregateInputType = {
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
+  is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
   createdAt?: true
@@ -174,6 +178,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
+  is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
   createdAt?: true
@@ -199,6 +204,7 @@ export type VendorMasterCountAggregateInputType = {
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
+  is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
   createdAt?: true
@@ -311,6 +317,7 @@ export type VendorMasterGroupByOutputType = {
   is_tracktrace_enabled: boolean
   is_approval_task_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
+  is_year_wise_lead_code_enabled: boolean
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean
   createdAt: Date
@@ -359,6 +366,7 @@ export type VendorMasterWhereInput = {
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -479,6 +487,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -602,6 +611,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -722,6 +732,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -755,6 +766,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
@@ -779,6 +791,7 @@ export type VendorMasterCreateInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -898,6 +911,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -1016,6 +1030,7 @@ export type VendorMasterUpdateInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1135,6 +1150,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1254,6 +1270,7 @@ export type VendorMasterCreateManyInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -1278,6 +1295,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1302,6 +1320,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1327,6 +1346,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
+  is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1359,6 +1379,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
+  is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -1384,6 +1405,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
+  is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -2831,6 +2853,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -2949,6 +2972,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -3082,6 +3106,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3200,6 +3225,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3317,6 +3343,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -3435,6 +3462,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -3568,6 +3596,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3686,6 +3715,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -3803,6 +3833,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -3921,6 +3952,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -4054,6 +4086,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4172,6 +4205,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4289,6 +4323,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -4407,6 +4442,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -4540,6 +4576,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4658,6 +4695,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -4775,6 +4813,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -4893,6 +4932,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -5026,6 +5066,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5144,6 +5185,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5261,6 +5303,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -5379,6 +5422,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -5512,6 +5556,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5630,6 +5675,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5747,6 +5793,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -5865,6 +5912,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -5998,6 +6046,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6116,6 +6165,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6233,6 +6283,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -6351,6 +6402,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -6484,6 +6536,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6602,6 +6655,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6719,6 +6773,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -6837,6 +6892,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -6970,6 +7026,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7088,6 +7145,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7205,6 +7263,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -7323,6 +7382,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -7456,6 +7516,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7574,6 +7635,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7691,6 +7753,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -7809,6 +7872,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -7942,6 +8006,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8060,6 +8125,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8177,6 +8243,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -8295,6 +8362,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -8428,6 +8496,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8546,6 +8615,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8663,6 +8733,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -8781,6 +8852,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -8914,6 +8986,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9032,6 +9105,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9149,6 +9223,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -9267,6 +9342,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -9400,6 +9476,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9518,6 +9595,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9635,6 +9713,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -9753,6 +9832,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -9886,6 +9966,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10004,6 +10085,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10121,6 +10203,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -10239,6 +10322,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -10372,6 +10456,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10490,6 +10575,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10607,6 +10693,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -10725,6 +10812,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -10858,6 +10946,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10976,6 +11065,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11093,6 +11183,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -11211,6 +11302,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -11344,6 +11436,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11462,6 +11555,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11579,6 +11673,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -11697,6 +11792,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -11830,6 +11926,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11948,6 +12045,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12065,6 +12163,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -12183,6 +12282,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -12316,6 +12416,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12434,6 +12535,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12551,6 +12653,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -12669,6 +12772,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -12802,6 +12906,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12920,6 +13025,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13037,6 +13143,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -13155,6 +13262,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -13288,6 +13396,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13406,6 +13515,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13523,6 +13633,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -13641,6 +13752,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -13774,6 +13886,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13892,6 +14005,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14009,6 +14123,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -14127,6 +14242,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -14260,6 +14376,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14378,6 +14495,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14495,6 +14613,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -14613,6 +14732,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -14746,6 +14866,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14864,6 +14985,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14981,6 +15103,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -15099,6 +15222,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -15232,6 +15356,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15350,6 +15475,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15467,6 +15593,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -15585,6 +15712,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -15718,6 +15846,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15836,6 +15965,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15953,6 +16083,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -16071,6 +16202,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -16204,6 +16336,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16322,6 +16455,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16439,6 +16573,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -16557,6 +16692,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -16690,6 +16826,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16808,6 +16945,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16925,6 +17063,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -17043,6 +17182,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -17176,6 +17316,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17294,6 +17435,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17411,6 +17553,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -17529,6 +17672,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -17662,6 +17806,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17780,6 +17925,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17897,6 +18043,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -18015,6 +18162,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -18148,6 +18296,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18266,6 +18415,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18383,6 +18533,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -18501,6 +18652,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -18634,6 +18786,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18752,6 +18905,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18869,6 +19023,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -18987,6 +19142,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -19120,6 +19276,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19238,6 +19395,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19355,6 +19513,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -19473,6 +19632,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -19606,6 +19766,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19724,6 +19885,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19841,6 +20003,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -19959,6 +20122,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -20092,6 +20256,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20210,6 +20375,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20327,6 +20493,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -20445,6 +20612,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -20578,6 +20746,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20696,6 +20865,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20813,6 +20983,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -20931,6 +21102,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -21064,6 +21236,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21182,6 +21355,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21299,6 +21473,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -21417,6 +21592,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -21550,6 +21726,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21668,6 +21845,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21785,6 +21963,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -21903,6 +22082,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -22036,6 +22216,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22154,6 +22335,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22271,6 +22453,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -22389,6 +22572,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -22522,6 +22706,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22640,6 +22825,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22757,6 +22943,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -22875,6 +23062,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -23008,6 +23196,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23126,6 +23315,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23243,6 +23433,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -23361,6 +23552,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -23494,6 +23686,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23612,6 +23805,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23729,6 +23923,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -23847,6 +24042,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -23980,6 +24176,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24098,6 +24295,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24215,6 +24413,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -24333,6 +24532,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -24466,6 +24666,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24584,6 +24785,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24701,6 +24903,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -24819,6 +25022,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -24952,6 +25156,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25070,6 +25275,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25187,6 +25393,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -25305,6 +25512,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -25438,6 +25646,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25556,6 +25765,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25673,6 +25883,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -25791,6 +26002,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -25924,6 +26136,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26042,6 +26255,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26159,6 +26373,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -26277,6 +26492,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -26410,6 +26626,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26528,6 +26745,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26645,6 +26863,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -26763,6 +26982,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -26896,6 +27116,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27014,6 +27235,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27131,6 +27353,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -27249,6 +27472,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -27382,6 +27606,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27500,6 +27725,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27617,6 +27843,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -27735,6 +27962,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -27868,6 +28096,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27986,6 +28215,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28103,6 +28333,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -28221,6 +28452,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -28354,6 +28586,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28472,6 +28705,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28589,6 +28823,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -28707,6 +28942,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -28840,6 +29076,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28958,6 +29195,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29075,6 +29313,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -29193,6 +29432,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -29326,6 +29566,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29444,6 +29685,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29561,6 +29803,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -29679,6 +29922,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -29812,6 +30056,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29930,6 +30175,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30047,6 +30293,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -30165,6 +30412,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -30298,6 +30546,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30416,6 +30665,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30533,6 +30783,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -30651,6 +30902,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -30784,6 +31036,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30902,6 +31155,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31019,6 +31273,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -31137,6 +31392,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -31270,6 +31526,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31388,6 +31645,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31505,6 +31763,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -31623,6 +31882,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -31756,6 +32016,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31874,6 +32135,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31991,6 +32253,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -32109,6 +32372,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -32242,6 +32506,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32360,6 +32625,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32477,6 +32743,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -32595,6 +32862,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -32728,6 +32996,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32846,6 +33115,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32963,6 +33233,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -33081,6 +33352,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -33214,6 +33486,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33332,6 +33605,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33449,6 +33723,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -33567,6 +33842,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -33700,6 +33976,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33818,6 +34095,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -33935,6 +34213,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -34053,6 +34332,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -34186,6 +34466,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34304,6 +34585,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34421,6 +34703,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -34539,6 +34822,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -34672,6 +34956,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34790,6 +35075,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -34907,6 +35193,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -35025,6 +35312,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -35158,6 +35446,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35276,6 +35565,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35393,6 +35683,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -35511,6 +35802,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -35644,6 +35936,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35762,6 +36055,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -35879,6 +36173,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -35997,6 +36292,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -36130,6 +36426,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36248,6 +36545,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36365,6 +36663,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -36483,6 +36782,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -36616,6 +36916,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36734,6 +37035,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -36851,6 +37153,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -36969,6 +37272,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -37102,6 +37406,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37220,6 +37525,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37337,6 +37643,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -37455,6 +37762,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -37588,6 +37896,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37706,6 +38015,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -37823,6 +38133,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -37941,6 +38252,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -38074,6 +38386,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38192,6 +38505,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38309,6 +38623,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -38427,6 +38742,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -38560,6 +38876,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38678,6 +38995,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -38795,6 +39113,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -38913,6 +39232,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -39046,6 +39366,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39164,6 +39485,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39281,6 +39603,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -39399,6 +39722,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -39532,6 +39856,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39650,6 +39975,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -39767,6 +40093,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -39885,6 +40212,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -40032,6 +40360,7 @@ export type VendorMasterScalarWhereInput = {
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
@@ -40056,6 +40385,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -40174,6 +40504,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -40307,6 +40638,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40425,6 +40757,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40542,6 +40875,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -40660,6 +40994,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -40793,6 +41128,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -40911,6 +41247,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41028,6 +41365,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -41146,6 +41484,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -41279,6 +41618,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41397,6 +41737,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41514,6 +41855,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -41632,6 +41974,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -41765,6 +42108,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -41883,6 +42227,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42000,6 +42345,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -42118,6 +42464,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -42251,6 +42598,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42369,6 +42717,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42486,6 +42835,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -42604,6 +42954,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -42737,6 +43088,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42855,6 +43207,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -42972,6 +43325,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -43090,6 +43444,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -43223,6 +43578,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43341,6 +43697,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43458,6 +43815,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -43576,6 +43934,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -43709,6 +44068,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43827,6 +44187,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -43944,6 +44305,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -44062,6 +44424,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -44195,6 +44558,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44313,6 +44677,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44430,6 +44795,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -44548,6 +44914,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -44681,6 +45048,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44799,6 +45167,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -44916,6 +45285,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -45034,6 +45404,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -45167,6 +45538,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -45285,6 +45657,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -45402,6 +45775,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -45520,6 +45894,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -45653,6 +46028,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -45771,6 +46147,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -45888,6 +46265,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -46006,6 +46384,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -46139,6 +46518,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -46257,6 +46637,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -46374,6 +46755,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -46492,6 +46874,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -46625,6 +47008,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -46743,6 +47127,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -46860,6 +47245,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -46978,6 +47364,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -47111,6 +47498,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -47229,6 +47617,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -47346,6 +47735,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -47464,6 +47854,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -47597,6 +47988,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -47715,6 +48107,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -47832,6 +48225,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -47950,6 +48344,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -48083,6 +48478,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -48201,6 +48597,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -48318,6 +48715,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -48436,6 +48834,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -48569,6 +48968,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -48687,6 +49087,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -48805,6 +49206,7 @@ export type VendorMasterCreateManyStateInput = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: Date | string
@@ -48828,6 +49230,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -48946,6 +49349,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -49064,6 +49468,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -49956,6 +50361,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
@@ -50077,6 +50483,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
@@ -50103,6 +50510,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
@@ -50129,6 +50537,7 @@ export type VendorMasterSelectScalar = {
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
+  is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
   createdAt?: boolean
@@ -50136,7 +50545,7 @@ export type VendorMasterSelectScalar = {
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_this_vendor_is_custom_usertype_only" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -50359,6 +50768,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_tracktrace_enabled: boolean
     is_approval_task_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
+    is_year_wise_lead_code_enabled: boolean
     eligible_booking_days: number | null
     is_self_assign_task_type_master_enabed: boolean
     createdAt: Date
@@ -50899,6 +51309,7 @@ export interface VendorMasterFieldRefs {
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_year_wise_lead_code_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>

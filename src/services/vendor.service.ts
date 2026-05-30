@@ -114,6 +114,7 @@ export const createVendor = async (data: any) => {
     status,
     logo,
     time_zone,
+    is_year_wise_lead_code_enabled,
   } = data;
 
   return await prisma.vendorMaster.create({
@@ -128,6 +129,7 @@ export const createVendor = async (data: any) => {
       status,
       logo,
       time_zone,
+      is_year_wise_lead_code_enabled,
     },
   });
 };
@@ -177,6 +179,7 @@ export const getAllVendorsPaginated = async ({
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
         is_this_vendor_is_custom_usertype_only: true,
+        is_year_wise_lead_code_enabled: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -1578,6 +1581,7 @@ export const onboardVendor = async (data: any) => {
     status,
     logo,
     time_zone,
+    is_year_wise_lead_code_enabled,
   } = data;
 
   const vendor = await prisma.vendorMaster.create({
@@ -1592,6 +1596,7 @@ export const onboardVendor = async (data: any) => {
       status,
       logo,
       time_zone,
+      is_year_wise_lead_code_enabled,
     },
   });
 
