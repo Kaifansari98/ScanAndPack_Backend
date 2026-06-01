@@ -57,6 +57,7 @@ export type VendorMasterMinAggregateOutputType = {
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
+  is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
@@ -83,6 +84,7 @@ export type VendorMasterMaxAggregateOutputType = {
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
+  is_client_visit_enabled: boolean | null
   is_this_vendor_is_custom_usertype_only: boolean | null
   is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
@@ -109,6 +111,7 @@ export type VendorMasterCountAggregateOutputType = {
   is_inventory_enabled: number
   is_tracktrace_enabled: number
   is_approval_task_enabled: number
+  is_client_visit_enabled: number
   is_this_vendor_is_custom_usertype_only: number
   is_year_wise_lead_code_enabled: number
   eligible_booking_days: number
@@ -151,6 +154,7 @@ export type VendorMasterMinAggregateInputType = {
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
+  is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
@@ -177,6 +181,7 @@ export type VendorMasterMaxAggregateInputType = {
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
+  is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
@@ -203,6 +208,7 @@ export type VendorMasterCountAggregateInputType = {
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
+  is_client_visit_enabled?: true
   is_this_vendor_is_custom_usertype_only?: true
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
@@ -316,6 +322,7 @@ export type VendorMasterGroupByOutputType = {
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
   is_approval_task_enabled: boolean
+  is_client_visit_enabled: boolean
   is_this_vendor_is_custom_usertype_only: boolean | null
   is_year_wise_lead_code_enabled: boolean
   eligible_booking_days: number | null
@@ -365,6 +372,7 @@ export type VendorMasterWhereInput = {
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -397,8 +405,10 @@ export type VendorMasterWhereInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentListRelationFilter
   leadChatRooms?: Prisma.LeadChatRoomListRelationFilter
   designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  clientVisits?: Prisma.LeadClientVisitListRelationFilter
   meetingTypes?: Prisma.MeetingTypeMasterListRelationFilter
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
@@ -486,6 +496,7 @@ export type VendorMasterOrderByWithRelationInput = {
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
+  is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -518,8 +529,10 @@ export type VendorMasterOrderByWithRelationInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentOrderByRelationAggregateInput
   leadChatRooms?: Prisma.LeadChatRoomOrderByRelationAggregateInput
   designMeeting?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
+  clientVisits?: Prisma.LeadClientVisitOrderByRelationAggregateInput
   meetingTypes?: Prisma.MeetingTypeMasterOrderByRelationAggregateInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingOrderByRelationAggregateInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingOrderByRelationAggregateInput
   designSelection?: Prisma.LeadDesignSelectionOrderByRelationAggregateInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
@@ -610,6 +623,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -642,8 +656,10 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   leadChatDocuments?: Prisma.LeadChatDocumentListRelationFilter
   leadChatRooms?: Prisma.LeadChatRoomListRelationFilter
   designMeeting?: Prisma.LeadDesignMeetingListRelationFilter
+  clientVisits?: Prisma.LeadClientVisitListRelationFilter
   meetingTypes?: Prisma.MeetingTypeMasterListRelationFilter
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingListRelationFilter
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   designSelection?: Prisma.LeadDesignSelectionListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
   leadDetailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
@@ -731,6 +747,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
+  is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrderInput | Prisma.SortOrder
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -765,6 +782,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_client_visit_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
@@ -790,6 +808,7 @@ export type VendorMasterCreateInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -821,8 +840,10 @@ export type VendorMasterCreateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -910,6 +931,7 @@ export type VendorMasterUncheckedCreateInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -942,8 +964,10 @@ export type VendorMasterUncheckedCreateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -1029,6 +1053,7 @@ export type VendorMasterUpdateInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1060,8 +1085,10 @@ export type VendorMasterUpdateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -1149,6 +1176,7 @@ export type VendorMasterUncheckedUpdateInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1181,8 +1209,10 @@ export type VendorMasterUncheckedUpdateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -1269,6 +1299,7 @@ export type VendorMasterCreateManyInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -1294,6 +1325,7 @@ export type VendorMasterUpdateManyMutationInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1319,6 +1351,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1345,6 +1378,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
+  is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
@@ -1378,6 +1412,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
+  is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
@@ -1404,6 +1439,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
+  is_client_visit_enabled?: Prisma.SortOrder
   is_this_vendor_is_custom_usertype_only?: Prisma.SortOrder
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
@@ -2036,6 +2072,20 @@ export type VendorMasterUpdateOneRequiredWithoutDesignMeetingNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutDesignMeetingInput, Prisma.VendorMasterUpdateWithoutDesignMeetingInput>, Prisma.VendorMasterUncheckedUpdateWithoutDesignMeetingInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutClientVisitsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutClientVisitsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutClientVisitsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutClientVisitsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutClientVisitsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutClientVisitsInput, Prisma.VendorMasterUpdateWithoutClientVisitsInput>, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitsInput>
+}
+
 export type VendorMasterCreateNestedOneWithoutMeetingTypesInput = {
   create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutMeetingTypesInput, Prisma.VendorMasterUncheckedCreateWithoutMeetingTypesInput>
   connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutMeetingTypesInput
@@ -2062,6 +2112,20 @@ export type VendorMasterUpdateOneRequiredWithoutDesignMeetingDocsMappingNestedIn
   upsert?: Prisma.VendorMasterUpsertWithoutDesignMeetingDocsMappingInput
   connect?: Prisma.VendorMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutDesignMeetingDocsMappingInput, Prisma.VendorMasterUpdateWithoutDesignMeetingDocsMappingInput>, Prisma.VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput>
+}
+
+export type VendorMasterCreateNestedOneWithoutClientVisitDocumentMappingsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutClientVisitDocumentMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutClientVisitDocumentMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUpdateWithoutClientVisitDocumentMappingsInput>, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput>
 }
 
 export type VendorMasterCreateNestedOneWithoutDesignSelectionInput = {
@@ -2852,6 +2916,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -2883,8 +2948,10 @@ export type VendorMasterCreateWithoutAddressesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -2971,6 +3038,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -3003,8 +3071,10 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -3105,6 +3175,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3136,8 +3207,10 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -3224,6 +3297,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3256,8 +3330,10 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -3342,6 +3418,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -3373,8 +3450,10 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -3461,6 +3540,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -3493,8 +3573,10 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -3595,6 +3677,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3626,8 +3709,10 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -3714,6 +3799,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3746,8 +3832,10 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -3832,6 +3920,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -3863,8 +3952,10 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -3951,6 +4042,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -3983,8 +4075,10 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -4085,6 +4179,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4116,8 +4211,10 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -4204,6 +4301,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4236,8 +4334,10 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -4322,6 +4422,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -4353,8 +4454,10 @@ export type VendorMasterCreateWithoutUsersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -4441,6 +4544,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -4473,8 +4577,10 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -4575,6 +4681,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4606,8 +4713,10 @@ export type VendorMasterUpdateWithoutUsersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -4694,6 +4803,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4726,8 +4836,10 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -4812,6 +4924,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -4843,8 +4956,10 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -4931,6 +5046,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -4963,8 +5079,10 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -5065,6 +5183,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5096,8 +5215,10 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -5184,6 +5305,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5216,8 +5338,10 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -5302,6 +5426,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -5333,8 +5458,10 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -5421,6 +5548,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -5453,8 +5581,10 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -5555,6 +5685,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5586,8 +5717,10 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -5674,6 +5807,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5706,8 +5840,10 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -5792,6 +5928,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -5823,8 +5960,10 @@ export type VendorMasterCreateWithoutProjectsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -5911,6 +6050,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -5943,8 +6083,10 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -6045,6 +6187,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6076,8 +6219,10 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -6164,6 +6309,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6196,8 +6342,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -6282,6 +6430,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -6313,8 +6462,10 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -6401,6 +6552,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -6433,8 +6585,10 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -6535,6 +6689,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6566,8 +6721,10 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -6654,6 +6811,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6686,8 +6844,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -6772,6 +6932,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -6803,8 +6964,10 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -6891,6 +7054,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -6923,8 +7087,10 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -7025,6 +7191,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7056,8 +7223,10 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -7144,6 +7313,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7176,8 +7346,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -7262,6 +7434,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -7292,8 +7465,10 @@ export type VendorMasterCreateWithoutBoxesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -7381,6 +7556,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -7412,8 +7588,10 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -7515,6 +7693,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7545,8 +7724,10 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -7634,6 +7815,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7665,8 +7847,10 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -7752,6 +7936,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -7783,8 +7968,10 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -7871,6 +8058,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -7903,8 +8091,10 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -8005,6 +8195,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8036,8 +8227,10 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -8124,6 +8317,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8156,8 +8350,10 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -8242,6 +8438,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -8273,8 +8470,10 @@ export type VendorMasterCreateWithoutTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -8361,6 +8560,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -8393,8 +8593,10 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -8495,6 +8697,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8526,8 +8729,10 @@ export type VendorMasterUpdateWithoutTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -8614,6 +8819,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8646,8 +8852,10 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -8732,6 +8940,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -8763,8 +8972,10 @@ export type VendorMasterCreateWithoutLeadsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -8851,6 +9062,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -8883,8 +9095,10 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -8985,6 +9199,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9016,8 +9231,10 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -9104,6 +9321,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9136,8 +9354,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -9222,6 +9442,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -9253,8 +9474,10 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -9341,6 +9564,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -9373,8 +9597,10 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -9475,6 +9701,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9506,8 +9733,10 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -9594,6 +9823,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9626,8 +9856,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -9712,6 +9944,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -9743,8 +9976,10 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -9831,6 +10066,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -9863,8 +10099,10 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -9965,6 +10203,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9996,8 +10235,10 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -10084,6 +10325,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10116,8 +10358,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -10202,6 +10446,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -10232,8 +10477,10 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -10321,6 +10568,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -10352,8 +10600,10 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -10455,6 +10705,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10485,8 +10736,10 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -10574,6 +10827,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10605,8 +10859,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -10692,6 +10948,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -10723,8 +10980,10 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -10811,6 +11070,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -10843,8 +11103,10 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -10945,6 +11207,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10976,8 +11239,10 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -11064,6 +11329,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11096,8 +11362,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -11182,6 +11450,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -11213,8 +11482,10 @@ export type VendorMasterCreateWithoutSourcesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -11301,6 +11572,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -11333,8 +11605,10 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -11435,6 +11709,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11466,8 +11741,10 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -11554,6 +11831,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11586,8 +11864,10 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -11672,6 +11952,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -11702,8 +11983,10 @@ export type VendorMasterCreateWithoutAccountsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -11791,6 +12074,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -11822,8 +12106,10 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -11925,6 +12211,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11955,8 +12242,10 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -12044,6 +12333,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12075,8 +12365,10 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -12162,6 +12454,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -12193,8 +12486,10 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -12281,6 +12576,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -12313,8 +12609,10 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -12415,6 +12713,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12446,8 +12745,10 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -12534,6 +12835,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12566,8 +12868,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -12652,6 +12956,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -12683,8 +12988,10 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -12771,6 +13078,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -12803,8 +13111,10 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -12905,6 +13215,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12936,8 +13247,10 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -13024,6 +13337,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13056,8 +13370,10 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -13142,6 +13458,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -13172,8 +13489,10 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -13261,6 +13580,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -13292,8 +13612,10 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -13395,6 +13717,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13425,8 +13748,10 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -13514,6 +13839,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13545,8 +13871,10 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -13632,6 +13960,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -13662,8 +13991,10 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -13751,6 +14082,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -13782,8 +14114,10 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -13885,6 +14219,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13915,8 +14250,10 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -14004,6 +14341,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14035,8 +14373,10 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -14122,6 +14462,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -14152,8 +14493,10 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -14241,6 +14584,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -14272,8 +14616,10 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -14375,6 +14721,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14405,8 +14752,10 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -14494,6 +14843,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14525,8 +14875,10 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -14612,6 +14964,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -14642,8 +14995,10 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -14731,6 +15086,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -14762,8 +15118,10 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -14865,6 +15223,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14895,8 +15254,10 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -14984,6 +15345,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15015,8 +15377,10 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -15102,6 +15466,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -15133,8 +15498,10 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -15221,6 +15588,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -15253,8 +15621,10 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -15355,6 +15725,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15386,8 +15757,10 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -15474,6 +15847,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15506,8 +15880,10 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -15592,6 +15968,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -15622,8 +15999,10 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -15711,6 +16090,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -15742,8 +16122,10 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -15845,6 +16227,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15875,8 +16258,10 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -15964,6 +16349,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15995,8 +16381,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -16082,6 +16470,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -16112,8 +16501,10 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -16201,6 +16592,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -16232,8 +16624,10 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -16335,6 +16729,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16365,8 +16760,10 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -16454,6 +16851,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16485,8 +16883,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -16572,6 +16972,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -16603,8 +17004,10 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -16691,6 +17094,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -16723,8 +17127,10 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -16825,6 +17231,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16856,8 +17263,10 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -16944,6 +17353,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16976,8 +17386,10 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -17062,6 +17474,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -17093,8 +17506,10 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -17181,6 +17596,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -17213,8 +17629,10 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -17315,6 +17733,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17346,8 +17765,10 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -17434,6 +17855,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17466,8 +17888,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -17552,6 +17976,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -17583,8 +18008,10 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -17671,6 +18098,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -17703,8 +18131,10 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -17805,6 +18235,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17836,8 +18267,10 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -17924,6 +18357,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17956,8 +18390,10 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -18042,6 +18478,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -18073,8 +18510,10 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -18161,6 +18600,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -18193,8 +18633,10 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -18295,6 +18737,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18326,8 +18769,10 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -18414,6 +18859,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18446,8 +18892,10 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -18532,6 +18980,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -18563,8 +19012,10 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -18651,6 +19102,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -18683,8 +19135,10 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -18785,6 +19239,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18816,8 +19271,10 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -18904,6 +19361,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18936,8 +19394,10 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -19022,6 +19482,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -19053,8 +19514,10 @@ export type VendorMasterCreateWithoutLedgersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -19141,6 +19604,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -19173,8 +19637,10 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -19275,6 +19741,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19306,8 +19773,10 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -19394,6 +19863,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19426,8 +19896,10 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -19512,6 +19984,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -19542,8 +20015,10 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -19631,6 +20106,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -19662,8 +20138,10 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -19765,6 +20243,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19795,8 +20274,10 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -19884,6 +20365,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19915,8 +20397,10 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -20002,6 +20486,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -20033,8 +20518,10 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -20121,6 +20608,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -20153,8 +20641,10 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -20255,6 +20745,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20286,8 +20777,10 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -20374,6 +20867,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20406,8 +20900,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -20492,6 +20988,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -20523,8 +21020,10 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -20611,6 +21110,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -20643,8 +21143,10 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -20745,6 +21247,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20776,8 +21279,10 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -20864,6 +21369,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20896,8 +21402,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -20982,6 +21490,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -21013,8 +21522,10 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -21101,6 +21612,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -21133,8 +21645,10 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -21235,6 +21749,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21266,8 +21781,10 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -21354,6 +21871,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21386,8 +21904,10 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -21472,6 +21992,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -21503,8 +22024,10 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -21591,6 +22114,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -21623,8 +22147,10 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -21725,6 +22251,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21756,8 +22283,10 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -21844,6 +22373,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21876,8 +22406,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -21962,6 +22494,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -21992,8 +22525,10 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -22081,6 +22616,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -22112,8 +22648,10 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -22215,6 +22753,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22245,8 +22784,10 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -22334,6 +22875,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22365,8 +22907,512 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutClientVisitsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutClientVisitsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitsInput>
+}
+
+export type VendorMasterUpsertWithoutClientVisitsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutClientVisitsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutClientVisitsInput, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitsInput>
+}
+
+export type VendorMasterUpdateWithoutClientVisitsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -22452,6 +23498,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -22483,7 +23530,9 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -22571,6 +23620,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -22603,7 +23653,9 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -22705,6 +23757,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22736,7 +23789,9 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -22824,6 +23879,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22856,7 +23912,9 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -22942,6 +24000,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -22973,7 +24032,9 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -23061,6 +24122,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -23093,7 +24155,9 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -23195,6 +24259,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23226,7 +24291,9 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -23314,6 +24381,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23346,7 +24414,511 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  IsAccountLocInEnabled?: boolean | null
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput>
+}
+
+export type VendorMasterUpsertWithoutClientVisitDocumentMappingsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutClientVisitDocumentMappingsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutClientVisitDocumentMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput>
+}
+
+export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -23432,6 +25004,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -23463,8 +25036,10 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
@@ -23551,6 +25126,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -23583,8 +25159,10 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
@@ -23685,6 +25263,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23716,8 +25295,10 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
@@ -23804,6 +25385,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23836,8 +25418,10 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
@@ -23922,6 +25506,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -23953,8 +25538,10 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
@@ -24041,6 +25628,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -24073,8 +25661,10 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
@@ -24175,6 +25765,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24206,8 +25797,10 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
@@ -24294,6 +25887,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24326,8 +25920,10 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
@@ -24412,6 +26008,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -24443,8 +26040,10 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -24531,6 +26130,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -24563,8 +26163,10 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -24665,6 +26267,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24696,8 +26299,10 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -24784,6 +26389,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24816,8 +26422,10 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -24902,6 +26510,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -24933,8 +26542,10 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -25021,6 +26632,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -25053,8 +26665,10 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -25155,6 +26769,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25186,8 +26801,10 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -25274,6 +26891,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25306,8 +26924,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -25392,6 +27012,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -25423,8 +27044,10 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -25511,6 +27134,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -25543,8 +27167,10 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -25645,6 +27271,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25676,8 +27303,10 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -25764,6 +27393,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25796,8 +27426,10 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -25882,6 +27514,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -25913,8 +27546,10 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
@@ -26001,6 +27636,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -26033,8 +27669,10 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
@@ -26135,6 +27773,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26166,8 +27805,10 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
@@ -26254,6 +27895,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26286,8 +27928,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
@@ -26372,6 +28016,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -26403,8 +28048,10 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -26491,6 +28138,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -26523,8 +28171,10 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -26625,6 +28275,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26656,8 +28307,10 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -26744,6 +28397,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26776,8 +28430,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -26862,6 +28518,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -26893,8 +28550,10 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -26981,6 +28640,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -27013,8 +28673,10 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -27115,6 +28777,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27146,8 +28809,10 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -27234,6 +28899,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27266,8 +28932,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -27352,6 +29020,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -27382,8 +29051,10 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -27471,6 +29142,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -27502,8 +29174,10 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -27605,6 +29279,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27635,8 +29310,10 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -27724,6 +29401,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27755,8 +29433,10 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -27842,6 +29522,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -27873,8 +29554,10 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -27961,6 +29644,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -27993,8 +29677,10 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -28095,6 +29781,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28126,8 +29813,10 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -28214,6 +29903,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28246,8 +29936,10 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -28332,6 +30024,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -28363,8 +30056,10 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -28451,6 +30146,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -28483,8 +30179,10 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -28585,6 +30283,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28616,8 +30315,10 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -28704,6 +30405,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28736,8 +30438,10 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -28822,6 +30526,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -28852,8 +30557,10 @@ export type VendorMasterCreateWithoutInstallersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -28941,6 +30648,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -28972,8 +30680,10 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -29075,6 +30785,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29105,8 +30816,10 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -29194,6 +30907,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29225,8 +30939,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -29312,6 +31028,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -29342,8 +31059,10 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -29431,6 +31150,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -29462,8 +31182,10 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -29565,6 +31287,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29595,8 +31318,10 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -29684,6 +31409,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29715,8 +31441,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -29802,6 +31530,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -29832,8 +31561,10 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -29921,6 +31652,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -29952,8 +31684,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -30055,6 +31789,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30085,8 +31820,10 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -30174,6 +31911,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30205,8 +31943,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -30292,6 +32032,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -30322,8 +32063,10 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -30411,6 +32154,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -30442,8 +32186,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -30545,6 +32291,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30575,8 +32322,10 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -30664,6 +32413,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30695,8 +32445,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -30782,6 +32534,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -30813,8 +32566,10 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -30901,6 +32656,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -30933,8 +32689,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -31035,6 +32793,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31066,8 +32825,10 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -31154,6 +32915,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31186,8 +32948,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -31272,6 +33036,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -31303,8 +33068,10 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -31391,6 +33158,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -31423,8 +33191,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -31525,6 +33295,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31556,8 +33327,10 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -31644,6 +33417,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31676,8 +33450,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -31762,6 +33538,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -31793,8 +33570,10 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -31881,6 +33660,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -31913,8 +33693,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -32015,6 +33797,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32046,8 +33829,10 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -32134,6 +33919,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32166,8 +33952,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -32252,6 +34040,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -32283,8 +34072,10 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -32371,6 +34162,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -32403,8 +34195,10 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -32505,6 +34299,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32536,8 +34331,10 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -32624,6 +34421,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32656,8 +34454,10 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -32742,6 +34542,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -32772,8 +34573,10 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -32861,6 +34664,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -32892,8 +34696,10 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -32995,6 +34801,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33025,8 +34832,10 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -33114,6 +34923,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33145,8 +34955,10 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -33232,6 +35044,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -33262,8 +35075,10 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -33351,6 +35166,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -33382,8 +35198,10 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -33485,6 +35303,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33515,8 +35334,10 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -33604,6 +35425,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33635,8 +35457,10 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -33722,6 +35546,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -33752,8 +35577,10 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -33841,6 +35668,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -33872,8 +35700,10 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -33975,6 +35805,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34005,8 +35836,10 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -34094,6 +35927,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34125,8 +35959,10 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -34212,6 +36048,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -34243,8 +36080,10 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -34331,6 +36170,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -34363,8 +36203,10 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -34465,6 +36307,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34496,8 +36339,10 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -34584,6 +36429,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34616,8 +36462,10 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -34702,6 +36550,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -34733,8 +36582,10 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -34821,6 +36672,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -34853,8 +36705,10 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -34955,6 +36809,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34986,8 +36841,10 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -35074,6 +36931,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35106,8 +36964,10 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -35192,6 +37052,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -35223,8 +37084,10 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -35311,6 +37174,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -35343,8 +37207,10 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -35445,6 +37311,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35476,8 +37343,10 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -35564,6 +37433,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35596,8 +37466,10 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -35682,6 +37554,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -35713,8 +37586,10 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -35801,6 +37676,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -35833,8 +37709,10 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -35935,6 +37813,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35966,8 +37845,10 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -36054,6 +37935,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36086,8 +37968,10 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -36172,6 +38056,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -36202,8 +38087,10 @@ export type VendorMasterCreateWithoutCutListInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -36291,6 +38178,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -36322,8 +38210,10 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -36425,6 +38315,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36455,8 +38346,10 @@ export type VendorMasterUpdateWithoutCutListInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -36544,6 +38437,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36575,8 +38469,10 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -36662,6 +38558,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -36692,8 +38589,10 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -36781,6 +38680,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -36812,8 +38712,10 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -36915,6 +38817,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36945,8 +38848,10 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -37034,6 +38939,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37065,8 +38971,10 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -37152,6 +39060,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -37183,8 +39092,10 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -37271,6 +39182,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -37303,8 +39215,10 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -37405,6 +39319,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37436,8 +39351,10 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -37524,6 +39441,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37556,8 +39474,10 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -37642,6 +39562,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -37673,8 +39594,10 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -37761,6 +39684,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -37793,8 +39717,10 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -37895,6 +39821,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37926,8 +39853,10 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -38014,6 +39943,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38046,8 +39976,10 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -38132,6 +40064,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -38162,8 +40095,10 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -38251,6 +40186,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -38282,8 +40218,10 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -38385,6 +40323,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38415,8 +40354,10 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -38504,6 +40445,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38535,8 +40477,10 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -38622,6 +40566,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -38652,8 +40597,10 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -38741,6 +40688,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -38772,8 +40720,10 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -38875,6 +40825,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38905,8 +40856,10 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -38994,6 +40947,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39025,8 +40979,10 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -39112,6 +41068,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -39142,8 +41099,10 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -39231,6 +41190,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -39262,8 +41222,10 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -39365,6 +41327,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39395,8 +41358,10 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -39484,6 +41449,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39515,8 +41481,10 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -39602,6 +41570,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -39632,8 +41601,10 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -39721,6 +41692,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -39752,8 +41724,10 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -39855,6 +41829,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39885,8 +41860,10 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -39974,6 +41951,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40005,8 +41983,10 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -40092,6 +42072,7 @@ export type VendorMasterCreateWithoutStateInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -40123,8 +42104,10 @@ export type VendorMasterCreateWithoutStateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -40211,6 +42194,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -40242,8 +42226,10 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -40359,6 +42345,7 @@ export type VendorMasterScalarWhereInput = {
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_client_visit_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -40384,6 +42371,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -40415,8 +42403,10 @@ export type VendorMasterCreateWithoutThemesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -40503,6 +42493,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -40535,8 +42526,10 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -40637,6 +42630,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40668,8 +42662,10 @@ export type VendorMasterUpdateWithoutThemesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -40756,6 +42752,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40788,8 +42785,10 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -40874,6 +42873,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -40905,8 +42905,10 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -40993,6 +42995,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -41025,8 +43028,10 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -41127,6 +43132,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41158,8 +43164,10 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -41246,6 +43254,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41278,8 +43287,10 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -41364,6 +43375,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -41395,8 +43407,10 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -41483,6 +43497,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -41515,8 +43530,10 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -41617,6 +43634,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41648,8 +43666,10 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -41736,6 +43756,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41768,8 +43789,10 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -41854,6 +43877,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -41885,8 +43909,10 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -41973,6 +43999,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -42005,8 +44032,10 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -42107,6 +44136,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42138,8 +44168,10 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -42226,6 +44258,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42258,8 +44291,10 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -42344,6 +44379,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -42375,8 +44411,10 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -42463,6 +44501,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -42495,8 +44534,10 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -42597,6 +44638,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42628,8 +44670,10 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -42716,6 +44760,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42748,8 +44793,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -42834,6 +44881,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -42865,8 +44913,10 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -42953,6 +45003,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -42985,8 +45036,10 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -43087,6 +45140,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43118,8 +45172,10 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -43206,6 +45262,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43238,8 +45295,10 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -43324,6 +45383,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -43355,8 +45415,10 @@ export type VendorMasterCreateWithoutBrandsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -43443,6 +45505,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -43475,8 +45538,10 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -43577,6 +45642,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43608,8 +45674,10 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -43696,6 +45764,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43728,8 +45797,10 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -43814,6 +45885,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -43845,8 +45917,10 @@ export type VendorMasterCreateWithoutProductsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -43933,6 +46007,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -43965,8 +46040,10 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -44067,6 +46144,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44098,8 +46176,10 @@ export type VendorMasterUpdateWithoutProductsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -44186,6 +46266,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44218,8 +46299,10 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -44304,6 +46387,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -44335,8 +46419,10 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -44423,6 +46509,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -44455,8 +46542,10 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -44557,6 +46646,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44588,8 +46678,10 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -44676,6 +46768,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44708,8 +46801,10 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -44794,6 +46889,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -44825,8 +46921,10 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -44913,6 +47011,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -44945,8 +47044,10 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -45047,6 +47148,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45078,8 +47180,10 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -45166,6 +47270,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45198,8 +47303,10 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -45284,6 +47391,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -45315,8 +47423,10 @@ export type VendorMasterCreateWithoutGrnsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -45403,6 +47513,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -45435,8 +47546,10 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -45537,6 +47650,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45568,8 +47682,10 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -45656,6 +47772,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45688,8 +47805,10 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -45774,6 +47893,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -45805,8 +47925,10 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -45893,6 +48015,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -45925,8 +48048,10 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -46027,6 +48152,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46058,8 +48184,10 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -46146,6 +48274,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46178,8 +48307,10 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -46264,6 +48395,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -46295,8 +48427,10 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -46383,6 +48517,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -46415,8 +48550,10 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -46517,6 +48654,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46548,8 +48686,10 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -46636,6 +48776,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46668,8 +48809,10 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -46754,6 +48897,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -46785,8 +48929,10 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -46873,6 +49019,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -46905,8 +49052,10 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -47007,6 +49156,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47038,8 +49188,10 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -47126,6 +49278,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47158,8 +49311,10 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -47244,6 +49399,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -47275,8 +49431,10 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -47363,6 +49521,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -47395,8 +49554,10 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -47497,6 +49658,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47528,8 +49690,10 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -47616,6 +49780,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47648,8 +49813,10 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -47734,6 +49901,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -47765,8 +49933,10 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -47853,6 +50023,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -47885,8 +50056,10 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -47987,6 +50160,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48018,8 +50192,10 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -48106,6 +50282,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48138,8 +50315,10 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -48224,6 +50403,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -48255,8 +50435,10 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -48343,6 +50525,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -48375,8 +50558,10 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -48477,6 +50662,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48508,8 +50694,10 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -48596,6 +50784,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48628,8 +50817,10 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -48714,6 +50905,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -48745,8 +50937,10 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
@@ -48833,6 +51027,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -48865,8 +51060,10 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
@@ -48967,6 +51164,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48998,8 +51196,10 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -49086,6 +51286,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49118,8 +51319,10 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -49205,6 +51408,7 @@ export type VendorMasterCreateManyStateInput = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean | null
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
@@ -49229,6 +51433,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49260,8 +51465,10 @@ export type VendorMasterUpdateWithoutStateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
@@ -49348,6 +51555,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49379,8 +51587,10 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
   leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
   designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
   meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
   designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
   designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
   leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
@@ -49467,6 +51677,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49506,8 +51717,10 @@ export type VendorMasterCountOutputType = {
   leadChatDocuments: number
   leadChatRooms: number
   designMeeting: number
+  clientVisits: number
   meetingTypes: number
   designMeetingDocsMapping: number
+  clientVisitDocumentMappings: number
   designSelection: number
   chsSelectionMappings: number
   leadDetailedLogs: number
@@ -49603,8 +51816,10 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   leadChatDocuments?: boolean | VendorMasterCountOutputTypeCountLeadChatDocumentsArgs
   leadChatRooms?: boolean | VendorMasterCountOutputTypeCountLeadChatRoomsArgs
   designMeeting?: boolean | VendorMasterCountOutputTypeCountDesignMeetingArgs
+  clientVisits?: boolean | VendorMasterCountOutputTypeCountClientVisitsArgs
   meetingTypes?: boolean | VendorMasterCountOutputTypeCountMeetingTypesArgs
   designMeetingDocsMapping?: boolean | VendorMasterCountOutputTypeCountDesignMeetingDocsMappingArgs
+  clientVisitDocumentMappings?: boolean | VendorMasterCountOutputTypeCountClientVisitDocumentMappingsArgs
   designSelection?: boolean | VendorMasterCountOutputTypeCountDesignSelectionArgs
   chsSelectionMappings?: boolean | VendorMasterCountOutputTypeCountChsSelectionMappingsArgs
   leadDetailedLogs?: boolean | VendorMasterCountOutputTypeCountLeadDetailedLogsArgs
@@ -49862,6 +52077,13 @@ export type VendorMasterCountOutputTypeCountDesignMeetingArgs<ExtArgs extends ru
 /**
  * VendorMasterCountOutputType without action
  */
+export type VendorMasterCountOutputTypeCountClientVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadClientVisitWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
 export type VendorMasterCountOutputTypeCountMeetingTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.MeetingTypeMasterWhereInput
 }
@@ -49871,6 +52093,13 @@ export type VendorMasterCountOutputTypeCountMeetingTypesArgs<ExtArgs extends run
  */
 export type VendorMasterCountOutputTypeCountDesignMeetingDocsMappingArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadDesignMeetingDocumentsMappingWhereInput
+}
+
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountClientVisitDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadClientVisitDocumentMappingWhereInput
 }
 
 /**
@@ -50360,6 +52589,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
@@ -50392,8 +52622,10 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   leadChatDocuments?: boolean | Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>
   leadChatRooms?: boolean | Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>
   designMeeting?: boolean | Prisma.VendorMaster$designMeetingArgs<ExtArgs>
+  clientVisits?: boolean | Prisma.VendorMaster$clientVisitsArgs<ExtArgs>
   meetingTypes?: boolean | Prisma.VendorMaster$meetingTypesArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.VendorMaster$designMeetingDocsMappingArgs<ExtArgs>
+  clientVisitDocumentMappings?: boolean | Prisma.VendorMaster$clientVisitDocumentMappingsArgs<ExtArgs>
   designSelection?: boolean | Prisma.VendorMaster$designSelectionArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>
@@ -50482,6 +52714,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
@@ -50509,6 +52742,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
@@ -50536,6 +52770,7 @@ export type VendorMasterSelectScalar = {
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
   is_this_vendor_is_custom_usertype_only?: boolean
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
@@ -50545,7 +52780,7 @@ export type VendorMasterSelectScalar = {
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -50572,8 +52807,10 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   leadChatDocuments?: boolean | Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>
   leadChatRooms?: boolean | Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>
   designMeeting?: boolean | Prisma.VendorMaster$designMeetingArgs<ExtArgs>
+  clientVisits?: boolean | Prisma.VendorMaster$clientVisitsArgs<ExtArgs>
   meetingTypes?: boolean | Prisma.VendorMaster$meetingTypesArgs<ExtArgs>
   designMeetingDocsMapping?: boolean | Prisma.VendorMaster$designMeetingDocsMappingArgs<ExtArgs>
+  clientVisitDocumentMappings?: boolean | Prisma.VendorMaster$clientVisitDocumentMappingsArgs<ExtArgs>
   designSelection?: boolean | Prisma.VendorMaster$designSelectionArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>
   leadDetailedLogs?: boolean | Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>
@@ -50679,8 +52916,10 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     leadChatDocuments: Prisma.$LeadChatDocumentPayload<ExtArgs>[]
     leadChatRooms: Prisma.$LeadChatRoomPayload<ExtArgs>[]
     designMeeting: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
+    clientVisits: Prisma.$LeadClientVisitPayload<ExtArgs>[]
     meetingTypes: Prisma.$MeetingTypeMasterPayload<ExtArgs>[]
     designMeetingDocsMapping: Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>[]
+    clientVisitDocumentMappings: Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>[]
     designSelection: Prisma.$LeadDesignSelectionPayload<ExtArgs>[]
     chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
     leadDetailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
@@ -50767,6 +53006,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
     is_approval_task_enabled: boolean
+    is_client_visit_enabled: boolean
     is_this_vendor_is_custom_usertype_only: boolean | null
     is_year_wise_lead_code_enabled: boolean
     eligible_booking_days: number | null
@@ -51193,8 +53433,10 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   leadChatDocuments<T extends Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadChatDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadChatRooms<T extends Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadChatRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadChatRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designMeeting<T extends Prisma.VendorMaster$designMeetingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$designMeetingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  clientVisits<T extends Prisma.VendorMaster$clientVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$clientVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   meetingTypes<T extends Prisma.VendorMaster$meetingTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$meetingTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MeetingTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designMeetingDocsMapping<T extends Prisma.VendorMaster$designMeetingDocsMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$designMeetingDocsMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingDocumentsMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  clientVisitDocumentMappings<T extends Prisma.VendorMaster$clientVisitDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$clientVisitDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   designSelection<T extends Prisma.VendorMaster$designSelectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$designSelectionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignSelectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chsSelectionMappings<T extends Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDetailedLogs<T extends Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$leadDetailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -51308,6 +53550,7 @@ export interface VendorMasterFieldRefs {
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_client_visit_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_this_vendor_is_custom_usertype_only: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_year_wise_lead_code_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
@@ -52316,6 +54559,30 @@ export type VendorMaster$designMeetingArgs<ExtArgs extends runtime.Types.Extensi
 }
 
 /**
+ * VendorMaster.clientVisits
+ */
+export type VendorMaster$clientVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadClientVisit
+   */
+  select?: Prisma.LeadClientVisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadClientVisit
+   */
+  omit?: Prisma.LeadClientVisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadClientVisitInclude<ExtArgs> | null
+  where?: Prisma.LeadClientVisitWhereInput
+  orderBy?: Prisma.LeadClientVisitOrderByWithRelationInput | Prisma.LeadClientVisitOrderByWithRelationInput[]
+  cursor?: Prisma.LeadClientVisitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadClientVisitScalarFieldEnum | Prisma.LeadClientVisitScalarFieldEnum[]
+}
+
+/**
  * VendorMaster.meetingTypes
  */
 export type VendorMaster$meetingTypesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -52361,6 +54628,30 @@ export type VendorMaster$designMeetingDocsMappingArgs<ExtArgs extends runtime.Ty
   take?: number
   skip?: number
   distinct?: Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum | Prisma.LeadDesignMeetingDocumentsMappingScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.clientVisitDocumentMappings
+ */
+export type VendorMaster$clientVisitDocumentMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadClientVisitDocumentMapping
+   */
+  select?: Prisma.LeadClientVisitDocumentMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadClientVisitDocumentMapping
+   */
+  omit?: Prisma.LeadClientVisitDocumentMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadClientVisitDocumentMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadClientVisitDocumentMappingWhereInput
+  orderBy?: Prisma.LeadClientVisitDocumentMappingOrderByWithRelationInput | Prisma.LeadClientVisitDocumentMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadClientVisitDocumentMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadClientVisitDocumentMappingScalarFieldEnum | Prisma.LeadClientVisitDocumentMappingScalarFieldEnum[]
 }
 
 /**

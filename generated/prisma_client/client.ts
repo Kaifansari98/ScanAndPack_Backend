@@ -285,6 +285,11 @@ export type LeadStatusLogs = Prisma.LeadStatusLogsModel
  */
 export type LeadDesignMeeting = Prisma.LeadDesignMeetingModel
 /**
+ * Model LeadClientVisit
+ * 
+ */
+export type LeadClientVisit = Prisma.LeadClientVisitModel
+/**
  * Model MeetingTypeMaster
  * 
  */
@@ -294,6 +299,11 @@ export type MeetingTypeMaster = Prisma.MeetingTypeMasterModel
  * 
  */
 export type LeadDesignMeetingDocumentsMapping = Prisma.LeadDesignMeetingDocumentsMappingModel
+/**
+ * Model LeadClientVisitDocumentMapping
+ * 
+ */
+export type LeadClientVisitDocumentMapping = Prisma.LeadClientVisitDocumentMappingModel
 /**
  * Model LeadDesignSelection
  * 

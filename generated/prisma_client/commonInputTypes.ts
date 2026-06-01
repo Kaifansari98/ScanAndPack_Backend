@@ -507,6 +507,40 @@ export type EnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaModel = 
   _max?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
 }
 
+export type EnumClientVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitType | Prisma.EnumClientVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel> | $Enums.ClientVisitType
+}
+
+export type EnumClientVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitType | Prisma.EnumClientVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.ClientVisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel>
+}
+
+export type EnumClientVisitDocumentRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitDocumentRole | Prisma.EnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel> | $Enums.ClientVisitDocumentRole
+}
+
+export type EnumClientVisitDocumentRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitDocumentRole | Prisma.EnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitDocumentRoleWithAggregatesFilter<$PrismaModel> | $Enums.ClientVisitDocumentRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel>
+}
+
 export type EnumSupervisorStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.SupervisorStatus | Prisma.EnumSupervisorStatusFieldRefInput<$PrismaModel>
   in?: $Enums.SupervisorStatus[] | Prisma.ListEnumSupervisorStatusFieldRefInput<$PrismaModel>
@@ -1706,6 +1740,40 @@ export type NestedEnumServiceClosureReasonNullableWithAggregatesFilter<$PrismaMo
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
   _max?: Prisma.NestedEnumServiceClosureReasonNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumClientVisitTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitType | Prisma.EnumClientVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel> | $Enums.ClientVisitType
+}
+
+export type NestedEnumClientVisitTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitType | Prisma.EnumClientVisitTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitType[] | Prisma.ListEnumClientVisitTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitTypeWithAggregatesFilter<$PrismaModel> | $Enums.ClientVisitType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumClientVisitTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumClientVisitDocumentRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitDocumentRole | Prisma.EnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel> | $Enums.ClientVisitDocumentRole
+}
+
+export type NestedEnumClientVisitDocumentRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ClientVisitDocumentRole | Prisma.EnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ClientVisitDocumentRole[] | Prisma.ListEnumClientVisitDocumentRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumClientVisitDocumentRoleWithAggregatesFilter<$PrismaModel> | $Enums.ClientVisitDocumentRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumClientVisitDocumentRoleFilter<$PrismaModel>
 }
 
 export type NestedEnumSupervisorStatusFilter<$PrismaModel = never> = {

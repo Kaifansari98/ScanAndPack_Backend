@@ -100,8 +100,10 @@ export const ModelName = {
   StatusTypeMaster: 'StatusTypeMaster',
   LeadStatusLogs: 'LeadStatusLogs',
   LeadDesignMeeting: 'LeadDesignMeeting',
+  LeadClientVisit: 'LeadClientVisit',
   MeetingTypeMaster: 'MeetingTypeMaster',
   LeadDesignMeetingDocumentsMapping: 'LeadDesignMeetingDocumentsMapping',
+  LeadClientVisitDocumentMapping: 'LeadClientVisitDocumentMapping',
   LeadDesignSelection: 'LeadDesignSelection',
   CHSSelectionTypeMapping: 'CHSSelectionTypeMapping',
   PaymentTypeMaster: 'PaymentTypeMaster',
@@ -218,6 +220,7 @@ export const VendorMasterScalarFieldEnum = {
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',
   is_approval_task_enabled: 'is_approval_task_enabled',
+  is_client_visit_enabled: 'is_client_visit_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
   eligible_booking_days: 'eligible_booking_days',
@@ -1018,6 +1021,26 @@ export const LeadDesignMeetingScalarFieldEnum = {
 export type LeadDesignMeetingScalarFieldEnum = (typeof LeadDesignMeetingScalarFieldEnum)[keyof typeof LeadDesignMeetingScalarFieldEnum]
 
 
+export const LeadClientVisitScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  vendor_id: 'vendor_id',
+  meeting_type_id: 'meeting_type_id',
+  visit_type: 'visit_type',
+  date: 'date',
+  location: 'location',
+  remark: 'remark',
+  expense_incurred: 'expense_incurred',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type LeadClientVisitScalarFieldEnum = (typeof LeadClientVisitScalarFieldEnum)[keyof typeof LeadClientVisitScalarFieldEnum]
+
+
 export const MeetingTypeMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -1040,6 +1063,21 @@ export const LeadDesignMeetingDocumentsMappingScalarFieldEnum = {
 } as const
 
 export type LeadDesignMeetingDocumentsMappingScalarFieldEnum = (typeof LeadDesignMeetingDocumentsMappingScalarFieldEnum)[keyof typeof LeadDesignMeetingDocumentsMappingScalarFieldEnum]
+
+
+export const LeadClientVisitDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  vendor_id: 'vendor_id',
+  client_visit_id: 'client_visit_id',
+  document_id: 'document_id',
+  document_role: 'document_role',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadClientVisitDocumentMappingScalarFieldEnum = (typeof LeadClientVisitDocumentMappingScalarFieldEnum)[keyof typeof LeadClientVisitDocumentMappingScalarFieldEnum]
 
 
 export const LeadDesignSelectionScalarFieldEnum = {

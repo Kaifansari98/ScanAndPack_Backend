@@ -319,6 +319,22 @@ export const LeadApprovalRequestDocumentRole = {
 export type LeadApprovalRequestDocumentRole = (typeof LeadApprovalRequestDocumentRole)[keyof typeof LeadApprovalRequestDocumentRole]
 
 
+export const ClientVisitType = {
+  physical_visit: 'physical_visit',
+  follow_up_call: 'follow_up_call'
+} as const
+
+export type ClientVisitType = (typeof ClientVisitType)[keyof typeof ClientVisitType]
+
+
+export const ClientVisitDocumentRole = {
+  supporting_document: 'supporting_document',
+  payment_proof: 'payment_proof'
+} as const
+
+export type ClientVisitDocumentRole = (typeof ClientVisitDocumentRole)[keyof typeof ClientVisitDocumentRole]
+
+
 export const LeadChatMessageType = {
   text: 'text',
   attachment: 'attachment',

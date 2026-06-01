@@ -213,6 +213,7 @@ export type MeetingTypeMasterWhereInput = {
   type?: Prisma.StringFilter<"MeetingTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"MeetingTypeMaster"> | Date | string
   meetings?: Prisma.LeadDesignMeetingListRelationFilter
+  clientVisits?: Prisma.LeadClientVisitListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -222,6 +223,7 @@ export type MeetingTypeMasterOrderByWithRelationInput = {
   type?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   meetings?: Prisma.LeadDesignMeetingOrderByRelationAggregateInput
+  clientVisits?: Prisma.LeadClientVisitOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -234,6 +236,7 @@ export type MeetingTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.StringFilter<"MeetingTypeMaster"> | string
   created_at?: Prisma.DateTimeFilter<"MeetingTypeMaster"> | Date | string
   meetings?: Prisma.LeadDesignMeetingListRelationFilter
+  clientVisits?: Prisma.LeadClientVisitListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -263,6 +266,7 @@ export type MeetingTypeMasterCreateInput = {
   type: string
   created_at?: Date | string
   meetings?: Prisma.LeadDesignMeetingCreateNestedManyWithoutMeetingTypeInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutMeetingTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMeetingTypesInput
 }
 
@@ -272,12 +276,14 @@ export type MeetingTypeMasterUncheckedCreateInput = {
   type: string
   created_at?: Date | string
   meetings?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutMeetingTypeInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutMeetingTypeInput
 }
 
 export type MeetingTypeMasterUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meetings?: Prisma.LeadDesignMeetingUpdateManyWithoutMeetingTypeNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutMeetingTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMeetingTypesNestedInput
 }
 
@@ -287,6 +293,7 @@ export type MeetingTypeMasterUncheckedUpdateInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meetings?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutMeetingTypeNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutMeetingTypeNestedInput
 }
 
 export type MeetingTypeMasterCreateManyInput = {
@@ -412,10 +419,27 @@ export type MeetingTypeMasterUpdateOneWithoutMeetingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MeetingTypeMasterUpdateToOneWithWhereWithoutMeetingsInput, Prisma.MeetingTypeMasterUpdateWithoutMeetingsInput>, Prisma.MeetingTypeMasterUncheckedUpdateWithoutMeetingsInput>
 }
 
+export type MeetingTypeMasterCreateNestedOneWithoutClientVisitsInput = {
+  create?: Prisma.XOR<Prisma.MeetingTypeMasterCreateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedCreateWithoutClientVisitsInput>
+  connectOrCreate?: Prisma.MeetingTypeMasterCreateOrConnectWithoutClientVisitsInput
+  connect?: Prisma.MeetingTypeMasterWhereUniqueInput
+}
+
+export type MeetingTypeMasterUpdateOneWithoutClientVisitsNestedInput = {
+  create?: Prisma.XOR<Prisma.MeetingTypeMasterCreateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedCreateWithoutClientVisitsInput>
+  connectOrCreate?: Prisma.MeetingTypeMasterCreateOrConnectWithoutClientVisitsInput
+  upsert?: Prisma.MeetingTypeMasterUpsertWithoutClientVisitsInput
+  disconnect?: Prisma.MeetingTypeMasterWhereInput | boolean
+  delete?: Prisma.MeetingTypeMasterWhereInput | boolean
+  connect?: Prisma.MeetingTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MeetingTypeMasterUpdateToOneWithWhereWithoutClientVisitsInput, Prisma.MeetingTypeMasterUpdateWithoutClientVisitsInput>, Prisma.MeetingTypeMasterUncheckedUpdateWithoutClientVisitsInput>
+}
+
 export type MeetingTypeMasterCreateWithoutVendorInput = {
   type: string
   created_at?: Date | string
   meetings?: Prisma.LeadDesignMeetingCreateNestedManyWithoutMeetingTypeInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutMeetingTypeInput
 }
 
 export type MeetingTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -423,6 +447,7 @@ export type MeetingTypeMasterUncheckedCreateWithoutVendorInput = {
   type: string
   created_at?: Date | string
   meetings?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutMeetingTypeInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutMeetingTypeInput
 }
 
 export type MeetingTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -464,6 +489,7 @@ export type MeetingTypeMasterScalarWhereInput = {
 export type MeetingTypeMasterCreateWithoutMeetingsInput = {
   type: string
   created_at?: Date | string
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutMeetingTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutMeetingTypesInput
 }
 
@@ -472,6 +498,7 @@ export type MeetingTypeMasterUncheckedCreateWithoutMeetingsInput = {
   vendor_id: number
   type: string
   created_at?: Date | string
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutMeetingTypeInput
 }
 
 export type MeetingTypeMasterCreateOrConnectWithoutMeetingsInput = {
@@ -493,6 +520,7 @@ export type MeetingTypeMasterUpdateToOneWithWhereWithoutMeetingsInput = {
 export type MeetingTypeMasterUpdateWithoutMeetingsInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutMeetingTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMeetingTypesNestedInput
 }
 
@@ -501,6 +529,53 @@ export type MeetingTypeMasterUncheckedUpdateWithoutMeetingsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutMeetingTypeNestedInput
+}
+
+export type MeetingTypeMasterCreateWithoutClientVisitsInput = {
+  type: string
+  created_at?: Date | string
+  meetings?: Prisma.LeadDesignMeetingCreateNestedManyWithoutMeetingTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutMeetingTypesInput
+}
+
+export type MeetingTypeMasterUncheckedCreateWithoutClientVisitsInput = {
+  id?: number
+  vendor_id: number
+  type: string
+  created_at?: Date | string
+  meetings?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutMeetingTypeInput
+}
+
+export type MeetingTypeMasterCreateOrConnectWithoutClientVisitsInput = {
+  where: Prisma.MeetingTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.MeetingTypeMasterCreateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedCreateWithoutClientVisitsInput>
+}
+
+export type MeetingTypeMasterUpsertWithoutClientVisitsInput = {
+  update: Prisma.XOR<Prisma.MeetingTypeMasterUpdateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedUpdateWithoutClientVisitsInput>
+  create: Prisma.XOR<Prisma.MeetingTypeMasterCreateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedCreateWithoutClientVisitsInput>
+  where?: Prisma.MeetingTypeMasterWhereInput
+}
+
+export type MeetingTypeMasterUpdateToOneWithWhereWithoutClientVisitsInput = {
+  where?: Prisma.MeetingTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.MeetingTypeMasterUpdateWithoutClientVisitsInput, Prisma.MeetingTypeMasterUncheckedUpdateWithoutClientVisitsInput>
+}
+
+export type MeetingTypeMasterUpdateWithoutClientVisitsInput = {
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meetings?: Prisma.LeadDesignMeetingUpdateManyWithoutMeetingTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutMeetingTypesNestedInput
+}
+
+export type MeetingTypeMasterUncheckedUpdateWithoutClientVisitsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meetings?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutMeetingTypeNestedInput
 }
 
 export type MeetingTypeMasterCreateManyVendorInput = {
@@ -513,6 +588,7 @@ export type MeetingTypeMasterUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meetings?: Prisma.LeadDesignMeetingUpdateManyWithoutMeetingTypeNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutMeetingTypeNestedInput
 }
 
 export type MeetingTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -520,6 +596,7 @@ export type MeetingTypeMasterUncheckedUpdateWithoutVendorInput = {
   type?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   meetings?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutMeetingTypeNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutMeetingTypeNestedInput
 }
 
 export type MeetingTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -535,10 +612,12 @@ export type MeetingTypeMasterUncheckedUpdateManyWithoutVendorInput = {
 
 export type MeetingTypeMasterCountOutputType = {
   meetings: number
+  clientVisits: number
 }
 
 export type MeetingTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meetings?: boolean | MeetingTypeMasterCountOutputTypeCountMeetingsArgs
+  clientVisits?: boolean | MeetingTypeMasterCountOutputTypeCountClientVisitsArgs
 }
 
 /**
@@ -558,6 +637,13 @@ export type MeetingTypeMasterCountOutputTypeCountMeetingsArgs<ExtArgs extends ru
   where?: Prisma.LeadDesignMeetingWhereInput
 }
 
+/**
+ * MeetingTypeMasterCountOutputType without action
+ */
+export type MeetingTypeMasterCountOutputTypeCountClientVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadClientVisitWhereInput
+}
+
 
 export type MeetingTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -565,6 +651,7 @@ export type MeetingTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   type?: boolean
   created_at?: boolean
   meetings?: boolean | Prisma.MeetingTypeMaster$meetingsArgs<ExtArgs>
+  clientVisits?: boolean | Prisma.MeetingTypeMaster$clientVisitsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MeetingTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["meetingTypeMaster"]>
@@ -595,6 +682,7 @@ export type MeetingTypeMasterSelectScalar = {
 export type MeetingTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "type" | "created_at", ExtArgs["result"]["meetingTypeMaster"]>
 export type MeetingTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   meetings?: boolean | Prisma.MeetingTypeMaster$meetingsArgs<ExtArgs>
+  clientVisits?: boolean | Prisma.MeetingTypeMaster$clientVisitsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.MeetingTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -609,6 +697,7 @@ export type $MeetingTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
   name: "MeetingTypeMaster"
   objects: {
     meetings: Prisma.$LeadDesignMeetingPayload<ExtArgs>[]
+    clientVisits: Prisma.$LeadClientVisitPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1011,6 +1100,7 @@ readonly fields: MeetingTypeMasterFieldRefs;
 export interface Prisma__MeetingTypeMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   meetings<T extends Prisma.MeetingTypeMaster$meetingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeetingTypeMaster$meetingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDesignMeetingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  clientVisits<T extends Prisma.MeetingTypeMaster$clientVisitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MeetingTypeMaster$clientVisitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1467,6 +1557,30 @@ export type MeetingTypeMaster$meetingsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.LeadDesignMeetingScalarFieldEnum | Prisma.LeadDesignMeetingScalarFieldEnum[]
+}
+
+/**
+ * MeetingTypeMaster.clientVisits
+ */
+export type MeetingTypeMaster$clientVisitsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadClientVisit
+   */
+  select?: Prisma.LeadClientVisitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadClientVisit
+   */
+  omit?: Prisma.LeadClientVisitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadClientVisitInclude<ExtArgs> | null
+  where?: Prisma.LeadClientVisitWhereInput
+  orderBy?: Prisma.LeadClientVisitOrderByWithRelationInput | Prisma.LeadClientVisitOrderByWithRelationInput[]
+  cursor?: Prisma.LeadClientVisitWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadClientVisitScalarFieldEnum | Prisma.LeadClientVisitScalarFieldEnum[]
 }
 
 /**
