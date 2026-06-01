@@ -121,6 +121,12 @@ type AssignDesignerInput = {
   created_by: number;
 };
 
+type ToggleLeadBlockInput = {
+  vendor_id: number;
+  lead_id: number;
+  updated_by: number;
+};
+
 const editTaskISMSchema = Joi.object({
   lead_id: Joi.number().integer().positive().required(),
   task_id: Joi.number().integer().positive().required(),
@@ -2160,6 +2166,93 @@ export const updateLeadService = async (
   }
 
   return result;
+};
+
+const setLeadBlockedState = async (
+  payload: ToggleLeadBlockInput,
+  isBlocked: boolean,
+) => {
+  const { vendor_id, lead_id, updated_by } = payload;
+
+  return prisma.$transaction(async (tx) => {
+    const existingLead = await tx.leadMaster.findFirst({
+      where: {
+        id: lead_id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        account_id: true,
+        is_blocked: true,
+      },
+    });
+
+    if (!existingLead || !existingLead.account_id) {
+      throw new Error(`Lead with ID ${lead_id} not found`);
+    }
+
+    const blockedAt = isBlocked ? new Date() : null;
+
+    const updatedLead = await tx.leadMaster.update({
+      where: { id: lead_id },
+      data: {
+        is_blocked: isBlocked,
+        lead_blocked_at: blockedAt,
+        updated_by,
+        updated_at: new Date(),
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        is_blocked: true,
+        lead_blocked_at: true,
+        updated_by: true,
+        updated_at: true,
+      },
+    });
+
+    await createLeadLog(tx, {
+      vendor_id,
+      lead_id,
+      account_id: existingLead.account_id,
+      action: isBlocked ? "Lead blocked" : "Lead unblocked",
+      action_type: "UPDATE",
+      created_by: updated_by,
+      history_type: "Lead",
+    });
+
+    return updatedLead;
+  });
+};
+
+export const blockLeadService = async (payload: ToggleLeadBlockInput) =>
+  setLeadBlockedState(payload, true);
+
+export const unblockLeadService = async (payload: ToggleLeadBlockInput) =>
+  setLeadBlockedState(payload, false);
+
+export const getLeadBlockStatus = async (vendorId: number, leadId: number) => {
+  const lead = await prisma.leadMaster.findFirst({
+    where: {
+      id: leadId,
+      vendor_id: vendorId,
+      is_deleted: false,
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      is_blocked: true,
+      lead_blocked_at: true,
+    },
+  });
+
+  if (!lead) {
+    throw new Error(`Lead with ID ${leadId} not found`);
+  }
+
+  return lead;
 };
 
 export const isContactOrEmailExists = async (

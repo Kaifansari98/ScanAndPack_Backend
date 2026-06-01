@@ -11,6 +11,7 @@ import {
   createLeadProductStructureInstance,
   getSiteSupervisorByVendor,
   getHeadSiteSupervisorByVendor,
+  getLeadBlockStatus,
   softDeleteLead,
   updateLeadService,
   verifyUserTokenService,
@@ -19,6 +20,8 @@ import {
   uploadMoreSitePhotosService,
   checkSiteSupervisorAssigned,
   assignDesignerToLead,
+  blockLeadService,
+  unblockLeadService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import {
   createLeadSchema,
@@ -1316,6 +1319,130 @@ export class LeadController {
             500,
           ),
         );
+    }
+  }
+
+  async blockLead(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getSingleBodyValue(req.body.updated_by));
+
+      if (!vendorId || isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!leadId || isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!updatedBy || isNaN(updatedBy)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid updated_by provided", 400));
+      }
+
+      const result = await blockLeadService({
+        vendor_id: vendorId,
+        lead_id: leadId,
+        updated_by: updatedBy,
+      });
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Lead blocked successfully", 200));
+    } catch (error: any) {
+      if (error.message?.includes("not found")) {
+        return res.status(404).json(ApiResponse.error(error.message, 404));
+      }
+
+      logger.error("[CONTROLLER] blockLead error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
+
+  async unblockLead(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const updatedBy = Number(getSingleBodyValue(req.body.updated_by));
+
+      if (!vendorId || isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!leadId || isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!updatedBy || isNaN(updatedBy)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid updated_by provided", 400));
+      }
+
+      const result = await unblockLeadService({
+        vendor_id: vendorId,
+        lead_id: leadId,
+        updated_by: updatedBy,
+      });
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Lead unblocked successfully", 200));
+    } catch (error: any) {
+      if (error.message?.includes("not found")) {
+        return res.status(404).json(ApiResponse.error(error.message, 404));
+      }
+
+      logger.error("[CONTROLLER] unblockLead error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  }
+
+  async getLeadBlockStatus(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+
+      if (!vendorId || isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      if (!leadId || isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      const result = await getLeadBlockStatus(vendorId, leadId);
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Lead block status fetched successfully", 200));
+    } catch (error: any) {
+      if (error.message?.includes("not found")) {
+        return res.status(404).json(ApiResponse.error(error.message, 404));
+      }
+
+      logger.error("[CONTROLLER] getLeadBlockStatus error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
     }
   }
 

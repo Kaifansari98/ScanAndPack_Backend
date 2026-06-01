@@ -123,6 +123,18 @@ leadsRouter.delete(
 );
 
 leadsRouter.put("/update/:leadId/userId/:userId", leadController.updateLead);
+leadsRouter.patch(
+  "/vendorId/:vendorId/leadId/:leadId/block",
+  leadController.blockLead
+);
+leadsRouter.patch(
+  "/vendorId/:vendorId/leadId/:leadId/unblock",
+  leadController.unblockLead
+);
+leadsRouter.get(
+  "/vendorId/:vendorId/leadId/:leadId/block-status",
+  leadController.getLeadBlockStatus
+);
 leadsRouter.put(
   "/update-product-type/:leadId/userId/:userId",
   leadController.updateLeadProductType
