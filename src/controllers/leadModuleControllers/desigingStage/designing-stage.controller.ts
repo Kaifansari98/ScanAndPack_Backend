@@ -4,6 +4,9 @@ import { ApiResponse } from "../../../utils/apiResponse";
 import { DesigingStage } from "../../../services/leadModuleServices/desigingStage/designing-stage.service";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
+import { sendNewMeetingAddedEmail } from "../../../services/email/brevoEmail.service";
 import {
   generateSignedUrl,
   uploadToWasabi,
@@ -14,6 +17,24 @@ import {
 import fs from "node:fs/promises";
 import path from "node:path";
 import { sanitizeFilename } from "../../../utils/fileUtils";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
 
 export class DesigingStageController {
   public static async addToDesigingStage(req: Request, res: Response) {
@@ -591,6 +612,64 @@ export class DesigingStageController {
           };
         },
       );
+
+      const designerMapping = await prisma.leadUserMapping.findFirst({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          type: "designer",
+          status: "active",
+          user_id: { not: Number(userId) },
+        },
+        select: {
+          user_id: true,
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+        },
+      });
+
+      if (designerMapping?.user?.user_email) {
+        const redirectPath = `/dashboard/leads/designing-stage/details/${Number(leadId)}?accountId=${Number(accountId)}&tab=meetings`;
+        const detailsUrl = `${resolveClientBaseUrl(req)}${redirectPath}`;
+        const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+        const notificationMessage = `A new meeting has been added on ${lead.lead_code} - ${leadName}. Click to view the meeting details`;
+        const formattedMeetingDate = new Date(date).toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        });
+
+        await Promise.allSettled([
+          NotificationService.createAndSend({
+            vendor_id: Number(vendorId),
+            user_id: designerMapping.user_id,
+            sender_id: Number(userId),
+            type: NotificationType.LEAD_ACTION,
+            title: "New Meeting Added",
+            message: notificationMessage,
+            entity_type: "lead_design_meeting",
+            entity_id: meeting.id,
+            redirect_url: redirectPath,
+          }),
+          sendNewMeetingAddedEmail({
+            vendor_id: Number(vendorId),
+            toEmail: designerMapping.user.user_email,
+            toName: designerMapping.user.user_name,
+            leadCode: lead.lead_code,
+            leadName,
+            meetingDate: formattedMeetingDate,
+            meetingDescription: desc?.trim() || "",
+            detailsUrl,
+          }),
+        ]);
+      }
 
       return res.status(201).json({
         success: true,

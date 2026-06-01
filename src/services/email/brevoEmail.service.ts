@@ -59,6 +59,17 @@ export type ChatMentionEmailPayload = {
   conversationUrl?: string;
 };
 
+export type NewMeetingAddedEmailPayload = {
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  meetingDate: string;
+  meetingDescription?: string | null;
+  detailsUrl?: string;
+};
+
 export type MajorMilestoneEmailPayload = {
   vendor_id: number;
   toEmail: string;
@@ -405,6 +416,86 @@ export const sendBrevoEmail = async (
     });
     return { success: false, error: error?.message };
   }
+};
+
+export const sendNewMeetingAddedEmail = async (
+  payload: NewMeetingAddedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `New Meeting Added - ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hello ${payload.toName ?? "there"},`,
+    "",
+    `A new meeting has been added on ${payload.leadCode} - ${payload.leadName}.`,
+    `Meeting Date: ${payload.meetingDate}`,
+    payload.meetingDescription?.trim()
+      ? `Meeting Description: ${payload.meetingDescription.trim()}`
+      : "",
+    "",
+    "Click to view the meeting details.",
+    payload.detailsUrl ? `View Meeting Details: ${payload.detailsUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body style="margin:0; padding:0; background:#f5f7fb; font-family:Arial, sans-serif; color:#111827;">
+  <div style="max-width:640px; margin:0 auto; padding:24px 16px;">
+    <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:16px; overflow:hidden;">
+      <div style="padding:24px;">
+        <h2 style="margin:0 0 12px; font-size:22px; line-height:1.3;">New Meeting Added</h2>
+        <p style="margin:0 0 16px; color:#4b5563;">
+          A new meeting has been added on <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+        </p>
+        <div style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:12px; padding:16px; margin-bottom:16px;">
+          <p style="margin:0 0 8px;"><strong>Meeting Date:</strong> ${payload.meetingDate}</p>
+          ${
+            payload.meetingDescription?.trim()
+              ? `<p style="margin:0;"><strong>Meeting Description:</strong> ${payload.meetingDescription.trim()}</p>`
+              : ""
+          }
+        </div>
+        <p style="margin:0 0 16px; color:#4b5563;">
+          Click below to view the meeting details.
+        </p>
+        ${
+          payload.detailsUrl
+            ? `<div style="margin-top:16px;">
+          <a
+            href="${payload.detailsUrl}"
+            style="display:inline-block; background:#111827; color:#ffffff; text-decoration:none; padding:10px 16px; border-radius:8px; font-size:14px;"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View Meeting Details
+          </a>
+        </div>`
+            : ""
+        }
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+  `;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject: defaultSubject,
+      text: defaultText,
+      html: defaultHtml,
+    },
+    identity,
+  );
 };
 //1
 export const sendLeadCreatedEmail = async (
