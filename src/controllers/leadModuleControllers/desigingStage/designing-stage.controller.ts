@@ -1070,7 +1070,7 @@ export class DesigingStageController {
             });
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^R(\d+)-/i);
+                const match = doc.doc_og_name?.match(/^[DR](\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
@@ -1086,7 +1086,7 @@ export class DesigingStageController {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
                   const extension = path.extname(file.originalname || "");
-                  const renamedOriginalName = `R${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
                   nextRevision += 1;
                   return renamedOriginalName;
                 })()

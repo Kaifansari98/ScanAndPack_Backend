@@ -25,7 +25,9 @@ function buildQuotationNameFromDesign(
 ) {
   const designNameWithoutExtension = path.parse(designOriginalName).name;
   const quotationExtension = path.extname(quotationOriginalName || "");
-  const designMatch = designNameWithoutExtension.match(/^R(\d+)-(.+)-\d{4}-\d{2}-\d{2}$/i);
+  const designMatch = designNameWithoutExtension.match(
+    /^[DR](\d+)-(.+)-\d{4}-\d{2}-\d{2}$/i,
+  );
 
   if (!designMatch) {
     throw new Error("Selected design file name is invalid for quotation naming");
