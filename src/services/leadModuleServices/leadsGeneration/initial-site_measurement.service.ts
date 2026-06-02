@@ -618,9 +618,13 @@ export class PaymentUploadService {
         message: "Upload completed successfully",
       };
 
-      const uploadedSitePhotos: { originalName: string; s3Key: string }[] = [];
+      const uploadedSitePhotos: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
       if (data.sitePhotos && data.sitePhotos.length > 0) {
-        for (const photo of data.sitePhotos) {
+        for (const [index, photo] of data.sitePhotos.entries()) {
           const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
             photo.path,
             data.vendor_id,
@@ -634,12 +638,18 @@ export class PaymentUploadService {
           uploadedSitePhotos.push({
             originalName: photo.originalname,
             s3Key,
+            productStructureInstanceId:
+              data.sitePhotoInstanceIds?.[index] ?? null,
           });
         }
       }
 
-      const uploadedPdfDocuments: { originalName: string; s3Key: string }[] = [];
-      for (const pdfFile of data.pdfFiles) {
+      const uploadedPdfDocuments: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+      for (const [index, pdfFile] of data.pdfFiles.entries()) {
         const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
           pdfFile.path,
           data.vendor_id,
@@ -652,6 +662,7 @@ export class PaymentUploadService {
         uploadedPdfDocuments.push({
           originalName: pdfFile.originalname,
           s3Key: pdfS3Key,
+          productStructureInstanceId: data.pdfFileInstanceIds?.[index] ?? null,
         });
       }
 
@@ -693,6 +704,8 @@ export class PaymentUploadService {
                   account_id: data.account_id,
                   lead_id: data.lead_id,
                   vendor_id: data.vendor_id,
+                  product_structure_instance_id:
+                    uploaded.productStructureInstanceId,
                 },
               });
 
@@ -726,6 +739,8 @@ export class PaymentUploadService {
                 account_id: data.account_id,
                 lead_id: data.lead_id,
                 vendor_id: data.vendor_id,
+                product_structure_instance_id:
+                  uploadedPdf.productStructureInstanceId,
               },
             });
 

@@ -45,6 +45,64 @@ export class PaymentUploadController {
     this.paymentUploadService = new PaymentUploadService();
   }
 
+  private parseInstanceIdArray(
+    raw: unknown,
+    expectedLength: number,
+  ): (number | null)[] | undefined {
+    if (raw == null || raw === "") return undefined;
+
+    let parsed: unknown = raw;
+    if (typeof raw === "string") {
+      try {
+        parsed = JSON.parse(raw);
+      } catch {
+        throw new Error("Invalid instance mapping payload");
+      }
+    }
+
+    if (!Array.isArray(parsed)) {
+      throw new Error("Instance mapping payload must be an array");
+    }
+
+    if (parsed.length !== expectedLength) {
+      throw new Error("Instance mapping count does not match uploaded files");
+    }
+
+    return parsed.map((value) => {
+      if (value == null || value === "") return null;
+      const numeric = Number(value);
+      if (Number.isNaN(numeric)) {
+        throw new Error("Instance mapping contains a non-numeric value");
+      }
+      return numeric;
+    });
+  }
+
+  private async validateInstanceIdsForLead(
+    leadId: number,
+    vendorId: number,
+    instanceIds: (number | null)[] | undefined,
+  ) {
+    const concreteIds = Array.from(
+      new Set((instanceIds ?? []).filter((value): value is number => value != null)),
+    );
+
+    if (!concreteIds.length) return;
+
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        id: { in: concreteIds },
+      },
+      select: { id: true },
+    });
+
+    if (instances.length !== concreteIds.length) {
+      throw new Error("One or more product structure instances are invalid for this lead");
+    }
+  }
+
   public getISMDetailsByLeadId = async (
     req: Request,
     res: Response,
@@ -323,6 +381,8 @@ export class PaymentUploadController {
       const sitePhotos = files?.current_site_photos || [];
       const pdfFiles = files?.upload_pdf || [];
       const paymentImageFile = files?.payment_image?.[0];
+      let sitePhotoInstanceIds: (number | null)[] | undefined;
+      let pdfFileInstanceIds: (number | null)[] | undefined;
 
       // Validate image files for site photos
       const validImageTypes = [
@@ -385,6 +445,37 @@ export class PaymentUploadController {
         return;
       }
 
+      try {
+        sitePhotoInstanceIds = this.parseInstanceIdArray(
+          req.body.current_site_photo_instance_ids,
+          sitePhotos.length,
+        );
+        pdfFileInstanceIds = this.parseInstanceIdArray(
+          req.body.upload_pdf_instance_ids,
+          pdfFiles.length,
+        );
+      } catch (mappingError: any) {
+        res.status(400).json({
+          success: false,
+          message: mappingError?.message || "Invalid instance mapping payload",
+        });
+        return;
+      }
+
+      try {
+        await this.validateInstanceIdsForLead(
+          parseInt(lead_id),
+          parseInt(vendor_id),
+          [...(sitePhotoInstanceIds ?? []), ...(pdfFileInstanceIds ?? [])],
+        );
+      } catch (instanceError: any) {
+        res.status(400).json({
+          success: false,
+          message: instanceError?.message || "Invalid product structure instance mapping",
+        });
+        return;
+      }
+
       // Create DTO
       const createDto: CreatePaymentUploadDto = {
         lead_id: parseInt(lead_id),
@@ -400,7 +491,9 @@ export class PaymentUploadController {
           : undefined,
         payment_text: req.body.payment_text || undefined,
         sitePhotos,
+        sitePhotoInstanceIds,
         pdfFiles,
+        pdfFileInstanceIds,
         paymentImageFile,
       };
 
