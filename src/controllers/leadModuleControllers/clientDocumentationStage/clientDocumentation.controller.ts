@@ -81,9 +81,10 @@ export class ClientDocumentationController {
   }
 
   private static sanitizeSegment(value: string, fallback: string) {
-    const normalized = sanitizeFilename((value || "").trim().replace(/\s+/g, "_"))
-      .replace(/_+/g, "_")
-      .replace(/^_+|_+$/g, "");
+    const normalized = sanitizeFilename((value || "").trim().replace(/\s+/g, "-"))
+      .replace(/_+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-+|-+$/g, "");
 
     return normalized || fallback;
   }
