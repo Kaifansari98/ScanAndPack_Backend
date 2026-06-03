@@ -35,6 +35,37 @@ const service = new DispatchStageService();
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+const getProductionStageFactoryUser = async (
+  vendorId: number,
+  leadId: number,
+) => {
+  const productionStageMapping = await prisma.leadUserMapping.findFirst({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+      status: "active",
+      type: "production-stage",
+      user: {
+        status: "active",
+      },
+    },
+    orderBy: { created_at: "asc" },
+    select: {
+      user_id: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+          user_type: { select: { user_type: true } },
+        },
+      },
+    },
+  });
+
+  return productionStageMapping?.user ?? null;
+};
+
 export class DispatchStageController {
   /** ✅ Get all leads under Dispatch Stage (Type 14) */
   async getAllDispatchStageLeads(req: Request, res: Response) {
@@ -453,24 +484,16 @@ export class DispatchStageController {
         }
       }
 
-      const factoryUser = await prisma.userMaster.findFirst({
-        where: {
-          vendor_id: Number(vendorId),
-          status: "active",
-          user_type: {
-            user_type: {
-              equals: "factory",
-              mode: "insensitive",
-            },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
-      });
+      const factoryUser = await getProductionStageFactoryUser(
+        Number(vendorId),
+        Number(leadId),
+      );
 
       if (!factoryUser) {
         return res.status(400).json({
           success: false,
-          message: "Factory user not found for this vendor",
+          message:
+            "Production-stage factory mapping not found for this lead",
         });
       }
 
@@ -616,24 +639,16 @@ export class DispatchStageController {
         }
       }
 
-      const factoryUser = await prisma.userMaster.findFirst({
-        where: {
-          vendor_id: Number(vendorId),
-          status: "active",
-          user_type: {
-            user_type: {
-              equals: "factory",
-              mode: "insensitive",
-            },
-          },
-        },
-        select: { id: true, user_name: true, user_email: true },
-      });
+      const factoryUser = await getProductionStageFactoryUser(
+        Number(vendorId),
+        Number(leadId),
+      );
 
       if (!factoryUser) {
         return res.status(400).json({
           success: false,
-          message: "Factory user not found for this vendor",
+          message:
+            "Production-stage factory mapping not found for this lead",
         });
       }
 
