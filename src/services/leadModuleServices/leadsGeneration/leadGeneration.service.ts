@@ -328,8 +328,9 @@ export const createLeadService = async (
           data: leadCreateData,
         });
 
-        /* ✅ NEW: LeadUserMapping writes (cases: admin vs sales-executive)
-      - Both cases use: type="ISM", status="active"
+        /* ✅ NEW: LeadUserMapping writes
+      - The creator is always mapped with type="ISM", status="active"
+      - Admin and super-admin also seed the initial assignee mapping
       */
         const creator = await tx.userMaster.findUnique({
           where: { id: created_by },
@@ -337,6 +338,9 @@ export const createLeadService = async (
         });
 
         const creatorRole = creator?.user_type?.user_type?.toLowerCase(); // e.g., "admin" or "sales-executive"
+        const shouldMapInitialAssignee =
+          (creatorRole === "admin" || creatorRole === "super-admin") &&
+          Boolean(assign_to);
 
         // Base fields common to all LeadUserMapping rows
         const mappingBase = {
@@ -353,8 +357,8 @@ export const createLeadService = async (
           data: { ...mappingBase, user_id: created_by },
         });
 
-        // If creator is admin -> also map the assignee (when provided)
-        if (creatorRole === "admin" && assign_to) {
+        // If creator is admin/super-admin -> also map the assignee (when provided)
+        if (shouldMapInitialAssignee && assign_to) {
           await tx.leadUserMapping.create({
             data: { ...mappingBase, user_id: assign_to },
           });
@@ -396,7 +400,7 @@ export const createLeadService = async (
         ]);
         memberIds.add(created_by);
 
-        if (creatorRole === "admin" && assign_to) {
+        if (shouldMapInitialAssignee && assign_to) {
           memberIds.add(assign_to);
         }
 
