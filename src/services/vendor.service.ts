@@ -114,6 +114,8 @@ export const createVendor = async (data: any) => {
     status,
     logo,
     time_zone,
+    is_inventory_enabled,
+    is_tracktrace_enabled,
     is_year_wise_lead_code_enabled,
   } = data;
 
@@ -129,6 +131,8 @@ export const createVendor = async (data: any) => {
       status,
       logo,
       time_zone,
+      is_inventory_enabled,
+      is_tracktrace_enabled,
       is_year_wise_lead_code_enabled,
     },
   });
