@@ -216,6 +216,7 @@ export const VendorMasterScalarFieldEnum = {
   status: 'status',
   logo: 'logo',
   time_zone: 'time_zone',
+  subdomain_url: 'subdomain_url',
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',
   is_inventory_enabled: 'is_inventory_enabled',
   is_tracktrace_enabled: 'is_tracktrace_enabled',

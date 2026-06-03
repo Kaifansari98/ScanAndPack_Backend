@@ -1577,6 +1577,7 @@ export const onboardVendor = async (data: any) => {
   const {
     vendor_name,
     vendor_code,
+    subdomain_url,
     primary_contact_name,
     primary_contact_number,
     primary_contact_email,
@@ -1585,6 +1586,8 @@ export const onboardVendor = async (data: any) => {
     status,
     logo,
     time_zone,
+    is_inventory_enabled,
+    is_tracktrace_enabled,
     is_year_wise_lead_code_enabled,
   } = data;
 
@@ -1592,6 +1595,7 @@ export const onboardVendor = async (data: any) => {
     data: {
       vendor_name,
       vendor_code,
+      subdomain_url,
       primary_contact_name,
       primary_contact_number,
       primary_contact_email,
@@ -1600,6 +1604,8 @@ export const onboardVendor = async (data: any) => {
       status,
       logo,
       time_zone,
+      is_inventory_enabled,
+      is_tracktrace_enabled,
       is_year_wise_lead_code_enabled,
     },
   });

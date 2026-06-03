@@ -20,6 +20,7 @@ model VendorMaster {
   status                                 String   @default("inactive")
   logo                                   String
   time_zone                              String
+  subdomain_url                          String?
   IsAccountLocInEnabled                  Boolean? @default(false)
   is_inventory_enabled                   Boolean  @default(false)
   is_tracktrace_enabled                  Boolean  @default(false)
