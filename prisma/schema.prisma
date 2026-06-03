@@ -22,6 +22,7 @@ model VendorMaster {
   time_zone                              String
   subdomain_url                          String?
   IsAccountLocInEnabled                  Boolean? @default(false)
+  is_crm_enabled                         Boolean  @default(true)
   is_inventory_enabled                   Boolean  @default(false)
   is_tracktrace_enabled                  Boolean  @default(false)
   is_approval_task_enabled               Boolean  @default(true)

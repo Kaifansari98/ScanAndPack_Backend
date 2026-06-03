@@ -55,6 +55,7 @@ export type VendorMasterMinAggregateOutputType = {
   time_zone: string | null
   subdomain_url: string | null
   IsAccountLocInEnabled: boolean | null
+  is_crm_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
@@ -83,6 +84,7 @@ export type VendorMasterMaxAggregateOutputType = {
   time_zone: string | null
   subdomain_url: string | null
   IsAccountLocInEnabled: boolean | null
+  is_crm_enabled: boolean | null
   is_inventory_enabled: boolean | null
   is_tracktrace_enabled: boolean | null
   is_approval_task_enabled: boolean | null
@@ -111,6 +113,7 @@ export type VendorMasterCountAggregateOutputType = {
   time_zone: number
   subdomain_url: number
   IsAccountLocInEnabled: number
+  is_crm_enabled: number
   is_inventory_enabled: number
   is_tracktrace_enabled: number
   is_approval_task_enabled: number
@@ -155,6 +158,7 @@ export type VendorMasterMinAggregateInputType = {
   time_zone?: true
   subdomain_url?: true
   IsAccountLocInEnabled?: true
+  is_crm_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
@@ -183,6 +187,7 @@ export type VendorMasterMaxAggregateInputType = {
   time_zone?: true
   subdomain_url?: true
   IsAccountLocInEnabled?: true
+  is_crm_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
@@ -211,6 +216,7 @@ export type VendorMasterCountAggregateInputType = {
   time_zone?: true
   subdomain_url?: true
   IsAccountLocInEnabled?: true
+  is_crm_enabled?: true
   is_inventory_enabled?: true
   is_tracktrace_enabled?: true
   is_approval_task_enabled?: true
@@ -326,6 +332,7 @@ export type VendorMasterGroupByOutputType = {
   time_zone: string
   subdomain_url: string | null
   IsAccountLocInEnabled: boolean | null
+  is_crm_enabled: boolean
   is_inventory_enabled: boolean
   is_tracktrace_enabled: boolean
   is_approval_task_enabled: boolean
@@ -377,6 +384,7 @@ export type VendorMasterWhereInput = {
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -502,6 +510,7 @@ export type VendorMasterOrderByWithRelationInput = {
   time_zone?: Prisma.SortOrder
   subdomain_url?: Prisma.SortOrderInput | Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_crm_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
@@ -630,6 +639,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -755,6 +765,7 @@ export type VendorMasterOrderByWithAggregationInput = {
   time_zone?: Prisma.SortOrder
   subdomain_url?: Prisma.SortOrderInput | Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_crm_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
@@ -791,6 +802,7 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   time_zone?: Prisma.StringWithAggregatesFilter<"VendorMaster"> | string
   subdomain_url?: Prisma.StringNullableWithAggregatesFilter<"VendorMaster"> | string | null
   IsAccountLocInEnabled?: Prisma.BoolNullableWithAggregatesFilter<"VendorMaster"> | boolean | null
+  is_crm_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
@@ -818,6 +830,7 @@ export type VendorMasterCreateInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -942,6 +955,7 @@ export type VendorMasterUncheckedCreateInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -1065,6 +1079,7 @@ export type VendorMasterUpdateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1189,6 +1204,7 @@ export type VendorMasterUncheckedUpdateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1313,6 +1329,7 @@ export type VendorMasterCreateManyInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -1340,6 +1357,7 @@ export type VendorMasterUpdateManyMutationInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1367,6 +1385,7 @@ export type VendorMasterUncheckedUpdateManyInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1395,6 +1414,7 @@ export type VendorMasterCountOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   subdomain_url?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
+  is_crm_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
@@ -1430,6 +1450,7 @@ export type VendorMasterMaxOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   subdomain_url?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
+  is_crm_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
@@ -1458,6 +1479,7 @@ export type VendorMasterMinOrderByAggregateInput = {
   time_zone?: Prisma.SortOrder
   subdomain_url?: Prisma.SortOrder
   IsAccountLocInEnabled?: Prisma.SortOrder
+  is_crm_enabled?: Prisma.SortOrder
   is_inventory_enabled?: Prisma.SortOrder
   is_tracktrace_enabled?: Prisma.SortOrder
   is_approval_task_enabled?: Prisma.SortOrder
@@ -2936,6 +2958,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -3059,6 +3082,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -3197,6 +3221,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3320,6 +3345,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3442,6 +3468,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -3565,6 +3592,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -3703,6 +3731,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3826,6 +3855,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3948,6 +3978,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -4071,6 +4102,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -4209,6 +4241,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4332,6 +4365,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4454,6 +4488,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -4577,6 +4612,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -4715,6 +4751,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4838,6 +4875,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -4960,6 +4998,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -5083,6 +5122,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -5221,6 +5261,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5344,6 +5385,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5466,6 +5508,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -5589,6 +5632,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -5727,6 +5771,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5850,6 +5895,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -5972,6 +6018,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -6095,6 +6142,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -6233,6 +6281,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6356,6 +6405,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6478,6 +6528,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -6601,6 +6652,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -6739,6 +6791,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6862,6 +6915,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -6984,6 +7038,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -7107,6 +7162,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -7245,6 +7301,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7368,6 +7425,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7490,6 +7548,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -7613,6 +7672,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -7751,6 +7811,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7874,6 +7935,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -7996,6 +8058,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -8119,6 +8182,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -8257,6 +8321,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8380,6 +8445,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8502,6 +8568,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -8625,6 +8692,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -8763,6 +8831,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -8886,6 +8955,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9008,6 +9078,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -9131,6 +9202,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -9269,6 +9341,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9392,6 +9465,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9514,6 +9588,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -9637,6 +9712,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -9775,6 +9851,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -9898,6 +9975,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10020,6 +10098,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -10143,6 +10222,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -10281,6 +10361,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10404,6 +10485,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10526,6 +10608,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -10649,6 +10732,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -10787,6 +10871,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -10910,6 +10995,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11032,6 +11118,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -11155,6 +11242,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -11293,6 +11381,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11416,6 +11505,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11538,6 +11628,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -11661,6 +11752,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -11799,6 +11891,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -11922,6 +12015,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12044,6 +12138,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -12167,6 +12262,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -12305,6 +12401,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12428,6 +12525,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12550,6 +12648,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -12673,6 +12772,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -12811,6 +12911,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -12934,6 +13035,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13056,6 +13158,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -13179,6 +13282,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -13317,6 +13421,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13440,6 +13545,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13562,6 +13668,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -13685,6 +13792,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -13823,6 +13931,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -13946,6 +14055,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14068,6 +14178,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -14191,6 +14302,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -14329,6 +14441,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14452,6 +14565,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14574,6 +14688,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -14697,6 +14812,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -14835,6 +14951,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -14958,6 +15075,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15080,6 +15198,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -15203,6 +15322,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -15341,6 +15461,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15464,6 +15585,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15586,6 +15708,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -15709,6 +15832,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -15847,6 +15971,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -15970,6 +16095,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16092,6 +16218,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -16215,6 +16342,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -16353,6 +16481,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16476,6 +16605,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16598,6 +16728,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -16721,6 +16852,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -16859,6 +16991,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -16982,6 +17115,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17104,6 +17238,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -17227,6 +17362,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -17365,6 +17501,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17488,6 +17625,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17610,6 +17748,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -17733,6 +17872,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -17871,6 +18011,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -17994,6 +18135,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18116,6 +18258,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -18239,6 +18382,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -18377,6 +18521,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18500,6 +18645,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -18622,6 +18768,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -18745,6 +18892,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -18883,6 +19031,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19006,6 +19155,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19128,6 +19278,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -19251,6 +19402,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -19389,6 +19541,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19512,6 +19665,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -19634,6 +19788,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -19757,6 +19912,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -19895,6 +20051,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20018,6 +20175,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20140,6 +20298,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -20263,6 +20422,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -20401,6 +20561,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20524,6 +20685,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -20646,6 +20808,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -20769,6 +20932,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -20907,6 +21071,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21030,6 +21195,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21152,6 +21318,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -21275,6 +21442,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -21413,6 +21581,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21536,6 +21705,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -21658,6 +21828,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -21781,6 +21952,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -21919,6 +22091,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22042,6 +22215,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22164,6 +22338,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -22287,6 +22462,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -22425,6 +22601,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22548,6 +22725,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -22670,6 +22848,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -22793,6 +22972,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -22931,6 +23111,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23054,6 +23235,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23176,6 +23358,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -23299,6 +23482,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -23437,6 +23621,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23560,6 +23745,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -23682,6 +23868,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -23805,6 +23992,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -23943,6 +24131,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24066,6 +24255,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24188,6 +24378,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -24311,6 +24502,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -24449,6 +24641,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24572,6 +24765,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -24694,6 +24888,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -24817,6 +25012,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -24955,6 +25151,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25078,6 +25275,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25200,6 +25398,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -25323,6 +25522,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -25461,6 +25661,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25584,6 +25785,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -25706,6 +25908,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -25829,6 +26032,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -25967,6 +26171,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26090,6 +26295,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26212,6 +26418,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -26335,6 +26542,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -26473,6 +26681,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26596,6 +26805,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -26718,6 +26928,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -26841,6 +27052,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -26979,6 +27191,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27102,6 +27315,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27224,6 +27438,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -27347,6 +27562,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -27485,6 +27701,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27608,6 +27825,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -27730,6 +27948,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -27853,6 +28072,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -27991,6 +28211,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28114,6 +28335,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28236,6 +28458,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -28359,6 +28582,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -28497,6 +28721,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28620,6 +28845,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -28742,6 +28968,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -28865,6 +29092,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -29003,6 +29231,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29126,6 +29355,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29248,6 +29478,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -29371,6 +29602,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -29509,6 +29741,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29632,6 +29865,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -29754,6 +29988,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -29877,6 +30112,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -30015,6 +30251,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30138,6 +30375,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30260,6 +30498,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -30383,6 +30622,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -30521,6 +30761,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30644,6 +30885,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -30766,6 +31008,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -30889,6 +31132,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -31027,6 +31271,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31150,6 +31395,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31272,6 +31518,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -31395,6 +31642,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -31533,6 +31781,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31656,6 +31905,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -31778,6 +32028,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -31901,6 +32152,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -32039,6 +32291,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32162,6 +32415,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32284,6 +32538,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -32407,6 +32662,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -32545,6 +32801,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32668,6 +32925,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -32790,6 +33048,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -32913,6 +33172,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -33051,6 +33311,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33174,6 +33435,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33296,6 +33558,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -33419,6 +33682,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -33557,6 +33821,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33680,6 +33945,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33802,6 +34068,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -33925,6 +34192,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -34063,6 +34331,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34186,6 +34455,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34308,6 +34578,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -34431,6 +34702,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -34569,6 +34841,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34692,6 +34965,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -34814,6 +35088,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -34937,6 +35212,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -35075,6 +35351,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35198,6 +35475,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35320,6 +35598,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -35443,6 +35722,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -35581,6 +35861,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35704,6 +35985,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -35826,6 +36108,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -35949,6 +36232,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -36087,6 +36371,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36210,6 +36495,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36332,6 +36618,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -36455,6 +36742,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -36593,6 +36881,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36716,6 +37005,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -36838,6 +37128,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -36961,6 +37252,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -37099,6 +37391,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37222,6 +37515,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37344,6 +37638,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -37467,6 +37762,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -37605,6 +37901,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37728,6 +38025,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -37850,6 +38148,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -37973,6 +38272,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -38111,6 +38411,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38234,6 +38535,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38356,6 +38658,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -38479,6 +38782,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -38617,6 +38921,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38740,6 +39045,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -38862,6 +39168,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -38985,6 +39292,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -39123,6 +39431,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39246,6 +39555,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39368,6 +39678,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -39491,6 +39802,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -39629,6 +39941,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39752,6 +40065,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -39874,6 +40188,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -39997,6 +40312,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -40135,6 +40451,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40258,6 +40575,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40380,6 +40698,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -40503,6 +40822,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -40641,6 +40961,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40764,6 +41085,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -40886,6 +41208,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -41009,6 +41332,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -41147,6 +41471,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41270,6 +41595,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41392,6 +41718,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -41515,6 +41842,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -41653,6 +41981,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41776,6 +42105,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -41898,6 +42228,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42021,6 +42352,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42159,6 +42491,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42282,6 +42615,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -42404,6 +42738,7 @@ export type VendorMasterCreateWithoutStateInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42527,6 +42862,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42679,6 +43015,7 @@ export type VendorMasterScalarWhereInput = {
   time_zone?: Prisma.StringFilter<"VendorMaster"> | string
   subdomain_url?: Prisma.StringNullableFilter<"VendorMaster"> | string | null
   IsAccountLocInEnabled?: Prisma.BoolNullableFilter<"VendorMaster"> | boolean | null
+  is_crm_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_inventory_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_tracktrace_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   is_approval_task_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
@@ -42706,6 +43043,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42829,6 +43167,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -42967,6 +43306,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43090,6 +43430,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43212,6 +43553,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -43335,6 +43677,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -43473,6 +43816,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43596,6 +43940,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -43718,6 +44063,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -43841,6 +44187,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -43979,6 +44326,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44102,6 +44450,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44224,6 +44573,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -44347,6 +44697,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -44485,6 +44836,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44608,6 +44960,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -44730,6 +45083,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -44853,6 +45207,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -44991,6 +45346,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45114,6 +45470,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45236,6 +45593,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -45359,6 +45717,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -45497,6 +45856,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45620,6 +45980,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -45742,6 +46103,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -45865,6 +46227,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -46003,6 +46366,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46126,6 +46490,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46248,6 +46613,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -46371,6 +46737,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -46509,6 +46876,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46632,6 +47000,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -46754,6 +47123,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -46877,6 +47247,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -47015,6 +47386,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47138,6 +47510,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47260,6 +47633,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -47383,6 +47757,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -47521,6 +47896,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47644,6 +48020,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -47766,6 +48143,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -47889,6 +48267,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -48027,6 +48406,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48150,6 +48530,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48272,6 +48653,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -48395,6 +48777,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -48533,6 +48916,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48656,6 +49040,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -48778,6 +49163,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -48901,6 +49287,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -49039,6 +49426,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49162,6 +49550,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49284,6 +49673,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -49407,6 +49797,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -49545,6 +49936,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49668,6 +50060,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -49790,6 +50183,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -49913,6 +50307,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -50051,6 +50446,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50174,6 +50570,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50296,6 +50693,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -50419,6 +50817,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -50557,6 +50956,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50680,6 +51080,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -50802,6 +51203,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -50925,6 +51327,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -51063,6 +51466,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51186,6 +51590,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51308,6 +51713,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -51431,6 +51837,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -51569,6 +51976,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51692,6 +52100,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51815,6 +52224,7 @@ export type VendorMasterCreateManyStateInput = {
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -51841,6 +52251,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -51964,6 +52375,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -52087,6 +52499,7 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -53000,6 +53413,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   time_zone?: boolean
   subdomain_url?: boolean
   IsAccountLocInEnabled?: boolean
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -53126,6 +53540,7 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   time_zone?: boolean
   subdomain_url?: boolean
   IsAccountLocInEnabled?: boolean
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -53155,6 +53570,7 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   time_zone?: boolean
   subdomain_url?: boolean
   IsAccountLocInEnabled?: boolean
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -53184,6 +53600,7 @@ export type VendorMasterSelectScalar = {
   time_zone?: boolean
   subdomain_url?: boolean
   IsAccountLocInEnabled?: boolean
+  is_crm_enabled?: boolean
   is_inventory_enabled?: boolean
   is_tracktrace_enabled?: boolean
   is_approval_task_enabled?: boolean
@@ -53197,7 +53614,7 @@ export type VendorMasterSelectScalar = {
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -53421,6 +53838,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     time_zone: string
     subdomain_url: string | null
     IsAccountLocInEnabled: boolean | null
+    is_crm_enabled: boolean
     is_inventory_enabled: boolean
     is_tracktrace_enabled: boolean
     is_approval_task_enabled: boolean
@@ -53966,6 +54384,7 @@ export interface VendorMasterFieldRefs {
   readonly time_zone: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly subdomain_url: Prisma.FieldRef<"VendorMaster", 'String'>
   readonly IsAccountLocInEnabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_crm_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_inventory_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_tracktrace_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly is_approval_task_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
