@@ -422,10 +422,17 @@ export class AuthService {
       };
     }
 
-    if (actor.user_type.toLowerCase() !== "super-admin") {
+    const normalizedActorUserType = actor.user_type.toLowerCase();
+    if (
+      normalizedActorUserType !== "super-admin" &&
+      normalizedActorUserType !== "master-admin"
+    ) {
       return {
         status: 403,
-        body: { message: "Only super-admin can use vendor login override." },
+        body: {
+          message:
+            "Only super-admin and master-admin can use vendor login override.",
+        },
       };
     }
 

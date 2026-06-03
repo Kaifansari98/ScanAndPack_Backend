@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createVendor,
   getAllVendors,
+  getVendorByIdController,
   getErdReportController,
   getLeadTrackingReportController,
   getLeadsOverviewReportController,
@@ -32,5 +33,6 @@ router.get(
   getPaymentsBetweenClientAndStoreReportController,
 );
 router.get("/reports/erd", getErdReportController);
+router.get("/:vendor_id", verifyToken, getVendorByIdController);
 
 export default router;
