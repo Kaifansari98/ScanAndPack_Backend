@@ -24,8 +24,16 @@ interface FinalMeasurementDto {
   created_by: number;
   baseUrl: string;
   critical_discussion_notes?: string | null;
-  finalMeasurementDocs: { originalName: string; sysName: string }[];
-  sitePhotos: { originalName: string; sysName: string }[];
+  finalMeasurementDocs: {
+    originalName: string;
+    sysName: string;
+    product_structure_instance_id: number | null;
+  }[];
+  sitePhotos: {
+    originalName: string;
+    sysName: string;
+    product_structure_instance_id: number | null;
+  }[];
 }
 
 const RESTRICTED_TASK_TYPES = [
@@ -151,6 +159,8 @@ export class FinalMeasurementService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_structure_instance_id:
+                doc.product_structure_instance_id ?? undefined,
             },
           });
 
@@ -177,6 +187,8 @@ export class FinalMeasurementService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_structure_instance_id:
+                photo.product_structure_instance_id ?? undefined,
             },
           });
 

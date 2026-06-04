@@ -60,6 +60,38 @@ const safeUnlink = async (filePath?: string) => {
   }
 };
 
+const parseInstanceIds = (
+  rawValue: unknown,
+  expectedLength: number,
+  fieldLabel: string,
+): Array<number | null> => {
+  if (rawValue == null || rawValue === "") {
+    return Array.from({ length: expectedLength }, () => null);
+  }
+
+  const parsed =
+    typeof rawValue === "string" ? JSON.parse(rawValue) : rawValue;
+
+  if (!Array.isArray(parsed)) {
+    throw new Error(`${fieldLabel} must be an array`);
+  }
+
+  if (parsed.length !== expectedLength) {
+    throw new Error(
+      `${fieldLabel} count must match uploaded file count`,
+    );
+  }
+
+  return parsed.map((value) => {
+    if (value === null || value === "" || value === undefined) return null;
+    const parsedValue = Number(value);
+    if (!Number.isInteger(parsedValue) || parsedValue <= 0) {
+      throw new Error(`${fieldLabel} contains an invalid instance id`);
+    }
+    return parsedValue;
+  });
+};
+
 export class FinalMeasurementController {
   public getRestrictedTaskConflicts = async (
     req: Request,
@@ -120,6 +152,16 @@ export class FinalMeasurementController {
         ...(files?.site_photos || []),
         ...(files?.["site_photos[]"] || []),
       ];
+      const finalMeasurementDocInstanceIds = parseInstanceIds(
+        req.body.final_measurement_doc_instance_ids,
+        finalMeasurementDocs.length,
+        "final_measurement_doc_instance_ids",
+      );
+      const sitePhotoInstanceIds = parseInstanceIds(
+        req.body.site_photo_instance_ids,
+        sitePhotos.length,
+        "site_photo_instance_ids",
+      );
 
       if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
         res.status(400).json({
@@ -139,9 +181,10 @@ export class FinalMeasurementController {
       const uploadedFinalMeasurementDocs: {
         originalName: string;
         sysName: string;
+        product_structure_instance_id: number | null;
       }[] = [];
 
-      for (const doc of finalMeasurementDocs) {
+      for (const [index, doc] of finalMeasurementDocs.entries()) {
         await ensureTempFileExists(doc);
         const sysName = await uploadToWasabiFinalMeasurementDocFile(
           doc.path,
@@ -156,15 +199,18 @@ export class FinalMeasurementController {
         uploadedFinalMeasurementDocs.push({
           originalName: doc.originalname,
           sysName,
+          product_structure_instance_id:
+            finalMeasurementDocInstanceIds[index] ?? null,
         });
       }
 
       const uploadedSitePhotos: {
         originalName: string;
         sysName: string;
+        product_structure_instance_id: number | null;
       }[] = [];
 
-      for (const photo of sitePhotos) {
+      for (const [index, photo] of sitePhotos.entries()) {
         await ensureTempFileExists(photo);
         const sysName = await uploadToWasabiFinalMeasurementSitePhotoFile(
           photo.path,
@@ -179,6 +225,7 @@ export class FinalMeasurementController {
         uploadedSitePhotos.push({
           originalName: photo.originalname,
           sysName,
+          product_structure_instance_id: sitePhotoInstanceIds[index] ?? null,
         });
       }
 
