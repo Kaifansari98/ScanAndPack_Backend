@@ -13,6 +13,13 @@ import { sanitizeFilename } from "./sanitizeFilename";
 
 console.log("[DEBUG] WASABI_ENDPOINT:", process.env.WASABI_ENDPOINT);
 
+const buildUniqueMulterFilename = (originalName: string) => {
+  const ext = path.extname(originalName || "");
+  const baseName = path.basename(originalName || "upload", ext);
+  const safeBaseName = sanitizeFilename(baseName || "upload");
+  return `${Date.now()}-${uuidv4()}-${safeBaseName}${ext}`;
+};
+
 const wasabi = new S3Client({
   endpoint:
     process.env.WASABI_ENDPOINT || "https://s3.ap-southeast-1.wasabisys.com",
@@ -1235,7 +1242,7 @@ export const uploadChatAttachments = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
@@ -1251,7 +1258,7 @@ export const uploadLeadSitePhotos = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
@@ -1268,7 +1275,7 @@ export const uploadDesignQuotationFiles = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
@@ -1285,7 +1292,7 @@ export const uploadInitialSiteMeasurement = multer({
       cb(null, dir);
     },
     filename: (_req, file, cb) => {
-      cb(null, `${Date.now()}-${file.originalname}`);
+      cb(null, buildUniqueMulterFilename(file.originalname));
     },
   }),
   limits: {
