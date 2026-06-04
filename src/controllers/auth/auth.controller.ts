@@ -18,6 +18,38 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
+export const createVendorLoginLaunch = async (req: Request, res: Response) => {
+  const vendorId = Number(req.params.vendor_id);
+
+  if (!vendorId || Number.isNaN(vendorId)) {
+    return res.status(400).json({ message: "vendor_id must be a valid number" });
+  }
+
+  try {
+    const response = await authService.createVendorLoginLaunch(req, vendorId);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Vendor login launch error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const exchangeVendorLogin = async (req: Request, res: Response) => {
+  const token = String(req.body?.token || "").trim();
+
+  if (!token) {
+    return res.status(400).json({ message: "token is required" });
+  }
+
+  try {
+    const response = await authService.exchangeVendorLoginToken(req, token);
+    return res.status(response.status).json(response.body);
+  } catch (err) {
+    console.error("Vendor login exchange error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const logoutActivity = async (req: Request, res: Response) => {
   try {
     const response = await authService.logout(req);

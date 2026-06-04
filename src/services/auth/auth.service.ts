@@ -20,6 +20,14 @@ type TokenPayload = {
   jti: string;
 };
 
+type VendorLoginExchangePayload = {
+  purpose: "vendor-login-exchange";
+  target_user_id: number;
+  target_vendor_id: number;
+  actor_user_id: number;
+  subdomain_url: string;
+};
+
 const addDays = (date: Date, days: number) => {
   const next = new Date(date);
   next.setDate(next.getDate() + days);
@@ -65,6 +73,172 @@ const getSessionTtlSeconds = (expiresAt: Date) =>
 const VENDOR_SESSION_INDEX_TTL_SECONDS = ACCESS_TOKEN_TTL_DAYS * 24 * 60 * 60;
 
 export class AuthService {
+  private async buildSuccessfulLoginResponse(
+    req: Request,
+    user: any,
+    loginType: "MASTER_LOGIN" | "USER_LOGIN",
+  ) {
+    const now = new Date();
+    const expiresAt = addDays(now, ACCESS_TOKEN_TTL_DAYS);
+    const ipAddress = getIpAddress(req);
+    const userAgent = req.headers["user-agent"] || null;
+    const deviceId = buildDeviceId(req);
+    const deviceName =
+      typeof req.body?.device_name === "string" ? req.body.device_name : null;
+    const platform =
+      typeof req.body?.platform === "string" ? req.body.platform : null;
+
+    await prisma.userSession.updateMany({
+      where: {
+        user_id: user.id,
+        status: "active",
+        expires_at: { lte: now },
+      },
+      data: {
+        status: "expired",
+        is_current: false,
+      },
+    });
+
+    let session = await prisma.userSession.findFirst({
+      where: {
+        user_id: user.id,
+        device_id: deviceId,
+        login_type: loginType,
+        status: "active",
+      },
+    });
+
+    if (!session && loginType !== "MASTER_LOGIN") {
+      const activeSessionsCount = await prisma.userSession.count({
+        where: {
+          user_id: user.id,
+          login_type: "USER_LOGIN",
+          status: "active",
+          expires_at: { gt: now },
+        },
+      });
+
+      if (activeSessionsCount >= MAX_ACTIVE_SESSIONS) {
+        return {
+          status: 403,
+          body: {
+            message:
+              "Maximum 10 active devices are allowed. Logout from another device first.",
+          },
+        };
+      }
+    }
+
+    const accessJti = crypto.randomUUID();
+    const sessionSecret = crypto.randomUUID();
+    const refreshTokenHash = crypto
+      .createHash("sha256")
+      .update(`${user.id}:${deviceId}:${sessionSecret}`)
+      .digest("hex");
+
+    if (session) {
+      session = await prisma.userSession.update({
+        where: { id: session.id },
+        data: {
+          vendor_id: user.vendor_id,
+          access_jti: accessJti,
+          refresh_token_hash: refreshTokenHash,
+          device_name: deviceName,
+          platform,
+          ip_address: ipAddress,
+          user_agent: userAgent,
+          login_type: loginType,
+          status: "active",
+          is_current: true,
+          last_seen_at: now,
+          expires_at: expiresAt,
+          logged_out_at: null,
+          revoked_at: null,
+          revoked_by: null,
+          revoke_reason: null,
+        },
+      });
+    } else {
+      session = await prisma.userSession.create({
+        data: {
+          user_id: user.id,
+          vendor_id: user.vendor_id,
+          refresh_token_hash: refreshTokenHash,
+          access_jti: accessJti,
+          device_id: deviceId,
+          device_name: deviceName,
+          platform,
+          ip_address: ipAddress,
+          user_agent: userAgent,
+          login_type: loginType,
+          status: "active",
+          is_current: true,
+          last_seen_at: now,
+          expires_at: expiresAt,
+        },
+      });
+    }
+
+    let is_ho_user = false;
+    if (user.franchise_id) {
+      const franchise = await prisma.franchiseMaster.findUnique({
+        where: { id: user.franchise_id },
+        select: { is_head_office: true },
+      });
+      is_ho_user = franchise?.is_head_office ?? false;
+    }
+
+    const customPrivileges = await this.getCustomPrivilegeCodes(
+      user.id,
+      user.vendor_id,
+      user.user_type.user_type,
+    );
+
+    const token = jwt.sign(
+      {
+        id: user.id,
+        vendor_id: user.vendor_id,
+        franchise_id: user.franchise_id,
+        user_type: user.user_type.user_type,
+        session_id: session.id,
+        jti: accessJti,
+      },
+      JWT_SECRET,
+      { expiresIn: `${ACCESS_TOKEN_TTL_DAYS}d` },
+    );
+
+    await prisma.userActivityLog.create({
+      data: {
+        user_id: user.id,
+        action: "User logged in successfully.",
+        activity_type: "LOGIN",
+        ip_address: ipAddress,
+        user_agent: userAgent,
+        metadata: {
+          logged_in_at: now.toISOString(),
+          session_id: session.id,
+          device_id: deviceId,
+          login_type: loginType,
+        },
+      },
+    });
+
+    await this.cacheSession(session);
+
+    return {
+      status: 200,
+      body: {
+        message: "Login successful",
+        token,
+        session_id: session.id,
+        franchise_id: user.franchise_id,
+        customPrivileges,
+        user: { ...user, is_ho_user },
+      },
+    };
+  }
+
   private async getCustomPrivilegeCodes(
     userId: number,
     vendorId: number,
@@ -235,165 +409,162 @@ export class AuthService {
       };
     }
 
-    const now = new Date();
-    const expiresAt = addDays(now, ACCESS_TOKEN_TTL_DAYS);
-    const ipAddress = getIpAddress(req);
-    const userAgent = req.headers["user-agent"] || null;
-    const deviceId = buildDeviceId(req);
-    const deviceName =
-      typeof req.body?.device_name === "string" ? req.body.device_name : null;
-    const platform =
-      typeof req.body?.platform === "string" ? req.body.platform : null;
+    return this.buildSuccessfulLoginResponse(req, user, loginType);
+  }
 
-    await prisma.userSession.updateMany({
-      where: {
-        user_id: user.id,
-        status: "active",
-        expires_at: { lte: now },
-      },
-      data: {
-        status: "expired",
-        is_current: false,
+  async createVendorLoginLaunch(req: Request, vendorId: number) {
+    const actor = (req as any).user as TokenPayload | undefined;
+
+    if (!actor?.id || !actor?.user_type) {
+      return {
+        status: 401,
+        body: { message: "Unauthorized" },
+      };
+    }
+
+    const normalizedActorUserType = actor.user_type.toLowerCase();
+    if (
+      normalizedActorUserType !== "super-admin" &&
+      normalizedActorUserType !== "master-admin"
+    ) {
+      return {
+        status: 403,
+        body: {
+          message:
+            "Only super-admin and master-admin can use vendor login override.",
+        },
+      };
+    }
+
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: vendorId },
+      select: {
+        id: true,
+        vendor_name: true,
+        subdomain_url: true,
       },
     });
 
-    let session = await prisma.userSession.findFirst({
+    if (!vendor) {
+      return {
+        status: 404,
+        body: { message: "Vendor not found" },
+      };
+    }
+
+    if (!vendor.subdomain_url) {
+      return {
+        status: 400,
+        body: { message: "Vendor subdomain is not configured" },
+      };
+    }
+
+    const targetUser = await prisma.userMaster.findFirst({
       where: {
-        user_id: user.id,
-        device_id: deviceId,
-        login_type: loginType,
+        vendor_id: vendor.id,
         status: "active",
+        user_type: {
+          user_type: "super-admin",
+        },
+      },
+      select: {
+        id: true,
+        user_email: true,
+      },
+      orderBy: {
+        id: "asc",
       },
     });
 
-    if (!session && !isMasterLogin) {
-      const activeSessionsCount = await prisma.userSession.count({
-        where: {
-          user_id: user.id,
-          login_type: "USER_LOGIN",
-          status: "active",
-          expires_at: { gt: now },
-        },
-      });
-
-      if (activeSessionsCount >= MAX_ACTIVE_SESSIONS) {
-        return {
-          status: 403,
-          body: {
-            message:
-              "Maximum 10 active devices are allowed. Logout from another device first.",
-          },
-        };
-      }
+    if (!targetUser?.id || !targetUser.user_email) {
+      return {
+        status: 404,
+        body: { message: "Vendor super-admin user not found" },
+      };
     }
 
-    const accessJti = crypto.randomUUID();
-    const sessionSecret = crypto.randomUUID();
-    const refreshTokenHash = crypto
-      .createHash("sha256")
-      .update(`${user.id}:${deviceId}:${sessionSecret}`)
-      .digest("hex");
-
-    if (session) {
-      session = await prisma.userSession.update({
-        where: { id: session.id },
-        data: {
-          vendor_id: user.vendor_id,
-          access_jti: accessJti,
-          refresh_token_hash: refreshTokenHash,
-          device_name: deviceName,
-          platform,
-          ip_address: ipAddress,
-          user_agent: userAgent,
-          login_type: loginType,
-          status: "active",
-          is_current: true,
-          last_seen_at: now,
-          expires_at: expiresAt,
-          logged_out_at: null,
-          revoked_at: null,
-          revoked_by: null,
-          revoke_reason: null,
-        },
-      });
-    } else {
-      session = await prisma.userSession.create({
-        data: {
-          user_id: user.id,
-          vendor_id: user.vendor_id,
-          refresh_token_hash: refreshTokenHash,
-          access_jti: accessJti,
-          device_id: deviceId,
-          device_name: deviceName,
-          platform,
-          ip_address: ipAddress,
-          user_agent: userAgent,
-          login_type: loginType,
-          status: "active",
-          is_current: true,
-          last_seen_at: now,
-          expires_at: expiresAt,
-        },
-      });
-    }
-
-    let is_ho_user = false;
-    if (user.franchise_id) {
-      const franchise = await prisma.franchiseMaster.findUnique({
-        where: { id: user.franchise_id },
-        select: { is_head_office: true },
-      });
-      is_ho_user = franchise?.is_head_office ?? false;
-    }
-
-    const customPrivileges = await this.getCustomPrivilegeCodes(
-      user.id,
-      user.vendor_id,
-      user.user_type.user_type,
-    );
-
-    const token = jwt.sign(
+    const exchangeToken = jwt.sign(
       {
-        id: user.id,
-        vendor_id: user.vendor_id,
-        franchise_id: user.franchise_id,
-        user_type: user.user_type.user_type,
-        session_id: session.id,
-        jti: accessJti,
-      },
+        purpose: "vendor-login-exchange",
+        target_user_id: targetUser.id,
+        target_vendor_id: vendor.id,
+        actor_user_id: actor.id,
+        subdomain_url: vendor.subdomain_url,
+      } satisfies VendorLoginExchangePayload,
       JWT_SECRET,
-      { expiresIn: `${ACCESS_TOKEN_TTL_DAYS}d` },
+      { expiresIn: "10m" },
     );
 
     await prisma.userActivityLog.create({
       data: {
-        user_id: user.id,
-        action: "User logged in successfully.",
+        user_id: actor.id,
+        action: `Vendor login override initiated for ${vendor.vendor_name}.`,
         activity_type: "LOGIN",
-        ip_address: ipAddress,
-        user_agent: userAgent,
+        ip_address: getIpAddress(req),
+        user_agent: req.headers["user-agent"] || null,
         metadata: {
-          logged_in_at: now.toISOString(),
-          session_id: session.id,
-          device_id: deviceId,
-          login_type: loginType,
+          target_vendor_id: vendor.id,
+          target_user_id: targetUser.id,
+          subdomain_url: vendor.subdomain_url,
         },
       },
     });
 
-    await this.cacheSession(session);
-
     return {
       status: 200,
       body: {
-        message: "Login successful",
-        token,
-        session_id: session.id,
-        franchise_id: user.franchise_id,
-        customPrivileges,
-        user: { ...user, is_ho_user },
+        message: "Vendor login launch URL created",
+        data: {
+          vendor_id: vendor.id,
+          vendor_name: vendor.vendor_name,
+          subdomain_url: vendor.subdomain_url,
+          launch_url: `https://${vendor.subdomain_url}/login?vendorLoginToken=${encodeURIComponent(exchangeToken)}`,
+        },
       },
     };
+  }
+
+  async exchangeVendorLoginToken(req: Request, token: string) {
+    let payload: VendorLoginExchangePayload;
+
+    try {
+      payload = jwt.verify(token, JWT_SECRET) as VendorLoginExchangePayload;
+    } catch {
+      return {
+        status: 401,
+        body: { message: "Vendor login token is invalid or expired" },
+      };
+    }
+
+    if (payload.purpose !== "vendor-login-exchange") {
+      return {
+        status: 401,
+        body: { message: "Vendor login token is invalid" },
+      };
+    }
+
+    const user = await prisma.userMaster.findFirst({
+      where: {
+        id: payload.target_user_id,
+        vendor_id: payload.target_vendor_id,
+        status: "active",
+      },
+      include: {
+        vendor: true,
+        user_type: true,
+        documents: true,
+        createdProjects: true,
+      },
+    });
+
+    if (!user) {
+      return {
+        status: 404,
+        body: { message: "Target vendor super-admin not found or inactive" },
+      };
+    }
+
+    return this.buildSuccessfulLoginResponse(req, user, "MASTER_LOGIN");
   }
 
   async logout(req: Request) {

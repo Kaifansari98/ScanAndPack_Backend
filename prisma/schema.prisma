@@ -20,7 +20,10 @@ model VendorMaster {
   status                                 String   @default("inactive")
   logo                                   String
   time_zone                              String
+  subdomain_url                          String?
   IsAccountLocInEnabled                  Boolean? @default(false)
+  is_crm_enabled                         Boolean  @default(true)
+  is_custom_doc_nomenclature_enabled     Boolean  @default(false)
   is_inventory_enabled                   Boolean  @default(false)
   is_tracktrace_enabled                  Boolean  @default(false)
   is_approval_task_enabled               Boolean  @default(true)
@@ -1207,6 +1210,8 @@ model LeadDesignMeeting {
   vendor_id                Int
   meeting_type_id          Int?
   date                     DateTime
+  meeting_start_time       String?                             @db.VarChar(5)
+  meeting_end_time         String?                             @db.VarChar(5)
   desc                     String                              @db.VarChar(2000)
   created_by               Int
   updated_by               Int?

@@ -11,6 +11,33 @@ export const createVendor = async (req: Request, res: Response) => {
   }
 };
 
+export const updateVendorController = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id must be a valid number",
+      });
+    }
+
+    const vendor = await vendorService.updateVendor(vendorId, req.body);
+
+    return res.status(200).json({
+      success: true,
+      message: "Vendor updated successfully",
+      data: vendor,
+    });
+  } catch (err: any) {
+    console.error("Update Vendor Error:", err);
+    return res.status(err?.message === "Vendor not found" ? 404 : 500).json({
+      success: false,
+      message: err?.message || "Vendor update failed",
+    });
+  }
+};
+
 export const getAllVendors = async (req: Request, res: Response) => {
   try {
     const page  = Math.max(1, Number(req.query.page)  || 1);
@@ -28,6 +55,40 @@ export const getAllVendors = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("Get All Vendors Error:", err);
     return res.status(500).json({ success: false, message: "Internal server error" });
+  }
+};
+
+export const getVendorByIdController = async (req: Request, res: Response) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: "vendor_id must be a valid number",
+      });
+    }
+
+    const vendor = await vendorService.getVendorById(vendorId);
+
+    if (!vendor) {
+      return res.status(404).json({
+        success: false,
+        message: "Vendor not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Vendor fetched successfully",
+      data: vendor,
+    });
+  } catch (err) {
+    console.error("Get Vendor By Id Error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
 

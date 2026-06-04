@@ -610,17 +610,22 @@ export class DispatchPlanningService {
         throw new Error("Required date for dispatch is missing.");
       }
 
-      const factoryUser = await tx.userMaster.findFirst({
+      const factoryUser = await tx.leadUserMapping.findFirst({
         where: {
           vendor_id: vendorId,
-          user_type: { user_type: "factory" },
+          lead_id: leadId,
           status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
         },
-        select: { id: true },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
       });
 
       if (!factoryUser) {
-        throw new Error("Factory user not configured.");
+        throw new Error("Production-stage factory mapping not found for this lead.");
       }
 
       const existingTask = await tx.userLeadTask.findFirst({
@@ -661,7 +666,7 @@ export class DispatchPlanningService {
             lead_id: leadId,
             account_id: leadPlanningData.account_id,
             franchise_id: leadPlanningData.franchise_id ?? null,
-            user_id: factoryUser.id,
+            user_id: factoryUser.user_id,
             task_type: "Dispatch",
             due_date: leadPlanningData.required_date_for_dispatch,
             remark:

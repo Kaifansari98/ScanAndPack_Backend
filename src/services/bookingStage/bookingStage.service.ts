@@ -1268,10 +1268,20 @@ public async createBookingStage(data: CreateBookingStageDto) {
       select: { lead_id: true },
     });
 
+    const assignedLeads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        assign_to: userId,
+        is_deleted: false,
+      },
+      select: { id: true },
+    });
+
     const leadIds = [
       ...new Set([
         ...mappedLeads.map((m) => m.lead_id),
         ...taskLeads.map((t) => t.lead_id),
+        ...assignedLeads.map((lead) => lead.id),
       ]),
     ];
 

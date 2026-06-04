@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createVendor,
   getAllVendors,
+  getVendorByIdController,
   getErdReportController,
   getLeadTrackingReportController,
   getLeadsOverviewReportController,
@@ -12,6 +13,7 @@ import {
   getVendorUsersController,
   onboardVendorController,
   seedVendorMastersController,
+  updateVendorController,
 } from "../controllers/vendor.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
 
@@ -19,6 +21,7 @@ const router = Router();
 
 router.post("/", createVendor);
 router.post("/onboard", onboardVendorController);
+router.patch("/:vendor_id", verifyToken, updateVendorController);
 router.post("/seed-masters", seedVendorMastersController);
 router.get("/", verifyToken, getAllVendors);
 router.get("/vendor-users", getVendorUsersController);
@@ -32,5 +35,6 @@ router.get(
   getPaymentsBetweenClientAndStoreReportController,
 );
 router.get("/reports/erd", getErdReportController);
+router.get("/:vendor_id", verifyToken, getVendorByIdController);
 
 export default router;

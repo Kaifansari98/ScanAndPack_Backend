@@ -4,6 +4,9 @@ import { ApiResponse } from "../../../utils/apiResponse";
 import { DesigingStage } from "../../../services/leadModuleServices/desigingStage/designing-stage.service";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
+import { NotificationService } from "../../../services/notification/notification.service";
+import { NotificationType } from "../../../prisma/generated";
+import { sendNewMeetingAddedEmail } from "../../../services/email/brevoEmail.service";
 import {
   generateSignedUrl,
   uploadToWasabi,
@@ -14,6 +17,29 @@ import {
 import fs from "node:fs/promises";
 import path from "node:path";
 import { sanitizeFilename } from "../../../utils/fileUtils";
+
+const resolveClientBaseUrl = (req: Request): string => {
+  const origin = req.headers.origin;
+  if (typeof origin === "string" && origin.trim().length > 0) {
+    return origin.replace(/\/$/, "");
+  }
+
+  const referer = req.headers.referer;
+  if (typeof referer === "string" && referer.trim().length > 0) {
+    try {
+      return new URL(referer).origin;
+    } catch {
+      return "http://localhost:3000";
+    }
+  }
+
+  return "http://localhost:3000";
+};
+
+const meetingTimePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+const isValidMeetingTime = (value?: string): boolean =>
+  typeof value === "string" && meetingTimePattern.test(value);
 
 export class DesigingStageController {
   public static async addToDesigingStage(req: Request, res: Response) {
@@ -392,7 +418,16 @@ export class DesigingStageController {
         return res.status(400).json({ success: false, logs: errors.array() });
       }
 
-      const { leadId, vendorId, userId, date, desc, meeting_type_id } = req.body;
+      const {
+        leadId,
+        vendorId,
+        userId,
+        date,
+        desc,
+        meeting_type_id,
+        meeting_start_time,
+        meeting_end_time,
+      } = req.body;
       const logs: any[] = [];
       const files = (req.files as Express.Multer.File[]) || [];
 
@@ -447,6 +482,27 @@ export class DesigingStageController {
         });
       }
 
+      if (meeting_start_time && !isValidMeetingTime(meeting_start_time)) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_start_time must be in HH:mm format"],
+        });
+      }
+
+      if (meeting_end_time && !isValidMeetingTime(meeting_end_time)) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_end_time must be in HH:mm format"],
+        });
+      }
+
+      if (meeting_start_time && meeting_end_time && meeting_start_time >= meeting_end_time) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_end_time must be after meeting_start_time"],
+        });
+      }
+
       if (meeting_type_id) {
         const meetingType = await prisma.meetingTypeMaster.findFirst({
           where: {
@@ -493,6 +549,8 @@ export class DesigingStageController {
                 ? Number(meeting_type_id)
                 : null,
               date: new Date(date),
+              meeting_start_time: meeting_start_time?.trim() || null,
+              meeting_end_time: meeting_end_time?.trim() || null,
               desc: desc?.trim() || "",
               created_by: Number(userId),
             },
@@ -591,6 +649,64 @@ export class DesigingStageController {
           };
         },
       );
+
+      const designerMapping = await prisma.leadUserMapping.findFirst({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          type: "designer",
+          status: "active",
+          user_id: { not: Number(userId) },
+        },
+        select: {
+          user_id: true,
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+        },
+      });
+
+      if (designerMapping?.user?.user_email) {
+        const redirectPath = `/dashboard/leads/designing-stage/details/${Number(leadId)}?accountId=${Number(accountId)}&tab=meetings`;
+        const detailsUrl = `${resolveClientBaseUrl(req)}${redirectPath}`;
+        const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim();
+        const notificationMessage = `A new meeting has been added on ${lead.lead_code} - ${leadName}. Click to view the meeting details`;
+        const formattedMeetingDate = new Date(date).toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        });
+
+        await Promise.allSettled([
+          NotificationService.createAndSend({
+            vendor_id: Number(vendorId),
+            user_id: designerMapping.user_id,
+            sender_id: Number(userId),
+            type: NotificationType.LEAD_ACTION,
+            title: "New Meeting Added",
+            message: notificationMessage,
+            entity_type: "lead_design_meeting",
+            entity_id: meeting.id,
+            redirect_url: redirectPath,
+          }),
+          sendNewMeetingAddedEmail({
+            vendor_id: Number(vendorId),
+            toEmail: designerMapping.user.user_email,
+            toName: designerMapping.user.user_name,
+            leadCode: lead.lead_code,
+            leadName,
+            meetingDate: formattedMeetingDate,
+            meetingDescription: desc?.trim() || "",
+            detailsUrl,
+          }),
+        ]);
+      }
 
       return res.status(201).json({
         success: true,
@@ -991,7 +1107,7 @@ export class DesigingStageController {
             });
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^R(\d+)-/i);
+                const match = doc.doc_og_name?.match(/^[DR](\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
@@ -1007,7 +1123,7 @@ export class DesigingStageController {
             const finalOriginalName = useCustomVendorFlow
               ? (() => {
                   const extension = path.extname(file.originalname || "");
-                  const renamedOriginalName = `R${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                  const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
                   nextRevision += 1;
                   return renamedOriginalName;
                 })()
@@ -1087,7 +1203,14 @@ export class DesigingStageController {
   public static async editDesignMeeting(req: Request, res: Response) {
     try {
       const { meetingId } = req.params;
-      const { vendorId, userId, date, desc } = req.body;
+      const {
+        vendorId,
+        userId,
+        date,
+        desc,
+        meeting_start_time,
+        meeting_end_time,
+      } = req.body;
 
       if (!meetingId) {
         return res.status(400).json({
@@ -1107,12 +1230,14 @@ export class DesigingStageController {
       if (
         !date &&
         !desc &&
+        meeting_start_time == null &&
+        meeting_end_time == null &&
         (!req.files || (req.files as Express.Multer.File[]).length === 0)
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "At least one field (date, desc, or files) must be provided for update",
+            "At least one field (date, desc, meeting time, or files) must be provided for update",
         });
       }
 
@@ -1159,6 +1284,46 @@ export class DesigingStageController {
 
       if (desc) {
         updateData.desc = desc;
+      }
+
+      if (meeting_start_time != null) {
+        if (meeting_start_time && !isValidMeetingTime(meeting_start_time)) {
+          return res.status(400).json({
+            success: false,
+            message: "meeting_start_time must be in HH:mm format",
+          });
+        }
+
+        updateData.meeting_start_time = meeting_start_time?.trim() || null;
+      }
+
+      if (meeting_end_time != null) {
+        if (meeting_end_time && !isValidMeetingTime(meeting_end_time)) {
+          return res.status(400).json({
+            success: false,
+            message: "meeting_end_time must be in HH:mm format",
+          });
+        }
+
+        updateData.meeting_end_time = meeting_end_time?.trim() || null;
+      }
+
+      const nextStartTime =
+        updateData.meeting_start_time ?? existingMeeting.meeting_start_time;
+      const nextEndTime =
+        updateData.meeting_end_time ?? existingMeeting.meeting_end_time;
+
+      if (
+        nextStartTime &&
+        nextEndTime &&
+        isValidMeetingTime(nextStartTime) &&
+        isValidMeetingTime(nextEndTime) &&
+        nextStartTime >= nextEndTime
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "meeting_end_time must be after meeting_start_time",
+        });
       }
 
       // 4️⃣ Update the meeting

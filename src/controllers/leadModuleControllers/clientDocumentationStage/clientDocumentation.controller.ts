@@ -15,6 +15,22 @@ const clientDocumentationService = new ClientDocumentationService();
 const getParam = (param: string | string[] | undefined): string | undefined =>
   Array.isArray(param) ? param[0] : param;
 
+type ResolvedInstance = {
+  id: number;
+  title: string;
+};
+
+type ClientDocUploadContext = {
+  vendorId: number;
+  leadId: number;
+  isCustomVendorFlow: boolean;
+  resolvedInstance: ResolvedInstance | null;
+  clientNameSegment: string;
+  fallbackFurnitureSegment: string;
+};
+
+type ClientDocCategory = "Document" | "Design";
+
 export class ClientDocumentationController {
   private static async resolveProductStructureInstance(
     leadId: number,
@@ -54,6 +70,140 @@ export class ClientDocumentationController {
     }
 
     return null;
+  }
+
+  private static formatDateSegment(date: Date) {
+    return [
+      date.getFullYear(),
+      String(date.getMonth() + 1).padStart(2, "0"),
+      String(date.getDate()).padStart(2, "0"),
+    ].join("-");
+  }
+
+  private static sanitizeSegment(value: string, fallback: string) {
+    const normalized = sanitizeFilename((value || "").trim().replace(/\s+/g, "-"))
+      .replace(/_+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    return normalized || fallback;
+  }
+
+  private static extractClientDocRevision(fileName: string) {
+    const parsedName = fileName.replace(/\.[^/.]+$/, "");
+    const match = parsedName.match(/^CD(\d+)-(Document|Design)-/i);
+    return match ? Number(match[1]) : null;
+  }
+
+  private static async buildUploadContext(
+    leadId: number,
+    vendorId: number,
+    resolvedInstance: ResolvedInstance | null,
+  ): Promise<ClientDocUploadContext> {
+    const [vendor, lead, allInstances] = await Promise.all([
+      prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      }),
+      prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+        select: { firstname: true, lastname: true },
+      }),
+      prisma.leadProductStructureInstance.findMany({
+        where: { lead_id: leadId, vendor_id: vendorId },
+        select: {
+          id: true,
+          title: true,
+          productType: { select: { type: true } },
+        },
+        orderBy: [
+          { product_structure_id: "asc" },
+          { quantity_index: "asc" },
+        ],
+      }),
+    ]);
+
+    if (!lead) {
+      throw new Error("Lead not found for client documentation upload");
+    }
+
+    const firstFurnitureType =
+      allInstances.find((instance) => instance.productType?.type)?.productType?.type ??
+      "Furniture";
+
+    return {
+      vendorId,
+      leadId,
+      isCustomVendorFlow:
+        vendor?.is_this_vendor_is_custom_usertype_only === true,
+      resolvedInstance,
+      clientNameSegment: ClientDocumentationController.sanitizeSegment(
+        `${lead.firstname ?? ""} ${lead.lastname ?? ""}`,
+        "Client",
+      ),
+      fallbackFurnitureSegment:
+        ClientDocumentationController.sanitizeSegment(
+          firstFurnitureType,
+          "Furniture",
+        ),
+    };
+  }
+
+  private static async getNextClientDocumentationRevision(
+    context: ClientDocUploadContext,
+    tag: "Type 11" | "Type 12",
+  ) {
+    const existingDocs = await prisma.leadDocuments.findMany({
+      where: {
+        lead_id: context.leadId,
+        vendor_id: context.vendorId,
+        is_deleted: false,
+        documentType: { tag },
+        product_structure_instance_id: context.resolvedInstance?.id ?? null,
+      },
+      select: { doc_og_name: true },
+    });
+
+    const parsedRevisions = existingDocs
+      .map((doc) =>
+        ClientDocumentationController.extractClientDocRevision(doc.doc_og_name),
+      )
+      .filter((revision): revision is number => revision !== null);
+
+    const nextRevision =
+      parsedRevisions.length > 0
+        ? Math.max(...parsedRevisions) + 1
+        : existingDocs.length;
+
+    return nextRevision;
+  }
+
+  private static buildClientDocumentationName(
+    context: ClientDocUploadContext,
+    tag: "Type 11" | "Type 12",
+    originalName: string,
+    revision: number,
+  ) {
+    if (!context.isCustomVendorFlow) {
+      return originalName;
+    }
+
+    const category: ClientDocCategory = tag === "Type 11" ? "Document" : "Design";
+    const extension = (originalName.match(/\.[^/.]+$/)?.[0] || "").toLowerCase();
+    const structureSegment = context.resolvedInstance?.title
+      ? ClientDocumentationController.sanitizeSegment(
+          context.resolvedInstance.title,
+          context.fallbackFurnitureSegment,
+        )
+      : context.fallbackFurnitureSegment;
+
+    return [
+      `CD${revision}`,
+      category,
+      context.clientNameSegment,
+      structureSegment,
+      ClientDocumentationController.formatDateSegment(new Date()),
+    ].join("-") + extension;
   }
 
   public static async create(req: Request, res: Response): Promise<void> {
@@ -117,6 +267,13 @@ export class ClientDocumentationController {
         return;
       }
 
+      const uploadContext =
+        await ClientDocumentationController.buildUploadContext(
+          parsedLeadId,
+          parsedVendorId,
+          resolvedInstance,
+        );
+
       const instanceFolder = resolvedInstance?.title
         ? sanitizeFilename(resolvedInstance.title.trim().replace(/\s+/g, "_"))
         : undefined;
@@ -131,13 +288,26 @@ export class ClientDocumentationController {
             : "client_documentations/client_documentations_pytha";
 
         const uploaded: CustomMulterFile[] = [];
+        let nextRevision =
+          await ClientDocumentationController.getNextClientDocumentationRevision(
+            uploadContext,
+            tag,
+          );
 
         for (const doc of docs) {
+          const finalOriginalName =
+            ClientDocumentationController.buildClientDocumentationName(
+              uploadContext,
+              tag,
+              doc.originalname,
+              nextRevision,
+            );
+          nextRevision += 1;
           const sysName = await uploadToWasabClientDocumentationFile(
             doc.path,
             Number(vendor_id),
             Number(lead_id),
-            doc.originalname,
+            finalOriginalName,
             doc.mimetype,
             instanceFolder
           );
@@ -145,7 +315,7 @@ export class ClientDocumentationController {
           await fs.unlink(doc.path);
 
           uploaded.push({
-            originalName: doc.originalname,
+            originalName: finalOriginalName,
             sysName,
             docTypeTag: tag,
             productStructureInstanceId: resolvedInstance?.id,
@@ -297,6 +467,13 @@ export class ClientDocumentationController {
         return;
       }
 
+      const uploadContext =
+        await ClientDocumentationController.buildUploadContext(
+          parsedLeadId,
+          parsedVendorId,
+          resolvedInstance,
+        );
+
       const instanceFolder = resolvedInstance?.title
         ? sanitizeFilename(resolvedInstance.title.trim().replace(/\s+/g, "_"))
         : undefined;
@@ -311,13 +488,26 @@ export class ClientDocumentationController {
             : "client_documentations/client_documentations_pytha";
 
         const uploaded: CustomMulterFile[] = [];
+        let nextRevision =
+          await ClientDocumentationController.getNextClientDocumentationRevision(
+            uploadContext,
+            tag,
+          );
 
         for (const doc of docs) {
+          const finalOriginalName =
+            ClientDocumentationController.buildClientDocumentationName(
+              uploadContext,
+              tag,
+              doc.originalname,
+              nextRevision,
+            );
+          nextRevision += 1;
           const sysName = await uploadToWasabClientDocumentationFile(
             doc.path,
             Number(vendor_id),
             Number(lead_id),
-            doc.originalname,
+            finalOriginalName,
             doc.mimetype,
             instanceFolder
           );
@@ -325,7 +515,7 @@ export class ClientDocumentationController {
           await fs.unlink(doc.path);
 
           uploaded.push({
-            originalName: doc.originalname,
+            originalName: finalOriginalName,
             sysName,
             docTypeTag: tag,
             productStructureInstanceId: resolvedInstance?.id,

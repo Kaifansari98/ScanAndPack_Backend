@@ -1134,28 +1134,21 @@ export class UnderInstallationStageService {
       // Factory Assignment Logic
       // -----------------------------
 
-      let factoryAssigneeId: number | null = null;
-
-      const factoryType = await tx.userTypeMaster.findFirst({
+      const factoryMapping = await tx.leadUserMapping.findFirst({
         where: {
-          user_type: { equals: "factory", mode: "insensitive" },
+          vendor_id,
+          lead_id,
+          status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
         },
-        select: { id: true },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
       });
 
-      if (factoryType) {
-        const factoryMapping = await tx.leadUserMapping.findFirst({
-          where: {
-            vendor_id,
-            lead_id,
-            status: "active",
-            user: { user_type_id: factoryType.id },
-          },
-          select: { user_id: true },
-        });
-
-        factoryAssigneeId = factoryMapping?.user_id ?? null;
-      }
+      const factoryAssigneeId = factoryMapping?.user_id ?? null;
 
       // -----------------------------
       // Lead Stage Resolution
@@ -1810,28 +1803,21 @@ export class UnderInstallationStageService {
         },
       });
 
-      // Resolve Factory Role
-      const factoryType = await tx.userTypeMaster.findFirst({
+      const factoryMapping = await tx.leadUserMapping.findFirst({
         where: {
-          user_type: { equals: "factory", mode: "insensitive" },
+          vendor_id,
+          lead_id: existing.lead_id,
+          status: "active",
+          type: "production-stage",
+          user: {
+            status: "active",
+          },
         },
-        select: { id: true },
+        orderBy: { created_at: "asc" },
+        select: { user_id: true },
       });
 
-      let factoryAssigneeId: number | null = null;
-      if (factoryType) {
-        const factoryMapping = await tx.leadUserMapping.findFirst({
-          where: {
-            vendor_id,
-            lead_id: existing.lead_id,
-            status: "active",
-            user: { user_type_id: factoryType.id },
-          },
-          select: { user_id: true },
-        });
-
-        factoryAssigneeId = factoryMapping?.user_id ?? null;
-      }
+      const factoryAssigneeId = factoryMapping?.user_id ?? null;
 
       const leadStageRecord = await tx.leadMaster.findUnique({
         where: { id: existing.lead_id },

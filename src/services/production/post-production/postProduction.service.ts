@@ -957,12 +957,12 @@ export class PostProductionService {
         vendor_id: vendorId,
         lead_id: leadId,
         status: "active",
+        type: "production-stage",
         user: {
-          user_type: {
-            user_type: { equals: "factory", mode: "insensitive" },
-          },
+          status: "active",
         },
       },
+      orderBy: { created_at: "asc" },
       select: { user_id: true },
     });
 
