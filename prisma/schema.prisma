@@ -1210,6 +1210,8 @@ model LeadDesignMeeting {
   vendor_id                Int
   meeting_type_id          Int?
   date                     DateTime
+  meeting_start_time       String?                             @db.VarChar(5)
+  meeting_end_time         String?                             @db.VarChar(5)
   desc                     String                              @db.VarChar(2000)
   created_by               Int
   updated_by               Int?

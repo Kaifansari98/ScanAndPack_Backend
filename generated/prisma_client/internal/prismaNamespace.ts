@@ -11305,6 +11305,8 @@ export const LeadDesignMeetingScalarFieldEnum = {
   vendor_id: 'vendor_id',
   meeting_type_id: 'meeting_type_id',
   date: 'date',
+  meeting_start_time: 'meeting_start_time',
+  meeting_end_time: 'meeting_end_time',
   desc: 'desc',
   created_by: 'created_by',
   updated_by: 'updated_by',

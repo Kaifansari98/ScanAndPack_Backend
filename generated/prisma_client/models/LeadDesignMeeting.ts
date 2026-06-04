@@ -53,6 +53,8 @@ export type LeadDesignMeetingMinAggregateOutputType = {
   vendor_id: number | null
   meeting_type_id: number | null
   date: Date | null
+  meeting_start_time: string | null
+  meeting_end_time: string | null
   desc: string | null
   created_by: number | null
   updated_by: number | null
@@ -67,6 +69,8 @@ export type LeadDesignMeetingMaxAggregateOutputType = {
   vendor_id: number | null
   meeting_type_id: number | null
   date: Date | null
+  meeting_start_time: string | null
+  meeting_end_time: string | null
   desc: string | null
   created_by: number | null
   updated_by: number | null
@@ -81,6 +85,8 @@ export type LeadDesignMeetingCountAggregateOutputType = {
   vendor_id: number
   meeting_type_id: number
   date: number
+  meeting_start_time: number
+  meeting_end_time: number
   desc: number
   created_by: number
   updated_by: number
@@ -117,6 +123,8 @@ export type LeadDesignMeetingMinAggregateInputType = {
   vendor_id?: true
   meeting_type_id?: true
   date?: true
+  meeting_start_time?: true
+  meeting_end_time?: true
   desc?: true
   created_by?: true
   updated_by?: true
@@ -131,6 +139,8 @@ export type LeadDesignMeetingMaxAggregateInputType = {
   vendor_id?: true
   meeting_type_id?: true
   date?: true
+  meeting_start_time?: true
+  meeting_end_time?: true
   desc?: true
   created_by?: true
   updated_by?: true
@@ -145,6 +155,8 @@ export type LeadDesignMeetingCountAggregateInputType = {
   vendor_id?: true
   meeting_type_id?: true
   date?: true
+  meeting_start_time?: true
+  meeting_end_time?: true
   desc?: true
   created_by?: true
   updated_by?: true
@@ -246,6 +258,8 @@ export type LeadDesignMeetingGroupByOutputType = {
   vendor_id: number
   meeting_type_id: number | null
   date: Date
+  meeting_start_time: string | null
+  meeting_end_time: string | null
   desc: string
   created_by: number
   updated_by: number | null
@@ -283,6 +297,8 @@ export type LeadDesignMeetingWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   meeting_type_id?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
   date?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
+  meeting_start_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
+  meeting_end_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
   desc?: Prisma.StringFilter<"LeadDesignMeeting"> | string
   created_by?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
@@ -304,6 +320,8 @@ export type LeadDesignMeetingOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   meeting_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
+  meeting_start_time?: Prisma.SortOrderInput | Prisma.SortOrder
+  meeting_end_time?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -328,6 +346,8 @@ export type LeadDesignMeetingWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   meeting_type_id?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
   date?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
+  meeting_start_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
+  meeting_end_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
   desc?: Prisma.StringFilter<"LeadDesignMeeting"> | string
   created_by?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
@@ -349,6 +369,8 @@ export type LeadDesignMeetingOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   meeting_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
+  meeting_start_time?: Prisma.SortOrderInput | Prisma.SortOrder
+  meeting_end_time?: Prisma.SortOrderInput | Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -371,6 +393,8 @@ export type LeadDesignMeetingScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadDesignMeeting"> | number
   meeting_type_id?: Prisma.IntNullableWithAggregatesFilter<"LeadDesignMeeting"> | number | null
   date?: Prisma.DateTimeWithAggregatesFilter<"LeadDesignMeeting"> | Date | string
+  meeting_start_time?: Prisma.StringNullableWithAggregatesFilter<"LeadDesignMeeting"> | string | null
+  meeting_end_time?: Prisma.StringNullableWithAggregatesFilter<"LeadDesignMeeting"> | string | null
   desc?: Prisma.StringWithAggregatesFilter<"LeadDesignMeeting"> | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadDesignMeeting"> | number
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"LeadDesignMeeting"> | number | null
@@ -380,6 +404,8 @@ export type LeadDesignMeetingScalarWhereWithAggregatesInput = {
 
 export type LeadDesignMeetingCreateInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -399,6 +425,8 @@ export type LeadDesignMeetingUncheckedCreateInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -409,6 +437,8 @@ export type LeadDesignMeetingUncheckedCreateInput = {
 
 export type LeadDesignMeetingUpdateInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -428,6 +458,8 @@ export type LeadDesignMeetingUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -443,6 +475,8 @@ export type LeadDesignMeetingCreateManyInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -452,6 +486,8 @@ export type LeadDesignMeetingCreateManyInput = {
 
 export type LeadDesignMeetingUpdateManyMutationInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -464,6 +500,8 @@ export type LeadDesignMeetingUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -488,6 +526,8 @@ export type LeadDesignMeetingCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   meeting_type_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  meeting_start_time?: Prisma.SortOrder
+  meeting_end_time?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -512,6 +552,8 @@ export type LeadDesignMeetingMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   meeting_type_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  meeting_start_time?: Prisma.SortOrder
+  meeting_end_time?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -526,6 +568,8 @@ export type LeadDesignMeetingMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   meeting_type_id?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  meeting_start_time?: Prisma.SortOrder
+  meeting_end_time?: Prisma.SortOrder
   desc?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -816,6 +860,8 @@ export type LeadDesignMeetingUpdateOneRequiredWithoutDesignMeetingDocsMappingNes
 
 export type LeadDesignMeetingCreateWithoutVendorInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -833,6 +879,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutVendorInput = {
   account_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -877,6 +925,8 @@ export type LeadDesignMeetingScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   meeting_type_id?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
   date?: Prisma.DateTimeFilter<"LeadDesignMeeting"> | Date | string
+  meeting_start_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
+  meeting_end_time?: Prisma.StringNullableFilter<"LeadDesignMeeting"> | string | null
   desc?: Prisma.StringFilter<"LeadDesignMeeting"> | string
   created_by?: Prisma.IntFilter<"LeadDesignMeeting"> | number
   updated_by?: Prisma.IntNullableFilter<"LeadDesignMeeting"> | number | null
@@ -886,6 +936,8 @@ export type LeadDesignMeetingScalarWhereInput = {
 
 export type LeadDesignMeetingCreateWithoutCreatedByInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -904,6 +956,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   updated_by?: number | null
   created_at?: Date | string
@@ -923,6 +977,8 @@ export type LeadDesignMeetingCreateManyCreatedByInputEnvelope = {
 
 export type LeadDesignMeetingCreateWithoutUpdatedByInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -941,6 +997,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutUpdatedByInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   created_at?: Date | string
@@ -992,6 +1050,8 @@ export type LeadDesignMeetingUpdateManyWithWhereWithoutUpdatedByInput = {
 
 export type LeadDesignMeetingCreateWithoutLeadInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -1009,6 +1069,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutLeadInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1045,6 +1107,8 @@ export type LeadDesignMeetingUpdateManyWithWhereWithoutLeadInput = {
 
 export type LeadDesignMeetingCreateWithoutAccountInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -1062,6 +1126,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutAccountInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1098,6 +1164,8 @@ export type LeadDesignMeetingUpdateManyWithWhereWithoutAccountInput = {
 
 export type LeadDesignMeetingCreateWithoutMeetingTypeInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -1115,6 +1183,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutMeetingTypeInput = {
   account_id: number
   vendor_id: number
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1151,6 +1221,8 @@ export type LeadDesignMeetingUpdateManyWithWhereWithoutMeetingTypeInput = {
 
 export type LeadDesignMeetingCreateWithoutDesignMeetingDocsMappingInput = {
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_at?: Date | string
   updated_at?: Date | string
@@ -1169,6 +1241,8 @@ export type LeadDesignMeetingUncheckedCreateWithoutDesignMeetingDocsMappingInput
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1194,6 +1268,8 @@ export type LeadDesignMeetingUpdateToOneWithWhereWithoutDesignMeetingDocsMapping
 
 export type LeadDesignMeetingUpdateWithoutDesignMeetingDocsMappingInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1212,6 +1288,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutDesignMeetingDocsMappingInput
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1225,6 +1303,8 @@ export type LeadDesignMeetingCreateManyVendorInput = {
   account_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1234,6 +1314,8 @@ export type LeadDesignMeetingCreateManyVendorInput = {
 
 export type LeadDesignMeetingUpdateWithoutVendorInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1251,6 +1333,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1265,6 +1349,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutVendorInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1279,6 +1365,8 @@ export type LeadDesignMeetingCreateManyCreatedByInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   updated_by?: number | null
   created_at?: Date | string
@@ -1292,6 +1380,8 @@ export type LeadDesignMeetingCreateManyUpdatedByInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   created_at?: Date | string
@@ -1300,6 +1390,8 @@ export type LeadDesignMeetingCreateManyUpdatedByInput = {
 
 export type LeadDesignMeetingUpdateWithoutCreatedByInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1318,6 +1410,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1332,6 +1426,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1340,6 +1436,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByInput = {
 
 export type LeadDesignMeetingUpdateWithoutUpdatedByInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1358,6 +1456,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutUpdatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1372,6 +1472,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1384,6 +1486,8 @@ export type LeadDesignMeetingCreateManyLeadInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1393,6 +1497,8 @@ export type LeadDesignMeetingCreateManyLeadInput = {
 
 export type LeadDesignMeetingUpdateWithoutLeadInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1410,6 +1516,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1424,6 +1532,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutLeadInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1437,6 +1547,8 @@ export type LeadDesignMeetingCreateManyAccountInput = {
   vendor_id: number
   meeting_type_id?: number | null
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1446,6 +1558,8 @@ export type LeadDesignMeetingCreateManyAccountInput = {
 
 export type LeadDesignMeetingUpdateWithoutAccountInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1463,6 +1577,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1477,6 +1593,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutAccountInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   meeting_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1490,6 +1608,8 @@ export type LeadDesignMeetingCreateManyMeetingTypeInput = {
   account_id: number
   vendor_id: number
   date: Date | string
+  meeting_start_time?: string | null
+  meeting_end_time?: string | null
   desc: string
   created_by: number
   updated_by?: number | null
@@ -1499,6 +1619,8 @@ export type LeadDesignMeetingCreateManyMeetingTypeInput = {
 
 export type LeadDesignMeetingUpdateWithoutMeetingTypeInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1516,6 +1638,8 @@ export type LeadDesignMeetingUncheckedUpdateWithoutMeetingTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1530,6 +1654,8 @@ export type LeadDesignMeetingUncheckedUpdateManyWithoutMeetingTypeInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  meeting_start_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  meeting_end_time?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   desc?: Prisma.StringFieldUpdateOperationsInput | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1575,6 +1701,8 @@ export type LeadDesignMeetingSelect<ExtArgs extends runtime.Types.Extensions.Int
   vendor_id?: boolean
   meeting_type_id?: boolean
   date?: boolean
+  meeting_start_time?: boolean
+  meeting_end_time?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
@@ -1597,6 +1725,8 @@ export type LeadDesignMeetingSelectCreateManyAndReturn<ExtArgs extends runtime.T
   vendor_id?: boolean
   meeting_type_id?: boolean
   date?: boolean
+  meeting_start_time?: boolean
+  meeting_end_time?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
@@ -1617,6 +1747,8 @@ export type LeadDesignMeetingSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   vendor_id?: boolean
   meeting_type_id?: boolean
   date?: boolean
+  meeting_start_time?: boolean
+  meeting_end_time?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
@@ -1637,6 +1769,8 @@ export type LeadDesignMeetingSelectScalar = {
   vendor_id?: boolean
   meeting_type_id?: boolean
   date?: boolean
+  meeting_start_time?: boolean
+  meeting_end_time?: boolean
   desc?: boolean
   created_by?: boolean
   updated_by?: boolean
@@ -1644,7 +1778,7 @@ export type LeadDesignMeetingSelectScalar = {
   updated_at?: boolean
 }
 
-export type LeadDesignMeetingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "meeting_type_id" | "date" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["leadDesignMeeting"]>
+export type LeadDesignMeetingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "meeting_type_id" | "date" | "meeting_start_time" | "meeting_end_time" | "desc" | "created_by" | "updated_by" | "created_at" | "updated_at", ExtArgs["result"]["leadDesignMeeting"]>
 export type LeadDesignMeetingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -1690,6 +1824,8 @@ export type $LeadDesignMeetingPayload<ExtArgs extends runtime.Types.Extensions.I
     vendor_id: number
     meeting_type_id: number | null
     date: Date
+    meeting_start_time: string | null
+    meeting_end_time: string | null
     desc: string
     created_by: number
     updated_by: number | null
@@ -2131,6 +2267,8 @@ export interface LeadDesignMeetingFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"LeadDesignMeeting", 'Int'>
   readonly meeting_type_id: Prisma.FieldRef<"LeadDesignMeeting", 'Int'>
   readonly date: Prisma.FieldRef<"LeadDesignMeeting", 'DateTime'>
+  readonly meeting_start_time: Prisma.FieldRef<"LeadDesignMeeting", 'String'>
+  readonly meeting_end_time: Prisma.FieldRef<"LeadDesignMeeting", 'String'>
   readonly desc: Prisma.FieldRef<"LeadDesignMeeting", 'String'>
   readonly created_by: Prisma.FieldRef<"LeadDesignMeeting", 'Int'>
   readonly updated_by: Prisma.FieldRef<"LeadDesignMeeting", 'Int'>

@@ -36,6 +36,11 @@ const resolveClientBaseUrl = (req: Request): string => {
   return "http://localhost:3000";
 };
 
+const meetingTimePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
+
+const isValidMeetingTime = (value?: string): boolean =>
+  typeof value === "string" && meetingTimePattern.test(value);
+
 export class DesigingStageController {
   public static async addToDesigingStage(req: Request, res: Response) {
     try {
@@ -413,7 +418,16 @@ export class DesigingStageController {
         return res.status(400).json({ success: false, logs: errors.array() });
       }
 
-      const { leadId, vendorId, userId, date, desc, meeting_type_id } = req.body;
+      const {
+        leadId,
+        vendorId,
+        userId,
+        date,
+        desc,
+        meeting_type_id,
+        meeting_start_time,
+        meeting_end_time,
+      } = req.body;
       const logs: any[] = [];
       const files = (req.files as Express.Multer.File[]) || [];
 
@@ -468,6 +482,27 @@ export class DesigingStageController {
         });
       }
 
+      if (meeting_start_time && !isValidMeetingTime(meeting_start_time)) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_start_time must be in HH:mm format"],
+        });
+      }
+
+      if (meeting_end_time && !isValidMeetingTime(meeting_end_time)) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_end_time must be in HH:mm format"],
+        });
+      }
+
+      if (meeting_start_time && meeting_end_time && meeting_start_time >= meeting_end_time) {
+        return res.status(400).json({
+          success: false,
+          logs: ["meeting_end_time must be after meeting_start_time"],
+        });
+      }
+
       if (meeting_type_id) {
         const meetingType = await prisma.meetingTypeMaster.findFirst({
           where: {
@@ -514,6 +549,8 @@ export class DesigingStageController {
                 ? Number(meeting_type_id)
                 : null,
               date: new Date(date),
+              meeting_start_time: meeting_start_time?.trim() || null,
+              meeting_end_time: meeting_end_time?.trim() || null,
               desc: desc?.trim() || "",
               created_by: Number(userId),
             },
@@ -1166,7 +1203,14 @@ export class DesigingStageController {
   public static async editDesignMeeting(req: Request, res: Response) {
     try {
       const { meetingId } = req.params;
-      const { vendorId, userId, date, desc } = req.body;
+      const {
+        vendorId,
+        userId,
+        date,
+        desc,
+        meeting_start_time,
+        meeting_end_time,
+      } = req.body;
 
       if (!meetingId) {
         return res.status(400).json({
@@ -1186,12 +1230,14 @@ export class DesigingStageController {
       if (
         !date &&
         !desc &&
+        meeting_start_time == null &&
+        meeting_end_time == null &&
         (!req.files || (req.files as Express.Multer.File[]).length === 0)
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "At least one field (date, desc, or files) must be provided for update",
+            "At least one field (date, desc, meeting time, or files) must be provided for update",
         });
       }
 
@@ -1238,6 +1284,46 @@ export class DesigingStageController {
 
       if (desc) {
         updateData.desc = desc;
+      }
+
+      if (meeting_start_time != null) {
+        if (meeting_start_time && !isValidMeetingTime(meeting_start_time)) {
+          return res.status(400).json({
+            success: false,
+            message: "meeting_start_time must be in HH:mm format",
+          });
+        }
+
+        updateData.meeting_start_time = meeting_start_time?.trim() || null;
+      }
+
+      if (meeting_end_time != null) {
+        if (meeting_end_time && !isValidMeetingTime(meeting_end_time)) {
+          return res.status(400).json({
+            success: false,
+            message: "meeting_end_time must be in HH:mm format",
+          });
+        }
+
+        updateData.meeting_end_time = meeting_end_time?.trim() || null;
+      }
+
+      const nextStartTime =
+        updateData.meeting_start_time ?? existingMeeting.meeting_start_time;
+      const nextEndTime =
+        updateData.meeting_end_time ?? existingMeeting.meeting_end_time;
+
+      if (
+        nextStartTime &&
+        nextEndTime &&
+        isValidMeetingTime(nextStartTime) &&
+        isValidMeetingTime(nextEndTime) &&
+        nextStartTime >= nextEndTime
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "meeting_end_time must be after meeting_start_time",
+        });
       }
 
       // 4️⃣ Update the meeting
