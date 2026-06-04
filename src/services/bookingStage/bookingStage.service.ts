@@ -18,6 +18,7 @@ import logger from "../../utils/logger";
 import { isLeadComplete } from "../../validations/leadValidation";
 import { cache } from "../../utils/cache";
 import {
+  sendLeadMovedToBookingEmail,
   sendPaymentAddedEmail,
 } from "../email/brevoEmail.service";
 import { AssignTaskBookingInput } from "../../types/leadModule.types";
@@ -263,7 +264,7 @@ export class BookingStageService {
     }
   }
 
-  public async createBookingStage(data: CreateBookingStageDto) {
+public async createBookingStage(data: CreateBookingStageDto) {
     const response = await prisma.$transaction(
       async (tx: any) => {
         const response: any = {
@@ -272,17 +273,6 @@ export class BookingStageService {
           supervisorAssigned: null,
           message: "Booking stage completed successfully",
         };
-
-        const vendor = await tx.vendorMaster.findUnique({
-          where: { id: data.vendor_id },
-          select: {
-            IsAccountLocInEnabled: true,
-            is_this_vendor_is_custom_usertype_only: true,
-          },
-        });
-        const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled ?? false;
-        const useCustomUsersOnly =
-          vendor?.is_this_vendor_is_custom_usertype_only === true;
 
         // 1. Upload Final Documents (mandatory)
         if (!data.finalDocuments || data.finalDocuments.length === 0) {
@@ -361,18 +351,12 @@ export class BookingStageService {
           paymentFileId = document.id;
         }
 
-        const leadForPayment = await tx.leadMaster.findUnique({
-          where: { id: data.lead_id },
-          select: { status_id: true },
-        });
-
         const bookingPayment = await tx.paymentInfo.create({
           data: {
             lead_id: data.lead_id,
             account_id: data.account_id,
             vendor_id: data.vendor_id,
             created_by: data.created_by,
-            status_id: leadForPayment?.status_id ?? null,
             amount: data.bookingAmount,
             payment_text: data.bookingAmountPaymentDetailsText || null,
             payment_file_id: paymentFileId, // may be null if no file
@@ -415,127 +399,79 @@ export class BookingStageService {
           },
         });
 
-        // Check vendor settings for custom usertype
-        const vendorRecord = await tx.vendorMaster.findUnique({
-          where: { id: data.vendor_id },
-          select: { is_this_vendor_is_custom_usertype_only: true }
+        // 5. Assign Site Supervisor
+        const supervisor = await tx.leadSiteSupervisorMapping.create({
+          data: {
+            lead_id: data.lead_id,
+            user_id: data.siteSupervisorId,
+            vendor_id: data.vendor_id,
+            account_id: data.account_id,
+            created_by: data.created_by, // ✅ required field
+          },
         });
 
-        const isCustomUsertypeOnly = vendorRecord?.is_this_vendor_is_custom_usertype_only === true;
+        response.supervisorAssigned = supervisor;
 
-        if (!isCustomUsertypeOnly) {
-          if (!data.siteSupervisorId) {
-            throw new Error("Site Supervisor ID is required for this vendor");
-          }
+        // -----------------------------
+        // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
+        // -----------------------------
+        await tx.leadUserMapping.create({
+          data: {
+            vendor_id: data.vendor_id,
+            account_id: data.account_id,
+            lead_id: data.lead_id,
+            user_id: data.siteSupervisorId,
+            type: "site-supervisor",
+            status: "active",
+            created_by: data.created_by,
+          },
+        });
 
-          // 5. Assign Site Supervisor
-          const supervisor = await tx.leadSiteSupervisorMapping.create({
+        // ✅ Ensure site supervisor is in lead chat members
+        let chatRoom = await tx.leadChatRoom.findFirst({
+          where: {
+            lead_id: data.lead_id,
+            vendor_id: data.vendor_id,
+          },
+          select: { id: true },
+        });
+
+        if (!chatRoom) {
+          chatRoom = await tx.leadChatRoom.create({
             data: {
               lead_id: data.lead_id,
-              user_id: data.siteSupervisorId,
               vendor_id: data.vendor_id,
-              account_id: data.account_id,
-              created_by: data.created_by, // ✅ required field
-            },
-          });
-
-          response.supervisorAssigned = supervisor;
-          response.supervisorAssigned = supervisor;
-
-          // -----------------------------
-          // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
-          // -----------------------------
-          await tx.leadUserMapping.create({
-            data: {
-              vendor_id: data.vendor_id,
-              account_id: data.account_id,
-              lead_id: data.lead_id,
-              user_id: data.siteSupervisorId,
-              type: "head-site-supervisor",
-              status: "active",
               created_by: data.created_by,
             },
+            select: { id: true },
           });
+        }
 
-          // ✅ Ensure site supervisor is in lead chat members
-          let chatRoom = await tx.leadChatRoom.findFirst({
-            where: {
+        const existingMember = await tx.leadChatMember.findFirst({
+          where: {
+            chat_room_id: chatRoom.id,
+            user_id: data.siteSupervisorId,
+          },
+          select: { id: true },
+        });
+
+        if (existingMember) {
+          logger.info(
+            "[SERVICE] LeadChatMember already exists, skipping insert",
+            {
               lead_id: data.lead_id,
-              vendor_id: data.vendor_id,
-            },
-            select: { id: true },
-          });
-
-          if (!chatRoom) {
-            chatRoom = await tx.leadChatRoom.create({
-              data: {
-                lead_id: data.lead_id,
-                vendor_id: data.vendor_id,
-              },
-              select: { id: true },
-            });
-          }
-          if (!chatRoom) {
-            chatRoom = await tx.leadChatRoom.create({
-              data: {
-                lead_id: data.lead_id,
-                vendor_id: data.vendor_id,
-              },
-              select: { id: true },
-            });
-          }
-
-          const existingMember = await tx.leadChatMember.findFirst({
-            where: {
               chat_room_id: chatRoom.id,
               user_id: data.siteSupervisorId,
             },
-            select: { id: true },
-          });
-          const existingMember = await tx.leadChatMember.findFirst({
-            where: {
+          );
+        } else {
+          await tx.leadChatMember.create({
+            data: {
               chat_room_id: chatRoom.id,
               user_id: data.siteSupervisorId,
+              added_by: data.created_by,
             },
-            select: { id: true },
           });
-
-          if (existingMember) {
-            logger.info(
-              "[SERVICE] LeadChatMember already exists, skipping insert",
-              {
-                lead_id: data.lead_id,
-                chat_room_id: chatRoom.id,
-                user_id: data.siteSupervisorId,
-              },
-            );
-          } else {
-            await tx.leadChatMember.create({
-              data: {
-                chat_room_id: chatRoom.id,
-                user_id: data.siteSupervisorId,
-                added_by: data.created_by,
-              },
-            });
-          }
-          if (existingMember) {
-            logger.info(
-              "[SERVICE] LeadChatMember already exists, skipping insert",
-              {
-                lead_id: data.lead_id,
-                chat_room_id: chatRoom.id,
-                user_id: data.siteSupervisorId,
-              },
-            );
-          } else {
-            await tx.leadChatMember.create({
-              data: {
-                chat_room_id: chatRoom.id,
-                user_id: data.siteSupervisorId,
-                added_by: data.created_by,
-              },
-            });
-          }
         }
 
         // -----------------------------
@@ -552,31 +488,12 @@ export class BookingStageService {
           },
         });
 
-        if (isAccountLocInEnabled) {
-          const bookingDoneLockIn =
-            await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
-              {
-                vendor_id: data.vendor_id,
-                lead_id: data.lead_id,
-                created_by: data.created_by,
-                base_date: new Date(),
-                clientBaseUrl: data.baseUrl,
-              },
-              tx,
-            );
-
-          response.superAdminApprovalLockIn = bookingDoneLockIn.approval;
-          response.superAdminApprovalTask = bookingDoneLockIn.task;
-        }
-
         await cache.del(
           `performance:snapshot:${data.vendor_id}:${data.created_by}`,
         );
-        if (data.siteSupervisorId) {
-          await cache.del(
-            `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
-          );
-        }
+        await cache.del(
+          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
+        );
         await cache.del(
           `lead-status-counts:${data.vendor_id}:${data.created_by}`,
         );
@@ -597,14 +514,16 @@ export class BookingStageService {
         }
 
         // Create LeadDetailedLogs entry
-        const detailedLog = await createLeadLog(tx, {
-          vendor_id: data.vendor_id,
-          lead_id: data.lead_id,
-          account_id: data.account_id,
-          action: actionMessage,
-          action_type: "CREATE",
-          created_by: data.created_by,
-          created_at: new Date(),
+        const detailedLog = await tx.leadDetailedLogs.create({
+          data: {
+            vendor_id: data.vendor_id,
+            lead_id: data.lead_id,
+            account_id: data.account_id,
+            action: actionMessage,
+            action_type: "CREATE",
+            created_by: data.created_by,
+            created_at: new Date(),
+          },
         });
 
         // Map uploaded documents to LeadDocumentLogs if any
@@ -644,17 +563,23 @@ export class BookingStageService {
     try {
       const actorId = data.created_by;
 
-      const lead = await prisma.leadMaster.findUnique({
-        where: { id: data.lead_id },
-        select: {
-          firstname: true,
-          lastname: true,
-          lead_code: true,
-          vendor_id: true,
-          account_id: true,
-          franchise_id: true,
-        },
-      });
+      const [lead, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: {
+            firstname: true,
+            lastname: true,
+            lead_code: true,
+            vendor_id: true,
+            account_id: true,
+          },
+        }),
+
+        prisma.userMaster.findUnique({
+          where: { id: actorId },
+          select: { user_name: true },
+        }),
+      ]);
 
       if (!lead) return response;
 
@@ -663,16 +588,43 @@ export class BookingStageService {
       const leadCode =
         lead.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
 
-      const franchiseId = lead?.franchise_id ?? null;
+      const updatedAt = new Date().toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      const baseUrl =
+        process.env.CLIENT_BASE_URL ||
+        process.env.FRONTEND_URL ||
+        "http://localhost:3000";
+
+      const projectUrl = lead.account_id
+        ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
+        : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
       // Fetch Active Admins
-      const admins = await getFranchiseAdminRecipients({
-        vendorId: lead.vendor_id,
-        franchiseId,
-        excludeUserId: actorId,
+      const admins = await prisma.userMaster.findMany({
+        where: {
+          vendor_id: lead.vendor_id,
+          status: "active",
+          user_type: {
+            user_type: { in: ["admin"] },
+          },
+        },
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
       });
 
       for (const admin of admins) {
+        // ❌ Prevent self-trigger notification
+        if (admin.id === actorId) continue;
+
         // 🔔 In-App Notification
         await NotificationService.createAndSend({
           vendor_id: lead.vendor_id,
@@ -688,6 +640,19 @@ export class BookingStageService {
             : `/dashboard/leads/details/${data.lead_id}`,
         });
 
+        // 📧 Email Notification
+        if (!admin.user_email) continue;
+
+        await sendLeadMovedToBookingEmail({
+          vendor_id: lead.vendor_id,
+          toEmail: admin.user_email,
+          toName: admin.user_name,
+          leadCode,
+          leadName,
+          updatedBy: actor?.user_name ?? "System",
+          updatedAt,
+          projectUrl,
+        });
       }
     } catch (err: any) {
       logger.warn("⚠️ Booking stage admin notification failed", {
@@ -698,6 +663,8 @@ export class BookingStageService {
 
     return response;
   }
+
+
 
   public async addBookingStageFiles(data: {
     lead_id: number;
