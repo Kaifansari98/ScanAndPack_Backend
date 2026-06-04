@@ -267,7 +267,7 @@ private static mapTaskWithLead(task: any) {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -285,6 +285,7 @@ private static mapTaskWithLead(task: any) {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
     };
   }> {
     return this.getTasksByVendorAndUserReport(
@@ -311,7 +312,7 @@ private static mapTaskWithLead(task: any) {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -330,6 +331,7 @@ private static mapTaskWithLead(task: any) {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
     };
   }> {
     // USER ROLE RESOLUTION
@@ -598,15 +600,31 @@ private static mapTaskWithLead(task: any) {
     // ============================
 
     if (isAdmin) {
+      const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+      const completedStatusFilter = { status: "completed" as const };
+      const dataStatusFilter =
+        filters.due_filter === "completed"
+          ? completedStatusFilter
+          : includeAllStatuses
+            ? {}
+            : activeStatusFilter;
+
       // ✅ UNFILTERED BASE (for inactive tabs)
       const unfilteredBaseWhereClause: any = {
         vendor_id: vendorId,
         user_id: userId,
         ...TaskService.activeLeadWhere(),
-        ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+        ...(includeAllStatuses ? {} : activeStatusFilter),
+      };
+      const completedBaseWhereClause: any = {
+        vendor_id: vendorId,
+        user_id: userId,
+        ...TaskService.activeLeadWhere(),
+        ...completedStatusFilter,
       };
       if (includeFranchise) {
         unfilteredBaseWhereClause.franchise_id = franchiseId;
+        completedBaseWhereClause.franchise_id = franchiseId;
       }
 
       // ✅ FILTERED BASE (for active tab)
@@ -614,7 +632,7 @@ private static mapTaskWithLead(task: any) {
         vendor_id: vendorId,
         user_id: userId,
         ...TaskService.activeLeadWhere(),
-        ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+        ...dataStatusFilter,
       });
       if (includeFranchise) {
         filteredBaseWhereClause.franchise_id = franchiseId;
@@ -647,6 +665,7 @@ private static mapTaskWithLead(task: any) {
       let todayCount = 0;
       let upcomingCount = 0;
       let overdueCount = 0;
+      let completedCount = 0;
 
       if (filters.due_filter === "today") {
         todayCount = await prisma.userLeadTask.count({
@@ -705,7 +724,7 @@ private static mapTaskWithLead(task: any) {
             },
           }),
         ]);
-      } else {
+      } else if (filters.due_filter !== "completed") {
         // No filter selected
         [todayCount, upcomingCount, overdueCount] = await Promise.all([
           prisma.userLeadTask.count({
@@ -729,6 +748,15 @@ private static mapTaskWithLead(task: any) {
         ]);
       }
 
+      completedCount =
+        filters.due_filter === "completed"
+          ? await prisma.userLeadTask.count({
+              where: dataWhereClause,
+            })
+          : await prisma.userLeadTask.count({
+              where: completedBaseWhereClause,
+            });
+
       const [tasks, total] = await Promise.all([
         prisma.userLeadTask.findMany({
           where: dataWhereClause,
@@ -748,6 +776,7 @@ private static mapTaskWithLead(task: any) {
           today: todayCount,
           upcoming: upcomingCount,
           overdue: overdueCount,
+          completed: completedCount,
         },
       };
     }
@@ -772,19 +801,35 @@ private static mapTaskWithLead(task: any) {
       return {
         tasks: [],
         count: 0,
-        summary: { today: 0, upcoming: 0, overdue: 0 },
+        summary: { today: 0, upcoming: 0, overdue: 0, completed: 0 },
       };
     }
 
     // ✅ UNFILTERED BASE (for inactive tabs)
+    const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+    const completedStatusFilter = { status: "completed" as const };
+    const dataStatusFilter =
+      filters.due_filter === "completed"
+        ? completedStatusFilter
+        : includeAllStatuses
+          ? {}
+          : activeStatusFilter;
+
     const unfilteredBaseWhereClause: any = {
       id: { in: taskIds },
       vendor_id: vendorId,
       ...TaskService.activeLeadWhere(),
-      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+      ...(includeAllStatuses ? {} : activeStatusFilter),
+    };
+    const completedBaseWhereClause: any = {
+      id: { in: taskIds },
+      vendor_id: vendorId,
+      ...TaskService.activeLeadWhere(),
+      ...completedStatusFilter,
     };
     if (includeFranchise) {
       unfilteredBaseWhereClause.franchise_id = franchiseId;
+      completedBaseWhereClause.franchise_id = franchiseId;
     }
 
     // ✅ FILTERED BASE (for active tab)
@@ -792,7 +837,7 @@ private static mapTaskWithLead(task: any) {
       id: { in: taskIds },
       vendor_id: vendorId,
       ...TaskService.activeLeadWhere(),
-      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+      ...dataStatusFilter,
     });
     if (includeFranchise) {
       filteredBaseWhereClause.franchise_id = franchiseId;
@@ -825,6 +870,7 @@ private static mapTaskWithLead(task: any) {
     let todayCount = 0;
     let upcomingCount = 0;
     let overdueCount = 0;
+    let completedCount = 0;
 
     if (filters.due_filter === "today") {
       todayCount = await prisma.userLeadTask.count({
@@ -883,7 +929,7 @@ private static mapTaskWithLead(task: any) {
           },
         }),
       ]);
-    } else {
+    } else if (filters.due_filter !== "completed") {
       // No filter selected
       [todayCount, upcomingCount, overdueCount] = await Promise.all([
         prisma.userLeadTask.count({
@@ -907,6 +953,15 @@ private static mapTaskWithLead(task: any) {
       ]);
     }
 
+    completedCount =
+      filters.due_filter === "completed"
+        ? await prisma.userLeadTask.count({
+            where: dataWhereClause,
+          })
+        : await prisma.userLeadTask.count({
+            where: completedBaseWhereClause,
+          });
+
     const [tasks, total] = await Promise.all([
       prisma.userLeadTask.findMany({
         where: dataWhereClause,
@@ -926,6 +981,7 @@ private static mapTaskWithLead(task: any) {
         today: todayCount,
         upcoming: upcomingCount,
         overdue: overdueCount,
+        completed: completedCount,
       },
     };
   }
@@ -1003,7 +1059,7 @@ private static mapTaskWithLead(task: any) {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -1021,6 +1077,7 @@ private static mapTaskWithLead(task: any) {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
     };
   }> {
     return this.getTasksFilterByVendorReport(
@@ -1045,7 +1102,7 @@ private static mapTaskWithLead(task: any) {
       phone?: string;
       task_type?: string[];
       due_date?: string;
-      due_filter?: "today" | "upcoming" | "overdue";
+      due_filter?: "today" | "upcoming" | "overdue" | "completed";
       site_map_link?: boolean;
       site_type?: number[];
       product_type?: number[];
@@ -1064,6 +1121,7 @@ private static mapTaskWithLead(task: any) {
       today: number;
       upcoming: number;
       overdue: number;
+      completed: number;
     };
   }> {
     const skip = (page - 1) * limit;
@@ -1318,11 +1376,26 @@ private static mapTaskWithLead(task: any) {
     // ✅ BASE QUERY - WITHOUT ANY FILTERS (for unfiltered counts)
     // ============================
 
+    const activeStatusFilter = { status: { in: ["open", "in_progress"] } };
+    const completedStatusFilter = { status: "completed" as const };
+    const dataStatusFilter =
+      filters.due_filter === "completed"
+        ? completedStatusFilter
+        : includeAllStatuses
+          ? {}
+          : activeStatusFilter;
+
     const unfilteredBaseWhereClause: any = {
       vendor_id: vendorId,
       franchise_id: franchiseId,
       ...TaskService.activeLeadWhere(),
-      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+      ...(includeAllStatuses ? {} : activeStatusFilter),
+    };
+    const completedBaseWhereClause: any = {
+      vendor_id: vendorId,
+      franchise_id: franchiseId,
+      ...TaskService.activeLeadWhere(),
+      ...completedStatusFilter,
     };
 
     // ============================
@@ -1333,7 +1406,7 @@ private static mapTaskWithLead(task: any) {
       vendor_id: vendorId,
       franchise_id: franchiseId,
       ...TaskService.activeLeadWhere(),
-      ...(includeAllStatuses ? {} : { status: { in: ["open", "in_progress"] } }),
+      ...dataStatusFilter,
     });
 
     // ============================
@@ -1372,6 +1445,7 @@ private static mapTaskWithLead(task: any) {
     let todayCount = 0;
     let upcomingCount = 0;
     let overdueCount = 0;
+    let completedCount = 0;
 
     if (filters.due_filter === "today") {
       // Today is active → filtered count
@@ -1436,7 +1510,7 @@ private static mapTaskWithLead(task: any) {
           },
         }),
       ]);
-    } else {
+    } else if (filters.due_filter !== "completed") {
       // No filter selected → all unfiltered
       [todayCount, upcomingCount, overdueCount] = await Promise.all([
         prisma.userLeadTask.count({
@@ -1459,6 +1533,15 @@ private static mapTaskWithLead(task: any) {
         }),
       ]);
     }
+
+    completedCount =
+      filters.due_filter === "completed"
+        ? await prisma.userLeadTask.count({
+            where: dataWhereClause,
+          })
+        : await prisma.userLeadTask.count({
+            where: completedBaseWhereClause,
+          });
 
     // ============================
     // FETCH TASKS (with filters)
@@ -1489,6 +1572,7 @@ private static mapTaskWithLead(task: any) {
         today: todayCount,
         upcoming: upcomingCount,
         overdue: overdueCount,
+        completed: completedCount,
       },
     };
   }
