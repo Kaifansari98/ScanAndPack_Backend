@@ -468,7 +468,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -520,6 +520,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           sitePhotos: uploadedSitePhotos,
         }
       );
@@ -543,7 +546,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -594,6 +597,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           sitePhotos: uploadedSitePhotos,
         });
 
@@ -616,7 +622,7 @@ export class FinalMeasurementController {
     res: Response
   ): Promise<void> => {
     try {
-      const { lead_id, vendor_id, created_by } = req.body;
+      const { lead_id, vendor_id, created_by, product_structure_instance_id } = req.body;
 
       if (!lead_id || !vendor_id || !created_by) {
         res
@@ -664,6 +670,9 @@ export class FinalMeasurementController {
           lead_id: parseInt(lead_id),
           vendor_id: parseInt(vendor_id),
           created_by: parseInt(created_by),
+          product_structure_instance_id: product_structure_instance_id
+            ? Number(product_structure_instance_id)
+            : null,
           finalMeasurementDocs: uploadedFinalMeasurementDocs,
         });
 
