@@ -163,14 +163,105 @@ export class FinalMeasurementController {
         "site_photo_instance_ids",
       );
 
-      if (!finalMeasurementDocs || finalMeasurementDocs.length === 0) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: Number(vendor_id) },
+        select: { is_this_vendor_is_custom_usertype_only: true },
+      });
+      const isCustomVendorFlow =
+        vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+      const instances = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: Number(lead_id),
+          vendor_id: Number(vendor_id),
+        },
+        select: { id: true },
+      });
+
+      const isMultiInstanceFlow = instances.length > 1;
+      let canUseExistingInstanceFilesOnly = false;
+
+      if (
+        isCustomVendorFlow &&
+        isMultiInstanceFlow &&
+        finalMeasurementDocs.length === 0 &&
+        sitePhotos.length === 0
+      ) {
+        const [measurementDocType, sitePhotoType] = await Promise.all([
+          prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendor_id), tag: "Type 9" },
+            select: { id: true },
+          }),
+          prisma.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendor_id), tag: "Type 10" },
+            select: { id: true },
+          }),
+        ]);
+
+        if (!measurementDocType || !sitePhotoType) {
+          res.status(400).json({
+            success: false,
+            message: "At least one Final Measurement document is required",
+          });
+          return;
+        }
+
+        const existingDocs = await prisma.leadDocuments.findMany({
+          where: {
+            lead_id: Number(lead_id),
+            vendor_id: Number(vendor_id),
+            is_deleted: false,
+            doc_type_id: { in: [measurementDocType.id, sitePhotoType.id] },
+            product_structure_instance_id: {
+              in: instances.map((instance) => instance.id),
+            },
+          },
+          select: {
+            doc_type_id: true,
+            product_structure_instance_id: true,
+          },
+        });
+
+        const hasAllRequiredInstanceDocs = instances.every((instance) => {
+          const hasMeasurementDoc = existingDocs.some(
+            (doc) =>
+              doc.product_structure_instance_id === instance.id &&
+              doc.doc_type_id === measurementDocType.id,
+          );
+          const hasSitePhoto = existingDocs.some(
+            (doc) =>
+              doc.product_structure_instance_id === instance.id &&
+              doc.doc_type_id === sitePhotoType.id,
+          );
+
+          return hasMeasurementDoc && hasSitePhoto;
+        });
+
+        if (!hasAllRequiredInstanceDocs) {
+          res.status(400).json({
+            success: false,
+            message: "At least one Final Measurement document is required",
+          });
+          return;
+        }
+
+        canUseExistingInstanceFilesOnly = true;
+      }
+
+      if (
+        (!finalMeasurementDocs || finalMeasurementDocs.length === 0) &&
+        !canUseExistingInstanceFilesOnly
+      ) {
         res.status(400).json({
           success: false,
           message: "At least one Final Measurement document is required",
         });
         return;
       }
-      if (!sitePhotos || sitePhotos.length === 0) {
+      if (
+        (!sitePhotos || sitePhotos.length === 0) &&
+        !canUseExistingInstanceFilesOnly
+      ) {
         res.status(400).json({
           success: false,
           message: "At least one site photo is required",
