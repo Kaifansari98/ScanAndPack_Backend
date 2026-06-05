@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, validationResult, query, param  } from 'express-validator';
+import { prisma } from '../prisma/client';
 
 // Validation middleware
 export const validatePaymentUpload = [
@@ -61,16 +62,106 @@ export const validatePaymentUpload = [
 ];
 
 // File validation middleware
-export const validateFiles = (req: Request, res: Response, next: NextFunction) => {
+export const validateFiles = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const files = req.files as { [fieldname: string]: Express.Multer.File[] };
     
     // Check if at least one document file is provided (mandatory)
     if (!files?.upload_pdf || files.upload_pdf.length === 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'At least one document file upload is mandatory'
+      const leadId = Number(req.body.lead_id);
+      const vendorId = Number(req.body.vendor_id);
+
+      if (!Number.isFinite(leadId) || !Number.isFinite(vendorId)) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one document file upload is mandatory'
+        });
+      }
+
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: vendorId },
+        select: { is_this_vendor_is_custom_usertype_only: true },
       });
+
+      if (!vendor?.is_this_vendor_is_custom_usertype_only) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one document file upload is mandatory'
+        });
+      }
+
+      const instances = await prisma.leadProductStructureInstance.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+        },
+        select: { id: true },
+      });
+
+      if (instances.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one document file upload is mandatory'
+        });
+      }
+
+      const [sitePhotoDocType, measurementDocType] = await Promise.all([
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: 'Type 2' },
+          select: { id: true },
+        }),
+        prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: vendorId, tag: 'Type 3' },
+          select: { id: true },
+        }),
+      ]);
+
+      if (!sitePhotoDocType || !measurementDocType) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one document file upload is mandatory'
+        });
+      }
+
+      const existingDocs = await prisma.leadDocuments.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          is_deleted: false,
+          doc_type_id: {
+            in: [sitePhotoDocType.id, measurementDocType.id],
+          },
+          product_structure_instance_id: {
+            in: instances.map((instance) => instance.id),
+          },
+        },
+        select: {
+          doc_type_id: true,
+          product_structure_instance_id: true,
+        },
+      });
+
+      const hasAllRequiredInstanceDocs = instances.every((instance) => {
+        const hasSitePhoto = existingDocs.some(
+          (doc) =>
+            doc.product_structure_instance_id === instance.id &&
+            doc.doc_type_id === sitePhotoDocType.id,
+        );
+        const hasMeasurementDoc = existingDocs.some(
+          (doc) =>
+            doc.product_structure_instance_id === instance.id &&
+            doc.doc_type_id === measurementDocType.id,
+        );
+
+        return hasSitePhoto && hasMeasurementDoc;
+      });
+
+      if (!hasAllRequiredInstanceDocs) {
+        return res.status(400).json({
+          success: false,
+          message: 'At least one document file upload is mandatory'
+        });
+      }
     }
 
     // Validate payment image and payment text dependency

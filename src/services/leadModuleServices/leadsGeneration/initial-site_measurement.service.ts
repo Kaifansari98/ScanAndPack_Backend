@@ -493,6 +493,7 @@ export class PaymentUploadService {
             originalName: doc.doc_og_name,
             uploadedAt: doc.created_at,
             s3Key: doc.doc_sys_name,
+            product_structure_instance_id: doc.product_structure_instance_id,
             signedUrl: await generateSignedUrl(doc.doc_sys_name),
           })),
         );
@@ -607,8 +608,28 @@ export class PaymentUploadService {
     data: CreatePaymentUploadDto,
   ): Promise<PaymentUploadResponseDto> {
     try {
-      if (!data.pdfFiles?.length) {
-        throw new Error("At least one document file is mandatory");
+      const pdfFiles = data.pdfFiles ?? [];
+
+      if (!pdfFiles.length) {
+        const existingMeasurementDocType = await prisma.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 3" },
+          select: { id: true },
+        });
+
+        const existingMeasurementDocsCount = existingMeasurementDocType
+          ? await prisma.leadDocuments.count({
+              where: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                doc_type_id: existingMeasurementDocType.id,
+                is_deleted: false,
+              },
+            })
+          : 0;
+
+        if (existingMeasurementDocsCount === 0) {
+          throw new Error("At least one document file is mandatory");
+        }
       }
 
       const response: PaymentUploadResponseDto = {
@@ -649,7 +670,7 @@ export class PaymentUploadService {
         s3Key: string;
         productStructureInstanceId: number | null;
       }[] = [];
-      for (const [index, pdfFile] of data.pdfFiles.entries()) {
+      for (const [index, pdfFile] of pdfFiles.entries()) {
         const pdfS3Key = await uploadToWasabiInitialSiteMeasurementFile(
           pdfFile.path,
           data.vendor_id,
