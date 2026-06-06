@@ -531,6 +531,7 @@ model LeadMaster {
   site_type_id                                Int?
   source_id                                   Int?
   archetech_name                              String?
+  archetech_number                            String?
   designer_remark                             String?
   created_by                                  Int
   created_at                                  DateTime                              @default(now())

@@ -186,6 +186,7 @@ export const createLeadService = async (
     status_id,
     source_id,
     archetech_name,
+    archetech_number,
     designer_remark,
     vendor_id,
     franchise_id,
@@ -312,6 +313,7 @@ export const createLeadService = async (
           status_id,
           source_id,
           archetech_name,
+          archetech_number,
           designer_remark,
           vendor_id,
           franchise_id,
@@ -1786,6 +1788,7 @@ export const updateLeadService = async (
     source_id,
     priority,
     archetech_name,
+    archetech_number,
     designer_remark,
     updated_by,
     initial_site_measurement_date,
@@ -1874,6 +1877,8 @@ export const updateLeadService = async (
     }
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
+    if (archetech_number !== undefined)
+      leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
       leadUpdateData.designer_remark = designer_remark;
 

@@ -493,6 +493,7 @@ export const LeadMasterScalarFieldEnum = {
   site_type_id: 'site_type_id',
   source_id: 'source_id',
   archetech_name: 'archetech_name',
+  archetech_number: 'archetech_number',
   designer_remark: 'designer_remark',
   created_by: 'created_by',
   created_at: 'created_at',
