@@ -87,6 +87,28 @@ export class BookingStageService {
       updatedBy: true,
       assignedTo: { select: { id: true, user_name: true } },
       assignedBy: { select: { id: true, user_name: true } },
+      leadUserMapping: {
+        where: {
+          status: "active",
+          type: "designer",
+        },
+        select: {
+          id: true,
+          user_id: true,
+          type: true,
+          status: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: Prisma.SortOrder.asc,
+        },
+      },
       productMappings: {
         select: {
           productType: { select: { id: true, type: true, tag: true } },
