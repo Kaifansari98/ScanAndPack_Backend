@@ -2,6 +2,7 @@ import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
 import {
+  LeadUserStatus,
   NotificationType,
   Prisma,
   ServiceVisitStatus,
@@ -87,9 +88,9 @@ export class BookingStageService {
       updatedBy: true,
       assignedTo: { select: { id: true, user_name: true } },
       assignedBy: { select: { id: true, user_name: true } },
-      leadUserMapping: {
+      userMappings: {
         where: {
-          status: "active",
+          status: LeadUserStatus.active,
           type: "designer",
         },
         select: {
