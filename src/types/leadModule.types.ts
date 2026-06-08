@@ -310,6 +310,7 @@ export interface CreatePaymentUploadDto {
     pdfFiles?: Express.Multer.File[];
     pdfFileInstanceIds?: (number | null)[];
     paymentImageFile?: Express.Multer.File;
+    skip_status_update?: boolean;
   }
   
   export interface PaymentUploadResponseDto {

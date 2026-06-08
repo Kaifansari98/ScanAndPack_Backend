@@ -869,82 +869,84 @@ export class PaymentUploadService {
             };
           }
 
-          // 6. Update LeadMaster status (status "Type 2" → "Type 3")
-          const statusFrom = await tx.statusTypeMaster.findFirst({
-            where: { vendor_id: data.vendor_id, tag: "Type 2" },
-          });
-          const statusTo = await tx.statusTypeMaster.findFirst({
-            where: { vendor_id: data.vendor_id, tag: "Type 3" },
-          });
-
-          if (statusFrom && statusTo) {
-            await tx.leadMaster.updateMany({
-              where: {
-                id: data.lead_id,
-                vendor_id: data.vendor_id,
-                status_id: statusFrom.id,
-              },
-              data: {
-                status_id: statusTo.id,
-              },
+          if (!data.skip_status_update) {
+            // 6. Update LeadMaster status (status "Type 2" → "Type 3")
+            const statusFrom = await tx.statusTypeMaster.findFirst({
+              where: { vendor_id: data.vendor_id, tag: "Type 2" },
             });
-          }
+            const statusTo = await tx.statusTypeMaster.findFirst({
+              where: { vendor_id: data.vendor_id, tag: "Type 3" },
+            });
 
-          // 6B. Insert into LeadStatusLogs
-          if (statusFrom && statusTo) {
-            await tx.leadStatusLogs.create({
-              data: {
+            if (statusFrom && statusTo) {
+              await tx.leadMaster.updateMany({
+                where: {
+                  id: data.lead_id,
+                  vendor_id: data.vendor_id,
+                  status_id: statusFrom.id,
+                },
+                data: {
+                  status_id: statusTo.id,
+                },
+              });
+            }
+
+            // 6B. Insert into LeadStatusLogs
+            if (statusFrom && statusTo) {
+              await tx.leadStatusLogs.create({
+                data: {
+                  lead_id: data.lead_id,
+                  account_id: data.account_id,
+                  vendor_id: data.vendor_id,
+                  status_id: statusTo.id,
+                  created_by: data.created_by,
+                  created_at: new Date(),
+                },
+              });
+
+              logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
                 lead_id: data.lead_id,
-                account_id: data.account_id,
+                from: statusFrom.id,
+                to: statusTo.id,
+              });
+            }
+
+            // 7. Mark related userLeadTask as completed
+            await tx.userLeadTask.updateMany({
+              where: {
                 vendor_id: data.vendor_id,
-                status_id: statusTo.id,
-                created_by: data.created_by,
-                created_at: new Date(),
+                lead_id: data.lead_id,
+                task_type: "Initial Site Measurement",
+                status: "open", // or "pending" depending on your flow
+              },
+              data: {
+                status: "completed",
+                closed_by: data.user_id,
+                closed_at: new Date(),
+                updated_by: data.user_id,
+                updated_at: new Date(),
               },
             });
 
-            logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
-              lead_id: data.lead_id,
-              from: statusFrom.id,
-              to: statusTo.id,
+            // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
+            // Fetch all users who were assigned the ISM task
+            const ismAssignees = await tx.userLeadTask.findMany({
+              where: {
+                vendor_id: data.vendor_id,
+                lead_id: data.lead_id,
+                task_type: "Initial Site Measurement",
+              },
+              select: { user_id: true },
             });
+
+            // Invalidate cache for each assignee
+            for (const t of ismAssignees) {
+              await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
+            }
+
+            // Also invalidate for the user completing this stage
+            await cache.del(`dashboard:tasks:${data.vendor_id}:${data.user_id}`);
           }
-
-          // 7. Mark related userLeadTask as completed
-          await tx.userLeadTask.updateMany({
-            where: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              task_type: "Initial Site Measurement",
-              status: "open", // or "pending" depending on your flow
-            },
-            data: {
-              status: "completed",
-              closed_by: data.user_id,
-              closed_at: new Date(),
-              updated_by: data.user_id,
-              updated_at: new Date(),
-            },
-          });
-
-          // 🧹 Redis Cache Invalidation — Sales Executive Dashboard
-          // Fetch all users who were assigned the ISM task
-          const ismAssignees = await tx.userLeadTask.findMany({
-            where: {
-              vendor_id: data.vendor_id,
-              lead_id: data.lead_id,
-              task_type: "Initial Site Measurement",
-            },
-            select: { user_id: true },
-          });
-
-          // Invalidate cache for each assignee
-          for (const t of ismAssignees) {
-            await cache.del(`dashboard:tasks:${data.vendor_id}:${t.user_id}`);
-          }
-
-          // Also invalidate for the user completing this stage
-          await cache.del(`dashboard:tasks:${data.vendor_id}:${data.user_id}`);
 
           // 8️⃣ Create LeadDetailedLogs + LeadDocumentLogs (Audit Trail)
           let actionMessage = "";
