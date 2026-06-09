@@ -453,7 +453,7 @@ model BoxMaster {
   id                 Int       @id @default(autoincrement())
   project_id         Int
   vendor_id          Int
-  lead_id            Int
+  lead_id            Int?
   box_name           String
   box_status         BoxStatus
   created_by         Int
