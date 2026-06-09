@@ -190,28 +190,34 @@ const getPackagingTotal = async (
 // ── getProjectById ────────────────────────────────────────────────────────────
 
 export const getProjectById = async (id: number) => {
-  const [project, packagingMachine] = await Promise.all([
-    prisma.projectMaster.findUnique({
-      where: { id },
-      include: {
-        vendor: true,
-        createdByUser: true,
-        details: true,
-      },
-    }),
-    prisma.machineMaster.findFirst({
-      where: { machine_type_id: 18 },
-      select: { id: true, machine_name: true, sequence_no: true },
-      orderBy: { id: "asc" },
-    }),
-  ]);
+  const project = await prisma.projectMaster.findUnique({
+    where: { id },
+    include: {
+      vendor: true,
+      createdByUser: true,
+      details: true,
+    },
+  });
 
   if (!project) return null;
 
+  const packagingMachine = await prisma.machineMaster.findFirst({
+    where: {
+      machine_type_id: 18,
+      vendor_id: project.vendor_id,
+    },
+    select: {
+      id: true,
+      machine_name: true,
+      sequence_no: true,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
+
   const packagingMachineId = packagingMachine?.id ?? null;
 
-  // ── total_items: dashboard-style (Part A waterfall + Part B packaging-only)
-  // ── total_packed: distinct cut_list_ids with box_id set (assigned to a box)
   const [total_items, totalPackedGroups] = await Promise.all([
     packagingMachine
       ? getPackagingTotal(id, project.vendor_id, packagingMachine)
@@ -223,8 +229,11 @@ export const getProjectById = async (id: number) => {
           where: {
             project_id: id,
             machine_id: packagingMachineId,
+            vendor_id: project.vendor_id,
             expected_in: true,
-            box_id: { not: null },
+            box_id: {
+              not: null,
+            },
           },
         })
       : Promise.resolve([]),
