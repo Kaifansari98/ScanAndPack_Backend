@@ -1123,6 +1123,7 @@ export const seedVendorMasters = async (vendorId: number) => {
     existingDocTypes,
     existingStatusTypes,
     existingPaymentTypes,
+    existingSmallOrderRequestTypes,
     existingMiscTypes,
     existingMiscTeams,
     existingIssueLogTypes,
@@ -1155,6 +1156,10 @@ export const seedVendorMasters = async (vendorId: number) => {
       where: { vendor_id: vendorId },
       select: { type: true },
     }),
+    prisma.smallOrderRequestTypeMaster.findMany({
+      where: { vendor_id: vendorId },
+      select: { type_key: true },
+    }),
     prisma.miscellaneousTypeMaster.findMany({
       where: { vendor_id: vendorId },
       select: { name: true },
@@ -1181,6 +1186,9 @@ export const seedVendorMasters = async (vendorId: number) => {
   const existingStatusTypeSet = new Set(existingStatusTypes.map((r) => r.type));
   const existingPaymentTypeSet = new Set(
     existingPaymentTypes.map((r) => r.type),
+  );
+  const existingSmallOrderRequestTypeSet = new Set(
+    existingSmallOrderRequestTypes.map((r) => r.type_key),
   );
   const existingMiscTypeSet = new Set(existingMiscTypes.map((r) => r.name));
   const existingMiscTeamSet = new Set(existingMiscTeams.map((r) => r.name));
@@ -1229,6 +1237,26 @@ export const seedVendorMasters = async (vendorId: number) => {
     .map((item) => ({ vendor_id: vendorId, ...item }));
   if (productTypesToAdd.length)
     await prisma.productTypeMaster.createMany({ data: productTypesToAdd });
+
+  const smallOrderRequestTypesToAdd = [
+    { type: "Additional Panel Order", type_key: "additional_panel" as const },
+    {
+      type: "Additional Hardware Order",
+      type_key: "additional_hardware" as const,
+    },
+    { type: "One Cabinet Order", type_key: "one_cabinet" as const },
+    {
+      type: "Additional Accessory Order",
+      type_key: "additional_accessory" as const,
+    },
+  ]
+    .filter((item) => !existingSmallOrderRequestTypeSet.has(item.type_key))
+    .map((item) => ({ vendor_id: vendorId, ...item }));
+  if (smallOrderRequestTypesToAdd.length) {
+    await prisma.smallOrderRequestTypeMaster.createMany({
+      data: smallOrderRequestTypesToAdd,
+    });
+  }
 
   const productStructuresToAdd = [
     { type: "L kitchen", parent: "Kitchen" },
