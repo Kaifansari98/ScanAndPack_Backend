@@ -2628,91 +2628,77 @@ export const assignMachine = async (payload: CutListSavePayload) => {
 
 
 export const createQR = async (payload: QRParam) => {
-
   try {
-
-
     const projectId = await prisma.projectMaster.findFirst({
       where: {
-        unique_project_id: payload.projectId
+        unique_project_id: payload.projectId,
       },
       select: {
-        id: true
-      }
-    })
+        id: true,
+      },
+    });
 
-    // console.log(payload.cutListIds)
-    if (projectId) {
-      let cutListIds: number[] | undefined;
-      if (payload.cutListIds) {
-        cutListIds = payload.cutListIds
-          .split(",")
-          .map((id) => Number(id.trim()))
-          .filter((id) => !isNaN(id));
-      }
+    if (!projectId) return null;
 
+    let cutListIds: number[] | undefined;
+    if (payload.cutListIds) {
+      cutListIds = payload.cutListIds
+        .split(",")
+        .map((id) => Number(id.trim()))
+        .filter((id) => !isNaN(id));
+    }
 
-      console.log("cutListIds", cutListIds)
-
-      const cutLists = await prisma.cutListMachineMapping.findMany({
-        where: {
-          vendor_id: Number(payload.vendorId),
-          project_id: Number(projectId.id),
-          ...(cutListIds && cutListIds.length > 0
-            ? { cut_list_id: { in: cutListIds } }
-            : {}),
-        },
-        distinct: ['cut_list_id'],
-        select: {
-          id: true, // clmm.id
-          cut_list: {
-            select: {
-              unique_code: true,
-              description: true,
+    const cutLists = await prisma.cutListMachineMapping.findMany({
+      where: {
+        vendor_id: Number(payload.vendorId),
+        project_id: Number(projectId.id),
+        ...(cutListIds && cutListIds.length > 0
+          ? { cut_list_id: { in: cutListIds } }
+          : {}),
+      },
+      distinct: ["cut_list_id"],
+      select: {
+        id: true,
+        cut_list: {
+          select: {
+            unique_code:       true,
+            description:       true,
+            item_name:         true,
+            group_name:        true,
+            length:            true,
+            width:             true,
+            thickness:         true,
+            material_details:  true,
+            category_name:     true,
+            elf:               true,
+            elb:               true,
+            esl:               true,
+            esr:               true,
+            qty:               true,
+            created_at:        true,
+            project: {
+              select: {
+                project_name:       true,
+                unique_project_id:  true,
+                client: {
+                  select: {
+                    name: true,
+                  },
+                },
+              },
             },
           },
         },
-      });
+      },
+    });
 
-      console.log("cutLists", cutLists)
-      if (cutLists.length > 0) {
-        return cutLists;
-      } else {
-        return null;
-      }
-
-      // const cutLists = await prisma.cutListMachineMapping.findMany({
-      //     where: {
-      //         vendor_id: Number(payload.vendorId),
-      //         project_id: Number(projectId.id),
-      //         ...(cutListIds && cutListIds.length > 0
-      //             ? { id: { in: cutListIds } }
-      //             : {}),
-      //     },
-      //     include: {
-      //         cut_list: true,
-      //     },
-      //     select: {
-      //         id: true,
-      //         unique_code: true,
-      //         description: true,
-      //     },
-      // });
-
-
-    }
-
-
-
-
-
-
+    return cutLists.length > 0 ? cutLists : null;
 
   } catch (error) {
-    console.error('Error generating QR code:', error);
+    console.error("Error generating QR code:", error);
     throw error;
   }
-}
+};
 
 
 

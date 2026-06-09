@@ -8,6 +8,7 @@ import * as machineService from '../../services/machineService/machineService.se
 import { ApiResponse } from '../../../src/utils/apiResponse';
 import { CutListSavePayload, MarkDefectPayload, QRParam } from '../../../src/types/track-trace';
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
+import { generateWarehouseLabelPDF } from 'src/utils/label-qr-generator';
 
 
 interface TrackTracePayload {
@@ -478,7 +479,7 @@ export const assignMachine = async (_req: Request, res: Response) => {
 // import { generateQrLabel } from "../../utils/qr-label";
 // import { generateMultiQRLabel } from "../../utils/multi-qr-label";
 
-export const createQR = async (_req: Request, res: Response) => {
+export const createQR1 = async (_req: Request, res: Response) => {
     console.log("Query params:", _req.body);
 
     const payload: QRParam = {
@@ -512,6 +513,69 @@ export const createQR = async (_req: Request, res: Response) => {
             return res.status(200).json(ApiResponse.error("No data avialbale", 200));
         }
     } catch (err) {
+        return res.status(200).json(ApiResponse.error("", 500));
+    }
+};
+
+
+// In your controller file — replace the existing createQR handler
+
+export const createQR = async (_req: Request, res: Response) => {
+    const payload: QRParam = {
+        vendorId: Number(_req.body.vendorId),
+        projectId: String(_req.body.projectId),
+        cutListIds: String(_req.body.cutListIds),
+    };
+
+    try {
+        // Service should now return CutList with project (+ client) included:
+        // include: { project: { include: { client: true } } }
+        const data = await trackTraceService.createQR(payload);
+
+        const baseUrl =
+            process.env.PUBLIC_BASE_URL || `${_req.protocol}://${_req.get("host")}`;
+
+        if (!data?.length) {
+            return res.status(200).json(ApiResponse.error("No data available", 200));
+        }
+
+        console.log(data);
+        const filePath = await generateWarehouseLabelPDF({
+            baseUrl,
+            items: data.map((item: any) => {
+                const cl = item.cut_list;
+                const project = cl.project;       // ProjectMaster
+                const client  = project?.client;  // ClientMaster (nullable)
+
+                return {
+                    unique_code:        cl.unique_code ?? String(cl.id),
+                    item_name:          cl.item_name,
+                    description:        cl.description,
+                    group_name:         cl.group_name,
+                    length:             cl.length,
+                    width:              cl.width,
+                    thickness:          cl.thickness,
+                    material_details:   cl.material_details,
+                    category_name:      cl.category_name,
+                    elf:                cl.elf,
+                    elb:                cl.elb,
+                    esl:                cl.esl,
+                    esr:                cl.esr,
+                    qty:                cl.qty,
+                    created_at:         cl.created_at,
+                    client_name:        client?.name,
+                    project_name:       project?.project_name,
+                    unique_project_id:  project?.unique_project_id,
+                };
+            }),
+        });
+
+        const filename = path.basename(filePath);
+        const fileUrl  = `${baseUrl}/api/track-trace/qr-labels/${filename}`;
+        return res.status(200).json(ApiResponse.success(fileUrl, "", 200));
+
+    } catch (err) {
+        console.error("[createQR]", err);
         return res.status(200).json(ApiResponse.error("", 500));
     }
 };
