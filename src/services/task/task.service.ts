@@ -1,3 +1,4 @@
+
 import { prisma, Prisma } from "../../prisma/client";
 
 export class TaskService {
@@ -77,6 +78,8 @@ private static taskIncludes() {
           lastname: true,
           contact_no: true,
           site_map_link: true,
+          is_blocked: true,
+          lead_blocked_at: true,
 
           statusType: {
             select: {
@@ -173,6 +176,8 @@ private static mapTaskWithLead(task: any) {
       product_type: productType,       // ✅ instance-aware
       product_structure: productStructure, // ✅ instance-aware
       instance_id: task.instance_id ?? null, 
+      is_blocked: task.lead?.is_blocked ?? false,
+      lead_blocked_at: task.lead?.lead_blocked_at ?? null,
     },
     instanceDetails: task.instance
       ? {
@@ -236,6 +241,8 @@ private static mapTaskWithLead(task: any) {
             lastname: true,
             contact_no: true,
             site_map_link: true,
+            is_blocked: true,
+            lead_blocked_at: true,
             statusType: { select: { type: true } },
             siteType: { select: { type: true } },
             productMappings: {
@@ -724,7 +731,7 @@ private static mapTaskWithLead(task: any) {
             },
           }),
         ]);
-      } else if (filters.due_filter !== "completed") {
+      } else {
         // No filter selected
         [todayCount, upcomingCount, overdueCount] = await Promise.all([
           prisma.userLeadTask.count({
@@ -929,7 +936,7 @@ private static mapTaskWithLead(task: any) {
           },
         }),
       ]);
-    } else if (filters.due_filter !== "completed") {
+    } else {
       // No filter selected
       [todayCount, upcomingCount, overdueCount] = await Promise.all([
         prisma.userLeadTask.count({
@@ -1510,7 +1517,7 @@ private static mapTaskWithLead(task: any) {
           },
         }),
       ]);
-    } else if (filters.due_filter !== "completed") {
+    } else {
       // No filter selected → all unfiltered
       [todayCount, upcomingCount, overdueCount] = await Promise.all([
         prisma.userLeadTask.count({
