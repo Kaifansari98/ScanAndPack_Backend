@@ -1309,6 +1309,42 @@ export const assignDesignerToLead = async (
       },
     });
 
+    let chatRoom = await tx.leadChatRoom.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+      },
+      select: { id: true },
+    });
+
+    if (!chatRoom) {
+      chatRoom = await tx.leadChatRoom.create({
+        data: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingMember = await tx.leadChatMember.findFirst({
+      where: {
+        chat_room_id: chatRoom.id,
+        user_id: designerUser.id,
+      },
+      select: { id: true },
+    });
+
+    if (!existingMember) {
+      await tx.leadChatMember.create({
+        data: {
+          chat_room_id: chatRoom.id,
+          user_id: designerUser.id,
+          added_by: data.created_by,
+        },
+      });
+    }
+
     await createLeadLog(tx, {
       vendor_id: data.vendor_id,
       lead_id: data.lead_id,
