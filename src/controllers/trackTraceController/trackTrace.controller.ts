@@ -8,7 +8,7 @@ import * as machineService from '../../services/machineService/machineService.se
 import { ApiResponse } from '../../../src/utils/apiResponse';
 import { CutListSavePayload, MarkDefectPayload, QRParam } from '../../../src/types/track-trace';
 import { generateWarehouseQRPDF } from "../../utils/warehouse-qr-generator";
-import { generateWarehouseLabelPDF } from 'src/utils/label-qr-generator';
+import { generateWarehouseLabelPDF } from '../../utils/label-qr-generator';
 
 
 interface TrackTracePayload {
