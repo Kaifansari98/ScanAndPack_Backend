@@ -319,6 +319,16 @@ export const SmallOrderRequestSource = {
 export type SmallOrderRequestSource = (typeof SmallOrderRequestSource)[keyof typeof SmallOrderRequestSource]
 
 
+export const SmallOrderRequestStatus = {
+  pending_approval: 'pending_approval',
+  pending_approvals: 'pending_approvals',
+  approved: 'approved',
+  rejected: 'rejected'
+} as const
+
+export type SmallOrderRequestStatus = (typeof SmallOrderRequestStatus)[keyof typeof SmallOrderRequestStatus]
+
+
 export const SmallOrderTypeKey = {
   additional_panel: 'additional_panel',
   additional_hardware: 'additional_hardware',

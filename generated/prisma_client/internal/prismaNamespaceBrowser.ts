@@ -963,6 +963,7 @@ export const SmallOrderRequestScalarFieldEnum = {
   parent_lead_code: 'parent_lead_code',
   so_code: 'so_code',
   customer_name: 'customer_name',
+  status: 'status',
   request_source: 'request_source',
   request_type_id: 'request_type_id',
   required_date: 'required_date',

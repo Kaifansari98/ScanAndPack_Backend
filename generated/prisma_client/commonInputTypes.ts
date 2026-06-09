@@ -473,11 +473,28 @@ export type EnumSmallOrderTypeKeyWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumSmallOrderTypeKeyFilter<$PrismaModel>
 }
 
+export type EnumSmallOrderRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SmallOrderRequestStatus | Prisma.EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel> | $Enums.SmallOrderRequestStatus
+}
+
 export type EnumSmallOrderRequestSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.SmallOrderRequestSource | Prisma.EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   in?: $Enums.SmallOrderRequestSource[] | Prisma.ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   notIn?: $Enums.SmallOrderRequestSource[] | Prisma.ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumSmallOrderRequestSourceFilter<$PrismaModel> | $Enums.SmallOrderRequestSource
+}
+
+export type EnumSmallOrderRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SmallOrderRequestStatus | Prisma.EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSmallOrderRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.SmallOrderRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel>
 }
 
 export type EnumSmallOrderRequestSourceWithAggregatesFilter<$PrismaModel = never> = {
@@ -1759,11 +1776,28 @@ export type NestedEnumSmallOrderTypeKeyWithAggregatesFilter<$PrismaModel = never
   _max?: Prisma.NestedEnumSmallOrderTypeKeyFilter<$PrismaModel>
 }
 
+export type NestedEnumSmallOrderRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.SmallOrderRequestStatus | Prisma.EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel> | $Enums.SmallOrderRequestStatus
+}
+
 export type NestedEnumSmallOrderRequestSourceFilter<$PrismaModel = never> = {
   equals?: $Enums.SmallOrderRequestSource | Prisma.EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   in?: $Enums.SmallOrderRequestSource[] | Prisma.ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   notIn?: $Enums.SmallOrderRequestSource[] | Prisma.ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel>
   not?: Prisma.NestedEnumSmallOrderRequestSourceFilter<$PrismaModel> | $Enums.SmallOrderRequestSource
+}
+
+export type NestedEnumSmallOrderRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.SmallOrderRequestStatus | Prisma.EnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.SmallOrderRequestStatus[] | Prisma.ListEnumSmallOrderRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumSmallOrderRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.SmallOrderRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumSmallOrderRequestStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumSmallOrderRequestSourceWithAggregatesFilter<$PrismaModel = never> = {

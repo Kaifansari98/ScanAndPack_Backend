@@ -1145,6 +1145,7 @@ model SmallOrderRequest {
   parent_lead_code                   String
   so_code                            String?
   customer_name                      String
+  status                             SmallOrderRequestStatus     @default(pending_approval)
   request_source                     SmallOrderRequestSource
   request_type_id                    Int
   required_date                      DateTime
@@ -3265,6 +3266,13 @@ enum ApprovalRequestStatus {
 enum SmallOrderRequestSource {
   post_dispatch
   final_handover
+}
+
+enum SmallOrderRequestStatus {
+  pending_approval
+  pending_approvals
+  approved
+  rejected
 }
 
 enum SmallOrderTypeKey {

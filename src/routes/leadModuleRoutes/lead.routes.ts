@@ -51,8 +51,10 @@ import {
   fetchAllShutterTypes,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
+import { createSmallOrderRequestController } from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
 
 const leadsRouter = Router();
+const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
 
 leadsRouter.post("/create-document-type", createDocumentType);
 leadsRouter.post("/create-payment-type", createPaymentType);
@@ -68,6 +70,11 @@ leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
 leadsRouter.get(
   "/get-all-small-order-request-types/:vendor_id",
   fetchAllSmallOrderRequestTypes,
+);
+leadsRouter.post(
+  "/small-order-requests",
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  createSmallOrderRequestController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
@@ -98,8 +105,6 @@ leadsRouter.patch("/update-source-type-status/:id", toggleSourceTypeStatus);
 leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
-
-const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
 
 leadsRouter.post(
   "/create",

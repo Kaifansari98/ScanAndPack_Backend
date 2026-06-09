@@ -53,6 +53,7 @@ export type SmallOrderRequestMinAggregateOutputType = {
   parent_lead_code: string | null
   so_code: string | null
   customer_name: string | null
+  status: $Enums.SmallOrderRequestStatus | null
   request_source: $Enums.SmallOrderRequestSource | null
   request_type_id: number | null
   required_date: Date | null
@@ -78,6 +79,7 @@ export type SmallOrderRequestMaxAggregateOutputType = {
   parent_lead_code: string | null
   so_code: string | null
   customer_name: string | null
+  status: $Enums.SmallOrderRequestStatus | null
   request_source: $Enums.SmallOrderRequestSource | null
   request_type_id: number | null
   required_date: Date | null
@@ -103,6 +105,7 @@ export type SmallOrderRequestCountAggregateOutputType = {
   parent_lead_code: number
   so_code: number
   customer_name: number
+  status: number
   request_source: number
   request_type_id: number
   required_date: number
@@ -150,6 +153,7 @@ export type SmallOrderRequestMinAggregateInputType = {
   parent_lead_code?: true
   so_code?: true
   customer_name?: true
+  status?: true
   request_source?: true
   request_type_id?: true
   required_date?: true
@@ -175,6 +179,7 @@ export type SmallOrderRequestMaxAggregateInputType = {
   parent_lead_code?: true
   so_code?: true
   customer_name?: true
+  status?: true
   request_source?: true
   request_type_id?: true
   required_date?: true
@@ -200,6 +205,7 @@ export type SmallOrderRequestCountAggregateInputType = {
   parent_lead_code?: true
   so_code?: true
   customer_name?: true
+  status?: true
   request_source?: true
   request_type_id?: true
   required_date?: true
@@ -312,6 +318,7 @@ export type SmallOrderRequestGroupByOutputType = {
   parent_lead_code: string
   so_code: string | null
   customer_name: string
+  status: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date
@@ -360,6 +367,7 @@ export type SmallOrderRequestWhereInput = {
   parent_lead_code?: Prisma.StringFilter<"SmallOrderRequest"> | string
   so_code?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
   customer_name?: Prisma.StringFilter<"SmallOrderRequest"> | string
+  status?: Prisma.EnumSmallOrderRequestStatusFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFilter<"SmallOrderRequest"> | number
   required_date?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
@@ -391,6 +399,7 @@ export type SmallOrderRequestOrderByWithRelationInput = {
   parent_lead_code?: Prisma.SortOrder
   so_code?: Prisma.SortOrderInput | Prisma.SortOrder
   customer_name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   request_source?: Prisma.SortOrder
   request_type_id?: Prisma.SortOrder
   required_date?: Prisma.SortOrder
@@ -427,6 +436,7 @@ export type SmallOrderRequestWhereUniqueInput = Prisma.AtLeast<{
   parent_lead_code?: Prisma.StringFilter<"SmallOrderRequest"> | string
   so_code?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
   customer_name?: Prisma.StringFilter<"SmallOrderRequest"> | string
+  status?: Prisma.EnumSmallOrderRequestStatusFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFilter<"SmallOrderRequest"> | number
   required_date?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
@@ -458,6 +468,7 @@ export type SmallOrderRequestOrderByWithAggregationInput = {
   parent_lead_code?: Prisma.SortOrder
   so_code?: Prisma.SortOrderInput | Prisma.SortOrder
   customer_name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   request_source?: Prisma.SortOrder
   request_type_id?: Prisma.SortOrder
   required_date?: Prisma.SortOrder
@@ -491,6 +502,7 @@ export type SmallOrderRequestScalarWhereWithAggregatesInput = {
   parent_lead_code?: Prisma.StringWithAggregatesFilter<"SmallOrderRequest"> | string
   so_code?: Prisma.StringNullableWithAggregatesFilter<"SmallOrderRequest"> | string | null
   customer_name?: Prisma.StringWithAggregatesFilter<"SmallOrderRequest"> | string
+  status?: Prisma.EnumSmallOrderRequestStatusWithAggregatesFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceWithAggregatesFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntWithAggregatesFilter<"SmallOrderRequest"> | number
   required_date?: Prisma.DateTimeWithAggregatesFilter<"SmallOrderRequest"> | Date | string
@@ -513,6 +525,7 @@ export type SmallOrderRequestCreateInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -541,6 +554,7 @@ export type SmallOrderRequestUncheckedCreateInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -564,6 +578,7 @@ export type SmallOrderRequestUpdateInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -592,6 +607,7 @@ export type SmallOrderRequestUncheckedUpdateInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -618,6 +634,7 @@ export type SmallOrderRequestCreateManyInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -640,6 +657,7 @@ export type SmallOrderRequestUpdateManyMutationInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -662,6 +680,7 @@ export type SmallOrderRequestUncheckedUpdateManyInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -708,6 +727,7 @@ export type SmallOrderRequestCountOrderByAggregateInput = {
   parent_lead_code?: Prisma.SortOrder
   so_code?: Prisma.SortOrder
   customer_name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   request_source?: Prisma.SortOrder
   request_type_id?: Prisma.SortOrder
   required_date?: Prisma.SortOrder
@@ -743,6 +763,7 @@ export type SmallOrderRequestMaxOrderByAggregateInput = {
   parent_lead_code?: Prisma.SortOrder
   so_code?: Prisma.SortOrder
   customer_name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   request_source?: Prisma.SortOrder
   request_type_id?: Prisma.SortOrder
   required_date?: Prisma.SortOrder
@@ -768,6 +789,7 @@ export type SmallOrderRequestMinOrderByAggregateInput = {
   parent_lead_code?: Prisma.SortOrder
   so_code?: Prisma.SortOrder
   customer_name?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   request_source?: Prisma.SortOrder
   request_type_id?: Prisma.SortOrder
   required_date?: Prisma.SortOrder
@@ -1011,6 +1033,10 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutRequestTypeNestedInput = 
   deleteMany?: Prisma.SmallOrderRequestScalarWhereInput | Prisma.SmallOrderRequestScalarWhereInput[]
 }
 
+export type EnumSmallOrderRequestStatusFieldUpdateOperationsInput = {
+  set?: $Enums.SmallOrderRequestStatus
+}
+
 export type EnumSmallOrderRequestSourceFieldUpdateOperationsInput = {
   set?: $Enums.SmallOrderRequestSource
 }
@@ -1033,6 +1059,7 @@ export type SmallOrderRequestCreateWithoutVendorInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1059,6 +1086,7 @@ export type SmallOrderRequestUncheckedCreateWithoutVendorInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1114,6 +1142,7 @@ export type SmallOrderRequestScalarWhereInput = {
   parent_lead_code?: Prisma.StringFilter<"SmallOrderRequest"> | string
   so_code?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
   customer_name?: Prisma.StringFilter<"SmallOrderRequest"> | string
+  status?: Prisma.EnumSmallOrderRequestStatusFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFilter<"SmallOrderRequest"> | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFilter<"SmallOrderRequest"> | number
   required_date?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
@@ -1136,6 +1165,7 @@ export type SmallOrderRequestCreateWithoutCreatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1163,6 +1193,7 @@ export type SmallOrderRequestUncheckedCreateWithoutCreatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1195,6 +1226,7 @@ export type SmallOrderRequestCreateWithoutUpdatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1222,6 +1254,7 @@ export type SmallOrderRequestUncheckedCreateWithoutUpdatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1286,6 +1319,7 @@ export type SmallOrderRequestCreateWithoutLeadInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1312,6 +1346,7 @@ export type SmallOrderRequestUncheckedCreateWithoutLeadInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1361,6 +1396,7 @@ export type SmallOrderRequestCreateWithoutRequestTypeInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1388,6 +1424,7 @@ export type SmallOrderRequestUncheckedCreateWithoutRequestTypeInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1436,6 +1473,7 @@ export type SmallOrderRequestCreateWithoutDocumentsInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1463,6 +1501,7 @@ export type SmallOrderRequestUncheckedCreateWithoutDocumentsInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1501,6 +1540,7 @@ export type SmallOrderRequestUpdateWithoutDocumentsInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1528,6 +1568,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutDocumentsInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1552,6 +1593,7 @@ export type SmallOrderRequestCreateManyVendorInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1574,6 +1616,7 @@ export type SmallOrderRequestUpdateWithoutVendorInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1600,6 +1643,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutVendorInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1625,6 +1669,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutVendorInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1650,6 +1695,7 @@ export type SmallOrderRequestCreateManyCreatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1674,6 +1720,7 @@ export type SmallOrderRequestCreateManyUpdatedByInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1695,6 +1742,7 @@ export type SmallOrderRequestUpdateWithoutCreatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1722,6 +1770,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutCreatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1747,6 +1796,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutCreatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1768,6 +1818,7 @@ export type SmallOrderRequestUpdateWithoutUpdatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1795,6 +1846,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutUpdatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1820,6 +1872,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1843,6 +1896,7 @@ export type SmallOrderRequestCreateManyLeadInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   request_type_id: number
   required_date: Date | string
@@ -1865,6 +1919,7 @@ export type SmallOrderRequestUpdateWithoutLeadInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1891,6 +1946,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutLeadInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1916,6 +1972,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutLeadInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1941,6 +1998,7 @@ export type SmallOrderRequestCreateManyRequestTypeInput = {
   parent_lead_code: string
   so_code?: string | null
   customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
   request_source: $Enums.SmallOrderRequestSource
   required_date: Date | string
   remarks?: string | null
@@ -1962,6 +2020,7 @@ export type SmallOrderRequestUpdateWithoutRequestTypeInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1989,6 +2048,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutRequestTypeInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2014,6 +2074,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutRequestTypeInput = {
   parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
   so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
   request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
   required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2069,6 +2130,7 @@ export type SmallOrderRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   parent_lead_code?: boolean
   so_code?: boolean
   customer_name?: boolean
+  status?: boolean
   request_source?: boolean
   request_type_id?: boolean
   required_date?: boolean
@@ -2101,6 +2163,7 @@ export type SmallOrderRequestSelectCreateManyAndReturn<ExtArgs extends runtime.T
   parent_lead_code?: boolean
   so_code?: boolean
   customer_name?: boolean
+  status?: boolean
   request_source?: boolean
   request_type_id?: boolean
   required_date?: boolean
@@ -2131,6 +2194,7 @@ export type SmallOrderRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   parent_lead_code?: boolean
   so_code?: boolean
   customer_name?: boolean
+  status?: boolean
   request_source?: boolean
   request_type_id?: boolean
   required_date?: boolean
@@ -2161,6 +2225,7 @@ export type SmallOrderRequestSelectScalar = {
   parent_lead_code?: boolean
   so_code?: boolean
   customer_name?: boolean
+  status?: boolean
   request_source?: boolean
   request_type_id?: boolean
   required_date?: boolean
@@ -2179,7 +2244,7 @@ export type SmallOrderRequestSelectScalar = {
   rejection_reason?: boolean
 }
 
-export type SmallOrderRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "parent_lead_code" | "so_code" | "customer_name" | "request_source" | "request_type_id" | "required_date" | "remarks" | "supervisor_approved" | "supervisor_approved_at" | "admin_approved" | "admin_approved_at" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_merge_to_parent_on_installation" | "usable_handover_date_snapshot" | "small_order_sequence" | "rejection_reason", ExtArgs["result"]["smallOrderRequest"]>
+export type SmallOrderRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "parent_lead_code" | "so_code" | "customer_name" | "status" | "request_source" | "request_type_id" | "required_date" | "remarks" | "supervisor_approved" | "supervisor_approved_at" | "admin_approved" | "admin_approved_at" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_merge_to_parent_on_installation" | "usable_handover_date_snapshot" | "small_order_sequence" | "rejection_reason", ExtArgs["result"]["smallOrderRequest"]>
 export type SmallOrderRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2221,6 +2286,7 @@ export type $SmallOrderRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     parent_lead_code: string
     so_code: string | null
     customer_name: string
+    status: $Enums.SmallOrderRequestStatus
     request_source: $Enums.SmallOrderRequestSource
     request_type_id: number
     required_date: Date
@@ -2672,6 +2738,7 @@ export interface SmallOrderRequestFieldRefs {
   readonly parent_lead_code: Prisma.FieldRef<"SmallOrderRequest", 'String'>
   readonly so_code: Prisma.FieldRef<"SmallOrderRequest", 'String'>
   readonly customer_name: Prisma.FieldRef<"SmallOrderRequest", 'String'>
+  readonly status: Prisma.FieldRef<"SmallOrderRequest", 'SmallOrderRequestStatus'>
   readonly request_source: Prisma.FieldRef<"SmallOrderRequest", 'SmallOrderRequestSource'>
   readonly request_type_id: Prisma.FieldRef<"SmallOrderRequest", 'Int'>
   readonly required_date: Prisma.FieldRef<"SmallOrderRequest", 'DateTime'>
