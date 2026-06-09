@@ -1168,6 +1168,7 @@ model SmallOrderRequest {
   updatedBy                          UserMaster?                 @relation("SmallOrderRequestUpdatedBy", fields: [updated_by], references: [id])
   vendor                             VendorMaster                @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   documents                          SmallOrderRequestDocument[]
+  tasks                              UserLeadTask[]              @relation("SmallOrderRequestTasks")
 
   @@unique([vendor_id, so_code], name: "uniq_vendor_small_order_so_code")
   @@unique([vendor_id, lead_id, small_order_sequence], name: "uniq_vendor_lead_small_order_sequence")
@@ -1471,32 +1472,34 @@ model LeadSiteSupervisorMapping {
 }
 
 model UserLeadTask {
-  id           Int                           @id @default(autoincrement())
-  lead_id      Int
-  account_id   Int
-  vendor_id    Int
-  user_id      Int
-  task_type    String
-  due_date     DateTime
-  remark       String?                       @db.VarChar(2000)
-  status       LeadTaskStatus                @default(open)
-  closed_by    Int?
-  closed_at    DateTime?
-  created_by   Int
-  created_at   DateTime                      @default(now())
-  updated_at   DateTime                      @updatedAt
-  updated_by   Int?
-  lead_stage   String?
-  instance_id  Int?
-  franchise_id Int?
-  account      AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  closedBy     UserMaster?                   @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
-  createdBy    UserMaster                    @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  instance     LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
-  lead         LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  detailedLogs LeadDetailedLogs[]
-  user         UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
-  vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  id                     Int                           @id @default(autoincrement())
+  lead_id                Int
+  account_id             Int
+  vendor_id              Int
+  user_id                Int
+  small_order_request_id Int?
+  task_type              String
+  due_date               DateTime
+  remark                 String?                       @db.VarChar(2000)
+  status                 LeadTaskStatus                @default(open)
+  closed_by              Int?
+  closed_at              DateTime?
+  created_by             Int
+  created_at             DateTime                      @default(now())
+  updated_at             DateTime                      @updatedAt
+  updated_by             Int?
+  lead_stage             String?
+  instance_id            Int?
+  franchise_id           Int?
+  account                AccountMaster                 @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  closedBy               UserMaster?                   @relation("LeadTask_ClosedBy", fields: [closed_by], references: [id])
+  createdBy              UserMaster                    @relation("LeadTask_CreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  instance               LeadProductStructureInstance? @relation(fields: [instance_id], references: [id])
+  lead                   LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  smallOrderRequest      SmallOrderRequest?            @relation("SmallOrderRequestTasks", fields: [small_order_request_id], references: [id])
+  detailedLogs           LeadDetailedLogs[]
+  user                   UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
+  vendor                 VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model LeadDetailedLogs {

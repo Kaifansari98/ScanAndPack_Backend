@@ -1211,6 +1211,7 @@ export const UserLeadTaskScalarFieldEnum = {
   account_id: 'account_id',
   vendor_id: 'vendor_id',
   user_id: 'user_id',
+  small_order_request_id: 'small_order_request_id',
   task_type: 'task_type',
   due_date: 'due_date',
   remark: 'remark',

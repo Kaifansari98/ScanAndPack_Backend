@@ -32,6 +32,14 @@ export interface CreateSmallOrderRequestInput {
   documents?: Express.Multer.File[];
 }
 
+export interface ActOnSmallOrderRequestTaskInput {
+  lead_id: number;
+  task_id: number;
+  action: "approve" | "reject";
+  acted_by: number;
+  remark?: string | null;
+}
+
 type UploadedSmallOrderFile = {
   originalName: string;
   sysName: string;
@@ -193,6 +201,100 @@ const buildTaskRemark = (input: {
   }
 
   return parts.join(" ");
+};
+
+const closeTask = async (
+  tx: any,
+  taskId: number,
+  actedBy: number,
+  remarkOverride?: string | null,
+) => {
+  const updatedTask = await tx.userLeadTask.update({
+    where: { id: taskId },
+    data: {
+      status: "completed",
+      closed_by: actedBy,
+      closed_at: new Date(),
+      updated_by: actedBy,
+      ...(remarkOverride !== undefined ? { remark: remarkOverride } : {}),
+    },
+  });
+
+  await createTaskHistoryLog({
+    db: tx,
+    task: updatedTask,
+    createdBy: actedBy,
+    actionType: "UPDATE",
+  });
+
+  return updatedTask;
+};
+
+const getTaskBoundSmallOrderRequest = async (taskId: number, leadId: number) => {
+  const task = await prisma.userLeadTask.findFirst({
+    where: {
+      id: taskId,
+      lead_id: leadId,
+      task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
+    },
+    select: {
+      id: true,
+      lead_id: true,
+      vendor_id: true,
+      user_id: true,
+      status: true,
+      created_at: true,
+      created_by: true,
+      small_order_request_id: true,
+      smallOrderRequest: {
+        select: {
+          id: true,
+          lead_id: true,
+        },
+      },
+    },
+  });
+
+  if (!task) {
+    throw new Error("Small order request task not found");
+  }
+
+  if (task.status === "completed") {
+    throw new Error("This task is already completed");
+  }
+
+  if (task.small_order_request_id) {
+    return {
+      task,
+      requestId: task.small_order_request_id,
+    };
+  }
+
+  const fallbackRequest = await prisma.smallOrderRequest.findFirst({
+    where: {
+      lead_id: leadId,
+      vendor_id: task.vendor_id,
+      created_by: task.created_by,
+      status: {
+        in: ["pending_approval", "pending_approvals"],
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (!fallbackRequest) {
+    throw new Error("Linked small order request not found");
+  }
+
+  return {
+    task,
+    requestId: fallbackRequest.id,
+  };
 };
 
 export const createSmallOrderRequest = async (
@@ -434,6 +536,7 @@ export const createSmallOrderRequest = async (
           vendor_id: value.vendor_id,
           franchise_id: lead.franchise_id ?? actor.franchise_id ?? undefined,
           user_id: recipient.id,
+          small_order_request_id: smallOrderRequest.id,
           task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
           lead_stage: lead.statusType?.type ?? null,
           due_date: dueDate,
@@ -457,6 +560,182 @@ export const createSmallOrderRequest = async (
       ...smallOrderRequest,
       documents_count: createdDocuments.length,
       tasks_created: createdTasks.length,
+    };
+  });
+};
+
+export const actOnSmallOrderRequestTask = async (
+  input: ActOnSmallOrderRequestTaskInput,
+) => {
+  const action = input.action?.trim().toLowerCase();
+  if (action !== "approve" && action !== "reject") {
+    throw new Error("Invalid action");
+  }
+
+  if (!input.lead_id || !input.task_id || !input.acted_by) {
+    throw new Error("lead_id, task_id, and acted_by are required");
+  }
+
+  if (action === "reject" && !input.remark?.trim()) {
+    throw new Error("Remark is required for rejection");
+  }
+
+  const actor = await prisma.userMaster.findUnique({
+    where: { id: input.acted_by },
+    select: {
+      id: true,
+      vendor_id: true,
+      user_type: {
+        select: {
+          user_type: true,
+        },
+      },
+    },
+  });
+
+  if (!actor) {
+    throw new Error("Acting user not found");
+  }
+
+  const { task, requestId } = await getTaskBoundSmallOrderRequest(
+    input.task_id,
+    input.lead_id,
+  );
+
+  if (actor.vendor_id !== task.vendor_id) {
+    throw new Error("User does not belong to this vendor");
+  }
+
+  const actorRole = actor.user_type.user_type.trim().toLowerCase();
+
+  return prisma.$transaction(async (tx) => {
+    const smallOrderRequest = await tx.smallOrderRequest.findUnique({
+      where: { id: requestId },
+      include: {
+        createdBy: {
+          select: {
+            id: true,
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
+          },
+        },
+        tasks: {
+          where: {
+            task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
+            status: { not: "completed" },
+          },
+          select: {
+            id: true,
+            user_id: true,
+          },
+        },
+      },
+    });
+
+    if (!smallOrderRequest) {
+      throw new Error("Small order request not found");
+    }
+
+    const creatorRole =
+      smallOrderRequest.createdBy.user_type.user_type.trim().toLowerCase();
+
+    if (creatorRole === "super-admin") {
+      throw new Error(
+        "No approval action is required for small order requests raised by super-admin",
+      );
+    }
+
+    if (action === "reject") {
+      await tx.smallOrderRequest.update({
+        where: { id: smallOrderRequest.id },
+        data: {
+          status: "rejected",
+          rejection_reason: input.remark?.trim() || null,
+          updated_by: input.acted_by,
+        },
+      });
+
+      const openTasks = await tx.userLeadTask.findMany({
+        where: {
+          small_order_request_id: smallOrderRequest.id,
+          task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
+          status: { not: "completed" },
+        },
+        select: { id: true },
+      });
+
+      for (const openTask of openTasks) {
+        await closeTask(
+          tx,
+          openTask.id,
+          input.acted_by,
+          input.remark?.trim() || undefined,
+        );
+      }
+
+      return {
+        success: true,
+        status: "rejected",
+      };
+    }
+
+    const approvalData: Record<string, any> = {
+      updated_by: input.acted_by,
+    };
+
+    if (creatorRole === "sales-executive") {
+      if (actorRole === "site-supervisor") {
+        approvalData.supervisor_approved = true;
+        approvalData.supervisor_approved_at = new Date();
+      } else if (actorRole === "admin" || actorRole === "super-admin") {
+        approvalData.admin_approved = true;
+        approvalData.admin_approved_at = new Date();
+      } else {
+        throw new Error("You are not allowed to approve this request");
+      }
+    } else if (creatorRole === "admin") {
+      if (actorRole !== "site-supervisor") {
+        throw new Error("Only site-supervisor can approve this request");
+      }
+
+      const approvalTimestamp = new Date();
+      approvalData.supervisor_approved = true;
+      approvalData.supervisor_approved_at = approvalTimestamp;
+      approvalData.admin_approved = true;
+      approvalData.admin_approved_at = approvalTimestamp;
+    } else {
+      throw new Error("Unsupported small order request creator role");
+    }
+
+    await closeTask(tx, input.task_id, input.acted_by);
+
+    const afterApproval = await tx.smallOrderRequest.update({
+      where: { id: smallOrderRequest.id },
+      data: approvalData,
+      select: {
+        id: true,
+        supervisor_approved: true,
+        admin_approved: true,
+      },
+    });
+
+    const isFullyApproved =
+      afterApproval.supervisor_approved && afterApproval.admin_approved;
+
+    await tx.smallOrderRequest.update({
+      where: { id: smallOrderRequest.id },
+      data: {
+        status: isFullyApproved ? "approved" : "pending_approvals",
+        updated_by: input.acted_by,
+      },
+    });
+
+    return {
+      success: true,
+      status: isFullyApproved ? "approved" : "pending_approvals",
     };
   });
 };

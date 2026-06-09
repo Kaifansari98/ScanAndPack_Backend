@@ -390,6 +390,7 @@ export type SmallOrderRequestWhereInput = {
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.SmallOrderRequestDocumentListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }
 
 export type SmallOrderRequestOrderByWithRelationInput = {
@@ -422,6 +423,7 @@ export type SmallOrderRequestOrderByWithRelationInput = {
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   documents?: Prisma.SmallOrderRequestDocumentOrderByRelationAggregateInput
+  tasks?: Prisma.UserLeadTaskOrderByRelationAggregateInput
 }
 
 export type SmallOrderRequestWhereUniqueInput = Prisma.AtLeast<{
@@ -459,6 +461,7 @@ export type SmallOrderRequestWhereUniqueInput = Prisma.AtLeast<{
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   documents?: Prisma.SmallOrderRequestDocumentListRelationFilter
+  tasks?: Prisma.UserLeadTaskListRelationFilter
 }, "id" | "uniq_vendor_small_order_so_code" | "uniq_vendor_lead_small_order_sequence">
 
 export type SmallOrderRequestOrderByWithAggregationInput = {
@@ -545,6 +548,7 @@ export type SmallOrderRequestCreateInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateInput = {
@@ -572,6 +576,7 @@ export type SmallOrderRequestUncheckedCreateInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUpdateInput = {
@@ -598,6 +603,7 @@ export type SmallOrderRequestUpdateInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateInput = {
@@ -625,6 +631,7 @@ export type SmallOrderRequestUncheckedUpdateInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestCreateManyInput = {
@@ -821,6 +828,11 @@ export type SmallOrderRequestSumOrderByAggregateInput = {
 export type SmallOrderRequestScalarRelationFilter = {
   is?: Prisma.SmallOrderRequestWhereInput
   isNot?: Prisma.SmallOrderRequestWhereInput
+}
+
+export type SmallOrderRequestNullableScalarRelationFilter = {
+  is?: Prisma.SmallOrderRequestWhereInput | null
+  isNot?: Prisma.SmallOrderRequestWhereInput | null
 }
 
 export type SmallOrderRequestCreateNestedManyWithoutVendorInput = {
@@ -1055,6 +1067,22 @@ export type SmallOrderRequestUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SmallOrderRequestUpdateToOneWithWhereWithoutDocumentsInput, Prisma.SmallOrderRequestUpdateWithoutDocumentsInput>, Prisma.SmallOrderRequestUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type SmallOrderRequestCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.SmallOrderRequestCreateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.SmallOrderRequestCreateOrConnectWithoutTasksInput
+  connect?: Prisma.SmallOrderRequestWhereUniqueInput
+}
+
+export type SmallOrderRequestUpdateOneWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.SmallOrderRequestCreateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.SmallOrderRequestCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.SmallOrderRequestUpsertWithoutTasksInput
+  disconnect?: Prisma.SmallOrderRequestWhereInput | boolean
+  delete?: Prisma.SmallOrderRequestWhereInput | boolean
+  connect?: Prisma.SmallOrderRequestWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SmallOrderRequestUpdateToOneWithWhereWithoutTasksInput, Prisma.SmallOrderRequestUpdateWithoutTasksInput>, Prisma.SmallOrderRequestUncheckedUpdateWithoutTasksInput>
+}
+
 export type SmallOrderRequestCreateWithoutVendorInput = {
   parent_lead_code: string
   so_code?: string | null
@@ -1078,6 +1106,7 @@ export type SmallOrderRequestCreateWithoutVendorInput = {
   requestType: Prisma.SmallOrderRequestTypeMasterCreateNestedOneWithoutSmallOrderRequestsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutVendorInput = {
@@ -1104,6 +1133,7 @@ export type SmallOrderRequestUncheckedCreateWithoutVendorInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutVendorInput = {
@@ -1184,6 +1214,7 @@ export type SmallOrderRequestCreateWithoutCreatedByInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutCreatedByInput = {
@@ -1210,6 +1241,7 @@ export type SmallOrderRequestUncheckedCreateWithoutCreatedByInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutCreatedByInput = {
@@ -1245,6 +1277,7 @@ export type SmallOrderRequestCreateWithoutUpdatedByInput = {
   requestType: Prisma.SmallOrderRequestTypeMasterCreateNestedOneWithoutSmallOrderRequestsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutUpdatedByInput = {
@@ -1271,6 +1304,7 @@ export type SmallOrderRequestUncheckedCreateWithoutUpdatedByInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutUpdatedByInput = {
@@ -1338,6 +1372,7 @@ export type SmallOrderRequestCreateWithoutLeadInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutLeadInput = {
@@ -1364,6 +1399,7 @@ export type SmallOrderRequestUncheckedCreateWithoutLeadInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutLeadInput = {
@@ -1415,6 +1451,7 @@ export type SmallOrderRequestCreateWithoutRequestTypeInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
   documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutRequestTypeInput = {
@@ -1441,6 +1478,7 @@ export type SmallOrderRequestUncheckedCreateWithoutRequestTypeInput = {
   small_order_sequence?: number | null
   rejection_reason?: string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutRequestTypeInput = {
@@ -1492,6 +1530,7 @@ export type SmallOrderRequestCreateWithoutDocumentsInput = {
   requestType: Prisma.SmallOrderRequestTypeMasterCreateNestedOneWithoutSmallOrderRequestsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestUncheckedCreateWithoutDocumentsInput = {
@@ -1518,6 +1557,7 @@ export type SmallOrderRequestUncheckedCreateWithoutDocumentsInput = {
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput
 }
 
 export type SmallOrderRequestCreateOrConnectWithoutDocumentsInput = {
@@ -1559,6 +1599,7 @@ export type SmallOrderRequestUpdateWithoutDocumentsInput = {
   requestType?: Prisma.SmallOrderRequestTypeMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutDocumentsInput = {
@@ -1585,6 +1626,129 @@ export type SmallOrderRequestUncheckedUpdateWithoutDocumentsInput = {
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+}
+
+export type SmallOrderRequestCreateWithoutTasksInput = {
+  parent_lead_code: string
+  so_code?: string | null
+  customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
+  request_source: $Enums.SmallOrderRequestSource
+  required_date: Date | string
+  remarks?: string | null
+  supervisor_approved?: boolean
+  supervisor_approved_at?: Date | string | null
+  admin_approved?: boolean
+  admin_approved_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  is_merge_to_parent_on_installation: boolean
+  usable_handover_date_snapshot?: Date | string | null
+  small_order_sequence?: number | null
+  rejection_reason?: string | null
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsCreatedInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSmallOrderRequestsInput
+  requestType: Prisma.SmallOrderRequestTypeMasterCreateNestedOneWithoutSmallOrderRequestsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutSmallOrderRequestsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutSmallOrderRequestsInput
+  documents?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutSmallOrderRequestInput
+}
+
+export type SmallOrderRequestUncheckedCreateWithoutTasksInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  parent_lead_code: string
+  so_code?: string | null
+  customer_name: string
+  status?: $Enums.SmallOrderRequestStatus
+  request_source: $Enums.SmallOrderRequestSource
+  request_type_id: number
+  required_date: Date | string
+  remarks?: string | null
+  supervisor_approved?: boolean
+  supervisor_approved_at?: Date | string | null
+  admin_approved?: boolean
+  admin_approved_at?: Date | string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  is_merge_to_parent_on_installation: boolean
+  usable_handover_date_snapshot?: Date | string | null
+  small_order_sequence?: number | null
+  rejection_reason?: string | null
+  documents?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutSmallOrderRequestInput
+}
+
+export type SmallOrderRequestCreateOrConnectWithoutTasksInput = {
+  where: Prisma.SmallOrderRequestWhereUniqueInput
+  create: Prisma.XOR<Prisma.SmallOrderRequestCreateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedCreateWithoutTasksInput>
+}
+
+export type SmallOrderRequestUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.SmallOrderRequestUpdateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.SmallOrderRequestCreateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedCreateWithoutTasksInput>
+  where?: Prisma.SmallOrderRequestWhereInput
+}
+
+export type SmallOrderRequestUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.SmallOrderRequestWhereInput
+  data: Prisma.XOR<Prisma.SmallOrderRequestUpdateWithoutTasksInput, Prisma.SmallOrderRequestUncheckedUpdateWithoutTasksInput>
+}
+
+export type SmallOrderRequestUpdateWithoutTasksInput = {
+  parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
+  request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
+  required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supervisor_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  supervisor_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  admin_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  admin_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutSmallOrderRequestsCreatedNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
+  requestType?: Prisma.SmallOrderRequestTypeMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
+  documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+}
+
+export type SmallOrderRequestUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  parent_lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  so_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customer_name?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumSmallOrderRequestStatusFieldUpdateOperationsInput | $Enums.SmallOrderRequestStatus
+  request_source?: Prisma.EnumSmallOrderRequestSourceFieldUpdateOperationsInput | $Enums.SmallOrderRequestSource
+  request_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  required_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  supervisor_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  supervisor_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  admin_approved?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  admin_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestCreateManyVendorInput = {
@@ -1635,6 +1799,7 @@ export type SmallOrderRequestUpdateWithoutVendorInput = {
   requestType?: Prisma.SmallOrderRequestTypeMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutVendorInput = {
@@ -1661,6 +1826,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutVendorInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateManyWithoutVendorInput = {
@@ -1761,6 +1927,7 @@ export type SmallOrderRequestUpdateWithoutCreatedByInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutCreatedByInput = {
@@ -1787,6 +1954,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutCreatedByInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateManyWithoutCreatedByInput = {
@@ -1837,6 +2005,7 @@ export type SmallOrderRequestUpdateWithoutUpdatedByInput = {
   requestType?: Prisma.SmallOrderRequestTypeMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutUpdatedByInput = {
@@ -1863,6 +2032,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutUpdatedByInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -1938,6 +2108,7 @@ export type SmallOrderRequestUpdateWithoutLeadInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutLeadInput = {
@@ -1964,6 +2135,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutLeadInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateManyWithoutLeadInput = {
@@ -2039,6 +2211,7 @@ export type SmallOrderRequestUpdateWithoutRequestTypeInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutSmallOrderRequestsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutSmallOrderRequestsNestedInput
   documents?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateWithoutRequestTypeInput = {
@@ -2065,6 +2238,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutRequestTypeInput = {
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput
 }
 
 export type SmallOrderRequestUncheckedUpdateManyWithoutRequestTypeInput = {
@@ -2099,10 +2273,12 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutRequestTypeInput = {
 
 export type SmallOrderRequestCountOutputType = {
   documents: number
+  tasks: number
 }
 
 export type SmallOrderRequestCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | SmallOrderRequestCountOutputTypeCountDocumentsArgs
+  tasks?: boolean | SmallOrderRequestCountOutputTypeCountTasksArgs
 }
 
 /**
@@ -2120,6 +2296,13 @@ export type SmallOrderRequestCountOutputTypeDefaultArgs<ExtArgs extends runtime.
  */
 export type SmallOrderRequestCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.SmallOrderRequestDocumentWhereInput
+}
+
+/**
+ * SmallOrderRequestCountOutputType without action
+ */
+export type SmallOrderRequestCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserLeadTaskWhereInput
 }
 
 
@@ -2153,6 +2336,7 @@ export type SmallOrderRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   updatedBy?: boolean | Prisma.SmallOrderRequest$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.SmallOrderRequest$documentsArgs<ExtArgs>
+  tasks?: boolean | Prisma.SmallOrderRequest$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.SmallOrderRequestCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["smallOrderRequest"]>
 
@@ -2252,6 +2436,7 @@ export type SmallOrderRequestInclude<ExtArgs extends runtime.Types.Extensions.In
   updatedBy?: boolean | Prisma.SmallOrderRequest$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   documents?: boolean | Prisma.SmallOrderRequest$documentsArgs<ExtArgs>
+  tasks?: boolean | Prisma.SmallOrderRequest$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.SmallOrderRequestCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SmallOrderRequestIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2278,6 +2463,7 @@ export type $SmallOrderRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     documents: Prisma.$SmallOrderRequestDocumentPayload<ExtArgs>[]
+    tasks: Prisma.$UserLeadTaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -2703,6 +2889,7 @@ export interface Prisma__SmallOrderRequestClient<T, Null = never, ExtArgs extend
   updatedBy<T extends Prisma.SmallOrderRequest$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SmallOrderRequest$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   documents<T extends Prisma.SmallOrderRequest$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SmallOrderRequest$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SmallOrderRequestDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.SmallOrderRequest$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SmallOrderRequest$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserLeadTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3196,6 +3383,30 @@ export type SmallOrderRequest$documentsArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.SmallOrderRequestDocumentScalarFieldEnum | Prisma.SmallOrderRequestDocumentScalarFieldEnum[]
+}
+
+/**
+ * SmallOrderRequest.tasks
+ */
+export type SmallOrderRequest$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserLeadTask
+   */
+  select?: Prisma.UserLeadTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserLeadTask
+   */
+  omit?: Prisma.UserLeadTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserLeadTaskInclude<ExtArgs> | null
+  where?: Prisma.UserLeadTaskWhereInput
+  orderBy?: Prisma.UserLeadTaskOrderByWithRelationInput | Prisma.UserLeadTaskOrderByWithRelationInput[]
+  cursor?: Prisma.UserLeadTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserLeadTaskScalarFieldEnum | Prisma.UserLeadTaskScalarFieldEnum[]
 }
 
 /**
