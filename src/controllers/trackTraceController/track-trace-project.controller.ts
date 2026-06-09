@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { createProjectService,searchTrackTraceLeadsService } from "../../../src/services/trackTraceServices/track-trace-project.service";
+import { createProjectService,searchTrackTraceLeadsService,getTrackTraceVendorConfigService } from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
+
 
 export const createProjectController = async (req: Request, res: Response) => {
   try {
@@ -20,11 +21,16 @@ export const createProjectController = async (req: Request, res: Response) => {
       });
     }
 
+    const parsedLeadId =
+      lead_id !== undefined && lead_id !== null && lead_id !== ""
+        ? Number(lead_id)
+        : null;
+
     const result = await createProjectService(
       projectName,
       Number(vendorId),
-      Number(lead_id),
-      req.file,
+      parsedLeadId,
+      req.file
     );
 
     return res.status(201).json({
@@ -43,8 +49,7 @@ export const createProjectController = async (req: Request, res: Response) => {
       error.message.includes("must be") ||
       error.message.includes("Excel file is empty") ||
       error.message.includes("Duplicate barcodes") ||
-      error.message.includes("lead not mapped") ||
-      error.message.includes("Invalid or expired vendor token") ||
+      error.message.includes("Invalid lead_id") ||
       error.message.includes("Vendor not found") ||
       error.message.includes("Vendor token not found");
 
@@ -83,6 +88,36 @@ export const searchTrackTraceLeadsController = async (
       success: false,
       message: error.message || "Failed to fetch leads",
       data: [],
+    });
+  }
+};
+
+export const getTrackTraceVendorConfigController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const vendorId = Number(req.params.vendor_id);
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid vendor_id",
+      });
+    }
+
+    const result = await getTrackTraceVendorConfigService(vendorId);
+
+    return res.status(result.success ? 200 : 400).json(result);
+  } catch (error: any) {
+    logger.error("getTrackTraceVendorConfigController error", {
+      error: error.message,
+    });
+
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch vendor config",
+      data: null,
     });
   }
 };
