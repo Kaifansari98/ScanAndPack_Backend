@@ -13,6 +13,8 @@ import {
   uploadToWasabiCSPBookingPhotoFile,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
+import fsSync from "node:fs";
+import path from "node:path";
 import { prisma } from "../../../prisma/client";
 import {
   sendLeadAssignedToSiteSupervisorEmail,
@@ -121,6 +123,29 @@ export class BookingStageController {
           .status(400)
           .json({ success: false, message: "Final documents are mandatory" });
         return;
+      }
+
+      // Validate final documents file extensions
+      const allowedExtensions = [".pptx", ".ppt", ".pdf", ".jpg", ".jpeg", ".png", ".pyo"];
+      for (const file of finalDocuments) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (!allowedExtensions.includes(ext)) {
+          // Clean up all uploaded files
+          const allFilesToCleanup = [
+            ...finalDocuments,
+            ...(bookingAmountPaymentDetailsFile ? [bookingAmountPaymentDetailsFile] : []),
+          ];
+          for (const f of allFilesToCleanup) {
+            if (f.path && fsSync.existsSync(f.path)) {
+              await fs.unlink(f.path).catch(() => {});
+            }
+          }
+          res.status(400).json({
+            success: false,
+            message: `Unsupported file type for final documents: ${ext}. Supported types: .pptx, .ppt, .pdf, .jpg, .jpeg, .png, .pyo`,
+          });
+          return;
+        }
       }
 
       if (Number(mrpValue) < Number(finalBookingAmount)) {
@@ -328,6 +353,24 @@ export class BookingStageController {
             "[BOOKING STAGE] At least one file must be uploaded of finalDocuments",
         });
         return;
+      }
+
+      // Validate final documents file extensions
+      const allowedExtensions = [".pptx", ".ppt", ".pdf", ".jpg", ".jpeg", ".png", ".pyo"];
+      for (const file of finalDocuments) {
+        const ext = path.extname(file.originalname).toLowerCase();
+        if (!allowedExtensions.includes(ext)) {
+          for (const f of finalDocuments) {
+            if (f.path && fsSync.existsSync(f.path)) {
+              await fs.unlink(f.path).catch(() => {});
+            }
+          }
+          res.status(400).json({
+            success: false,
+            message: `Unsupported file type for final documents: ${ext}. Supported types: .pptx, .ppt, .pdf, .jpg, .jpeg, .png, .pyo`,
+          });
+          return;
+        }
       }
 
       const uploadedFinalDocuments: UploadedFileRef[] = [];
@@ -1028,14 +1071,14 @@ export class BookingStageController {
     try {
       const leadId = Number(getParam(req.params.leadId));
       const vendorId = Number(getParam(req.params.vendorId));
-      const siteSupervisorId = parseInt(req.body.siteSupervisorId);
+      const siteSupervisorId = req.body.siteSupervisorId ? parseInt(req.body.siteSupervisorId) : undefined;
       const createdBy = parseInt(req.body.created_by);
 
-      if (!leadId || !vendorId || !siteSupervisorId || !createdBy) {
+     if (!leadId || !vendorId || !createdBy || !siteSupervisorId) {
         res.status(400).json({
           success: false,
           message:
-            "leadId, vendorId, siteSupervisorId, and created_by are required",
+            "leadId, vendorId, and created_by are required",
         });
         return;
       }

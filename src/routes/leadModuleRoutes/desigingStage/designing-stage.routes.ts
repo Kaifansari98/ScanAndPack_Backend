@@ -13,6 +13,7 @@ import {
   uploadMeetingDocs,
 } from "../../../middlewares/uploadWasabi";
 import { uploadDesignQuotationFiles } from "../../../utils/wasabiClient";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const DesigningStageRouter = Router();
 
@@ -32,7 +33,7 @@ DesigningStageRouter.get(
 
 DesigningStageRouter.post(
   "/upload-quotation",
-  uploadDesignQuotationFiles.array("files", 10), // file field in form-data
+  handleMulterUpload(uploadDesignQuotationFiles.array("files")), // file field in form-data
   (req, res) => DesigingStageController.upload(req, res),
 );
 
@@ -40,14 +41,14 @@ DesigningStageRouter.post(
 // Form-data: leadId, vendorId, userId, accountId, date, desc, files[]
 DesigningStageRouter.post(
   "/design-meeting",
-  uploadDesignMeetingFiles.array("files"), // multiple files
+  handleMulterUpload(uploadDesignMeetingFiles.array("files")), // multiple files
   DesigingStageController.addDesignMeeting,
 );
 
 // POST /api/leads/designing-stage/add-meeting-docs
 DesigningStageRouter.post(
   "/add-meeting-docs",
-  uploadMeetingDocs.array("files", 10), // same multer setup
+  handleMulterUpload(uploadMeetingDocs.array("files")), // same multer setup
   (req, res) => DesigingStageController.addMeetingDocs(req, res),
 );
 
@@ -66,7 +67,7 @@ DesigningStageRouter.get(
 // Form-data: vendorId, leadId, userId, accountId, files[]
 DesigningStageRouter.post(
   "/upload-designs",
-  uploadDesigns.array("files", 10), // multiple files
+  handleMulterUpload(uploadDesigns.array("files")), // multiple files
   (req, res) => DesigingStageController.uploadDesigns(req, res),
 );
 
@@ -74,7 +75,7 @@ DesigningStageRouter.post(
 // Form-data: vendorId, userId, date?, desc?, files[]?
 DesigningStageRouter.put(
   "/design-meeting/:meetingId",
-  upload.array("files"), // optional multiple files
+  handleMulterUpload(upload.array("files")), // optional multiple files
   DesigingStageController.editDesignMeeting,
 );
 
@@ -89,7 +90,7 @@ DesigningStageRouter.get(
 // Form-data: lead_id, account_id, vendor_id, type, desc, created_by
 DesigningStageRouter.post(
   "/design-selection",
-  upload.none(), // Handle form-data without files
+  handleMulterUpload(upload.none()), // Handle form-data without files
   createDesignSelectionValidation,
   DesigingStageController.createDesignSelection,
 );
@@ -118,7 +119,7 @@ DesigningStageRouter.get(
 // Form-data: type, desc, updated_by
 DesigningStageRouter.put(
   "/design-selection/:id",
-  upload.none(), // Handle form-data without files
+  handleMulterUpload(upload.none()), // Handle form-data without files
   updateDesignSelectionValidation,
   DesigingStageController.updateDesignSelection,
 );

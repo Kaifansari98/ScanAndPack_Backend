@@ -1,25 +1,26 @@
 import { Router } from "express";
 import { PostProductionController } from "../../../controllers/leadModuleControllers/production/post-production/postProduction.controller";
 import { uploadPostProductionFiles, uploadPreProductionFiles } from "../../../middlewares/uploadWasabi";
+import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const postProductionRoutes = Router();
 const controller = new PostProductionController();
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-qc-photos",
-  uploadPostProductionFiles.array("files", 10), // accept up to 10 images
+  handleMulterUpload(uploadPostProductionFiles.array("files")), // accept multiple images
   controller.uploadQcPhotos
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-hardware-packing-details",
-  uploadPostProductionFiles.array("files", 10), // multiple docs
+  handleMulterUpload(uploadPostProductionFiles.array("files")), // multiple docs
   controller.uploadHardwarePackingDetails
 );
 
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-woodwork-packing-details",
-  uploadPostProductionFiles.array("files", 10),
+  handleMulterUpload(uploadPostProductionFiles.array("files")),
   controller.uploadWoodworkPackingDetails
 );
 
@@ -73,7 +74,7 @@ postProductionRoutes.put(
 // ✅ Pre-Production Files (Type 37)
 postProductionRoutes.post(
   "/vendorId/:vendorId/leadId/:leadId/upload-pre-production-files",
-  uploadPreProductionFiles.array("files", 10),
+  handleMulterUpload(uploadPreProductionFiles.array("files")),
   controller.uploadPreProductionFiles
 );
 

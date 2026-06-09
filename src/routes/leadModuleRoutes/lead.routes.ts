@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
   createProductType,
   fetchAllProductTypes,
@@ -26,8 +27,8 @@ import {
   editProductStructureParent,
   removeProductStructureType,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
-import { upload } from "../../middlewares/uploadWasabi";
 import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
+import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
 import {
   createDocumentType,
@@ -76,7 +77,7 @@ leadsRouter.patch("/update-site-type-status/:id", toggleSiteTypeStatus);
 leadsRouter.get(
   "/get-all-productStructure-types/:vendor_id",
   fetchAllProductStructureTypes
-);
+)
 leadsRouter.patch(
   "/update-productStructure-type/:id",
   editProductStructureParent
@@ -93,15 +94,17 @@ leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
 
+const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
+
 leadsRouter.post(
   "/create",
-  uploadLeadSitePhotos.array("documents", 10),
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   leadController.createLead
 );
 
 leadsRouter.post(
   "/upload-more-site-photos",
-  uploadLeadSitePhotos.array("documents", 10),
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   leadController.uploadMoreSitePhotos
 );
 

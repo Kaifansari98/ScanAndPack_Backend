@@ -4,7 +4,7 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { generateSignedUrl } from "../../../utils/wasabiClient";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
-import { NotificationType } from "../../../prisma/generated";
+import { NotificationType, LeadUserStatus } from "../../../prisma/generated";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMiscERDUpdatedEmail, sendMarkAsReadyEmail, sendMiscRequiredDeliveryDateEmail, sendLeadMovedToFinalHandoverEmail } from "../../../../src/services/email/brevoEmail.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
@@ -595,9 +595,8 @@ export class UnderInstallationStageService {
         vendor_id: vendorId,
         lead_id: lead.id,
         account_id: lead.account_id!,
-        action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${
-          installers.length
-        } installer(s)`,
+        action: `Set expected installation end date (${formattedExpectedEndDate}) & added ${installers.length
+          } installer(s)`,
         action_type: "UPDATE",
         created_by: updatedBy,
         created_at: new Date(),
@@ -1062,20 +1061,71 @@ export class UnderInstallationStageService {
     // 1️⃣ TRANSACTION LAYER
     // ====================================
 
+
+    if (
+      !reorder_material_details ||
+      !reorder_material_details.trim()
+    ) {
+      throw new Error(
+        "Reorder material details is required"
+      );
+    }
+
+
     const misc = await prisma.$transaction(async (tx) => {
+      // -----------------------------
+      // Validation
+      // -----------------------------
+
+      if (
+        !reorder_material_details ||
+        !reorder_material_details.trim()
+      ) {
+        throw new Error(
+          "Reorder material details is required"
+        );
+      }
+
       const misc = await tx.miscellaneousMaster.create({
         data: {
           vendor_id,
           lead_id,
           account_id,
           misc_type_id,
-          problem_description,
-          reorder_material_details,
-          quantity,
-          cost,
-          supervisor_remark,
-          expected_ready_date,
-          is_resolved,
+
+          // String fields
+          problem_description:
+            problem_description?.trim() || "",
+
+          reorder_material_details:
+            reorder_material_details.trim(),
+
+          supervisor_remark:
+            supervisor_remark?.trim() || null,
+
+          // Number fields
+          quantity:
+            quantity !== undefined &&
+              quantity !== null
+              ? Number(quantity)
+              : null,
+
+          cost:
+            cost !== undefined &&
+              cost !== null
+              ? Number(cost)
+              : null,
+
+          // Date fields
+          expected_ready_date:
+            expected_ready_date
+              ? new Date(expected_ready_date)
+              : null,
+
+          // Boolean
+          is_resolved:
+            is_resolved ?? false,
+
           created_by,
         },
       });
@@ -1111,11 +1161,11 @@ export class UnderInstallationStageService {
 
       const leadStage = leadStageRecord?.status_id
         ? ((
-            await tx.statusTypeMaster.findUnique({
-              where: { id: leadStageRecord.status_id },
-              select: { type: true },
-            })
-          )?.type ?? null)
+          await tx.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
         : null;
 
       // -----------------------------
@@ -1512,19 +1562,19 @@ export class UnderInstallationStageService {
           documents: docs,
           task: taskForMisc
             ? {
-                id: taskForMisc.id,
-                task_type: taskForMisc.task_type,
-                status: taskForMisc.status,
-              }
+              id: taskForMisc.id,
+              task_type: taskForMisc.task_type,
+              status: taskForMisc.status,
+            }
             : null,
           delivery_task: deliveryTaskForMisc
             ? {
-                id: deliveryTaskForMisc.id,
-                task_type: deliveryTaskForMisc.task_type,
-                status: deliveryTaskForMisc.status,
-                remark: deliveryTaskForMisc.remark ?? null,
-                due_date: deliveryTaskForMisc.due_date ?? null,
-              }
+              id: deliveryTaskForMisc.id,
+              task_type: deliveryTaskForMisc.task_type,
+              status: deliveryTaskForMisc.status,
+              remark: deliveryTaskForMisc.remark ?? null,
+              due_date: deliveryTaskForMisc.due_date ?? null,
+            }
             : null,
         };
       }),
@@ -1776,11 +1826,11 @@ export class UnderInstallationStageService {
 
       const leadStage = leadStageRecord?.status_id
         ? ((
-            await tx.statusTypeMaster.findUnique({
-              where: { id: leadStageRecord.status_id },
-              select: { type: true },
-            })
-          )?.type ?? null)
+          await tx.statusTypeMaster.findUnique({
+            where: { id: leadStageRecord.status_id },
+            select: { type: true },
+          })
+        )?.type ?? null)
         : null;
 
       const deliveryRemark = `Required delivery date set for **${existing.reorder_material_details}** - ${existing.problem_description}`;
@@ -2828,24 +2878,24 @@ export class UnderInstallationStageService {
 
     const finalSitePhotos = finalSitePhotoType
       ? await prisma.leadDocuments.findMany({
-          where: {
-            vendor_id,
-            lead_id,
-            doc_type_id: finalSitePhotoType.id,
-            is_deleted: false,
-          },
-        })
+        where: {
+          vendor_id,
+          lead_id,
+          doc_type_id: finalSitePhotoType.id,
+          is_deleted: false,
+        },
+      })
       : [];
 
     const handoverDocuments = handoverDocType
       ? await prisma.leadDocuments.findMany({
-          where: {
-            vendor_id,
-            lead_id,
-            doc_type_id: handoverDocType.id,
-            is_deleted: false,
-          },
-        })
+        where: {
+          vendor_id,
+          lead_id,
+          doc_type_id: handoverDocType.id,
+          is_deleted: false,
+        },
+      })
       : [];
 
     // 4️⃣ Attach Signed URLs
@@ -3107,13 +3157,13 @@ export class UnderInstallationStageService {
         }),
         salesUserIds.length > 0
           ? prisma.userMaster.findMany({
-              where: {
-                id: { in: salesUserIds },
-                status: "active",
-                user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
-              },
-              select: { id: true, user_name: true, user_email: true },
-            })
+            where: {
+              id: { in: salesUserIds },
+              status: "active",
+              user_type: { user_type: { in: ["sales-executive"], mode: "insensitive" } },
+            },
+            select: { id: true, user_name: true, user_email: true },
+          })
           : Promise.resolve([]),
       ]);
 
@@ -3275,11 +3325,11 @@ export class UnderInstallationStageService {
       msg: isReady
         ? null
         : this.getInstallationFailMessage(
-            lead.is_carcass_installation_completed,
-            lead.is_shutter_installation_completed,
-            lead.expected_installation_end_date,
-            installerCount,
-          ),
+          lead.is_carcass_installation_completed,
+          lead.is_shutter_installation_completed,
+          lead.expected_installation_end_date,
+          installerCount,
+        ),
     };
   }
 
@@ -3848,21 +3898,22 @@ export class UnderInstallationStageService {
       issue_count: lead._count.installationIssueLogMaster,
     }));
   }
-
   static async getMiscIssueLogReportData(
     vendorId: number,
     franchiseId: number | null,
     leadId: number | null,
     fromDate: string | null,
     toDate: string | null,
+    teamIds?: number[],
   ) {
     const INSTALLATION_TAGS = ["Type 15", "Type 16", "Type 17"];
+
     const dateFilter =
       fromDate && toDate
         ? {
-            gte: new Date(fromDate),
-            lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
-          }
+          gte: new Date(fromDate),
+          lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+        }
         : undefined;
 
     const leadWhere = {
@@ -3870,54 +3921,51 @@ export class UnderInstallationStageService {
       statusType: {
         tag: { in: INSTALLATION_TAGS },
       },
-      ...(leadId !== null ? { id: leadId } : {}),
-      ...(franchiseId !== null ? { franchise_id: franchiseId } : {}),
+      ...(leadId !== null && { id: leadId }),
+      ...(franchiseId !== null && { franchise_id: franchiseId }),
     };
-    const splitMiscMaterial = (value: string | null) => {
-      const raw = value?.trim() ?? "";
-      if (!raw) {
-        return {
-          instance: "-",
-          reorderMaterialType: "-",
-        };
-      }
 
-      const delimiter = " - ";
-      const delimiterIndex = raw.indexOf(delimiter);
-
-      if (delimiterIndex === -1) {
-        return {
-          instance: "-",
-          reorderMaterialType: raw,
-        };
-      }
-
-      const instance = raw.slice(0, delimiterIndex).trim() || "-";
-      const reorderMaterialType =
-        raw.slice(delimiterIndex + delimiter.length).trim() || "-";
-
-      return {
-        instance,
-        reorderMaterialType,
-      };
+    // ─── shared userMappings include ────────────────────────────────────────────
+    // We fetch ALL ISM + site-supervisor type mappings, then double-check
+    // against UserTypeMaster so admins accidentally mapped with those types
+    // don't sneak through.
+    const userMappingsInclude = {
+      where: {
+        type: { in: ["ISM", "site-supervisor"] },
+        status: LeadUserStatus.active,   // only active mappings
+      },
+      orderBy: { created_at: "asc" as const },
+      select: {
+        type: true,
+        user: {
+          select: {
+            user_name: true,
+            // ✅ pull actual user_type from UserTypeMaster
+            user_type: {
+              select: {
+                user_type: true,
+              },
+            },
+          },
+        },
+      },
     };
 
     const miscEntries = await prisma.miscellaneousMaster.findMany({
       where: {
         vendor_id: vendorId,
-        ...(dateFilter ? { created_at: dateFilter } : {}),
+        ...(dateFilter && { created_at: dateFilter }),
         lead: leadWhere,
+        ...(teamIds &&
+          teamIds.length > 0 && {
+          teams: { some: { team_id: { in: teamIds } } },
+        }),
       },
+
       include: {
-        type: {
-          select: { name: true },
-        },
+        type: { select: { name: true } },
         teams: {
-          include: {
-            team: {
-              select: { name: true },
-            },
-          },
+          include: { team: { select: { name: true } } },
         },
         lead: {
           select: {
@@ -3925,53 +3973,106 @@ export class UnderInstallationStageService {
             firstname: true,
             lastname: true,
             dispatch_date: true,
-            franchise: {
-              select: {
-                franchise_name: true,
-              },
-            },
+            franchise: { select: { franchise_name: true } },
+            userMappings: userMappingsInclude,
           },
         },
       },
+
       orderBy: { created_at: "asc" },
     });
 
     const issueLogs = await prisma.installationIssueLogMaster.findMany({
       where: {
         vendor_id: vendorId,
-        ...(dateFilter ? { created_at: dateFilter } : {}),
+        ...(dateFilter && { created_at: dateFilter }),
         lead: leadWhere,
+        ...(teamIds &&
+          teamIds.length > 0 && {
+          responsibleTeams: { some: { team_id: { in: teamIds } } },
+        }),
       },
+
       include: {
         issueTypes: {
-          include: {
-            type: {
-              select: { name: true },
-            },
-          },
+          include: { type: { select: { name: true } } },
         },
         responsibleTeams: {
-          include: {
-            team: {
-              select: { name: true },
-            },
-          },
+          include: { team: { select: { name: true } } },
         },
         lead: {
           select: {
             lead_code: true,
             firstname: true,
             lastname: true,
-            franchise: {
-              select: {
-                franchise_name: true,
-              },
-            },
+            franchise: { select: { franchise_name: true } },
+            userMappings: userMappingsInclude,
           },
         },
       },
+
       orderBy: { created_at: "asc" },
     });
+
+    // ─── helpers ──────────────────────────────────────────────────────────────
+
+    const splitMiscMaterial = (value: string | null) => {
+      const raw = value?.trim() ?? "";
+      if (!raw) return { instance: "-", reorderMaterialType: "-" };
+
+      const delimiter = " - ";
+      const delimiterIndex = raw.indexOf(delimiter);
+
+      if (delimiterIndex === -1) {
+        return { instance: "-", reorderMaterialType: raw };
+      }
+
+      const instance = raw.slice(0, delimiterIndex).trim() || "-";
+      const reorderMaterialType =
+        raw.slice(delimiterIndex + delimiter.length).trim() || "-";
+
+      return { instance, reorderMaterialType };
+    };
+
+    // ✅ Resolve sales-executive: mapping type must be "ISM" AND
+    //    UserTypeMaster.user_type must be "sales-executive" (case-insensitive)
+    const resolveSalesExecutive = (
+      mappings: Array<{
+        type: string;
+        user: {
+          user_name: string;
+          user_type: { user_type: string } | null;
+        } | null;
+      }>,
+    ): string => {
+      const match = mappings.find(
+        (x) =>
+          x.type === "ISM" &&
+          x.user?.user_type?.user_type?.toLowerCase() === "sales-executive",
+      );
+      return match?.user?.user_name ?? "-";
+    };
+
+    // ✅ Resolve site-supervisor: mapping type must be "site-supervisor" AND
+    //    UserTypeMaster.user_type must be "site-supervisor" (case-insensitive)
+    const resolveSiteSupervisor = (
+      mappings: Array<{
+        type: string;
+        user: {
+          user_name: string;
+          user_type: { user_type: string } | null;
+        } | null;
+      }>,
+    ): string => {
+      const match = mappings.find(
+        (x) =>
+          x.type === "site-supervisor" &&
+          x.user?.user_type?.user_type?.toLowerCase() === "site-supervisor",
+      );
+      return match?.user?.user_name ?? "-";
+    };
+
+    // ─── map rows ─────────────────────────────────────────────────────────────
 
     const miscRows = miscEntries.map((entry) => {
       const { instance, reorderMaterialType } = splitMiscMaterial(
@@ -3983,16 +4084,18 @@ export class UnderInstallationStageService {
         row_id: entry.id,
         lead_id: entry.lead_id,
         lead_code: entry.lead.lead_code,
-        client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
+        client_name: `${entry.lead.firstname ?? ""} ${entry.lead.lastname ?? ""}`.trim(),
         franchise_store: entry.lead.franchise?.franchise_name ?? null,
         miscl_issue_type: entry.type.name,
-        responsible_team:
-          entry.teams.map((team) => team.team.name).join(", ") || "-",
+        sales_executive: resolveSalesExecutive(entry.lead.userMappings),   // ✅
+        site_supervisor: resolveSiteSupervisor(entry.lead.userMappings),   // ✅
+        responsible_team: entry.teams.map((t) => t.team.name).join(", ") || "-",
         issue_impact: "-",
         instance,
         reorder_material_type: reorderMaterialType,
-        approve_reject_date:
-          entry.misc_approved === null ? null : entry.updated_at,
+        problem_description: entry.problem_description ?? "-",
+        reorder_material_details: entry.reorder_material_details ?? "-",
+        approve_reject_date: entry.misc_approved === null ? null : entry.updated_at,
         rtd_date: entry.expected_ready_date,
         dispatch_req_date: entry.required_delivery_date,
         dispatch_date: entry.lead.dispatch_date,
@@ -4001,28 +4104,34 @@ export class UnderInstallationStageService {
       };
     });
 
-    const issueRows = issueLogs.map((entry) => ({
-      row_type: "issue" as const,
-      row_id: entry.id,
-      lead_id: entry.lead_id,
-      lead_code: entry.lead.lead_code,
-      client_name: `${entry.lead.firstname} ${entry.lead.lastname}`.trim(),
-      franchise_store: entry.lead.franchise?.franchise_name ?? null,
-      miscl_issue_type:
-        entry.issueTypes.map((issueType) => issueType.type.name).join(", ") ||
-        "Issue",
-      responsible_team:
-        entry.responsibleTeams.map((team) => team.team.name).join(", ") || "-",
-      issue_impact: entry.issue_impact ?? "-",
-      instance: "-",
-      reorder_material_type: "-",
-      approve_reject_date: null,
-      rtd_date: null,
-      dispatch_req_date: null,
-      dispatch_date: null,
-      resolved_date: null,
-      created_at: entry.created_at,
-    }));
+    const issueRows = issueLogs.map((entry) => {
+      return {
+        row_type: "issue" as const,
+        row_id: entry.id,
+        lead_id: entry.lead_id,
+        lead_code: entry.lead.lead_code,
+        client_name: `${entry.lead.firstname ?? ""} ${entry.lead.lastname ?? ""}`.trim(),
+        franchise_store: entry.lead.franchise?.franchise_name ?? null,
+        miscl_issue_type:
+          entry.issueTypes.map((i) => i.type.name).join(", ") || "Issue",
+        sales_executive: resolveSalesExecutive(entry.lead.userMappings),   // ✅
+        site_supervisor: resolveSiteSupervisor(entry.lead.userMappings),   // ✅
+        responsible_team:
+          entry.responsibleTeams.map((t) => t.team.name).join(", ") || "-",
+        issue_impact: entry.issue_impact ?? "-",
+        instance: "-",
+        reorder_material_type: "-",
+        problem_description: "-",
+        reorder_material_details: "-",
+        issue_description: entry.issue_description ?? "-",
+        approve_reject_date: null,
+        rtd_date: null,
+        dispatch_req_date: null,
+        dispatch_date: null,
+        resolved_date: null,
+        created_at: entry.created_at,
+      };
+    });
 
     return [...miscRows, ...issueRows].sort(
       (a, b) => a.created_at.getTime() - b.created_at.getTime(),

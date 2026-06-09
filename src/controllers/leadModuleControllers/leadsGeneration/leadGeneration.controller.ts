@@ -338,12 +338,13 @@ export class LeadController {
         });
       }
 
-      if (files.length > 10) {
+      const maxFilesAllowed = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+      if (files.length > maxFilesAllowed) {
         logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
           success: false,
           error: "Too many files",
-          details: "Maximum 10 files allowed",
+          details: `Maximum ${maxFilesAllowed} files allowed`,
         });
       }
 
@@ -642,12 +643,13 @@ export class LeadController {
         });
       }
 
-      if (files.length > 10) {
+      const maxFilesAllowed = parseInt(process.env.UPLOAD_MAX_FILES || "40", 10);
+      if (files.length > maxFilesAllowed) {
         logger.warn("Too many files uploaded", { count: files.length });
         return res.status(400).json({
           success: false,
           error: "Too many files",
-          details: "Maximum 10 files allowed",
+          details: `Maximum ${maxFilesAllowed} files allowed`,
         });
       }
 
@@ -1623,6 +1625,9 @@ export class LeadController {
       const requiredPrivilegeCode = req.query.required_privilege_code
         ? String(req.query.required_privilege_code)
         : undefined;
+      const taskType = req.query.task_type
+        ? String(req.query.task_type)
+        : undefined;
 
       // Validate vendorId
       if (isNaN(vendorId) || vendorId <= 0) {
@@ -1649,6 +1654,7 @@ export class LeadController {
         {
           assigneeUserType,
           requiredPrivilegeCode,
+          taskType,
         },
       );
 
