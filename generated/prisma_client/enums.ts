@@ -311,6 +311,31 @@ export const ApprovalRequestStatus = {
 export type ApprovalRequestStatus = (typeof ApprovalRequestStatus)[keyof typeof ApprovalRequestStatus]
 
 
+export const SmallOrderRequestSource = {
+  post_dispatch: 'post_dispatch',
+  final_handover: 'final_handover'
+} as const
+
+export type SmallOrderRequestSource = (typeof SmallOrderRequestSource)[keyof typeof SmallOrderRequestSource]
+
+
+export const SmallOrderTypeKey = {
+  additional_panel: 'additional_panel',
+  additional_hardware: 'additional_hardware',
+  one_cabinet: 'one_cabinet',
+  additional_accessory: 'additional_accessory'
+} as const
+
+export type SmallOrderTypeKey = (typeof SmallOrderTypeKey)[keyof typeof SmallOrderTypeKey]
+
+
+export const SmallOrderRequestDocumentCategory = {
+  supporting_document: 'supporting_document'
+} as const
+
+export type SmallOrderRequestDocumentCategory = (typeof SmallOrderRequestDocumentCategory)[keyof typeof SmallOrderRequestDocumentCategory]
+
+
 export const LeadApprovalRequestDocumentRole = {
   request: 'request',
   response: 'response'

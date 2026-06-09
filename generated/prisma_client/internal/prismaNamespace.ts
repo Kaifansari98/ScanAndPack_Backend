@@ -428,6 +428,9 @@ export const ModelName = {
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
+  SmallOrderRequestTypeMaster: 'SmallOrderRequestTypeMaster',
+  SmallOrderRequest: 'SmallOrderRequest',
+  SmallOrderRequestDocument: 'SmallOrderRequestDocument',
   LeadAmcContract: 'LeadAmcContract',
   LeadServiceSchedule: 'LeadServiceSchedule',
   StatusTypeMaster: 'StatusTypeMaster',
@@ -533,7 +536,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3790,6 +3793,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.DocumentTypeMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.DocumentTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    SmallOrderRequestTypeMaster: {
+      payload: Prisma.$SmallOrderRequestTypeMasterPayload<ExtArgs>
+      fields: Prisma.SmallOrderRequestTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SmallOrderRequestTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SmallOrderRequestTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.SmallOrderRequestTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SmallOrderRequestTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.SmallOrderRequestTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.SmallOrderRequestTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.SmallOrderRequestTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SmallOrderRequestTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.SmallOrderRequestTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.SmallOrderRequestTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.SmallOrderRequestTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SmallOrderRequestTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SmallOrderRequestTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.SmallOrderRequestTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.SmallOrderRequestTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSmallOrderRequestTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.SmallOrderRequestTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SmallOrderRequestTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    SmallOrderRequest: {
+      payload: Prisma.$SmallOrderRequestPayload<ExtArgs>
+      fields: Prisma.SmallOrderRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SmallOrderRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SmallOrderRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.SmallOrderRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SmallOrderRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        findMany: {
+          args: Prisma.SmallOrderRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>[]
+        }
+        create: {
+          args: Prisma.SmallOrderRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        createMany: {
+          args: Prisma.SmallOrderRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SmallOrderRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.SmallOrderRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        update: {
+          args: Prisma.SmallOrderRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.SmallOrderRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SmallOrderRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SmallOrderRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.SmallOrderRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.SmallOrderRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSmallOrderRequest>
+        }
+        groupBy: {
+          args: Prisma.SmallOrderRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SmallOrderRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    SmallOrderRequestDocument: {
+      payload: Prisma.$SmallOrderRequestDocumentPayload<ExtArgs>
+      fields: Prisma.SmallOrderRequestDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SmallOrderRequestDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SmallOrderRequestDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.SmallOrderRequestDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SmallOrderRequestDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.SmallOrderRequestDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.SmallOrderRequestDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.SmallOrderRequestDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SmallOrderRequestDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.SmallOrderRequestDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        update: {
+          args: Prisma.SmallOrderRequestDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.SmallOrderRequestDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SmallOrderRequestDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SmallOrderRequestDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.SmallOrderRequestDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SmallOrderRequestDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.SmallOrderRequestDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSmallOrderRequestDocument>
+        }
+        groupBy: {
+          args: Prisma.SmallOrderRequestDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SmallOrderRequestDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SmallOrderRequestDocumentCountAggregateOutputType> | number
         }
       }
     }
@@ -11229,6 +11454,60 @@ export const DocumentTypeMasterScalarFieldEnum = {
 export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalarFieldEnum)[keyof typeof DocumentTypeMasterScalarFieldEnum]
 
 
+export const SmallOrderRequestTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  type_key: 'type_key',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SmallOrderRequestTypeMasterScalarFieldEnum = (typeof SmallOrderRequestTypeMasterScalarFieldEnum)[keyof typeof SmallOrderRequestTypeMasterScalarFieldEnum]
+
+
+export const SmallOrderRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  parent_lead_code: 'parent_lead_code',
+  so_code: 'so_code',
+  customer_name: 'customer_name',
+  request_source: 'request_source',
+  request_type_id: 'request_type_id',
+  required_date: 'required_date',
+  remarks: 'remarks',
+  supervisor_approved: 'supervisor_approved',
+  supervisor_approved_at: 'supervisor_approved_at',
+  admin_approved: 'admin_approved',
+  admin_approved_at: 'admin_approved_at',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  is_merge_to_parent_on_installation: 'is_merge_to_parent_on_installation',
+  usable_handover_date_snapshot: 'usable_handover_date_snapshot',
+  small_order_sequence: 'small_order_sequence',
+  rejection_reason: 'rejection_reason'
+} as const
+
+export type SmallOrderRequestScalarFieldEnum = (typeof SmallOrderRequestScalarFieldEnum)[keyof typeof SmallOrderRequestScalarFieldEnum]
+
+
+export const SmallOrderRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  small_order_request_id: 'small_order_request_id',
+  document_id: 'document_id',
+  document_category: 'document_category',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type SmallOrderRequestDocumentScalarFieldEnum = (typeof SmallOrderRequestDocumentScalarFieldEnum)[keyof typeof SmallOrderRequestDocumentScalarFieldEnum]
+
+
 export const LeadAmcContractScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -13001,6 +13280,48 @@ export type ListEnumLedgerTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$P
 
 
 /**
+ * Reference to a field of type 'SmallOrderTypeKey'
+ */
+export type EnumSmallOrderTypeKeyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderTypeKey'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderTypeKey[]'
+ */
+export type ListEnumSmallOrderTypeKeyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderTypeKey[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestSource'
+ */
+export type EnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestSource[]'
+ */
+export type ListEnumSmallOrderRequestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestDocumentCategory'
+ */
+export type EnumSmallOrderRequestDocumentCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestDocumentCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'SmallOrderRequestDocumentCategory[]'
+ */
+export type ListEnumSmallOrderRequestDocumentCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SmallOrderRequestDocumentCategory[]'>
+    
+
+
+/**
  * Reference to a field of type 'ServiceVisitType'
  */
 export type EnumServiceVisitTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceVisitType'>
@@ -13684,6 +14005,9 @@ export type GlobalOmitConfig = {
   paymentInfo?: Prisma.PaymentInfoOmit
   ledger?: Prisma.LedgerOmit
   documentTypeMaster?: Prisma.DocumentTypeMasterOmit
+  smallOrderRequestTypeMaster?: Prisma.SmallOrderRequestTypeMasterOmit
+  smallOrderRequest?: Prisma.SmallOrderRequestOmit
+  smallOrderRequestDocument?: Prisma.SmallOrderRequestDocumentOmit
   leadAmcContract?: Prisma.LeadAmcContractOmit
   leadServiceSchedule?: Prisma.LeadServiceScheduleOmit
   statusTypeMaster?: Prisma.StatusTypeMasterOmit

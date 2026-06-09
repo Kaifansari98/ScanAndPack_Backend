@@ -260,6 +260,21 @@ export type Ledger = Prisma.LedgerModel
  */
 export type DocumentTypeMaster = Prisma.DocumentTypeMasterModel
 /**
+ * Model SmallOrderRequestTypeMaster
+ * 
+ */
+export type SmallOrderRequestTypeMaster = Prisma.SmallOrderRequestTypeMasterModel
+/**
+ * Model SmallOrderRequest
+ * 
+ */
+export type SmallOrderRequest = Prisma.SmallOrderRequestModel
+/**
+ * Model SmallOrderRequestDocument
+ * 
+ */
+export type SmallOrderRequestDocument = Prisma.SmallOrderRequestDocumentModel
+/**
  * Model LeadAmcContract
  * 
  */
