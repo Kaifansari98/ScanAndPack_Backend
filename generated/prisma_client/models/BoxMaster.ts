@@ -281,7 +281,7 @@ export type BoxMasterGroupByOutputType = {
   id: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -323,7 +323,7 @@ export type BoxMasterWhereInput = {
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -350,7 +350,7 @@ export type BoxMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -380,7 +380,7 @@ export type BoxMasterWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.BoxMasterWhereInput | Prisma.BoxMasterWhereInput[]
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -407,7 +407,7 @@ export type BoxMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   project_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  lead_id?: Prisma.SortOrder
+  lead_id?: Prisma.SortOrderInput | Prisma.SortOrder
   box_name?: Prisma.SortOrder
   box_status?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
@@ -434,7 +434,7 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   project_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntNullableWithAggregatesFilter<"BoxMaster"> | number | null
   box_name?: Prisma.StringWithAggregatesFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusWithAggregatesFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntWithAggregatesFilter<"BoxMaster"> | number
@@ -450,7 +450,7 @@ export type BoxMasterScalarWhereWithAggregatesInput = {
 }
 
 export type BoxMasterCreateInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -474,7 +474,7 @@ export type BoxMasterUncheckedCreateInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -493,7 +493,7 @@ export type BoxMasterUncheckedCreateInput = {
 }
 
 export type BoxMasterUpdateInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -517,7 +517,7 @@ export type BoxMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -539,7 +539,7 @@ export type BoxMasterCreateManyInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -555,7 +555,7 @@ export type BoxMasterCreateManyInput = {
 }
 
 export type BoxMasterUpdateManyMutationInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -571,7 +571,7 @@ export type BoxMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -970,7 +970,7 @@ export type BoxMasterUpdateOneWithoutCutListMachineMappingNestedInput = {
 }
 
 export type BoxMasterCreateWithoutVendorInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -992,7 +992,7 @@ export type BoxMasterCreateWithoutVendorInput = {
 export type BoxMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   project_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1043,7 +1043,7 @@ export type BoxMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"BoxMaster"> | number
   project_id?: Prisma.IntFilter<"BoxMaster"> | number
   vendor_id?: Prisma.IntFilter<"BoxMaster"> | number
-  lead_id?: Prisma.IntFilter<"BoxMaster"> | number
+  lead_id?: Prisma.IntNullableFilter<"BoxMaster"> | number | null
   box_name?: Prisma.StringFilter<"BoxMaster"> | string
   box_status?: Prisma.EnumBoxStatusFilter<"BoxMaster"> | $Enums.BoxStatus
   created_by?: Prisma.IntFilter<"BoxMaster"> | number
@@ -1059,7 +1059,7 @@ export type BoxMasterScalarWhereInput = {
 }
 
 export type BoxMasterCreateWithoutFactoryOutByUserInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1082,7 +1082,7 @@ export type BoxMasterUncheckedCreateWithoutFactoryOutByUserInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1110,7 +1110,7 @@ export type BoxMasterCreateManyFactoryOutByUserInputEnvelope = {
 }
 
 export type BoxMasterCreateWithoutSiteInByUserInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1133,7 +1133,7 @@ export type BoxMasterUncheckedCreateWithoutSiteInByUserInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1193,7 +1193,7 @@ export type BoxMasterUpdateManyWithWhereWithoutSiteInByUserInput = {
 }
 
 export type BoxMasterCreateWithoutProjectInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1215,7 +1215,7 @@ export type BoxMasterCreateWithoutProjectInput = {
 export type BoxMasterUncheckedCreateWithoutProjectInput = {
   id?: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1260,7 +1260,7 @@ export type BoxMasterUpdateManyWithWhereWithoutProjectInput = {
 }
 
 export type BoxMasterCreateWithoutDetailsInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1283,7 +1283,7 @@ export type BoxMasterUncheckedCreateWithoutDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1327,7 +1327,7 @@ export type BoxMasterUpdateManyWithWhereWithoutDetailsInput = {
 }
 
 export type BoxMasterCreateWithoutItemsInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1350,7 +1350,7 @@ export type BoxMasterUncheckedCreateWithoutItemsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1384,7 +1384,7 @@ export type BoxMasterUpdateToOneWithWhereWithoutItemsInput = {
 }
 
 export type BoxMasterUpdateWithoutItemsInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1407,7 +1407,7 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1425,7 +1425,7 @@ export type BoxMasterUncheckedUpdateWithoutItemsInput = {
 }
 
 export type BoxMasterCreateWithoutLeadMasterInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1448,7 +1448,7 @@ export type BoxMasterUncheckedCreateWithoutLeadMasterInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1487,7 +1487,7 @@ export type BoxMasterUpdateManyWithWhereWithoutLeadMasterInput = {
 }
 
 export type BoxMasterCreateWithoutCutListMachineMappingInput = {
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1510,7 +1510,7 @@ export type BoxMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1544,7 +1544,7 @@ export type BoxMasterUpdateToOneWithWhereWithoutCutListMachineMappingInput = {
 }
 
 export type BoxMasterUpdateWithoutCutListMachineMappingInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1567,7 +1567,7 @@ export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1587,7 +1587,7 @@ export type BoxMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
 export type BoxMasterCreateManyVendorInput = {
   id?: number
   project_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1603,7 +1603,7 @@ export type BoxMasterCreateManyVendorInput = {
 }
 
 export type BoxMasterUpdateWithoutVendorInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1625,7 +1625,7 @@ export type BoxMasterUpdateWithoutVendorInput = {
 export type BoxMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1646,7 +1646,7 @@ export type BoxMasterUncheckedUpdateWithoutVendorInput = {
 export type BoxMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1665,7 +1665,7 @@ export type BoxMasterCreateManyFactoryOutByUserInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1683,7 +1683,7 @@ export type BoxMasterCreateManySiteInByUserInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1698,7 +1698,7 @@ export type BoxMasterCreateManySiteInByUserInput = {
 }
 
 export type BoxMasterUpdateWithoutFactoryOutByUserInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1721,7 +1721,7 @@ export type BoxMasterUncheckedUpdateWithoutFactoryOutByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1742,7 +1742,7 @@ export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1757,7 +1757,7 @@ export type BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserInput = {
 }
 
 export type BoxMasterUpdateWithoutSiteInByUserInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1780,7 +1780,7 @@ export type BoxMasterUncheckedUpdateWithoutSiteInByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1801,7 +1801,7 @@ export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1818,7 +1818,7 @@ export type BoxMasterUncheckedUpdateManyWithoutSiteInByUserInput = {
 export type BoxMasterCreateManyProjectInput = {
   id?: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1834,7 +1834,7 @@ export type BoxMasterCreateManyProjectInput = {
 }
 
 export type BoxMasterUpdateWithoutProjectInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1856,7 +1856,7 @@ export type BoxMasterUpdateWithoutProjectInput = {
 export type BoxMasterUncheckedUpdateWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1877,7 +1877,7 @@ export type BoxMasterUncheckedUpdateWithoutProjectInput = {
 export type BoxMasterUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1896,7 +1896,7 @@ export type BoxMasterCreateManyDetailsInput = {
   id?: number
   project_id: number
   vendor_id: number
-  lead_id: number
+  lead_id?: number | null
   box_name: string
   box_status: $Enums.BoxStatus
   created_by: number
@@ -1911,7 +1911,7 @@ export type BoxMasterCreateManyDetailsInput = {
 }
 
 export type BoxMasterUpdateWithoutDetailsInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1934,7 +1934,7 @@ export type BoxMasterUncheckedUpdateWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1955,7 +1955,7 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1970,7 +1970,7 @@ export type BoxMasterUncheckedUpdateManyWithoutDetailsInput = {
 }
 
 export type BoxMasterUpdateWithoutLeadMasterInput = {
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -1993,7 +1993,7 @@ export type BoxMasterUncheckedUpdateWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2014,7 +2014,7 @@ export type BoxMasterUncheckedUpdateManyWithoutLeadMasterInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   project_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   box_name?: Prisma.StringFieldUpdateOperationsInput | string
   box_status?: Prisma.EnumBoxStatusFieldUpdateOperationsInput | $Enums.BoxStatus
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
@@ -2216,7 +2216,7 @@ export type $BoxMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     id: number
     project_id: number
     vendor_id: number
-    lead_id: number
+    lead_id: number | null
     box_name: string
     box_status: $Enums.BoxStatus
     created_by: number
