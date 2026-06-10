@@ -573,8 +573,6 @@ export class BookingStageService {
           actionMessage,
         });
 
-        response.supervisorAssigned = supervisor;
-
         return response;
       },
       {
