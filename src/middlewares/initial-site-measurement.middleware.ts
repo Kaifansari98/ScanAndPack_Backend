@@ -142,18 +142,13 @@ export const validateFiles = async (req: Request, res: Response, next: NextFunct
       });
 
       const hasAllRequiredInstanceDocs = instances.every((instance) => {
-        const hasSitePhoto = existingDocs.some(
-          (doc) =>
-            doc.product_structure_instance_id === instance.id &&
-            doc.doc_type_id === sitePhotoDocType.id,
-        );
         const hasMeasurementDoc = existingDocs.some(
           (doc) =>
             doc.product_structure_instance_id === instance.id &&
             doc.doc_type_id === measurementDocType.id,
         );
 
-        return hasSitePhoto && hasMeasurementDoc;
+        return hasMeasurementDoc;
       });
 
       if (!hasAllRequiredInstanceDocs) {

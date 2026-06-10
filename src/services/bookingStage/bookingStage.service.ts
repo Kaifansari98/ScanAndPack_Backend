@@ -65,20 +65,20 @@ export class BookingStageService {
     const productStructureInstancesOrderBy =
       normalizedStageTag === "Type 9"
         ? [
-            { tech_check_completed_at: Prisma.SortOrder.desc },
+          { tech_check_completed_at: Prisma.SortOrder.desc },
+          { product_structure_id: Prisma.SortOrder.asc },
+          { quantity_index: Prisma.SortOrder.asc },
+        ]
+        : normalizedStageTag === "Type 10"
+          ? [
+            { order_login_completed_at: Prisma.SortOrder.desc },
             { product_structure_id: Prisma.SortOrder.asc },
             { quantity_index: Prisma.SortOrder.asc },
           ]
-        : normalizedStageTag === "Type 10"
-          ? [
-              { order_login_completed_at: Prisma.SortOrder.desc },
-              { product_structure_id: Prisma.SortOrder.asc },
-              { quantity_index: Prisma.SortOrder.asc },
-            ]
           : [
-              { product_structure_id: Prisma.SortOrder.asc },
-              { quantity_index: Prisma.SortOrder.asc },
-            ];
+            { product_structure_id: Prisma.SortOrder.asc },
+            { quantity_index: Prisma.SortOrder.asc },
+          ];
 
     return {
       account: { select: { id: true, name: true } },
@@ -147,25 +147,25 @@ export class BookingStageService {
       },
       ...(BookingStageService.statusLogSortedStageTags.has(normalizedStageTag)
         ? {
-            leadStatusLogs: {
-              where: {
-                statusType: {
-                  tag: normalizedStageTag,
-                },
-              },
-              select: {
-                created_at: true,
-                statusType: {
-                  select: {
-                    tag: true,
-                  },
-                },
-              },
-              orderBy: {
-                created_at: Prisma.SortOrder.desc,
+          leadStatusLogs: {
+            where: {
+              statusType: {
+                tag: normalizedStageTag,
               },
             },
-          }
+            select: {
+              created_at: true,
+              statusType: {
+                select: {
+                  tag: true,
+                },
+              },
+            },
+            orderBy: {
+              created_at: Prisma.SortOrder.desc,
+            },
+          },
+        }
         : {}),
       payments: {
         where: { paymentType: { tag: "Type 2" } },
@@ -287,7 +287,7 @@ export class BookingStageService {
     }
   }
 
-public async createBookingStage(data: CreateBookingStageDto) {
+  public async createBookingStage(data: CreateBookingStageDto) {
     const response = await prisma.$transaction(
       async (tx: any) => {
         const response: any = {
@@ -529,9 +529,8 @@ public async createBookingStage(data: CreateBookingStageDto) {
         let actionMessage = `Booking has been done successfully`;
 
         if (hasDocs) {
-          actionMessage += ` — Remark: ${docCount} document${
-            docCount > 1 ? "s have" : " has"
-          } been uploaded successfully with it.`;
+          actionMessage += ` — Remark: ${docCount} document${docCount > 1 ? "s have" : " has"
+            } been uploaded successfully with it.`;
         } else {
           actionMessage += ` — Remark: No documents were uploaded.`;
         }
@@ -1906,10 +1905,10 @@ public async createBookingStage(data: CreateBookingStageDto) {
 
     const sortedProcessed = shouldApplyStageSort
       ? [...processed].sort(
-          (a, b) =>
-            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-        )
+        (a, b) =>
+          BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+          BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+      )
       : processed;
 
     const paginatedLeads = shouldApplyStageSort
@@ -2182,9 +2181,8 @@ public async createBookingStage(data: CreateBookingStageDto) {
         },
       );
 
-      let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${
-        data.payment_text
-      }`;
+      let actionMessage = `Additional payment of ₹${data.amount.toLocaleString()} received successfully on ${formattedDate}. — Payment Details: ${data.payment_text
+        }`;
 
       if (response.documentsUploaded.length > 0) {
         const docCount = response.documentsUploaded.length;
@@ -2253,9 +2251,8 @@ public async createBookingStage(data: CreateBookingStageDto) {
 
       const leadCode =
         leadInfo?.lead_code ?? `LEAD-${String(data.lead_id).padStart(4, "0")}`;
-      const leadName = `${leadInfo?.firstname ?? ""} ${
-        leadInfo?.lastname ?? ""
-      }`.trim();
+      const leadName = `${leadInfo?.firstname ?? ""} ${leadInfo?.lastname ?? ""
+        }`.trim();
       const updatedByName = updatedByUser?.user_name ?? "User";
       const amountText = `₹${data.amount.toLocaleString("en-IN")}`;
       const paymentTypeName = result.paymentTypeName || "Payment";
@@ -2278,9 +2275,8 @@ public async createBookingStage(data: CreateBookingStageDto) {
             message: `Payment added for ${leadCode} - ${leadName} by ${updatedByName}.`,
             entity_type: "lead",
             entity_id: data.lead_id,
-            redirect_url: `/dashboard/leads/details/${data.lead_id}${
-              leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
-            }`,
+            redirect_url: `/dashboard/leads/details/${data.lead_id}${leadInfo?.account_id ? `?accountId=${leadInfo.account_id}` : ""
+              }`,
           });
 
           if (!admin.user_email) return;
@@ -3020,16 +3016,16 @@ public async createBookingStage(data: CreateBookingStageDto) {
       });
       statusIds = statuses.map((s) => s.id);
     } else {
-const statusTags =
-  normalizedTag === "Type 8"
-    ? ["Type 8", "Type 9"]
-    : normalizedTag === "Type 9"
-      ? ["Type 8", "Type 9"]
-      : normalizedTag === "Type 10"
-        ? ["Type 8", "Type 9", "Type 10"]
-        : normalizedTag === "Type 15"
-          ? ["Type 15"]
-          : [tag];
+      const statusTags =
+        normalizedTag === "Type 8"
+          ? ["Type 8", "Type 9"]
+          : normalizedTag === "Type 9"
+            ? ["Type 8", "Type 9"]
+            : normalizedTag === "Type 10"
+              ? ["Type 8", "Type 9", "Type 10"]
+              : normalizedTag === "Type 15"
+                ? ["Type 15"]
+                : [tag];
       const statusTypes = await prisma.statusTypeMaster.findMany({
         where: { vendor_id: vendorId, tag: { in: statusTags } },
         select: { id: true },
@@ -3549,9 +3545,9 @@ const statusTags =
         status_id: { in: statusIds },
         statusType: shouldExcludeLaterStageTags
           ? {
-              vendor_id: vendorId,
-              tag: { notIn: excludedProductionStageTags },
-            }
+            vendor_id: vendorId,
+            tag: { notIn: excludedProductionStageTags },
+          }
           : { vendor_id: vendorId },
         activity_status: isAllStages
           ? "onGoing"
@@ -3603,10 +3599,10 @@ const statusTags =
       );
       const sortedProcessed = shouldApplyStageSort
         ? [...processed].sort(
-            (a, b) =>
-              BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-              BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-          )
+          (a, b) =>
+            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+        )
         : processed;
 
       const paginatedLeads = shouldApplyStageSort
@@ -3658,9 +3654,9 @@ const statusTags =
       status_id: { in: statusIds },
       statusType: shouldExcludeLaterStageTags
         ? {
-            vendor_id: vendorId,
-            tag: { notIn: excludedProductionStageTags },
-          }
+          vendor_id: vendorId,
+          tag: { notIn: excludedProductionStageTags },
+        }
         : { vendor_id: vendorId },
       activity_status: isAllStages
         ? "onGoing"
@@ -3717,10 +3713,10 @@ const statusTags =
 
     const sortedProcessed = shouldApplyStageSort
       ? [...processed].sort(
-          (a, b) =>
-            BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
-            BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
-        )
+        (a, b) =>
+          BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
+          BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
+      )
       : processed;
 
     const paginatedLeads = shouldApplyStageSort
@@ -3749,9 +3745,9 @@ const statusTags =
 
       const leadStage = lead.status_id
         ? ((await tx.statusTypeMaster.findUnique({
-            where: { id: lead.status_id },
-            select: { type: true },
-          }))?.type ?? null)
+          where: { id: lead.status_id },
+          select: { type: true },
+        }))?.type ?? null)
         : null;
 
       const assignee = await tx.userMaster.findUnique({
