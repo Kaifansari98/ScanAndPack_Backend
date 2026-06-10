@@ -563,6 +563,7 @@ model LeadMaster {
   total_project_amount                        Float?
   is_draft                                    Boolean                               @default(false)
   lead_code                                   String
+  is_small_order_request                      Boolean                               @default(false)
   is_client_approval_submitted                Boolean                               @default(false)
   client_required_order_login_complition_date DateTime?
   expected_order_login_ready_date             DateTime?

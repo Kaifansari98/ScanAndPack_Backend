@@ -342,6 +342,8 @@ const createSmallOrderLeadFromRequest = async ({
     created_by: request.created_by,
     priority: request.lead.priority?.trim() || null,
     account_id: request.lead.account_id,
+    is_small_order_request: true,
+    client_required_order_login_complition_date: request.required_date,
     assign_to: null,
     assigned_by: null,
     is_draft: false,
