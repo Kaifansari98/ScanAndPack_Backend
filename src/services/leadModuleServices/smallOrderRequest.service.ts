@@ -273,6 +273,19 @@ const createSmallOrderLeadFromRequest = async ({
       }),
     ]);
 
+  const parentLeadUserMappings = await tx.leadUserMapping.findMany({
+    where: {
+      vendor_id: request.vendor_id,
+      lead_id: request.lead_id,
+      status: "active",
+    },
+    select: {
+      user_id: true,
+      type: true,
+      status: true,
+    },
+  });
+
   if (!smallOrderProductType) {
     throw new Error("Small Order product type master not found");
   }
@@ -345,21 +358,48 @@ const createSmallOrderLeadFromRequest = async ({
     data: leadCreateData,
   });
 
-  const mappingBase = {
-    vendor_id: request.vendor_id,
-    account_id: request.lead.account_id,
-    lead_id: newLead.id,
-    type: "ISM" as const,
-    status: "active" as const,
-    created_by: request.created_by,
-  };
+  const mappingRows = new Map<
+    string,
+    {
+      user_id: number;
+      type: string;
+      status: "active" | "inactive";
+    }
+  >();
 
-  await tx.leadUserMapping.create({
-    data: {
-      ...mappingBase,
+  for (const mapping of parentLeadUserMappings) {
+    const key = `${mapping.user_id}::${mapping.type}::${mapping.status}`;
+    if (!mappingRows.has(key)) {
+      mappingRows.set(key, {
+        user_id: mapping.user_id,
+        type: mapping.type,
+        status: mapping.status,
+      });
+    }
+  }
+
+  const creatorMappingKey = `${request.created_by}::ISM::active`;
+  if (!mappingRows.has(creatorMappingKey)) {
+    mappingRows.set(creatorMappingKey, {
       user_id: request.created_by,
-    },
-  });
+      type: "ISM",
+      status: "active",
+    });
+  }
+
+  if (mappingRows.size > 0) {
+    await tx.leadUserMapping.createMany({
+      data: Array.from(mappingRows.values()).map((mapping) => ({
+        vendor_id: request.vendor_id,
+        account_id: request.lead.account_id,
+        lead_id: newLead.id,
+        user_id: mapping.user_id,
+        type: mapping.type,
+        status: mapping.status,
+        created_by: request.created_by,
+      })),
+    });
+  }
 
   const chatRoom = await tx.leadChatRoom.create({
     data: {
@@ -395,6 +435,10 @@ const createSmallOrderLeadFromRequest = async ({
     ...adminUsers.map((user: { id: number }) => user.id),
     request.created_by,
   ]);
+
+  for (const mapping of mappingRows.values()) {
+    memberIds.add(mapping.user_id);
+  }
 
   if (memberIds.size > 0) {
     await tx.leadChatMember.createMany({
