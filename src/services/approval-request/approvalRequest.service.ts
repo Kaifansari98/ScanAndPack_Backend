@@ -266,7 +266,7 @@ export class ApprovalRequestService {
         user.user_type?.user_type ?? "",
       ).toLowerCase();
 
-      if (["admin", "sales-executive"].includes(normalizedUserType)) {
+      if (normalizedUserType === "sales-executive") {
         return user.franchise_id === (lead.franchise_id ?? null);
       }
 
