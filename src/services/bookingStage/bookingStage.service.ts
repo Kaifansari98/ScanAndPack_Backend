@@ -422,79 +422,81 @@ export class BookingStageService {
           },
         });
 
-        // 5. Assign Site Supervisor
-        const supervisor = await tx.leadSiteSupervisorMapping.create({
-          data: {
-            lead_id: data.lead_id,
-            user_id: data.siteSupervisorId,
-            vendor_id: data.vendor_id,
-            account_id: data.account_id,
-            created_by: data.created_by, // ✅ required field
-          },
-        });
-
-        response.supervisorAssigned = supervisor;
-
-        // -----------------------------
-        // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
-        // -----------------------------
-        await tx.leadUserMapping.create({
-          data: {
-            vendor_id: data.vendor_id,
-            account_id: data.account_id,
-            lead_id: data.lead_id,
-            user_id: data.siteSupervisorId,
-            type: "site-supervisor",
-            status: "active",
-            created_by: data.created_by,
-          },
-        });
-
-        // ✅ Ensure site supervisor is in lead chat members
-        let chatRoom = await tx.leadChatRoom.findFirst({
-          where: {
-            lead_id: data.lead_id,
-            vendor_id: data.vendor_id,
-          },
-          select: { id: true },
-        });
-
-        if (!chatRoom) {
-          chatRoom = await tx.leadChatRoom.create({
+        if (data.siteSupervisorId) {
+          // 5. Assign Site Supervisor
+          const supervisor = await tx.leadSiteSupervisorMapping.create({
             data: {
               lead_id: data.lead_id,
+              user_id: data.siteSupervisorId,
               vendor_id: data.vendor_id,
+              account_id: data.account_id,
               created_by: data.created_by,
+            },
+          });
+
+          response.supervisorAssigned = supervisor;
+
+          // -----------------------------
+          // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
+          // -----------------------------
+          await tx.leadUserMapping.create({
+            data: {
+              vendor_id: data.vendor_id,
+              account_id: data.account_id,
+              lead_id: data.lead_id,
+              user_id: data.siteSupervisorId,
+              type: "site-supervisor",
+              status: "active",
+              created_by: data.created_by,
+            },
+          });
+
+          // ✅ Ensure site supervisor is in lead chat members
+          let chatRoom = await tx.leadChatRoom.findFirst({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
             },
             select: { id: true },
           });
-        }
 
-        const existingMember = await tx.leadChatMember.findFirst({
-          where: {
-            chat_room_id: chatRoom.id,
-            user_id: data.siteSupervisorId,
-          },
-          select: { id: true },
-        });
+          if (!chatRoom) {
+            chatRoom = await tx.leadChatRoom.create({
+              data: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                created_by: data.created_by,
+              },
+              select: { id: true },
+            });
+          }
 
-        if (existingMember) {
-          logger.info(
-            "[SERVICE] LeadChatMember already exists, skipping insert",
-            {
-              lead_id: data.lead_id,
+          const existingMember = await tx.leadChatMember.findFirst({
+            where: {
               chat_room_id: chatRoom.id,
               user_id: data.siteSupervisorId,
             },
-          );
-        } else {
-          await tx.leadChatMember.create({
-            data: {
-              chat_room_id: chatRoom.id,
-              user_id: data.siteSupervisorId,
-              added_by: data.created_by,
-            },
+            select: { id: true },
           });
+
+          if (existingMember) {
+            logger.info(
+              "[SERVICE] LeadChatMember already exists, skipping insert",
+              {
+                lead_id: data.lead_id,
+                chat_room_id: chatRoom.id,
+                user_id: data.siteSupervisorId,
+              },
+            );
+          } else {
+            await tx.leadChatMember.create({
+              data: {
+                chat_room_id: chatRoom.id,
+                user_id: data.siteSupervisorId,
+                added_by: data.created_by,
+              },
+            });
+          }
         }
 
         // -----------------------------
@@ -514,9 +516,11 @@ export class BookingStageService {
         await cache.del(
           `performance:snapshot:${data.vendor_id}:${data.created_by}`,
         );
-        await cache.del(
-          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
-        );
+        if (data.siteSupervisorId) {
+          await cache.del(
+            `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
+          );
+        }
         await cache.del(
           `lead-status-counts:${data.vendor_id}:${data.created_by}`,
         );
