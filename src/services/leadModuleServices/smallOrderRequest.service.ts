@@ -471,6 +471,8 @@ const createSmallOrderLeadFromRequest = async ({
     },
   });
 
+  const instanceCreatedAt = new Date();
+
   await tx.leadProductStructureInstance.create({
     data: {
       vendor_id: request.vendor_id,
@@ -482,6 +484,9 @@ const createSmallOrderLeadFromRequest = async ({
       title: othersStructure.type,
       description: null,
       created_by: request.created_by,
+      created_at: instanceCreatedAt,
+      is_tech_check_completed: true,
+      tech_check_completed_at: instanceCreatedAt,
     },
   });
 
