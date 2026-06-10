@@ -67,14 +67,7 @@ const formatDate = (date: Date) =>
 
 const buildSmallOrderLeadCode = (parentLeadCode: string, sequence: number) => {
   const trimmedCode = parentLeadCode.trim();
-  const match = trimmedCode.match(/^(.*)-([^-]+)$/);
-
-  if (!match) {
-    return `${trimmedCode}-SO${sequence}`;
-  }
-
-  const [, prefix, suffix] = match;
-  return `${prefix}-SO${sequence}.${suffix}`;
+  return `SO${sequence}-${trimmedCode}`;
 };
 
 const getSmallOrderRequestDocumentTypeId = async (
