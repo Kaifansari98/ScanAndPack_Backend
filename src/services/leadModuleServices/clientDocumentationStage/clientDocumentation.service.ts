@@ -1106,7 +1106,7 @@ export class ClientDocumentationService {
         vendor_id: data.vendor_id,
         lead_id: data.lead_id,
         account_id: data.account_id,
-        action: `${docCount} Revised Documents uploaded Successfully.`,
+        action: `${docCount} additional Client Documentation uploaded.`,
         action_type: "UPLOAD",
         created_by: data.created_by,
       });
