@@ -4,6 +4,7 @@ import { prisma } from "../../prisma/client";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
 import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
+import { createLeadLog } from "../../utils/leadDetailedLog";
 
 const SMALL_ORDER_REQUEST_DOCUMENT_TAG = "SMALL_ORDER_REQUEST_DOCUMENT";
 const SMALL_ORDER_REQUEST_TASK_TYPE = "Small order request";
@@ -63,6 +64,18 @@ const formatDate = (date: Date) =>
     month: "short",
     year: "numeric",
   }).format(date);
+
+const buildSmallOrderLeadCode = (parentLeadCode: string, sequence: number) => {
+  const trimmedCode = parentLeadCode.trim();
+  const match = trimmedCode.match(/^(.*)-([^-]+)$/);
+
+  if (!match) {
+    return `${trimmedCode}-SO${sequence}`;
+  }
+
+  const [, prefix, suffix] = match;
+  return `${prefix}-SO${sequence}.${suffix}`;
+};
 
 const getSmallOrderRequestDocumentTypeId = async (
   tx: any,
@@ -201,6 +214,266 @@ const buildTaskRemark = (input: {
   }
 
   return parts.join(" ");
+};
+
+const createSmallOrderLeadFromRequest = async ({
+  tx,
+  smallOrderRequestId,
+}: {
+  tx: any;
+  smallOrderRequestId: number;
+}) => {
+  const request = await tx.smallOrderRequest.findUnique({
+    where: { id: smallOrderRequestId },
+    include: {
+      createdBy: {
+        include: {
+          user_type: true,
+        },
+      },
+      lead: true,
+    },
+  });
+
+  if (!request) {
+    throw new Error("Small order request not found for lead creation");
+  }
+
+  if (request.so_code) {
+    return {
+      leadCode: request.so_code,
+      alreadyExists: true,
+    };
+  }
+
+  if (!request.lead.account_id) {
+    throw new Error("Parent lead account is missing for small order lead creation");
+  }
+
+  const [smallOrderProductType, othersStructure, orderLoginStatus] =
+    await Promise.all([
+      tx.productTypeMaster.findFirst({
+        where: {
+          vendor_id: request.vendor_id,
+          tag: "Type 7",
+        },
+      }),
+      tx.productStructure.findFirst({
+        where: {
+          vendor_id: request.vendor_id,
+          type: "Others",
+          parent: "Others",
+        },
+      }),
+      tx.statusTypeMaster.findFirst({
+        where: {
+          vendor_id: request.vendor_id,
+          tag: "Type 9",
+        },
+      }),
+    ]);
+
+  if (!smallOrderProductType) {
+    throw new Error("Small Order product type master not found");
+  }
+
+  if (!othersStructure) {
+    throw new Error("Others product structure master not found");
+  }
+
+  if (!orderLoginStatus) {
+    throw new Error("Order Login stage status master not found");
+  }
+
+  const smallOrderSequence = request.small_order_sequence ?? 1;
+  const leadCode = buildSmallOrderLeadCode(
+    request.parent_lead_code,
+    smallOrderSequence,
+  );
+
+  const existingLeadWithCode = await tx.leadMaster.findFirst({
+    where: {
+      vendor_id: request.vendor_id,
+      lead_code: leadCode,
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (existingLeadWithCode) {
+    await tx.smallOrderRequest.update({
+      where: { id: request.id },
+      data: {
+        so_code: leadCode,
+      },
+    });
+
+    return {
+      leadCode,
+      alreadyExists: true,
+    };
+  }
+
+  const leadCreateData: any = {
+    lead_code: leadCode,
+    firstname: request.lead.firstname,
+    lastname: request.lead.lastname,
+    country_code: request.lead.country_code,
+    contact_no: request.lead.contact_no,
+    alt_contact_no: request.lead.alt_contact_no,
+    email: request.lead.email ?? "",
+    site_address: request.lead.site_address,
+    site_map_link: request.lead.site_map_link,
+    site_type_id: request.lead.site_type_id,
+    status_id: orderLoginStatus.id,
+    source_id: request.lead.source_id,
+    archetech_name: request.lead.archetech_name,
+    archetech_number: request.lead.archetech_number,
+    designer_remark: request.lead.designer_remark,
+    vendor_id: request.vendor_id,
+    franchise_id: request.lead.franchise_id,
+    created_by: request.created_by,
+    priority: request.lead.priority?.trim() || null,
+    account_id: request.lead.account_id,
+    assign_to: null,
+    assigned_by: null,
+    is_draft: false,
+  };
+
+  const newLead = await tx.leadMaster.create({
+    data: leadCreateData,
+  });
+
+  const mappingBase = {
+    vendor_id: request.vendor_id,
+    account_id: request.lead.account_id,
+    lead_id: newLead.id,
+    type: "ISM" as const,
+    status: "active" as const,
+    created_by: request.created_by,
+  };
+
+  await tx.leadUserMapping.create({
+    data: {
+      ...mappingBase,
+      user_id: request.created_by,
+    },
+  });
+
+  const chatRoom = await tx.leadChatRoom.create({
+    data: {
+      lead_id: newLead.id,
+      vendor_id: request.vendor_id,
+    },
+  });
+
+  const [superAdminUsers, adminUsers] = await Promise.all([
+    tx.userMaster.findMany({
+      where: {
+        vendor_id: request.vendor_id,
+        status: "active",
+        user_type: { user_type: "super-admin" },
+      },
+      select: { id: true },
+    }),
+    request.lead.franchise_id
+      ? tx.userMaster.findMany({
+          where: {
+            vendor_id: request.vendor_id,
+            franchise_id: request.lead.franchise_id,
+            status: "active",
+            user_type: { user_type: "admin" },
+          },
+          select: { id: true },
+        })
+      : Promise.resolve([]),
+  ]);
+
+  const memberIds = new Set<number>([
+    ...superAdminUsers.map((user: { id: number }) => user.id),
+    ...adminUsers.map((user: { id: number }) => user.id),
+    request.created_by,
+  ]);
+
+  if (memberIds.size > 0) {
+    await tx.leadChatMember.createMany({
+      data: Array.from(memberIds).map((user_id) => ({
+        chat_room_id: chatRoom.id,
+        user_id,
+        added_by: request.created_by,
+      })),
+      skipDuplicates: true,
+    });
+  }
+
+  await tx.leadProductMapping.create({
+    data: {
+      vendor_id: request.vendor_id,
+      lead_id: newLead.id,
+      account_id: request.lead.account_id,
+      product_type_id: smallOrderProductType.id,
+      created_by: request.created_by,
+    },
+  });
+
+  await tx.leadProductStructureMapping.create({
+    data: {
+      vendor_id: request.vendor_id,
+      lead_id: newLead.id,
+      account_id: request.lead.account_id,
+      product_structure_id: othersStructure.id,
+      created_by: request.created_by,
+    },
+  });
+
+  await tx.leadProductStructureInstance.create({
+    data: {
+      vendor_id: request.vendor_id,
+      lead_id: newLead.id,
+      account_id: request.lead.account_id,
+      product_type_id: smallOrderProductType.id,
+      product_structure_id: othersStructure.id,
+      quantity_index: 1,
+      title: othersStructure.type,
+      description: null,
+      created_by: request.created_by,
+    },
+  });
+
+  await tx.leadStatusLogs.create({
+    data: {
+      lead_id: newLead.id,
+      account_id: request.lead.account_id,
+      vendor_id: request.vendor_id,
+      status_id: orderLoginStatus.id,
+      created_by: request.created_by,
+      created_at: new Date(),
+    },
+  });
+
+  await createLeadLog(tx, {
+    vendor_id: request.vendor_id,
+    lead_id: newLead.id,
+    account_id: request.lead.account_id,
+    action: `Small order lead created from parent lead ${request.parent_lead_code}`,
+    action_type: "CREATE",
+    created_by: request.created_by,
+    created_at: new Date(),
+  });
+
+  await tx.smallOrderRequest.update({
+    where: { id: request.id },
+    data: {
+      so_code: leadCode,
+    },
+  });
+
+  return {
+    leadId: newLead.id,
+    leadCode,
+    alreadyExists: false,
+  };
 };
 
 const closeTask = async (
@@ -472,11 +745,16 @@ export const createSmallOrderRequest = async (
         lead_id: value.lead_id,
         parent_lead_code: lead.lead_code,
         customer_name: customerName,
-        status: "pending_approval",
+        status: actorRole === "super-admin" ? "approved" : "pending_approval",
         request_source: value.request_source,
         request_type_id: requestType.id,
         required_date: requiredDate,
         remarks: value.remarks?.trim() || null,
+        supervisor_approved: actorRole === "super-admin",
+        supervisor_approved_at:
+          actorRole === "super-admin" ? new Date() : null,
+        admin_approved: actorRole === "super-admin",
+        admin_approved_at: actorRole === "super-admin" ? new Date() : null,
         created_by: value.created_by,
         is_merge_to_parent_on_installation:
           value.request_source === "post_dispatch",
@@ -556,10 +834,21 @@ export const createSmallOrderRequest = async (
       createdTasks.push(task);
     }
 
+    let createdLead: { leadId?: number; leadCode: string; alreadyExists: boolean } | null =
+      null;
+
+    if (actorRole === "super-admin") {
+      createdLead = await createSmallOrderLeadFromRequest({
+        tx,
+        smallOrderRequestId: smallOrderRequest.id,
+      });
+    }
+
     return {
       ...smallOrderRequest,
       documents_count: createdDocuments.length,
       tasks_created: createdTasks.length,
+      created_lead: createdLead,
     };
   });
 };
@@ -733,9 +1022,21 @@ export const actOnSmallOrderRequestTask = async (
       },
     });
 
+    let createdLead:
+      | { leadId?: number; leadCode: string; alreadyExists: boolean }
+      | null = null;
+
+    if (isFullyApproved) {
+      createdLead = await createSmallOrderLeadFromRequest({
+        tx,
+        smallOrderRequestId: smallOrderRequest.id,
+      });
+    }
+
     return {
       success: true,
       status: isFullyApproved ? "approved" : "pending_approvals",
+      created_lead: createdLead,
     };
   });
 };
