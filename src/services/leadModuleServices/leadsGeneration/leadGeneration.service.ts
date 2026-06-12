@@ -1060,6 +1060,34 @@ export const getLeadById = async (
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
     }
 
+    const isSmallOrderRequestLead =
+      (lead as any).is_small_order_request === true;
+    const linkedSmallOrderRequest =
+      isSmallOrderRequestLead && lead.lead_code
+        ? await prisma.smallOrderRequest.findFirst({
+            where: {
+              vendor_id: vendorId,
+              so_code: {
+                equals: lead.lead_code.trim(),
+                mode: "insensitive",
+              },
+            },
+            select: {
+              id: true,
+              is_request_resolved: true,
+              request_source: true,
+              request_type_id: true,
+              requestType: {
+                select: {
+                  id: true,
+                  type: true,
+                  type_key: true,
+                },
+              },
+            },
+          })
+        : null;
+
     // ✅ Auto-unmark draft if completed
     if (lead.is_draft && isLeadComplete(lead)) {
       await prisma.leadMaster.update({
@@ -1165,6 +1193,10 @@ export const getLeadById = async (
     return {
       lead: {
         ...lead,
+        smallOrderRequest:
+          linkedSmallOrderRequest && isSmallOrderRequestLead
+            ? linkedSmallOrderRequest
+            : null,
         documents: documentsWithUrls,
         latest_activity_status: activityStatusPayload,
         assigned_site_supervisor_from_mapping: oldestSiteSupervisorMapping
