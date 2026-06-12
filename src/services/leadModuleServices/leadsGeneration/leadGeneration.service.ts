@@ -1024,7 +1024,7 @@ export const getLeadById = async (
       whereCondition.AND = [
         ...(Array.isArray(whereCondition.AND) ? whereCondition.AND : []),
         {
-          OR: [{ created_by: userId }, { assigned_to: userId }],
+          OR: [{ created_by: userId }, { assign_to: userId }],
         },
       ];
     }
