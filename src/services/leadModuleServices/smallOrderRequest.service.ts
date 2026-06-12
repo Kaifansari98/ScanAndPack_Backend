@@ -76,9 +76,38 @@ export const getSmallOrderRequestsByLead = async (
     },
   });
 
+  const soCodes = requests
+    .map((request) => request.so_code?.trim())
+    .filter((code): code is string => Boolean(code));
+
+  const linkedLeads = soCodes.length
+    ? await prisma.leadMaster.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_code: {
+            in: soCodes,
+          },
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+          lead_code: true,
+          account_id: true,
+        },
+      })
+    : [];
+
+  const linkedLeadByCode = new Map(
+    linkedLeads.map((lead) => [lead.lead_code?.trim() ?? "", lead]),
+  );
+
   return requests.map((request) => ({
     ...request,
     document_count: request.documents.length,
+    linked_lead:
+      request.so_code?.trim()
+        ? linkedLeadByCode.get(request.so_code.trim()) ?? null
+        : null,
   }));
 };
 
