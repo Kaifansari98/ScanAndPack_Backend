@@ -119,20 +119,6 @@ export class BookingStageService {
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
       },
-      smallOrderRequest: {
-        select: {
-          id: true,
-          request_source: true,
-          request_type_id: true,
-          requestType: {
-            select: {
-              id: true,
-              type: true,
-              type_key: true,
-            },
-          },
-        },
-      },
       productStructureInstances: {
         select: {
           id: true,
@@ -1919,13 +1905,16 @@ export class BookingStageService {
       }),
     );
 
+    const processedWithSmallOrderRequests =
+      await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
     const sortedProcessed = shouldApplyStageSort
-      ? [...processed].sort(
+      ? [...processedWithSmallOrderRequests].sort(
         (a, b) =>
           BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
           BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
       )
-      : processed;
+      : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
       ? sortedProcessed.slice(skip, skip + limit)
@@ -1949,6 +1938,62 @@ export class BookingStageService {
   private static isImageFile(filename: string): boolean {
     const ext = filename.split(".").pop()?.toLowerCase();
     return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "");
+  }
+
+  private static async attachLinkedSmallOrderRequests(leads: any[]) {
+    const smallOrderLeadCodes = [
+      ...new Set(
+        leads
+          .filter(
+            (lead: any) =>
+              lead?.is_small_order_request === true &&
+              typeof lead?.lead_code === "string" &&
+              lead.lead_code.trim().length > 0,
+          )
+          .map((lead: any) => String(lead.lead_code).trim()),
+      ),
+    ];
+
+    if (smallOrderLeadCodes.length === 0) {
+      return leads.map((lead: any) => ({
+        ...lead,
+        smallOrderRequest: lead?.smallOrderRequest ?? null,
+      }));
+    }
+
+    const linkedRequests = await prisma.smallOrderRequest.findMany({
+      where: {
+        vendor_id: leads[0]?.vendor_id ?? undefined,
+        so_code: { in: smallOrderLeadCodes },
+      },
+      select: {
+        id: true,
+        so_code: true,
+        request_source: true,
+        request_type_id: true,
+        requestType: {
+          select: {
+            id: true,
+            type: true,
+            type_key: true,
+          },
+        },
+      },
+    });
+
+    const requestBySoCode = new Map(
+      linkedRequests
+        .filter((request: any) => !!request?.so_code)
+        .map((request: any) => [String(request.so_code), request]),
+    );
+
+    return leads.map((lead: any) => ({
+      ...lead,
+      smallOrderRequest:
+        lead?.is_small_order_request === true && lead?.lead_code
+          ? requestBySoCode.get(String(lead.lead_code)) ?? null
+          : null,
+    }));
   }
 
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
@@ -3613,13 +3658,16 @@ export class BookingStageService {
           return { ...lead, documents: docsWithUrls };
         }),
       );
+      const processedWithSmallOrderRequests =
+        await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
       const sortedProcessed = shouldApplyStageSort
-        ? [...processed].sort(
+        ? [...processedWithSmallOrderRequests].sort(
           (a, b) =>
             BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
             BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
         )
-        : processed;
+        : processedWithSmallOrderRequests;
 
       const paginatedLeads = shouldApplyStageSort
         ? sortedProcessed.slice(skip, skip + limit)
@@ -3727,13 +3775,16 @@ export class BookingStageService {
       }),
     );
 
+    const processedWithSmallOrderRequests =
+      await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
     const sortedProcessed = shouldApplyStageSort
-      ? [...processed].sort(
+      ? [...processedWithSmallOrderRequests].sort(
         (a, b) =>
           BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
           BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
       )
-      : processed;
+      : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
       ? sortedProcessed.slice(skip, skip + limit)

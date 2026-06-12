@@ -1003,7 +1003,6 @@ export const getLeadById = async (
       id: leadId,
       vendor_id: vendorId,
       is_deleted: false,
-      account: { is_deleted: false },
     };
 
     // 3️⃣ Access control
@@ -1022,7 +1021,12 @@ export const getLeadById = async (
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
       console.log("[SERVICE] Limited role – assigned/created leads access");
-      whereCondition.OR = [{ created_by: userId }, { assigned_to: userId }];
+      whereCondition.AND = [
+        ...(Array.isArray(whereCondition.AND) ? whereCondition.AND : []),
+        {
+          OR: [{ created_by: userId }, { assigned_to: userId }],
+        },
+      ];
     }
 
     // 4️⃣ Fetch the lead
@@ -1049,7 +1053,6 @@ export const getLeadById = async (
         assignedBy: {
           select: { id: true, user_name: true, user_email: true },
         },
-        tasks: true,
       },
     });
 
