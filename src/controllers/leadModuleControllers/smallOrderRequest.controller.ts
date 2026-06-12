@@ -4,6 +4,7 @@ import { ApiResponse } from "../../utils/apiResponse";
 import {
   createSmallOrderRequest,
   CreateSmallOrderRequestInput,
+  getSmallOrderRequestsByLead,
 } from "../../services/leadModuleServices/smallOrderRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -67,5 +68,44 @@ export const createSmallOrderRequestController = async (
     return res
       .status(statusCode)
       .json(ApiResponse.error(message, statusCode));
+  }
+};
+
+export const getSmallOrderRequestsByLeadController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const leadId = Number(req.params.leadId);
+    const vendorId = Number(req.params.vendorId);
+
+    if (!leadId || Number.isNaN(leadId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid lead ID provided", 400));
+    }
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid vendor ID provided", 400));
+    }
+
+    const result = await getSmallOrderRequestsByLead(vendorId, leadId);
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result,
+          "Small order requests fetched successfully",
+          200,
+        ),
+      );
+  } catch (error: any) {
+    logger.error("[SmallOrderRequestController] listByLead:", error);
+    const message = error?.message || "Failed to fetch small order requests";
+
+    return res.status(500).json(ApiResponse.error(message, 500));
   }
 };

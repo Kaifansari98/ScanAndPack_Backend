@@ -51,7 +51,10 @@ import {
   fetchAllShutterTypes,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
-import { createSmallOrderRequestController } from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
+import {
+  createSmallOrderRequestController,
+  getSmallOrderRequestsByLeadController,
+} from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
 
 const leadsRouter = Router();
 const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
@@ -75,6 +78,10 @@ leadsRouter.post(
   "/small-order-requests",
   handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   createSmallOrderRequestController,
+);
+leadsRouter.get(
+  "/small-order-requests/vendor/:vendorId/lead/:leadId",
+  getSmallOrderRequestsByLeadController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);

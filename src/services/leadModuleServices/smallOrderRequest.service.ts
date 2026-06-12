@@ -41,6 +41,47 @@ export interface ActOnSmallOrderRequestTaskInput {
   remark?: string | null;
 }
 
+export const getSmallOrderRequestsByLead = async (
+  vendorId: number,
+  leadId: number,
+) => {
+  const requests = await prisma.smallOrderRequest.findMany({
+    where: {
+      vendor_id: vendorId,
+      lead_id: leadId,
+    },
+    include: {
+      requestType: {
+        select: {
+          id: true,
+          type: true,
+          type_key: true,
+        },
+      },
+      createdBy: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      documents: {
+        select: {
+          id: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: "desc",
+    },
+  });
+
+  return requests.map((request) => ({
+    ...request,
+    document_count: request.documents.length,
+  }));
+};
+
 type UploadedSmallOrderFile = {
   originalName: string;
   sysName: string;
