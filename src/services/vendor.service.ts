@@ -574,9 +574,18 @@ export const getTechCheckStageReportData = async (
       },
       leadDetailedLogs: {
         where: {
-          action: {
-            endsWith: "additional Client Documentation uploaded.",
-          },
+          OR: [
+            {
+              action: {
+                endsWith: "additional Client Documentation uploaded.",
+              },
+            },
+            {
+              action: {
+                endsWith: "Revised Documents uploaded Successfully.",
+              },
+            },
+          ],
         },
         select: {
           id: true,
@@ -636,7 +645,7 @@ export const getTechCheckStageReportData = async (
         ),
         client_name: `${lead.firstname} ${lead.lastname}`.trim(),
         franchise_store: lead.franchise?.franchise_name ?? "-",
-        tech_check_req_date: lead.client_required_order_login_complition_date,
+        tech_check_req_date: lead.tech_check_reached_at,
         rejection_dates: rejectionDates,
         revised_upload_dates: revisedDates,
         tech_check_approved_date: lead.tech_check_completed_at,
