@@ -119,6 +119,20 @@ export class BookingStageService {
       leadProductStructureMapping: {
         select: { productStructure: { select: { id: true, type: true } } },
       },
+      smallOrderRequest: {
+        select: {
+          id: true,
+          request_source: true,
+          request_type_id: true,
+          requestType: {
+            select: {
+              id: true,
+              type: true,
+              type_key: true,
+            },
+          },
+        },
+      },
       productStructureInstances: {
         select: {
           id: true,
