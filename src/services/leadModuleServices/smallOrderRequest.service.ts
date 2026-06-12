@@ -41,6 +41,72 @@ export interface ActOnSmallOrderRequestTaskInput {
   remark?: string | null;
 }
 
+export const markSmallOrderRequestResolved = async (
+  vendorId: number,
+  requestId: number,
+  updatedBy: number,
+) => {
+  const request = await prisma.smallOrderRequest.findFirst({
+    where: {
+      id: requestId,
+      vendor_id: vendorId,
+    },
+    select: {
+      id: true,
+      is_request_resolved: true,
+      lead_id: true,
+      so_code: true,
+      parent_lead_code: true,
+    },
+  });
+
+  if (!request) {
+    throw new Error("Small order request not found");
+  }
+
+  if (request.is_request_resolved) {
+    return request;
+  }
+
+  const updatedRequest = await prisma.smallOrderRequest.update({
+    where: { id: requestId },
+    data: {
+      is_request_resolved: true,
+      updated_by: updatedBy,
+    },
+    select: {
+      id: true,
+      is_request_resolved: true,
+      lead_id: true,
+      so_code: true,
+      parent_lead_code: true,
+      updated_at: true,
+    },
+  });
+
+  const linkedLead = await prisma.leadMaster.findFirst({
+    where: {
+      id: updatedRequest.lead_id,
+      vendor_id: vendorId,
+    },
+    select: {
+      account_id: true,
+    },
+  });
+
+  await createLeadLog(prisma as any, {
+    account_id: linkedLead?.account_id ?? 0,
+    lead_id: updatedRequest.lead_id,
+    vendor_id: vendorId,
+    created_by: updatedBy,
+    action: `Small order request ${updatedRequest.so_code ?? updatedRequest.parent_lead_code} marked as resolved`,
+    action_type: "STATUS_CHANGE",
+    history_type: "Lead",
+  }).catch(() => undefined);
+
+  return updatedRequest;
+};
+
 export const getSmallOrderRequestsByLead = async (
   vendorId: number,
   leadId: number,

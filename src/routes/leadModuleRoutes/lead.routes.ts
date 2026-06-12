@@ -54,6 +54,7 @@ import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleCont
 import {
   createSmallOrderRequestController,
   getSmallOrderRequestsByLeadController,
+  markSmallOrderRequestResolvedController,
 } from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
 
 const leadsRouter = Router();
@@ -82,6 +83,10 @@ leadsRouter.post(
 leadsRouter.get(
   "/small-order-requests/vendor/:vendorId/lead/:leadId",
   getSmallOrderRequestsByLeadController,
+);
+leadsRouter.patch(
+  "/small-order-requests/vendor/:vendorId/request/:requestId/resolve",
+  markSmallOrderRequestResolvedController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);

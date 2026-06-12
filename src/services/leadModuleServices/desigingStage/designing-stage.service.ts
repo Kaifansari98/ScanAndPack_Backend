@@ -402,6 +402,7 @@ export class DesigingStage {
             },
             select: {
               id: true,
+              is_request_resolved: true,
               request_type_id: true,
               requestType: {
                 select: {

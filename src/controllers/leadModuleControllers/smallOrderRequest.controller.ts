@@ -5,6 +5,7 @@ import {
   createSmallOrderRequest,
   CreateSmallOrderRequestInput,
   getSmallOrderRequestsByLead,
+  markSmallOrderRequestResolved,
 } from "../../services/leadModuleServices/smallOrderRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -107,5 +108,57 @@ export const getSmallOrderRequestsByLeadController = async (
     const message = error?.message || "Failed to fetch small order requests";
 
     return res.status(500).json(ApiResponse.error(message, 500));
+  }
+};
+
+export const markSmallOrderRequestResolvedController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const requestId = Number(req.params.requestId);
+    const vendorId = Number(req.params.vendorId);
+    const updatedBy = Number(req.body.updated_by);
+
+    if (!requestId || Number.isNaN(requestId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid request ID provided", 400));
+    }
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid vendor ID provided", 400));
+    }
+
+    if (!updatedBy || Number.isNaN(updatedBy)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid updated_by provided", 400));
+    }
+
+    const result = await markSmallOrderRequestResolved(
+      vendorId,
+      requestId,
+      updatedBy,
+    );
+
+    return res
+      .status(200)
+      .json(
+        ApiResponse.success(
+          result,
+          "Small order request marked as resolved successfully",
+          200,
+        ),
+      );
+  } catch (error: any) {
+    logger.error("[SmallOrderRequestController] markResolved:", error);
+    const message =
+      error?.message || "Failed to mark small order request as resolved";
+    const statusCode = message.includes("not found") ? 404 : 500;
+
+    return res.status(statusCode).json(ApiResponse.error(message, statusCode));
   }
 };

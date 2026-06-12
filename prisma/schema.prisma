@@ -1160,6 +1160,7 @@ model SmallOrderRequest {
   updated_by                         Int?
   updated_at                         DateTime                    @updatedAt
   is_merge_to_parent_on_installation Boolean
+  is_request_resolved                Boolean                     @default(false)
   usable_handover_date_snapshot      DateTime?
   small_order_sequence               Int?
   rejection_reason                   String?                     @db.VarChar(2000)

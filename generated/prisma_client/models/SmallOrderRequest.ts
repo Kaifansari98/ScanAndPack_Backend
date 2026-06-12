@@ -67,6 +67,7 @@ export type SmallOrderRequestMinAggregateOutputType = {
   updated_by: number | null
   updated_at: Date | null
   is_merge_to_parent_on_installation: boolean | null
+  is_request_resolved: boolean | null
   usable_handover_date_snapshot: Date | null
   small_order_sequence: number | null
   rejection_reason: string | null
@@ -93,6 +94,7 @@ export type SmallOrderRequestMaxAggregateOutputType = {
   updated_by: number | null
   updated_at: Date | null
   is_merge_to_parent_on_installation: boolean | null
+  is_request_resolved: boolean | null
   usable_handover_date_snapshot: Date | null
   small_order_sequence: number | null
   rejection_reason: string | null
@@ -119,6 +121,7 @@ export type SmallOrderRequestCountAggregateOutputType = {
   updated_by: number
   updated_at: number
   is_merge_to_parent_on_installation: number
+  is_request_resolved: number
   usable_handover_date_snapshot: number
   small_order_sequence: number
   rejection_reason: number
@@ -167,6 +170,7 @@ export type SmallOrderRequestMinAggregateInputType = {
   updated_by?: true
   updated_at?: true
   is_merge_to_parent_on_installation?: true
+  is_request_resolved?: true
   usable_handover_date_snapshot?: true
   small_order_sequence?: true
   rejection_reason?: true
@@ -193,6 +197,7 @@ export type SmallOrderRequestMaxAggregateInputType = {
   updated_by?: true
   updated_at?: true
   is_merge_to_parent_on_installation?: true
+  is_request_resolved?: true
   usable_handover_date_snapshot?: true
   small_order_sequence?: true
   rejection_reason?: true
@@ -219,6 +224,7 @@ export type SmallOrderRequestCountAggregateInputType = {
   updated_by?: true
   updated_at?: true
   is_merge_to_parent_on_installation?: true
+  is_request_resolved?: true
   usable_handover_date_snapshot?: true
   small_order_sequence?: true
   rejection_reason?: true
@@ -332,6 +338,7 @@ export type SmallOrderRequestGroupByOutputType = {
   updated_by: number | null
   updated_at: Date
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved: boolean
   usable_handover_date_snapshot: Date | null
   small_order_sequence: number | null
   rejection_reason: string | null
@@ -381,6 +388,7 @@ export type SmallOrderRequestWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
+  is_request_resolved?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
   usable_handover_date_snapshot?: Prisma.DateTimeNullableFilter<"SmallOrderRequest"> | Date | string | null
   small_order_sequence?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   rejection_reason?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
@@ -414,6 +422,7 @@ export type SmallOrderRequestOrderByWithRelationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   is_merge_to_parent_on_installation?: Prisma.SortOrder
+  is_request_resolved?: Prisma.SortOrder
   usable_handover_date_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
   small_order_sequence?: Prisma.SortOrderInput | Prisma.SortOrder
   rejection_reason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -452,6 +461,7 @@ export type SmallOrderRequestWhereUniqueInput = Prisma.AtLeast<{
   updated_by?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
+  is_request_resolved?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
   usable_handover_date_snapshot?: Prisma.DateTimeNullableFilter<"SmallOrderRequest"> | Date | string | null
   small_order_sequence?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   rejection_reason?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
@@ -485,6 +495,7 @@ export type SmallOrderRequestOrderByWithAggregationInput = {
   updated_by?: Prisma.SortOrderInput | Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   is_merge_to_parent_on_installation?: Prisma.SortOrder
+  is_request_resolved?: Prisma.SortOrder
   usable_handover_date_snapshot?: Prisma.SortOrderInput | Prisma.SortOrder
   small_order_sequence?: Prisma.SortOrderInput | Prisma.SortOrder
   rejection_reason?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -519,6 +530,7 @@ export type SmallOrderRequestScalarWhereWithAggregatesInput = {
   updated_by?: Prisma.IntNullableWithAggregatesFilter<"SmallOrderRequest"> | number | null
   updated_at?: Prisma.DateTimeWithAggregatesFilter<"SmallOrderRequest"> | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolWithAggregatesFilter<"SmallOrderRequest"> | boolean
+  is_request_resolved?: Prisma.BoolWithAggregatesFilter<"SmallOrderRequest"> | boolean
   usable_handover_date_snapshot?: Prisma.DateTimeNullableWithAggregatesFilter<"SmallOrderRequest"> | Date | string | null
   small_order_sequence?: Prisma.IntNullableWithAggregatesFilter<"SmallOrderRequest"> | number | null
   rejection_reason?: Prisma.StringNullableWithAggregatesFilter<"SmallOrderRequest"> | string | null
@@ -539,6 +551,7 @@ export type SmallOrderRequestCreateInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -572,6 +585,7 @@ export type SmallOrderRequestUncheckedCreateInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -594,6 +608,7 @@ export type SmallOrderRequestUpdateInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -627,6 +642,7 @@ export type SmallOrderRequestUncheckedUpdateInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -655,6 +671,7 @@ export type SmallOrderRequestCreateManyInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -675,6 +692,7 @@ export type SmallOrderRequestUpdateManyMutationInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -701,6 +719,7 @@ export type SmallOrderRequestUncheckedUpdateManyInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -748,6 +767,7 @@ export type SmallOrderRequestCountOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   is_merge_to_parent_on_installation?: Prisma.SortOrder
+  is_request_resolved?: Prisma.SortOrder
   usable_handover_date_snapshot?: Prisma.SortOrder
   small_order_sequence?: Prisma.SortOrder
   rejection_reason?: Prisma.SortOrder
@@ -784,6 +804,7 @@ export type SmallOrderRequestMaxOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   is_merge_to_parent_on_installation?: Prisma.SortOrder
+  is_request_resolved?: Prisma.SortOrder
   usable_handover_date_snapshot?: Prisma.SortOrder
   small_order_sequence?: Prisma.SortOrder
   rejection_reason?: Prisma.SortOrder
@@ -810,6 +831,7 @@ export type SmallOrderRequestMinOrderByAggregateInput = {
   updated_by?: Prisma.SortOrder
   updated_at?: Prisma.SortOrder
   is_merge_to_parent_on_installation?: Prisma.SortOrder
+  is_request_resolved?: Prisma.SortOrder
   usable_handover_date_snapshot?: Prisma.SortOrder
   small_order_sequence?: Prisma.SortOrder
   rejection_reason?: Prisma.SortOrder
@@ -1098,6 +1120,7 @@ export type SmallOrderRequestCreateWithoutVendorInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1129,6 +1152,7 @@ export type SmallOrderRequestUncheckedCreateWithoutVendorInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1186,6 +1210,7 @@ export type SmallOrderRequestScalarWhereInput = {
   updated_by?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   updated_at?: Prisma.DateTimeFilter<"SmallOrderRequest"> | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
+  is_request_resolved?: Prisma.BoolFilter<"SmallOrderRequest"> | boolean
   usable_handover_date_snapshot?: Prisma.DateTimeNullableFilter<"SmallOrderRequest"> | Date | string | null
   small_order_sequence?: Prisma.IntNullableFilter<"SmallOrderRequest"> | number | null
   rejection_reason?: Prisma.StringNullableFilter<"SmallOrderRequest"> | string | null
@@ -1206,6 +1231,7 @@ export type SmallOrderRequestCreateWithoutCreatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1237,6 +1263,7 @@ export type SmallOrderRequestUncheckedCreateWithoutCreatedByInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1269,6 +1296,7 @@ export type SmallOrderRequestCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1300,6 +1328,7 @@ export type SmallOrderRequestUncheckedCreateWithoutUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1364,6 +1393,7 @@ export type SmallOrderRequestCreateWithoutLeadInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1395,6 +1425,7 @@ export type SmallOrderRequestUncheckedCreateWithoutLeadInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1443,6 +1474,7 @@ export type SmallOrderRequestCreateWithoutRequestTypeInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1474,6 +1506,7 @@ export type SmallOrderRequestUncheckedCreateWithoutRequestTypeInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1522,6 +1555,7 @@ export type SmallOrderRequestCreateWithoutDocumentsInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1554,6 +1588,7 @@ export type SmallOrderRequestUncheckedCreateWithoutDocumentsInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1591,6 +1626,7 @@ export type SmallOrderRequestUpdateWithoutDocumentsInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1623,6 +1659,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutDocumentsInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1644,6 +1681,7 @@ export type SmallOrderRequestCreateWithoutTasksInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1676,6 +1714,7 @@ export type SmallOrderRequestUncheckedCreateWithoutTasksInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1713,6 +1752,7 @@ export type SmallOrderRequestUpdateWithoutTasksInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1745,6 +1785,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutTasksInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1771,6 +1812,7 @@ export type SmallOrderRequestCreateManyVendorInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1791,6 +1833,7 @@ export type SmallOrderRequestUpdateWithoutVendorInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1822,6 +1865,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1849,6 +1893,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutVendorInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1874,6 +1919,7 @@ export type SmallOrderRequestCreateManyCreatedByInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1899,6 +1945,7 @@ export type SmallOrderRequestCreateManyUpdatedByInput = {
   created_at?: Date | string
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -1919,6 +1966,7 @@ export type SmallOrderRequestUpdateWithoutCreatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1950,6 +1998,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutCreatedByInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1977,6 +2026,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutCreatedByInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1997,6 +2047,7 @@ export type SmallOrderRequestUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2028,6 +2079,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2055,6 +2107,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2080,6 +2133,7 @@ export type SmallOrderRequestCreateManyLeadInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -2100,6 +2154,7 @@ export type SmallOrderRequestUpdateWithoutLeadInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2131,6 +2186,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutLeadInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2158,6 +2214,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutLeadInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2183,6 +2240,7 @@ export type SmallOrderRequestCreateManyRequestTypeInput = {
   updated_by?: number | null
   updated_at?: Date | string
   is_merge_to_parent_on_installation: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: Date | string | null
   small_order_sequence?: number | null
   rejection_reason?: string | null
@@ -2203,6 +2261,7 @@ export type SmallOrderRequestUpdateWithoutRequestTypeInput = {
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2234,6 +2293,7 @@ export type SmallOrderRequestUncheckedUpdateWithoutRequestTypeInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2261,6 +2321,7 @@ export type SmallOrderRequestUncheckedUpdateManyWithoutRequestTypeInput = {
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   is_merge_to_parent_on_installation?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_request_resolved?: Prisma.BoolFieldUpdateOperationsInput | boolean
   usable_handover_date_snapshot?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   small_order_sequence?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2327,6 +2388,7 @@ export type SmallOrderRequestSelect<ExtArgs extends runtime.Types.Extensions.Int
   updated_by?: boolean
   updated_at?: boolean
   is_merge_to_parent_on_installation?: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: boolean
   small_order_sequence?: boolean
   rejection_reason?: boolean
@@ -2361,6 +2423,7 @@ export type SmallOrderRequestSelectCreateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   updated_at?: boolean
   is_merge_to_parent_on_installation?: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: boolean
   small_order_sequence?: boolean
   rejection_reason?: boolean
@@ -2392,6 +2455,7 @@ export type SmallOrderRequestSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   updated_by?: boolean
   updated_at?: boolean
   is_merge_to_parent_on_installation?: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: boolean
   small_order_sequence?: boolean
   rejection_reason?: boolean
@@ -2423,12 +2487,13 @@ export type SmallOrderRequestSelectScalar = {
   updated_by?: boolean
   updated_at?: boolean
   is_merge_to_parent_on_installation?: boolean
+  is_request_resolved?: boolean
   usable_handover_date_snapshot?: boolean
   small_order_sequence?: boolean
   rejection_reason?: boolean
 }
 
-export type SmallOrderRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "parent_lead_code" | "so_code" | "customer_name" | "status" | "request_source" | "request_type_id" | "required_date" | "remarks" | "supervisor_approved" | "supervisor_approved_at" | "admin_approved" | "admin_approved_at" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_merge_to_parent_on_installation" | "usable_handover_date_snapshot" | "small_order_sequence" | "rejection_reason", ExtArgs["result"]["smallOrderRequest"]>
+export type SmallOrderRequestOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "parent_lead_code" | "so_code" | "customer_name" | "status" | "request_source" | "request_type_id" | "required_date" | "remarks" | "supervisor_approved" | "supervisor_approved_at" | "admin_approved" | "admin_approved_at" | "created_by" | "created_at" | "updated_by" | "updated_at" | "is_merge_to_parent_on_installation" | "is_request_resolved" | "usable_handover_date_snapshot" | "small_order_sequence" | "rejection_reason", ExtArgs["result"]["smallOrderRequest"]>
 export type SmallOrderRequestInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
@@ -2486,6 +2551,7 @@ export type $SmallOrderRequestPayload<ExtArgs extends runtime.Types.Extensions.I
     updated_by: number | null
     updated_at: Date
     is_merge_to_parent_on_installation: boolean
+    is_request_resolved: boolean
     usable_handover_date_snapshot: Date | null
     small_order_sequence: number | null
     rejection_reason: string | null
@@ -2939,6 +3005,7 @@ export interface SmallOrderRequestFieldRefs {
   readonly updated_by: Prisma.FieldRef<"SmallOrderRequest", 'Int'>
   readonly updated_at: Prisma.FieldRef<"SmallOrderRequest", 'DateTime'>
   readonly is_merge_to_parent_on_installation: Prisma.FieldRef<"SmallOrderRequest", 'Boolean'>
+  readonly is_request_resolved: Prisma.FieldRef<"SmallOrderRequest", 'Boolean'>
   readonly usable_handover_date_snapshot: Prisma.FieldRef<"SmallOrderRequest", 'DateTime'>
   readonly small_order_sequence: Prisma.FieldRef<"SmallOrderRequest", 'Int'>
   readonly rejection_reason: Prisma.FieldRef<"SmallOrderRequest", 'String'>

@@ -11489,6 +11489,7 @@ export const SmallOrderRequestScalarFieldEnum = {
   updated_by: 'updated_by',
   updated_at: 'updated_at',
   is_merge_to_parent_on_installation: 'is_merge_to_parent_on_installation',
+  is_request_resolved: 'is_request_resolved',
   usable_handover_date_snapshot: 'usable_handover_date_snapshot',
   small_order_sequence: 'small_order_sequence',
   rejection_reason: 'rejection_reason'
