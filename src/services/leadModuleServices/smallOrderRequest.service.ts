@@ -3,7 +3,10 @@ import fs from "node:fs/promises";
 import { prisma } from "../../prisma/client";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
-import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiInitialSiteMeasurementFile,
+} from "../../utils/wasabiClient";
 import { createLeadLog } from "../../utils/leadDetailedLog";
 
 const SMALL_ORDER_REQUEST_DOCUMENT_TAG = "SMALL_ORDER_REQUEST_DOCUMENT";
@@ -134,6 +137,14 @@ export const getSmallOrderRequestsByLead = async (
       documents: {
         select: {
           id: true,
+          document_id: true,
+          created_at: true,
+          document: {
+            select: {
+              doc_og_name: true,
+              doc_sys_name: true,
+            },
+          },
         },
       },
     },
@@ -167,14 +178,27 @@ export const getSmallOrderRequestsByLead = async (
     linkedLeads.map((lead) => [lead.lead_code?.trim() ?? "", lead]),
   );
 
-  return requests.map((request) => ({
-    ...request,
-    document_count: request.documents.length,
-    linked_lead:
-      request.so_code?.trim()
-        ? linkedLeadByCode.get(request.so_code.trim()) ?? null
-        : null,
-  }));
+  return Promise.all(
+    requests.map(async (request) => ({
+      ...request,
+      document_count: request.documents.length,
+      documents: await Promise.all(
+        request.documents.map(async (doc) => ({
+          id: doc.id,
+          document_id: doc.document_id,
+          original_name: doc.document?.doc_og_name ?? "",
+          signed_url: doc.document?.doc_sys_name
+            ? await generateSignedUrl(doc.document.doc_sys_name, 3600, "inline")
+            : null,
+          created_at: doc.created_at,
+        })),
+      ),
+      linked_lead:
+        request.so_code?.trim()
+          ? linkedLeadByCode.get(request.so_code.trim()) ?? null
+          : null,
+    })),
+  );
 };
 
 type UploadedSmallOrderFile = {
