@@ -648,6 +648,7 @@ export class DashboardService {
           vendor_id,
           status_id,
           is_deleted: false,
+          ...(typeTag === "Type 1" ? { is_draft: false } : {}),
           ...activityStatusFilter,
           ...userFilter,
         },
