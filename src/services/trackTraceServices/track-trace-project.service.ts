@@ -1199,7 +1199,7 @@ export const createProjectService = async (
 
     /*
       STEP 6.1 — Pre-fetch machines once.
-      This avoids repeated findFirst calls inside the transaction.
+      This avoids repeated machineMaster.findFirst calls.
     */
     const machines = await prisma.machineMaster.findMany({
       where: {
@@ -1253,14 +1253,18 @@ export const createProjectService = async (
       }
     };
 
-    const insertMappingsInChunks = async (tx: any, data: any[]) => {
-      const chunkSize = 1000;
+    /*
+      Insert mapping rows outside interactive transaction.
+      Smaller chunks avoid DB packet/lock pressure.
+    */
+    const insertMappingsInChunks = async (data: any[]) => {
+      const chunkSize = 500;
 
       for (let i = 0; i < data.length; i += chunkSize) {
         const chunk = data.slice(i, i + chunkSize);
 
         if (chunk.length > 0) {
-          await tx.cutListMachineMapping.createMany({
+          await prisma.cutListMachineMapping.createMany({
             data: chunk,
           });
         }
@@ -1279,7 +1283,10 @@ export const createProjectService = async (
 
     const unique_project_id = randomUUID();
 
-    /* STEP 8 — Transaction */
+    /*
+      STEP 8 — Create only project and project details inside short transaction.
+      Do not insert cut-list machine mappings inside this transaction.
+    */
     const result = await prisma.$transaction(
       async (tx) => {
         const project = await tx.projectMaster.create({
@@ -1315,171 +1322,185 @@ export const createProjectService = async (
           },
         });
 
-        for (const item of validPayload.items) {
-          const quantity = Number(item.qty);
-
-          const hasEdgeBanding =
-            !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
-
-          const row = await tx.cutList.create({
-            data: {
-              project_id: project.id,
-              vendor_id: vendor.id,
-              description: item.name,
-              length: Number(item.l1),
-              width: Number(item.l2),
-              thickness: Number(item.l3),
-              qty: quantity,
-              material_details: item.articleCode,
-              item_name: item.name,
-              status: "Active",
-              created_by: createdByUserId,
-              lead_id,
-              elf: item.el1 || "",
-              elb: item.el2 || "",
-              esl: item.sl1 || "",
-              esr: item.sl2 || "",
-              unique_code: "",
-              unique_code_2: item.barcode2 || null,
-              group_name: item.groupName || null,
-              category_name: item.categoryName || null,
-              procurement: item.procurement || null,
-            },
-          });
-
-          const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
-
-          await tx.cutList.update({
-            where: {
-              id: row.id,
-            },
-            data: {
-              unique_code: uniqueCode,
-            },
-          });
-
-          const machineMappings: any[] = [];
-
-          const itemCategoryName = (item.categoryName ?? "")
-            .trim()
-            .toLowerCase();
-
-          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
-
-          const hasType4 = categoryTypeIds.includes(4);
-          const hasType3 = categoryTypeIds.includes(3);
-          const hasType1Or2 = categoryTypeIds.some(
-            (typeId) => typeId === 1 || typeId === 2,
-          );
-
-          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
-
-          /*
-            Type 4:
-            Skip machine mapping entirely.
-          */
-          if (hasType4) {
-            continue;
-          }
-
-          /*
-            Type 3:
-            Only scan/pack machine types 17 and 18.
-          */
-          if (hasType3 && !isNormalFlow) {
-            const scanPackMachineTypeIds = [17, 18];
-
-            for (const machineTypeId of scanPackMachineTypeIds) {
-              const machine = getMachine(machineTypeId);
-
-              addMappingRows(
-                machineMappings,
-                machine,
-                row.id,
-                project.id,
-                quantity,
-              );
-            }
-
-            await insertMappingsInChunks(tx, machineMappings);
-
-            continue;
-          }
-
-          /*
-            Normal flow:
-            - Edgebanding machine type 11 if edge banding exists
-            - Cutting machine type 3
-            - CNC machine type 7 if thickness > 9
-            - Default scan/pack machine types 17 and 18
-          */
-
-          if (hasEdgeBanding) {
-            const edgeBandingMachine = getMachine(11);
-
-            if (!edgeBandingMachine) {
-              throw new Error("Edgebanding machine is not configured");
-            }
-
-            addMappingRows(
-              machineMappings,
-              edgeBandingMachine,
-              row.id,
-              project.id,
-              quantity,
-            );
-          }
-
-          const cuttingMachine = getMachine(3, true);
-
-          if (cuttingMachine) {
-            addMappingRows(
-              machineMappings,
-              cuttingMachine,
-              row.id,
-              project.id,
-              quantity,
-            );
-          }
-
-          if (Number(item.l3) > 9) {
-            const cncMachine = getMachine(7, true);
-
-            if (cncMachine) {
-              addMappingRows(
-                machineMappings,
-                cncMachine,
-                row.id,
-                project.id,
-                quantity,
-              );
-            }
-          }
-
-          const defaultMachineTypeIds = [17, 18];
-
-          for (const machineTypeId of defaultMachineTypeIds) {
-            const machine = getMachine(machineTypeId);
-
-            addMappingRows(
-              machineMappings,
-              machine,
-              row.id,
-              project.id,
-              quantity,
-            );
-          }
-
-          await insertMappingsInChunks(tx, machineMappings);
-        }
-
         return project;
       },
       {
         maxWait: 10000,
-        timeout: 60000,
+        timeout: 20000,
       },
     );
+
+    /*
+      STEP 8.1 — Create cut-list rows and machine mappings outside transaction.
+      This avoids "expired transaction" error for large Excel imports.
+    */
+    for (const item of validPayload.items) {
+      const quantity = Number(item.qty);
+
+      const hasEdgeBanding =
+        !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
+
+      /*
+        Earlier your code created cutList with unique_code empty,
+        then updated it after row.id was available.
+
+        To avoid empty unique_code conflict, we create a temporary unique code
+        when barcode1 is missing, then update it to rowId-projectId.
+      */
+      const tempUniqueCode =
+        item.barcode1 || `TEMP-${result.id}-${randomUUID()}`;
+
+      const row = await prisma.cutList.create({
+        data: {
+          project_id: result.id,
+          vendor_id: vendor.id,
+          description: item.name,
+          length: Number(item.l1),
+          width: Number(item.l2),
+          thickness: Number(item.l3),
+          qty: quantity,
+          material_details: item.articleCode,
+          item_name: item.name,
+          status: "Active",
+          created_by: createdByUserId,
+          lead_id,
+          elf: item.el1 || "",
+          elb: item.el2 || "",
+          esl: item.sl1 || "",
+          esr: item.sl2 || "",
+          unique_code: tempUniqueCode,
+          unique_code_2: item.barcode2 || null,
+          group_name: item.groupName || null,
+          category_name: item.categoryName || null,
+          procurement: item.procurement || null,
+        },
+      });
+
+      if (!item.barcode1) {
+        await prisma.cutList.update({
+          where: {
+            id: row.id,
+          },
+          data: {
+            unique_code: `${row.id}-${result.id}`,
+          },
+        });
+      }
+
+      const machineMappings: any[] = [];
+
+      const itemCategoryName = (item.categoryName ?? "")
+        .trim()
+        .toLowerCase();
+
+      const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+      const hasType4 = categoryTypeIds.includes(4);
+      const hasType3 = categoryTypeIds.includes(3);
+      const hasType1Or2 = categoryTypeIds.some(
+        (typeId) => typeId === 1 || typeId === 2,
+      );
+
+      const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+
+      /*
+        Type 4:
+        Skip machine mapping entirely.
+      */
+      if (hasType4) {
+        continue;
+      }
+
+      /*
+        Type 3:
+        Only scan/pack machine types 17 and 18.
+      */
+      if (hasType3 && !isNormalFlow) {
+        const scanPackMachineTypeIds = [17, 18];
+
+        for (const machineTypeId of scanPackMachineTypeIds) {
+          const machine = getMachine(machineTypeId);
+
+          addMappingRows(
+            machineMappings,
+            machine,
+            row.id,
+            result.id,
+            quantity,
+          );
+        }
+
+        await insertMappingsInChunks(machineMappings);
+
+        continue;
+      }
+
+      /*
+        Normal flow:
+        - Edgebanding machine type 11 if edge banding exists
+        - Cutting machine type 3
+        - CNC machine type 7 if thickness > 9
+        - Default scan/pack machine types 17 and 18
+      */
+
+      if (hasEdgeBanding) {
+        const edgeBandingMachine = getMachine(11);
+
+        if (!edgeBandingMachine) {
+          throw new Error("Edgebanding machine is not configured");
+        }
+
+        addMappingRows(
+          machineMappings,
+          edgeBandingMachine,
+          row.id,
+          result.id,
+          quantity,
+        );
+      }
+
+      const cuttingMachine = getMachine(3, true);
+
+      if (cuttingMachine) {
+        addMappingRows(
+          machineMappings,
+          cuttingMachine,
+          row.id,
+          result.id,
+          quantity,
+        );
+      }
+
+      if (Number(item.l3) > 9) {
+        const cncMachine = getMachine(7, true);
+
+        if (cncMachine) {
+          addMappingRows(
+            machineMappings,
+            cncMachine,
+            row.id,
+            result.id,
+            quantity,
+          );
+        }
+      }
+
+      const defaultMachineTypeIds = [17, 18];
+
+      for (const machineTypeId of defaultMachineTypeIds) {
+        const machine = getMachine(machineTypeId);
+
+        addMappingRows(
+          machineMappings,
+          machine,
+          row.id,
+          result.id,
+          quantity,
+        );
+      }
+
+      await insertMappingsInChunks(machineMappings);
+    }
 
     /* STEP 9 — Success API log */
     try {
