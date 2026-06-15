@@ -186,6 +186,7 @@ export const createLeadService = async (
     status_id,
     source_id,
     archetech_name,
+    archetech_number,
     designer_remark,
     vendor_id,
     franchise_id,
@@ -312,6 +313,7 @@ export const createLeadService = async (
           status_id,
           source_id,
           archetech_name,
+          archetech_number,
           designer_remark,
           vendor_id,
           franchise_id,
@@ -1001,7 +1003,6 @@ export const getLeadById = async (
       id: leadId,
       vendor_id: vendorId,
       is_deleted: false,
-      account: { is_deleted: false },
     };
 
     // 3️⃣ Access control
@@ -1020,7 +1021,12 @@ export const getLeadById = async (
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
       console.log("[SERVICE] Limited role – assigned/created leads access");
-      whereCondition.OR = [{ created_by: userId }, { assigned_to: userId }];
+      whereCondition.AND = [
+        ...(Array.isArray(whereCondition.AND) ? whereCondition.AND : []),
+        {
+          OR: [{ created_by: userId }, { assign_to: userId }],
+        },
+      ];
     }
 
     // 4️⃣ Fetch the lead
@@ -1047,13 +1053,70 @@ export const getLeadById = async (
         assignedBy: {
           select: { id: true, user_name: true, user_email: true },
         },
-        tasks: true,
       },
     });
 
     if (!lead) {
       throw new Error(`Lead ${leadId} not found for vendor ${vendorId}`);
     }
+
+    const isSmallOrderRequestLead =
+      (lead as any).is_small_order_request === true;
+    const linkedSmallOrderRequest =
+      isSmallOrderRequestLead && lead.lead_code
+        ? await prisma.smallOrderRequest.findFirst({
+            where: {
+              vendor_id: vendorId,
+              so_code: {
+                equals: lead.lead_code.trim(),
+                mode: "insensitive",
+              },
+            },
+            select: {
+              id: true,
+              is_request_resolved: true,
+              request_source: true,
+              request_type_id: true,
+              requestType: {
+                select: {
+                  id: true,
+                  type: true,
+                  type_key: true,
+                },
+              },
+              documents: {
+                select: {
+                  id: true,
+                  document_id: true,
+                  created_at: true,
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                      doc_sys_name: true,
+                    },
+                  },
+                },
+              },
+            },
+          })
+        : null;
+
+    const linkedSmallOrderRequestWithDocs = linkedSmallOrderRequest
+      ? {
+          ...linkedSmallOrderRequest,
+          documents: await Promise.all(
+            linkedSmallOrderRequest.documents.map(async (doc) => ({
+              id: doc.id,
+              document_id: doc.document_id,
+              original_name: doc.document?.doc_og_name ?? "",
+              signed_url: doc.document?.doc_sys_name
+                ? await generateSignedUrl(doc.document.doc_sys_name, 3600, "inline")
+                : null,
+              created_at: doc.created_at,
+            })),
+          ),
+        }
+      : null;
 
     // ✅ Auto-unmark draft if completed
     if (lead.is_draft && isLeadComplete(lead)) {
@@ -1160,6 +1223,10 @@ export const getLeadById = async (
     return {
       lead: {
         ...lead,
+        smallOrderRequest:
+          linkedSmallOrderRequestWithDocs && isSmallOrderRequestLead
+            ? linkedSmallOrderRequestWithDocs
+            : null,
         documents: documentsWithUrls,
         latest_activity_status: activityStatusPayload,
         assigned_site_supervisor_from_mapping: oldestSiteSupervisorMapping
@@ -1306,6 +1373,42 @@ export const assignDesignerToLead = async (
         created_by: data.created_by,
       },
     });
+
+    let chatRoom = await tx.leadChatRoom.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+      },
+      select: { id: true },
+    });
+
+    if (!chatRoom) {
+      chatRoom = await tx.leadChatRoom.create({
+        data: {
+          lead_id: data.lead_id,
+          vendor_id: data.vendor_id,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingMember = await tx.leadChatMember.findFirst({
+      where: {
+        chat_room_id: chatRoom.id,
+        user_id: designerUser.id,
+      },
+      select: { id: true },
+    });
+
+    if (!existingMember) {
+      await tx.leadChatMember.create({
+        data: {
+          chat_room_id: chatRoom.id,
+          user_id: designerUser.id,
+          added_by: data.created_by,
+        },
+      });
+    }
 
     await createLeadLog(tx, {
       vendor_id: data.vendor_id,
@@ -1786,6 +1889,7 @@ export const updateLeadService = async (
     source_id,
     priority,
     archetech_name,
+    archetech_number,
     designer_remark,
     updated_by,
     initial_site_measurement_date,
@@ -1874,6 +1978,8 @@ export const updateLeadService = async (
     }
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
+    if (archetech_number !== undefined)
+      leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
       leadUpdateData.designer_remark = designer_remark;
 

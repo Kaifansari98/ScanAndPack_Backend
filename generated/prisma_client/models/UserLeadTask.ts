@@ -32,6 +32,7 @@ export type UserLeadTaskAvgAggregateOutputType = {
   account_id: number | null
   vendor_id: number | null
   user_id: number | null
+  small_order_request_id: number | null
   closed_by: number | null
   created_by: number | null
   updated_by: number | null
@@ -45,6 +46,7 @@ export type UserLeadTaskSumAggregateOutputType = {
   account_id: number | null
   vendor_id: number | null
   user_id: number | null
+  small_order_request_id: number | null
   closed_by: number | null
   created_by: number | null
   updated_by: number | null
@@ -58,6 +60,7 @@ export type UserLeadTaskMinAggregateOutputType = {
   account_id: number | null
   vendor_id: number | null
   user_id: number | null
+  small_order_request_id: number | null
   task_type: string | null
   due_date: Date | null
   remark: string | null
@@ -79,6 +82,7 @@ export type UserLeadTaskMaxAggregateOutputType = {
   account_id: number | null
   vendor_id: number | null
   user_id: number | null
+  small_order_request_id: number | null
   task_type: string | null
   due_date: Date | null
   remark: string | null
@@ -100,6 +104,7 @@ export type UserLeadTaskCountAggregateOutputType = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id: number
   task_type: number
   due_date: number
   remark: number
@@ -123,6 +128,7 @@ export type UserLeadTaskAvgAggregateInputType = {
   account_id?: true
   vendor_id?: true
   user_id?: true
+  small_order_request_id?: true
   closed_by?: true
   created_by?: true
   updated_by?: true
@@ -136,6 +142,7 @@ export type UserLeadTaskSumAggregateInputType = {
   account_id?: true
   vendor_id?: true
   user_id?: true
+  small_order_request_id?: true
   closed_by?: true
   created_by?: true
   updated_by?: true
@@ -149,6 +156,7 @@ export type UserLeadTaskMinAggregateInputType = {
   account_id?: true
   vendor_id?: true
   user_id?: true
+  small_order_request_id?: true
   task_type?: true
   due_date?: true
   remark?: true
@@ -170,6 +178,7 @@ export type UserLeadTaskMaxAggregateInputType = {
   account_id?: true
   vendor_id?: true
   user_id?: true
+  small_order_request_id?: true
   task_type?: true
   due_date?: true
   remark?: true
@@ -191,6 +200,7 @@ export type UserLeadTaskCountAggregateInputType = {
   account_id?: true
   vendor_id?: true
   user_id?: true
+  small_order_request_id?: true
   task_type?: true
   due_date?: true
   remark?: true
@@ -299,6 +309,7 @@ export type UserLeadTaskGroupByOutputType = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id: number | null
   task_type: string
   due_date: Date
   remark: string | null
@@ -343,6 +354,7 @@ export type UserLeadTaskWhereInput = {
   account_id?: Prisma.IntFilter<"UserLeadTask"> | number
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
+  small_order_request_id?: Prisma.IntNullableFilter<"UserLeadTask"> | number | null
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
@@ -361,6 +373,7 @@ export type UserLeadTaskWhereInput = {
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  smallOrderRequest?: Prisma.XOR<Prisma.SmallOrderRequestNullableScalarRelationFilter, Prisma.SmallOrderRequestWhereInput> | null
   detailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -372,6 +385,7 @@ export type UserLeadTaskOrderByWithRelationInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   task_type?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -390,6 +404,7 @@ export type UserLeadTaskOrderByWithRelationInput = {
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
   instance?: Prisma.LeadProductStructureInstanceOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
+  smallOrderRequest?: Prisma.SmallOrderRequestOrderByWithRelationInput
   detailedLogs?: Prisma.LeadDetailedLogsOrderByRelationAggregateInput
   user?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
@@ -404,6 +419,7 @@ export type UserLeadTaskWhereUniqueInput = Prisma.AtLeast<{
   account_id?: Prisma.IntFilter<"UserLeadTask"> | number
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
+  small_order_request_id?: Prisma.IntNullableFilter<"UserLeadTask"> | number | null
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
@@ -422,6 +438,7 @@ export type UserLeadTaskWhereUniqueInput = Prisma.AtLeast<{
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   instance?: Prisma.XOR<Prisma.LeadProductStructureInstanceNullableScalarRelationFilter, Prisma.LeadProductStructureInstanceWhereInput> | null
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
+  smallOrderRequest?: Prisma.XOR<Prisma.SmallOrderRequestNullableScalarRelationFilter, Prisma.SmallOrderRequestWhereInput> | null
   detailedLogs?: Prisma.LeadDetailedLogsListRelationFilter
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
@@ -433,6 +450,7 @@ export type UserLeadTaskOrderByWithAggregationInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrderInput | Prisma.SortOrder
   task_type?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -462,6 +480,7 @@ export type UserLeadTaskScalarWhereWithAggregatesInput = {
   account_id?: Prisma.IntWithAggregatesFilter<"UserLeadTask"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntWithAggregatesFilter<"UserLeadTask"> | number
+  small_order_request_id?: Prisma.IntNullableWithAggregatesFilter<"UserLeadTask"> | number | null
   task_type?: Prisma.StringWithAggregatesFilter<"UserLeadTask"> | string
   due_date?: Prisma.DateTimeWithAggregatesFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableWithAggregatesFilter<"UserLeadTask"> | string | null
@@ -493,6 +512,7 @@ export type UserLeadTaskCreateInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -504,6 +524,7 @@ export type UserLeadTaskUncheckedCreateInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -536,6 +557,7 @@ export type UserLeadTaskUpdateInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -547,6 +569,7 @@ export type UserLeadTaskUncheckedUpdateInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -569,6 +592,7 @@ export type UserLeadTaskCreateManyInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -603,6 +627,7 @@ export type UserLeadTaskUncheckedUpdateManyInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -634,6 +659,7 @@ export type UserLeadTaskCountOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
@@ -655,6 +681,7 @@ export type UserLeadTaskAvgOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrder
   closed_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -668,6 +695,7 @@ export type UserLeadTaskMaxOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
@@ -689,6 +717,7 @@ export type UserLeadTaskMinOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrder
   task_type?: Prisma.SortOrder
   due_date?: Prisma.SortOrder
   remark?: Prisma.SortOrder
@@ -710,6 +739,7 @@ export type UserLeadTaskSumOrderByAggregateInput = {
   account_id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   user_id?: Prisma.SortOrder
+  small_order_request_id?: Prisma.SortOrder
   closed_by?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
@@ -1016,6 +1046,48 @@ export type UserLeadTaskUncheckedUpdateManyWithoutInstanceNestedInput = {
   deleteMany?: Prisma.UserLeadTaskScalarWhereInput | Prisma.UserLeadTaskScalarWhereInput[]
 }
 
+export type UserLeadTaskCreateNestedManyWithoutSmallOrderRequestInput = {
+  create?: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput> | Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput[] | Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput[]
+  connectOrCreate?: Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput | Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput[]
+  createMany?: Prisma.UserLeadTaskCreateManySmallOrderRequestInputEnvelope
+  connect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+}
+
+export type UserLeadTaskUncheckedCreateNestedManyWithoutSmallOrderRequestInput = {
+  create?: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput> | Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput[] | Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput[]
+  connectOrCreate?: Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput | Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput[]
+  createMany?: Prisma.UserLeadTaskCreateManySmallOrderRequestInputEnvelope
+  connect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+}
+
+export type UserLeadTaskUpdateManyWithoutSmallOrderRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput> | Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput[] | Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput[]
+  connectOrCreate?: Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput | Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput[]
+  upsert?: Prisma.UserLeadTaskUpsertWithWhereUniqueWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpsertWithWhereUniqueWithoutSmallOrderRequestInput[]
+  createMany?: Prisma.UserLeadTaskCreateManySmallOrderRequestInputEnvelope
+  set?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  disconnect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  delete?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  connect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  update?: Prisma.UserLeadTaskUpdateWithWhereUniqueWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpdateWithWhereUniqueWithoutSmallOrderRequestInput[]
+  updateMany?: Prisma.UserLeadTaskUpdateManyWithWhereWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpdateManyWithWhereWithoutSmallOrderRequestInput[]
+  deleteMany?: Prisma.UserLeadTaskScalarWhereInput | Prisma.UserLeadTaskScalarWhereInput[]
+}
+
+export type UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestNestedInput = {
+  create?: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput> | Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput[] | Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput[]
+  connectOrCreate?: Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput | Prisma.UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput[]
+  upsert?: Prisma.UserLeadTaskUpsertWithWhereUniqueWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpsertWithWhereUniqueWithoutSmallOrderRequestInput[]
+  createMany?: Prisma.UserLeadTaskCreateManySmallOrderRequestInputEnvelope
+  set?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  disconnect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  delete?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  connect?: Prisma.UserLeadTaskWhereUniqueInput | Prisma.UserLeadTaskWhereUniqueInput[]
+  update?: Prisma.UserLeadTaskUpdateWithWhereUniqueWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpdateWithWhereUniqueWithoutSmallOrderRequestInput[]
+  updateMany?: Prisma.UserLeadTaskUpdateManyWithWhereWithoutSmallOrderRequestInput | Prisma.UserLeadTaskUpdateManyWithWhereWithoutSmallOrderRequestInput[]
+  deleteMany?: Prisma.UserLeadTaskScalarWhereInput | Prisma.UserLeadTaskScalarWhereInput[]
+}
+
 export type EnumLeadTaskStatusFieldUpdateOperationsInput = {
   set?: $Enums.LeadTaskStatus
 }
@@ -1052,6 +1124,7 @@ export type UserLeadTaskCreateWithoutVendorInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
 }
@@ -1061,6 +1134,7 @@ export type UserLeadTaskUncheckedCreateWithoutVendorInput = {
   lead_id: number
   account_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1112,6 +1186,7 @@ export type UserLeadTaskScalarWhereInput = {
   account_id?: Prisma.IntFilter<"UserLeadTask"> | number
   vendor_id?: Prisma.IntFilter<"UserLeadTask"> | number
   user_id?: Prisma.IntFilter<"UserLeadTask"> | number
+  small_order_request_id?: Prisma.IntNullableFilter<"UserLeadTask"> | number | null
   task_type?: Prisma.StringFilter<"UserLeadTask"> | string
   due_date?: Prisma.DateTimeFilter<"UserLeadTask"> | Date | string
   remark?: Prisma.StringNullableFilter<"UserLeadTask"> | string | null
@@ -1142,6 +1217,7 @@ export type UserLeadTaskCreateWithoutClosedByInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -1153,6 +1229,7 @@ export type UserLeadTaskUncheckedCreateWithoutClosedByInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1193,6 +1270,7 @@ export type UserLeadTaskCreateWithoutCreatedByInput = {
   closedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadTasksClosedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -1204,6 +1282,7 @@ export type UserLeadTaskUncheckedCreateWithoutCreatedByInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1245,6 +1324,7 @@ export type UserLeadTaskCreateWithoutUserInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
 }
@@ -1254,6 +1334,7 @@ export type UserLeadTaskUncheckedCreateWithoutUserInput = {
   lead_id: number
   account_id: number
   vendor_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1343,6 +1424,7 @@ export type UserLeadTaskCreateWithoutLeadInput = {
   closedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadTasksClosedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -1353,6 +1435,7 @@ export type UserLeadTaskUncheckedCreateWithoutLeadInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1410,6 +1493,7 @@ export type UserLeadTaskCreateWithoutAccountInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -1420,6 +1504,7 @@ export type UserLeadTaskUncheckedCreateWithoutAccountInput = {
   lead_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1477,6 +1562,7 @@ export type UserLeadTaskCreateWithoutInstanceInput = {
   closedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadTasksClosedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
@@ -1488,6 +1574,7 @@ export type UserLeadTaskUncheckedCreateWithoutInstanceInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1529,6 +1616,75 @@ export type UserLeadTaskUpdateManyWithWhereWithoutInstanceInput = {
   data: Prisma.XOR<Prisma.UserLeadTaskUpdateManyMutationInput, Prisma.UserLeadTaskUncheckedUpdateManyWithoutInstanceInput>
 }
 
+export type UserLeadTaskCreateWithoutSmallOrderRequestInput = {
+  task_type: string
+  due_date: Date | string
+  remark?: string | null
+  status?: $Enums.LeadTaskStatus
+  closed_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  lead_stage?: string | null
+  franchise_id?: number | null
+  account: Prisma.AccountMasterCreateNestedOneWithoutTasksInput
+  closedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadTasksClosedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
+  instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  detailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutTaskInput
+  user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
+}
+
+export type UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  user_id: number
+  task_type: string
+  due_date: Date | string
+  remark?: string | null
+  status?: $Enums.LeadTaskStatus
+  closed_by?: number | null
+  closed_at?: Date | string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  lead_stage?: string | null
+  instance_id?: number | null
+  franchise_id?: number | null
+  detailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutTaskInput
+}
+
+export type UserLeadTaskCreateOrConnectWithoutSmallOrderRequestInput = {
+  where: Prisma.UserLeadTaskWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput>
+}
+
+export type UserLeadTaskCreateManySmallOrderRequestInputEnvelope = {
+  data: Prisma.UserLeadTaskCreateManySmallOrderRequestInput | Prisma.UserLeadTaskCreateManySmallOrderRequestInput[]
+  skipDuplicates?: boolean
+}
+
+export type UserLeadTaskUpsertWithWhereUniqueWithoutSmallOrderRequestInput = {
+  where: Prisma.UserLeadTaskWhereUniqueInput
+  update: Prisma.XOR<Prisma.UserLeadTaskUpdateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedUpdateWithoutSmallOrderRequestInput>
+  create: Prisma.XOR<Prisma.UserLeadTaskCreateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedCreateWithoutSmallOrderRequestInput>
+}
+
+export type UserLeadTaskUpdateWithWhereUniqueWithoutSmallOrderRequestInput = {
+  where: Prisma.UserLeadTaskWhereUniqueInput
+  data: Prisma.XOR<Prisma.UserLeadTaskUpdateWithoutSmallOrderRequestInput, Prisma.UserLeadTaskUncheckedUpdateWithoutSmallOrderRequestInput>
+}
+
+export type UserLeadTaskUpdateManyWithWhereWithoutSmallOrderRequestInput = {
+  where: Prisma.UserLeadTaskScalarWhereInput
+  data: Prisma.XOR<Prisma.UserLeadTaskUpdateManyMutationInput, Prisma.UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestInput>
+}
+
 export type UserLeadTaskCreateWithoutDetailedLogsInput = {
   task_type: string
   due_date: Date | string
@@ -1545,6 +1701,7 @@ export type UserLeadTaskCreateWithoutDetailedLogsInput = {
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadTasksCreatedInput
   instance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutTasksInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutTasksInput
+  smallOrderRequest?: Prisma.SmallOrderRequestCreateNestedOneWithoutTasksInput
   user: Prisma.UserMasterCreateNestedOneWithoutLeadTasksAssignedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutUserLeadTasksInput
 }
@@ -1555,6 +1712,7 @@ export type UserLeadTaskUncheckedCreateWithoutDetailedLogsInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1602,6 +1760,7 @@ export type UserLeadTaskUpdateWithoutDetailedLogsInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
 }
@@ -1612,6 +1771,7 @@ export type UserLeadTaskUncheckedUpdateWithoutDetailedLogsInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1632,6 +1792,7 @@ export type UserLeadTaskCreateManyVendorInput = {
   lead_id: number
   account_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1663,6 +1824,7 @@ export type UserLeadTaskUpdateWithoutVendorInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
 }
@@ -1672,6 +1834,7 @@ export type UserLeadTaskUncheckedUpdateWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1693,6 +1856,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutVendorInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1714,6 +1878,7 @@ export type UserLeadTaskCreateManyClosedByInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1734,6 +1899,7 @@ export type UserLeadTaskCreateManyCreatedByInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1753,6 +1919,7 @@ export type UserLeadTaskCreateManyUserInput = {
   lead_id: number
   account_id: number
   vendor_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1783,6 +1950,7 @@ export type UserLeadTaskUpdateWithoutClosedByInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -1794,6 +1962,7 @@ export type UserLeadTaskUncheckedUpdateWithoutClosedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1815,6 +1984,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutClosedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1844,6 +2014,7 @@ export type UserLeadTaskUpdateWithoutCreatedByInput = {
   closedBy?: Prisma.UserMasterUpdateOneWithoutLeadTasksClosedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -1855,6 +2026,7 @@ export type UserLeadTaskUncheckedUpdateWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1876,6 +2048,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutCreatedByInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1906,6 +2079,7 @@ export type UserLeadTaskUpdateWithoutUserInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
 }
@@ -1915,6 +2089,7 @@ export type UserLeadTaskUncheckedUpdateWithoutUserInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1936,6 +2111,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutUserInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1956,6 +2132,7 @@ export type UserLeadTaskCreateManyLeadInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -1986,6 +2163,7 @@ export type UserLeadTaskUpdateWithoutLeadInput = {
   closedBy?: Prisma.UserMasterUpdateOneWithoutLeadTasksClosedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -1996,6 +2174,7 @@ export type UserLeadTaskUncheckedUpdateWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2017,6 +2196,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutLeadInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2037,6 +2217,7 @@ export type UserLeadTaskCreateManyAccountInput = {
   lead_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -2067,6 +2248,7 @@ export type UserLeadTaskUpdateWithoutAccountInput = {
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -2077,6 +2259,7 @@ export type UserLeadTaskUncheckedUpdateWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2098,6 +2281,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutAccountInput = {
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2119,6 +2303,7 @@ export type UserLeadTaskCreateManyInstanceInput = {
   account_id: number
   vendor_id: number
   user_id: number
+  small_order_request_id?: number | null
   task_type: string
   due_date: Date | string
   remark?: string | null
@@ -2148,6 +2333,7 @@ export type UserLeadTaskUpdateWithoutInstanceInput = {
   closedBy?: Prisma.UserMasterUpdateOneWithoutLeadTasksClosedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  smallOrderRequest?: Prisma.SmallOrderRequestUpdateOneWithoutTasksNestedInput
   detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
@@ -2159,6 +2345,7 @@ export type UserLeadTaskUncheckedUpdateWithoutInstanceInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2180,6 +2367,7 @@ export type UserLeadTaskUncheckedUpdateManyWithoutInstanceInput = {
   account_id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  small_order_request_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   task_type?: Prisma.StringFieldUpdateOperationsInput | string
   due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2191,6 +2379,91 @@ export type UserLeadTaskUncheckedUpdateManyWithoutInstanceInput = {
   updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+}
+
+export type UserLeadTaskCreateManySmallOrderRequestInput = {
+  id?: number
+  lead_id: number
+  account_id: number
+  vendor_id: number
+  user_id: number
+  task_type: string
+  due_date: Date | string
+  remark?: string | null
+  status?: $Enums.LeadTaskStatus
+  closed_by?: number | null
+  closed_at?: Date | string | null
+  created_by: number
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  lead_stage?: string | null
+  instance_id?: number | null
+  franchise_id?: number | null
+}
+
+export type UserLeadTaskUpdateWithoutSmallOrderRequestInput = {
+  task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
+  closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account?: Prisma.AccountMasterUpdateOneRequiredWithoutTasksNestedInput
+  closedBy?: Prisma.UserMasterUpdateOneWithoutLeadTasksClosedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksCreatedNestedInput
+  instance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutTasksNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutTasksNestedInput
+  detailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutTaskNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutLeadTasksAssignedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUserLeadTasksNestedInput
+}
+
+export type UserLeadTaskUncheckedUpdateWithoutSmallOrderRequestInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
+  closed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  detailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutTaskNestedInput
+}
+
+export type UserLeadTaskUncheckedUpdateManyWithoutSmallOrderRequestInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  account_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  task_type?: Prisma.StringFieldUpdateOperationsInput | string
+  due_date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadTaskStatusFieldUpdateOperationsInput | $Enums.LeadTaskStatus
+  closed_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
@@ -2231,6 +2504,7 @@ export type UserLeadTaskSelect<ExtArgs extends runtime.Types.Extensions.Internal
   account_id?: boolean
   vendor_id?: boolean
   user_id?: boolean
+  small_order_request_id?: boolean
   task_type?: boolean
   due_date?: boolean
   remark?: boolean
@@ -2249,6 +2523,7 @@ export type UserLeadTaskSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   detailedLogs?: boolean | Prisma.UserLeadTask$detailedLogsArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2261,6 +2536,7 @@ export type UserLeadTaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   account_id?: boolean
   vendor_id?: boolean
   user_id?: boolean
+  small_order_request_id?: boolean
   task_type?: boolean
   due_date?: boolean
   remark?: boolean
@@ -2279,6 +2555,7 @@ export type UserLeadTaskSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userLeadTask"]>
@@ -2289,6 +2566,7 @@ export type UserLeadTaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   account_id?: boolean
   vendor_id?: boolean
   user_id?: boolean
+  small_order_request_id?: boolean
   task_type?: boolean
   due_date?: boolean
   remark?: boolean
@@ -2307,6 +2585,7 @@ export type UserLeadTaskSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userLeadTask"]>
@@ -2317,6 +2596,7 @@ export type UserLeadTaskSelectScalar = {
   account_id?: boolean
   vendor_id?: boolean
   user_id?: boolean
+  small_order_request_id?: boolean
   task_type?: boolean
   due_date?: boolean
   remark?: boolean
@@ -2332,13 +2612,14 @@ export type UserLeadTaskSelectScalar = {
   franchise_id?: boolean
 }
 
-export type UserLeadTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "user_id" | "task_type" | "due_date" | "remark" | "status" | "closed_by" | "closed_at" | "created_by" | "created_at" | "updated_at" | "updated_by" | "lead_stage" | "instance_id" | "franchise_id", ExtArgs["result"]["userLeadTask"]>
+export type UserLeadTaskOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "lead_id" | "account_id" | "vendor_id" | "user_id" | "small_order_request_id" | "task_type" | "due_date" | "remark" | "status" | "closed_by" | "closed_at" | "created_by" | "created_at" | "updated_at" | "updated_by" | "lead_stage" | "instance_id" | "franchise_id", ExtArgs["result"]["userLeadTask"]>
 export type UserLeadTaskInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.AccountMasterDefaultArgs<ExtArgs>
   closedBy?: boolean | Prisma.UserLeadTask$closedByArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   detailedLogs?: boolean | Prisma.UserLeadTask$detailedLogsArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -2350,6 +2631,7 @@ export type UserLeadTaskIncludeCreateManyAndReturn<ExtArgs extends runtime.Types
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -2359,6 +2641,7 @@ export type UserLeadTaskIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   instance?: boolean | Prisma.UserLeadTask$instanceArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
+  smallOrderRequest?: boolean | Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
@@ -2371,6 +2654,7 @@ export type $UserLeadTaskPayload<ExtArgs extends runtime.Types.Extensions.Intern
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     instance: Prisma.$LeadProductStructureInstancePayload<ExtArgs> | null
     lead: Prisma.$LeadMasterPayload<ExtArgs>
+    smallOrderRequest: Prisma.$SmallOrderRequestPayload<ExtArgs> | null
     detailedLogs: Prisma.$LeadDetailedLogsPayload<ExtArgs>[]
     user: Prisma.$UserMasterPayload<ExtArgs>
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
@@ -2381,6 +2665,7 @@ export type $UserLeadTaskPayload<ExtArgs extends runtime.Types.Extensions.Intern
     account_id: number
     vendor_id: number
     user_id: number
+    small_order_request_id: number | null
     task_type: string
     due_date: Date
     remark: string | null
@@ -2793,6 +3078,7 @@ export interface Prisma__UserLeadTaskClient<T, Null = never, ExtArgs extends run
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   instance<T extends Prisma.UserLeadTask$instanceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserLeadTask$instanceArgs<ExtArgs>>): Prisma.Prisma__LeadProductStructureInstanceClient<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  smallOrderRequest<T extends Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserLeadTask$smallOrderRequestArgs<ExtArgs>>): Prisma.Prisma__SmallOrderRequestClient<runtime.Types.Result.GetResult<Prisma.$SmallOrderRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   detailedLogs<T extends Prisma.UserLeadTask$detailedLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserLeadTask$detailedLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDetailedLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -2830,6 +3116,7 @@ export interface UserLeadTaskFieldRefs {
   readonly account_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
   readonly vendor_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
   readonly user_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
+  readonly small_order_request_id: Prisma.FieldRef<"UserLeadTask", 'Int'>
   readonly task_type: Prisma.FieldRef<"UserLeadTask", 'String'>
   readonly due_date: Prisma.FieldRef<"UserLeadTask", 'DateTime'>
   readonly remark: Prisma.FieldRef<"UserLeadTask", 'String'>
@@ -3279,6 +3566,25 @@ export type UserLeadTask$instanceArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.LeadProductStructureInstanceInclude<ExtArgs> | null
   where?: Prisma.LeadProductStructureInstanceWhereInput
+}
+
+/**
+ * UserLeadTask.smallOrderRequest
+ */
+export type UserLeadTask$smallOrderRequestArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SmallOrderRequest
+   */
+  select?: Prisma.SmallOrderRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SmallOrderRequest
+   */
+  omit?: Prisma.SmallOrderRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SmallOrderRequestInclude<ExtArgs> | null
+  where?: Prisma.SmallOrderRequestWhereInput
 }
 
 /**

@@ -243,25 +243,6 @@ export class ApprovalRequestService {
       where: {
         vendor_id: vendorId,
         status: "active",
-        OR: [
-          {
-            user_type: {
-              user_type: {
-                in: ["admin", "sales-executive"],
-                mode: "insensitive",
-              },
-            },
-            franchise_id: lead.franchise_id ?? undefined,
-          },
-          {
-            user_type: {
-              user_type: {
-                notIn: ["admin", "sales-executive"],
-                mode: "insensitive",
-              },
-            },
-          },
-        ],
       },
       select: {
         id: true,
@@ -280,9 +261,21 @@ export class ApprovalRequestService {
       },
     });
 
+    const filteredUsers = users.filter((user) => {
+      const normalizedUserType = String(
+        user.user_type?.user_type ?? "",
+      ).toLowerCase();
+
+      if (normalizedUserType === "sales-executive") {
+        return user.franchise_id === (lead.franchise_id ?? null);
+      }
+
+      return true;
+    });
+
     return {
       leadFranchiseId: lead.franchise_id ?? null,
-      users,
+      users: filteredUsers,
     };
   }
 

@@ -135,6 +135,7 @@ export interface CreateLeadDTO {
     site_type_id?: number;
     source_id: number;
     archetech_name?: string;
+    archetech_number?: string;
     designer_remark?: string;
     vendor_id: number;
     franchise_id: number;
@@ -172,6 +173,7 @@ export interface UpdateLeadDTO {
     source_id: number;
     priority?: string;
     archetech_name?: string;
+    archetech_number?: string;
     designer_remark?: string;
     updated_by: number;
     initial_site_measurement_date?: Date | string;
@@ -308,6 +310,7 @@ export interface CreatePaymentUploadDto {
     pdfFiles?: Express.Multer.File[];
     pdfFileInstanceIds?: (number | null)[];
     paymentImageFile?: Express.Multer.File;
+    skip_status_update?: boolean;
   }
   
   export interface PaymentUploadResponseDto {

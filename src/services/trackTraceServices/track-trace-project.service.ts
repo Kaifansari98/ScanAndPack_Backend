@@ -381,7 +381,7 @@ export const validateCutlistPayload = (payload: unknown): ValidationResult => {
 export const createProjectService = async (
   projectName: string,
   vendorId: number,
-  leadId: number,
+  leadId: number | null,
   file: Express.Multer.File,
 ) => {
   let resolvedVendorId: number | null = null;
@@ -400,6 +400,10 @@ export const createProjectService = async (
     const vendor = await prisma.vendorMaster.findFirst({
       where: {
         id: Number(vendorId),
+      },
+      select: {
+        id: true,
+        is_crm_enabled: true,
       },
     });
 
@@ -429,21 +433,27 @@ export const createProjectService = async (
     resolvedVendorToken = vendorTokenEntry.token;
 
     /* STEP 0.2 — Validate lead_id belongs to this vendor */
-    const lead = await prisma.leadMaster.findFirst({
-      where: {
-        id: Number(leadId),
-        vendor_id: vendor.id,
-      },
-      select: {
-        id: true,
-      },
-    });
+    let lead_id: number | null = null;
 
-    if (!lead) {
-      throw new Error("Invalid lead_id for this vendor");
+    if (vendor.is_crm_enabled && leadId && Number(leadId) > 0) {
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: vendor.id,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!lead) {
+        throw new Error("Invalid lead_id for this vendor");
+      }
+
+      lead_id = lead.id;
     }
 
-    const lead_id = lead.id;
+    //const lead_id = lead.id;
 
     /* STEP 0.3 — Initial API log */
     try {
@@ -982,41 +992,41 @@ export const searchTrackTraceLeadsService = async (
 
         ...(q
           ? {
-              OR: [
-                {
-                  firstname: {
-                    contains: q,
-                    mode: "insensitive",
-                  },
+            OR: [
+              {
+                firstname: {
+                  contains: q,
+                  mode: "insensitive",
                 },
-                {
-                  email: {
-                    contains: q,
-                    mode: "insensitive",
-                  },
+              },
+              {
+                email: {
+                  contains: q,
+                  mode: "insensitive",
                 },
-                {
-                  contact_no: {
-                    contains: q,
-                    mode: "insensitive",
-                  },
-                },     
-                {
-                  lead_code: {
-                    contains: q,
-                    mode: "insensitive",
-                  },
-                },              
-              ],
-            }
+              },
+              {
+                contact_no: {
+                  contains: q,
+                  mode: "insensitive",
+                },
+              },
+              {
+                lead_code: {
+                  contains: q,
+                  mode: "insensitive",
+                },
+              },
+            ],
+          }
           : {}),
       },
       select: {
         id: true,
         firstname: true,
-        lead_code:true,
+        lead_code: true,
         email: true,
-        contact_no: true,        
+        contact_no: true,
         created_at: true,
       },
       orderBy: {
@@ -1041,3 +1051,42 @@ export const searchTrackTraceLeadsService = async (
   }
 };
 
+
+export const getTrackTraceVendorConfigService = async (vendorId: number) => {
+  try {
+    const vendor = await prisma.vendorMaster.findFirst({
+      where: {
+        id: Number(vendorId),
+      },
+      select: {
+        id: true,
+        is_crm_enabled: true,
+      },
+    });
+
+    if (!vendor) {
+      return {
+        success: false,
+        message: "Vendor not found",
+        data: null,
+      };
+    }
+
+    return {
+      success: true,
+      message: "Vendor config fetched successfully",
+      data: {
+        vendor_id: vendor.id,
+        is_crm_enabled: vendor.is_crm_enabled,
+      },
+    };
+  } catch (error: any) {
+    console.error("getTrackTraceVendorConfigService error:", error);
+
+    return {
+      success: false,
+      message: error.message || "Failed to fetch vendor config",
+      data: null,
+    };
+  }
+};

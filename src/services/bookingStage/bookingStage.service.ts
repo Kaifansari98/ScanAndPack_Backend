@@ -2,6 +2,7 @@ import { prisma } from "../../prisma/client";
 import { NotificationService } from "../notification/notification.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
 import {
+  LeadUserStatus,
   NotificationType,
   Prisma,
   ServiceVisitStatus,
@@ -88,6 +89,28 @@ export class BookingStageService {
       updatedBy: true,
       assignedTo: { select: { id: true, user_name: true } },
       assignedBy: { select: { id: true, user_name: true } },
+      userMappings: {
+        where: {
+          status: LeadUserStatus.active,
+          type: "designer",
+        },
+        select: {
+          id: true,
+          user_id: true,
+          type: true,
+          status: true,
+          created_at: true,
+          user: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+        orderBy: {
+          created_at: Prisma.SortOrder.asc,
+        },
+      },
       productMappings: {
         select: {
           productType: { select: { id: true, type: true, tag: true } },
@@ -399,79 +422,81 @@ export class BookingStageService {
           },
         });
 
-        // 5. Assign Site Supervisor
-        const supervisor = await tx.leadSiteSupervisorMapping.create({
-          data: {
-            lead_id: data.lead_id,
-            user_id: data.siteSupervisorId,
-            vendor_id: data.vendor_id,
-            account_id: data.account_id,
-            created_by: data.created_by, // ✅ required field
-          },
-        });
-
-        response.supervisorAssigned = supervisor;
-
-        // -----------------------------
-        // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
-        // -----------------------------
-        await tx.leadUserMapping.create({
-          data: {
-            vendor_id: data.vendor_id,
-            account_id: data.account_id,
-            lead_id: data.lead_id,
-            user_id: data.siteSupervisorId,
-            type: "site-supervisor",
-            status: "active",
-            created_by: data.created_by,
-          },
-        });
-
-        // ✅ Ensure site supervisor is in lead chat members
-        let chatRoom = await tx.leadChatRoom.findFirst({
-          where: {
-            lead_id: data.lead_id,
-            vendor_id: data.vendor_id,
-          },
-          select: { id: true },
-        });
-
-        if (!chatRoom) {
-          chatRoom = await tx.leadChatRoom.create({
+        if (data.siteSupervisorId) {
+          // 5. Assign Site Supervisor
+          const supervisor = await tx.leadSiteSupervisorMapping.create({
             data: {
               lead_id: data.lead_id,
+              user_id: data.siteSupervisorId,
               vendor_id: data.vendor_id,
+              account_id: data.account_id,
               created_by: data.created_by,
+            },
+          });
+
+          response.supervisorAssigned = supervisor;
+
+          // -----------------------------
+          // ⭐ 6️⃣ LeadUserMapping ENTRY (NEW)
+          // -----------------------------
+          await tx.leadUserMapping.create({
+            data: {
+              vendor_id: data.vendor_id,
+              account_id: data.account_id,
+              lead_id: data.lead_id,
+              user_id: data.siteSupervisorId,
+              type: "site-supervisor",
+              status: "active",
+              created_by: data.created_by,
+            },
+          });
+
+          // ✅ Ensure site supervisor is in lead chat members
+          let chatRoom = await tx.leadChatRoom.findFirst({
+            where: {
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
             },
             select: { id: true },
           });
-        }
 
-        const existingMember = await tx.leadChatMember.findFirst({
-          where: {
-            chat_room_id: chatRoom.id,
-            user_id: data.siteSupervisorId,
-          },
-          select: { id: true },
-        });
+          if (!chatRoom) {
+            chatRoom = await tx.leadChatRoom.create({
+              data: {
+                lead_id: data.lead_id,
+                vendor_id: data.vendor_id,
+                created_by: data.created_by,
+              },
+              select: { id: true },
+            });
+          }
 
-        if (existingMember) {
-          logger.info(
-            "[SERVICE] LeadChatMember already exists, skipping insert",
-            {
-              lead_id: data.lead_id,
+          const existingMember = await tx.leadChatMember.findFirst({
+            where: {
               chat_room_id: chatRoom.id,
               user_id: data.siteSupervisorId,
             },
-          );
-        } else {
-          await tx.leadChatMember.create({
-            data: {
-              chat_room_id: chatRoom.id,
-              user_id: data.siteSupervisorId,
-              added_by: data.created_by,
-            },
+            select: { id: true },
           });
+
+          if (existingMember) {
+            logger.info(
+              "[SERVICE] LeadChatMember already exists, skipping insert",
+              {
+                lead_id: data.lead_id,
+                chat_room_id: chatRoom.id,
+                user_id: data.siteSupervisorId,
+              },
+            );
+          } else {
+            await tx.leadChatMember.create({
+              data: {
+                chat_room_id: chatRoom.id,
+                user_id: data.siteSupervisorId,
+                added_by: data.created_by,
+              },
+            });
+          }
         }
 
         // -----------------------------
@@ -491,9 +516,11 @@ export class BookingStageService {
         await cache.del(
           `performance:snapshot:${data.vendor_id}:${data.created_by}`,
         );
-        await cache.del(
-          `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
-        );
+        if (data.siteSupervisorId) {
+          await cache.del(
+            `dashboard:tasks:${data.vendor_id}:${data.siteSupervisorId}`,
+          );
+        }
         await cache.del(
           `lead-status-counts:${data.vendor_id}:${data.created_by}`,
         );
@@ -545,8 +572,6 @@ export class BookingStageService {
           vendorId: data.vendor_id,
           actionMessage,
         });
-
-        response.supervisorAssigned = supervisor;
 
         return response;
       },
@@ -1880,13 +1905,16 @@ export class BookingStageService {
       }),
     );
 
+    const processedWithSmallOrderRequests =
+      await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
     const sortedProcessed = shouldApplyStageSort
-      ? [...processed].sort(
+      ? [...processedWithSmallOrderRequests].sort(
         (a, b) =>
           BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
           BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
       )
-      : processed;
+      : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
       ? sortedProcessed.slice(skip, skip + limit)
@@ -1910,6 +1938,62 @@ export class BookingStageService {
   private static isImageFile(filename: string): boolean {
     const ext = filename.split(".").pop()?.toLowerCase();
     return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "");
+  }
+
+  private static async attachLinkedSmallOrderRequests(leads: any[]) {
+    const smallOrderLeadCodes = [
+      ...new Set(
+        leads
+          .filter(
+            (lead: any) =>
+              lead?.is_small_order_request === true &&
+              typeof lead?.lead_code === "string" &&
+              lead.lead_code.trim().length > 0,
+          )
+          .map((lead: any) => String(lead.lead_code).trim()),
+      ),
+    ];
+
+    if (smallOrderLeadCodes.length === 0) {
+      return leads.map((lead: any) => ({
+        ...lead,
+        smallOrderRequest: lead?.smallOrderRequest ?? null,
+      }));
+    }
+
+    const linkedRequests = await prisma.smallOrderRequest.findMany({
+      where: {
+        vendor_id: leads[0]?.vendor_id ?? undefined,
+        so_code: { in: smallOrderLeadCodes },
+      },
+      select: {
+        id: true,
+        so_code: true,
+        request_source: true,
+        request_type_id: true,
+        requestType: {
+          select: {
+            id: true,
+            type: true,
+            type_key: true,
+          },
+        },
+      },
+    });
+
+    const requestBySoCode = new Map(
+      linkedRequests
+        .filter((request: any) => !!request?.so_code)
+        .map((request: any) => [String(request.so_code), request]),
+    );
+
+    return leads.map((lead: any) => ({
+      ...lead,
+      smallOrderRequest:
+        lead?.is_small_order_request === true && lead?.lead_code
+          ? requestBySoCode.get(String(lead.lead_code)) ?? null
+          : null,
+    }));
   }
 
   public async editBookingStage(data: Partial<CreateBookingStageDto>) {
@@ -3574,13 +3658,16 @@ export class BookingStageService {
           return { ...lead, documents: docsWithUrls };
         }),
       );
+      const processedWithSmallOrderRequests =
+        await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
       const sortedProcessed = shouldApplyStageSort
-        ? [...processed].sort(
+        ? [...processedWithSmallOrderRequests].sort(
           (a, b) =>
             BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
             BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
         )
-        : processed;
+        : processedWithSmallOrderRequests;
 
       const paginatedLeads = shouldApplyStageSort
         ? sortedProcessed.slice(skip, skip + limit)
@@ -3688,13 +3775,16 @@ export class BookingStageService {
       }),
     );
 
+    const processedWithSmallOrderRequests =
+      await BookingStageService.attachLinkedSmallOrderRequests(processed);
+
     const sortedProcessed = shouldApplyStageSort
-      ? [...processed].sort(
+      ? [...processedWithSmallOrderRequests].sort(
         (a, b) =>
           BookingStageService.getStageSortTimestamp(b, normalizedStageTag) -
           BookingStageService.getStageSortTimestamp(a, normalizedStageTag),
       )
-      : processed;
+      : processedWithSmallOrderRequests;
 
     const paginatedLeads = shouldApplyStageSort
       ? sortedProcessed.slice(skip, skip + limit)

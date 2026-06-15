@@ -753,6 +753,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
+    product_structure_instance_id?: number | null;
     sitePhotos?: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
@@ -797,6 +798,8 @@ export class FinalMeasurementService {
                 account_id: lead.account_id,
                 lead_id: data.lead_id,
                 vendor_id: data.vendor_id,
+                product_structure_instance_id:
+                  data.product_structure_instance_id ?? undefined,
               },
             });
 
@@ -814,6 +817,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
+    product_structure_instance_id?: number | null;
     sitePhotos: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
@@ -856,6 +860,8 @@ export class FinalMeasurementService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_structure_instance_id:
+                data.product_structure_instance_id ?? undefined,
             },
           });
 
@@ -872,6 +878,7 @@ export class FinalMeasurementService {
     lead_id: number;
     vendor_id: number;
     created_by: number;
+    product_structure_instance_id?: number | null;
     finalMeasurementDocs: { originalName: string; sysName: string }[];
   }) {
     return await prisma.$transaction(
@@ -914,6 +921,8 @@ export class FinalMeasurementService {
               account_id: lead.account_id,
               lead_id: data.lead_id,
               vendor_id: data.vendor_id,
+              product_structure_instance_id:
+                data.product_structure_instance_id ?? undefined,
             },
           });
 

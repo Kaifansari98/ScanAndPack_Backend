@@ -391,6 +391,30 @@ export class DesigingStage {
 
     if (!lead) return null;
 
+    const isSmallOrderRequestLead =
+      (lead as any).is_small_order_request === true;
+    const linkedSmallOrderRequest =
+      isSmallOrderRequestLead && lead.lead_code
+        ? await prisma.smallOrderRequest.findFirst({
+            where: {
+              vendor_id: vendorId,
+              so_code: lead.lead_code,
+            },
+            select: {
+              id: true,
+              is_request_resolved: true,
+              request_type_id: true,
+              requestType: {
+                select: {
+                  id: true,
+                  type: true,
+                  type_key: true,
+                },
+              },
+            },
+          })
+        : null;
+
     // ✅ Generate signed URLs for documents
     const docsWithUrls = await Promise.all(
       (lead.documents || []).map(async (doc: any) => {
@@ -403,6 +427,10 @@ export class DesigingStage {
 
     return {
       ...lead,
+      smallOrderRequest:
+        linkedSmallOrderRequest && isSmallOrderRequestLead
+          ? linkedSmallOrderRequest
+          : null,
       documents: docsWithUrls,
     };
   }

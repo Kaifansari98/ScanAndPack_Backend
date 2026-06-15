@@ -9,7 +9,7 @@ const getFinancialYearSegment = (date: Date) => {
   const financialYearStart = month >= 3 ? year : year - 1;
   const financialYearEnd = financialYearStart + 1;
 
-  return `${String(financialYearStart).slice(-2)}-${String(financialYearEnd).slice(-2)}`;
+  return `${String(financialYearStart).slice(-2)}/${String(financialYearEnd).slice(-2)}`;
 };
 
 export async function generateLeadCode(

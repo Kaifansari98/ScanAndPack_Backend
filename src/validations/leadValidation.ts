@@ -51,6 +51,11 @@ export const createLeadSchema = Joi.object({
   }),
 
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  archetech_number: Joi.string()
+    .trim()
+    .pattern(/^\+?\d{7,20}$/)
+    .optional()
+    .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
@@ -107,6 +112,11 @@ export const createLeadDraftSchema = Joi.object({
   site_type_id: numberLike.optional().allow(null),
   source_id: numberLike.optional().allow(null), // ✅ Drafts don't require this
   archetech_name: Joi.string().trim().max(100).optional().allow("", null),
+  archetech_number: Joi.string()
+    .trim()
+    .pattern(/^\+?\d{7,20}$/)
+    .optional()
+    .allow("", null),
   designer_remark: Joi.string().trim().max(1000).optional().allow("", null),
 
   vendor_id: numberLike.required(),
@@ -179,6 +189,7 @@ interface UpdateLeadInput {
   source_id?: number;
   priority?: string;
   archetech_name?: string;
+  archetech_number?: string;
   designer_remark?: string;
   updated_by?: number;
 }
@@ -291,6 +302,20 @@ export const validateUpdateLeadInput = (
     typeof input.archetech_name !== "string"
   ) {
     errors.push("archetech_name must be a string if provided");
+  }
+
+  if (
+    input.archetech_number !== undefined &&
+    input.archetech_number !== null
+  ) {
+    if (typeof input.archetech_number !== "string") {
+      errors.push("archetech_number must be a string if provided");
+    } else if (
+      input.archetech_number.trim() !== "" &&
+      !/^\+?\d{7,20}$/.test(input.archetech_number.trim())
+    ) {
+      errors.push("archetech_number must be a valid phone number if provided");
+    }
   }
 
   if (

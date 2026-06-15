@@ -137,6 +137,27 @@ export class LeadStatsService {
       },
     };
 
+    const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
+      where: {
+        vendor_id: vendorId,
+        so_code: { not: null },
+        request_source: { in: ["post_dispatch", "final_handover"] },
+      },
+      select: {
+        so_code: true,
+        request_source: true,
+      },
+    });
+
+    const postDispatchHiddenLeadCodes = hiddenSmallOrderRequests
+      .filter((request) => request.request_source === "post_dispatch")
+      .map((request) => request.so_code)
+      .filter((code): code is string => Boolean(code));
+
+    const installationHiddenLeadCodes = hiddenSmallOrderRequests
+      .map((request) => request.so_code)
+      .filter((code): code is string => Boolean(code));
+
     // Helper: count leads by status tag (Type 1..17)
     const countByTag = async (statusTag: string) =>
       prisma.leadMaster.count({
@@ -253,6 +274,9 @@ export class LeadStatsService {
     const totalUnderInstallationStageLeads = await prisma.leadMaster.count({
       where: {
         ...baseLeadScope,
+        ...(postDispatchHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: postDispatchHiddenLeadCodes } }
+          : {}),
 
         // Stage Filter (Type 15)
         statusType: {
@@ -273,16 +297,30 @@ export class LeadStatsService {
         },
       },
     });
-    const totalFinalhandoverStageLeads = await countByTag("Type 16");
+    const totalFinalhandoverStageLeads = await prisma.leadMaster.count({
+      where: {
+        ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
+        statusType: { vendor_id: vendorId, tag: "Type 16" },
+      },
+    });
     const totalProjectCompletedStageLeads = await prisma.leadMaster.count({
       where: {
         ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
         statusType: { vendor_id: vendorId, tag: "Type 17" },
       },
     });
     const totalServicingStageLeads = await prisma.leadMaster.count({
       where: {
         ...baseLeadScope,
+        ...(installationHiddenLeadCodes.length > 0
+          ? { lead_code: { notIn: installationHiddenLeadCodes } }
+          : {}),
         statusType: { vendor_id: vendorId, tag: "Type 17" },
         serviceSchedules: {
           some: {

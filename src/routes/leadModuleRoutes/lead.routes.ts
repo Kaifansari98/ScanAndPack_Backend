@@ -50,8 +50,15 @@ import {
   fetchAllHandleTypes,
   fetchAllShutterTypes,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
+import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
+import {
+  createSmallOrderRequestController,
+  getSmallOrderRequestsByLeadController,
+  markSmallOrderRequestResolvedController,
+} from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
 
 const leadsRouter = Router();
+const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
 
 leadsRouter.post("/create-document-type", createDocumentType);
 leadsRouter.post("/create-payment-type", createPaymentType);
@@ -64,6 +71,23 @@ leadsRouter.get("/get-all-status-types/:vendor_id", fetchAllStatusTypes);
 leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
 leadsRouter.get("/get-all-product-types/:vendor_id", fetchAllProductTypes);
+leadsRouter.get(
+  "/get-all-small-order-request-types/:vendor_id",
+  fetchAllSmallOrderRequestTypes,
+);
+leadsRouter.post(
+  "/small-order-requests",
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  createSmallOrderRequestController,
+);
+leadsRouter.get(
+  "/small-order-requests/vendor/:vendorId/lead/:leadId",
+  getSmallOrderRequestsByLeadController,
+);
+leadsRouter.patch(
+  "/small-order-requests/vendor/:vendorId/request/:requestId/resolve",
+  markSmallOrderRequestResolvedController,
+);
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
@@ -93,8 +117,6 @@ leadsRouter.patch("/update-source-type-status/:id", toggleSourceTypeStatus);
 leadsRouter.delete("/delete-document-type/:id", removeDocumentType);
 leadsRouter.delete("/delete-status-type/:id", removeStatusType);
 leadsRouter.delete("/delete-payment-type/:id", removePaymentType);
-
-const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
 
 leadsRouter.post(
   "/create",
@@ -277,6 +299,35 @@ leadsRouter.get(
 leadsRouter.get(
   "/vendorId/:vendorId/leadId/:leadId/all-documents",
   leadController.getAllLeadDocuments
+);
+
+leadsRouter.get(
+  "/unshorten-url",
+  async (req, res) => {
+    const { url } = req.query;
+    if (!url || typeof url !== "string") {
+      return res.status(400).json({ success: false, message: "URL parameter is required" });
+    }
+    try {
+      const axios = require("axios");
+      const response = await axios.get(url, {
+        maxRedirects: 10,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
+        }
+      });
+      const resolvedUrl = response.request?.res?.responseUrl || response.config?.url || url;
+      return res.json({ success: true, resolvedUrl });
+    } catch (error: any) {
+      if (error.response && error.response.status >= 300 && error.response.status < 400) {
+        const location = error.response.headers?.location;
+        if (location) {
+          return res.json({ success: true, resolvedUrl: location });
+        }
+      }
+      return res.status(500).json({ success: false, message: error.message || "Failed to resolve URL" });
+    }
+  }
 );
 
 export default leadsRouter;

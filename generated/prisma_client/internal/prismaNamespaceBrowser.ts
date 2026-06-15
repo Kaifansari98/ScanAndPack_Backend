@@ -95,6 +95,9 @@ export const ModelName = {
   PaymentInfo: 'PaymentInfo',
   Ledger: 'Ledger',
   DocumentTypeMaster: 'DocumentTypeMaster',
+  SmallOrderRequestTypeMaster: 'SmallOrderRequestTypeMaster',
+  SmallOrderRequest: 'SmallOrderRequest',
+  SmallOrderRequestDocument: 'SmallOrderRequestDocument',
   LeadAmcContract: 'LeadAmcContract',
   LeadServiceSchedule: 'LeadServiceSchedule',
   StatusTypeMaster: 'StatusTypeMaster',
@@ -493,6 +496,7 @@ export const LeadMasterScalarFieldEnum = {
   site_type_id: 'site_type_id',
   source_id: 'source_id',
   archetech_name: 'archetech_name',
+  archetech_number: 'archetech_number',
   designer_remark: 'designer_remark',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -518,6 +522,7 @@ export const LeadMasterScalarFieldEnum = {
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
   lead_code: 'lead_code',
+  is_small_order_request: 'is_small_order_request',
   is_client_approval_submitted: 'is_client_approval_submitted',
   client_required_order_login_complition_date: 'client_required_order_login_complition_date',
   expected_order_login_ready_date: 'expected_order_login_ready_date',
@@ -939,6 +944,62 @@ export const DocumentTypeMasterScalarFieldEnum = {
 export type DocumentTypeMasterScalarFieldEnum = (typeof DocumentTypeMasterScalarFieldEnum)[keyof typeof DocumentTypeMasterScalarFieldEnum]
 
 
+export const SmallOrderRequestTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  type_key: 'type_key',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type SmallOrderRequestTypeMasterScalarFieldEnum = (typeof SmallOrderRequestTypeMasterScalarFieldEnum)[keyof typeof SmallOrderRequestTypeMasterScalarFieldEnum]
+
+
+export const SmallOrderRequestScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  parent_lead_code: 'parent_lead_code',
+  so_code: 'so_code',
+  customer_name: 'customer_name',
+  status: 'status',
+  request_source: 'request_source',
+  request_type_id: 'request_type_id',
+  required_date: 'required_date',
+  remarks: 'remarks',
+  supervisor_approved: 'supervisor_approved',
+  supervisor_approved_at: 'supervisor_approved_at',
+  admin_approved: 'admin_approved',
+  admin_approved_at: 'admin_approved_at',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
+  is_merge_to_parent_on_installation: 'is_merge_to_parent_on_installation',
+  is_request_resolved: 'is_request_resolved',
+  usable_handover_date_snapshot: 'usable_handover_date_snapshot',
+  small_order_sequence: 'small_order_sequence',
+  rejection_reason: 'rejection_reason'
+} as const
+
+export type SmallOrderRequestScalarFieldEnum = (typeof SmallOrderRequestScalarFieldEnum)[keyof typeof SmallOrderRequestScalarFieldEnum]
+
+
+export const SmallOrderRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  small_order_request_id: 'small_order_request_id',
+  document_id: 'document_id',
+  document_category: 'document_category',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type SmallOrderRequestDocumentScalarFieldEnum = (typeof SmallOrderRequestDocumentScalarFieldEnum)[keyof typeof SmallOrderRequestDocumentScalarFieldEnum]
+
+
 export const LeadAmcContractScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -1152,6 +1213,7 @@ export const UserLeadTaskScalarFieldEnum = {
   account_id: 'account_id',
   vendor_id: 'vendor_id',
   user_id: 'user_id',
+  small_order_request_id: 'small_order_request_id',
   task_type: 'task_type',
   due_date: 'due_date',
   remark: 'remark',

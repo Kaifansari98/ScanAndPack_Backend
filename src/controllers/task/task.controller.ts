@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TaskService } from "../../services/task/task.service";
 import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
+import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
 import logger from "../../../src/utils/logger";
 import { date } from "joi";
 
@@ -888,6 +889,56 @@ export class TaskController {
         success: false,
         message: "Failed to fetch active tasks",
         error: error.message,
+      });
+    }
+  }
+
+  static async actOnSmallOrderRequestTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const actedBy = Number(req.body.acted_by);
+      const action = String(req.body.action ?? "");
+      const remark =
+        typeof req.body.remark === "string" ? req.body.remark : null;
+
+      const result = await actOnSmallOrderRequestTask({
+        lead_id: leadId,
+        task_id: taskId,
+        acted_by: actedBy,
+        action: action === "reject" ? "reject" : "approve",
+        remark,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message:
+          action === "reject"
+            ? "Small order request rejected successfully"
+            : "Small order request approved successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] actOnSmallOrderRequestTask Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      const message =
+        error?.message || "Failed to update small order request task";
+      const statusCode =
+        message.includes("required") ||
+        message.includes("not found") ||
+        message.includes("not allowed") ||
+        message.includes("Only") ||
+        message.includes("already completed") ||
+        message.includes("No approval action")
+          ? 400
+          : 500;
+
+      return res.status(statusCode).json({
+        success: false,
+        message,
       });
     }
   }

@@ -473,6 +473,7 @@ export class PaymentUploadController {
         pdfFiles,
         pdfFileInstanceIds,
         paymentImageFile,
+        skip_status_update: String(req.body.skip_status_update) === "true",
       };
 
       // Business logic validations

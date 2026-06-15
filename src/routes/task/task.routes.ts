@@ -69,4 +69,9 @@ taskRouter.patch(
   TaskController.rescheduleSelfAssignTask,
 );
 
+taskRouter.patch(
+  "/leadId/:leadId/taskId/:taskId/small-order-request/action",
+  TaskController.actOnSmallOrderRequestTask,
+);
+
 export default taskRouter;
