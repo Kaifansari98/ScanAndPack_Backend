@@ -844,6 +844,121 @@ export class BookingStageController {
     }
   };
 
+  public getDraftLeadTableData = async (req: Request, res: Response) => {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const userId = Number(req.body.userId);
+      const franchiseIdRaw = req.body.franchise_id;
+      const franchiseId =
+        franchiseIdRaw !== undefined && franchiseIdRaw !== null && franchiseIdRaw !== ""
+          ? Number(franchiseIdRaw)
+          : undefined;
+
+      const page = parseInt((req.body.page as string) || "1");
+      const limit = parseInt((req.body.limit as string) || "10");
+
+      let dateRange: { from: string; to: string } | undefined;
+
+      if (req.body.date_range) {
+        const { from, to } = req.body.date_range;
+
+        if (from && isNaN(Date.parse(from))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'from' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (to && isNaN(Date.parse(to))) {
+          return res.status(400).json({
+            success: false,
+            message: "Invalid 'to' date format. Use YYYY-MM-DD or ISO format",
+          });
+        }
+
+        if (from && !to) {
+          dateRange = { from, to: from };
+        } else if (from && to) {
+          if (new Date(from) > new Date(to)) {
+            return res.status(400).json({
+              success: false,
+              message: "'from' date cannot be after 'to' date",
+            });
+          }
+          dateRange = { from, to };
+        } else if (!from && to) {
+          dateRange = { from: to, to };
+        }
+      }
+
+      const filters = {
+        global_search: req.body.global_search,
+        filter_lead_code: req.body.filter_lead_code,
+        filter_name: req.body.filter_name,
+        contact: req.body.contact,
+        furniture_type: req.body.furniture_type,
+        furniture_structure: req.body.furniture_structure,
+        site_map_link: req.body.site_map_link,
+        site_type: req.body.site_type,
+        assign_to: req.body.assign_to,
+        priority: normalizeStringArray(req.body.priority),
+        site_address: req.body.site_address,
+        archetech_name: req.body.archetech_name,
+        source: req.body.source,
+        created_at: req.body.created_at,
+        alt_contact_no: req.body.alt_contact_no,
+        email: req.body.email,
+        designer_remark: req.body.designer_remark,
+        date_range: dateRange,
+      };
+
+      if (!vendorId || !userId) {
+        return res.status(400).json({
+          success: false,
+          message: "Vendor ID and User ID are required",
+        });
+      }
+      if (franchiseId !== undefined && (isNaN(franchiseId) || franchiseId <= 0)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid Franchise ID provided",
+        });
+      }
+
+      const { leads, count } = await BookingStageService.getDraftLeadTableData(
+        vendorId,
+        userId,
+        franchiseId,
+        page,
+        limit,
+        filters
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Draft leads fetched successfully",
+        count,
+        data: leads,
+        pagination: {
+          currentPage: page,
+          totalPages: Math.ceil(count / limit),
+          totalRecords: count,
+          hasNext: page * limit < count,
+          hasPrev: page > 1,
+        },
+      });
+    } catch (error: any) {
+      logger.error("[BookingStageController] getDraftLeadTableData Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Something went wrong",
+      });
+    }
+  };
+
   public getOpenLeads = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(getParam(req.params.vendorId));
