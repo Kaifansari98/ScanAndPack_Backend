@@ -3859,7 +3859,7 @@ export class BookingStageService {
     userId: number,
     franchiseId: number | undefined,
     page: number = 1,
-    limit: number = 10,
+    limit: number = 50,
     filters: {
       global_search?: string;
       filter_lead_code?: string;

@@ -855,7 +855,7 @@ export class BookingStageController {
           : undefined;
 
       const page = parseInt((req.body.page as string) || "1");
-      const limit = parseInt((req.body.limit as string) || "10");
+      const limit = parseInt((req.body.limit as string) || "50");
 
       let dateRange: { from: string; to: string } | undefined;
 

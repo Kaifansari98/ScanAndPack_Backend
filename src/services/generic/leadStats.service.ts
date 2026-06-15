@@ -159,11 +159,12 @@ export class LeadStatsService {
       .filter((code): code is string => Boolean(code));
 
     // Helper: count leads by status tag (Type 1..17)
-    const countByTag = async (statusTag: string) =>
+    const countByTag = async (statusTag: string, extraWhere: any = {}) =>
       prisma.leadMaster.count({
         where: {
           ...baseLeadScope,
           statusType: { vendor_id: vendorId, tag: statusTag },
+          ...extraWhere,
         },
       });
 
@@ -203,7 +204,8 @@ export class LeadStatsService {
       },
     });
 
-    const totalOpenLeads = await countByTag("Type 1");
+    const totalOpenLeads = await countByTag("Type 1", { is_draft: { not: true } });
+    const totalDraftLeads = await countByTag("Type 1", { is_draft: true });
     const totalInitialSiteMeasurementLeads = await countByTag("Type 2");
     const totalDesigningStageLeads = await countByTag("Type 3");
     const totalBookingStageLeads = await countByTag("Type 4");
@@ -334,6 +336,7 @@ export class LeadStatsService {
       totalLeads,
       totalOverallLeads,
       totalOpenLeads,
+      totalDraftLeads,
       totalInitialSiteMeasurementLeads,
       totalDesigningStageLeads,
       totalBookingStageLeads,
@@ -387,6 +390,7 @@ export class LeadStatsService {
       total_my_tasks: totalMyTasks,
 
       total_open_leads: totalOpenLeads,
+      total_draft_leads: totalDraftLeads,
       total_initial_site_measurement_leads: totalInitialSiteMeasurementLeads,
       total_designing_stage_leads: totalDesigningStageLeads,
       total_booking_stage_leads: totalBookingStageLeads,
