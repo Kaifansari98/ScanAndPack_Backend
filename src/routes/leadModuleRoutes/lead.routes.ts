@@ -301,4 +301,33 @@ leadsRouter.get(
   leadController.getAllLeadDocuments
 );
 
+leadsRouter.get(
+  "/unshorten-url",
+  async (req, res) => {
+    const { url } = req.query;
+    if (!url || typeof url !== "string") {
+      return res.status(400).json({ success: false, message: "URL parameter is required" });
+    }
+    try {
+      const axios = require("axios");
+      const response = await axios.get(url, {
+        maxRedirects: 10,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1'
+        }
+      });
+      const resolvedUrl = response.request?.res?.responseUrl || response.config?.url || url;
+      return res.json({ success: true, resolvedUrl });
+    } catch (error: any) {
+      if (error.response && error.response.status >= 300 && error.response.status < 400) {
+        const location = error.response.headers?.location;
+        if (location) {
+          return res.json({ success: true, resolvedUrl: location });
+        }
+      }
+      return res.status(500).json({ success: false, message: error.message || "Failed to resolve URL" });
+    }
+  }
+);
+
 export default leadsRouter;
