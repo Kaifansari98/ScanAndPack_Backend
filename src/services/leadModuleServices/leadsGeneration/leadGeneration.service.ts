@@ -1084,9 +1084,39 @@ export const getLeadById = async (
                   type_key: true,
                 },
               },
+              documents: {
+                select: {
+                  id: true,
+                  document_id: true,
+                  created_at: true,
+                  document: {
+                    select: {
+                      doc_og_name: true,
+                      doc_sys_name: true,
+                    },
+                  },
+                },
+              },
             },
           })
         : null;
+
+    const linkedSmallOrderRequestWithDocs = linkedSmallOrderRequest
+      ? {
+          ...linkedSmallOrderRequest,
+          documents: await Promise.all(
+            linkedSmallOrderRequest.documents.map(async (doc) => ({
+              id: doc.id,
+              document_id: doc.document_id,
+              original_name: doc.document?.doc_og_name ?? "",
+              signed_url: doc.document?.doc_sys_name
+                ? await generateSignedUrl(doc.document.doc_sys_name, 3600, "inline")
+                : null,
+              created_at: doc.created_at,
+            })),
+          ),
+        }
+      : null;
 
     // ✅ Auto-unmark draft if completed
     if (lead.is_draft && isLeadComplete(lead)) {
@@ -1194,8 +1224,8 @@ export const getLeadById = async (
       lead: {
         ...lead,
         smallOrderRequest:
-          linkedSmallOrderRequest && isSmallOrderRequestLead
-            ? linkedSmallOrderRequest
+          linkedSmallOrderRequestWithDocs && isSmallOrderRequestLead
+            ? linkedSmallOrderRequestWithDocs
             : null,
         documents: documentsWithUrls,
         latest_activity_status: activityStatusPayload,
