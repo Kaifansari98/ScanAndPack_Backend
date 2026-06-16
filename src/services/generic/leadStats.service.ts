@@ -46,6 +46,7 @@ export class LeadStatsService {
         // "site-supervisor",
         "admin",
         "super-admin",
+        "auditor",
       ].includes(userType);
       const shouldIncludeFranchiseForMyTasks = [
         "sales-executive",
