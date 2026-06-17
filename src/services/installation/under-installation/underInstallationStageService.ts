@@ -10,6 +10,7 @@ import { sendLeadMovedToUnderInstallationEmail, sendMiscRequirementEmail, sendMi
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { sendSmallOrderDispatchedForInstallationEmail, sendSmallOrderDispatchedEmail } from "../../email/brevoEmail2.service";
 
 interface MiscPayload {
   vendor_id: number;
@@ -200,6 +201,8 @@ export class UnderInstallationStageService {
             account_id: true,
             franchise_id: true,
             statusType: { select: { tag: true } },
+            is_small_order_request: true,
+            dispatch_date: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -298,6 +301,129 @@ export class UnderInstallationStageService {
           });
         }),
       );
+
+      if (lead.is_small_order_request) {
+        // Collect all mapped users for this lead
+        const leadMappings = await prisma.leadUserMapping.findMany({
+          where: { lead_id: leadId, vendor_id: vendorId, status: "active" },
+          select: {
+            user: {
+              select: {
+                id: true,
+                user_name: true,
+                user_email: true,
+                user_type: { select: { user_type: true } },
+              },
+            },
+          },
+        });
+
+        const mappedUsers = leadMappings.map((m) => m.user).filter(Boolean);
+
+        // Sales executives from mapping
+        const salesExecs = mappedUsers.filter(
+          (u) => u.user_type.user_type.toLowerCase() === "sales-executive",
+        );
+
+        const supervisorUser = siteSupervisorMapping?.user ?? null;
+        const smallOrderRedirectPath = `/dashboard/installation/under-installation/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
+        const dispatchDateStr = lead.dispatch_date
+          ? new Date(lead.dispatch_date).toLocaleString("en-IN", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
+          : "N/A";
+
+        // Notify Site Supervisor
+        if (supervisorUser) {
+          await Promise.allSettled([
+            (async () => {
+              try {
+                await NotificationService.createAndSend({
+                  vendor_id: lead.vendor_id,
+                  user_id: supervisorUser.id,
+                  sender_id: actorId,
+                  type: NotificationType.LEAD_MILESTONE,
+                  title: "Small Order Dispatched for Installation",
+                  message: `The Small Order for ${leadCode} - ${leadName} has been dispatched and moved to Under Installation. Please review the details and update the installation progress as required.`,
+                  entity_type: "lead",
+                  entity_id: leadId,
+                  redirect_url: smallOrderRedirectPath,
+                });
+                console.log(`✅ Small Order Dispatched for Installation In-App sent to Site Supervisor ${supervisorUser.id}`);
+              } catch (err: any) {
+                logger.warn(`⚠️ Small Order Dispatched for Installation In-App to Site Supervisor ${supervisorUser.id} failed:`, err.message);
+              }
+            })(),
+            (async () => {
+              if (supervisorUser.user_email) {
+                try {
+                  await sendSmallOrderDispatchedForInstallationEmail({
+                    vendor_id: lead.vendor_id,
+                    toEmail: supervisorUser.user_email,
+                    site_supervisor_name: supervisorUser.user_name || "Site Supervisor",
+                    leadCode,
+                    leadName,
+                    dispatch_date: dispatchDateStr,
+                    projectUrl: smallOrderProjectUrl,
+                  });
+                  console.log(`✅ Small Order Dispatched for Installation Email sent to Site Supervisor ${supervisorUser.user_email}`);
+                } catch (err: any) {
+                  logger.warn(`⚠️ Small Order Dispatched for Installation Email to ${supervisorUser.user_email} failed:`, err.message);
+                }
+              }
+            })(),
+          ]);
+        }
+
+        // Notify Sales Executives
+        if (salesExecs.length > 0) {
+          await Promise.allSettled(
+            salesExecs.map(async (exec) => {
+              await Promise.allSettled([
+                (async () => {
+                  try {
+                    await NotificationService.createAndSend({
+                      vendor_id: lead.vendor_id,
+                      user_id: exec.id,
+                      sender_id: actorId,
+                      type: NotificationType.LEAD_MILESTONE,
+                      title: "Small Order Dispatched",
+                      message: `The Small Order for ${leadCode} - ${leadName} has been dispatched successfully.`,
+                      entity_type: "lead",
+                      entity_id: leadId,
+                      redirect_url: smallOrderRedirectPath,
+                    });
+                    console.log(`✅ Small Order Dispatched In-App sent to Sales Executive ${exec.id}`);
+                  } catch (err: any) {
+                    logger.warn(`⚠️ Small Order Dispatched In-App to Sales Executive ${exec.id} failed:`, err.message);
+                  }
+                })(),
+                (async () => {
+                  if (exec.user_email) {
+                    try {
+                      await sendSmallOrderDispatchedEmail({
+                        vendor_id: lead.vendor_id,
+                        toEmail: exec.user_email,
+                        sales_executive_name: exec.user_name || "Sales Executive",
+                        leadCode,
+                        leadName,
+                        dispatch_date: dispatchDateStr,
+                        projectUrl: smallOrderProjectUrl,
+                      });
+                      console.log(`✅ Small Order Dispatched Email sent to Sales Executive ${exec.user_email}`);
+                    } catch (err: any) {
+                      logger.warn(`⚠️ Small Order Dispatched Email to ${exec.user_email} failed:`, err.message);
+                    }
+                  }
+                })(),
+              ]);
+            })
+          );
+        }
+      }
 
       logger.info("✅ Under Installation notifications sent", {
         vendor_id: lead.vendor_id,

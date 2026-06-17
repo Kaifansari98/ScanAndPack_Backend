@@ -23,6 +23,30 @@ export const ORDER_LOGIN_TEMPLATE_KEYS = {
   DISPATCH_PLANNING_APPROVED_TEMPLATE_KEY: "DISPATCH_PLANNING_APPROVED",
 };
 
+export const SMALL_ORDER_TEMPLATE_KEYS = {
+  SMALL_ORDER_REQUEST_SITE_SUPERVISOR_APPROVAL: "SMALL_ORDER_REQUEST_SITE_SUPERVISOR_APPROVAL",
+  SMALL_ORDER_REQUEST_STORE_ADMIN_APPROVAL: "SMALL_ORDER_REQUEST_STORE_ADMIN_APPROVAL",
+  // Site Supervisor Action Updates to Sales Executive
+  SMALL_ORDER_REQUEST_SUPERVISOR_APPROVED: "SMALL_ORDER_REQUEST_SUPERVISOR_APPROVED",
+  SMALL_ORDER_REQUEST_SUPERVISOR_REJECTED: "SMALL_ORDER_REQUEST_SUPERVISOR_REJECTED",
+  // Store Admin Action Updates to Sales Executive
+  SMALL_ORDER_REQUEST_ADMIN_APPROVED: "SMALL_ORDER_REQUEST_ADMIN_APPROVED",
+  SMALL_ORDER_REQUEST_ADMIN_REJECTED: "SMALL_ORDER_REQUEST_ADMIN_REJECTED",
+  // Fully Approved Update to Sales Executive
+  SMALL_ORDER_REQUEST_FULLY_APPROVED: "SMALL_ORDER_REQUEST_FULLY_APPROVED",
+  // Pre Production User Update
+  SMALL_ORDER_SENT_TO_PRE_PRODUCTION: "SMALL_ORDER_SENT_TO_PRE_PRODUCTION",
+  // Factory User Update
+  SMALL_ORDER_SENT_TO_PRODUCTION: "SMALL_ORDER_SENT_TO_PRODUCTION",
+  // Production Completed Update to Sales Executive
+  SMALL_ORDER_PRODUCTION_COMPLETED: "SMALL_ORDER_PRODUCTION_COMPLETED",
+  // Ready for Dispatch Update to Factory User
+  SMALL_ORDER_READY_FOR_DISPATCH: "SMALL_ORDER_READY_FOR_DISPATCH",
+  // Dispatched updates
+  SMALL_ORDER_DISPATCHED_FOR_INSTALLATION: "SMALL_ORDER_DISPATCHED_FOR_INSTALLATION",
+  SMALL_ORDER_DISPATCHED: "SMALL_ORDER_DISPATCHED",
+};
+
 const renderTemplate = (template: string, values: Record<string, string>) => {
   return template.replace(/{{\s*([a-zA-Z0-9_]+)\s*}}/g, (match, key) => {
     return Object.prototype.hasOwnProperty.call(values, key)
@@ -2071,6 +2095,2143 @@ export const sendDispatchPlanningApprovedEmail = async (payload: {
     {
       toEmail: payload.toEmail,
       toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderRequestSiteSupervisorApprovalEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  site_supervisor_name: string;
+  leadCode: string;
+  leadName: string;
+  sales_executive_name: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestSiteSupervisorApprovalEmail = async (
+  payload: SmallOrderRequestSiteSupervisorApprovalEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.site_supervisor_name},`,
+    "",
+    `A Small Order request has been raised by ${payload.sales_executive_name} for ${payload.leadCode} - ${payload.leadName}`,
+    "",
+    "Please review the request and approve or reject it.",
+    "",
+    payload.projectUrl ? `Review Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Small Order Approval Request
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.site_supervisor_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A Small Order request has been raised by ${payload.sales_executive_name} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the request and approve or reject it.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Raised By</div>
+          <div class="lead-info-value">${payload.sales_executive_name}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.site_supervisor_name,
+    site_supervisor_name: payload.site_supervisor_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    sales_executive_name: payload.sales_executive_name,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_SITE_SUPERVISOR_APPROVAL,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.site_supervisor_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderRequestStoreAdminApprovalEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  store_admin_name: string;
+  leadCode: string;
+  leadName: string;
+  sales_executive_name: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestStoreAdminApprovalEmail = async (
+  payload: SmallOrderRequestStoreAdminApprovalEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.store_admin_name},`,
+    "",
+    `A Small Order request has been raised by ${payload.sales_executive_name} for ${payload.leadCode} - ${payload.leadName}`,
+    "",
+    "Please review the request and approve or reject it.",
+    "",
+    payload.projectUrl ? `Review Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
+        Small Order Approval Request
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.store_admin_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A Small Order request has been raised by ${payload.sales_executive_name} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the request and approve or reject it.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Raised By</div>
+          <div class="lead-info-value">${payload.sales_executive_name}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.store_admin_name,
+    store_admin_name: payload.store_admin_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    sales_executive_name: payload.sales_executive_name,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_STORE_ADMIN_APPROVAL,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.store_admin_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ==========================================
+// Site Supervisor Action – Sales Executive Update
+// ==========================================
+
+export interface SmallOrderRequestSupervisorApprovedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  site_supervisor_name: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestSupervisorApprovedEmail = async (
+  payload: SmallOrderRequestSupervisorApprovedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Approved by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order request for ${payload.leadCode} - ${payload.leadName} has been approved by ${payload.site_supervisor_name}.`,
+    "The request is now awaiting Store Admin approval, if not already completed.",
+    "",
+    payload.projectUrl ? `View Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Request Approved
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by ${payload.site_supervisor_name}.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The request is now awaiting Store Admin approval, if not already completed.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.site_supervisor_name}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    site_supervisor_name: payload.site_supervisor_name,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_SUPERVISOR_APPROVED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderRequestSupervisorRejectedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  site_supervisor_name: string;
+  rejection_reason: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestSupervisorRejectedEmail = async (
+  payload: SmallOrderRequestSupervisorRejectedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Rejected by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order request for ${payload.leadCode} - ${payload.leadName} has been rejected by ${payload.site_supervisor_name}.`,
+    `Reason: ${payload.rejection_reason}`,
+    "",
+    payload.projectUrl ? `View Rejection Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#dc2626;">
+        Small Order Request Rejected
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been rejected by ${payload.site_supervisor_name}.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Rejected By</div>
+          <div class="lead-info-value">${payload.site_supervisor_name}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Reason</div>
+          <div class="lead-info-value">${payload.rejection_reason}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Rejection Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    site_supervisor_name: payload.site_supervisor_name,
+    rejection_reason: payload.rejection_reason,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_SUPERVISOR_REJECTED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+// ==========================================
+// Store Admin Action – Sales Executive Update
+// ==========================================
+
+export interface SmallOrderRequestAdminApprovedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  store_admin_name: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestAdminApprovedEmail = async (
+  payload: SmallOrderRequestAdminApprovedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Approved by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order request for ${payload.leadCode} - ${payload.leadName} has been approved by ${payload.store_admin_name}.`,
+    "The request is now awaiting Site Supervisor approval, if not already completed.",
+    "",
+    payload.projectUrl ? `View Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Request Approved
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by ${payload.store_admin_name}.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The request is now awaiting Site Supervisor approval, if not already completed.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Approved By</div>
+          <div class="lead-info-value">${payload.store_admin_name}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    store_admin_name: payload.store_admin_name,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_ADMIN_APPROVED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderRequestAdminRejectedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  store_admin_name: string;
+  rejection_reason: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestAdminRejectedEmail = async (
+  payload: SmallOrderRequestAdminRejectedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Rejected by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order request for ${payload.leadCode} - ${payload.leadName} has been rejected by ${payload.store_admin_name}.`,
+    `Reason: ${payload.rejection_reason}`,
+    "",
+    payload.projectUrl ? `View Rejection Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#dc2626;">
+        Small Order Request Rejected
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been rejected by ${payload.store_admin_name}.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Rejected By</div>
+          <div class="lead-info-value">${payload.store_admin_name}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Reason</div>
+          <div class="lead-info-value">${payload.rejection_reason}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Rejection Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    store_admin_name: payload.store_admin_name,
+    rejection_reason: payload.rejection_reason,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_ADMIN_REJECTED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderRequestFullyApprovedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderRequestFullyApprovedEmail = async (
+  payload: SmallOrderRequestFullyApprovedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Fully Approved – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order request for ${payload.leadCode} - ${payload.leadName} has been approved by both the Site Supervisor and Store Admin.`,
+    "A new Small Order lead has been created and moved to Order Login.",
+    "",
+    payload.projectUrl ? `View Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Fully Approved
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by both the Site Supervisor and Store Admin.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A new Small Order lead has been created and moved to Order Login.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Status</div>
+          <div class="lead-info-value" style="color:#16a34a;">Fully Approved</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_REQUEST_FULLY_APPROVED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderSentToPreProductionEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  pre_production_user_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderSentToPreProductionEmail = async (
+  payload: SmallOrderSentToPreProductionEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Sent for Pre Production – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.pre_production_user_name},`,
+    "",
+    `Order Login has been completed for the Small Order request of ${payload.leadCode} - ${payload.leadName}.`,
+    "Please review the order and upload the required Pre-Production file.",
+    "",
+    payload.projectUrl ? `Review Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Sent for Pre Production
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.pre_production_user_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Order Login has been completed for the Small Order request of <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the order and upload the required Pre-Production file.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.pre_production_user_name,
+    pre_production_user_name: payload.pre_production_user_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_SENT_TO_PRE_PRODUCTION,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.pre_production_user_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderSentToFactoryEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  factory_user_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderSentToFactoryEmail = async (
+  payload: SmallOrderSentToFactoryEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Sent for Production – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.factory_user_name},`,
+    "",
+    `A Small Order for ${payload.leadCode} - ${payload.leadName} has been sent for production after Order Login completion.`,
+    "Please review the order details and proceed with the production process.",
+    "",
+    payload.projectUrl ? `View Production Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Sent for Production
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.factory_user_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A Small Order for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been sent for production after Order Login completion.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the order details and proceed with the production process.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Production Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.factory_user_name,
+    factory_user_name: payload.factory_user_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_SENT_TO_PRODUCTION,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.factory_user_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderProductionCompletedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderProductionCompletedEmail = async (
+  payload: SmallOrderProductionCompletedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Production Completed – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `Production has been completed for the Small Order of ${payload.leadCode} - ${payload.leadName}.`,
+    "Please complete the Dispatch Planning details to proceed further.",
+    "",
+    payload.projectUrl ? `Complete Dispatch Planning: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Production Completed
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Production has been completed for the Small Order of <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please complete the Dispatch Planning details to proceed further.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Complete Dispatch Planning
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_PRODUCTION_COMPLETED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderReadyForDispatchEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  factory_user_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderReadyForDispatchEmail = async (
+  payload: SmallOrderReadyForDispatchEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Ready for Dispatch – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.factory_user_name},`,
+    "",
+    `Dispatch Planning has been completed for the Small Order of ${payload.leadCode} - ${payload.leadName}.`,
+    "Please update the dispatch date and dispatch information.",
+    "",
+    payload.projectUrl ? `Update Dispatch Details: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Ready for Dispatch
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.factory_user_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Dispatch Planning has been completed for the Small Order of <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please update the dispatch date and dispatch information.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Update Dispatch Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.factory_user_name,
+    factory_user_name: payload.factory_user_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_READY_FOR_DISPATCH,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.factory_user_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderDispatchedForInstallationEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  site_supervisor_name: string;
+  leadCode: string;
+  leadName: string;
+  dispatch_date: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderDispatchedForInstallationEmail = async (
+  payload: SmallOrderDispatchedForInstallationEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Dispatched for Installation – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.site_supervisor_name},`,
+    "",
+    `The Small Order for ${payload.leadCode} - ${payload.leadName} has been dispatched and moved to Under Installation.`,
+    "Please review the details and update the installation progress as required.",
+    `Dispatch Date: ${payload.dispatch_date}`,
+    "",
+    payload.projectUrl ? `Update Installation: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Dispatched for Installation
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.site_supervisor_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been dispatched and moved to Under Installation.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the details and update the installation progress as required.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Dispatch Date</div>
+          <div class="lead-info-value">${payload.dispatch_date}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Update Installation
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.site_supervisor_name,
+    site_supervisor_name: payload.site_supervisor_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    dispatch_date: payload.dispatch_date,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_DISPATCHED_FOR_INSTALLATION,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.site_supervisor_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface SmallOrderDispatchedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  sales_executive_name: string;
+  leadCode: string;
+  leadName: string;
+  dispatch_date: string;
+  projectUrl: string;
+}
+
+export const sendSmallOrderDispatchedEmail = async (
+  payload: SmallOrderDispatchedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Small Order Dispatched – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.sales_executive_name},`,
+    "",
+    `The Small Order for ${payload.leadCode} - ${payload.leadName} has been dispatched successfully.`,
+    `Dispatch Date: ${payload.dispatch_date}`,
+    "The order has now been moved to Under Installation for Site Supervisor updates.",
+    "",
+    payload.projectUrl ? `View Small Order: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        Small Order Dispatched
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.sales_executive_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The Small Order for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been dispatched successfully.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        The order has now been moved to Under Installation for Site Supervisor updates.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Dispatch Date</div>
+          <div class="lead-info-value">${payload.dispatch_date}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Small Order
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.sales_executive_name,
+    sales_executive_name: payload.sales_executive_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    dispatch_date: payload.dispatch_date,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.SMALL_ORDER_DISPATCHED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.sales_executive_name,
       subject,
       text,
       html,

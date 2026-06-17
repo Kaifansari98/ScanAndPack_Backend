@@ -5,6 +5,7 @@ import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToDispatchEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendSmallOrderReadyForDispatchEmail } from "../../email/brevoEmail2.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
@@ -707,6 +708,7 @@ export class DispatchPlanningService {
             account_id: true,
             franchise_id: true,
             statusType: { select: { tag: true } },
+            is_small_order_request: true,
           },
         }),
         prisma.leadProductStructureInstance.findFirst({
@@ -814,6 +816,49 @@ export class DispatchPlanningService {
           });
         }),
       );
+
+      if (lead.is_small_order_request && factoryUser) {
+        const smallOrderRedirectPath = `/dashboard/installation/dispatch-planning/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
+
+        await Promise.allSettled([
+          (async () => {
+            try {
+              await NotificationService.createAndSend({
+                vendor_id: lead.vendor_id,
+                user_id: factoryUser.id,
+                sender_id: actorId,
+                type: NotificationType.LEAD_ACTION,
+                title: "Small Order Ready for Dispatch",
+                message: `Dispatch Planning for ${leadCode} - ${leadName} is completed. Please update the dispatch details.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: smallOrderRedirectPath,
+              });
+              console.log(`✅ Small Order Ready for Dispatch In-App sent to Factory User ${factoryUser.id}`);
+            } catch (err: any) {
+              logger.warn(`⚠️ Small Order Ready for Dispatch In-App to Factory User ${factoryUser.id} failed:`, err.message);
+            }
+          })(),
+          (async () => {
+            if (factoryUser.user_email) {
+              try {
+                await sendSmallOrderReadyForDispatchEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: factoryUser.user_email,
+                  factory_user_name: factoryUser.user_name || "Factory User",
+                  leadCode,
+                  leadName,
+                  projectUrl: smallOrderProjectUrl,
+                });
+                console.log(`✅ Small Order Ready for Dispatch Email sent to Factory User ${factoryUser.user_email}`);
+              } catch (err: any) {
+                logger.warn(`⚠️ Small Order Ready for Dispatch Email to ${factoryUser.user_email} failed:`, err.message);
+              }
+            }
+          })(),
+        ]);
+      }
 
       logger.info("✅ Move to Dispatch notifications sent", {
         vendor_id: lead.vendor_id,
