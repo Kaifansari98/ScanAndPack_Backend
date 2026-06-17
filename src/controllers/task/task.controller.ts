@@ -20,7 +20,7 @@ export class TaskController {
       }
 
       const { tasks, count } = await TaskService.getTasksByVendorAndUser2(
-        vendorId,
+        vendorId, 
         userId,
         franchiseId,
         1,
