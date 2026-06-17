@@ -863,7 +863,7 @@ export const getLeadsByVendorAndUser = async (
       console.log(
         `[SERVICE] Applied sales-executive filter for user ${userId}`,
       );
-    } else if (["admin", "super-admin"].includes(userType)) {
+    } else if (["admin", "super-admin", "auditor"].includes(userType)) {
       // Admins and super-admins can see all leads for their vendor
       // No additional filtering needed beyond vendor_id
       console.log(
@@ -956,7 +956,7 @@ export const getLeadsByVendorAndUser = async (
       leads: leadsWithSignedDocs,
       userInfo: {
         role: userType,
-        canViewAllLeads: ["admin", "super-admin"].includes(userType),
+        canViewAllLeads: ["admin", "super-admin", "auditor"].includes(userType),
         userData: userInfo.userData,
       },
     };
@@ -1017,7 +1017,7 @@ export const getLeadById = async (
       (userType === "custom" && !!customViewPrivilege)
     ) {
       console.log("[SERVICE] Sales Executive – vendor scoped access granted");
-    } else if (["admin", "super-admin"].includes(userType)) {
+    } else if (["admin", "super-admin", "auditor"].includes(userType)) {
       console.log("[SERVICE] Admin/Super-admin full access");
     } else {
       console.log("[SERVICE] Limited role – assigned/created leads access");
@@ -1253,7 +1253,7 @@ export const getLeadById = async (
       },
       userInfo: {
         role: userType,
-        canViewAllLeads: ["admin", "super-admin"].includes(userType),
+        canViewAllLeads: ["admin", "super-admin", "auditor"].includes(userType),
         userData: userInfo.userData,
       },
     };

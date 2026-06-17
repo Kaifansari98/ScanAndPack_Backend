@@ -3172,17 +3172,8 @@ export class BookingStageService {
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
-    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin);
-    const shouldUseMappingForRange =
-      isType4To16 &&
-      [
-        "sales-executive",
-        "site-supervisor",
-        "backend",
-        "tech-check",
-        "factory",
-        "head-site-supervisor",
-      ].includes(normalizedUserType || "");
+    const isAuditor = normalizedUserType === "auditor";
+    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
     const shouldIncludeFranchiseByRole =
       isType4To16 &&
       [
@@ -3190,10 +3181,12 @@ export class BookingStageService {
         "site-supervisor",
         "admin",
         "super-admin",
+        "auditor",
       ].includes(normalizedUserType || "");
     const shouldIncludeFranchise =
       normalizedUserType === "admin" ||
       normalizedUserType === "super-admin" ||
+      normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
     const orderBy = {
@@ -3987,10 +3980,12 @@ export class BookingStageService {
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
-    const isAdminFlow = isAdmin || isSuperAdmin;
+    const isAuditor = normalizedUserType === "auditor";
+    const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
     const shouldIncludeFranchise =
       normalizedUserType === "admin" ||
       normalizedUserType === "super-admin" ||
+      normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
 
     const skip = (page - 1) * limit;
