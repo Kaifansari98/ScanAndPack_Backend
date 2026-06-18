@@ -3110,17 +3110,8 @@ export class BookingStageService {
     const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
     const isAdmin = normalizedUserType === "admin";
     const isSuperAdmin = normalizedUserType === "super-admin";
-    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin);
-    const shouldUseMappingForRange =
-      isType4To16 &&
-      [
-        "sales-executive",
-        "site-supervisor",
-        "backend",
-        "tech-check",
-        "factory",
-        "head-site-supervisor",
-      ].includes(normalizedUserType || "");
+    const isAuditor = normalizedUserType === "auditor";
+    const isAdminLikeForRange = isType4To16 && (isAdmin || isSuperAdmin || isAuditor);
     const shouldIncludeFranchiseByRole =
       isType4To16 &&
       [
@@ -3128,10 +3119,12 @@ export class BookingStageService {
         "site-supervisor",
         "admin",
         "super-admin",
+        "auditor",
       ].includes(normalizedUserType || "");
     const shouldIncludeFranchise =
       normalizedUserType === "admin" ||
       normalizedUserType === "super-admin" ||
+      normalizedUserType === "auditor" ||
       normalizedUserType === "sales-executive";
     const skip = (page - 1) * limit;
     const orderBy = {
@@ -3852,4 +3845,325 @@ export class BookingStageService {
       return task;
     });
   }
+
+
+  public static async getDraftLeadTableData(
+    vendorId: number,
+    userId: number,
+    franchiseId: number | undefined,
+    page: number = 1,
+    limit: number = 50,
+    filters: {
+      global_search?: string;
+      filter_lead_code?: string;
+      filter_name?: string;
+      contact?: string;
+      furniture_type?: Array<number | string>;
+      furniture_structure?: Array<number | string>;
+      site_map_link?: boolean;
+      site_type?: Array<number | string>;
+      assign_to?: Array<number | string>;
+      priority?: Array<string>;
+      site_address?: string;
+      archetech_name?: string;
+      source?: Array<number | string>;
+      created_at?: "asc" | "desc";
+      alt_contact_no?: string;
+      email?: string;
+      designer_remark?: string;
+      date_range?: { from: string; to: string };
+    } = {}
+  ): Promise<{ leads: any[]; count: number }> {
+    logger.info("[BookingStageService] getDraftLeadTableData called", { vendorId, userId, franchiseId, page, limit });
+
+    // Enforce Type 1
+    const targetTags = ["Type 1"];
+    const statusTypes = await prisma.statusTypeMaster.findMany({
+      where: { vendor_id: vendorId, tag: { in: targetTags } },
+      select: { id: true },
+    });
+
+    if (!statusTypes.length) {
+      return { leads: [], count: 0 };
+    }
+    const statusIds = statusTypes.map((status) => status.id);
+
+    const creator = await prisma.userMaster.findUnique({
+      where: { id: userId },
+      include: { user_type: true },
+    });
+
+    const normalizedUserType = creator?.user_type?.user_type?.toLowerCase();
+    const isAdmin = normalizedUserType === "admin";
+    const isSuperAdmin = normalizedUserType === "super-admin";
+    const isAuditor = normalizedUserType === "auditor";
+    const isAdminFlow = isAdmin || isSuperAdmin || isAuditor;
+    const shouldIncludeFranchise =
+      normalizedUserType === "admin" ||
+      normalizedUserType === "super-admin" ||
+      normalizedUserType === "auditor" ||
+      normalizedUserType === "sales-executive";
+
+    const skip = (page - 1) * limit;
+    const orderBy = {
+      created_at: filters.created_at === "asc" ? Prisma.SortOrder.asc : Prisma.SortOrder.desc,
+    };
+
+    const includeConfig = BookingStageService.leadIncludes("Type 1");
+
+    const addFilterConditions = (whereClause: Prisma.LeadMasterWhereInput): Prisma.LeadMasterWhereInput => {
+      const addAnd = (condition: Prisma.LeadMasterWhereInput) => {
+        if (!whereClause.AND) whereClause.AND = [];
+        if (Array.isArray(whereClause.AND)) {
+          whereClause.AND.push(condition);
+        } else {
+          whereClause.AND = [whereClause.AND, condition];
+        }
+      };
+
+      const toString = (value: unknown) => (typeof value === "string" ? value.trim() : "");
+      const toArray = (value: unknown): Array<number | string> => {
+        if (Array.isArray(value)) return value;
+        if (value === undefined || value === null) return [];
+        return [value as number | string];
+      };
+      const parseNumberList = (value: unknown) => {
+        const raw = toArray(value);
+        const numbers = raw.map(Number).filter((item) => !Number.isNaN(item));
+        const strings = raw.filter((item) => Number.isNaN(Number(item))).map(String);
+        return { numbers, strings };
+      };
+
+      const leadCode = toString(filters.filter_lead_code);
+      if (leadCode) {
+        addAnd({ lead_code: { contains: leadCode, mode: "insensitive" } });
+      }
+
+      const nameFilter = toString(filters.filter_name);
+      if (nameFilter) {
+        const nameParts = nameFilter.split(/\s+/).filter(Boolean);
+        if (nameParts.length >= 2) {
+          addAnd({
+            AND: [
+              { firstname: { contains: nameParts[0], mode: "insensitive" } },
+              { lastname: { contains: nameParts.slice(1).join(" "), mode: "insensitive" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [
+              { firstname: { contains: nameFilter, mode: "insensitive" } },
+              { lastname: { contains: nameFilter, mode: "insensitive" } },
+            ],
+          });
+        }
+      }
+
+      const globalSearch = toString(filters.global_search);
+      if (globalSearch) {
+        const nameParts = globalSearch.split(/\s+/).filter(Boolean);
+        if (nameParts.length >= 2) {
+          addAnd({
+            OR: [
+              {
+                AND: [
+                  { firstname: { contains: nameParts[0], mode: "insensitive" } },
+                  { lastname: { contains: nameParts.slice(1).join(" "), mode: "insensitive" } },
+                ],
+              },
+              { lead_code: { contains: globalSearch, mode: "insensitive" } },
+              { contact_no: { contains: globalSearch, mode: "insensitive" } },
+            ],
+          });
+        } else {
+          addAnd({
+            OR: [
+              { firstname: { contains: globalSearch, mode: "insensitive" } },
+              { lastname: { contains: globalSearch, mode: "insensitive" } },
+              { lead_code: { contains: globalSearch, mode: "insensitive" } },
+              { contact_no: { contains: globalSearch, mode: "insensitive" } },
+            ],
+          });
+        }
+      }
+
+      const contactFilter = toString(filters.contact);
+      if (contactFilter) {
+        addAnd({ contact_no: { contains: contactFilter, mode: "insensitive" } });
+      }
+
+      const altContactFilter = toString(filters.alt_contact_no);
+      if (altContactFilter) {
+        addAnd({ alt_contact_no: { contains: altContactFilter, mode: "insensitive" } });
+      }
+
+      const emailFilter = toString(filters.email);
+      if (emailFilter) {
+        addAnd({ email: { contains: emailFilter, mode: "insensitive" } });
+      }
+
+      const siteAddressFilter = toString(filters.site_address);
+      if (siteAddressFilter) {
+        addAnd({ site_address: { contains: siteAddressFilter, mode: "insensitive" } });
+      }
+
+      const archetechFilter = toString(filters.archetech_name);
+      if (archetechFilter) {
+        addAnd({ archetech_name: { contains: archetechFilter, mode: "insensitive" } });
+      }
+
+      const designerRemarkFilter = toString(filters.designer_remark);
+      if (designerRemarkFilter) {
+        addAnd({ designer_remark: { contains: designerRemarkFilter, mode: "insensitive" } });
+      }
+
+      const dateRange = filters.date_range;
+      if (dateRange && (dateRange.from || dateRange.to)) {
+        let fromDate: Date | null = null;
+        let toDate: Date | null = null;
+
+        if (dateRange.from) {
+          fromDate = new Date(dateRange.from);
+          fromDate.setHours(0, 0, 0, 0);
+        }
+        if (dateRange.to) {
+          toDate = new Date(dateRange.to);
+          toDate.setHours(23, 59, 59, 999);
+        }
+
+        if (fromDate && toDate) {
+          addAnd({ created_at: { gte: fromDate, lte: toDate } });
+        } else if (fromDate) {
+          const endOfDay = new Date(fromDate);
+          endOfDay.setHours(23, 59, 59, 999);
+          addAnd({ created_at: { gte: fromDate, lte: endOfDay } });
+        } else if (toDate) {
+          addAnd({ created_at: { lte: toDate } });
+        }
+      }
+
+      if (Array.isArray(filters.assign_to) && filters.assign_to.length > 0) {
+        const assignIds = filters.assign_to.map(Number).filter((id) => !Number.isNaN(id));
+        if (assignIds.length > 0) {
+          addAnd({ assign_to: { in: assignIds } });
+        }
+      }
+
+      if (Array.isArray(filters.priority) && filters.priority.length > 0) {
+        const priorities = filters.priority.map((item) => String(item).trim()).filter(Boolean);
+        if (priorities.length > 0) {
+          addAnd({
+            OR: priorities.map((priority) => ({
+              priority: { equals: priority, mode: "insensitive" },
+            })),
+          });
+        }
+      }
+
+      const siteTypeList = parseNumberList(filters.site_type);
+      if (siteTypeList.numbers.length > 0) {
+        addAnd({ site_type_id: { in: siteTypeList.numbers } });
+      } else if (siteTypeList.strings.length > 0) {
+        addAnd({ siteType: { type: { in: siteTypeList.strings } } });
+      }
+
+      const sourceList = parseNumberList(filters.source);
+      if (sourceList.numbers.length > 0) {
+        addAnd({ source_id: { in: sourceList.numbers } });
+      } else if (sourceList.strings.length > 0) {
+        addAnd({ source: { type: { in: sourceList.strings } } });
+      }
+
+      const furnitureTypes = parseNumberList(filters.furniture_type);
+      if (furnitureTypes.numbers.length > 0) {
+        addAnd({ productMappings: { some: { product_type_id: { in: furnitureTypes.numbers } } } });
+      } else if (furnitureTypes.strings.length > 0) {
+        addAnd({ productMappings: { some: { productType: { type: { in: furnitureTypes.strings } } } } });
+      }
+
+      const furnitureStructures = parseNumberList(filters.furniture_structure);
+      if (furnitureStructures.numbers.length > 0) {
+        addAnd({ leadProductStructureMapping: { some: { product_structure_id: { in: furnitureStructures.numbers } } } });
+      } else if (furnitureStructures.strings.length > 0) {
+        addAnd({ leadProductStructureMapping: { some: { productStructure: { type: { in: furnitureStructures.strings } } } } });
+      }
+
+      if (typeof filters.site_map_link === "boolean") {
+        if (filters.site_map_link) {
+          addAnd({
+            AND: [{ site_map_link: { not: null } }, { site_map_link: { not: "" } }],
+          });
+        } else {
+          addAnd({
+            OR: [{ site_map_link: null }, { site_map_link: "" }],
+          });
+        }
+      }
+
+      return whereClause;
+    };
+
+    let baseWhere: Prisma.LeadMasterWhereInput = {
+      vendor_id: vendorId,
+      is_deleted: false,
+      status_id: { in: statusIds },
+      is_draft: true,
+    };
+
+    if (shouldIncludeFranchise && franchiseId) {
+      baseWhere.franchise_id = franchiseId;
+    }
+
+    if (!isAdminFlow) {
+      const mappedLeads = await prisma.leadUserMapping.findMany({
+        where: { vendor_id: vendorId, user_id: userId, status: "active" },
+        select: { lead_id: true },
+      });
+
+      const taskLeads = await prisma.userLeadTask.findMany({
+        where: { vendor_id: vendorId, OR: [{ created_by: userId }, { user_id: userId }] },
+        select: { lead_id: true },
+      });
+
+      const leadIds = [...new Set([...mappedLeads.map((m) => m.lead_id), ...taskLeads.map((t) => t.lead_id)])];
+
+      if (!leadIds.length) {
+        return { leads: [], count: 0 };
+      }
+      baseWhere.id = { in: leadIds };
+    }
+
+    const whereClause = addFilterConditions(baseWhere);
+
+    const [leads, total] = await Promise.all([
+      prisma.leadMaster.findMany({
+        where: whereClause,
+        include: includeConfig,
+        orderBy,
+        skip,
+        take: limit,
+      }),
+      prisma.leadMaster.count({ where: whereClause }),
+    ]);
+
+    const processed = await Promise.all(
+      leads.map(async (lead: any) => {
+        const docsWithUrls = await Promise.all(
+          lead.documents.map(async (doc: any) => {
+            const signed_url = await generateSignedUrl(doc.doc_sys_name);
+            return {
+              ...doc,
+              signed_url,
+              file_type: BookingStageService.getFileType(doc.doc_og_name),
+              is_image: BookingStageService.isImageFile(doc.doc_og_name),
+            };
+          })
+        );
+        return { ...lead, documents: docsWithUrls };
+      })
+    );
+
+    return { leads: processed, count: total };
+  }
 }
+

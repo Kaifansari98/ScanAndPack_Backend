@@ -43,6 +43,7 @@ export type LeadMasterAvgAggregateOutputType = {
   total_project_amount: number | null
   no_of_client_documents_initially_submitted: number | null
   no_of_boxes: number | null
+  material_lift_size: number | null
   mrp_value: number | null
   franchise_id: number | null
   total_required_chs_manufacturing_days: number | null
@@ -65,6 +66,7 @@ export type LeadMasterSumAggregateOutputType = {
   total_project_amount: number | null
   no_of_client_documents_initially_submitted: number | null
   no_of_boxes: number | null
+  material_lift_size: number | null
   mrp_value: number | null
   franchise_id: number | null
   total_required_chs_manufacturing_days: number | null
@@ -118,6 +120,7 @@ export type LeadMasterMinAggregateOutputType = {
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
+  material_lift_size: number | null
   vehicle_approachability_for_dispatch: boolean | null
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
@@ -202,6 +205,7 @@ export type LeadMasterMaxAggregateOutputType = {
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
+  material_lift_size: number | null
   vehicle_approachability_for_dispatch: boolean | null
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
@@ -286,6 +290,7 @@ export type LeadMasterCountAggregateOutputType = {
   no_of_boxes: number
   dispatch_planning_remark: number
   material_lift_availability: number
+  material_lift_size: number
   vehicle_approachability_for_dispatch: number
   onsite_contact_person_name: number
   onsite_contact_person_number: number
@@ -341,6 +346,7 @@ export type LeadMasterAvgAggregateInputType = {
   total_project_amount?: true
   no_of_client_documents_initially_submitted?: true
   no_of_boxes?: true
+  material_lift_size?: true
   mrp_value?: true
   franchise_id?: true
   total_required_chs_manufacturing_days?: true
@@ -363,6 +369,7 @@ export type LeadMasterSumAggregateInputType = {
   total_project_amount?: true
   no_of_client_documents_initially_submitted?: true
   no_of_boxes?: true
+  material_lift_size?: true
   mrp_value?: true
   franchise_id?: true
   total_required_chs_manufacturing_days?: true
@@ -416,6 +423,7 @@ export type LeadMasterMinAggregateInputType = {
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
+  material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
@@ -500,6 +508,7 @@ export type LeadMasterMaxAggregateInputType = {
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
+  material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
@@ -584,6 +593,7 @@ export type LeadMasterCountAggregateInputType = {
   no_of_boxes?: true
   dispatch_planning_remark?: true
   material_lift_availability?: true
+  material_lift_size?: true
   vehicle_approachability_for_dispatch?: true
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
@@ -755,6 +765,7 @@ export type LeadMasterGroupByOutputType = {
   no_of_boxes: number | null
   dispatch_planning_remark: string | null
   material_lift_availability: boolean | null
+  material_lift_size: number | null
   vehicle_approachability_for_dispatch: boolean | null
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
@@ -862,6 +873,7 @@ export type LeadMasterWhereInput = {
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  material_lift_size?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -995,6 +1007,7 @@ export type LeadMasterOrderByWithRelationInput = {
   no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1132,6 +1145,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  material_lift_size?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -1265,6 +1279,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   no_of_boxes?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrderInput | Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrderInput | Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1357,6 +1372,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   no_of_boxes?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
+  material_lift_size?: Prisma.FloatNullableWithAggregatesFilter<"LeadMaster"> | number | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableWithAggregatesFilter<"LeadMaster"> | boolean | null
   onsite_contact_person_name?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
@@ -1431,6 +1447,7 @@ export type LeadMasterCreateInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -1563,6 +1580,7 @@ export type LeadMasterUncheckedCreateInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -1676,6 +1694,7 @@ export type LeadMasterUpdateInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1808,6 +1827,7 @@ export type LeadMasterUncheckedUpdateInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1931,6 +1951,7 @@ export type LeadMasterCreateManyInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -2005,6 +2026,7 @@ export type LeadMasterUpdateManyMutationInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2088,6 +2110,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2192,6 +2215,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
@@ -2245,6 +2269,7 @@ export type LeadMasterAvgOrderByAggregateInput = {
   total_project_amount?: Prisma.SortOrder
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   total_required_chs_manufacturing_days?: Prisma.SortOrder
@@ -2298,6 +2323,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
@@ -2382,6 +2408,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   no_of_boxes?: Prisma.SortOrder
   dispatch_planning_remark?: Prisma.SortOrder
   material_lift_availability?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
   vehicle_approachability_for_dispatch?: Prisma.SortOrder
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
@@ -2435,6 +2462,7 @@ export type LeadMasterSumOrderByAggregateInput = {
   total_project_amount?: Prisma.SortOrder
   no_of_client_documents_initially_submitted?: Prisma.SortOrder
   no_of_boxes?: Prisma.SortOrder
+  material_lift_size?: Prisma.SortOrder
   mrp_value?: Prisma.SortOrder
   franchise_id?: Prisma.SortOrder
   total_required_chs_manufacturing_days?: Prisma.SortOrder
@@ -3497,6 +3525,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -3627,6 +3656,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -3779,6 +3809,7 @@ export type LeadMasterScalarWhereInput = {
   no_of_boxes?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   dispatch_planning_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   material_lift_availability?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
+  material_lift_size?: Prisma.FloatNullableFilter<"LeadMaster"> | number | null
   vehicle_approachability_for_dispatch?: Prisma.BoolNullableFilter<"LeadMaster"> | boolean | null
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
@@ -3853,6 +3884,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -3983,6 +4015,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4106,6 +4139,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4236,6 +4270,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4359,6 +4394,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4489,6 +4525,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4612,6 +4649,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4742,6 +4780,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -4929,6 +4968,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -5060,6 +5100,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -5188,6 +5229,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5319,6 +5361,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5431,6 +5474,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -5562,6 +5606,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -5690,6 +5735,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5821,6 +5867,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -5933,6 +5980,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6064,6 +6112,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6197,6 +6246,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6328,6 +6378,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6456,6 +6507,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6587,6 +6639,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -6699,6 +6752,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6830,6 +6884,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -6958,6 +7013,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7089,6 +7145,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7201,6 +7258,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -7332,6 +7390,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -7460,6 +7519,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7591,6 +7651,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -7703,6 +7764,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -7833,6 +7895,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -7972,6 +8035,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8102,6 +8166,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8241,6 +8306,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8371,6 +8437,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8510,6 +8577,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8641,6 +8709,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -8769,6 +8838,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -8900,6 +8970,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9012,6 +9083,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -9143,6 +9215,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -9271,6 +9344,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9402,6 +9476,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9514,6 +9589,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -9645,6 +9721,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -9773,6 +9850,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -9904,6 +9982,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10016,6 +10095,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -10147,6 +10227,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -10275,6 +10356,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10406,6 +10488,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10518,6 +10601,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -10649,6 +10733,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -10777,6 +10862,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -10908,6 +10994,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11020,6 +11107,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -11151,6 +11239,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -11279,6 +11368,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11410,6 +11500,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11522,6 +11613,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -11653,6 +11745,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -11781,6 +11874,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -11912,6 +12006,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12024,6 +12119,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -12155,6 +12251,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -12283,6 +12380,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12414,6 +12512,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12526,6 +12625,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -12657,6 +12757,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -12785,6 +12886,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -12916,6 +13018,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13028,6 +13131,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -13159,6 +13263,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -13287,6 +13392,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13418,6 +13524,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13530,6 +13637,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -13661,6 +13769,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -13789,6 +13898,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -13920,6 +14030,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14032,6 +14143,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -14162,6 +14274,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -14301,6 +14414,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -14432,6 +14546,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -14560,6 +14675,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14691,6 +14807,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -14803,6 +14920,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -14934,6 +15052,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -15062,6 +15181,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15193,6 +15313,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15305,6 +15426,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -15436,6 +15558,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -15564,6 +15687,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15695,6 +15819,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -15807,6 +15932,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -15938,6 +16064,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -16066,6 +16193,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16197,6 +16325,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16309,6 +16438,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -16440,6 +16570,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -16568,6 +16699,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16699,6 +16831,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -16811,6 +16944,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -16942,6 +17076,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -17070,6 +17205,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17201,6 +17337,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17313,6 +17450,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -17444,6 +17582,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -17572,6 +17711,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17703,6 +17843,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -17815,6 +17956,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -17946,6 +18088,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -18074,6 +18217,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18205,6 +18349,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18317,6 +18462,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -18448,6 +18594,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -18576,6 +18723,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18707,6 +18855,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -18819,6 +18968,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -18950,6 +19100,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -19078,6 +19229,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19209,6 +19361,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19321,6 +19474,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -19452,6 +19606,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -19580,6 +19735,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19711,6 +19867,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -19823,6 +19980,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -19954,6 +20112,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -20082,6 +20241,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20213,6 +20373,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20325,6 +20486,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -20456,6 +20618,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -20584,6 +20747,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20715,6 +20879,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -20827,6 +20992,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -20958,6 +21124,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -21086,6 +21253,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21217,6 +21385,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21329,6 +21498,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -21460,6 +21630,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -21588,6 +21759,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21719,6 +21891,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -21831,6 +22004,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -21962,6 +22136,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -22090,6 +22265,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22221,6 +22397,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22333,6 +22510,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -22464,6 +22642,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -22592,6 +22771,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22723,6 +22903,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -22835,6 +23016,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -22966,6 +23148,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -23094,6 +23277,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23225,6 +23409,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23337,6 +23522,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -23468,6 +23654,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -23596,6 +23783,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23727,6 +23915,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -23839,6 +24028,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -23970,6 +24160,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -24098,6 +24289,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24229,6 +24421,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24341,6 +24534,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -24472,6 +24666,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -24600,6 +24795,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24731,6 +24927,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -24843,6 +25040,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -24974,6 +25172,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -25112,6 +25311,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -25243,6 +25443,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -25371,6 +25572,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25502,6 +25704,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25623,6 +25826,7 @@ export type LeadMasterCreateManyVendorInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -25697,6 +25901,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25827,6 +26032,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -25949,6 +26155,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26032,6 +26239,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -26115,6 +26323,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -26198,6 +26407,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -26281,6 +26491,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -26355,6 +26566,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26485,6 +26697,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26607,6 +26820,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26681,6 +26895,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26811,6 +27026,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -26933,6 +27149,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27007,6 +27224,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27137,6 +27355,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27259,6 +27478,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27333,6 +27553,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27463,6 +27684,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27585,6 +27807,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27659,6 +27882,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27790,6 +28014,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27912,6 +28137,7 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -27995,6 +28221,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -28069,6 +28296,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28199,6 +28427,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28321,6 +28550,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28404,6 +28634,7 @@ export type LeadMasterCreateManySourceInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -28478,6 +28709,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28608,6 +28840,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28730,6 +28963,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -28813,6 +29047,7 @@ export type LeadMasterCreateManyAccountInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -28887,6 +29122,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29017,6 +29253,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29139,6 +29376,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29222,6 +29460,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -29296,6 +29535,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29426,6 +29666,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29548,6 +29789,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29632,6 +29874,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   no_of_boxes?: number | null
   dispatch_planning_remark?: string | null
   material_lift_availability?: boolean | null
+  material_lift_size?: number | null
   vehicle_approachability_for_dispatch?: boolean | null
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
@@ -29705,6 +29948,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29836,6 +30080,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -29958,6 +30203,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -30414,6 +30660,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
+  material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
@@ -30548,6 +30795,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
+  material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
@@ -30642,6 +30890,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
+  material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
@@ -30736,6 +30985,7 @@ export type LeadMasterSelectScalar = {
   no_of_boxes?: boolean
   dispatch_planning_remark?: boolean
   material_lift_availability?: boolean
+  material_lift_size?: boolean
   vehicle_approachability_for_dispatch?: boolean
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
@@ -30772,7 +31022,7 @@ export type LeadMasterSelectScalar = {
   lead_blocked_at?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -30951,6 +31201,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     no_of_boxes: number | null
     dispatch_planning_remark: string | null
     material_lift_availability: boolean | null
+    material_lift_size: number | null
     vehicle_approachability_for_dispatch: boolean | null
     onsite_contact_person_name: string | null
     onsite_contact_person_number: string | null
@@ -31504,6 +31755,7 @@ export interface LeadMasterFieldRefs {
   readonly no_of_boxes: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly dispatch_planning_remark: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly material_lift_availability: Prisma.FieldRef<"LeadMaster", 'Boolean'>
+  readonly material_lift_size: Prisma.FieldRef<"LeadMaster", 'Float'>
   readonly vehicle_approachability_for_dispatch: Prisma.FieldRef<"LeadMaster", 'Boolean'>
   readonly onsite_contact_person_name: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly onsite_contact_person_number: Prisma.FieldRef<"LeadMaster", 'String'>

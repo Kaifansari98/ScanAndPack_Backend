@@ -6,7 +6,11 @@ import { NotificationService } from "../../../../src/services/notification/notif
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { resolveLeadCode } from "../../../../src/utils/fileUtils";
 import { STAGE_PATH_BY_TAG } from "../../leadModuleServices/leadsGeneration/leadActivityStatus.service";
-import { sendMovedToProductionWithOrderLoginEmail } from "../../email/brevoEmail2.service";
+import {
+  sendMovedToProductionWithOrderLoginEmail,
+  sendSmallOrderSentToFactoryEmail,
+  sendSmallOrderSentToPreProductionEmail,
+} from "../../email/brevoEmail2.service";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
@@ -1403,6 +1407,7 @@ export class OrderLoginService {
             title: true,
             account_id: true,
             quantity_index: true,
+            is_pre_prod_done: true,
           },
         });
 
@@ -1422,6 +1427,7 @@ export class OrderLoginService {
             vendor_id: true,
             account_id: true,
             franchise_id: true,
+            is_small_order_request: true,
           },
         });
 
@@ -1751,6 +1757,20 @@ export class OrderLoginService {
       const instanceOrderLoginComplete =
         instanceRecord?.is_order_login_filled === true;
 
+      const isSmallOrder = leadMeta?.is_small_order_request === true;
+
+      const factoryNotifTitle = isSmallOrder
+        ? "Small Order Sent for Production"
+        : (instanceOrderLoginComplete
+            ? "Project Assigned : Order Login Completed"
+            : "Project Assigned – Order Login Pending");
+
+      const factoryNotifMessage = isSmallOrder
+        ? `A Small Order for ${instanceCode} - ${leadName} is now available for production.`
+        : (instanceOrderLoginComplete
+            ? `${instanceCode} - ${leadName} has been assigned to you. Order Login is complete.`
+            : `You've been assigned ${instanceCode} - ${leadName} for Order Login. Upload production files and order login details.`);
+
       let missingTypes: string[] = [];
 
       if (!instanceOrderLoginComplete) {
@@ -1789,11 +1809,13 @@ export class OrderLoginService {
               user_id: factoryUser.id,
               sender_id: userId,
               type: NotificationType.LEAD_ASSIGNED,
-              title: "Project Assigned : Order Login Completed",
-              message: `${instanceCode} - ${leadName} has been assigned to you. Order Login is complete.`,
+              title: factoryNotifTitle,
+              message: factoryNotifMessage,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: orderLoginRedirectUrl,
+              redirect_url: isSmallOrder
+                ? `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?accountId=${leadMeta?.account_id}&instance_id=${instanceId}`
+                : orderLoginRedirectUrl,
             });
             console.log("✅ Factory notified");
           } catch (err: any) {
@@ -1831,11 +1853,13 @@ export class OrderLoginService {
               user_id: factoryUser.id,
               sender_id: userId,
               type: NotificationType.LEAD_ACTION,
-              title: "Project Assigned – Order Login Pending",
-              message: `You've been assigned ${instanceCode} - ${leadName} for Order Login. Upload production files and order login details.`,
+              title: factoryNotifTitle,
+              message: factoryNotifMessage,
               entity_type: "lead",
               entity_id: leadId,
-              redirect_url: orderLoginRedirectUrl,
+              redirect_url: isSmallOrder
+                ? `${STAGE_PATH_BY_TAG["Type 10"]}/${leadId}?accountId=${leadMeta?.account_id}&instance_id=${instanceId}`
+                : orderLoginRedirectUrl,
             });
 
             console.log("✅ Factory notified");
@@ -1887,12 +1911,16 @@ export class OrderLoginService {
           ? postProdRedirectUrl
           : orderLoginRedirectUrl;
 
-        const notifTitle = instanceOrderLoginComplete
-          ? "Moved to Production"
-          : "Moved to Production (Order Login Pending)";
-        const notifMessage = instanceOrderLoginComplete
-          ? `${instanceCode} - ${leadName} has entered Production.`
-          : `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`;
+        const notifTitle = isSmallOrder
+          ? "Small Order Sent for Pre Production"
+          : (instanceOrderLoginComplete
+              ? "Moved to Production"
+              : "Moved to Production (Order Login Pending)");
+        const notifMessage = isSmallOrder
+          ? `Order Login has been completed for the Small Order request of ${instanceCode} - ${leadName}.`
+          : (instanceOrderLoginComplete
+              ? `${instanceCode} - ${leadName} has entered Production.`
+              : `${instanceCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`);
 
         const preProdMapping = await prisma.leadUserMapping.findFirst({
           where: {
@@ -1906,7 +1934,7 @@ export class OrderLoginService {
           select: { user: { select: { id: true, user_name: true, user_email: true } } },
         });
 
-        if (preProdMapping?.user?.id) {
+        if (preProdMapping?.user?.id && !(isSmallOrder && instance?.is_pre_prod_done === true)) {
           try {
             await NotificationService.createAndSend({
               vendor_id: vendorId,
@@ -1946,6 +1974,39 @@ export class OrderLoginService {
             console.log(`✅ Email sent to ${target.user_email}`);
           } catch (err: any) {
             console.error(`❌ Email to ${target.user_email} failed:`, err.message);
+          }
+        }
+
+        if (isSmallOrder) {
+          if (factoryUser?.user_email) {
+            try {
+              await sendSmallOrderSentToFactoryEmail({
+                vendor_id: vendorId,
+                toEmail: factoryUser.user_email,
+                factory_user_name: factoryUser.user_name || "Factory User",
+                leadCode: instanceCode,
+                leadName,
+                projectUrl: `${baseUrl}${prodNotifRedirect}`,
+              });
+              console.log(`✅ Small Order Email sent to factory user ${factoryUser.user_email}`);
+            } catch (err: any) {
+              console.error(`❌ Small Order Email to factory user ${factoryUser.user_email} failed:`, err.message);
+            }
+          }
+          if (preProdMapping?.user?.user_email && !(instance?.is_pre_prod_done === true)) {
+            try {
+              await sendSmallOrderSentToPreProductionEmail({
+                vendor_id: vendorId,
+                toEmail: preProdMapping.user.user_email,
+                pre_production_user_name: preProdMapping.user.user_name || "Pre-Production User",
+                leadCode: instanceCode,
+                leadName,
+                projectUrl: `${baseUrl}${prodNotifRedirect}`,
+              });
+              console.log(`✅ Small Order Email sent to pre-prod user ${preProdMapping.user.user_email}`);
+            } catch (err: any) {
+              console.error(`❌ Small Order Email to pre-prod user ${preProdMapping.user.user_email} failed:`, err.message);
+            }
           }
         }
       }
@@ -2243,6 +2304,7 @@ export class OrderLoginService {
         vendor_id: true,
         account_id: true,
         franchise_id: true,
+        is_small_order_request: true,
       },
     });
 
@@ -2340,12 +2402,31 @@ export class OrderLoginService {
       ? postProdRedirectUrlB
       : orderLoginRedirectUrl;
 
-    const notifTitleB = orderLoginCompleted
-      ? "Moved to Production"
-      : "Moved to Production (Order Login Pending)";
-    const notifMessageB = orderLoginCompleted
-      ? `${leadCode} - ${leadName} has entered Production.`
-      : `${leadCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`;
+    const isSmallOrderB = leadMeta.is_small_order_request === true;
+
+    const factoryNotifTitleB = isSmallOrderB
+      ? "Small Order Sent for Production"
+      : (orderLoginCompleted
+          ? "Moved to Production"
+          : "Moved to Production (Order Login Pending)");
+
+    const factoryNotifMessageB = isSmallOrderB
+      ? `A Small Order for ${leadCode} - ${leadName} is now available for production.`
+      : (orderLoginCompleted
+          ? `${leadCode} - ${leadName} has entered Production.`
+          : `${leadCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`);
+
+    const preProdNotifTitleB = isSmallOrderB
+      ? "Small Order Sent for Pre Production"
+      : (orderLoginCompleted
+          ? "Moved to Production"
+          : "Moved to Production (Order Login Pending)");
+
+    const preProdNotifMessageB = isSmallOrderB
+      ? `Order Login has been completed for the Small Order request of ${leadCode} - ${leadName}.`
+      : (orderLoginCompleted
+          ? `${leadCode} - ${leadName} has entered Production.`
+          : `${leadCode} - ${leadName} has entered Production. Production files are available, but Order Login details are pending.`);
 
     if (factoryUser?.id) {
       try {
@@ -2354,8 +2435,8 @@ export class OrderLoginService {
           user_id: factoryUser.id,
           sender_id: userId,
           type: NotificationType.LEAD_ACTION,
-          title: notifTitleB,
-          message: notifMessageB,
+          title: factoryNotifTitleB,
+          message: factoryNotifMessageB,
           entity_type: "lead",
           entity_id: leadId,
           redirect_url: prodNotifRedirectB,
@@ -2405,15 +2486,25 @@ export class OrderLoginService {
         select: { user: { select: { id: true, user_name: true, user_email: true } } },
       });
 
-      if (preProdMappingB?.user?.id) {
+      const checkPreProdDoneB = await prisma.leadProductStructureInstance.findFirst({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          is_pre_prod_done: true,
+        },
+        select: { id: true },
+      });
+      const isPreProdDoneB = !!checkPreProdDoneB;
+
+      if (preProdMappingB?.user?.id && !(isSmallOrderB && isPreProdDoneB)) {
         try {
           await NotificationService.createAndSend({
             vendor_id: vendorId,
             user_id: preProdMappingB.user.id,
             sender_id: userId,
             type: NotificationType.LEAD_ACTION,
-            title: notifTitleB,
-            message: notifMessageB,
+            title: preProdNotifTitleB,
+            message: preProdNotifMessageB,
             entity_type: "lead",
             entity_id: leadId,
             redirect_url: prodNotifRedirectB,
@@ -2445,6 +2536,39 @@ export class OrderLoginService {
           console.log(`✅ Email sent to ${target.user_email}`);
         } catch (err: any) {
           console.error(`❌ Email to ${target.user_email} failed:`, err.message);
+        }
+      }
+
+      if (isSmallOrderB) {
+        if (factoryUser?.user_email) {
+          try {
+            await sendSmallOrderSentToFactoryEmail({
+              vendor_id: vendorId,
+              toEmail: factoryUser.user_email,
+              factory_user_name: factoryUser.user_name || "Factory User",
+              leadCode: leadCode ?? "",
+              leadName,
+              projectUrl: `${baseUrl}${prodNotifRedirectB}`,
+            });
+            console.log(`✅ Small Order Email sent to factory user ${factoryUser.user_email}`);
+          } catch (err: any) {
+            console.error(`❌ Small Order Email to factory user ${factoryUser.user_email} failed:`, err.message);
+          }
+        }
+        if (preProdMappingB?.user?.user_email && !isPreProdDoneB) {
+          try {
+            await sendSmallOrderSentToPreProductionEmail({
+              vendor_id: vendorId,
+              toEmail: preProdMappingB.user.user_email,
+              pre_production_user_name: preProdMappingB.user.user_name || "Pre-Production User",
+              leadCode: leadCode ?? "",
+              leadName,
+              projectUrl: `${baseUrl}${prodNotifRedirectB}`,
+            });
+            console.log(`✅ Small Order Email sent to pre-prod user ${preProdMappingB.user.user_email}`);
+          } catch (err: any) {
+            console.error(`❌ Small Order Email to pre-prod user ${preProdMappingB.user.user_email} failed:`, err.message);
+          }
         }
       }
     }

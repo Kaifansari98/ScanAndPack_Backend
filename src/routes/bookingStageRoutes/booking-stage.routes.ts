@@ -63,6 +63,11 @@ bookingStageRouter.post(
 );
 
 bookingStageRouter.post(
+  "/draft-lead-table-data/vendorId/:vendorId",
+  bookingStageController.getDraftLeadTableData,
+);
+
+bookingStageRouter.post(
   "/vendorId/:vendorId/vendor-leads-by-tag/all-leads",
   bookingStageController.getVendorLeadsByTag2,
 );

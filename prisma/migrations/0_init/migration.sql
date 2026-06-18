@@ -1760,3 +1760,49 @@ ALTER TABLE "_LeadDocumentsToSiteReadiness" ADD CONSTRAINT "_LeadDocumentsToSite
 -- AddForeignKey
 ALTER TABLE "_LeadDocumentsToSiteReadiness" ADD CONSTRAINT "_LeadDocumentsToSiteReadiness_B_fkey" FOREIGN KEY ("B") REFERENCES "SiteReadiness"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+-- CreateEnum
+CREATE TYPE "ExternalPlatformMasterActiveStatus" AS ENUM ('Yes', 'No');
+
+-- CreateEnum
+CREATE TYPE "ExternalPlatformTokenActiveStatus" AS ENUM ('Yes', 'No');
+
+-- CreateTable
+CREATE TABLE "ExternalPlatformMaster" (
+    "id" SERIAL NOT NULL,
+    "external_platform_name" TEXT NOT NULL,
+    "active" "ExternalPlatformMasterActiveStatus" NOT NULL DEFAULT 'Yes',
+
+    CONSTRAINT "ExternalPlatformMaster_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ExternalPlatformToken" (
+    "id" SERIAL NOT NULL,
+    "external_platform_id" INTEGER NOT NULL,
+    "token" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+    "company_id" TEXT NOT NULL,
+    "vendor_id" INTEGER NOT NULL,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_by" INTEGER NOT NULL,
+    "updated_at" TIMESTAMP(3) NOT NULL,
+    "updated_by" INTEGER NOT NULL,
+    "active" "ExternalPlatformTokenActiveStatus" NOT NULL DEFAULT 'Yes',
+
+    CONSTRAINT "ExternalPlatformToken_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "ExternalPlatformToken" ADD CONSTRAINT "ExternalPlatformToken_external_platform_id_fkey" FOREIGN KEY ("external_platform_id") REFERENCES "ExternalPlatformMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ExternalPlatformToken" ADD CONSTRAINT "ExternalPlatformToken_vendor_id_fkey" FOREIGN KEY ("vendor_id") REFERENCES "VendorMaster"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ExternalPlatformToken" ADD CONSTRAINT "ExternalPlatformToken_created_by_fkey" FOREIGN KEY ("created_by") REFERENCES "UserMaster"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ExternalPlatformToken" ADD CONSTRAINT "ExternalPlatformToken_updated_by_fkey" FOREIGN KEY ("updated_by") REFERENCES "UserMaster"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
