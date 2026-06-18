@@ -34,6 +34,8 @@ export const SMALL_ORDER_TEMPLATE_KEYS = {
   SMALL_ORDER_REQUEST_ADMIN_REJECTED: "SMALL_ORDER_REQUEST_ADMIN_REJECTED",
   // Fully Approved Update to Sales Executive
   SMALL_ORDER_REQUEST_FULLY_APPROVED: "SMALL_ORDER_REQUEST_FULLY_APPROVED",
+  // New Small Order Lead Assigned to Backend (Order Login) User
+  NEW_SMALL_ORDER_LEAD_ASSIGNED: "NEW_SMALL_ORDER_LEAD_ASSIGNED",
   // Pre Production User Update
   SMALL_ORDER_SENT_TO_PRE_PRODUCTION: "SMALL_ORDER_SENT_TO_PRE_PRODUCTION",
   // Factory User Update
@@ -3101,6 +3103,165 @@ export const sendSmallOrderRequestAdminRejectedEmail = async (
     {
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
+export interface NewSmallOrderLeadAssignedEmailPayload {
+  vendor_id: number;
+  toEmail: string;
+  order_login_user_name: string;
+  leadCode: string;
+  leadName: string;
+  projectUrl: string;
+}
+
+export const sendNewSmallOrderLeadAssignedEmail = async (
+  payload: NewSmallOrderLeadAssignedEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `New Small Order Lead Assigned – ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.order_login_user_name},`,
+    "",
+    `A new Small Order lead has been created for ${payload.leadCode} - ${payload.leadName}`,
+    "Please review the details and complete the Order Login process.",
+    "",
+    payload.projectUrl ? `Complete Order Login: ${payload.projectUrl}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+      }
+      .lead-info-row:last-child {
+        border-bottom: none;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block;
+        width: 100%;
+      }
+      .lead-info-label {
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+        New Small Order Lead Assigned
+      </h2>
+      <p style="margin:0 0 12px;color:#111827;">
+        Hi ${payload.order_login_user_name},
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        A new Small Order lead has been created for <strong>${payload.leadCode} - ${payload.leadName}</strong>.
+      </p>
+      <p style="margin:0 0 16px;color:#4b5563;">
+        Please review the details and complete the Order Login process.
+      </p>
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;margin-bottom:16px;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+      ${
+        payload.projectUrl
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.projectUrl}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Complete Order Login
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.order_login_user_name,
+    order_login_user_name: payload.order_login_user_name,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    projectUrl: payload.projectUrl,
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: SMALL_ORDER_TEMPLATE_KEYS.NEW_SMALL_ORDER_LEAD_ASSIGNED,
+      active: true,
+    },
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      toEmail: payload.toEmail,
+      toName: payload.order_login_user_name,
       subject,
       text,
       html,
