@@ -1,6 +1,7 @@
 import Joi from "joi";
 import fs from "node:fs/promises";
 import { prisma } from "../../prisma/client";
+import logger from "../../utils/logger";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { getFranchiseAdminRecipients } from "../notification/adminRecipients.service";
 import {
@@ -8,6 +9,18 @@ import {
   uploadToWasabiInitialSiteMeasurementFile,
 } from "../../utils/wasabiClient";
 import { createLeadLog } from "../../utils/leadDetailedLog";
+import { NotificationService } from "../notification/notification.service";
+import { NotificationType } from "../../prisma/generated";
+import {
+  sendSmallOrderRequestSiteSupervisorApprovalEmail,
+  sendSmallOrderRequestStoreAdminApprovalEmail,
+  sendSmallOrderRequestSupervisorApprovedEmail,
+  sendSmallOrderRequestSupervisorRejectedEmail,
+  sendSmallOrderRequestAdminApprovedEmail,
+  sendSmallOrderRequestAdminRejectedEmail,
+  sendSmallOrderRequestFullyApprovedEmail,
+  sendNewSmallOrderLeadAssignedEmail,
+} from "../email/brevoEmail2.service";
 
 const SMALL_ORDER_REQUEST_DOCUMENT_TAG = "SMALL_ORDER_REQUEST_DOCUMENT";
 const SMALL_ORDER_REQUEST_TASK_TYPE = "Small order request";
@@ -159,19 +172,19 @@ export const getSmallOrderRequestsByLead = async (
 
   const linkedLeads = soCodes.length
     ? await prisma.leadMaster.findMany({
-        where: {
-          vendor_id: vendorId,
-          lead_code: {
-            in: soCodes,
-          },
-          is_deleted: false,
+      where: {
+        vendor_id: vendorId,
+        lead_code: {
+          in: soCodes,
         },
-        select: {
-          id: true,
-          lead_code: true,
-          account_id: true,
-        },
-      })
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        lead_code: true,
+        account_id: true,
+      },
+    })
     : [];
 
   const linkedLeadByCode = new Map(
@@ -393,8 +406,28 @@ const createSmallOrderLeadFromRequest = async ({
   }
 
   if (request.so_code) {
+    const existingLead = await tx.leadMaster.findFirst({
+      where: {
+        vendor_id: request.vendor_id,
+        lead_code: request.so_code,
+      },
+      select: { id: true },
+    });
+
+    const existingInstance = existingLead
+      ? await tx.leadProductStructureInstance.findFirst({
+          where: {
+            lead_id: existingLead.id,
+            vendor_id: request.vendor_id,
+          },
+          select: { id: true },
+        })
+      : null;
+
     return {
+      leadId: existingLead?.id,
       leadCode: request.so_code,
+      instanceId: existingInstance?.id,
       alreadyExists: true,
     };
   }
@@ -475,8 +508,18 @@ const createSmallOrderLeadFromRequest = async ({
       },
     });
 
+    const existingInstance = await tx.leadProductStructureInstance.findFirst({
+      where: {
+        lead_id: existingLeadWithCode.id,
+        vendor_id: request.vendor_id,
+      },
+      select: { id: true },
+    });
+
     return {
+      leadId: existingLeadWithCode.id,
       leadCode,
+      instanceId: existingInstance?.id,
       alreadyExists: true,
     };
   }
@@ -574,14 +617,14 @@ const createSmallOrderLeadFromRequest = async ({
     }),
     request.lead.franchise_id
       ? tx.userMaster.findMany({
-          where: {
-            vendor_id: request.vendor_id,
-            franchise_id: request.lead.franchise_id,
-            status: "active",
-            user_type: { user_type: "admin" },
-          },
-          select: { id: true },
-        })
+        where: {
+          vendor_id: request.vendor_id,
+          franchise_id: request.lead.franchise_id,
+          status: "active",
+          user_type: { user_type: "admin" },
+        },
+        select: { id: true },
+      })
       : Promise.resolve([]),
   ]);
 
@@ -628,7 +671,7 @@ const createSmallOrderLeadFromRequest = async ({
 
   const instanceCreatedAt = new Date();
 
-  await tx.leadProductStructureInstance.create({
+  const instance = await tx.leadProductStructureInstance.create({
     data: {
       vendor_id: request.vendor_id,
       lead_id: newLead.id,
@@ -676,6 +719,7 @@ const createSmallOrderLeadFromRequest = async ({
   return {
     leadId: newLead.id,
     leadCode,
+    instanceId: instance.id,
     alreadyExists: false,
   };
 };
@@ -788,6 +832,7 @@ export const createSmallOrderRequest = async (
     where: { id: value.created_by },
     select: {
       id: true,
+      user_name: true,
       vendor_id: true,
       franchise_id: true,
       user_type: {
@@ -895,11 +940,10 @@ export const createSmallOrderRequest = async (
   );
 
   const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
+  const adminRecipients =
+    franchiseAdmins.length > 0 ? franchiseAdmins : superAdmins;
 
   if (actorRole === "sales-executive") {
-    const adminRecipients =
-      franchiseAdmins.length > 0 ? franchiseAdmins : superAdmins;
-
     for (const recipient of adminRecipients) {
       recipientMap.set(recipient.id, recipient);
     }
@@ -935,7 +979,7 @@ export const createSmallOrderRequest = async (
     remarks: value.remarks,
   });
 
-  return prisma.$transaction(async (tx) => {
+  const { createdTasks, ...requestResult } = await prisma.$transaction(async (tx) => {
     const existingCount = await tx.smallOrderRequest.count({
       where: {
         vendor_id: value.vendor_id,
@@ -957,8 +1001,9 @@ export const createSmallOrderRequest = async (
         supervisor_approved: actorRole === "super-admin",
         supervisor_approved_at:
           actorRole === "super-admin" ? new Date() : null,
-        admin_approved: actorRole === "super-admin",
-        admin_approved_at: actorRole === "super-admin" ? new Date() : null,
+        admin_approved: actorRole === "super-admin" || actorRole === "admin",
+        admin_approved_at:
+          (actorRole === "super-admin" || actorRole === "admin") ? new Date() : null,
         created_by: value.created_by,
         is_merge_to_parent_on_installation:
           value.request_source === "post_dispatch",
@@ -1038,7 +1083,7 @@ export const createSmallOrderRequest = async (
       createdTasks.push(task);
     }
 
-    let createdLead: { leadId?: number; leadCode: string; alreadyExists: boolean } | null =
+    let createdLead: { leadId?: number; leadCode: string; instanceId?: number; alreadyExists: boolean } | null =
       null;
 
     if (actorRole === "super-admin") {
@@ -1053,8 +1098,148 @@ export const createSmallOrderRequest = async (
       documents_count: createdDocuments.length,
       tasks_created: createdTasks.length,
       created_lead: createdLead,
+      createdTasks,
     };
   });
+
+  // Trigger notifications and emails asynchronously outside database transaction
+  const siteSupervisorIds = new Set(siteSupervisorRecipients.map((u) => u.id));
+  const adminIds = new Set(adminRecipients.map((u) => u.id));
+  const baseUrl = process.env.CLIENT_BASE_URL || process.env.FRONTEND_URL || "http://localhost:3000";
+
+  for (const task of createdTasks) {
+    const recipient = recipientMap.get(task.user_id);
+    if (!recipient) continue;
+
+    const leadCode = lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+    const leadName = customerName;
+
+    // 1. Send In-App Notification (Redirecting to /dashboard/my-tasks?taskId=...)
+    if (siteSupervisorIds.has(task.user_id)) {
+      // In-App Notification for Site Supervisor
+      NotificationService.createAndSend({
+        vendor_id: value.vendor_id,
+        user_id: task.user_id,
+        sender_id: value.created_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: "Small Order Approval Request",
+        message: `A Small Order request for ${leadCode} - ${leadName} is pending your approval.`,
+        entity_type: "small_order_request",
+        entity_id: requestResult.id,
+        redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send supervisor notification:`, err);
+      });
+    } else if (adminIds.has(task.user_id)) {
+      // In-App Notification for Admin
+      NotificationService.createAndSend({
+        vendor_id: value.vendor_id,
+        user_id: task.user_id,
+        sender_id: value.created_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: "Small Order Approval Request",
+        message: `A Small Order request for ${leadCode} - ${leadName} is pending your approval.`,
+        entity_type: "small_order_request",
+        entity_id: requestResult.id,
+        redirect_url: `/dashboard/my-tasks?taskId=${task.id}`,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send admin notification:`, err);
+      });
+    }
+
+    // 2. Send Email Notification (only when raised by sales-executive or admin)
+    if ((actorRole === "sales-executive" || actorRole === "admin") && recipient.user_email) {
+      if (siteSupervisorIds.has(task.user_id)) {
+        sendSmallOrderRequestSiteSupervisorApprovalEmail({
+          vendor_id: value.vendor_id,
+          toEmail: recipient.user_email,
+          site_supervisor_name: recipient.user_name || "Site Supervisor",
+          leadCode,
+          leadName,
+          sales_executive_name: actor.user_name || (actorRole === "admin" ? "Admin" : "Sales Executive"),
+          projectUrl: `${baseUrl}/dashboard/my-tasks?taskId=${task.id}`,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send supervisor approval email to ${recipient.user_email}:`, err);
+        });
+      } else if (adminIds.has(task.user_id)) {
+        sendSmallOrderRequestStoreAdminApprovalEmail({
+          vendor_id: value.vendor_id,
+          toEmail: recipient.user_email,
+          store_admin_name: recipient.user_name || "Store Admin",
+          leadCode,
+          leadName,
+          sales_executive_name: actor.user_name || "Sales Executive",
+          projectUrl: `${baseUrl}/dashboard/my-tasks?taskId=${task.id}`,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send store admin approval email to ${recipient.user_email}:`, err);
+        });
+      }
+    }
+  }
+
+  // If created by super-admin, it is automatically approved. Send notifications to backend users mapped to parent lead.
+  if (actorRole === "super-admin" && requestResult.created_lead?.leadId) {
+    const parentLeadCode = lead.lead_code ?? `LEAD-${String(lead.id).padStart(4, "0")}`;
+    const parentLeadName = customerName;
+    const orderLoginUrl = `${baseUrl}/dashboard/production/order-login/details/${requestResult.created_lead.leadId}?accountId=${lead.account_id}&instance_id=${requestResult.created_lead.instanceId}`;
+
+    // Fetch backend users mapped to parent lead
+    prisma.leadUserMapping.findMany({
+      where: {
+        vendor_id: value.vendor_id,
+        lead_id: value.lead_id,
+        status: "active",
+        user: {
+          status: "active",
+          user_type: {
+            user_type: { equals: "backend", mode: "insensitive" },
+          },
+        },
+      },
+      select: {
+        user: {
+          select: { id: true, user_name: true, user_email: true },
+        },
+      },
+    }).then((backendMappings) => {
+      for (const mapping of backendMappings) {
+        if (!mapping.user) continue;
+
+        // 1. In-App Notification
+        NotificationService.createAndSend({
+          vendor_id: value.vendor_id,
+          user_id: mapping.user.id,
+          sender_id: value.created_by,
+          type: NotificationType.TASK_ASSIGNED,
+          title: "New Small Order Lead Assigned",
+          message: `A Small Order lead for ${parentLeadCode} - ${parentLeadName} is assigned to you for Order Login.`,
+          entity_type: "small_order_request",
+          entity_id: requestResult.id,
+          redirect_url: `/dashboard/production/order-login/details/${requestResult.created_lead!.leadId}?accountId=${lead.account_id}&instance_id=${requestResult.created_lead!.instanceId}`,
+        }).catch((err) => {
+          logger.error(`[InAppNotification] Failed to send assigned notification to backend user ${mapping.user.id}:`, err);
+        });
+
+        // 2. Email Update to Backend User
+        if (mapping.user.user_email) {
+          sendNewSmallOrderLeadAssignedEmail({
+            vendor_id: value.vendor_id,
+            toEmail: mapping.user.user_email,
+            order_login_user_name: mapping.user.user_name || "Order Login User",
+            leadCode: parentLeadCode,
+            leadName: parentLeadName,
+            projectUrl: orderLoginUrl,
+          }).catch((err) => {
+            logger.error(`[EmailNotification] Failed to send assigned email to backend user ${mapping.user.user_email}:`, err);
+          });
+        }
+      }
+    }).catch((err) => {
+      logger.error(`Failed to fetch backend users for super-admin small order request creation:`, err);
+    });
+  }
+
+  return requestResult;
 };
 
 export const actOnSmallOrderRequestTask = async (
@@ -1077,6 +1262,7 @@ export const actOnSmallOrderRequestTask = async (
     where: { id: input.acted_by },
     select: {
       id: true,
+      user_name: true,
       vendor_id: true,
       user_type: {
         select: {
@@ -1101,13 +1287,23 @@ export const actOnSmallOrderRequestTask = async (
 
   const actorRole = actor.user_type.user_type.trim().toLowerCase();
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const smallOrderRequest = await tx.smallOrderRequest.findUnique({
       where: { id: requestId },
       include: {
+        lead: {
+          select: {
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            account_id: true,
+          },
+        },
         createdBy: {
           select: {
             id: true,
+            user_name: true,
+            user_email: true,
             user_type: {
               select: {
                 user_type: true,
@@ -1172,6 +1368,13 @@ export const actOnSmallOrderRequestTask = async (
       return {
         success: true,
         status: "rejected",
+        smallOrderRequestId: smallOrderRequest.id,
+        leadCode: smallOrderRequest.lead.lead_code,
+        leadName: `${smallOrderRequest.lead.firstname ?? ""} ${smallOrderRequest.lead.lastname ?? ""}`.trim(),
+        createdBy: smallOrderRequest.createdBy,
+        actorName: actor.user_name,
+        actorRole: actorRole,
+        rejectionReason: input.remark?.trim() || "",
       };
     }
 
@@ -1227,7 +1430,7 @@ export const actOnSmallOrderRequestTask = async (
     });
 
     let createdLead:
-      | { leadId?: number; leadCode: string; alreadyExists: boolean }
+      | { leadId?: number; leadCode: string; instanceId?: number; alreadyExists: boolean }
       | null = null;
 
     if (isFullyApproved) {
@@ -1241,6 +1444,231 @@ export const actOnSmallOrderRequestTask = async (
       success: true,
       status: isFullyApproved ? "approved" : "pending_approvals",
       created_lead: createdLead,
+      smallOrderRequestId: smallOrderRequest.id,
+      leadCode: smallOrderRequest.lead.lead_code,
+      leadName: `${smallOrderRequest.lead.firstname ?? ""} ${smallOrderRequest.lead.lastname ?? ""}`.trim(),
+      leadAccountId: smallOrderRequest.lead.account_id,
+      createdBy: smallOrderRequest.createdBy,
+      actorName: actor.user_name,
+      actorRole: actorRole,
+      isFullyApproved,
     };
   });
+
+  // Trigger email and in-app notifications outside the transaction scope
+  const baseUrl = process.env.CLIENT_BASE_URL || process.env.FRONTEND_URL || "http://localhost:3000";
+  const leadCode = result.leadCode ?? `LEAD-${String(result.smallOrderRequestId).padStart(4, "0")}`;
+  const leadName = result.leadName;
+  const relativeProjectUrl = `/dashboard/installation/under-installation/details/${input.lead_id}?accountId=${result.leadAccountId}`;
+  const projectUrl = `${baseUrl}${relativeProjectUrl}`;
+
+  if (result.status === "rejected") {
+    // REJECTION ACTION
+    if (result.actorRole === "site-supervisor") {
+      // 1. In-App Notification
+      NotificationService.createAndSend({
+        vendor_id: actor.vendor_id,
+        user_id: result.createdBy.id,
+        sender_id: input.acted_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: `${result.actorName || "Site Supervisor"} Rejected`,
+        message: `${result.actorName || "Site Supervisor"} has rejected the Small Order request for ${leadCode} - ${leadName}.`,
+        entity_type: "small_order_request",
+        entity_id: result.smallOrderRequestId,
+        redirect_url: relativeProjectUrl,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send supervisor rejection notification:`, err);
+      });
+
+      // 2. Email Update to Sales Executive
+      if (result.createdBy.user_email) {
+        sendSmallOrderRequestSupervisorRejectedEmail({
+          vendor_id: actor.vendor_id,
+          toEmail: result.createdBy.user_email,
+          sales_executive_name: result.createdBy.user_name || "Sales Executive",
+          leadCode,
+          leadName,
+          site_supervisor_name: result.actorName || "Site Supervisor",
+          rejection_reason: result.rejectionReason ?? "",
+          projectUrl,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send supervisor rejection email:`, err);
+        });
+      }
+    } else if (result.actorRole === "admin" || result.actorRole === "super-admin") {
+      // 1. In-App Notification
+      NotificationService.createAndSend({
+        vendor_id: actor.vendor_id,
+        user_id: result.createdBy.id,
+        sender_id: input.acted_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: `${result.actorName || "Store Admin"} Rejected`,
+        message: `${result.actorName || "Store Admin"} has rejected the Small Order request for ${leadCode} - ${leadName}.`,
+        entity_type: "small_order_request",
+        entity_id: result.smallOrderRequestId,
+        redirect_url: relativeProjectUrl,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send store admin rejection notification:`, err);
+      });
+
+      // 2. Email Update to Sales Executive
+      if (result.createdBy.user_email) {
+        sendSmallOrderRequestAdminRejectedEmail({
+          vendor_id: actor.vendor_id,
+          toEmail: result.createdBy.user_email,
+          sales_executive_name: result.createdBy.user_name || "Sales Executive",
+          leadCode,
+          leadName,
+          store_admin_name: result.actorName || "Store Admin",
+          rejection_reason: result.rejectionReason ?? "",
+          projectUrl,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send store admin rejection email:`, err);
+        });
+      }
+    }
+  } else {
+    // APPROVAL ACTION
+    if (result.actorRole === "site-supervisor") {
+      // 1. In-App Notification
+      NotificationService.createAndSend({
+        vendor_id: actor.vendor_id,
+        user_id: result.createdBy.id,
+        sender_id: input.acted_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: `${result.actorName || "Site Supervisor"} Approved`,
+        message: `${result.actorName || "Site Supervisor"} has approved the Small Order request for ${leadCode} - ${leadName}.`,
+        entity_type: "small_order_request",
+        entity_id: result.smallOrderRequestId,
+        redirect_url: relativeProjectUrl,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send supervisor approval notification:`, err);
+      });
+
+      // 2. Email Update to Sales Executive
+      if (result.createdBy.user_email) {
+        sendSmallOrderRequestSupervisorApprovedEmail({
+          vendor_id: actor.vendor_id,
+          toEmail: result.createdBy.user_email,
+          sales_executive_name: result.createdBy.user_name || "Sales Executive",
+          leadCode,
+          leadName,
+          site_supervisor_name: result.actorName || "Site Supervisor",
+          projectUrl,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send supervisor approval email:`, err);
+        });
+      }
+    } else if (result.actorRole === "admin" || result.actorRole === "super-admin") {
+      // 1. In-App Notification
+      NotificationService.createAndSend({
+        vendor_id: actor.vendor_id,
+        user_id: result.createdBy.id,
+        sender_id: input.acted_by,
+        type: NotificationType.TASK_ASSIGNED,
+        title: `${result.actorName || "Store Admin"} Approved`,
+        message: `${result.actorName || "Store Admin"} has approved the Small Order request for ${leadCode} - ${leadName}.`,
+        entity_type: "small_order_request",
+        entity_id: result.smallOrderRequestId,
+        redirect_url: relativeProjectUrl,
+      }).catch((err: any) => {
+        logger.error(`[InAppNotification] Failed to send store admin approval notification:`, err);
+      });
+
+      // 2. Email Update to Sales Executive
+      if (result.createdBy.user_email) {
+        sendSmallOrderRequestAdminApprovedEmail({
+          vendor_id: actor.vendor_id,
+          toEmail: result.createdBy.user_email,
+          sales_executive_name: result.createdBy.user_name || "Sales Executive",
+          leadCode,
+          leadName,
+          store_admin_name: result.actorName || "Store Admin",
+          projectUrl,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send store admin approval email:`, err);
+        });
+      }
+    }
+
+    // Fully Approved Updates
+    if (result.isFullyApproved && result.created_lead?.leadId) {
+      const orderLoginUrl = `${baseUrl}/dashboard/production/order-login/details/${result.created_lead.leadId}?accountId=${result.leadAccountId}&instance_id=${result.created_lead.instanceId}`;
+
+      // 1. Email Update to Sales Executive (Creator of the Small Order Request)
+      if (result.createdBy?.user_email) {
+        sendSmallOrderRequestFullyApprovedEmail({
+          vendor_id: actor.vendor_id,
+          toEmail: result.createdBy.user_email,
+          sales_executive_name: result.createdBy.user_name || "Sales Executive",
+          leadCode,
+          leadName,
+          projectUrl: projectUrl,
+        }).catch((err: any) => {
+          logger.error(`[EmailNotification] Failed to send fully approved email to sales executive ${result.createdBy.user_email}:`, err);
+        });
+      }
+
+      // Fetch backend users mapped to parent lead
+      prisma.leadUserMapping.findMany({
+        where: {
+          vendor_id: actor.vendor_id,
+          lead_id: input.lead_id,
+          status: "active",
+          user: {
+            status: "active",
+            user_type: {
+              user_type: { equals: "backend", mode: "insensitive" },
+            },
+          },
+        },
+        select: {
+          user: {
+            select: { id: true, user_name: true, user_email: true },
+          },
+        },
+      }).then((backendMappings) => {
+        for (const mapping of backendMappings) {
+          if (!mapping.user) continue;
+
+          // 2. In-App Notification to Backend User (Redirect to Order Login Details)
+          NotificationService.createAndSend({
+            vendor_id: actor.vendor_id,
+            user_id: mapping.user.id,
+            sender_id: input.acted_by,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "New Small Order Lead Assigned",
+            message: `A Small Order lead for ${leadCode} - ${leadName} is assigned to you for Order Login.`,
+            entity_type: "small_order_request",
+            entity_id: result.smallOrderRequestId,
+            redirect_url: `/dashboard/production/order-login/details/${result.created_lead!.leadId}?accountId=${result.leadAccountId}&instance_id=${result.created_lead!.instanceId}`,
+          }).catch((err: any) => {
+            logger.error(`[InAppNotification] Failed to send assigned notification to backend user ${mapping.user.id}:`, err);
+          });
+
+          // 3. Email Update to Backend User
+          if (mapping.user.user_email) {
+            sendNewSmallOrderLeadAssignedEmail({
+              vendor_id: actor.vendor_id,
+              toEmail: mapping.user.user_email,
+              order_login_user_name: mapping.user.user_name || "Order Login User",
+              leadCode,
+              leadName,
+              projectUrl: orderLoginUrl,
+            }).catch((err: any) => {
+              logger.error(`[EmailNotification] Failed to send assigned email to backend user ${mapping.user.user_email}:`, err);
+            });
+          }
+        }
+      }).catch((err) => {
+        logger.error(`Failed to fetch backend users for small order fully approved update:`, err);
+      });
+    }
+  }
+
+  return {
+    success: result.success,
+    status: result.status,
+    created_lead: result.created_lead,
+  };
 };

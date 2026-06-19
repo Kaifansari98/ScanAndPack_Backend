@@ -5,7 +5,6 @@ UPDATE "SelfAssignTaskTypeMaster"
 SET "user_type_id" = (
   SELECT utm."id"
   FROM "UserTypeMaster" utm
-  WHERE utm."vendor_id" = "SelfAssignTaskTypeMaster"."vendor_id"
   ORDER BY utm."id"
   LIMIT 1
 );

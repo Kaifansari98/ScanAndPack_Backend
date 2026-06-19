@@ -7,6 +7,7 @@ import logger from "../../../utils/logger";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { getFranchiseAdminRecipients } from "../../../../src/services/notification/adminRecipients.service";
 import { sendLeadMovedToDispatchPlanningEmail } from "../../../../src/services/email/brevoEmail.service";
+import { sendSmallOrderProductionCompletedEmail } from "../../email/brevoEmail2.service";
 import { STAGE_PATH_BY_TAG } from "../../../../src/services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import { ensureLeadStatusLog } from "../../../utils/leadStatusLog";
 import { LeadSuperAdminApprovalLockInService } from "../../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
@@ -633,6 +634,7 @@ export class SiteReadinessService {
             vendor_id: true,
             account_id: true,
             franchise_id: true,
+            is_small_order_request: true,
           },
         }),
         prisma.userMaster.findUnique({
@@ -733,6 +735,51 @@ export class SiteReadinessService {
           });
         }),
       );
+
+      // Separate Small Order notifications to Sales Executives
+      if (lead.is_small_order_request) {
+        const smallOrderRedirectPath = `/dashboard/installation/dispatch-planning/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
+
+        await Promise.allSettled(
+          salesExecs.map(async (exec) => {
+            // 1. In-App Notification
+            try {
+              await NotificationService.createAndSend({
+                vendor_id: lead.vendor_id,
+                user_id: exec.id,
+                sender_id: actorId,
+                type: NotificationType.LEAD_MILESTONE,
+                title: "Production Completed",
+                message: `Production for the Small Order of ${leadCode} - ${leadName} is completed. Please complete Dispatch Planning.`,
+                entity_type: "lead",
+                entity_id: leadId,
+                redirect_url: smallOrderRedirectPath,
+              });
+              console.log(`✅ Small Order Production Completed In-App sent to Sales Executive ${exec.id}`);
+            } catch (err: any) {
+              logger.warn(`⚠️ Small Order Production Completed In-App to Sales Executive ${exec.id} failed:`, err.message);
+            }
+
+            // 2. Email Notification
+            if (exec.user_email) {
+              try {
+                await sendSmallOrderProductionCompletedEmail({
+                  vendor_id: lead.vendor_id,
+                  toEmail: exec.user_email,
+                  sales_executive_name: exec.user_name || "Sales Executive",
+                  leadCode,
+                  leadName,
+                  projectUrl: smallOrderProjectUrl,
+                });
+                console.log(`✅ Small Order Production Completed Email sent to Sales Executive ${exec.user_email}`);
+              } catch (err: any) {
+                logger.warn(`⚠️ Small Order Production Completed Email to ${exec.user_email} failed:`, err.message);
+              }
+            }
+          })
+        );
+      }
 
       logger.info("✅ Dispatch Planning notifications sent", {
         vendor_id: lead.vendor_id,
