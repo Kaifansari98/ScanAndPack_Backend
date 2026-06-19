@@ -114,6 +114,11 @@ export const changePassword = async (req: Request, res: Response) => {
       },
     });
 
+    const vendorId = (req as any).user?.vendor_id;
+    if (vendorId) {
+      await authService.logoutAllUserSessions(userId, vendorId);
+    }
+
     return res.status(200).json({ message: "Password changed successfully" });
   } catch (err) {
     console.error("Change password error:", err);

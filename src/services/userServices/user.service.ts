@@ -79,6 +79,54 @@ const revokeUserActiveSessionsForPrivilegeChange = async (
   return activeSessions.length;
 };
 
+const revokeUserActiveSessions = async (
+  vendorId: number,
+  userId: number,
+  reason: string = "Password changed",
+) => {
+  const now = new Date();
+
+  const activeSessions = await prisma.userSession.findMany({
+    where: {
+      vendor_id: vendorId,
+      user_id: userId,
+      status: "active",
+    },
+    select: {
+      id: true,
+    },
+  });
+
+  if (activeSessions.length === 0) return 0;
+
+  await prisma.userSession.updateMany({
+    where: {
+      vendor_id: vendorId,
+      user_id: userId,
+      status: "active",
+    },
+    data: {
+      status: "revoked",
+      is_current: false,
+      revoked_at: now,
+      revoke_reason: reason,
+      last_seen_at: now,
+    },
+  });
+
+  try {
+    await redis.del(activeSessions.map((session) => sessionCacheKey(session.id)));
+    await redis.sRem(
+      vendorSessionsKey(vendorId),
+      activeSessions.map((session) => String(session.id)),
+    );
+  } catch (error) {
+    console.error("Failed to evict user session cache after password reset:", error);
+  }
+
+  return activeSessions.length;
+};
+
 export const createUserService = async (data: {
   vendor_id: number;
   franchise_id: number;
@@ -149,7 +197,7 @@ export const MasterResetPasswordService = async ({
   // 1️⃣ Check if user exists
   const user = await prisma.userMaster.findUnique({
     where: { id: user_id },
-    select: { id: true },
+    select: { id: true, vendor_id: true },
   });
 
   if (!user) {
@@ -167,6 +215,9 @@ export const MasterResetPasswordService = async ({
       updated_at: new Date(),
     },
   });
+
+  // 4️⃣ Revoke all active sessions
+  await revokeUserActiveSessions(user.vendor_id, user.id);
 
   return { message: "Password reset successfully" };
 };
@@ -186,7 +237,7 @@ export const updateUserService = async (
 ) => {
   const user = await prisma.userMaster.findUnique({
     where: { id: userId },
-    select: { id: true },
+    select: { id: true, vendor_id: true },
   });
 
   if (!user) {
@@ -217,6 +268,10 @@ export const updateUserService = async (
     where: { id: userId },
     data: updateData,
   });
+
+  if (data.password) {
+    await revokeUserActiveSessions(updatedUser.vendor_id, updatedUser.id);
+  }
 
   const effectiveUserTypeId = updateData.user_type_id ?? undefined;
 
