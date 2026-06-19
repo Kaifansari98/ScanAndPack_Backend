@@ -10,6 +10,7 @@ export class CompanyVendorsService {
       email,
       address,
       created_by,
+      in_house,
     } = payload;
 
     // 🧾 Validation
@@ -56,6 +57,7 @@ export class CompanyVendorsService {
         contact_no,
         email,
         address,
+        in_house: in_house !== undefined ? (in_house === true || in_house === "true") : false,
         created_by: Number(created_by),
         updated_by: Number(created_by),
       },
@@ -146,6 +148,7 @@ export class CompanyVendorsService {
       contact_no: item.contact_no,
       email: item.email ?? null,
       address: item.address ?? null,
+      in_house: item.in_house !== undefined ? (item.in_house === true || item.in_house === "true") : false,
       created_by: Number(item.created_by),
       updated_by: Number(item.created_by),
     }));
@@ -217,6 +220,7 @@ export class CompanyVendorsService {
       email,
       address,
       updated_by,
+      in_house,
     } = payload;
 
     // 🧾 Validation
@@ -257,6 +261,7 @@ export class CompanyVendorsService {
         contact_no: contact_no ?? existingVendor.contact_no,
         email: email ?? existingVendor.email,
         address: address ?? existingVendor.address,
+        in_house: in_house !== undefined ? (in_house === true || in_house === "true") : existingVendor.in_house,
         updated_by: Number(updated_by),
         updated_at: new Date(),
       },
