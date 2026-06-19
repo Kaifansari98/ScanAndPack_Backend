@@ -162,8 +162,18 @@ export const getAllVendorsPaginated = async ({
         OR: [
           { vendor_name: { contains: search, mode: "insensitive" as const } },
           { vendor_code: { contains: search, mode: "insensitive" as const } },
-          { primary_contact_email: { contains: search, mode: "insensitive" as const } },
-          { primary_contact_name: { contains: search, mode: "insensitive" as const } },
+          {
+            primary_contact_email: {
+              contains: search,
+              mode: "insensitive" as const,
+            },
+          },
+          {
+            primary_contact_name: {
+              contains: search,
+              mode: "insensitive" as const,
+            },
+          },
         ],
       }
     : {};
@@ -275,9 +285,7 @@ const formatOverviewLeadCode = (
   quantityIndex: number | null | undefined,
   hasMultipleInstances: boolean,
 ) =>
-  hasMultipleInstances &&
-  quantityIndex !== null &&
-  quantityIndex !== undefined
+  hasMultipleInstances && quantityIndex !== null && quantityIndex !== undefined
     ? `${leadCode}.${quantityIndex}`
     : leadCode;
 
@@ -431,8 +439,7 @@ export const getLeadsOverviewReportData = async (
       lead.userMappings.find((mapping) => {
         const role = mapping.user.user_type.user_type.trim().toLowerCase();
         return role === "site-supervisor";
-      })
-        ?.user.user_name ?? "-";
+      })?.user.user_name ?? "-";
 
     if (!lead.productStructureInstances.length) {
       return [
@@ -559,7 +566,9 @@ export const getTechCheckStageReportData = async (
         where: {
           is_deleted: false,
           documentType: {
-            type: { in: ["client_documentations_ppt", "client_documentations_pytha"] },
+            type: {
+              in: ["client_documentations_ppt", "client_documentations_pytha"],
+            },
           },
         },
         select: {
@@ -613,7 +622,10 @@ export const getTechCheckStageReportData = async (
   return leads.flatMap<TechCheckStageReportRow>((lead) => {
     const hasMultipleInstances = lead.productStructureInstances.length > 1;
 
-    const buildRow = (instanceId: number | null, quantityIndex?: number | null) => {
+    const buildRow = (
+      instanceId: number | null,
+      quantityIndex?: number | null,
+    ) => {
       const rejectedDocs = lead.documents.filter(
         (doc) =>
           doc.tech_check_status === "REJECTED" &&
@@ -622,7 +634,10 @@ export const getTechCheckStageReportData = async (
 
       const rejectionDates = [
         ...new Map(
-          rejectedDocs.map((doc) => [doc.created_at.toISOString(), doc.created_at]),
+          rejectedDocs.map((doc) => [
+            doc.created_at.toISOString(),
+            doc.created_at,
+          ]),
         ).values(),
       ];
 
@@ -717,8 +732,6 @@ export const getErdReportData = async (
     erd_date: lead.expected_order_login_ready_date,
   }));
 };
-
-
 
 export const getLeadTrackingReportData = async (
   vendorId: number,
@@ -844,7 +857,16 @@ export const getLeadTrackingReportData = async (
         where: {
           statusType: {
             tag: {
-              in: ["Type 3", "Type 4", "Type 7", "Type 8", "Type 9", "Type 11", "Type 14", "Type 15"],
+              in: [
+                "Type 3",
+                "Type 4",
+                "Type 7",
+                "Type 8",
+                "Type 9",
+                "Type 11",
+                "Type 14",
+                "Type 15",
+              ],
             },
           },
         },
@@ -897,16 +919,14 @@ export const getLeadTrackingReportData = async (
     },
   });
 
-
-
-
   const roleMatchesLead = (lead: (typeof leads)[number]) => {
     if (!normalizedUserType) return true;
 
     const mappedUsers = lead.userMappings
       .filter(
         (mapping) =>
-          mapping.user.user_type.user_type.trim().toLowerCase() === normalizedUserType,
+          mapping.user.user_type.user_type.trim().toLowerCase() ===
+          normalizedUserType,
       )
       .map((mapping) => ({
         id: mapping.user.id,
@@ -941,14 +961,16 @@ export const getLeadTrackingReportData = async (
       const hasMultipleInstances = lead.productStructureInstances.length > 1;
 
       const firstStatusDate = (tag: string) =>
-        lead.leadStatusLogs.find((log) => log.statusType.tag === tag)?.created_at ??
-        null;
+        lead.leadStatusLogs.find((log) => log.statusType.tag === tag)
+          ?.created_at ?? null;
 
       const firstTaskCreatedAt = (taskType: string) =>
-        lead.tasks.find((task) => task.task_type === taskType)?.created_at ?? null;
+        lead.tasks.find((task) => task.task_type === taskType)?.created_at ??
+        null;
 
       const firstTaskClosedAt = (taskType: string) =>
-        lead.tasks.find((task) => task.task_type === taskType)?.closed_at ?? null;
+        lead.tasks.find((task) => task.task_type === taskType)?.closed_at ??
+        null;
 
       const designer =
         lead.userMappings.find(
@@ -997,13 +1019,12 @@ export const getLeadTrackingReportData = async (
         shutter_installation_completion_date:
           lead.shutter_installation_completion_date,
         usable_handover_date: lead.usable_handover_completed_at,
-        full_installation_completion_date: lead.actual_installation_completion_at,
+        full_installation_completion_date:
+          lead.actual_installation_completion_at,
         final_handover_date: lead.final_handover_marked_at,
       }));
     });
 };
-
-
 
 export const getPaymentsBetweenClientAndStoreReportData = async (
   vendorId: number,
