@@ -690,6 +690,45 @@ export class AuthService {
     };
   }
 
+  async logoutAllUserSessions(userId: number, vendorId: number) {
+    const now = new Date();
+    console.log(`[DEBUG] logoutAllUserSessions called for userId: ${userId}, vendorId: ${vendorId}`);
+
+    const sessionsToRevoke = await prisma.userSession.findMany({
+      where: {
+        user_id: userId,
+        status: "active",
+      },
+      select: { id: true },
+    });
+
+    console.log(`[DEBUG] Found ${sessionsToRevoke.length} active sessions to revoke for userId: ${userId}`);
+
+    if (sessionsToRevoke.length === 0) return;
+
+    const result = await prisma.userSession.updateMany({
+      where: {
+        user_id: userId,
+        status: "active",
+      },
+      data: {
+        status: "revoked",
+        is_current: false,
+        revoked_at: now,
+        revoked_by: userId,
+        revoke_reason: "Password changed",
+        last_seen_at: now,
+      },
+    });
+
+    console.log(`[DEBUG] Revoked ${result.count} sessions in DB`);
+
+    for (const session of sessionsToRevoke) {
+      console.log(`[DEBUG] Evicting Redis cache for sessionId: ${session.id}`);
+      await this.evictSessionCache(session.id, vendorId);
+    }
+  }
+
   async verifySessionToken(token: string) {
     const decoded = jwt.verify(token, JWT_SECRET) as jwt.JwtPayload & TokenPayload;
 
@@ -699,8 +738,11 @@ export class AuthService {
       });
     }
 
+    console.log(`[DEBUG] verifySessionToken for sessionId: ${decoded.session_id}, jti: ${decoded.jti}`);
+
     const cachedSession = await this.getCachedSession(decoded.session_id);
     if (cachedSession) {
+      console.log(`[DEBUG] Found cached session: status=${cachedSession.status}, userId=${cachedSession.user_id}`);
       const expiresAt = new Date(cachedSession.expires_at);
 
       if (
@@ -709,6 +751,7 @@ export class AuthService {
         cachedSession.status === "active"
       ) {
         if (expiresAt <= new Date()) {
+          console.log(`[DEBUG] Cached session expired`);
           await this.evictSessionCache(
             decoded.session_id,
             cachedSession.vendor_id,
@@ -717,6 +760,7 @@ export class AuthService {
           return decoded;
         }
       } else {
+        console.log(`[DEBUG] Cached session mismatch or inactive`);
         await this.evictSessionCache(
           decoded.session_id,
           cachedSession.vendor_id,
@@ -727,6 +771,7 @@ export class AuthService {
       }
     }
 
+    console.log(`[DEBUG] No cached session. Querying database for sessionId: ${decoded.session_id}`);
     const session = await prisma.userSession.findFirst({
       where: {
         id: decoded.session_id,
@@ -750,6 +795,7 @@ export class AuthService {
     });
 
     if (!session) {
+      console.log(`[DEBUG] Session not found in DB or inactive`);
       throw Object.assign(new Error("Session is no longer active."), {
         statusCode: 403,
       });
