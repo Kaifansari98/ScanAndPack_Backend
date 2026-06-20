@@ -78,17 +78,17 @@ export const validateFiles = async (req: Request, res: Response, next: NextFunct
         });
       }
 
-      const vendor = await prisma.vendorMaster.findUnique({
-        where: { id: vendorId },
-        select: { is_this_vendor_is_custom_usertype_only: true },
-      });
+      // const vendor = await prisma.vendorMaster.findUnique({
+      //   where: { id: vendorId },
+      //   select: { is_this_vendor_is_custom_usertype_only: true },
+      // });
 
-      if (!vendor?.is_this_vendor_is_custom_usertype_only) {
-        return res.status(400).json({
-          success: false,
-          message: 'At least one document file upload is mandatory'
-        });
-      }
+      // if (!vendor?.is_this_vendor_is_custom_usertype_only) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: 'At least one document file upload is mandatory'
+      //   });
+      // }
 
       const instances = await prisma.leadProductStructureInstance.findMany({
         where: {
