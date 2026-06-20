@@ -881,7 +881,19 @@ export class BookingStageService {
           vendor_id: vendorId,
           type: "site-supervisor",
           status: "active",
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive",
+              },
+            },
+          },
         },
+        orderBy: {
+          created_at: "asc",
+        },
+        take: 1,
         include: {
           user: { select: { id: true, user_name: true } },
         },
