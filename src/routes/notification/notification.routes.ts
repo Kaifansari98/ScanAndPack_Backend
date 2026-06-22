@@ -8,6 +8,7 @@ notificationRoutes.get(
   "/vendor/:vendorId/user/:userId",
   NotificationController.listForUser,
 );
+notificationRoutes.patch("/read-bulk", NotificationController.markReadBulk);
 notificationRoutes.patch("/:id/read", NotificationController.markRead);
 notificationRoutes.post(
   "/push-token",
