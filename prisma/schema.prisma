@@ -140,6 +140,8 @@ model VendorMaster {
   poPaymentSchedules POPaymentSchedule[]
 
   poPayments POPayment[]
+  units      UnitMaster[]
+  itemGroups ItemGroupMaster[]
 
   @@index([state_id])
 }
@@ -2515,6 +2517,31 @@ model ProductMaster {
   active               ProductActiveFlag @default(Yes)
   current_stock        Decimal           @default(0) @db.Decimal(12, 2)
   stock_updated_at     DateTime?
+  item_group_id        Int?
+
+  primary_unit_id     Int?
+  stock_unit_id       Int?
+  consumption_unit_id Int?
+
+  shelf_life_days Int?
+
+  costing_method CostingMethod @default(FIFO)
+
+  mrp Decimal? @db.Decimal(18, 2)
+
+  min_stock_qty     Decimal? @db.Decimal(18, 3)
+  min_stock_unit_id Int?
+
+  max_stock_qty     Decimal? @db.Decimal(18, 3)
+  max_stock_unit_id Int?
+
+  reorder_level_qty     Decimal? @db.Decimal(18, 3)
+  reorder_level_unit_id Int?
+
+  reorder_batch_qty     Decimal? @db.Decimal(18, 3)
+  reorder_batch_unit_id Int?
+
+  item_type ProductItemType @default(Goods)
 
   vendor              VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   brand               BrandMaster?            @relation(fields: [brand_id], references: [id], onDelete: SetNull)
@@ -2523,14 +2550,33 @@ model ProductMaster {
   purchaseOrderItems  PurchaseOrderItem[]     @relation("POItemProduct")
   grnItems            GRNItem[]               @relation("GRNItemProduct")
   hsn                 HsnProductMapping?      @relation("ProductHsnMapping", fields: [hsn_id], references: [id], onDelete: SetNull)
+  itemGroup           ItemGroupMaster?        @relation(fields: [item_group_id], references: [id], onDelete: SetNull)
+
+  primaryUnit     UnitMaster? @relation("ProductPrimaryUnit", fields: [primary_unit_id], references: [id], onDelete: SetNull)
+  stockUnit       UnitMaster? @relation("ProductStockUnit", fields: [stock_unit_id], references: [id], onDelete: SetNull)
+  consumptionUnit UnitMaster? @relation("ProductConsumptionUnit", fields: [consumption_unit_id], references: [id], onDelete: SetNull)
+
+  minStockUnit     UnitMaster? @relation("ProductMinStockUnit", fields: [min_stock_unit_id], references: [id], onDelete: SetNull)
+  maxStockUnit     UnitMaster? @relation("ProductMaxStockUnit", fields: [max_stock_unit_id], references: [id], onDelete: SetNull)
+  reorderLevelUnit UnitMaster? @relation("ProductReorderLevelUnit", fields: [reorder_level_unit_id], references: [id], onDelete: SetNull)
+  reorderBatchUnit UnitMaster? @relation("ProductReorderBatchUnit", fields: [reorder_batch_unit_id], references: [id], onDelete: SetNull)
 
   stockHistories ProductStockHistory[] @relation("StockHistoryProduct")
 
+  
   @@index([vendor_id])
   @@index([brand_id])
   @@index([category_id])
   @@index([item_id])
   @@index([hsn_id])
+  @@index([item_group_id])
+  @@index([primary_unit_id])
+  @@index([stock_unit_id])
+  @@index([consumption_unit_id])
+  @@index([min_stock_unit_id])
+  @@index([max_stock_unit_id])
+  @@index([reorder_level_unit_id])
+  @@index([reorder_batch_unit_id])
 }
 
 model PurchaseIntentMaster {
@@ -3063,6 +3109,53 @@ model POPayment {
   @@index([po_payment_schedule_id])
 }
 
+model UnitMaster {
+  id        Int     @id @default(autoincrement())
+  vendor_id Int
+  unit_name String
+  unit_class String
+  is_active Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  primaryUnitProducts     ProductMaster[] @relation("ProductPrimaryUnit")
+  stockUnitProducts       ProductMaster[] @relation("ProductStockUnit")
+  consumptionUnitProducts ProductMaster[] @relation("ProductConsumptionUnit")
+
+  minStockUnitProducts     ProductMaster[] @relation("ProductMinStockUnit")
+  maxStockUnitProducts     ProductMaster[] @relation("ProductMaxStockUnit")
+  reorderLevelUnitProducts ProductMaster[] @relation("ProductReorderLevelUnit")
+  reorderBatchUnitProducts ProductMaster[] @relation("ProductReorderBatchUnit")
+
+  @@unique([vendor_id, unit_name])
+  @@index([vendor_id])
+}
+
+model ItemGroupMaster {
+  id         Int     @id @default(autoincrement())
+  vendor_id  Int
+  group_name String
+  is_active  Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor   VendorMaster    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  products ProductMaster[]
+
+  @@unique([vendor_id, group_name])
+  @@index([vendor_id])
+}
+
 enum PaymentMode {
   Cash
   BankTransfer
@@ -3388,4 +3481,15 @@ enum ServiceClosureReason {
 enum DefectStatus {
   Pending
   Completed
+}
+
+enum CostingMethod {
+  FIFO
+  MANUAL
+}
+
+enum ProductItemType {
+  CapitalGoods
+  Goods
+  Services
 }

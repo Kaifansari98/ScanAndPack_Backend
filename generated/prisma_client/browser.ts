@@ -702,3 +702,13 @@ export type POPaymentSchedule = Prisma.POPaymentScheduleModel
  * 
  */
 export type POPayment = Prisma.POPaymentModel
+/**
+ * Model UnitMaster
+ * 
+ */
+export type UnitMaster = Prisma.UnitMasterModel
+/**
+ * Model ItemGroupMaster
+ * 
+ */
+export type ItemGroupMaster = Prisma.ItemGroupMasterModel

@@ -493,3 +493,20 @@ export const DefectStatus = {
 } as const
 
 export type DefectStatus = (typeof DefectStatus)[keyof typeof DefectStatus]
+
+
+export const CostingMethod = {
+  FIFO: 'FIFO',
+  MANUAL: 'MANUAL'
+} as const
+
+export type CostingMethod = (typeof CostingMethod)[keyof typeof CostingMethod]
+
+
+export const ProductItemType = {
+  CapitalGoods: 'CapitalGoods',
+  Goods: 'Goods',
+  Services: 'Services'
+} as const
+
+export type ProductItemType = (typeof ProductItemType)[keyof typeof ProductItemType]
