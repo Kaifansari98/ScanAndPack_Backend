@@ -573,6 +573,25 @@ export class BookingStageService {
           actionMessage,
         });
 
+        // Check if Accounts Lock-in is enabled for the vendor
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: data.vendor_id },
+          select: { IsAccountLocInEnabled: true },
+        });
+
+        if (vendor?.IsAccountLocInEnabled) {
+          await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
+            {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              created_by: data.created_by,
+              base_date: new Date(),
+              clientBaseUrl: data.baseUrl,
+            },
+            tx,
+          );
+        }
+
         return response;
       },
       {

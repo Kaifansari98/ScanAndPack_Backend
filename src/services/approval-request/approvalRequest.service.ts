@@ -488,7 +488,7 @@ export class ApprovalRequestService {
       message: `${lead.lead_code ?? `Lead #${lead.id}`} requires your approval review. Due by ${formatDueDate(value.due_date)}.`,
       entity_type: "approval_request",
       entity_id: result.approvalRequest.id,
-      redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}`,
+      redirect_url: `/dashboard/my-tasks?taskId=${result.task.id}&leadId=${lead.id}`,
     }).catch(() => undefined);
 
     return result;
