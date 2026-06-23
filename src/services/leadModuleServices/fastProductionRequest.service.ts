@@ -222,6 +222,53 @@ const findFirstActiveUserByRole = async (
     },
   });
 
+const getLatestActiveFastProductionBatch = async (tx: any, leadId: number) => {
+  const [approvedBatch, pendingBatch, draftBatch] = await Promise.all([
+    tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: leadId,
+        status: "approved",
+      },
+      orderBy: {
+        approved_at: "desc",
+      },
+      select: {
+        id: true,
+        status: true,
+        approved_at: true,
+      },
+    }),
+    tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: leadId,
+        status: "pending_approvals",
+      },
+      orderBy: {
+        updated_at: "desc",
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    }),
+    tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: leadId,
+        status: "draft",
+      },
+      orderBy: {
+        updated_at: "desc",
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    }),
+  ]);
+
+  return approvedBatch ?? pendingBatch ?? draftBatch ?? null;
+};
+
 const syncLeadFastProductionState = async (
   tx: any,
   leadId: number,
@@ -236,6 +283,7 @@ const syncLeadFastProductionState = async (
       approved_at: "desc",
     },
     select: {
+      id: true,
       status: true,
       approved_at: true,
     },
@@ -251,6 +299,7 @@ const syncLeadFastProductionState = async (
           updated_at: "desc",
         },
         select: {
+          id: true,
           status: true,
         },
       })
@@ -269,10 +318,28 @@ const syncLeadFastProductionState = async (
             updated_at: "desc",
           },
           select: {
+            id: true,
             status: true,
           },
         })
       : null;
+
+  const latestActiveBatch =
+    approvedBatch ??
+    pendingBatch ??
+    (await getLatestActiveFastProductionBatch(tx, leadId));
+
+  const latestClientRequiredDate = latestActiveBatch
+    ? await tx.fastProductionRequest.aggregate({
+        where: {
+          batch_id: latestActiveBatch.id,
+          lead_id: leadId,
+        },
+        _max: {
+          client_required_delivery_date: true,
+        },
+      })
+    : null;
 
   await tx.leadMaster.update({
     where: { id: leadId },
@@ -284,6 +351,8 @@ const syncLeadFastProductionState = async (
         latestClosedBatch?.status ??
         null,
       fast_production_approved_at: approvedBatch?.approved_at ?? null,
+      client_required_order_login_complition_date:
+        latestClientRequiredDate?._max?.client_required_delivery_date ?? null,
       updated_by: updatedBy,
     },
   });
@@ -637,6 +706,8 @@ export const saveFastProductionRequestDraft = async (
         batch_id: draftBatch.id,
       },
     });
+
+    await syncLeadFastProductionState(tx, value.lead_id, value.created_by);
 
     return {
       batchId: draftBatch.id,
