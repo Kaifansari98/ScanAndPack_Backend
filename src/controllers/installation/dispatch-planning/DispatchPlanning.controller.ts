@@ -101,7 +101,7 @@ export class DispatchPlanningController {
         alt_onsite_contact_person_number,
         material_lift_availability: material_lift_availability === "true",
         material_lift_size: material_lift_size !== undefined && material_lift_size !== null && material_lift_size !== ""
-          ? parseFloat(material_lift_size)
+          ? String(material_lift_size)
           : null,
         vehicle_approachability: vehicle_approachability === "true",
         dispatch_planning_remark,

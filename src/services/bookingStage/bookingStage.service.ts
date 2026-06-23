@@ -881,7 +881,19 @@ export class BookingStageService {
           vendor_id: vendorId,
           type: "site-supervisor",
           status: "active",
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive",
+              },
+            },
+          },
         },
+        orderBy: {
+          created_at: "asc",
+        },
+        take: 1,
         include: {
           user: { select: { id: true, user_name: true } },
         },
@@ -1836,6 +1848,17 @@ export class BookingStageService {
       activity_status: "onGoing",
       ...(excludedLeadIds.length && { id: { notIn: excludedLeadIds } }),
     });
+    const resolvedSmallOrderLeadExclusion =
+      await BookingStageService.getResolvedSmallOrderLeadExclusion(
+        vendorId,
+        tag,
+      );
+    if (resolvedSmallOrderLeadExclusion) {
+      BookingStageService.appendAndCondition(
+        whereClause,
+        resolvedSmallOrderLeadExclusion,
+      );
+    }
 
     try {
       const includeConfig = BookingStageService.leadIncludes();
@@ -1940,6 +1963,56 @@ export class BookingStageService {
     return ["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "");
   }
 
+  private static appendAndCondition(
+    whereClause: Prisma.LeadMasterWhereInput,
+    condition: Prisma.LeadMasterWhereInput,
+  ) {
+    if (!whereClause.AND) whereClause.AND = [];
+    if (Array.isArray(whereClause.AND)) {
+      whereClause.AND.push(condition);
+    } else {
+      whereClause.AND = [whereClause.AND, condition];
+    }
+  }
+
+  private static async getResolvedSmallOrderLeadExclusion(
+    vendorId: number,
+    stageTag?: string,
+  ): Promise<Prisma.LeadMasterWhereInput | null> {
+    if (String(stageTag ?? "").trim() !== "Type 15") {
+      return null;
+    }
+
+    const resolvedRequests = await prisma.smallOrderRequest.findMany({
+      where: {
+        vendor_id: vendorId,
+        is_request_resolved: true,
+      },
+      select: {
+        so_code: true,
+      },
+    });
+
+    const resolvedLeadCodes = [
+      ...new Set(
+        resolvedRequests
+          .map((request) => String(request.so_code ?? "").trim())
+          .filter(Boolean),
+      ),
+    ];
+
+    if (resolvedLeadCodes.length === 0) {
+      return null;
+    }
+
+    return {
+      NOT: {
+        is_small_order_request: true,
+        lead_code: { in: resolvedLeadCodes },
+      },
+    };
+  }
+
   private static async attachLinkedSmallOrderRequests(leads: any[]) {
     const smallOrderLeadCodes = [
       ...new Set(
@@ -1969,6 +2042,7 @@ export class BookingStageService {
       select: {
         id: true,
         so_code: true,
+        is_request_resolved: true,
         request_source: true,
         request_type_id: true,
         requestType: {
@@ -3616,6 +3690,17 @@ export class BookingStageService {
       }
 
       const whereClause = addFilterConditions(baseWhere);
+      const resolvedSmallOrderLeadExclusion =
+        await BookingStageService.getResolvedSmallOrderLeadExclusion(
+          vendorId,
+          normalizedStageTag,
+        );
+      if (resolvedSmallOrderLeadExclusion) {
+        BookingStageService.appendAndCondition(
+          whereClause,
+          resolvedSmallOrderLeadExclusion,
+        );
+      }
 
       const [leads, total] = await Promise.all([
         prisma.leadMaster.findMany({
@@ -3732,6 +3817,17 @@ export class BookingStageService {
     }
 
     const whereClause = addFilterConditions(baseWhere);
+    const resolvedSmallOrderLeadExclusion =
+      await BookingStageService.getResolvedSmallOrderLeadExclusion(
+        vendorId,
+        normalizedStageTag,
+      );
+    if (resolvedSmallOrderLeadExclusion) {
+      BookingStageService.appendAndCondition(
+        whereClause,
+        resolvedSmallOrderLeadExclusion,
+      );
+    }
 
     const [leads, total] = await Promise.all([
       prisma.leadMaster.findMany({
@@ -4166,4 +4262,3 @@ export class BookingStageService {
     return { leads: processed, count: total };
   }
 }
-

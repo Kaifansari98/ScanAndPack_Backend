@@ -822,7 +822,7 @@ export class DispatchPlanningService {
       );
 
       if (lead.is_small_order_request && factoryUser) {
-        const smallOrderRedirectPath = `/dashboard/installation/dispatch-planning/details/${leadId}?accountId=${lead.account_id}`;
+        const smallOrderRedirectPath = `/dashboard/installation/dispatch-stage/details/${leadId}?accountId=${lead.account_id}`;
         const smallOrderProjectUrl = `${baseUrl}${smallOrderRedirectPath}`;
 
         await Promise.allSettled([

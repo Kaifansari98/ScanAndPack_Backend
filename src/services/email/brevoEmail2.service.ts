@@ -2519,7 +2519,7 @@ export const sendSmallOrderRequestSupervisorApprovedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Request Approved
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -2685,7 +2685,7 @@ export const sendSmallOrderRequestSupervisorRejectedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#dc2626;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Request Rejected
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -2856,7 +2856,7 @@ export const sendSmallOrderRequestAdminApprovedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Request Approved
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3022,7 +3022,7 @@ export const sendSmallOrderRequestAdminRejectedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#dc2626;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Request Rejected
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3188,7 +3188,7 @@ export const sendNewSmallOrderLeadAssignedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         New Small Order Lead Assigned
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3347,7 +3347,7 @@ export const sendSmallOrderRequestFullyApprovedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Fully Approved
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3510,7 +3510,7 @@ export const sendSmallOrderSentToPreProductionEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Sent for Pre Production
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3669,7 +3669,7 @@ export const sendSmallOrderSentToFactoryEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Sent for Production
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3828,7 +3828,7 @@ export const sendSmallOrderProductionCompletedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Production Completed
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -3987,7 +3987,7 @@ export const sendSmallOrderReadyForDispatchEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Ready for Dispatch
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -4148,7 +4148,7 @@ export const sendSmallOrderDispatchedForInstallationEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Dispatched for Installation
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
@@ -4314,7 +4314,7 @@ export const sendSmallOrderDispatchedEmail = async (
 <body style="margin:0;padding:0;font-family:Arial,sans-serif;">
   <div style="background:#f9fafb;padding:10px;">
     <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
-      <h2 style="margin:0 0 12px;font-size:18px;color:#16a34a;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">
         Small Order Dispatched
       </h2>
       <p style="margin:0 0 12px;color:#111827;">
