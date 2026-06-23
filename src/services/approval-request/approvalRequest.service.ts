@@ -483,7 +483,7 @@ export class ApprovalRequestService {
       vendor_id: lead.vendor_id,
       user_id: assignee.id,
       sender_id: value.created_by,
-      type: NotificationType.TASK_ASSIGNED,
+      type: NotificationType.APPROVAL,
       title: "Approval Request Assigned",
       message: `${lead.lead_code ?? `Lead #${lead.id}`} requires your approval review. Due by ${formatDueDate(value.due_date)}.`,
       entity_type: "approval_request",
@@ -640,7 +640,7 @@ export class ApprovalRequestService {
       vendor_id: task.vendor_id,
       user_id: approvalRequest.requester_user_id,
       sender_id: value.acted_by,
-      type: NotificationType.TASK_ASSIGNED,
+      type: NotificationType.APPROVAL,
       title:
         value.action === "approve"
           ? "Approval Request Approved"

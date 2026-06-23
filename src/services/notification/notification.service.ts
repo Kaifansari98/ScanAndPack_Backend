@@ -235,9 +235,10 @@ export const NotificationService = {
 
     // Map tab names to their corresponding notification types (backend filter)
     const TAB_TYPE_MAP: Record<string, string[]> = {
-      leads:   ["LEAD_ASSIGNED", "LEAD_MILESTONE", "LEAD_ACTION"],
-      task:    ["TASK_ASSIGNED"],
-      mention: ["CHAT_MENTION"],
+      leads:    ["LEAD_ASSIGNED", "LEAD_MILESTONE", "LEAD_ACTION"],
+      task:     ["TASK_ASSIGNED"],
+      mention:  ["CHAT_MENTION"],
+      approval: ["APPROVAL"],
     };
 
     const whereClause: any = {
