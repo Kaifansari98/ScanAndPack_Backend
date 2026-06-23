@@ -445,6 +445,12 @@ export const ModelName = {
   PaymentTypeMaster: 'PaymentTypeMaster',
   LeadSiteSupervisorMapping: 'LeadSiteSupervisorMapping',
   UserLeadTask: 'UserLeadTask',
+  FastProductionRequestBatch: 'FastProductionRequestBatch',
+  FastProductionRequest: 'FastProductionRequest',
+  FastProductionFinish: 'FastProductionFinish',
+  FastProductionApproval: 'FastProductionApproval',
+  FastProductionRequestDocument: 'FastProductionRequestDocument',
+  FastProductionStatusLog: 'FastProductionStatusLog',
   LeadDetailedLogs: 'LeadDetailedLogs',
   LeadDocumentLogs: 'LeadDocumentLogs',
   LeadApprovalRequest: 'LeadApprovalRequest',
@@ -536,7 +542,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -5051,6 +5057,450 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserLeadTaskCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserLeadTaskCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionRequestBatch: {
+      payload: Prisma.$FastProductionRequestBatchPayload<ExtArgs>
+      fields: Prisma.FastProductionRequestBatchFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionRequestBatchFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionRequestBatchFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionRequestBatchFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionRequestBatchFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionRequestBatchFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionRequestBatchCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionRequestBatchCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionRequestBatchCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionRequestBatchDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        update: {
+          args: Prisma.FastProductionRequestBatchUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionRequestBatchDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionRequestBatchUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionRequestBatchUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionRequestBatchUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestBatchPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionRequestBatchAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionRequestBatch>
+        }
+        groupBy: {
+          args: Prisma.FastProductionRequestBatchGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestBatchGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionRequestBatchCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestBatchCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionRequest: {
+      payload: Prisma.$FastProductionRequestPayload<ExtArgs>
+      fields: Prisma.FastProductionRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        update: {
+          args: Prisma.FastProductionRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionRequest>
+        }
+        groupBy: {
+          args: Prisma.FastProductionRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionFinish: {
+      payload: Prisma.$FastProductionFinishPayload<ExtArgs>
+      fields: Prisma.FastProductionFinishFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionFinishFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionFinishFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionFinishFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionFinishFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionFinishFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionFinishCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionFinishCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionFinishCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionFinishDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        update: {
+          args: Prisma.FastProductionFinishUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionFinishDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionFinishUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionFinishUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionFinishUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionFinishPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionFinishAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionFinish>
+        }
+        groupBy: {
+          args: Prisma.FastProductionFinishGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionFinishGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionFinishCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionFinishCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionApproval: {
+      payload: Prisma.$FastProductionApprovalPayload<ExtArgs>
+      fields: Prisma.FastProductionApprovalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionApprovalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionApprovalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionApprovalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionApprovalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionApprovalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionApprovalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionApprovalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionApprovalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionApprovalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        update: {
+          args: Prisma.FastProductionApprovalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionApprovalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionApprovalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionApprovalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionApprovalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionApprovalPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionApprovalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionApproval>
+        }
+        groupBy: {
+          args: Prisma.FastProductionApprovalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionApprovalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionApprovalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionApprovalCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionRequestDocument: {
+      payload: Prisma.$FastProductionRequestDocumentPayload<ExtArgs>
+      fields: Prisma.FastProductionRequestDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionRequestDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionRequestDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionRequestDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionRequestDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionRequestDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionRequestDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionRequestDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionRequestDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionRequestDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        update: {
+          args: Prisma.FastProductionRequestDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionRequestDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionRequestDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionRequestDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionRequestDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionRequestDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionRequestDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionRequestDocument>
+        }
+        groupBy: {
+          args: Prisma.FastProductionRequestDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionRequestDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionRequestDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
+    FastProductionStatusLog: {
+      payload: Prisma.$FastProductionStatusLogPayload<ExtArgs>
+      fields: Prisma.FastProductionStatusLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FastProductionStatusLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FastProductionStatusLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        findFirst: {
+          args: Prisma.FastProductionStatusLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FastProductionStatusLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        findMany: {
+          args: Prisma.FastProductionStatusLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>[]
+        }
+        create: {
+          args: Prisma.FastProductionStatusLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        createMany: {
+          args: Prisma.FastProductionStatusLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FastProductionStatusLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>[]
+        }
+        delete: {
+          args: Prisma.FastProductionStatusLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        update: {
+          args: Prisma.FastProductionStatusLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.FastProductionStatusLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FastProductionStatusLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FastProductionStatusLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.FastProductionStatusLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FastProductionStatusLogPayload>
+        }
+        aggregate: {
+          args: Prisma.FastProductionStatusLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFastProductionStatusLog>
+        }
+        groupBy: {
+          args: Prisma.FastProductionStatusLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionStatusLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FastProductionStatusLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FastProductionStatusLogCountAggregateOutputType> | number
         }
       }
     }
@@ -11048,6 +11498,9 @@ export const LeadMasterScalarFieldEnum = {
   onsite_contact_person_name: 'onsite_contact_person_name',
   onsite_contact_person_number: 'onsite_contact_person_number',
   required_date_for_dispatch: 'required_date_for_dispatch',
+  is_fast_production: 'is_fast_production',
+  fast_production_status: 'fast_production_status',
+  fast_production_approved_at: 'fast_production_approved_at',
   alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
   alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
   dispatch_date: 'dispatch_date',
@@ -11240,6 +11693,8 @@ export const TimelineRuleScalarFieldEnum = {
   shutter_id: 'shutter_id',
   kitchen_manufacturing_days: 'kitchen_manufacturing_days',
   other_manufacturing_days: 'other_manufacturing_days',
+  kitchen_manufacturing_days_for_fast_production: 'kitchen_manufacturing_days_for_fast_production',
+  other_manufacturing_days_for_fast_production: 'other_manufacturing_days_for_fast_production',
   created_at: 'created_at'
 } as const
 
@@ -11742,6 +12197,114 @@ export const UserLeadTaskScalarFieldEnum = {
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
+
+
+export const FastProductionRequestBatchScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  franchise_id: 'franchise_id',
+  requester_user_id: 'requester_user_id',
+  month_bucket: 'month_bucket',
+  status: 'status',
+  terms_accepted_at: 'terms_accepted_at',
+  terms_version: 'terms_version',
+  approved_at: 'approved_at',
+  rejected_at: 'rejected_at',
+  revoked_at: 'revoked_at',
+  revoked_by: 'revoked_by',
+  revocation_remark: 'revocation_remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type FastProductionRequestBatchScalarFieldEnum = (typeof FastProductionRequestBatchScalarFieldEnum)[keyof typeof FastProductionRequestBatchScalarFieldEnum]
+
+
+export const FastProductionRequestScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  instance_id: 'instance_id',
+  franchise_id: 'franchise_id',
+  task_id: 'task_id',
+  requester_user_id: 'requester_user_id',
+  month_bucket: 'month_bucket',
+  status: 'status',
+  hardware_selection: 'hardware_selection',
+  accessory_selection: 'accessory_selection',
+  special_requirements: 'special_requirements',
+  client_required_delivery_date: 'client_required_delivery_date',
+  remarks: 'remarks',
+  terms_accepted_at: 'terms_accepted_at',
+  terms_version: 'terms_version',
+  approved_at: 'approved_at',
+  rejected_at: 'rejected_at',
+  revoked_at: 'revoked_at',
+  revoked_by: 'revoked_by',
+  revocation_remark: 'revocation_remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type FastProductionRequestScalarFieldEnum = (typeof FastProductionRequestScalarFieldEnum)[keyof typeof FastProductionRequestScalarFieldEnum]
+
+
+export const FastProductionFinishScalarFieldEnum = {
+  id: 'id',
+  request_id: 'request_id',
+  component: 'component',
+  finish_category: 'finish_category',
+  finish_description: 'finish_description',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionFinishScalarFieldEnum = (typeof FastProductionFinishScalarFieldEnum)[keyof typeof FastProductionFinishScalarFieldEnum]
+
+
+export const FastProductionApprovalScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  approver_role: 'approver_role',
+  approver_user_id: 'approver_user_id',
+  status: 'status',
+  remark: 'remark',
+  acted_at: 'acted_at',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionApprovalScalarFieldEnum = (typeof FastProductionApprovalScalarFieldEnum)[keyof typeof FastProductionApprovalScalarFieldEnum]
+
+
+export const FastProductionRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  request_id: 'request_id',
+  document_id: 'document_id',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionRequestDocumentScalarFieldEnum = (typeof FastProductionRequestDocumentScalarFieldEnum)[keyof typeof FastProductionRequestDocumentScalarFieldEnum]
+
+
+export const FastProductionStatusLogScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  from_status: 'from_status',
+  to_status: 'to_status',
+  actor_user_id: 'actor_user_id',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionStatusLogScalarFieldEnum = (typeof FastProductionStatusLogScalarFieldEnum)[keyof typeof FastProductionStatusLogScalarFieldEnum]
 
 
 export const LeadDetailedLogsScalarFieldEnum = {
@@ -13201,6 +13764,20 @@ export type ListEnumActivityStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'FastProductionRequestStatus'
+ */
+export type EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionRequestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionRequestStatus[]'
+ */
+export type ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionRequestStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'SuperAdminApprovalType'
  */
 export type EnumSuperAdminApprovalTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SuperAdminApprovalType'>
@@ -13435,6 +14012,48 @@ export type EnumLeadTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'LeadTaskStatus[]'
  */
 export type ListEnumLeadTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LeadTaskStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionFinishComponent'
+ */
+export type EnumFastProductionFinishComponentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionFinishComponent'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionFinishComponent[]'
+ */
+export type ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionFinishComponent[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionApproverRole'
+ */
+export type EnumFastProductionApproverRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionApproverRole'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionApproverRole[]'
+ */
+export type ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionApproverRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionApprovalStatus'
+ */
+export type EnumFastProductionApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionApprovalStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'FastProductionApprovalStatus[]'
+ */
+export type ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FastProductionApprovalStatus[]'>
     
 
 
@@ -14041,6 +14660,12 @@ export type GlobalOmitConfig = {
   paymentTypeMaster?: Prisma.PaymentTypeMasterOmit
   leadSiteSupervisorMapping?: Prisma.LeadSiteSupervisorMappingOmit
   userLeadTask?: Prisma.UserLeadTaskOmit
+  fastProductionRequestBatch?: Prisma.FastProductionRequestBatchOmit
+  fastProductionRequest?: Prisma.FastProductionRequestOmit
+  fastProductionFinish?: Prisma.FastProductionFinishOmit
+  fastProductionApproval?: Prisma.FastProductionApprovalOmit
+  fastProductionRequestDocument?: Prisma.FastProductionRequestDocumentOmit
+  fastProductionStatusLog?: Prisma.FastProductionStatusLogOmit
   leadDetailedLogs?: Prisma.LeadDetailedLogsOmit
   leadDocumentLogs?: Prisma.LeadDocumentLogsOmit
   leadApprovalRequest?: Prisma.LeadApprovalRequestOmit

@@ -609,7 +609,6 @@ export class ClientApprovalService {
     account_id: number;
     assign_to_user_id: number;
     created_by: number;
-    required_date: Date;
   }) {
     const response: any = {};
 
@@ -625,13 +624,12 @@ export class ClientApprovalService {
       );
     }
 
-    // Step 2. Update lead status + store date
+    // Step 2. Update lead status
     const updatedLead = await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         status_id: techCheckStatus.id,
         tech_check_reached_at: new Date(),
-        client_required_order_login_complition_date: data.required_date,
         updated_by: data.created_by,
         updated_at: new Date(),
       },

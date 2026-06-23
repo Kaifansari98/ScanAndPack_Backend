@@ -328,6 +328,13 @@ export type FloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
+export type EnumFastProductionRequestStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel> | $Enums.FastProductionRequestStatus | null
+}
+
 export type EnumActivityStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ActivityStatus | Prisma.EnumActivityStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ActivityStatus[] | Prisma.ListEnumActivityStatusFieldRefInput<$PrismaModel>
@@ -352,6 +359,16 @@ export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type EnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionRequestStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
 }
 
 export type EnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
@@ -641,6 +658,74 @@ export type EnumLeadTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadTaskStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadTaskStatusFilter<$PrismaModel>
+}
+
+export type EnumFastProductionRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel> | $Enums.FastProductionRequestStatus
+}
+
+export type EnumFastProductionRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel>
+}
+
+export type EnumFastProductionFinishComponentFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionFinishComponent | Prisma.EnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel> | $Enums.FastProductionFinishComponent
+}
+
+export type EnumFastProductionFinishComponentWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionFinishComponent | Prisma.EnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionFinishComponentWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionFinishComponent
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel>
+}
+
+export type EnumFastProductionApproverRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApproverRole | Prisma.EnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel> | $Enums.FastProductionApproverRole
+}
+
+export type EnumFastProductionApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApprovalStatus | Prisma.EnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel> | $Enums.FastProductionApprovalStatus
+}
+
+export type EnumFastProductionApproverRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApproverRole | Prisma.EnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApproverRoleWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionApproverRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel>
+}
+
+export type EnumFastProductionApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApprovalStatus | Prisma.EnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel>
 }
 
 export type EnumActionTypeFilter<$PrismaModel = never> = {
@@ -1631,6 +1716,13 @@ export type NestedEnumActivityStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumActivityStatusFilter<$PrismaModel> | $Enums.ActivityStatus
 }
 
+export type NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel> | $Enums.FastProductionRequestStatus | null
+}
+
 export type NestedEnumActivityStatusWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ActivityStatus | Prisma.EnumActivityStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ActivityStatus[] | Prisma.ListEnumActivityStatusFieldRefInput<$PrismaModel>
@@ -1655,6 +1747,16 @@ export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _min?: Prisma.NestedFloatNullableFilter<$PrismaModel>
   _max?: Prisma.NestedFloatNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumFastProductionRequestStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionRequestStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionRequestStatusNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumSuperAdminApprovalTypeFilter<$PrismaModel = never> = {
@@ -1944,6 +2046,74 @@ export type NestedEnumLeadTaskStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumLeadTaskStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumLeadTaskStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumFastProductionRequestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel> | $Enums.FastProductionRequestStatus
+}
+
+export type NestedEnumFastProductionRequestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionRequestStatus | Prisma.EnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionRequestStatus[] | Prisma.ListEnumFastProductionRequestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionRequestStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionRequestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionRequestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumFastProductionFinishComponentFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionFinishComponent | Prisma.EnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel> | $Enums.FastProductionFinishComponent
+}
+
+export type NestedEnumFastProductionFinishComponentWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionFinishComponent | Prisma.EnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionFinishComponent[] | Prisma.ListEnumFastProductionFinishComponentFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionFinishComponentWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionFinishComponent
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionFinishComponentFilter<$PrismaModel>
+}
+
+export type NestedEnumFastProductionApproverRoleFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApproverRole | Prisma.EnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel> | $Enums.FastProductionApproverRole
+}
+
+export type NestedEnumFastProductionApprovalStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApprovalStatus | Prisma.EnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel> | $Enums.FastProductionApprovalStatus
+}
+
+export type NestedEnumFastProductionApproverRoleWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApproverRole | Prisma.EnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApproverRole[] | Prisma.ListEnumFastProductionApproverRoleFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApproverRoleWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionApproverRole
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionApproverRoleFilter<$PrismaModel>
+}
+
+export type NestedEnumFastProductionApprovalStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.FastProductionApprovalStatus | Prisma.EnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.FastProductionApprovalStatus[] | Prisma.ListEnumFastProductionApprovalStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumFastProductionApprovalStatusWithAggregatesFilter<$PrismaModel> | $Enums.FastProductionApprovalStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumFastProductionApprovalStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumActionTypeFilter<$PrismaModel = never> = {

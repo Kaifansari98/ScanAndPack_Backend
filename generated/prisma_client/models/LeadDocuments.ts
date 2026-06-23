@@ -322,6 +322,7 @@ export type LeadDocumentsWhereInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   amcContracts?: Prisma.LeadAmcContractListRelationFilter
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -357,6 +358,7 @@ export type LeadDocumentsOrderByWithRelationInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingOrderByRelationAggregateInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsOrderByRelationAggregateInput
   amcContracts?: Prisma.LeadAmcContractOrderByRelationAggregateInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleOrderByRelationAggregateInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -395,6 +397,7 @@ export type LeadDocumentsWhereUniqueInput = Prisma.AtLeast<{
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingListRelationFilter
   leadDocumentLogs?: Prisma.LeadDocumentLogsListRelationFilter
   amcContracts?: Prisma.LeadAmcContractListRelationFilter
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   completedServiceSchedules?: Prisma.LeadServiceScheduleListRelationFilter
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
@@ -464,6 +467,7 @@ export type LeadDocumentsCreateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -499,6 +503,7 @@ export type LeadDocumentsUncheckedCreateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -519,6 +524,7 @@ export type LeadDocumentsUpdateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -554,6 +560,7 @@ export type LeadDocumentsUncheckedUpdateInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1071,6 +1078,20 @@ export type LeadDocumentsUpdateOneRequiredWithoutClientVisitDocumentMappingsNest
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutClientVisitDocumentMappingsInput, Prisma.LeadDocumentsUpdateWithoutClientVisitDocumentMappingsInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutClientVisitDocumentMappingsInput>
 }
 
+export type LeadDocumentsCreateNestedOneWithoutFastProductionRequestDocumentsInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInput>
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutFastProductionRequestDocumentsInput
+  connect?: Prisma.LeadDocumentsWhereUniqueInput
+}
+
+export type LeadDocumentsUpdateOneRequiredWithoutFastProductionRequestDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInput>
+  connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutFastProductionRequestDocumentsInput
+  upsert?: Prisma.LeadDocumentsUpsertWithoutFastProductionRequestDocumentsInput
+  connect?: Prisma.LeadDocumentsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadDocumentsUpdateToOneWithWhereWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput>, Prisma.LeadDocumentsUncheckedUpdateWithoutFastProductionRequestDocumentsInput>
+}
+
 export type LeadDocumentsCreateNestedOneWithoutLeadDocumentLogsInput = {
   create?: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutLeadDocumentLogsInput, Prisma.LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput>
   connectOrCreate?: Prisma.LeadDocumentsCreateOrConnectWithoutLeadDocumentLogsInput
@@ -1192,6 +1213,7 @@ export type LeadDocumentsCreateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1225,6 +1247,7 @@ export type LeadDocumentsUncheckedCreateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1291,6 +1314,7 @@ export type LeadDocumentsCreateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
@@ -1324,6 +1348,7 @@ export type LeadDocumentsUncheckedCreateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1354,6 +1379,7 @@ export type LeadDocumentsCreateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1387,6 +1413,7 @@ export type LeadDocumentsUncheckedCreateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1449,6 +1476,7 @@ export type LeadDocumentsCreateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1482,6 +1510,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1528,6 +1557,7 @@ export type LeadDocumentsCreateWithoutAccountInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
@@ -1561,6 +1591,7 @@ export type LeadDocumentsUncheckedCreateWithoutAccountInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1607,6 +1638,7 @@ export type LeadDocumentsCreateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1640,6 +1672,7 @@ export type LeadDocumentsUncheckedCreateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1686,6 +1719,7 @@ export type LeadDocumentsCreateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1720,6 +1754,7 @@ export type LeadDocumentsUncheckedCreateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1755,6 +1790,7 @@ export type LeadDocumentsUpdateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -1789,6 +1825,7 @@ export type LeadDocumentsUncheckedUpdateWithoutPaymentInfoInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -1808,6 +1845,7 @@ export type LeadDocumentsCreateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1841,6 +1879,7 @@ export type LeadDocumentsUncheckedCreateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1886,6 +1925,7 @@ export type LeadDocumentsCreateWithoutSmallOrderRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -1920,6 +1960,7 @@ export type LeadDocumentsUncheckedCreateWithoutSmallOrderRequestDocumentsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -1955,6 +1996,7 @@ export type LeadDocumentsUpdateWithoutSmallOrderRequestDocumentsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -1989,6 +2031,7 @@ export type LeadDocumentsUncheckedUpdateWithoutSmallOrderRequestDocumentsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2008,6 +2051,7 @@ export type LeadDocumentsCreateWithoutAmcContractsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2042,6 +2086,7 @@ export type LeadDocumentsUncheckedCreateWithoutAmcContractsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2077,6 +2122,7 @@ export type LeadDocumentsUpdateWithoutAmcContractsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2111,6 +2157,7 @@ export type LeadDocumentsUncheckedUpdateWithoutAmcContractsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2131,6 +2178,7 @@ export type LeadDocumentsCreateWithoutCompletedServiceSchedulesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
@@ -2165,6 +2213,7 @@ export type LeadDocumentsUncheckedCreateWithoutCompletedServiceSchedulesInput = 
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
@@ -2200,6 +2249,7 @@ export type LeadDocumentsUpdateWithoutCompletedServiceSchedulesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
@@ -2234,6 +2284,7 @@ export type LeadDocumentsUncheckedUpdateWithoutCompletedServiceSchedulesInput = 
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2252,6 +2303,7 @@ export type LeadDocumentsCreateWithoutClientVisitDocumentMappingsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2286,6 +2338,7 @@ export type LeadDocumentsUncheckedCreateWithoutClientVisitDocumentMappingsInput 
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2321,6 +2374,7 @@ export type LeadDocumentsUpdateWithoutClientVisitDocumentMappingsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2355,6 +2409,133 @@ export type LeadDocumentsUncheckedUpdateWithoutClientVisitDocumentMappingsInput 
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedUpdateManyWithoutSite_readiness_photosNestedInput
+}
+
+export type LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput = {
+  doc_og_name: string
+  doc_sys_name: string
+  created_at?: Date | string
+  deleted_at?: Date | string | null
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutDocumentInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutDocumentInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutDocumentInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutDocumentsDeletedInput
+  documentType: Prisma.DocumentTypeMasterCreateNestedOneWithoutDocumentsInput
+  lead?: Prisma.LeadMasterCreateNestedOneWithoutDocumentsInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceCreateNestedOneWithoutDocumentsInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutDocumentsInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInput = {
+  id?: number
+  doc_og_name: string
+  doc_sys_name: string
+  created_by: number
+  created_at?: Date | string
+  deleted_by?: number | null
+  deleted_at?: Date | string | null
+  account_id?: number | null
+  lead_id?: number | null
+  vendor_id: number
+  doc_type_id: number
+  is_deleted?: boolean
+  tech_check_status?: $Enums.TechCheckStatus | null
+  product_structure_instance_id?: number | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutDocumentInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
+  paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
+  site_readiness_photos?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutSite_readiness_photosInput
+}
+
+export type LeadDocumentsCreateOrConnectWithoutFastProductionRequestDocumentsInput = {
+  where: Prisma.LeadDocumentsWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInput>
+}
+
+export type LeadDocumentsUpsertWithoutFastProductionRequestDocumentsInput = {
+  update: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedUpdateWithoutFastProductionRequestDocumentsInput>
+  create: Prisma.XOR<Prisma.LeadDocumentsCreateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedCreateWithoutFastProductionRequestDocumentsInput>
+  where?: Prisma.LeadDocumentsWhereInput
+}
+
+export type LeadDocumentsUpdateToOneWithWhereWithoutFastProductionRequestDocumentsInput = {
+  where?: Prisma.LeadDocumentsWhereInput
+  data: Prisma.XOR<Prisma.LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput, Prisma.LeadDocumentsUncheckedUpdateWithoutFastProductionRequestDocumentsInput>
+}
+
+export type LeadDocumentsUpdateWithoutFastProductionRequestDocumentsInput = {
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutDocumentNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutDocumentNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
+  completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
+  documentType?: Prisma.DocumentTypeMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneWithoutDocumentsNestedInput
+  productStructureInstance?: Prisma.LeadProductStructureInstanceUpdateOneWithoutDocumentsNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutDocumentsNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutDocumentNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDocumentNestedInput
+  paymentInfo?: Prisma.PaymentInfoUpdateManyWithoutDocumentNestedInput
+  site_readiness_photos?: Prisma.SiteReadinessUpdateManyWithoutSite_readiness_photosNestedInput
+}
+
+export type LeadDocumentsUncheckedUpdateWithoutFastProductionRequestDocumentsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_og_name?: Prisma.StringFieldUpdateOperationsInput | string
+  doc_sys_name?: Prisma.StringFieldUpdateOperationsInput | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  lead_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  doc_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tech_check_status?: Prisma.NullableEnumTechCheckStatusFieldUpdateOperationsInput | $Enums.TechCheckStatus | null
+  product_structure_instance_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutDocumentNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2374,6 +2555,7 @@ export type LeadDocumentsCreateWithoutLeadDocumentLogsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2408,6 +2590,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadDocumentLogsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2443,6 +2626,7 @@ export type LeadDocumentsUpdateWithoutLeadDocumentLogsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2477,6 +2661,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadDocumentLogsInput = {
   smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2496,6 +2681,7 @@ export type LeadDocumentsCreateWithoutLeadApprovalRequestDocumentMappingsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2530,6 +2716,7 @@ export type LeadDocumentsUncheckedCreateWithoutLeadApprovalRequestDocumentMappin
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2565,6 +2752,7 @@ export type LeadDocumentsUpdateWithoutLeadApprovalRequestDocumentMappingsInput =
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2599,6 +2787,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadApprovalRequestDocumentMappin
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2619,6 +2808,7 @@ export type LeadDocumentsCreateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2653,6 +2843,7 @@ export type LeadDocumentsUncheckedCreateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2692,6 +2883,7 @@ export type LeadDocumentsCreateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2726,6 +2918,7 @@ export type LeadDocumentsUncheckedCreateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
@@ -2761,6 +2954,7 @@ export type LeadDocumentsUpdateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2795,6 +2989,7 @@ export type LeadDocumentsUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2815,6 +3010,7 @@ export type LeadDocumentsCreateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2849,6 +3045,7 @@ export type LeadDocumentsUncheckedCreateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
@@ -2884,6 +3081,7 @@ export type LeadDocumentsUpdateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -2918,6 +3116,7 @@ export type LeadDocumentsUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
@@ -2937,6 +3136,7 @@ export type LeadDocumentsCreateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutDocumentInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutDocumentsInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletionDocumentInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutDocumentsCreatedInput
@@ -2971,6 +3171,7 @@ export type LeadDocumentsUncheckedCreateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutDocumentInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutDocInput
   amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutDocumentInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutDocumentInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletionDocumentInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutDocumentInput
   paymentInfo?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutDocumentInput
@@ -3006,6 +3207,7 @@ export type LeadDocumentsUpdateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3040,6 +3242,7 @@ export type LeadDocumentsUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   paymentInfo?: Prisma.PaymentInfoUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3075,6 +3278,7 @@ export type LeadDocumentsUpdateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3108,6 +3312,7 @@ export type LeadDocumentsUncheckedUpdateWithoutVendorInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3176,6 +3381,7 @@ export type LeadDocumentsUpdateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
@@ -3209,6 +3415,7 @@ export type LeadDocumentsUncheckedUpdateWithoutCreatedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3245,6 +3452,7 @@ export type LeadDocumentsUpdateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3278,6 +3486,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDeletedByInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3330,6 +3539,7 @@ export type LeadDocumentsUpdateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3363,6 +3573,7 @@ export type LeadDocumentsUncheckedUpdateWithoutLeadInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3415,6 +3626,7 @@ export type LeadDocumentsUpdateWithoutAccountInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutDocumentsDeletedNestedInput
@@ -3448,6 +3660,7 @@ export type LeadDocumentsUncheckedUpdateWithoutAccountInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3500,6 +3713,7 @@ export type LeadDocumentsUpdateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3533,6 +3747,7 @@ export type LeadDocumentsUncheckedUpdateWithoutProductStructureInstanceInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3585,6 +3800,7 @@ export type LeadDocumentsUpdateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3618,6 +3834,7 @@ export type LeadDocumentsUncheckedUpdateWithoutDocumentTypeInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3654,6 +3871,7 @@ export type LeadDocumentsUpdateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUpdateManyWithoutDocumentNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutDocumentsNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletionDocumentNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutDocumentsCreatedNestedInput
@@ -3688,6 +3906,7 @@ export type LeadDocumentsUncheckedUpdateWithoutSite_readiness_photosInput = {
   clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutDocumentNestedInput
   leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutDocNestedInput
   amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutDocumentNestedInput
+  fastProductionRequestDocuments?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   completedServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletionDocumentNestedInput
   miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutDocumentNestedInput
   orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDocumentNestedInput
@@ -3723,6 +3942,7 @@ export type LeadDocumentsCountOutputType = {
   clientVisitDocumentMappings: number
   leadDocumentLogs: number
   amcContracts: number
+  fastProductionRequestDocuments: number
   completedServiceSchedules: number
   miscellaneousDocument: number
   orderLoginPoFiles: number
@@ -3737,6 +3957,7 @@ export type LeadDocumentsCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   clientVisitDocumentMappings?: boolean | LeadDocumentsCountOutputTypeCountClientVisitDocumentMappingsArgs
   leadDocumentLogs?: boolean | LeadDocumentsCountOutputTypeCountLeadDocumentLogsArgs
   amcContracts?: boolean | LeadDocumentsCountOutputTypeCountAmcContractsArgs
+  fastProductionRequestDocuments?: boolean | LeadDocumentsCountOutputTypeCountFastProductionRequestDocumentsArgs
   completedServiceSchedules?: boolean | LeadDocumentsCountOutputTypeCountCompletedServiceSchedulesArgs
   miscellaneousDocument?: boolean | LeadDocumentsCountOutputTypeCountMiscellaneousDocumentArgs
   orderLoginPoFiles?: boolean | LeadDocumentsCountOutputTypeCountOrderLoginPoFilesArgs
@@ -3799,6 +4020,13 @@ export type LeadDocumentsCountOutputTypeCountAmcContractsArgs<ExtArgs extends ru
 /**
  * LeadDocumentsCountOutputType without action
  */
+export type LeadDocumentsCountOutputTypeCountFastProductionRequestDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestDocumentWhereInput
+}
+
+/**
+ * LeadDocumentsCountOutputType without action
+ */
 export type LeadDocumentsCountOutputTypeCountCompletedServiceSchedulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadServiceScheduleWhereInput
 }
@@ -3853,6 +4081,7 @@ export type LeadDocumentsSelect<ExtArgs extends runtime.Types.Extensions.Interna
   clientVisitDocumentMappings?: boolean | Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   amcContracts?: boolean | Prisma.LeadDocuments$amcContractsArgs<ExtArgs>
+  fastProductionRequestDocuments?: boolean | Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -3941,6 +4170,7 @@ export type LeadDocumentsInclude<ExtArgs extends runtime.Types.Extensions.Intern
   clientVisitDocumentMappings?: boolean | Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>
   leadDocumentLogs?: boolean | Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>
   amcContracts?: boolean | Prisma.LeadDocuments$amcContractsArgs<ExtArgs>
+  fastProductionRequestDocuments?: boolean | Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs>
   account?: boolean | Prisma.LeadDocuments$accountArgs<ExtArgs>
   completedServiceSchedules?: boolean | Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -3983,6 +4213,7 @@ export type $LeadDocumentsPayload<ExtArgs extends runtime.Types.Extensions.Inter
     clientVisitDocumentMappings: Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>[]
     leadDocumentLogs: Prisma.$LeadDocumentLogsPayload<ExtArgs>[]
     amcContracts: Prisma.$LeadAmcContractPayload<ExtArgs>[]
+    fastProductionRequestDocuments: Prisma.$FastProductionRequestDocumentPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
     completedServiceSchedules: Prisma.$LeadServiceSchedulePayload<ExtArgs>[]
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
@@ -4411,6 +4642,7 @@ export interface Prisma__LeadDocumentsClient<T, Null = never, ExtArgs extends ru
   clientVisitDocumentMappings<T extends Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$clientVisitDocumentMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadClientVisitDocumentMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadDocumentLogs<T extends Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$leadDocumentLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadDocumentLogsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   amcContracts<T extends Prisma.LeadDocuments$amcContractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$amcContractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadAmcContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastProductionRequestDocuments<T extends Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadDocuments$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   completedServiceSchedules<T extends Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadDocuments$completedServiceSchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadServiceSchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -5008,6 +5240,30 @@ export type LeadDocuments$amcContractsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.LeadAmcContractScalarFieldEnum | Prisma.LeadAmcContractScalarFieldEnum[]
+}
+
+/**
+ * LeadDocuments.fastProductionRequestDocuments
+ */
+export type LeadDocuments$fastProductionRequestDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequestDocument
+   */
+  select?: Prisma.FastProductionRequestDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequestDocument
+   */
+  omit?: Prisma.FastProductionRequestDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestDocumentInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestDocumentWhereInput
+  orderBy?: Prisma.FastProductionRequestDocumentOrderByWithRelationInput | Prisma.FastProductionRequestDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestDocumentScalarFieldEnum | Prisma.FastProductionRequestDocumentScalarFieldEnum[]
 }
 
 /**

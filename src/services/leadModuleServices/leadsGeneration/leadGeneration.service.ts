@@ -1118,6 +1118,17 @@ export const getLeadById = async (
         }
       : null;
 
+    const pendingFastProductionRequest = await prisma.fastProductionRequestBatch.findFirst({
+      where: {
+        vendor_id: vendorId,
+        lead_id: lead.id,
+        status: "pending_approvals",
+      },
+      select: {
+        id: true,
+      },
+    });
+
     // ✅ Auto-unmark draft if completed
     if (lead.is_draft && isLeadComplete(lead)) {
       await prisma.leadMaster.update({
@@ -1223,6 +1234,7 @@ export const getLeadById = async (
     return {
       lead: {
         ...lead,
+        has_pending_fast_production_request: !!pendingFastProductionRequest,
         smallOrderRequest:
           linkedSmallOrderRequestWithDocs && isSmallOrderRequestLead
             ? linkedSmallOrderRequestWithDocs

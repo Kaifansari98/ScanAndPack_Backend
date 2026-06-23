@@ -123,6 +123,9 @@ export type LeadMasterMinAggregateOutputType = {
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
   required_date_for_dispatch: Date | null
+  is_fast_production: boolean | null
+  fast_production_status: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at: Date | null
   alt_onsite_contact_person_name: string | null
   alt_onsite_contact_person_number: string | null
   dispatch_date: Date | null
@@ -208,6 +211,9 @@ export type LeadMasterMaxAggregateOutputType = {
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
   required_date_for_dispatch: Date | null
+  is_fast_production: boolean | null
+  fast_production_status: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at: Date | null
   alt_onsite_contact_person_name: string | null
   alt_onsite_contact_person_number: string | null
   dispatch_date: Date | null
@@ -293,6 +299,9 @@ export type LeadMasterCountAggregateOutputType = {
   onsite_contact_person_name: number
   onsite_contact_person_number: number
   required_date_for_dispatch: number
+  is_fast_production: number
+  fast_production_status: number
+  fast_production_approved_at: number
   alt_onsite_contact_person_name: number
   alt_onsite_contact_person_number: number
   dispatch_date: number
@@ -424,6 +433,9 @@ export type LeadMasterMinAggregateInputType = {
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
   required_date_for_dispatch?: true
+  is_fast_production?: true
+  fast_production_status?: true
+  fast_production_approved_at?: true
   alt_onsite_contact_person_name?: true
   alt_onsite_contact_person_number?: true
   dispatch_date?: true
@@ -509,6 +521,9 @@ export type LeadMasterMaxAggregateInputType = {
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
   required_date_for_dispatch?: true
+  is_fast_production?: true
+  fast_production_status?: true
+  fast_production_approved_at?: true
   alt_onsite_contact_person_name?: true
   alt_onsite_contact_person_number?: true
   dispatch_date?: true
@@ -594,6 +609,9 @@ export type LeadMasterCountAggregateInputType = {
   onsite_contact_person_name?: true
   onsite_contact_person_number?: true
   required_date_for_dispatch?: true
+  is_fast_production?: true
+  fast_production_status?: true
+  fast_production_approved_at?: true
   alt_onsite_contact_person_name?: true
   alt_onsite_contact_person_number?: true
   dispatch_date?: true
@@ -766,6 +784,9 @@ export type LeadMasterGroupByOutputType = {
   onsite_contact_person_name: string | null
   onsite_contact_person_number: string | null
   required_date_for_dispatch: Date | null
+  is_fast_production: boolean
+  fast_production_status: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at: Date | null
   alt_onsite_contact_person_name: string | null
   alt_onsite_contact_person_number: string | null
   dispatch_date: Date | null
@@ -874,6 +895,9 @@ export type LeadMasterWhereInput = {
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  fast_production_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"LeadMaster"> | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   dispatch_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -953,6 +977,8 @@ export type LeadMasterWhereInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
   projectDetails?: Prisma.ProjectDetailsListRelationFilter
   BoxMaster?: Prisma.BoxMasterListRelationFilter
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
 }
 
 export type LeadMasterOrderByWithRelationInput = {
@@ -1008,6 +1034,9 @@ export type LeadMasterOrderByWithRelationInput = {
   onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
   required_date_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_fast_production?: Prisma.SortOrder
+  fast_production_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  fast_production_approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1087,6 +1116,8 @@ export type LeadMasterOrderByWithRelationInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingOrderByRelationAggregateInput
   projectDetails?: Prisma.ProjectDetailsOrderByRelationAggregateInput
   BoxMaster?: Prisma.BoxMasterOrderByRelationAggregateInput
+  fastProductionRequests?: Prisma.FastProductionRequestOrderByRelationAggregateInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchOrderByRelationAggregateInput
 }
 
 export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -1146,6 +1177,9 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  fast_production_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"LeadMaster"> | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   dispatch_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -1225,6 +1259,8 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingListRelationFilter
   projectDetails?: Prisma.ProjectDetailsListRelationFilter
   BoxMaster?: Prisma.BoxMasterListRelationFilter
+  fastProductionRequests?: Prisma.FastProductionRequestListRelationFilter
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchListRelationFilter
 }, "id" | "uniq_vendor_lead_code">
 
 export type LeadMasterOrderByWithAggregationInput = {
@@ -1280,6 +1316,9 @@ export type LeadMasterOrderByWithAggregationInput = {
   onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
   required_date_for_dispatch?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_fast_production?: Prisma.SortOrder
+  fast_production_status?: Prisma.SortOrderInput | Prisma.SortOrder
+  fast_production_approved_at?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_onsite_contact_person_name?: Prisma.SortOrderInput | Prisma.SortOrder
   alt_onsite_contact_person_number?: Prisma.SortOrderInput | Prisma.SortOrder
   dispatch_date?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1373,6 +1412,9 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   onsite_contact_person_name?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   required_date_for_dispatch?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
+  is_fast_production?: Prisma.BoolWithAggregatesFilter<"LeadMaster"> | boolean
+  fast_production_status?: Prisma.EnumFastProductionRequestStatusNullableWithAggregatesFilter<"LeadMaster"> | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
   alt_onsite_contact_person_name?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   alt_onsite_contact_person_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   dispatch_date?: Prisma.DateTimeNullableWithAggregatesFilter<"LeadMaster"> | Date | string | null
@@ -1448,6 +1490,9 @@ export type LeadMasterCreateInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -1526,6 +1571,8 @@ export type LeadMasterCreateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateInput = {
@@ -1581,6 +1628,9 @@ export type LeadMasterUncheckedCreateInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -1650,6 +1700,8 @@ export type LeadMasterUncheckedCreateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUpdateInput = {
@@ -1695,6 +1747,9 @@ export type LeadMasterUpdateInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1773,6 +1828,8 @@ export type LeadMasterUpdateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateInput = {
@@ -1828,6 +1885,9 @@ export type LeadMasterUncheckedUpdateInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1897,6 +1957,8 @@ export type LeadMasterUncheckedUpdateInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyInput = {
@@ -1952,6 +2014,9 @@ export type LeadMasterCreateManyInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -2027,6 +2092,9 @@ export type LeadMasterUpdateManyMutationInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2111,6 +2179,9 @@ export type LeadMasterUncheckedUpdateManyInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2216,6 +2287,9 @@ export type LeadMasterCountOrderByAggregateInput = {
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
   required_date_for_dispatch?: Prisma.SortOrder
+  is_fast_production?: Prisma.SortOrder
+  fast_production_status?: Prisma.SortOrder
+  fast_production_approved_at?: Prisma.SortOrder
   alt_onsite_contact_person_name?: Prisma.SortOrder
   alt_onsite_contact_person_number?: Prisma.SortOrder
   dispatch_date?: Prisma.SortOrder
@@ -2323,6 +2397,9 @@ export type LeadMasterMaxOrderByAggregateInput = {
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
   required_date_for_dispatch?: Prisma.SortOrder
+  is_fast_production?: Prisma.SortOrder
+  fast_production_status?: Prisma.SortOrder
+  fast_production_approved_at?: Prisma.SortOrder
   alt_onsite_contact_person_name?: Prisma.SortOrder
   alt_onsite_contact_person_number?: Prisma.SortOrder
   dispatch_date?: Prisma.SortOrder
@@ -2408,6 +2485,9 @@ export type LeadMasterMinOrderByAggregateInput = {
   onsite_contact_person_name?: Prisma.SortOrder
   onsite_contact_person_number?: Prisma.SortOrder
   required_date_for_dispatch?: Prisma.SortOrder
+  is_fast_production?: Prisma.SortOrder
+  fast_production_status?: Prisma.SortOrder
+  fast_production_approved_at?: Prisma.SortOrder
   alt_onsite_contact_person_name?: Prisma.SortOrder
   alt_onsite_contact_person_number?: Prisma.SortOrder
   dispatch_date?: Prisma.SortOrder
@@ -2757,6 +2837,10 @@ export type NullableFloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput = {
+  set?: $Enums.FastProductionRequestStatus | null
 }
 
 export type LeadMasterCreateNestedOneWithoutSuperAdminApprovalLocInsInput = {
@@ -3253,6 +3337,34 @@ export type LeadMasterUpdateOneRequiredWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutTasksInput, Prisma.LeadMasterUpdateWithoutTasksInput>, Prisma.LeadMasterUncheckedUpdateWithoutTasksInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutFastProductionRequestBatchesInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutFastProductionRequestBatchesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutFastProductionRequestBatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutFastProductionRequestBatchesInput
+  upsert?: Prisma.LeadMasterUpsertWithoutFastProductionRequestBatchesInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUpdateWithoutFastProductionRequestBatchesInput>, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput>
+}
+
+export type LeadMasterCreateNestedOneWithoutFastProductionRequestsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutFastProductionRequestsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutFastProductionRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutFastProductionRequestsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutFastProductionRequestsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutFastProductionRequestsInput, Prisma.LeadMasterUpdateWithoutFastProductionRequestsInput>, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput>
+}
+
 export type LeadMasterCreateNestedOneWithoutLeadDetailedLogsInput = {
   create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutLeadDetailedLogsInput, Prisma.LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput>
   connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutLeadDetailedLogsInput
@@ -3524,6 +3636,9 @@ export type LeadMasterCreateWithoutVendorInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -3601,6 +3716,8 @@ export type LeadMasterCreateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutVendorInput = {
@@ -3655,6 +3772,9 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -3724,6 +3844,8 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutVendorInput = {
@@ -3808,6 +3930,9 @@ export type LeadMasterScalarWhereInput = {
   onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   required_date_for_dispatch?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
+  is_fast_production?: Prisma.BoolFilter<"LeadMaster"> | boolean
+  fast_production_status?: Prisma.EnumFastProductionRequestStatusNullableFilter<"LeadMaster"> | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
   alt_onsite_contact_person_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   alt_onsite_contact_person_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   dispatch_date?: Prisma.DateTimeNullableFilter<"LeadMaster"> | Date | string | null
@@ -3883,6 +4008,9 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -3960,6 +4088,8 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
@@ -4014,6 +4144,9 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4083,6 +4216,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedToInput = {
@@ -4138,6 +4273,9 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4215,6 +4353,8 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
@@ -4269,6 +4409,9 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4338,6 +4481,8 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAssignedByInput = {
@@ -4393,6 +4538,9 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4470,6 +4618,8 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
@@ -4524,6 +4674,9 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4593,6 +4746,8 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCreatedByInput = {
@@ -4648,6 +4803,9 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4725,6 +4883,8 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
@@ -4779,6 +4939,9 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -4848,6 +5011,8 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUpdatedByInput = {
@@ -4967,6 +5132,9 @@ export type LeadMasterCreateWithoutProjectsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -5044,6 +5212,8 @@ export type LeadMasterCreateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProjectsInput = {
@@ -5099,6 +5269,9 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -5167,6 +5340,8 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProjectsInput = {
@@ -5228,6 +5403,9 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5305,6 +5483,8 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
@@ -5360,6 +5540,9 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5428,6 +5611,8 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProjectDetailsInput = {
@@ -5473,6 +5658,9 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -5550,6 +5738,8 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -5605,6 +5795,9 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -5673,6 +5866,8 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -5734,6 +5929,9 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5811,6 +6009,8 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -5866,6 +6066,9 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5934,6 +6137,8 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutBoxMasterInput = {
@@ -5979,6 +6184,9 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6056,6 +6264,8 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
@@ -6111,6 +6321,9 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6179,6 +6392,8 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutBoxMasterInput = {
@@ -6245,6 +6460,9 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6322,6 +6540,8 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
@@ -6377,6 +6597,9 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6445,6 +6668,8 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSuperAdminApprovalLocInsInput = {
@@ -6506,6 +6731,9 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6583,6 +6811,8 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
@@ -6638,6 +6868,9 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6706,6 +6939,8 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutUserMappingsInput = {
@@ -6751,6 +6986,9 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6828,6 +7066,8 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
@@ -6883,6 +7123,9 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -6951,6 +7194,8 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutUserMappingsInput = {
@@ -7012,6 +7257,9 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7089,6 +7337,8 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
@@ -7144,6 +7394,9 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7212,6 +7465,8 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -7257,6 +7512,9 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -7334,6 +7592,8 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -7389,6 +7649,9 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -7457,6 +7720,8 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -7518,6 +7783,9 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7595,6 +7863,8 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -7650,6 +7920,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7718,6 +7991,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteTypeInput = {
@@ -7763,6 +8038,9 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -7840,6 +8118,8 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
@@ -7894,6 +8174,9 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -7963,6 +8246,8 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteTypeInput = {
@@ -8034,6 +8319,9 @@ export type LeadMasterCreateWithoutSourceInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8111,6 +8399,8 @@ export type LeadMasterCreateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSourceInput = {
@@ -8165,6 +8455,9 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8234,6 +8527,8 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSourceInput = {
@@ -8305,6 +8600,9 @@ export type LeadMasterCreateWithoutAccountInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8382,6 +8680,8 @@ export type LeadMasterCreateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAccountInput = {
@@ -8436,6 +8736,9 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8505,6 +8808,8 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAccountInput = {
@@ -8576,6 +8881,9 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8653,6 +8961,8 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
@@ -8708,6 +9018,9 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -8776,6 +9089,8 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductMappingsInput = {
@@ -8837,6 +9152,9 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -8914,6 +9232,8 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
@@ -8969,6 +9289,9 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9037,6 +9360,8 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDocumentsInput = {
@@ -9082,6 +9407,9 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -9159,6 +9487,8 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
@@ -9214,6 +9544,9 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -9282,6 +9615,8 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDocumentsInput = {
@@ -9343,6 +9678,9 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9420,6 +9758,8 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -9475,6 +9815,9 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9543,6 +9886,8 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatRoomsInput = {
@@ -9588,6 +9933,9 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -9665,6 +10013,8 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -9720,6 +10070,9 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -9788,6 +10141,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -9849,6 +10204,9 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9926,6 +10284,8 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -9981,6 +10341,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10049,6 +10412,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
@@ -10094,6 +10459,9 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -10171,6 +10539,8 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -10226,6 +10596,9 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -10294,6 +10667,8 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -10355,6 +10730,9 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10432,6 +10810,8 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -10487,6 +10867,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10555,6 +10938,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -10600,6 +10985,9 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -10677,6 +11065,8 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -10732,6 +11122,9 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -10800,6 +11193,8 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -10861,6 +11256,9 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -10938,6 +11336,8 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -10993,6 +11393,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11061,6 +11464,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutProductStructureInstancesInput = {
@@ -11106,6 +11511,9 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -11183,6 +11591,8 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -11238,6 +11648,9 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -11306,6 +11719,8 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -11367,6 +11782,9 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11444,6 +11862,8 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -11499,6 +11919,9 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11567,6 +11990,8 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutPaymentsInput = {
@@ -11612,6 +12037,9 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -11689,6 +12117,8 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
@@ -11744,6 +12174,9 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -11812,6 +12245,8 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutPaymentsInput = {
@@ -11873,6 +12308,9 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11950,6 +12388,8 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -12005,6 +12445,9 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12073,6 +12516,8 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLedgersInput = {
@@ -12118,6 +12563,9 @@ export type LeadMasterCreateWithoutLedgersInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -12195,6 +12643,8 @@ export type LeadMasterCreateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLedgersInput = {
@@ -12250,6 +12700,9 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -12318,6 +12771,8 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLedgersInput = {
@@ -12379,6 +12834,9 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12456,6 +12914,8 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
@@ -12511,6 +12971,9 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12579,6 +13042,8 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
@@ -12624,6 +13089,9 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -12701,6 +13169,8 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -12756,6 +13226,9 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -12824,6 +13297,8 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -12885,6 +13360,9 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12962,6 +13440,8 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -13017,6 +13497,9 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13085,6 +13568,8 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutAmcContractsInput = {
@@ -13130,6 +13615,9 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -13207,6 +13695,8 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
@@ -13262,6 +13752,9 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -13330,6 +13823,8 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutAmcContractsInput = {
@@ -13391,6 +13886,9 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13468,6 +13966,8 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
@@ -13523,6 +14023,9 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13591,6 +14094,8 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutServiceSchedulesInput = {
@@ -13636,6 +14141,9 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -13713,6 +14221,8 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
@@ -13768,6 +14278,9 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -13836,6 +14349,8 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutServiceSchedulesInput = {
@@ -13897,6 +14412,9 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13974,6 +14492,8 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
@@ -14029,6 +14549,9 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14097,6 +14620,8 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutStatusTypeInput = {
@@ -14142,6 +14667,9 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -14219,6 +14747,8 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
@@ -14273,6 +14803,9 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -14342,6 +14875,8 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutStatusTypeInput = {
@@ -14413,6 +14948,9 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -14490,6 +15028,8 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -14545,6 +15085,9 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -14613,6 +15156,8 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -14674,6 +15219,9 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14751,6 +15299,8 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -14806,6 +15356,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -14874,6 +15427,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingInput = {
@@ -14919,6 +15474,9 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -14996,6 +15554,8 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -15051,6 +15611,9 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -15119,6 +15682,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -15180,6 +15745,9 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15257,6 +15825,8 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -15312,6 +15882,9 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15380,6 +15953,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutClientVisitsInput = {
@@ -15425,6 +16000,9 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -15502,6 +16080,8 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -15557,6 +16137,9 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -15625,6 +16208,8 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -15686,6 +16271,9 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15763,6 +16351,8 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -15818,6 +16408,9 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -15886,6 +16479,8 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -15931,6 +16526,9 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -16008,6 +16606,8 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -16063,6 +16663,9 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -16131,6 +16734,8 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -16192,6 +16797,9 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16269,6 +16877,8 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -16324,6 +16934,9 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16392,6 +17005,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -16437,6 +17052,9 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -16514,6 +17132,8 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -16569,6 +17189,9 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -16637,6 +17260,8 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -16698,6 +17323,9 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16775,6 +17403,8 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -16830,6 +17460,9 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16898,6 +17531,8 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutDesignSelectionInput = {
@@ -16943,6 +17578,9 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -17020,6 +17658,8 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -17075,6 +17715,9 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -17143,6 +17786,8 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -17204,6 +17849,9 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17281,6 +17929,8 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -17336,6 +17986,9 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17404,6 +18057,8 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
@@ -17449,6 +18104,9 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -17526,6 +18184,8 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -17581,6 +18241,9 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -17649,6 +18312,8 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -17710,6 +18375,9 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17787,6 +18455,8 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -17842,6 +18512,9 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17910,6 +18583,8 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteSupervisorsInput = {
@@ -17955,6 +18630,9 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -18032,6 +18710,8 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -18087,6 +18767,9 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -18155,6 +18838,8 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -18216,6 +18901,9 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18293,6 +18981,8 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -18348,6 +19038,9 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18416,6 +19109,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutTasksInput = {
@@ -18461,6 +19156,9 @@ export type LeadMasterCreateWithoutTasksInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -18538,6 +19236,8 @@ export type LeadMasterCreateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutTasksInput = {
@@ -18593,6 +19293,9 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -18661,6 +19364,8 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutTasksInput = {
@@ -18722,6 +19427,9 @@ export type LeadMasterUpdateWithoutTasksInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18799,6 +19507,8 @@ export type LeadMasterUpdateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutTasksInput = {
@@ -18854,6 +19564,9 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18922,6 +19635,1060 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutFastProductionRequestBatchesInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput>
+}
+
+export type LeadMasterUpsertWithoutFastProductionRequestBatchesInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutFastProductionRequestBatchesInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutFastProductionRequestBatchesInput, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput>
+}
+
+export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutFastProductionRequestsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutFastProductionRequestsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestsInput>
+}
+
+export type LeadMasterUpsertWithoutFastProductionRequestsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedCreateWithoutFastProductionRequestsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutFastProductionRequestsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutFastProductionRequestsInput, Prisma.LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput>
+}
+
+export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
@@ -18967,6 +20734,9 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -19044,6 +20814,8 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -19099,6 +20871,9 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -19167,6 +20942,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -19228,6 +21005,9 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19305,6 +21085,8 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -19360,6 +21142,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19428,6 +21213,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
@@ -19473,6 +21260,9 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -19550,6 +21340,8 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -19605,6 +21397,9 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -19673,6 +21468,8 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -19734,6 +21531,9 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19811,6 +21611,8 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -19866,6 +21668,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19934,6 +21739,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -19979,6 +21786,9 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -20056,6 +21866,8 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -20111,6 +21923,9 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -20179,6 +21994,8 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -20240,6 +22057,9 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20317,6 +22137,8 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -20372,6 +22194,9 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20440,6 +22265,8 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
@@ -20485,6 +22312,9 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -20562,6 +22392,8 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -20617,6 +22449,9 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -20685,6 +22520,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -20746,6 +22583,9 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20823,6 +22663,8 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -20878,6 +22720,9 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -20946,6 +22791,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutSiteReadinessInput = {
@@ -20991,6 +22838,9 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -21068,6 +22918,8 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -21123,6 +22975,9 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -21191,6 +23046,8 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -21252,6 +23109,9 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21329,6 +23189,8 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -21384,6 +23246,9 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21452,6 +23317,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallerMappingsInput = {
@@ -21497,6 +23364,9 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -21574,6 +23444,8 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -21629,6 +23501,9 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -21697,6 +23572,8 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -21758,6 +23635,9 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21835,6 +23715,8 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -21890,6 +23772,9 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21958,6 +23843,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationUpdatesInput = {
@@ -22003,6 +23890,9 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -22080,6 +23970,8 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -22135,6 +24027,9 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -22203,6 +24098,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -22264,6 +24161,9 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22341,6 +24241,8 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -22396,6 +24298,9 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22464,6 +24369,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
@@ -22509,6 +24416,9 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -22586,6 +24496,8 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -22641,6 +24553,9 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -22709,6 +24624,8 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -22770,6 +24687,9 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22847,6 +24767,8 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -22902,6 +24824,9 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22970,6 +24895,8 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -23015,6 +24942,9 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -23092,6 +25022,8 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -23147,6 +25079,9 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -23215,6 +25150,8 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -23276,6 +25213,9 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23353,6 +25293,8 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -23408,6 +25350,9 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23476,6 +25421,8 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListInput = {
@@ -23521,6 +25468,9 @@ export type LeadMasterCreateWithoutCutListInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -23598,6 +25548,8 @@ export type LeadMasterCreateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListInput = {
@@ -23653,6 +25605,9 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -23721,6 +25676,8 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListInput = {
@@ -23782,6 +25739,9 @@ export type LeadMasterUpdateWithoutCutListInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23859,6 +25819,8 @@ export type LeadMasterUpdateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListInput = {
@@ -23914,6 +25876,9 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23982,6 +25947,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutCutListMachineMappingInput = {
@@ -24027,6 +25994,9 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -24104,6 +26074,8 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -24159,6 +26131,9 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -24227,6 +26202,8 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -24288,6 +26265,9 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24365,6 +26345,8 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -24420,6 +26402,9 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24488,6 +26473,8 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
@@ -24533,6 +26520,9 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -24610,6 +26600,8 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
@@ -24665,6 +26657,9 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -24733,6 +26728,8 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutOrderLoginPoFilesInput = {
@@ -24794,6 +26791,9 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24871,6 +26871,8 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
@@ -24926,6 +26928,9 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24994,6 +26999,8 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateWithoutFranchiseInput = {
@@ -25039,6 +27046,9 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -25116,6 +27126,8 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
@@ -25171,6 +27183,9 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -25239,6 +27254,8 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutFranchiseInput = {
@@ -25310,6 +27327,9 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -25387,6 +27407,8 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInput = {
@@ -25442,6 +27464,9 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -25510,6 +27535,8 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
   projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
   BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
 }
 
 export type LeadMasterCreateOrConnectWithoutExternalPlatformCustomerMappingsInput = {
@@ -25571,6 +27598,9 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25648,6 +27678,8 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInput = {
@@ -25703,6 +27735,9 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25771,6 +27806,8 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterCreateManyVendorInput = {
@@ -25825,6 +27862,9 @@ export type LeadMasterCreateManyVendorInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -25900,6 +27940,9 @@ export type LeadMasterUpdateWithoutVendorInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25977,6 +28020,8 @@ export type LeadMasterUpdateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutVendorInput = {
@@ -26031,6 +28076,9 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26100,6 +28148,8 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -26154,6 +28204,9 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26238,6 +28291,9 @@ export type LeadMasterCreateManyAssignedToInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -26322,6 +28378,9 @@ export type LeadMasterCreateManyAssignedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -26406,6 +28465,9 @@ export type LeadMasterCreateManyCreatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -26490,6 +28552,9 @@ export type LeadMasterCreateManyUpdatedByInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -26565,6 +28630,9 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26642,6 +28710,8 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
@@ -26696,6 +28766,9 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26765,6 +28838,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
@@ -26819,6 +28894,9 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26894,6 +28972,9 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26971,6 +29052,8 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
@@ -27025,6 +29108,9 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27094,6 +29180,8 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
@@ -27148,6 +29236,9 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27223,6 +29314,9 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27300,6 +29394,8 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -27354,6 +29450,9 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27423,6 +29522,8 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -27477,6 +29578,9 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27552,6 +29656,9 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27629,6 +29736,8 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
@@ -27683,6 +29792,9 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27752,6 +29864,8 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
@@ -27806,6 +29920,9 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27881,6 +29998,9 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27958,6 +30078,8 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
@@ -28013,6 +30135,9 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28081,6 +30206,8 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
@@ -28136,6 +30263,9 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28220,6 +30350,9 @@ export type LeadMasterCreateManySiteTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -28295,6 +30428,9 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28372,6 +30508,8 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
@@ -28426,6 +30564,9 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28495,6 +30636,8 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
@@ -28549,6 +30692,9 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28633,6 +30779,9 @@ export type LeadMasterCreateManySourceInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -28708,6 +30857,9 @@ export type LeadMasterUpdateWithoutSourceInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28785,6 +30937,8 @@ export type LeadMasterUpdateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutSourceInput = {
@@ -28839,6 +30993,9 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -28908,6 +31065,8 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
@@ -28962,6 +31121,9 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29046,6 +31208,9 @@ export type LeadMasterCreateManyAccountInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -29121,6 +31286,9 @@ export type LeadMasterUpdateWithoutAccountInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29198,6 +31366,8 @@ export type LeadMasterUpdateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutAccountInput = {
@@ -29252,6 +31422,9 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29321,6 +31494,8 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
@@ -29375,6 +31550,9 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29459,6 +31637,9 @@ export type LeadMasterCreateManyStatusTypeInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -29534,6 +31715,9 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29611,6 +31795,8 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
@@ -29665,6 +31851,9 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29734,6 +31923,8 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
@@ -29788,6 +31979,9 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29873,6 +32067,9 @@ export type LeadMasterCreateManyFranchiseInput = {
   onsite_contact_person_name?: string | null
   onsite_contact_person_number?: string | null
   required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
   alt_onsite_contact_person_name?: string | null
   alt_onsite_contact_person_number?: string | null
   dispatch_date?: Date | string | null
@@ -29947,6 +32144,9 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30024,6 +32224,8 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -30079,6 +32281,9 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30147,6 +32352,8 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
   projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
   BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
 export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -30202,6 +32409,9 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -30278,6 +32488,8 @@ export type LeadMasterCountOutputType = {
   externalPlatformCustomerMappings: number
   projectDetails: number
   BoxMaster: number
+  fastProductionRequests: number
+  fastProductionRequestBatches: number
 }
 
 export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -30320,6 +32532,8 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   externalPlatformCustomerMappings?: boolean | LeadMasterCountOutputTypeCountExternalPlatformCustomerMappingsArgs
   projectDetails?: boolean | LeadMasterCountOutputTypeCountProjectDetailsArgs
   BoxMaster?: boolean | LeadMasterCountOutputTypeCountBoxMasterArgs
+  fastProductionRequests?: boolean | LeadMasterCountOutputTypeCountFastProductionRequestsArgs
+  fastProductionRequestBatches?: boolean | LeadMasterCountOutputTypeCountFastProductionRequestBatchesArgs
 }
 
 /**
@@ -30605,6 +32819,20 @@ export type LeadMasterCountOutputTypeCountBoxMasterArgs<ExtArgs extends runtime.
   where?: Prisma.BoxMasterWhereInput
 }
 
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountFastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountFastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FastProductionRequestBatchWhereInput
+}
+
 
 export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -30659,6 +32887,9 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
   required_date_for_dispatch?: boolean
+  is_fast_production?: boolean
+  fast_production_status?: boolean
+  fast_production_approved_at?: boolean
   alt_onsite_contact_person_name?: boolean
   alt_onsite_contact_person_number?: boolean
   dispatch_date?: boolean
@@ -30738,6 +32969,8 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   externalPlatformCustomerMappings?: boolean | Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>
   projectDetails?: boolean | Prisma.LeadMaster$projectDetailsArgs<ExtArgs>
   BoxMaster?: boolean | Prisma.LeadMaster$BoxMasterArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>
+  fastProductionRequestBatches?: boolean | Prisma.LeadMaster$fastProductionRequestBatchesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadMaster"]>
 
@@ -30794,6 +33027,9 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
   required_date_for_dispatch?: boolean
+  is_fast_production?: boolean
+  fast_production_status?: boolean
+  fast_production_approved_at?: boolean
   alt_onsite_contact_person_name?: boolean
   alt_onsite_contact_person_number?: boolean
   dispatch_date?: boolean
@@ -30889,6 +33125,9 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
   required_date_for_dispatch?: boolean
+  is_fast_production?: boolean
+  fast_production_status?: boolean
+  fast_production_approved_at?: boolean
   alt_onsite_contact_person_name?: boolean
   alt_onsite_contact_person_number?: boolean
   dispatch_date?: boolean
@@ -30984,6 +33223,9 @@ export type LeadMasterSelectScalar = {
   onsite_contact_person_name?: boolean
   onsite_contact_person_number?: boolean
   required_date_for_dispatch?: boolean
+  is_fast_production?: boolean
+  fast_production_status?: boolean
+  fast_production_approved_at?: boolean
   alt_onsite_contact_person_name?: boolean
   alt_onsite_contact_person_number?: boolean
   dispatch_date?: boolean
@@ -31016,7 +33258,7 @@ export type LeadMasterSelectScalar = {
   lead_blocked_at?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "is_fast_production" | "fast_production_status" | "fast_production_approved_at" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -31067,6 +33309,8 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   externalPlatformCustomerMappings?: boolean | Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>
   projectDetails?: boolean | Prisma.LeadMaster$projectDetailsArgs<ExtArgs>
   BoxMaster?: boolean | Prisma.LeadMaster$BoxMasterArgs<ExtArgs>
+  fastProductionRequests?: boolean | Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>
+  fastProductionRequestBatches?: boolean | Prisma.LeadMaster$fastProductionRequestBatchesArgs<ExtArgs>
   _count?: boolean | Prisma.LeadMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -31146,6 +33390,8 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     externalPlatformCustomerMappings: Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>[]
     projectDetails: Prisma.$ProjectDetailsPayload<ExtArgs>[]
     BoxMaster: Prisma.$BoxMasterPayload<ExtArgs>[]
+    fastProductionRequests: Prisma.$FastProductionRequestPayload<ExtArgs>[]
+    fastProductionRequestBatches: Prisma.$FastProductionRequestBatchPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -31200,6 +33446,9 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     onsite_contact_person_name: string | null
     onsite_contact_person_number: string | null
     required_date_for_dispatch: Date | null
+    is_fast_production: boolean
+    fast_production_status: $Enums.FastProductionRequestStatus | null
+    fast_production_approved_at: Date | null
     alt_onsite_contact_person_name: string | null
     alt_onsite_contact_person_number: string | null
     dispatch_date: Date | null
@@ -31673,6 +33922,8 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   externalPlatformCustomerMappings<T extends Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$externalPlatformCustomerMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadExternalPlatformCustomerMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projectDetails<T extends Prisma.LeadMaster$projectDetailsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$projectDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   BoxMaster<T extends Prisma.LeadMaster$BoxMasterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$BoxMasterArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastProductionRequests<T extends Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$fastProductionRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  fastProductionRequestBatches<T extends Prisma.LeadMaster$fastProductionRequestBatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$fastProductionRequestBatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FastProductionRequestBatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31754,6 +34005,9 @@ export interface LeadMasterFieldRefs {
   readonly onsite_contact_person_name: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly onsite_contact_person_number: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly required_date_for_dispatch: Prisma.FieldRef<"LeadMaster", 'DateTime'>
+  readonly is_fast_production: Prisma.FieldRef<"LeadMaster", 'Boolean'>
+  readonly fast_production_status: Prisma.FieldRef<"LeadMaster", 'FastProductionRequestStatus'>
+  readonly fast_production_approved_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
   readonly alt_onsite_contact_person_name: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly alt_onsite_contact_person_number: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly dispatch_date: Prisma.FieldRef<"LeadMaster", 'DateTime'>
@@ -33270,6 +35524,54 @@ export type LeadMaster$BoxMasterArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.fastProductionRequests
+ */
+export type LeadMaster$fastProductionRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequest
+   */
+  select?: Prisma.FastProductionRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequest
+   */
+  omit?: Prisma.FastProductionRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestWhereInput
+  orderBy?: Prisma.FastProductionRequestOrderByWithRelationInput | Prisma.FastProductionRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestScalarFieldEnum | Prisma.FastProductionRequestScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.fastProductionRequestBatches
+ */
+export type LeadMaster$fastProductionRequestBatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FastProductionRequestBatch
+   */
+  select?: Prisma.FastProductionRequestBatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FastProductionRequestBatch
+   */
+  omit?: Prisma.FastProductionRequestBatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FastProductionRequestBatchInclude<ExtArgs> | null
+  where?: Prisma.FastProductionRequestBatchWhereInput
+  orderBy?: Prisma.FastProductionRequestBatchOrderByWithRelationInput | Prisma.FastProductionRequestBatchOrderByWithRelationInput[]
+  cursor?: Prisma.FastProductionRequestBatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FastProductionRequestBatchScalarFieldEnum | Prisma.FastProductionRequestBatchScalarFieldEnum[]
 }
 
 /**

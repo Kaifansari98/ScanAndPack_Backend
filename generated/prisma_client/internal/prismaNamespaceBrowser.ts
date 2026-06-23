@@ -112,6 +112,12 @@ export const ModelName = {
   PaymentTypeMaster: 'PaymentTypeMaster',
   LeadSiteSupervisorMapping: 'LeadSiteSupervisorMapping',
   UserLeadTask: 'UserLeadTask',
+  FastProductionRequestBatch: 'FastProductionRequestBatch',
+  FastProductionRequest: 'FastProductionRequest',
+  FastProductionFinish: 'FastProductionFinish',
+  FastProductionApproval: 'FastProductionApproval',
+  FastProductionRequestDocument: 'FastProductionRequestDocument',
+  FastProductionStatusLog: 'FastProductionStatusLog',
   LeadDetailedLogs: 'LeadDetailedLogs',
   LeadDocumentLogs: 'LeadDocumentLogs',
   LeadApprovalRequest: 'LeadApprovalRequest',
@@ -537,6 +543,9 @@ export const LeadMasterScalarFieldEnum = {
   onsite_contact_person_name: 'onsite_contact_person_name',
   onsite_contact_person_number: 'onsite_contact_person_number',
   required_date_for_dispatch: 'required_date_for_dispatch',
+  is_fast_production: 'is_fast_production',
+  fast_production_status: 'fast_production_status',
+  fast_production_approved_at: 'fast_production_approved_at',
   alt_onsite_contact_person_name: 'alt_onsite_contact_person_name',
   alt_onsite_contact_person_number: 'alt_onsite_contact_person_number',
   dispatch_date: 'dispatch_date',
@@ -729,6 +738,8 @@ export const TimelineRuleScalarFieldEnum = {
   shutter_id: 'shutter_id',
   kitchen_manufacturing_days: 'kitchen_manufacturing_days',
   other_manufacturing_days: 'other_manufacturing_days',
+  kitchen_manufacturing_days_for_fast_production: 'kitchen_manufacturing_days_for_fast_production',
+  other_manufacturing_days_for_fast_production: 'other_manufacturing_days_for_fast_production',
   created_at: 'created_at'
 } as const
 
@@ -1231,6 +1242,114 @@ export const UserLeadTaskScalarFieldEnum = {
 } as const
 
 export type UserLeadTaskScalarFieldEnum = (typeof UserLeadTaskScalarFieldEnum)[keyof typeof UserLeadTaskScalarFieldEnum]
+
+
+export const FastProductionRequestBatchScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  franchise_id: 'franchise_id',
+  requester_user_id: 'requester_user_id',
+  month_bucket: 'month_bucket',
+  status: 'status',
+  terms_accepted_at: 'terms_accepted_at',
+  terms_version: 'terms_version',
+  approved_at: 'approved_at',
+  rejected_at: 'rejected_at',
+  revoked_at: 'revoked_at',
+  revoked_by: 'revoked_by',
+  revocation_remark: 'revocation_remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type FastProductionRequestBatchScalarFieldEnum = (typeof FastProductionRequestBatchScalarFieldEnum)[keyof typeof FastProductionRequestBatchScalarFieldEnum]
+
+
+export const FastProductionRequestScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  account_id: 'account_id',
+  instance_id: 'instance_id',
+  franchise_id: 'franchise_id',
+  task_id: 'task_id',
+  requester_user_id: 'requester_user_id',
+  month_bucket: 'month_bucket',
+  status: 'status',
+  hardware_selection: 'hardware_selection',
+  accessory_selection: 'accessory_selection',
+  special_requirements: 'special_requirements',
+  client_required_delivery_date: 'client_required_delivery_date',
+  remarks: 'remarks',
+  terms_accepted_at: 'terms_accepted_at',
+  terms_version: 'terms_version',
+  approved_at: 'approved_at',
+  rejected_at: 'rejected_at',
+  revoked_at: 'revoked_at',
+  revoked_by: 'revoked_by',
+  revocation_remark: 'revocation_remark',
+  created_by: 'created_by',
+  created_at: 'created_at',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at'
+} as const
+
+export type FastProductionRequestScalarFieldEnum = (typeof FastProductionRequestScalarFieldEnum)[keyof typeof FastProductionRequestScalarFieldEnum]
+
+
+export const FastProductionFinishScalarFieldEnum = {
+  id: 'id',
+  request_id: 'request_id',
+  component: 'component',
+  finish_category: 'finish_category',
+  finish_description: 'finish_description',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionFinishScalarFieldEnum = (typeof FastProductionFinishScalarFieldEnum)[keyof typeof FastProductionFinishScalarFieldEnum]
+
+
+export const FastProductionApprovalScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  approver_role: 'approver_role',
+  approver_user_id: 'approver_user_id',
+  status: 'status',
+  remark: 'remark',
+  acted_at: 'acted_at',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionApprovalScalarFieldEnum = (typeof FastProductionApprovalScalarFieldEnum)[keyof typeof FastProductionApprovalScalarFieldEnum]
+
+
+export const FastProductionRequestDocumentScalarFieldEnum = {
+  id: 'id',
+  request_id: 'request_id',
+  document_id: 'document_id',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionRequestDocumentScalarFieldEnum = (typeof FastProductionRequestDocumentScalarFieldEnum)[keyof typeof FastProductionRequestDocumentScalarFieldEnum]
+
+
+export const FastProductionStatusLogScalarFieldEnum = {
+  id: 'id',
+  batch_id: 'batch_id',
+  from_status: 'from_status',
+  to_status: 'to_status',
+  actor_user_id: 'actor_user_id',
+  remark: 'remark',
+  created_at: 'created_at'
+} as const
+
+export type FastProductionStatusLogScalarFieldEnum = (typeof FastProductionStatusLogScalarFieldEnum)[keyof typeof FastProductionStatusLogScalarFieldEnum]
 
 
 export const LeadDetailedLogsScalarFieldEnum = {

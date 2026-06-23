@@ -345,6 +345,36 @@ export type LeadSiteSupervisorMapping = Prisma.LeadSiteSupervisorMappingModel
  */
 export type UserLeadTask = Prisma.UserLeadTaskModel
 /**
+ * Model FastProductionRequestBatch
+ * 
+ */
+export type FastProductionRequestBatch = Prisma.FastProductionRequestBatchModel
+/**
+ * Model FastProductionRequest
+ * 
+ */
+export type FastProductionRequest = Prisma.FastProductionRequestModel
+/**
+ * Model FastProductionFinish
+ * 
+ */
+export type FastProductionFinish = Prisma.FastProductionFinishModel
+/**
+ * Model FastProductionApproval
+ * 
+ */
+export type FastProductionApproval = Prisma.FastProductionApprovalModel
+/**
+ * Model FastProductionRequestDocument
+ * 
+ */
+export type FastProductionRequestDocument = Prisma.FastProductionRequestDocumentModel
+/**
+ * Model FastProductionStatusLog
+ * 
+ */
+export type FastProductionStatusLog = Prisma.FastProductionStatusLogModel
+/**
  * Model LeadDetailedLogs
  * 
  */

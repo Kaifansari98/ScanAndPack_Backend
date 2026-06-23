@@ -413,10 +413,12 @@ export type ShutterTypeMasterCreateNestedOneWithoutRulesInput = {
   connect?: Prisma.ShutterTypeMasterWhereUniqueInput
 }
 
-export type ShutterTypeMasterUpdateOneRequiredWithoutRulesNestedInput = {
+export type ShutterTypeMasterUpdateOneWithoutRulesNestedInput = {
   create?: Prisma.XOR<Prisma.ShutterTypeMasterCreateWithoutRulesInput, Prisma.ShutterTypeMasterUncheckedCreateWithoutRulesInput>
   connectOrCreate?: Prisma.ShutterTypeMasterCreateOrConnectWithoutRulesInput
   upsert?: Prisma.ShutterTypeMasterUpsertWithoutRulesInput
+  disconnect?: Prisma.ShutterTypeMasterWhereInput | boolean
+  delete?: Prisma.ShutterTypeMasterWhereInput | boolean
   connect?: Prisma.ShutterTypeMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ShutterTypeMasterUpdateToOneWithWhereWithoutRulesInput, Prisma.ShutterTypeMasterUpdateWithoutRulesInput>, Prisma.ShutterTypeMasterUncheckedUpdateWithoutRulesInput>
 }

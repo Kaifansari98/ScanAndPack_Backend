@@ -106,12 +106,21 @@ export class TechCheckController {
       const {
         assign_to_user_id,
         account_id,
+        client_required_order_login_complition_date,
         product_structure_instance_id,
       } = req.body;
 
       const instanceId = product_structure_instance_id
         ? Number(product_structure_instance_id)
         : undefined;
+
+      if (!client_required_order_login_complition_date) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "Missing required field (client_required_order_login_complition_date)",
+        });
+      }
 
       // Instance-wise completion path
       const baseUrl = resolveClientBaseUrl(req);
@@ -123,6 +132,7 @@ export class TechCheckController {
             userId,
             Number(assign_to_user_id || 0),
             Number(account_id || 0),
+            new Date(client_required_order_login_complition_date),
             baseUrl,
             instanceId
           );
@@ -142,12 +152,13 @@ export class TechCheckController {
         !leadId ||
         !userId ||
         !assign_to_user_id ||
-        !account_id
+        !account_id ||
+        !client_required_order_login_complition_date
       ) {
         return res.status(400).json({
           success: false,
           message:
-            "Missing required fields (vendorId, leadId, userId, assign_to_user_id, account_id)",
+            "Missing required fields (vendorId, leadId, userId, assign_to_user_id, account_id, client_required_order_login_complition_date)",
         });
       }
   
@@ -157,6 +168,7 @@ export class TechCheckController {
         userId,
         Number(assign_to_user_id),
         Number(account_id),
+        new Date(client_required_order_login_complition_date),
         baseUrl,
         undefined
       );

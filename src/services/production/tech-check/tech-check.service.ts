@@ -68,6 +68,7 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
+    requiredDate: Date,
     baseUrl: string,
     productStructureInstanceId?: number,
   ): Promise<ApproveTechCheckResult> {
@@ -103,6 +104,15 @@ export class TechCheckService {
             data: {
               is_tech_check_completed: true,
               tech_check_completed_at: new Date(),
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+
+          await tx.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              client_required_order_login_complition_date: requiredDate,
               updated_by: userId,
               updated_at: new Date(),
             },
@@ -196,6 +206,7 @@ export class TechCheckService {
               data: {
                 status_id: orderLoginStatus.id,
                 tech_check_completed_at: new Date(),
+                client_required_order_login_complition_date: requiredDate,
                 updated_by: userId,
                 updated_at: new Date(),
               },
@@ -316,6 +327,7 @@ export class TechCheckService {
           data: {
             status_id: orderLoginStatus.id,
             tech_check_completed_at: new Date(),
+            client_required_order_login_complition_date: requiredDate,
             updated_by: userId,
             updated_at: new Date(),
           },

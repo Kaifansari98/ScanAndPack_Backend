@@ -311,6 +311,43 @@ export const ApprovalRequestStatus = {
 export type ApprovalRequestStatus = (typeof ApprovalRequestStatus)[keyof typeof ApprovalRequestStatus]
 
 
+export const FastProductionRequestStatus = {
+  draft: 'draft',
+  pending_approvals: 'pending_approvals',
+  approved: 'approved',
+  rejected: 'rejected',
+  revoked: 'revoked'
+} as const
+
+export type FastProductionRequestStatus = (typeof FastProductionRequestStatus)[keyof typeof FastProductionRequestStatus]
+
+
+export const FastProductionApproverRole = {
+  SUPER_ADMIN: 'SUPER_ADMIN',
+  FACTORY_ADMIN: 'FACTORY_ADMIN'
+} as const
+
+export type FastProductionApproverRole = (typeof FastProductionApproverRole)[keyof typeof FastProductionApproverRole]
+
+
+export const FastProductionApprovalStatus = {
+  pending: 'pending',
+  approved: 'approved',
+  rejected: 'rejected'
+} as const
+
+export type FastProductionApprovalStatus = (typeof FastProductionApprovalStatus)[keyof typeof FastProductionApprovalStatus]
+
+
+export const FastProductionFinishComponent = {
+  CARCASS: 'CARCASS',
+  SHUTTER: 'SHUTTER',
+  HANDLE: 'HANDLE'
+} as const
+
+export type FastProductionFinishComponent = (typeof FastProductionFinishComponent)[keyof typeof FastProductionFinishComponent]
+
+
 export const SmallOrderRequestSource = {
   post_dispatch: 'post_dispatch',
   final_handover: 'final_handover'
