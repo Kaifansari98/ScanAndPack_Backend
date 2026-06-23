@@ -67,28 +67,46 @@ export class NotificationController {
   }
 
   static async listForUser(req: Request, res: Response) {
+    const startTime = Date.now();
     try {
       const vendorId = Number(req.params.vendorId);
       const userId = Number(req.params.userId);
-      const isReadParam = req.query.is_read;
-      const isRead =
-        typeof isReadParam === "string" ? isReadParam === "true" : undefined;
-      const take = req.query.take ? Number(req.query.take) : undefined;
-      const skip = req.query.skip ? Number(req.query.skip) : undefined;
 
-      if (!vendorId || !userId) {
+      if (!vendorId || !userId || Number.isNaN(vendorId) || Number.isNaN(userId)) {
         return res.status(400).json({
           success: false,
-          message: "vendorId and userId are required",
+          message: "vendorId and userId are required and must be valid numbers",
         });
       }
 
+      const isReadParam = req.query.is_read;
+      const isRead =
+        typeof isReadParam === "string" ? isReadParam === "true" : undefined;
+
+      const takeParam = Number(req.query.take);
+      const take = !Number.isNaN(takeParam) ? Math.min(100, Math.max(1, takeParam)) : 20;
+
+      const skipParam = Number(req.query.skip);
+      const skip = !Number.isNaN(skipParam) ? Math.max(0, skipParam) : 0;
+
+      const search = typeof req.query.search === "string" ? req.query.search : undefined;
+      const tab = typeof req.query.tab === "string" ? req.query.tab : undefined;
+
+      const dbStartTime = Date.now();
       const { notifications, unread_count, total_count } =
         await NotificationService.listForUser(vendorId, userId, {
           is_read: isRead,
           take,
           skip,
+          search,
+          tab,
         });
+      const dbDuration = Date.now() - dbStartTime;
+      const apiDuration = Date.now() - startTime;
+
+      logger.info(
+        `[NotificationAPI] listForUser success: vendorId=${vendorId}, userId=${userId}, tab=${tab || "all"}, take=${take}, skip=${skip}. DB query time: ${dbDuration}ms. Total API time: ${apiDuration}ms`
+      );
 
       return res.status(200).json({
         success: true,
@@ -98,9 +116,49 @@ export class NotificationController {
         data: notifications,
       });
     } catch (error: any) {
+      const apiDuration = Date.now() - startTime;
+      logger.error(
+        `[NotificationAPI] listForUser failure: error=${error.message}. Total API time: ${apiDuration}ms`
+      );
       return res.status(500).json({
         success: false,
         message: "Failed to fetch notifications",
+        error: error.message,
+      });
+    }
+  }
+
+  static async markReadBulk(req: Request, res: Response) {
+    try {
+      const notificationIds = req.body.ids;
+      const userId = Number(req.body.user_id);
+
+      if (!Array.isArray(notificationIds) || !userId) {
+        return res.status(400).json({
+          success: false,
+          message: "ids (array) and user_id are required",
+        });
+      }
+
+      if (notificationIds.length === 0) {
+        return res.status(200).json({
+          success: true,
+          message: "No notifications to mark as read",
+        });
+      }
+
+      const parsedIds = notificationIds.map(Number).filter((id) => !Number.isNaN(id));
+      const result = await NotificationService.markReadBulk(parsedIds, userId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Notifications marked as read",
+        count: result.count,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to mark notifications as read",
         error: error.message,
       });
     }
