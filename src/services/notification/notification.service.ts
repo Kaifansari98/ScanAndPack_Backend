@@ -20,6 +20,8 @@ export type ListNotificationsOptions = {
   is_read?: boolean;
   take?: number;
   skip?: number;
+  search?: string;
+  tab?: string;
 };
 
 export type RegisterPushTokenInput = {
@@ -229,79 +231,74 @@ export const NotificationService = {
     userId: number,
     options: ListNotificationsOptions = {},
   ): Promise<ListNotificationsResult> {
-    const { is_read, take = 20, skip = 0 } = options;
-    const whereClause = {
+    const { is_read, take = 20, skip = 0, search, tab } = options;
+
+    // Map tab names to their corresponding notification types (backend filter)
+    const TAB_TYPE_MAP: Record<string, string[]> = {
+      leads:    ["LEAD_ASSIGNED", "LEAD_MILESTONE", "LEAD_ACTION"],
+      task:     ["TASK_ASSIGNED"],
+      mention:  ["CHAT_MENTION"],
+      approval: ["APPROVAL"],
+    };
+
+    const whereClause: any = {
       vendor_id: vendorId,
       user_id: userId,
       ...(typeof is_read === "boolean" ? { is_read } : {}),
+      ...(search ? { OR: [
+        { title:   { contains: search, mode: "insensitive" } },
+        { message: { contains: search, mode: "insensitive" } },
+      ]} : {}),
+      ...(tab && TAB_TYPE_MAP[tab] ? { type: { in: TAB_TYPE_MAP[tab] } } : {}),
     };
-    const notifications = await prisma.notification.findMany({
-      where: whereClause,
-      orderBy: { created_at: "desc" },
-      take,
-      skip,
-      include: {
-        sender: {
-          select: {
-            user_name: true,
+
+    const [notifications, unread_count, total_count] = await Promise.all([
+      prisma.notification.findMany({
+        where: whereClause,
+        orderBy: { created_at: "desc" },
+        take,
+        skip,
+        include: {
+          sender: {
+            select: { user_name: true },
           },
         },
-      },
-    });
+      }),
+      prisma.notification.count({
+        where: { vendor_id: vendorId, user_id: userId, is_read: false },
+      }),
+      prisma.notification.count({
+        where: whereClause,
+      }),
+    ]);
 
-    const unread_count = await prisma.notification.count({
-      where: {
-        vendor_id: vendorId,
-        user_id: userId,
-        is_read: false,
-      },
-    });
-    const total_count = await prisma.notification.count({
-      where: whereClause,
-    });
+    // Attach a default delivery_summary so the return type is satisfied.
+    // The delivery logs groupBy was removed — it ran sequentially after the
+    // main query, adding an extra DB round-trip that the frontend never used.
+    const notificationsWithDelivery: NotificationWithDelivery[] = notifications.map(
+      (n) => ({ ...n, delivery_summary: { sent: 0, failed: 0 } }),
+    );
 
-    if (notifications.length === 0) {
-      return { notifications: [], unread_count, total_count };
-    }
-
-    const notificationIds = notifications.map((item) => item.id);
-    const grouped = await prisma.notificationDeliveryLogs.groupBy({
-      by: ["notification_id", "status"],
-      where: { notification_id: { in: notificationIds } },
-      _count: { _all: true },
-    });
-
-    const deliveryLookup = new Map<number, { sent: number; failed: number }>();
-    for (const row of grouped) {
-      const current = deliveryLookup.get(row.notification_id) ?? {
-        sent: 0,
-        failed: 0,
-      };
-      if (row.status === "SENT") current.sent += row._count._all;
-      if (row.status === "FAILED") current.failed += row._count._all;
-      deliveryLookup.set(row.notification_id, current);
-    }
-
-    const notificationsWithDelivery: NotificationWithDelivery[] =
-      notifications.map((notification) => ({
-        ...notification,
-        delivery_summary: deliveryLookup.get(notification.id) ?? {
-          sent: 0,
-          failed: 0,
-        },
-      }));
-
-    return {
-      notifications: notificationsWithDelivery,
-      unread_count,
-      total_count,
-    };
+    return { notifications: notificationsWithDelivery, unread_count, total_count };
   },
 
   async markRead(notificationId: number, userId: number) {
     return prisma.notification.updateMany({
       where: {
         id: notificationId,
+        user_id: userId,
+      },
+      data: {
+        is_read: true,
+        read_at: new Date(),
+      },
+    });
+  },
+
+  async markReadBulk(notificationIds: number[], userId: number) {
+    return prisma.notification.updateMany({
+      where: {
+        id: { in: notificationIds },
         user_id: userId,
       },
       data: {

@@ -3366,6 +3366,7 @@ enum NotificationType {
   CHAT_MENTION
   LEAD_MILESTONE
   LEAD_ACTION
+  APPROVAL
 }
 
 enum SuperAdminApprovalType {
