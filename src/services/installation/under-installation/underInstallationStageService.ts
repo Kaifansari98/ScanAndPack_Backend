@@ -3476,23 +3476,6 @@ export class UnderInstallationStageService {
     return "Installation requirements not met.";
   }
 
-  private async checkMiscellaneous(vendorId: number, leadId: number) {
-    const pending = await prisma.miscellaneousMaster.count({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        is_resolved: false,
-      },
-    });
-
-    return {
-      ok: pending === 0,
-      msg:
-        pending === 0
-          ? null
-          : "Miscellaneous items are still pending to be resolved.",
-    };
-  }
 
   private async checkRequiredDocuments(vendorId: number, leadId: number) {
     const requiredTags = ["Type 25", "Type 26"]; // Final Site + Handover Docs
@@ -3533,14 +3516,6 @@ export class UnderInstallationStageService {
         step: "installationBase",
       };
 
-    // Step 2: Miscellaneous
-    const misc = await this.checkMiscellaneous(vendorId, leadId);
-    if (!misc.ok)
-      return {
-        isReady: false,
-        message: misc.msg,
-        step: "miscPending",
-      };
 
     // Step 3: Documents
     const docs = await this.checkRequiredDocuments(vendorId, leadId);
