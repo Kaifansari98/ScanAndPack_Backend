@@ -7,6 +7,7 @@ import { NotificationType } from "../../prisma/generated";
 import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
+import { CHSSelectionTypeMappingService } from "./desigingStage/chs-selection-type-mapping.service";
 
 const FAST_PRODUCTION_REQUEST_TASK_TYPE = "Request Fast Production";
 const FAST_PRODUCTION_REQUEST_DOCUMENT_TAG = "FAST_PRODUCTION_REQUEST_DOCUMENT";
@@ -51,6 +52,12 @@ const fastProductionTaskActionSchema = Joi.object({
 type UploadedFastProductionFile = {
   originalName: string;
   sysName: string;
+};
+
+type FastProductionFinishRow = {
+  component: "CARCASS" | "SHUTTER" | "HANDLE";
+  finish_category: string;
+  finish_description: string;
 };
 
 export interface SaveFastProductionDraftInput {
@@ -106,6 +113,15 @@ const joinFinishValues = (values: string[]) =>
     .filter(Boolean)
     .join(", ")
     .slice(0, 255);
+
+const splitFinishValues = (value?: string | null) =>
+  String(value ?? "")
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+const normalizeLookupLabel = (value?: string | null) =>
+  value?.trim().toLowerCase() ?? "";
 
 const getFastProductionDocumentTypeId = async (
   tx: any,
@@ -164,6 +180,289 @@ const uploadFastProductionFiles = async (
   }
 
   return uploadedFiles;
+};
+
+const syncApprovedFastProductionSelections = async (
+  tx: any,
+  batchId: number,
+  actedBy: number,
+) => {
+  const requests = await tx.fastProductionRequest.findMany({
+    where: { batch_id: batchId },
+    select: {
+      lead_id: true,
+      account_id: true,
+      vendor_id: true,
+      instance_id: true,
+      created_by: true,
+      finishes: {
+        select: {
+          component: true,
+          finish_category: true,
+          finish_description: true,
+        },
+      },
+    },
+  });
+
+  if (requests.length === 0) {
+    return;
+  }
+
+  const leadId = requests[0].lead_id;
+  const vendorId = requests[0].vendor_id;
+
+  const [existingSelections, carcassTypes, shutterTypes, handleTypes] =
+    await Promise.all([
+      tx.leadDesignSelection.findMany({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          type: { in: ["Carcas", "Shutter", "Handles"] },
+        },
+        select: {
+          id: true,
+          type: true,
+          product_structure_instance_id: true,
+        },
+        orderBy: [{ updated_at: "desc" }, { created_at: "desc" }],
+      }),
+      tx.carcassTypeMaster.findMany({
+        where: { vendor_id: vendorId },
+        select: { id: true, name: true },
+      }),
+      tx.shutterTypeMaster.findMany({
+        where: { vendor_id: vendorId },
+        select: {
+          id: true,
+          name: true,
+          subTypes: {
+            select: { id: true, name: true },
+            orderBy: { name: "asc" },
+          },
+        },
+      }),
+      tx.handleTypeMaster.findMany({
+        where: { vendor_id: vendorId },
+        select: { id: true, name: true },
+      }),
+    ]);
+
+  const carcassIdByLabel = new Map<string, number[]>();
+  const handleIdByLabel = new Map<string, number[]>();
+  const shutterTypeMatchesByLabel = new Map<string, Array<{ shutter_type_id: number }>>();
+  const shutterSubTypeMatchesByLabel = new Map<
+    string,
+    Array<{ shutter_type_id: number; shutter_sub_type_id: number }>
+  >();
+
+  for (const carcassType of carcassTypes) {
+    const key = normalizeLookupLabel(carcassType.name);
+    if (!key) continue;
+    carcassIdByLabel.set(key, [...(carcassIdByLabel.get(key) ?? []), carcassType.id]);
+  }
+
+  for (const handleType of handleTypes) {
+    const key = normalizeLookupLabel(handleType.name);
+    if (!key) continue;
+    handleIdByLabel.set(key, [...(handleIdByLabel.get(key) ?? []), handleType.id]);
+  }
+
+  for (const shutterType of shutterTypes) {
+    const typeKey = normalizeLookupLabel(shutterType.name);
+    if (typeKey) {
+      shutterTypeMatchesByLabel.set(typeKey, [
+        ...(shutterTypeMatchesByLabel.get(typeKey) ?? []),
+        { shutter_type_id: shutterType.id },
+      ]);
+    }
+
+    for (const subType of shutterType.subTypes ?? []) {
+      const subTypeKey = normalizeLookupLabel(subType.name);
+      if (!subTypeKey) continue;
+      shutterSubTypeMatchesByLabel.set(subTypeKey, [
+        ...(shutterSubTypeMatchesByLabel.get(subTypeKey) ?? []),
+        {
+          shutter_type_id: shutterType.id,
+          shutter_sub_type_id: subType.id,
+        },
+      ]);
+    }
+  }
+
+  const upsertSelectionWithMappings = async (params: {
+    accountId: number;
+    instanceId: number;
+    createdBy: number;
+    type: "Carcas" | "Shutter" | "Handles";
+    desc: string;
+    items: Array<{
+      carcass_type_id?: number | null;
+      shutter_type_id?: number | null;
+      shutter_sub_type_id?: number | null;
+      handle_type_id?: number | null;
+    }>;
+  }) => {
+    const existingSelection = existingSelections.find(
+      (selection: {
+        type: string;
+        product_structure_instance_id: number | null;
+      }) =>
+        selection.type === params.type &&
+        (selection.product_structure_instance_id ?? null) === params.instanceId,
+    );
+
+    const savedSelection = existingSelection
+      ? await tx.leadDesignSelection.update({
+          where: { id: existingSelection.id },
+          data: {
+            desc: params.desc,
+            updated_by: actedBy,
+          },
+          select: { id: true },
+        })
+      : await tx.leadDesignSelection.create({
+          data: {
+            lead_id: leadId,
+            account_id: params.accountId,
+            vendor_id: vendorId,
+            type: params.type,
+            desc: params.desc,
+            created_by: params.createdBy,
+            product_structure_instance_id: params.instanceId,
+          },
+          select: { id: true },
+        });
+
+    await tx.cHSSelectionTypeMapping.deleteMany({
+      where: { selection_id: savedSelection.id },
+    });
+
+    if (params.items.length > 0) {
+      await tx.cHSSelectionTypeMapping.createMany({
+        data: params.items.map((item) => ({
+          vendor_id: vendorId,
+          lead_id: leadId,
+          selection_id: savedSelection.id,
+          carcass_type_id: item.carcass_type_id ?? null,
+          shutter_type_id: item.shutter_type_id ?? null,
+          shutter_sub_type_id: item.shutter_sub_type_id ?? null,
+          handle_type_id: item.handle_type_id ?? null,
+          created_by: actedBy,
+        })),
+      });
+    }
+  };
+
+  for (const request of requests) {
+    const finishByComponent = new Map<
+      FastProductionFinishRow["component"],
+      FastProductionFinishRow
+    >(
+      (request.finishes as FastProductionFinishRow[]).map((finish) => [
+        finish.component,
+        finish,
+      ]),
+    );
+
+    const carcassFinish = finishByComponent.get("CARCASS");
+    const shutterFinish = finishByComponent.get("SHUTTER");
+    const handleFinish = finishByComponent.get("HANDLE");
+
+    const carcassItems = splitFinishValues(carcassFinish?.finish_category).flatMap(
+      (label) =>
+        (carcassIdByLabel.get(normalizeLookupLabel(label)) ?? []).map((id) => ({
+          carcass_type_id: id,
+        })),
+    );
+
+    const selectedCarcassIds = carcassItems
+      .map((item) => item.carcass_type_id)
+      .filter((id): id is number => id != null);
+
+    const candidateShutterTypeIds =
+      selectedCarcassIds.length > 0
+        ? new Set(
+            (
+              await tx.timelineRule.findMany({
+                where: {
+                  vendor_id: vendorId,
+                  carcass_id: { in: selectedCarcassIds },
+                },
+                select: { shutter_id: true },
+              })
+            )
+              .map((rule: { shutter_id: number | null }) => rule.shutter_id)
+              .filter((id: number | null): id is number => id != null),
+          )
+        : null;
+
+    const resolveShutterItems = (label: string) => {
+      const normalizedLabel = normalizeLookupLabel(label);
+      const subTypeMatches = (
+        shutterSubTypeMatchesByLabel.get(normalizedLabel) ?? []
+      ).filter((item) =>
+        candidateShutterTypeIds ? candidateShutterTypeIds.has(item.shutter_type_id) : true,
+      );
+
+      if (subTypeMatches.length > 0) {
+        return subTypeMatches;
+      }
+
+      const typeMatches = (
+        shutterTypeMatchesByLabel.get(normalizedLabel) ?? []
+      ).filter((item) =>
+        candidateShutterTypeIds ? candidateShutterTypeIds.has(item.shutter_type_id) : true,
+      );
+
+      if (typeMatches.length > 0) {
+        return typeMatches;
+      }
+
+      return [
+        ...(shutterSubTypeMatchesByLabel.get(normalizedLabel) ?? []),
+        ...(shutterTypeMatchesByLabel.get(normalizedLabel) ?? []),
+      ];
+    };
+
+    const shutterItems = splitFinishValues(shutterFinish?.finish_category).flatMap(
+      (label) => resolveShutterItems(label),
+    );
+
+    const handleItems = splitFinishValues(handleFinish?.finish_category).flatMap(
+      (label) =>
+        (handleIdByLabel.get(normalizeLookupLabel(label)) ?? []).map((id) => ({
+          handle_type_id: id,
+        })),
+    );
+
+    await upsertSelectionWithMappings({
+      accountId: request.account_id,
+      instanceId: request.instance_id,
+      createdBy: request.created_by,
+      type: "Carcas",
+      desc: carcassFinish?.finish_description?.trim() || "N/A",
+      items: carcassItems,
+    });
+
+    await upsertSelectionWithMappings({
+      accountId: request.account_id,
+      instanceId: request.instance_id,
+      createdBy: request.created_by,
+      type: "Shutter",
+      desc: shutterFinish?.finish_description?.trim() || "N/A",
+      items: shutterItems,
+    });
+
+    await upsertSelectionWithMappings({
+      accountId: request.account_id,
+      instanceId: request.instance_id,
+      createdBy: request.created_by,
+      type: "Handles",
+      desc: handleFinish?.finish_description?.trim() || "N/A",
+      items: handleItems,
+    });
+  }
 };
 
 const closeTask = async (
@@ -1174,6 +1473,8 @@ export const actOnFastProductionRequestTask = async (
     });
 
     if (remainingPendingApprovals === 0) {
+      await syncApprovedFastProductionSelections(tx, batch.id, value.acted_by);
+
       await tx.fastProductionRequestBatch.update({
         where: { id: batch.id },
         data: {
@@ -1247,6 +1548,18 @@ export const actOnFastProductionRequestTask = async (
   }).catch((notificationError: any) => {
     logger.error("[FastProductionRequest] Requester notification failed:", notificationError);
   });
+
+  if (result.isFullyApproved) {
+    await CHSSelectionTypeMappingService.recomputeAndPersistManufacturingDays(
+      value.lead_id,
+      task.vendor_id,
+    ).catch((error: any) => {
+      logger.error(
+        "[FastProductionRequest] Failed to recompute CHS manufacturing days after approval:",
+        error,
+      );
+    });
+  }
 
   return result;
 };

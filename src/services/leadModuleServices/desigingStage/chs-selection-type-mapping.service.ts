@@ -19,6 +19,57 @@ export class CHSSelectionTypeMappingService {
     });
   }
 
+  private static async resolveTimelineDayFieldConfig(
+    db: typeof prisma,
+    leadId: number,
+  ) {
+    const [lead, productMappings] = await Promise.all([
+      db.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { is_fast_production: true },
+      }),
+      db.leadProductMapping.findMany({
+        where: { lead_id: leadId },
+        select: { productType: { select: { type: true } } },
+      }),
+    ]);
+
+    return {
+      isFastProductionLead: lead?.is_fast_production === true,
+      usesKitchenManufacturingDays:
+        CHSSelectionTypeMappingService.usesKitchenManufacturingDays(
+          productMappings,
+        ),
+    };
+  }
+
+  private static pickTimelineDays(
+    rule: {
+      kitchen_manufacturing_days: number;
+      other_manufacturing_days: number;
+      kitchen_manufacturing_days_for_fast_production: number | null;
+      other_manufacturing_days_for_fast_production: number | null;
+    },
+    config: {
+      isFastProductionLead: boolean;
+      usesKitchenManufacturingDays: boolean;
+    },
+  ) {
+    if (config.isFastProductionLead) {
+      const fastDays = config.usesKitchenManufacturingDays
+        ? rule.kitchen_manufacturing_days_for_fast_production
+        : rule.other_manufacturing_days_for_fast_production;
+
+      if (fastDays != null) {
+        return fastDays;
+      }
+    }
+
+    return config.usesKitchenManufacturingDays
+      ? rule.kitchen_manufacturing_days
+      : rule.other_manufacturing_days;
+  }
+
   /**
    * POST — replace all mappings for a given selection_id with a new set of items.
    */
@@ -74,7 +125,7 @@ export class CHSSelectionTypeMappingService {
     });
 
     // Always recompute — covers both new items and cleared selections
-    await CHSSelectionTypeMappingService.computeAndSetManufacturingDays(
+    await CHSSelectionTypeMappingService.recomputeAndPersistManufacturingDays(
       data.lead_id,
       data.vendor_id,
     );
@@ -92,14 +143,10 @@ export class CHSSelectionTypeMappingService {
     vendorId: number,
     leadId: number,
   ): Promise<{ instance_id: number | null; max_days: number | null }[]> {
-    // 1. Check kitchen
-    const productMappings = await prisma.leadProductMapping.findMany({
-      where: { lead_id: leadId },
-      select: { productType: { select: { type: true } } },
-    });
-    const usesKitchenManufacturingDays =
-      CHSSelectionTypeMappingService.usesKitchenManufacturingDays(
-        productMappings,
+    const timelineConfig =
+      await CHSSelectionTypeMappingService.resolveTimelineDayFieldConfig(
+        prisma,
+        leadId,
       );
 
     // 2. Get all CHS mappings with their selection's instance_id
@@ -151,12 +198,15 @@ export class CHSSelectionTypeMappingService {
             select: {
               kitchen_manufacturing_days: true,
               other_manufacturing_days: true,
+              kitchen_manufacturing_days_for_fast_production: true,
+              other_manufacturing_days_for_fast_production: true,
             },
           });
           if (rule) {
-            const days = usesKitchenManufacturingDays
-              ? rule.kitchen_manufacturing_days
-              : rule.other_manufacturing_days;
+            const days = CHSSelectionTypeMappingService.pickTimelineDays(
+              rule,
+              timelineConfig,
+            );
             if (days > maxDays) maxDays = days;
           }
         }
@@ -233,7 +283,7 @@ export class CHSSelectionTypeMappingService {
       },
     });
 
-    await CHSSelectionTypeMappingService.computeAndSetManufacturingDays(
+    await CHSSelectionTypeMappingService.recomputeAndPersistManufacturingDays(
       existing.lead_id,
       existing.vendor_id,
     );
@@ -253,24 +303,21 @@ export class CHSSelectionTypeMappingService {
    *  3. Pick kitchen_manufacturing_days or other_manufacturing_days based on step 1.
    *  4. Take the maximum days and persist it to LeadMaster.
    */
-  private static async computeAndSetManufacturingDays(
+  public static async recomputeAndPersistManufacturingDays(
     leadId: number,
     vendorId: number,
+    db: typeof prisma = prisma,
   ) {
-    // 1. Determine if any product for this lead should use kitchen timelines
-    const productMappings = await prisma.leadProductMapping.findMany({
-      where: { lead_id: leadId },
-      select: { productType: { select: { type: true } } },
-    });
-    const usesKitchenManufacturingDays =
-      CHSSelectionTypeMappingService.usesKitchenManufacturingDays(
-        productMappings,
+    const timelineConfig =
+      await CHSSelectionTypeMappingService.resolveTimelineDayFieldConfig(
+        db,
+        leadId,
       );
 
     // 2. Collect all distinct carcass IDs and shutter IDs stored for this lead.
     //    Each selection type (Carcas / Shutter / Handles) is saved as a separate
     //    row so no single row has both fields set. We build a Cartesian product.
-    const chsMappings = await prisma.cHSSelectionTypeMapping.findMany({
+    const chsMappings = await db.cHSSelectionTypeMapping.findMany({
       where: { lead_id: leadId },
       select: { carcass_type_id: true, shutter_type_id: true },
     });
@@ -295,7 +342,7 @@ export class CHSSelectionTypeMappingService {
     // Cartesian product: every carcass × every shutter combination
     for (const carcassId of carcassIds) {
       for (const shutterId of shutterIds) {
-        const rule = await prisma.timelineRule.findUnique({
+        const rule = await db.timelineRule.findUnique({
           where: {
             vendor_id_carcass_id_shutter_id: {
               vendor_id: vendorId,
@@ -306,20 +353,23 @@ export class CHSSelectionTypeMappingService {
           select: {
             kitchen_manufacturing_days: true,
             other_manufacturing_days: true,
+            kitchen_manufacturing_days_for_fast_production: true,
+            other_manufacturing_days_for_fast_production: true,
           },
         });
 
         if (rule) {
-          const days = usesKitchenManufacturingDays
-            ? rule.kitchen_manufacturing_days
-            : rule.other_manufacturing_days;
+          const days = CHSSelectionTypeMappingService.pickTimelineDays(
+            rule,
+            timelineConfig,
+          );
           if (days > maxDays) maxDays = days;
         }
       }
     }
 
     // 3. Persist — null if no valid combinations found
-    await prisma.leadMaster.update({
+    await db.leadMaster.update({
       where: { id: leadId },
       data: {
         total_required_chs_manufacturing_days: maxDays > 0 ? maxDays : null,
