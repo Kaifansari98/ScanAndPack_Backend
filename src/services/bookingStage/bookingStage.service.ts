@@ -423,7 +423,14 @@ export class BookingStageService {
         });
 
         if (data.siteSupervisorId) {
-          // 5. Assign Site Supervisor
+          // Fetch actual role of the assigned supervisor
+          const supervisorUser = await tx.userMaster.findUnique({
+            where: { id: data.siteSupervisorId },
+            include: { user_type: true },
+          });
+          const supervisorRole = supervisorUser?.user_type?.user_type?.toLowerCase() || "site-supervisor";
+
+          // 5. Assign Site Supervisor mapping
           const supervisor = await tx.leadSiteSupervisorMapping.create({
             data: {
               lead_id: data.lead_id,
@@ -445,7 +452,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               user_id: data.siteSupervisorId,
-              type: "site-supervisor",
+              type: supervisorRole as any, // dynamically set role (e.g. head-site-supervisor or site-supervisor)
               status: "active",
               created_by: data.created_by,
             },
