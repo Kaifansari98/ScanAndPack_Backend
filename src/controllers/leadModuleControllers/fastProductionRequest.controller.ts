@@ -230,3 +230,40 @@ export const checkFastProductionStatusController = async (
     return res.status(400).json(ApiResponse.error(message, 400));
   }
 };
+
+export const getFastProductionDetailsController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const leadId = Number(req.params.leadId);
+    const vendorId = req.params.vendorId ? Number(req.params.vendorId) : undefined;
+    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+
+    if (!leadId) {
+      return res.status(400).json(ApiResponse.error("leadId is required", 400));
+    }
+
+    const { getFastProductionDetailsForLead } = await import(
+      "../../services/leadModuleServices/fastProductionRequest.service"
+    );
+
+    const requests = await getFastProductionDetailsForLead(
+      leadId,
+      vendorId,
+      franchiseId
+    );
+
+    return res.status(200).json(
+      ApiResponse.success(
+        requests,
+        "Fast production details retrieved successfully",
+        200,
+      ),
+    );
+  } catch (error: any) {
+    logger.error("[FastProductionRequestController] getDetails:", error);
+    const message = error?.message || "Failed to get fast production details";
+    return res.status(400).json(ApiResponse.error(message, 400));
+  }
+};

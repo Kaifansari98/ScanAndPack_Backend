@@ -1631,3 +1631,34 @@ export const checkFastProductionStatusForLead = async (
 
   return request.status === "approved" || request.status === "rejected";
 };
+
+export const getFastProductionDetailsForLead = async (
+  lead_id: number,
+  vendor_id?: number,
+  franchise_id?: number
+) => {
+  const requests = await prisma.fastProductionRequest.findMany({
+    where: {
+      lead_id,
+      ...(vendor_id && { vendor_id }),
+      ...(franchise_id && { franchise_id }),
+    },
+    select: {
+      id: true,
+      lead_id: true,
+      instance_id: true,
+      client_required_delivery_date: true,
+      status: true,
+      instance: {
+        select: {
+          title: true,
+        },
+      },
+    },
+    orderBy: {
+      id: 'desc',
+    },
+  });
+
+  return requests;
+};
