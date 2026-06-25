@@ -133,6 +133,7 @@ export const actOnFastProductionRequestTaskController = async (
     const actedBy = Number(req.body.acted_by);
     const action = getSingleValue(req.body.action);
     const remark = getSingleValue(req.body.remark) ?? null;
+    const productionTargetDate = getSingleValue(req.body.production_target_date) ?? null;
 
     const result = await actOnFastProductionRequestTask({
       lead_id: leadId,
@@ -140,6 +141,7 @@ export const actOnFastProductionRequestTaskController = async (
       action: action as "approve" | "reject",
       acted_by: actedBy,
       remark,
+      production_target_date: productionTargetDate ? new Date(productionTargetDate) : undefined,
     });
 
     return res.status(200).json(
