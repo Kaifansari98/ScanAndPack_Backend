@@ -1394,45 +1394,38 @@ export class DashboardService {
   }
 
   public async getFranchiseLeads(vendor_id: number, franchise_id: number) {
-    type Row = {
-      id: bigint;
-      lead_code: string | null;
-      name: string;
-      account_id: bigint | null;
-      stage_tag: string | null;
-      instance_id: bigint | null;
-    };
+    const leads = await prisma.leadMaster.findMany({
+      where: {
+        vendor_id,
+        franchise_id,
+        is_deleted: false,
+        activity_status: "onGoing",
+      },
+      select: {
+        id: true,
+        lead_code: true,
+        firstname: true,
+        lastname: true,
+        account_id: true,
+        statusType: {
+          select: { tag: true },
+        },
+        productStructureInstances: {
+          select: { id: true },
+          orderBy: { id: "asc" },
+          take: 1,
+        },
+      },
+      orderBy: { id: "desc" },
+    });
 
-    const rows = await prisma.$queryRaw<Row[]>`
-      SELECT
-        lm.id,
-        lm.lead_code,
-        CONCAT(lm.firstname, ' ', lm.lastname) AS name,
-        lm.account_id,
-        stm.tag AS stage_tag,
-        (
-          SELECT lpsi.id
-          FROM "LeadProductStructureInstance" lpsi
-          WHERE lpsi.lead_id = lm.id
-          ORDER BY lpsi.id ASC
-          LIMIT 1
-        ) AS instance_id
-      FROM "LeadMaster" lm
-      LEFT JOIN "StatusTypeMaster" stm ON stm.id = lm.status_id
-      WHERE lm.vendor_id = ${vendor_id}
-        AND lm.franchise_id = ${franchise_id}
-        AND lm.is_deleted = false
-        AND lm.activity_status != 'lost'
-      ORDER BY lm.id DESC
-    `;
-
-    return rows.map((r) => ({
-      id: Number(r.id),
-      lead_code: r.lead_code,
-      name: r.name,
-      account_id: r.account_id ? Number(r.account_id) : null,
-      stage_tag: r.stage_tag,
-      instance_id: r.instance_id ? Number(r.instance_id) : null,
+    return leads.map((l) => ({
+      id: Number(l.id),
+      lead_code: l.lead_code,
+      name: `${l.firstname || ""} ${l.lastname || ""}`.trim(),
+      account_id: l.account_id ? Number(l.account_id) : null,
+      stage_tag: l.statusType?.tag || null,
+      instance_id: l.productStructureInstances?.[0]?.id ? Number(l.productStructureInstances[0].id) : null,
     }));
   }
 
@@ -1547,7 +1540,7 @@ export class DashboardService {
   public async getLeadsByFranchise(vendor_id: number) {
     const franchises = await prisma.franchiseMaster.findMany({
       where: { vendor_id },
-      select: { id: true, franchise_name: true, franchise_code: true },
+      select: { id: true, franchise_name: true,  franchise_code: true },
       orderBy: { franchise_name: "asc" },
     });
 
@@ -1557,7 +1550,7 @@ export class DashboardService {
         name: f.franchise_name,
         code: f.franchise_code ?? f.franchise_name,
         leads: await prisma.leadMaster.count({
-          where: { vendor_id, franchise_id: f.id, is_deleted: false },
+          where: { vendor_id, franchise_id: f.id, is_deleted: false, activity_status: "onGoing"},
         }),
       }))
     );
