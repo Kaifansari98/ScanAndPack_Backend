@@ -193,3 +193,40 @@ export const checkFastProductionLimitController = async (
     return res.status(400).json(ApiResponse.error(message, 400));
   }
 };
+
+export const checkFastProductionStatusController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const leadId = Number(req.params.leadId);
+    const vendorId = req.params.vendorId ? Number(req.params.vendorId) : undefined;
+    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+
+    if (!leadId) {
+      return res.status(400).json(ApiResponse.error("leadId is required", 400));
+    }
+
+    const { checkFastProductionStatusForLead } = await import(
+      "../../services/leadModuleServices/fastProductionRequest.service"
+    );
+
+    const isApprovedOrRejected = await checkFastProductionStatusForLead(
+      leadId,
+      vendorId,
+      franchiseId
+    );
+
+    return res.status(200).json(
+      ApiResponse.success(
+        isApprovedOrRejected,
+        "Fast production request status retrieved successfully",
+        200,
+      ),
+    );
+  } catch (error: any) {
+    logger.error("[FastProductionRequestController] checkStatus:", error);
+    const message = error?.message || "Failed to check fast production status";
+    return res.status(400).json(ApiResponse.error(message, 400));
+  }
+};

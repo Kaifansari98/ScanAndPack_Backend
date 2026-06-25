@@ -1408,3 +1408,24 @@ export const limitFastProductionCreation = async (
   }
   return;
 }
+
+export const checkFastProductionStatusForLead = async (
+  lead_id: number,
+  vendor_id?: number,
+  franchise_id?: number
+): Promise<boolean> => {
+  const request = await prisma.fastProductionRequest.findFirst({
+    where: {
+      lead_id,
+      ...(vendor_id && { vendor_id }),
+      ...(franchise_id && { franchise_id }),
+    },
+    orderBy: {
+      id: 'desc',
+    },
+  });
+
+  if (!request) return false;
+
+  return request.status === "approved" || request.status === "rejected";
+};
