@@ -1326,12 +1326,14 @@ export class LeadActivityStatusService {
   static async getActivityStatusCount(
     vendorId: number,
     franchiseId?: number,
+    assignTo?: number,
   ) {
     const counts = await prisma.leadMaster.groupBy({
       by: ["activity_status"],
       where: {
         vendor_id: vendorId,
         ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        ...(assignTo ? { assign_to: assignTo } : {}),
         is_deleted: false,
       },
       _count: {
@@ -1372,6 +1374,7 @@ export class LeadActivityStatusService {
       where: {
         vendor_id: vendorId,
         ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        ...(assignTo ? { assign_to: assignTo } : {}),
         is_deleted: false,
         activity_status: "onGoing",
         statusType: {
