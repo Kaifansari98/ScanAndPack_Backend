@@ -61,6 +61,7 @@ import {
   createFastProductionRequestController,
   finalizeFastProductionRequestBatchController,
   checkFastProductionLimitController,
+  checkFastProductionStatusController,
 } from "../../controllers/leadModuleControllers/fastProductionRequest.controller";
 
 const leadsRouter = Router();
@@ -98,6 +99,10 @@ leadsRouter.post(
 leadsRouter.get(
   "/fast-production-requests/check-limit",
   checkFastProductionLimitController,
+);
+leadsRouter.get(
+  "/fast-production-requests/vendor/:vendorId/lead/:leadId/status",
+  checkFastProductionStatusController,
 );
 leadsRouter.get(
   "/small-order-requests/vendor/:vendorId/lead/:leadId",
