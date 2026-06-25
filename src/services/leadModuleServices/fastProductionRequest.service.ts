@@ -4,10 +4,9 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 import { cache } from "../../utils/cache";
 import { NotificationType } from "../../prisma/generated";
-import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
+import { generateSignedUrl, uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
-import { CHSSelectionTypeMappingService } from "./desigingStage/chs-selection-type-mapping.service";
 
 const FAST_PRODUCTION_REQUEST_TASK_TYPE = "Request Fast Production";
 const FAST_PRODUCTION_REQUEST_DOCUMENT_TAG = "FAST_PRODUCTION_REQUEST_DOCUMENT";
@@ -54,12 +53,6 @@ type UploadedFastProductionFile = {
   sysName: string;
 };
 
-type FastProductionFinishRow = {
-  component: "CARCASS" | "SHUTTER" | "HANDLE";
-  finish_category: string;
-  finish_description: string;
-};
-
 export interface SaveFastProductionDraftInput {
   lead_id: number;
   vendor_id: number;
@@ -95,6 +88,13 @@ export interface ActOnFastProductionRequestTaskInput {
   remark?: string | null;
 }
 
+export interface RevokeFastProductionInput {
+  lead_id: number;
+  vendor_id: number;
+  revoked_by: number;
+  remark?: string | null;
+}
+
 const normalizeRole = (role?: string | null) => role?.trim().toLowerCase() ?? "";
 
 const getMonthBucket = (date = new Date()) =>
@@ -107,21 +107,18 @@ const getTomorrowDueDate = () => {
   return tomorrow;
 };
 
+const getMonthBounds = (date = new Date()) => {
+  const start = new Date(date.getFullYear(), date.getMonth(), 1);
+  const end = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+  return { start, end };
+};
+
 const joinFinishValues = (values: string[]) =>
   values
     .map((value) => value.trim())
     .filter(Boolean)
     .join(", ")
     .slice(0, 255);
-
-const splitFinishValues = (value?: string | null) =>
-  String(value ?? "")
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean);
-
-const normalizeLookupLabel = (value?: string | null) =>
-  value?.trim().toLowerCase() ?? "";
 
 const getFastProductionDocumentTypeId = async (
   tx: any,
@@ -180,289 +177,6 @@ const uploadFastProductionFiles = async (
   }
 
   return uploadedFiles;
-};
-
-const syncApprovedFastProductionSelections = async (
-  tx: any,
-  batchId: number,
-  actedBy: number,
-) => {
-  const requests = await tx.fastProductionRequest.findMany({
-    where: { batch_id: batchId },
-    select: {
-      lead_id: true,
-      account_id: true,
-      vendor_id: true,
-      instance_id: true,
-      created_by: true,
-      finishes: {
-        select: {
-          component: true,
-          finish_category: true,
-          finish_description: true,
-        },
-      },
-    },
-  });
-
-  if (requests.length === 0) {
-    return;
-  }
-
-  const leadId = requests[0].lead_id;
-  const vendorId = requests[0].vendor_id;
-
-  const [existingSelections, carcassTypes, shutterTypes, handleTypes] =
-    await Promise.all([
-      tx.leadDesignSelection.findMany({
-        where: {
-          lead_id: leadId,
-          vendor_id: vendorId,
-          type: { in: ["Carcas", "Shutter", "Handles"] },
-        },
-        select: {
-          id: true,
-          type: true,
-          product_structure_instance_id: true,
-        },
-        orderBy: [{ updated_at: "desc" }, { created_at: "desc" }],
-      }),
-      tx.carcassTypeMaster.findMany({
-        where: { vendor_id: vendorId },
-        select: { id: true, name: true },
-      }),
-      tx.shutterTypeMaster.findMany({
-        where: { vendor_id: vendorId },
-        select: {
-          id: true,
-          name: true,
-          subTypes: {
-            select: { id: true, name: true },
-            orderBy: { name: "asc" },
-          },
-        },
-      }),
-      tx.handleTypeMaster.findMany({
-        where: { vendor_id: vendorId },
-        select: { id: true, name: true },
-      }),
-    ]);
-
-  const carcassIdByLabel = new Map<string, number[]>();
-  const handleIdByLabel = new Map<string, number[]>();
-  const shutterTypeMatchesByLabel = new Map<string, Array<{ shutter_type_id: number }>>();
-  const shutterSubTypeMatchesByLabel = new Map<
-    string,
-    Array<{ shutter_type_id: number; shutter_sub_type_id: number }>
-  >();
-
-  for (const carcassType of carcassTypes) {
-    const key = normalizeLookupLabel(carcassType.name);
-    if (!key) continue;
-    carcassIdByLabel.set(key, [...(carcassIdByLabel.get(key) ?? []), carcassType.id]);
-  }
-
-  for (const handleType of handleTypes) {
-    const key = normalizeLookupLabel(handleType.name);
-    if (!key) continue;
-    handleIdByLabel.set(key, [...(handleIdByLabel.get(key) ?? []), handleType.id]);
-  }
-
-  for (const shutterType of shutterTypes) {
-    const typeKey = normalizeLookupLabel(shutterType.name);
-    if (typeKey) {
-      shutterTypeMatchesByLabel.set(typeKey, [
-        ...(shutterTypeMatchesByLabel.get(typeKey) ?? []),
-        { shutter_type_id: shutterType.id },
-      ]);
-    }
-
-    for (const subType of shutterType.subTypes ?? []) {
-      const subTypeKey = normalizeLookupLabel(subType.name);
-      if (!subTypeKey) continue;
-      shutterSubTypeMatchesByLabel.set(subTypeKey, [
-        ...(shutterSubTypeMatchesByLabel.get(subTypeKey) ?? []),
-        {
-          shutter_type_id: shutterType.id,
-          shutter_sub_type_id: subType.id,
-        },
-      ]);
-    }
-  }
-
-  const upsertSelectionWithMappings = async (params: {
-    accountId: number;
-    instanceId: number;
-    createdBy: number;
-    type: "Carcas" | "Shutter" | "Handles";
-    desc: string;
-    items: Array<{
-      carcass_type_id?: number | null;
-      shutter_type_id?: number | null;
-      shutter_sub_type_id?: number | null;
-      handle_type_id?: number | null;
-    }>;
-  }) => {
-    const existingSelection = existingSelections.find(
-      (selection: {
-        type: string;
-        product_structure_instance_id: number | null;
-      }) =>
-        selection.type === params.type &&
-        (selection.product_structure_instance_id ?? null) === params.instanceId,
-    );
-
-    const savedSelection = existingSelection
-      ? await tx.leadDesignSelection.update({
-        where: { id: existingSelection.id },
-        data: {
-          desc: params.desc,
-          updated_by: actedBy,
-        },
-        select: { id: true },
-      })
-      : await tx.leadDesignSelection.create({
-        data: {
-          lead_id: leadId,
-          account_id: params.accountId,
-          vendor_id: vendorId,
-          type: params.type,
-          desc: params.desc,
-          created_by: params.createdBy,
-          product_structure_instance_id: params.instanceId,
-        },
-        select: { id: true },
-      });
-
-    await tx.cHSSelectionTypeMapping.deleteMany({
-      where: { selection_id: savedSelection.id },
-    });
-
-    if (params.items.length > 0) {
-      await tx.cHSSelectionTypeMapping.createMany({
-        data: params.items.map((item) => ({
-          vendor_id: vendorId,
-          lead_id: leadId,
-          selection_id: savedSelection.id,
-          carcass_type_id: item.carcass_type_id ?? null,
-          shutter_type_id: item.shutter_type_id ?? null,
-          shutter_sub_type_id: item.shutter_sub_type_id ?? null,
-          handle_type_id: item.handle_type_id ?? null,
-          created_by: actedBy,
-        })),
-      });
-    }
-  };
-
-  for (const request of requests) {
-    const finishByComponent = new Map<
-      FastProductionFinishRow["component"],
-      FastProductionFinishRow
-    >(
-      (request.finishes as FastProductionFinishRow[]).map((finish) => [
-        finish.component,
-        finish,
-      ]),
-    );
-
-    const carcassFinish = finishByComponent.get("CARCASS");
-    const shutterFinish = finishByComponent.get("SHUTTER");
-    const handleFinish = finishByComponent.get("HANDLE");
-
-    const carcassItems = splitFinishValues(carcassFinish?.finish_category).flatMap(
-      (label) =>
-        (carcassIdByLabel.get(normalizeLookupLabel(label)) ?? []).map((id) => ({
-          carcass_type_id: id,
-        })),
-    );
-
-    const selectedCarcassIds = carcassItems
-      .map((item) => item.carcass_type_id)
-      .filter((id): id is number => id != null);
-
-    const candidateShutterTypeIds =
-      selectedCarcassIds.length > 0
-        ? new Set(
-          (
-            await tx.timelineRule.findMany({
-              where: {
-                vendor_id: vendorId,
-                carcass_id: { in: selectedCarcassIds },
-              },
-              select: { shutter_id: true },
-            })
-          )
-            .map((rule: { shutter_id: number | null }) => rule.shutter_id)
-            .filter((id: number | null): id is number => id != null),
-        )
-        : null;
-
-    const resolveShutterItems = (label: string) => {
-      const normalizedLabel = normalizeLookupLabel(label);
-      const subTypeMatches = (
-        shutterSubTypeMatchesByLabel.get(normalizedLabel) ?? []
-      ).filter((item) =>
-        candidateShutterTypeIds ? candidateShutterTypeIds.has(item.shutter_type_id) : true,
-      );
-
-      if (subTypeMatches.length > 0) {
-        return subTypeMatches;
-      }
-
-      const typeMatches = (
-        shutterTypeMatchesByLabel.get(normalizedLabel) ?? []
-      ).filter((item) =>
-        candidateShutterTypeIds ? candidateShutterTypeIds.has(item.shutter_type_id) : true,
-      );
-
-      if (typeMatches.length > 0) {
-        return typeMatches;
-      }
-
-      return [
-        ...(shutterSubTypeMatchesByLabel.get(normalizedLabel) ?? []),
-        ...(shutterTypeMatchesByLabel.get(normalizedLabel) ?? []),
-      ];
-    };
-
-    const shutterItems = splitFinishValues(shutterFinish?.finish_category).flatMap(
-      (label) => resolveShutterItems(label),
-    );
-
-    const handleItems = splitFinishValues(handleFinish?.finish_category).flatMap(
-      (label) =>
-        (handleIdByLabel.get(normalizeLookupLabel(label)) ?? []).map((id) => ({
-          handle_type_id: id,
-        })),
-    );
-
-    await upsertSelectionWithMappings({
-      accountId: request.account_id,
-      instanceId: request.instance_id,
-      createdBy: request.created_by,
-      type: "Carcas",
-      desc: carcassFinish?.finish_description?.trim() || "N/A",
-      items: carcassItems,
-    });
-
-    await upsertSelectionWithMappings({
-      accountId: request.account_id,
-      instanceId: request.instance_id,
-      createdBy: request.created_by,
-      type: "Shutter",
-      desc: shutterFinish?.finish_description?.trim() || "N/A",
-      items: shutterItems,
-    });
-
-    await upsertSelectionWithMappings({
-      accountId: request.account_id,
-      instanceId: request.instance_id,
-      createdBy: request.created_by,
-      type: "Handles",
-      desc: handleFinish?.finish_description?.trim() || "N/A",
-      items: handleItems,
-    });
-  }
 };
 
 const closeTask = async (
@@ -590,28 +304,9 @@ const syncLeadFastProductionState = async (
 
   const pendingBatch = !approvedBatch
     ? await tx.fastProductionRequestBatch.findFirst({
-      where: {
-        lead_id: leadId,
-        status: "pending_approvals",
-      },
-      orderBy: {
-        updated_at: "desc",
-      },
-      select: {
-        id: true,
-        status: true,
-      },
-    })
-    : null;
-
-  const latestClosedBatch =
-    !approvedBatch && !pendingBatch
-      ? await tx.fastProductionRequestBatch.findFirst({
         where: {
           lead_id: leadId,
-          status: {
-            in: ["rejected", "revoked"],
-          },
+          status: "pending_approvals",
         },
         orderBy: {
           updated_at: "desc",
@@ -621,6 +316,25 @@ const syncLeadFastProductionState = async (
           status: true,
         },
       })
+    : null;
+
+  const latestClosedBatch =
+    !approvedBatch && !pendingBatch
+      ? await tx.fastProductionRequestBatch.findFirst({
+          where: {
+            lead_id: leadId,
+            status: {
+              in: ["rejected", "revoked"],
+            },
+          },
+          orderBy: {
+            updated_at: "desc",
+          },
+          select: {
+            id: true,
+            status: true,
+          },
+        })
       : null;
 
   const latestActiveBatch =
@@ -630,14 +344,14 @@ const syncLeadFastProductionState = async (
 
   const latestClientRequiredDate = latestActiveBatch
     ? await tx.fastProductionRequest.aggregate({
-      where: {
-        batch_id: latestActiveBatch.id,
-        lead_id: leadId,
-      },
-      _max: {
-        client_required_delivery_date: true,
-      },
-    })
+        where: {
+          batch_id: latestActiveBatch.id,
+          lead_id: leadId,
+        },
+        _max: {
+          client_required_delivery_date: true,
+        },
+      })
     : null;
 
   await tx.leadMaster.update({
@@ -769,12 +483,6 @@ export const saveFastProductionRequestDraft = async (
     value.vendor_id,
     value.created_by,
     value.lead_id,
-  );
-
-  await limitFastProductionCreation(
-    value.vendor_id,
-    value.created_by,
-    actor.franchise_id
   );
 
   const instance = await prisma.leadProductStructureInstance.findFirst({
@@ -1124,32 +832,32 @@ export const finalizeFastProductionRequestBatch = async (
     const approvalsToCreate =
       actorRole === "super-admin"
         ? [
-          {
-            batch_id: batch.id,
-            approver_role: "SUPER_ADMIN" as const,
-            approver_user_id: superAdminUser.id,
-            status: "approved" as const,
-            remark: "Auto-approved because the requester is super-admin",
-            acted_at: new Date(),
-          },
-          {
-            batch_id: batch.id,
-            approver_role: "FACTORY_ADMIN" as const,
-            approver_user_id: factoryUser.id,
-          },
-        ]
+            {
+              batch_id: batch.id,
+              approver_role: "SUPER_ADMIN" as const,
+              approver_user_id: superAdminUser.id,
+              status: "approved" as const,
+              remark: "Auto-approved because the requester is super-admin",
+              acted_at: new Date(),
+            },
+            {
+              batch_id: batch.id,
+              approver_role: "FACTORY_ADMIN" as const,
+              approver_user_id: factoryUser.id,
+            },
+          ]
         : [
-          {
-            batch_id: batch.id,
-            approver_role: "SUPER_ADMIN" as const,
-            approver_user_id: superAdminUser.id,
-          },
-          {
-            batch_id: batch.id,
-            approver_role: "FACTORY_ADMIN" as const,
-            approver_user_id: factoryUser.id,
-          },
-        ];
+            {
+              batch_id: batch.id,
+              approver_role: "SUPER_ADMIN" as const,
+              approver_user_id: superAdminUser.id,
+            },
+            {
+              batch_id: batch.id,
+              approver_role: "FACTORY_ADMIN" as const,
+              approver_user_id: factoryUser.id,
+            },
+          ];
 
     await tx.fastProductionRequestBatch.update({
       where: { id: batch.id },
@@ -1479,8 +1187,6 @@ export const actOnFastProductionRequestTask = async (
     });
 
     if (remainingPendingApprovals === 0) {
-      await syncApprovedFastProductionSelections(tx, batch.id, value.acted_by);
-
       await tx.fastProductionRequestBatch.update({
         where: { id: batch.id },
         data: {
@@ -1555,82 +1261,313 @@ export const actOnFastProductionRequestTask = async (
     logger.error("[FastProductionRequest] Requester notification failed:", notificationError);
   });
 
-  if (result.isFullyApproved) {
-    await CHSSelectionTypeMappingService.recomputeAndPersistManufacturingDays(
-      value.lead_id,
-      task.vendor_id,
-    ).catch((error: any) => {
-      logger.error(
-        "[FastProductionRequest] Failed to recompute CHS manufacturing days after approval:",
-        error,
-      );
-    });
-  }
-
   return result;
 };
-
 
 export const limitFastProductionCreation = async (
   vendorId: number,
   userId: number,
-  franchise_id?: number | null,
+  franchiseId?: number,
 ) => {
-  const user = await prisma.userMaster.findUnique({
-    where: { id: userId },
-    select: { user_type: { select: { user_type: true } } },
-  });
-
-  const normalizedUserType = (user?.user_type?.user_type ?? "").toLowerCase();
-  if (normalizedUserType === "super-admin") {
-    return;
+  if (!vendorId || !userId) {
+    throw new Error("vendor_id and user_id are required");
   }
 
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const { start, end } = getMonthBounds();
 
-  const queryWhere: any = {
-    created_by: userId,
-    vendor_id: vendorId,
-    created_at: {
-      gte: startOfMonth,
+  const activeBatchCount = await prisma.fastProductionRequestBatch.count({
+    where: {
+      vendor_id: vendorId,
+      requester_user_id: userId,
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
+      month_bucket: {
+        gte: start,
+        lt: end,
+      },
+      status: {
+        notIn: ["rejected", "revoked"],
+      },
     },
-  };
-
-  if (franchise_id) {
-    queryWhere.franchise_id = franchise_id;
-  }
-
-  const fastProductionCreations = await prisma.fastProductionRequestBatch.count({
-    where: queryWhere,
   });
 
-  if (fastProductionCreations >= 2) {
-    throw new Error("Fast production creation limit reached for the current month");
+  if (activeBatchCount >= 2) {
+    throw new Error(
+      "Fast production creation limit reached for the current month (Max 2)",
+    );
   }
-  return;
-}
+
+  return { canCreate: true, activeBatchCount };
+};
 
 export const checkFastProductionStatusForLead = async (
-  lead_id: number,
-  vendor_id?: number,
-  franchise_id?: number
-): Promise<boolean> => {
-  const request = await prisma.fastProductionRequest.findFirst({
+  leadId: number,
+  vendorId?: number,
+  franchiseId?: number,
+) => {
+  if (!leadId) {
+    throw new Error("leadId is required");
+  }
+
+  const latestBatch = await prisma.fastProductionRequestBatch.findFirst({
     where: {
-      lead_id,
-      ...(vendor_id && { vendor_id }),
-      ...(franchise_id && { franchise_id }),
+      lead_id: leadId,
+      ...(vendorId ? { vendor_id: vendorId } : {}),
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
     },
     orderBy: {
-      id: 'desc',
+      updated_at: "desc",
+    },
+    select: {
+      status: true,
     },
   });
 
-  if (!request) return false;
+  if (!latestBatch) {
+    return false;
+  }
 
-  return request.status === "approved" || request.status === "rejected";
+  return ["approved", "rejected", "revoked"].includes(latestBatch.status);
 };
+
+export const revokeFastProductionRequest = async (
+  input: RevokeFastProductionInput,
+) => {
+  const { error, value } = Joi.object<RevokeFastProductionInput>({
+    lead_id: Joi.number().integer().positive().required(),
+    vendor_id: Joi.number().integer().positive().required(),
+    revoked_by: Joi.number().integer().positive().required(),
+    remark: Joi.string().allow("", null).max(2000).optional(),
+  }).validate(input, { abortEarly: false });
+
+  if (error) {
+    throw new Error(`Validation failed: ${error.message}`);
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: value.lead_id,
+        vendor_id: value.vendor_id,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const activeBatch = await tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: value.lead_id,
+        vendor_id: value.vendor_id,
+        status: {
+          in: ["draft", "pending_approvals", "approved"],
+        },
+      },
+      orderBy: [
+        { approved_at: "desc" },
+        { updated_at: "desc" },
+      ],
+      select: {
+        id: true,
+        status: true,
+      },
+    });
+
+    if (!activeBatch) {
+      throw new Error("No active fast production request found for this lead");
+    }
+
+    const now = new Date();
+    const revocationRemark = value.remark?.trim() || null;
+
+    await tx.fastProductionRequestBatch.update({
+      where: { id: activeBatch.id },
+      data: {
+        status: "revoked",
+        revoked_at: now,
+        revoked_by: value.revoked_by,
+        revocation_remark: revocationRemark,
+        updated_by: value.revoked_by,
+      },
+    });
+
+    await tx.fastProductionRequest.updateMany({
+      where: {
+        batch_id: activeBatch.id,
+      },
+      data: {
+        status: "revoked",
+        revoked_at: now,
+        revoked_by: value.revoked_by,
+        revocation_remark: revocationRemark,
+        updated_by: value.revoked_by,
+      },
+    });
+
+    const pendingTask = await tx.userLeadTask.findFirst({
+      where: {
+        lead_id: value.lead_id,
+        task_type: FAST_PRODUCTION_REQUEST_TASK_TYPE,
+        status: {
+          not: "completed",
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (pendingTask) {
+      await closeTask(
+        tx,
+        pendingTask.id,
+        value.revoked_by,
+        revocationRemark ?? "Fast production request revoked",
+      );
+    }
+
+    await tx.fastProductionStatusLog.create({
+      data: {
+        batch_id: activeBatch.id,
+        from_status: activeBatch.status,
+        to_status: "revoked",
+        actor_user_id: value.revoked_by,
+        remark: revocationRemark,
+      },
+    });
+
+    await syncLeadFastProductionState(tx, value.lead_id, value.revoked_by);
+
+    return {
+      batch_id: activeBatch.id,
+      status: "revoked" as const,
+      revoked_at: now,
+    };
+  });
+};
+
+export const getFastProductionRequestDetails = async (
+  leadId: number,
+  taskId: number,
+) => {
+  const task = await prisma.userLeadTask.findFirst({
+    where: {
+      id: taskId,
+      lead_id: leadId,
+      task_type: FAST_PRODUCTION_REQUEST_TASK_TYPE,
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      user_id: true,
+    },
+  });
+
+  if (!task) {
+    throw new Error("Fast production task not found");
+  }
+
+  const batch: any = await prisma.fastProductionRequestBatch.findFirst({
+    where: {
+      lead_id: leadId,
+      vendor_id: task.vendor_id,
+      status: "pending_approvals",
+    },
+    include: {
+      requester: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      lead: {
+        select: {
+          id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      requests: {
+        include: {
+          instance: {
+            select: {
+              id: true,
+              title: true,
+              productStructure: {
+                select: {
+                  type: true,
+                },
+              },
+            },
+          },
+          finishes: true,
+          documents: {
+            include: {
+              document: true,
+            },
+          },
+        },
+        orderBy: {
+          instance_id: "asc",
+        },
+      },
+      approvals: {
+        include: {
+          approver: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!batch) {
+    return null;
+  }
+
+  // Generate signed URLs for documents
+  const requestsWithSignedUrls = await Promise.all(
+    batch.requests.map(async (req: any) => {
+      const documentsWithUrls = await Promise.all(
+        req.documents.map(async (docMapping: any) => {
+          const signedUrl = await generateSignedUrl(
+            docMapping.document.doc_sys_name,
+            3600,
+            "inline",
+          );
+          return {
+            ...docMapping,
+            document: {
+              ...docMapping.document,
+              signedUrl,
+            },
+          };
+        }),
+      );
+      return {
+        ...req,
+        documents: documentsWithUrls,
+      };
+    }),
+  );
+
+  return {
+    ...batch,
+    requests: requestsWithSignedUrls,
+  };
+};
+
 
 export const getFastProductionDetailsForLead = async (
   lead_id: number,
