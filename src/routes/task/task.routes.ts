@@ -74,6 +74,11 @@ taskRouter.patch(
   TaskController.actOnSmallOrderRequestTask,
 );
 
+taskRouter.get(
+  "/leadId/:leadId/taskId/:taskId/fast-production-request",
+  TaskController.getFastProductionRequestDetails,
+);
+
 taskRouter.patch(
   "/leadId/:leadId/taskId/:taskId/fast-production-request/action",
   TaskController.actOnFastProductionRequestTask,

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { TaskService } from "../../services/task/task.service";
 import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
-import { actOnFastProductionRequestTask } from "../../services/leadModuleServices/fastProductionRequest.service";
+import { actOnFastProductionRequestTask, getFastProductionRequestDetails } from "../../services/leadModuleServices/fastProductionRequest.service";
 import logger from "../../../src/utils/logger";
 import { date } from "joi";
 
@@ -516,6 +516,33 @@ export class TaskController {
       return res.status(500).json({
         success: false,
         message: error.message || "Failed to update fast production request",
+      });
+    }
+  }
+
+  static async getFastProductionRequestDetails(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+
+      if (!leadId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId and taskId are required",
+        });
+      }
+
+      const result = await getFastProductionRequestDetails(leadId, taskId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Fast production request details fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch fast production request details",
       });
     }
   }
