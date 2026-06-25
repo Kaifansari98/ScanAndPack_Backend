@@ -314,25 +314,25 @@ const syncApprovedFastProductionSelections = async (
 
     const savedSelection = existingSelection
       ? await tx.leadDesignSelection.update({
-          where: { id: existingSelection.id },
-          data: {
-            desc: params.desc,
-            updated_by: actedBy,
-          },
-          select: { id: true },
-        })
+        where: { id: existingSelection.id },
+        data: {
+          desc: params.desc,
+          updated_by: actedBy,
+        },
+        select: { id: true },
+      })
       : await tx.leadDesignSelection.create({
-          data: {
-            lead_id: leadId,
-            account_id: params.accountId,
-            vendor_id: vendorId,
-            type: params.type,
-            desc: params.desc,
-            created_by: params.createdBy,
-            product_structure_instance_id: params.instanceId,
-          },
-          select: { id: true },
-        });
+        data: {
+          lead_id: leadId,
+          account_id: params.accountId,
+          vendor_id: vendorId,
+          type: params.type,
+          desc: params.desc,
+          created_by: params.createdBy,
+          product_structure_instance_id: params.instanceId,
+        },
+        select: { id: true },
+      });
 
     await tx.cHSSelectionTypeMapping.deleteMany({
       where: { selection_id: savedSelection.id },
@@ -383,18 +383,18 @@ const syncApprovedFastProductionSelections = async (
     const candidateShutterTypeIds =
       selectedCarcassIds.length > 0
         ? new Set(
-            (
-              await tx.timelineRule.findMany({
-                where: {
-                  vendor_id: vendorId,
-                  carcass_id: { in: selectedCarcassIds },
-                },
-                select: { shutter_id: true },
-              })
-            )
-              .map((rule: { shutter_id: number | null }) => rule.shutter_id)
-              .filter((id: number | null): id is number => id != null),
+          (
+            await tx.timelineRule.findMany({
+              where: {
+                vendor_id: vendorId,
+                carcass_id: { in: selectedCarcassIds },
+              },
+              select: { shutter_id: true },
+            })
           )
+            .map((rule: { shutter_id: number | null }) => rule.shutter_id)
+            .filter((id: number | null): id is number => id != null),
+        )
         : null;
 
     const resolveShutterItems = (label: string) => {
@@ -590,9 +590,28 @@ const syncLeadFastProductionState = async (
 
   const pendingBatch = !approvedBatch
     ? await tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: leadId,
+        status: "pending_approvals",
+      },
+      orderBy: {
+        updated_at: "desc",
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    })
+    : null;
+
+  const latestClosedBatch =
+    !approvedBatch && !pendingBatch
+      ? await tx.fastProductionRequestBatch.findFirst({
         where: {
           lead_id: leadId,
-          status: "pending_approvals",
+          status: {
+            in: ["rejected", "revoked"],
+          },
         },
         orderBy: {
           updated_at: "desc",
@@ -602,25 +621,6 @@ const syncLeadFastProductionState = async (
           status: true,
         },
       })
-    : null;
-
-  const latestClosedBatch =
-    !approvedBatch && !pendingBatch
-      ? await tx.fastProductionRequestBatch.findFirst({
-          where: {
-            lead_id: leadId,
-            status: {
-              in: ["rejected", "revoked"],
-            },
-          },
-          orderBy: {
-            updated_at: "desc",
-          },
-          select: {
-            id: true,
-            status: true,
-          },
-        })
       : null;
 
   const latestActiveBatch =
@@ -630,14 +630,14 @@ const syncLeadFastProductionState = async (
 
   const latestClientRequiredDate = latestActiveBatch
     ? await tx.fastProductionRequest.aggregate({
-        where: {
-          batch_id: latestActiveBatch.id,
-          lead_id: leadId,
-        },
-        _max: {
-          client_required_delivery_date: true,
-        },
-      })
+      where: {
+        batch_id: latestActiveBatch.id,
+        lead_id: leadId,
+      },
+      _max: {
+        client_required_delivery_date: true,
+      },
+    })
     : null;
 
   await tx.leadMaster.update({
@@ -769,6 +769,12 @@ export const saveFastProductionRequestDraft = async (
     value.vendor_id,
     value.created_by,
     value.lead_id,
+  );
+
+  await limitFastProductionCreation(
+    value.vendor_id,
+    value.created_by,
+    actor.franchise_id
   );
 
   const instance = await prisma.leadProductStructureInstance.findFirst({
@@ -1118,32 +1124,32 @@ export const finalizeFastProductionRequestBatch = async (
     const approvalsToCreate =
       actorRole === "super-admin"
         ? [
-            {
-              batch_id: batch.id,
-              approver_role: "SUPER_ADMIN" as const,
-              approver_user_id: superAdminUser.id,
-              status: "approved" as const,
-              remark: "Auto-approved because the requester is super-admin",
-              acted_at: new Date(),
-            },
-            {
-              batch_id: batch.id,
-              approver_role: "FACTORY_ADMIN" as const,
-              approver_user_id: factoryUser.id,
-            },
-          ]
+          {
+            batch_id: batch.id,
+            approver_role: "SUPER_ADMIN" as const,
+            approver_user_id: superAdminUser.id,
+            status: "approved" as const,
+            remark: "Auto-approved because the requester is super-admin",
+            acted_at: new Date(),
+          },
+          {
+            batch_id: batch.id,
+            approver_role: "FACTORY_ADMIN" as const,
+            approver_user_id: factoryUser.id,
+          },
+        ]
         : [
-            {
-              batch_id: batch.id,
-              approver_role: "SUPER_ADMIN" as const,
-              approver_user_id: superAdminUser.id,
-            },
-            {
-              batch_id: batch.id,
-              approver_role: "FACTORY_ADMIN" as const,
-              approver_user_id: factoryUser.id,
-            },
-          ];
+          {
+            batch_id: batch.id,
+            approver_role: "SUPER_ADMIN" as const,
+            approver_user_id: superAdminUser.id,
+          },
+          {
+            batch_id: batch.id,
+            approver_role: "FACTORY_ADMIN" as const,
+            approver_user_id: factoryUser.id,
+          },
+        ];
 
     await tx.fastProductionRequestBatch.update({
       where: { id: batch.id },
@@ -1563,3 +1569,44 @@ export const actOnFastProductionRequestTask = async (
 
   return result;
 };
+
+
+export const limitFastProductionCreation = async (
+  vendorId: number,
+  userId: number,
+  franchise_id?: number | null,
+) => {
+  const user = await prisma.userMaster.findUnique({
+    where: { id: userId },
+    select: { user_type: { select: { user_type: true } } },
+  });
+
+  const normalizedUserType = (user?.user_type?.user_type ?? "").toLowerCase();
+  if (normalizedUserType === "super-admin") {
+    return;
+  }
+
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+  const queryWhere: any = {
+    created_by: userId,
+    vendor_id: vendorId,
+    created_at: {
+      gte: startOfMonth,
+    },
+  };
+
+  if (franchise_id) {
+    queryWhere.franchise_id = franchise_id;
+  }
+
+  const fastProductionCreations = await prisma.fastProductionRequestBatch.count({
+    where: queryWhere,
+  });
+
+  if (fastProductionCreations >= 2) {
+    throw new Error("Fast production creation limit reached for the current month");
+  }
+  return;
+}

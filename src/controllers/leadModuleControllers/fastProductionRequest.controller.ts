@@ -7,6 +7,7 @@ import {
   FinalizeFastProductionBatchInput,
   saveFastProductionRequestDraft,
   SaveFastProductionDraftInput,
+  limitFastProductionCreation,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -161,5 +162,34 @@ export const actOnFastProductionRequestTaskController = async (
         : 500;
 
     return res.status(statusCode).json(ApiResponse.error(message, statusCode));
+  }
+};
+
+export const checkFastProductionLimitController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendorId = Number(getSingleValue(req.query.vendor_id as string | string[]));
+    const userId = Number(getSingleValue(req.query.user_id as string | string[]));
+    const franchiseId = Number(getSingleValue(req.query.franchise_id as string | string[]));
+
+    if (!vendorId || !userId) {
+      return res.status(400).json(ApiResponse.error("vendor_id and user_id are required", 400));
+    }
+
+    await limitFastProductionCreation(vendorId, userId, franchiseId);
+
+    return res.status(200).json(
+      ApiResponse.success(
+        { canCreate: true },
+        "User can create fast production request",
+        200,
+      ),
+    );
+  } catch (error: any) {
+    logger.error("[FastProductionRequestController] checkLimit:", error);
+    const message = error?.message || "Failed to check fast production limit";
+    return res.status(400).json(ApiResponse.error(message, 400));
   }
 };
