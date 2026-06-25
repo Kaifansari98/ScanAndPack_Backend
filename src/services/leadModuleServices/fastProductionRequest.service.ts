@@ -4,7 +4,10 @@ import { prisma } from "../../prisma/client";
 import logger from "../../utils/logger";
 import { cache } from "../../utils/cache";
 import { NotificationType } from "../../prisma/generated";
-import { uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
+import {
+  generateSignedUrl,
+  uploadToWasabiInitialSiteMeasurementFile,
+} from "../../utils/wasabiClient";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
 import { CHSSelectionTypeMappingService } from "./desigingStage/chs-selection-type-mapping.service";
@@ -1563,3 +1566,120 @@ export const actOnFastProductionRequestTask = async (
 
   return result;
 };
+
+export const getFastProductionRequestDetails = async (
+  leadId: number,
+  taskId: number,
+) => {
+  const task = await prisma.userLeadTask.findFirst({
+    where: {
+      id: taskId,
+      lead_id: leadId,
+      task_type: FAST_PRODUCTION_REQUEST_TASK_TYPE,
+    },
+    select: {
+      id: true,
+      vendor_id: true,
+      user_id: true,
+    },
+  });
+
+  if (!task) {
+    throw new Error("Fast production task not found");
+  }
+
+  const batch: any = await prisma.fastProductionRequestBatch.findFirst({
+    where: {
+      lead_id: leadId,
+      vendor_id: task.vendor_id,
+      status: "pending_approvals",
+    },
+    include: {
+      requester: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      lead: {
+        select: {
+          id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      requests: {
+        include: {
+          instance: {
+            select: {
+              id: true,
+              title: true,
+              productStructure: {
+                select: {
+                  type: true,
+                },
+              },
+            },
+          },
+          finishes: true,
+          documents: {
+            include: {
+              document: true,
+            },
+          },
+        },
+        orderBy: {
+          instance_id: "asc",
+        },
+      },
+      approvals: {
+        include: {
+          approver: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!batch) {
+    return null;
+  }
+
+  // Generate signed URLs for documents
+  const requestsWithSignedUrls = await Promise.all(
+    batch.requests.map(async (req: any) => {
+      const documentsWithUrls = await Promise.all(
+        req.documents.map(async (docMapping: any) => {
+          const signedUrl = await generateSignedUrl(
+            docMapping.document.doc_sys_name,
+            3600,
+            "inline",
+          );
+          return {
+            ...docMapping,
+            document: {
+              ...docMapping.document,
+              signedUrl,
+            },
+          };
+        }),
+      );
+      return {
+        ...req,
+        documents: documentsWithUrls,
+      };
+    }),
+  );
+
+  return {
+    ...batch,
+    requests: requestsWithSignedUrls,
+  };
+};
+
