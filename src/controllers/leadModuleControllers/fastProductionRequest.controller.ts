@@ -7,8 +7,7 @@ import {
   FinalizeFastProductionBatchInput,
   saveFastProductionRequestDraft,
   SaveFastProductionDraftInput,
-  revokeFastProductionRequest,
-  RevokeFastProductionInput,
+  getFastProductionRequestDraft,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -166,36 +165,39 @@ export const actOnFastProductionRequestTaskController = async (
   }
 };
 
-export const revokeFastProductionRequestController = async (
+export const getFastProductionRequestDraftController = async (
   req: Request,
   res: Response,
 ) => {
   try {
-    const payload: RevokeFastProductionInput = {
-      lead_id: Number(getSingleValue(req.body.leadId)),
-      vendor_id: Number(getSingleValue(req.body.vendorId)),
-      revoked_by: Number(getSingleValue(req.body.userId)),
-      remark: getSingleValue(req.body.remark) ?? "",
-    };
+    const leadId = Number(req.params.leadId);
+    const vendorId = Number(req.params.vendorId);
 
-    const result = await revokeFastProductionRequest(payload);
+    if (!leadId || Number.isNaN(leadId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid lead ID provided", 400));
+    }
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("Invalid vendor ID provided", 400));
+    }
+
+    const result = await getFastProductionRequestDraft(leadId, vendorId);
 
     return res.status(200).json(
       ApiResponse.success(
         result,
-        "Fast production status cancelled successfully",
+        "Fast production draft fetched successfully",
         200,
       ),
     );
   } catch (error: any) {
-    logger.error("[FastProductionRequestController] revoke:", error);
-    const message = error?.message || "Failed to cancel fast production";
-    const statusCode =
-      message.startsWith("Validation failed") ||
-      message.includes("not found")
-        ? 400
-        : 500;
-
-    return res.status(statusCode).json(ApiResponse.error(message, statusCode));
+    logger.error("[FastProductionRequestController] getDraft:", error);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Failed to fetch fast production draft", 500));
   }
 };
