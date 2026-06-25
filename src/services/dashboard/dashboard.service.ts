@@ -1399,7 +1399,7 @@ export class DashboardService {
         vendor_id,
         franchise_id,
         is_deleted: false,
-        activity_status: "onGoing",
+      
       },
       select: {
         id: true,
