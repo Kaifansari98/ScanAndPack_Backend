@@ -88,6 +88,13 @@ export interface ActOnFastProductionRequestTaskInput {
   remark?: string | null;
 }
 
+export interface RevokeFastProductionInput {
+  lead_id: number;
+  vendor_id: number;
+  revoked_by: number;
+  remark?: string | null;
+}
+
 const normalizeRole = (role?: string | null) => role?.trim().toLowerCase() ?? "";
 
 const getMonthBucket = (date = new Date()) =>
@@ -98,6 +105,12 @@ const getTomorrowDueDate = () => {
   tomorrow.setHours(0, 0, 0, 0);
   tomorrow.setDate(tomorrow.getDate() + 1);
   return tomorrow;
+};
+
+const getMonthBounds = (date = new Date()) => {
+  const start = new Date(date.getFullYear(), date.getMonth(), 1);
+  const end = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+  return { start, end };
 };
 
 const joinFinishValues = (values: string[]) =>
@@ -1251,6 +1264,194 @@ export const actOnFastProductionRequestTask = async (
   return result;
 };
 
+export const limitFastProductionCreation = async (
+  vendorId: number,
+  userId: number,
+  franchiseId?: number,
+) => {
+  if (!vendorId || !userId) {
+    throw new Error("vendor_id and user_id are required");
+  }
+
+  const { start, end } = getMonthBounds();
+
+  const activeBatchCount = await prisma.fastProductionRequestBatch.count({
+    where: {
+      vendor_id: vendorId,
+      requester_user_id: userId,
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
+      month_bucket: {
+        gte: start,
+        lt: end,
+      },
+      status: {
+        notIn: ["rejected", "revoked"],
+      },
+    },
+  });
+
+  if (activeBatchCount >= 2) {
+    throw new Error(
+      "Fast production creation limit reached for the current month (Max 2)",
+    );
+  }
+
+  return { canCreate: true, activeBatchCount };
+};
+
+export const checkFastProductionStatusForLead = async (
+  leadId: number,
+  vendorId?: number,
+  franchiseId?: number,
+) => {
+  if (!leadId) {
+    throw new Error("leadId is required");
+  }
+
+  const latestBatch = await prisma.fastProductionRequestBatch.findFirst({
+    where: {
+      lead_id: leadId,
+      ...(vendorId ? { vendor_id: vendorId } : {}),
+      ...(franchiseId ? { franchise_id: franchiseId } : {}),
+    },
+    orderBy: {
+      updated_at: "desc",
+    },
+    select: {
+      status: true,
+    },
+  });
+
+  if (!latestBatch) {
+    return false;
+  }
+
+  return ["approved", "rejected", "revoked"].includes(latestBatch.status);
+};
+
+export const revokeFastProductionRequest = async (
+  input: RevokeFastProductionInput,
+) => {
+  const { error, value } = Joi.object<RevokeFastProductionInput>({
+    lead_id: Joi.number().integer().positive().required(),
+    vendor_id: Joi.number().integer().positive().required(),
+    revoked_by: Joi.number().integer().positive().required(),
+    remark: Joi.string().allow("", null).max(2000).optional(),
+  }).validate(input, { abortEarly: false });
+
+  if (error) {
+    throw new Error(`Validation failed: ${error.message}`);
+  }
+
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: value.lead_id,
+        vendor_id: value.vendor_id,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const activeBatch = await tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: value.lead_id,
+        vendor_id: value.vendor_id,
+        status: {
+          in: ["draft", "pending_approvals", "approved"],
+        },
+      },
+      orderBy: [
+        { approved_at: "desc" },
+        { updated_at: "desc" },
+      ],
+      select: {
+        id: true,
+        status: true,
+      },
+    });
+
+    if (!activeBatch) {
+      throw new Error("No active fast production request found for this lead");
+    }
+
+    const now = new Date();
+    const revocationRemark = value.remark?.trim() || null;
+
+    await tx.fastProductionRequestBatch.update({
+      where: { id: activeBatch.id },
+      data: {
+        status: "revoked",
+        revoked_at: now,
+        revoked_by: value.revoked_by,
+        revocation_remark: revocationRemark,
+        updated_by: value.revoked_by,
+      },
+    });
+
+    await tx.fastProductionRequest.updateMany({
+      where: {
+        batch_id: activeBatch.id,
+      },
+      data: {
+        status: "revoked",
+        revoked_at: now,
+        revoked_by: value.revoked_by,
+        revocation_remark: revocationRemark,
+        updated_by: value.revoked_by,
+      },
+    });
+
+    const pendingTask = await tx.userLeadTask.findFirst({
+      where: {
+        lead_id: value.lead_id,
+        task_type: FAST_PRODUCTION_REQUEST_TASK_TYPE,
+        status: {
+          not: "completed",
+        },
+      },
+      orderBy: {
+        created_at: "desc",
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (pendingTask) {
+      await closeTask(
+        tx,
+        pendingTask.id,
+        value.revoked_by,
+        revocationRemark ?? "Fast production request revoked",
+      );
+    }
+
+    await tx.fastProductionStatusLog.create({
+      data: {
+        batch_id: activeBatch.id,
+        from_status: activeBatch.status,
+        to_status: "revoked",
+        actor_user_id: value.revoked_by,
+        remark: revocationRemark,
+      },
+    });
+
+    await syncLeadFastProductionState(tx, value.lead_id, value.revoked_by);
+
+    return {
+      batch_id: activeBatch.id,
+      status: "revoked" as const,
+      revoked_at: now,
+    };
+  });
+};
+
 export const getFastProductionRequestDetails = async (
   leadId: number,
   taskId: number,
@@ -1366,4 +1567,3 @@ export const getFastProductionRequestDetails = async (
     requests: requestsWithSignedUrls,
   };
 };
-
