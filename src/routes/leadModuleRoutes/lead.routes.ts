@@ -60,6 +60,7 @@ import {
 import {
   createFastProductionRequestController,
   finalizeFastProductionRequestBatchController,
+  revokeFastProductionRequestController,
 } from "../../controllers/leadModuleControllers/fastProductionRequest.controller";
 
 const leadsRouter = Router();
@@ -93,6 +94,10 @@ leadsRouter.post(
 leadsRouter.post(
   "/fast-production-requests/finalize",
   finalizeFastProductionRequestBatchController,
+);
+leadsRouter.post(
+  "/fast-production-requests/revoke",
+  revokeFastProductionRequestController,
 );
 leadsRouter.get(
   "/small-order-requests/vendor/:vendorId/lead/:leadId",

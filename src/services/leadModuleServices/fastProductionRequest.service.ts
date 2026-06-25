@@ -1683,3 +1683,117 @@ export const getFastProductionRequestDetails = async (
   };
 };
 
+const revokeFastProductionSchema = Joi.object({
+  lead_id: Joi.number().integer().positive().required(),
+  vendor_id: Joi.number().integer().positive().required(),
+  revoked_by: Joi.number().integer().positive().required(),
+  remark: Joi.string().trim().min(1).required(),
+});
+
+export interface RevokeFastProductionInput {
+  lead_id: number;
+  vendor_id: number;
+  revoked_by: number;
+  remark: string;
+}
+
+export const revokeFastProductionRequest = async (
+  input: RevokeFastProductionInput,
+) => {
+  const { error, value } = revokeFastProductionSchema.validate(input);
+  if (error) {
+    throw new Error(`Validation failed: ${error.message}`);
+  }
+
+  const { lead_id, vendor_id, revoked_by, remark } = value;
+
+  const result = await prisma.$transaction(async (tx) => {
+    const activeBatch = await tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id,
+        vendor_id,
+        status: { in: ["approved", "pending_approvals"] },
+      },
+      orderBy: { updated_at: "desc" },
+    });
+
+    if (!activeBatch) {
+      throw new Error("No active fast production request batch found for this lead.");
+    }
+
+    await tx.fastProductionRequestBatch.update({
+      where: { id: activeBatch.id },
+      data: {
+        status: "revoked",
+        revoked_at: new Date(),
+        revoked_by,
+        revocation_remark: remark,
+        updated_by: revoked_by,
+      },
+    });
+
+    await tx.fastProductionRequest.updateMany({
+      where: { batch_id: activeBatch.id },
+      data: {
+        status: "revoked",
+        revoked_at: new Date(),
+        revoked_by,
+        revocation_remark: remark,
+        updated_by: revoked_by,
+      },
+    });
+
+    await tx.userLeadTask.updateMany({
+      where: {
+        lead_id,
+        vendor_id,
+        task_type: FAST_PRODUCTION_REQUEST_TASK_TYPE,
+        status: "open",
+      },
+      data: {
+        status: "cancelled",
+        closed_at: new Date(),
+        closed_by: revoked_by,
+        updated_by: revoked_by,
+      },
+    });
+
+    await tx.fastProductionStatusLog.create({
+      data: {
+        batch_id: activeBatch.id,
+        from_status: activeBatch.status,
+        to_status: "revoked",
+        remark,
+        actor_user_id: revoked_by,
+      },
+    });
+
+    await syncLeadFastProductionState(tx, lead_id, revoked_by);
+
+    const lead = await tx.leadMaster.findFirst({
+      where: { id: lead_id },
+      select: { account_id: true, status_id: true },
+    });
+
+    await tx.leadDetailedLogs.create({
+      data: {
+        vendor_id,
+        lead_id,
+        account_id: lead?.account_id ?? 0,
+        action: `Fast Production Cancelled. Reason: ${remark}`,
+        action_type: "STATUS_CHANGE",
+        created_by: revoked_by,
+        stage_id: lead?.status_id,
+      },
+    });
+
+    return { batchId: activeBatch.id };
+  });
+
+  await cache.del(`dashboard:leads:${vendor_id}:${revoked_by}`);
+  await cache.del(`dashboard:tasks:${vendor_id}:${revoked_by}`);
+
+  return result;
+};
+
+

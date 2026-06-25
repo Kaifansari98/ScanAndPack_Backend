@@ -7,6 +7,8 @@ import {
   FinalizeFastProductionBatchInput,
   saveFastProductionRequestDraft,
   SaveFastProductionDraftInput,
+  revokeFastProductionRequest,
+  RevokeFastProductionInput,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -157,6 +159,40 @@ export const actOnFastProductionRequestTaskController = async (
       message.includes("Only") ||
       message.includes("allowed") ||
       message.includes("required")
+        ? 400
+        : 500;
+
+    return res.status(statusCode).json(ApiResponse.error(message, statusCode));
+  }
+};
+
+export const revokeFastProductionRequestController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const payload: RevokeFastProductionInput = {
+      lead_id: Number(getSingleValue(req.body.leadId)),
+      vendor_id: Number(getSingleValue(req.body.vendorId)),
+      revoked_by: Number(getSingleValue(req.body.userId)),
+      remark: getSingleValue(req.body.remark) ?? "",
+    };
+
+    const result = await revokeFastProductionRequest(payload);
+
+    return res.status(200).json(
+      ApiResponse.success(
+        result,
+        "Fast production status cancelled successfully",
+        200,
+      ),
+    );
+  } catch (error: any) {
+    logger.error("[FastProductionRequestController] revoke:", error);
+    const message = error?.message || "Failed to cancel fast production";
+    const statusCode =
+      message.startsWith("Validation failed") ||
+      message.includes("not found")
         ? 400
         : 500;
 
