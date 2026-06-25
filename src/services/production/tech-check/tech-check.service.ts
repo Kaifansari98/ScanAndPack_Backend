@@ -68,7 +68,7 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
-    requiredDate: Date,
+    requiredDate: Date | undefined,
     baseUrl: string,
     productStructureInstanceId?: number,
   ): Promise<ApproveTechCheckResult> {
@@ -79,6 +79,25 @@ export class TechCheckService {
           select: { IsAccountLocInEnabled: true },
         });
         const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled === true;
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            id: true,
+            is_fast_production: true,
+          },
+        });
+
+        if (!lead) {
+          throw new Error("Lead not found");
+        }
+
+        const shouldRequireClientDate = lead.is_fast_production !== true;
+
+        if (shouldRequireClientDate && !requiredDate) {
+          throw new Error(
+            "client_required_order_login_complition_date is required",
+          );
+        }
 
         if (productStructureInstanceId) {
           const instance = await tx.leadProductStructureInstance.findFirst({
@@ -112,7 +131,11 @@ export class TechCheckService {
           await tx.leadMaster.update({
             where: { id: leadId },
             data: {
-              client_required_order_login_complition_date: requiredDate,
+              ...(requiredDate
+                ? {
+                    client_required_order_login_complition_date: requiredDate,
+                  }
+                : {}),
               updated_by: userId,
               updated_at: new Date(),
             },
@@ -206,7 +229,11 @@ export class TechCheckService {
               data: {
                 status_id: orderLoginStatus.id,
                 tech_check_completed_at: new Date(),
-                client_required_order_login_complition_date: requiredDate,
+                ...(requiredDate
+                  ? {
+                      client_required_order_login_complition_date: requiredDate,
+                    }
+                  : {}),
                 updated_by: userId,
                 updated_at: new Date(),
               },
@@ -327,7 +354,11 @@ export class TechCheckService {
           data: {
             status_id: orderLoginStatus.id,
             tech_check_completed_at: new Date(),
-            client_required_order_login_complition_date: requiredDate,
+            ...(requiredDate
+              ? {
+                  client_required_order_login_complition_date: requiredDate,
+                }
+              : {}),
             updated_by: userId,
             updated_at: new Date(),
           },
