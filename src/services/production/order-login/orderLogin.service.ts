@@ -1734,7 +1734,7 @@ export class OrderLoginService {
           }),
         ]);
 
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId,
         franchiseId: leadMeta?.franchise_id ?? null,
         excludeUserId: userId,
@@ -2340,7 +2340,7 @@ export class OrderLoginService {
         year: "numeric",
       });
 
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: leadMeta.vendor_id,
         franchiseId: leadMeta.franchise_id ?? null,
         excludeUserId: userId,

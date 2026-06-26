@@ -594,7 +594,7 @@ export class ClientApprovalController {
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const users = await getFranchiseAdminRecipients({
+        const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: dto.vendor_id,
           franchiseId,
           excludeUserId: dto.created_by,
@@ -633,7 +633,8 @@ export class ClientApprovalController {
             .map((user) =>
               sendMajorMilestoneEmail({
                 vendor_id: dto.vendor_id,
-                toEmail: user.user_email!,
+                allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
                 toName: user.user_name ?? undefined,
                 leadCode,
                 leadName: leadName || "Lead",

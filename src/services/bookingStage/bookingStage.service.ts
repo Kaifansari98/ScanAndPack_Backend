@@ -836,7 +836,7 @@ export class BookingStageService {
         const franchiseId = lead?.franchise_id ?? null;
 
         // Fetch Active Admins
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: lead.vendor_id,
           franchiseId,
           excludeUserId: actorId,
@@ -2404,7 +2404,7 @@ export class BookingStageService {
         }),
       ]);
 
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: data.vendor_id,
         franchiseId: leadInfo?.franchise_id ?? null,
         excludeUserId: data.created_by,
@@ -2445,7 +2445,8 @@ export class BookingStageService {
           await sendPaymentAddedEmail({
             vendor_id: data.vendor_id,
             franchise_id: franchiseId,
-            toEmail: admin.user_email,
+            allowSuperAdmin: isSuperAdminFallback,
+              toEmail: admin.user_email,
             toName: admin.user_name ?? undefined,
             leadCode,
             leadName: leadName || "Lead",

@@ -151,7 +151,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
   const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } =
     value;
 
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     // 1) Lead (for vendor/account)
     const lead = await tx.leadMaster.findUnique({
       where: { id: lead_id },
@@ -418,8 +418,83 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
       new_status_id: updatedLead.status_id,
     });
 
-    return { task, lead: updatedLead };
+    return { task, lead: updatedLead, isStageChanged: (task_type.toLowerCase() !== "follow up" && !isSelfAssignTask) };
   });
+
+  // ✅ Send Notifications outside the transaction if the lead stage was actually updated to ISM
+  if (result.isStageChanged && result.lead && result.lead.status_id) {
+    try {
+      const [leadData, actor] = await Promise.all([
+        prisma.leadMaster.findUnique({
+          where: { id: lead_id },
+          select: { firstname: true, lastname: true, lead_code: true, account_id: true, vendor_id: true, franchise_id: true }
+        }),
+        prisma.userMaster.findUnique({
+          where: { id: created_by },
+          select: { user_name: true }
+        })
+      ]);
+
+      if (leadData) {
+        const leadName = `${leadData.firstname ?? ""} ${leadData.lastname ?? ""}`.trim();
+        const leadCode = leadData.lead_code ?? `LEAD-${String(lead_id).padStart(4, "0")}`;
+        const accountId = leadData.account_id;
+        
+        const redirectUrl = accountId 
+          ? `/dashboard/leads/details/${lead_id}?accountId=${accountId}`
+          : `/dashboard/leads/details/${lead_id}`;
+
+        const { recipients, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+          vendorId: leadData.vendor_id,
+          franchiseId: leadData.franchise_id ?? null,
+        });
+
+        const updatedAt = new Date().toLocaleString("en-IN", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+        const updatedBy = actor?.user_name || "System";
+
+        for (const admin of recipients) {
+          // In-App
+          await NotificationService.createAndSend({
+            vendor_id: leadData.vendor_id,
+            user_id: admin.id,
+            sender_id: created_by,
+            type: NotificationType.LEAD_MILESTONE,
+            title: "Lead moved to Initial Site Measurement",
+            message: `${leadCode} - ${leadName} moved to Initial Site Measurement stage.`,
+            entity_type: "lead",
+            entity_id: lead_id,
+            redirect_url: redirectUrl,
+          });
+
+          // Email
+          try {
+            const { sendLeadMovedToISMEmail } = require("../../email/brevoEmail.service");
+            await sendLeadMovedToISMEmail({
+              allowSuperAdmin: isSuperAdminFallback,
+              vendor_id: leadData.vendor_id,
+              toEmail: admin.user_email!,
+              toName: admin.user_name || "Admin",
+              leadCode,
+              leadName,
+              updatedBy,
+              updatedAt,
+              projectUrl: redirectUrl,
+            });
+          } catch (e) {
+             logger.warn("Brevo email failed for ISM stage", e);
+          }
+        }
+      }
+    } catch (err: any) {
+      logger.error("Failed to send ISM stage notifications", err);
+    }
+  }
+
+  return { task: result.task, lead: result.lead };
 };
 
 export class PaymentUploadService {
@@ -1055,7 +1130,7 @@ export class PaymentUploadService {
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: lead.vendor_id,
           franchiseId: lead.franchise_id ?? null,
           excludeUserId: actorId,

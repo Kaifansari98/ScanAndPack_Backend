@@ -904,7 +904,7 @@ export class FinalMeasurementController {
               : `/dashboard/leads/details/${leadId}`;
 
             // Only admin users (matching franchise) receive the milestone notification and email
-            const users = await getFranchiseAdminRecipients({
+            const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
               vendorId,
               franchiseId,
               candidateUserIds: Array.from(recipientIds),
@@ -942,7 +942,8 @@ export class FinalMeasurementController {
                 .map((user) =>
                   sendMajorMilestoneEmail({
                     vendor_id: vendorId,
-                    toEmail: user.user_email!,
+                    allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
                     toName: user.user_name ?? undefined,
                     leadCode,
                     leadName: leadName || "Lead",

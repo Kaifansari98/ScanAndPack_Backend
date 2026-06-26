@@ -853,7 +853,7 @@ export class FinalHandoverStageService {
 
       const franchiseId = leadMeta?.franchise_id ?? null;
 
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId,
         franchiseId,
       });

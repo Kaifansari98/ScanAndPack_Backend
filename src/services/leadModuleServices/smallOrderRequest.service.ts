@@ -928,7 +928,7 @@ export const createSmallOrderRequest = async (
   );
   const siteSupervisorRecipients = siteSupervisorsRaw.map((item) => item.user);
 
-  const franchiseAdmins = await getFranchiseAdminRecipients({
+  const { recipients: franchiseAdmins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
     vendorId: value.vendor_id,
     franchiseId: lead.franchise_id ?? actor.franchise_id ?? null,
     excludeUserId: value.created_by,

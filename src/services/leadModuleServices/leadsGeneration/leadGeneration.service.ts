@@ -2239,7 +2239,7 @@ export const updateLeadService = async (
       await sendLeadCreatedEmail(payload);
 
       // Also notify franchise-filtered admins (mirrors createLead behaviour)
-      const adminUsers = await getFranchiseAdminRecipients({
+      const { recipients: adminUsers, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: payload.vendor_id,
         franchiseId: leadFranchiseId,
         excludeUserId: updated_by ?? null,
@@ -2258,6 +2258,7 @@ export const updateLeadService = async (
           ...adminRecipients.map((admin) =>
             sendLeadCreatedEmail({
               ...payload,
+              allowSuperAdmin: isSuperAdminFallback,
               toEmail: admin.user_email!,
               toName: admin.user_name ?? undefined,
             }),

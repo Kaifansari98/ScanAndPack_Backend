@@ -447,7 +447,7 @@ export class ReadyToDispatchController {
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const users = await getFranchiseAdminRecipients({
+        const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId,
           franchiseId,
           excludeUserId: Number(actorId) || null,
@@ -486,7 +486,8 @@ export class ReadyToDispatchController {
             .map((user) =>
               sendMajorMilestoneEmail({
                 vendor_id: result.lead.vendor_id,
-                toEmail: user.user_email!,
+                allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
                 toName: user.user_name ?? undefined,
                 leadCode,
                 leadName: leadName || "Lead",

@@ -513,7 +513,7 @@ export class TechCheckService {
         // ✅ redirectPath with instance_id
         const redirectPath = buildRedirectPath(lead.account_id);
 
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: lead.vendor_id,
           franchiseId: lead.franchise_id ?? null,
           excludeUserId: actorId,

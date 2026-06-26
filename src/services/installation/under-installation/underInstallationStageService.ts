@@ -241,7 +241,7 @@ export class UnderInstallationStageService {
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // Admins — franchise-filtered, no super-admin
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: lead.vendor_id,
         franchiseId,
         excludeUserId: actorId,
@@ -3294,7 +3294,7 @@ export class UnderInstallationStageService {
       ]);
 
       const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
-      for (const u of [...admins, ...salesExecutives]) recipientMap.set(u.id, u);
+      for (const u of [...admins.recipients, ...salesExecutives]) recipientMap.set(u.id, u);
       const recipients = Array.from(recipientMap.values());
 
       if (!recipients.length) return result;
@@ -3334,6 +3334,7 @@ export class UnderInstallationStageService {
           if (user.user_email) {
             await sendLeadMovedToFinalHandoverEmail({
               vendor_id: vendorId,
+              allowSuperAdmin: admins.isSuperAdminFallback,
               toEmail: user.user_email,
               toName: user.user_name ?? undefined,
               leadCode,

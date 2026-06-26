@@ -42,6 +42,7 @@ import { createLeadLog } from "../../../utils/leadDetailedLog";
 import logger from "../../../utils/logger";
 import { NotificationService } from "../../../services/notification/notification.service";
 import { NotificationType } from "../../../prisma/generated";
+import { getFranchiseAdminRecipients } from "../../../services/notification/adminRecipients.service";
 import { resolveLeadStagePath } from "../../../services/leadModuleServices/leadsGeneration/leadActivityStatus.service";
 import {
   sendLeadCreatedEmail,
@@ -484,23 +485,14 @@ export class LeadController {
               );
             }
           } else {
-            const adminUsers = await prisma.userMaster.findMany({
-              where: {
-                vendor_id: value.vendor_id,
-                status: "active",
-                user_type: {
-                  user_type: {
-                    in: ["admin", "super-admin"],
-                    mode: "insensitive",
-                  },
-                },
-                ...(value.franchise_id ? { franchise_id: value.franchise_id } : {}),
-              },
-              select: { id: true, user_email: true, user_name: true },
+            const { recipients: adminUsers, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+              vendorId: value.vendor_id,
+              franchiseId: value.franchise_id,
+              excludeUserId: value.created_by,
             });
 
             const recipients = adminUsers.filter(
-              (user) => user.id !== value.created_by && user.user_email,
+              (user: any) => user.user_email,
             );
 
             if (recipients.length === 0) {
@@ -512,14 +504,15 @@ export class LeadController {
               const redirectUrl = resolveLeadStagePath(result.lead.id, "Type 1", result.lead.account_id);
 
               await Promise.allSettled([
-                ...recipients.map((recipient) =>
+                ...recipients.map((recipient: any) =>
                   sendLeadCreatedEmail({
                     ...emailPayload,
+                    allowSuperAdmin: isSuperAdminFallback,
                     toEmail: recipient.user_email!,
                     toName: recipient.user_name ?? undefined,
                   }),
                 ),
-                ...recipients.map((recipient) =>
+                ...recipients.map((recipient: any) =>
                   NotificationService.createAndSend({
                     vendor_id: value.vendor_id,
                     user_id: recipient.id,

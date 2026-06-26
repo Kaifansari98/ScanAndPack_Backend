@@ -281,7 +281,7 @@ export class LeadActivityStatusService {
         status === ActivityStatus.onHold ||
         status === ActivityStatus.lostApproval
       ) {
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId,
           franchiseId,
           excludeUserId: createdBy,
@@ -314,7 +314,8 @@ export class LeadActivityStatusService {
               if (isOnHold) {
                 await sendLeadOnHoldEmail({
                   vendor_id: vendorId,
-                  toEmail: admin.user_email,
+                  allowSuperAdmin: isSuperAdminFallback,
+              toEmail: admin.user_email,
                   toName: admin.user_name ?? undefined,
                   leadCode,
                   leadName: leadName || "Lead",
@@ -327,7 +328,8 @@ export class LeadActivityStatusService {
               } else {
                 await sendLeadLostApprovalEmail({
                   vendor_id: vendorId,
-                  toEmail: admin.user_email,
+                  allowSuperAdmin: isSuperAdminFallback,
+              toEmail: admin.user_email,
                   toName: admin.user_name ?? undefined,
                   leadCode,
                   leadName: leadName || "Lead",
@@ -599,7 +601,7 @@ export class LeadActivityStatusService {
 
       // 🔔 Handle onHold → onGoing revert notifications
       if (previousStatus === ActivityStatus.onHold) {
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId,
           franchiseId,
           excludeUserId: createdBy,
@@ -623,6 +625,7 @@ export class LeadActivityStatusService {
 
             await sendLeadMarkedActiveEmail({
               vendor_id: vendorId,
+              allowSuperAdmin: isSuperAdminFallback,
               toEmail: admin.user_email,
               toName: admin.user_name ?? undefined,
               leadCode,

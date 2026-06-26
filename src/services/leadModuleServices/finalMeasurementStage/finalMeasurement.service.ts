@@ -347,7 +347,7 @@ export class FinalMeasurementService {
 
 
       // Fetch Active Admin Users for the lead franchise only
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: lead.vendor_id,
         franchiseId: lead.franchise_id ?? null,
         excludeUserId: actorId,
@@ -1335,7 +1335,7 @@ export class FinalMeasurementService {
         mappings.forEach((mapping) => recipientIds.add(mapping.user_id));
 
         if (recipientIds.size > 0) {
-          const users = await getFranchiseAdminRecipients({
+          const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
             vendorId: result.lead.vendor_id,
             franchiseId,
             candidateUserIds: Array.from(recipientIds),
