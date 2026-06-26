@@ -62,6 +62,7 @@ import {
   finalizeFastProductionRequestBatchController,
   checkFastProductionLimitController,
   checkFastProductionStatusController,
+  getFastProductionDetailsController,
   getFastProductionRequestDraftController,
 } from "../../controllers/leadModuleControllers/fastProductionRequest.controller";
 
@@ -104,6 +105,10 @@ leadsRouter.get(
 leadsRouter.get(
   "/fast-production-requests/vendor/:vendorId/lead/:leadId/status",
   checkFastProductionStatusController,
+);
+leadsRouter.get(
+  "/fast-production-requests/vendor/:vendorId/lead/:leadId/details",
+  getFastProductionDetailsController,
 );
 leadsRouter.get(
   "/fast-production-requests/draft/vendor/:vendorId/lead/:leadId",

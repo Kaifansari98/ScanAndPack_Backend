@@ -46,6 +46,7 @@ const fastProductionTaskActionSchema = Joi.object({
   action: Joi.string().valid("approve", "reject").required(),
   acted_by: Joi.number().integer().positive().required(),
   remark: Joi.string().allow("", null).optional(),
+  production_target_date: Joi.date().iso().allow(null).optional(),
 });
 
 type UploadedFastProductionFile = {
@@ -86,6 +87,7 @@ export interface ActOnFastProductionRequestTaskInput {
   action: "approve" | "reject";
   acted_by: number;
   remark?: string | null;
+  production_target_date?: Date | null;
 }
 
 export interface RevokeFastProductionInput {
@@ -304,9 +306,28 @@ const syncLeadFastProductionState = async (
 
   const pendingBatch = !approvedBatch
     ? await tx.fastProductionRequestBatch.findFirst({
+      where: {
+        lead_id: leadId,
+        status: "pending_approvals",
+      },
+      orderBy: {
+        updated_at: "desc",
+      },
+      select: {
+        id: true,
+        status: true,
+      },
+    })
+    : null;
+
+  const latestClosedBatch =
+    !approvedBatch && !pendingBatch
+      ? await tx.fastProductionRequestBatch.findFirst({
         where: {
           lead_id: leadId,
-          status: "pending_approvals",
+          status: {
+            in: ["rejected", "revoked"],
+          },
         },
         orderBy: {
           updated_at: "desc",
@@ -316,25 +337,6 @@ const syncLeadFastProductionState = async (
           status: true,
         },
       })
-    : null;
-
-  const latestClosedBatch =
-    !approvedBatch && !pendingBatch
-      ? await tx.fastProductionRequestBatch.findFirst({
-          where: {
-            lead_id: leadId,
-            status: {
-              in: ["rejected", "revoked"],
-            },
-          },
-          orderBy: {
-            updated_at: "desc",
-          },
-          select: {
-            id: true,
-            status: true,
-          },
-        })
       : null;
 
   const latestActiveBatch =
@@ -344,14 +346,14 @@ const syncLeadFastProductionState = async (
 
   const latestClientRequiredDate = latestActiveBatch
     ? await tx.fastProductionRequest.aggregate({
-        where: {
-          batch_id: latestActiveBatch.id,
-          lead_id: leadId,
-        },
-        _max: {
-          client_required_delivery_date: true,
-        },
-      })
+      where: {
+        batch_id: latestActiveBatch.id,
+        lead_id: leadId,
+      },
+      _max: {
+        client_required_delivery_date: true,
+      },
+    })
     : null;
 
   await tx.leadMaster.update({
@@ -832,32 +834,32 @@ export const finalizeFastProductionRequestBatch = async (
     const approvalsToCreate =
       actorRole === "super-admin"
         ? [
-            {
-              batch_id: batch.id,
-              approver_role: "SUPER_ADMIN" as const,
-              approver_user_id: superAdminUser.id,
-              status: "approved" as const,
-              remark: "Auto-approved because the requester is super-admin",
-              acted_at: new Date(),
-            },
-            {
-              batch_id: batch.id,
-              approver_role: "FACTORY_ADMIN" as const,
-              approver_user_id: factoryUser.id,
-            },
-          ]
+          {
+            batch_id: batch.id,
+            approver_role: "SUPER_ADMIN" as const,
+            approver_user_id: superAdminUser.id,
+            status: "approved" as const,
+            remark: "Auto-approved because the requester is super-admin",
+            acted_at: new Date(),
+          },
+          {
+            batch_id: batch.id,
+            approver_role: "FACTORY_ADMIN" as const,
+            approver_user_id: factoryUser.id,
+          },
+        ]
         : [
-            {
-              batch_id: batch.id,
-              approver_role: "SUPER_ADMIN" as const,
-              approver_user_id: superAdminUser.id,
-            },
-            {
-              batch_id: batch.id,
-              approver_role: "FACTORY_ADMIN" as const,
-              approver_user_id: factoryUser.id,
-            },
-          ];
+          {
+            batch_id: batch.id,
+            approver_role: "SUPER_ADMIN" as const,
+            approver_user_id: superAdminUser.id,
+          },
+          {
+            batch_id: batch.id,
+            approver_role: "FACTORY_ADMIN" as const,
+            approver_user_id: factoryUser.id,
+          },
+        ];
 
     await tx.fastProductionRequestBatch.update({
       where: { id: batch.id },
@@ -1116,6 +1118,15 @@ export const actOnFastProductionRequestTask = async (
         acted_at: new Date(),
       },
     });
+
+    if (value.production_target_date) {
+      await tx.leadMaster.update({
+        where: { id: value.lead_id },
+        data: {
+          client_required_order_login_complition_date: value.production_target_date,
+        },
+      });
+    }
 
     if (value.action === "reject") {
       await tx.fastProductionRequestBatch.update({

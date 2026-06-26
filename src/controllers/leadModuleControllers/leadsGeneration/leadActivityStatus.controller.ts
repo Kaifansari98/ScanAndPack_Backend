@@ -109,6 +109,10 @@ export class LeadActivityStatusController {
       const franchiseIdRaw = getParam(req.query.franchise_id);
       const franchiseId =
         franchiseIdRaw !== undefined ? Number(franchiseIdRaw) : undefined;
+      const assignToRaw = getParam(req.query.assign_to);
+      const assignTo =
+        assignToRaw !== undefined ? Number(assignToRaw) : undefined;
+
       if (!vendorId) {
         return res
           .status(400)
@@ -119,11 +123,13 @@ export class LeadActivityStatusController {
         await LeadActivityStatusService.getActivityStatusCount(
           vendorId,
           Number.isNaN(franchiseId) ? undefined : franchiseId,
+          Number.isNaN(assignTo) ? undefined : assignTo,
         );
 
       logger.info("Fetched lead activity status counts", {
         vendorId,
         franchiseId,
+        assignTo,
         data,
       });
 
