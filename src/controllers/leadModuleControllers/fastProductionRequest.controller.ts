@@ -9,6 +9,7 @@ import {
   SaveFastProductionDraftInput,
   limitFastProductionCreation,
   getFastProductionRequestDraft,
+  getFastProductionRequestDetails,
   revokeFastProductionRequest,
   RevokeFastProductionInput,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
@@ -242,22 +243,15 @@ export const getFastProductionDetailsController = async (
 ) => {
   try {
     const leadId = Number(req.params.leadId);
-    const vendorId = req.params.vendorId ? Number(req.params.vendorId) : undefined;
-    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
+    const taskId = req.query.taskId ? Number(req.query.taskId) : undefined;
 
-    if (!leadId) {
-      return res.status(400).json(ApiResponse.error("leadId is required", 400));
+    if (!leadId || !taskId) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("leadId and taskId are required", 400));
     }
 
-    const { getFastProductionDetailsForLead } = await import(
-      "../../services/leadModuleServices/fastProductionRequest.service"
-    );
-
-    const requests = await getFastProductionDetailsForLead(
-      leadId,
-      vendorId,
-      franchiseId
-    );
+    const requests = await getFastProductionRequestDetails(leadId, taskId);
 
     return res.status(200).json(
       ApiResponse.success(
@@ -269,6 +263,36 @@ export const getFastProductionDetailsController = async (
   } catch (error: any) {
     logger.error("[FastProductionRequestController] getDetails:", error);
     const message = error?.message || "Failed to get fast production details";
+    return res.status(400).json(ApiResponse.error(message, 400));
+  }
+};
+
+export const getFastProductionRequestDraftController = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const leadId = Number(req.params.leadId);
+    const vendorId = Number(req.params.vendorId);
+
+    if (!leadId || !vendorId) {
+      return res
+        .status(400)
+        .json(ApiResponse.error("vendorId and leadId are required", 400));
+    }
+
+    const result = await getFastProductionRequestDraft(vendorId, leadId);
+
+    return res.status(200).json(
+      ApiResponse.success(
+        result,
+        "Fast production draft fetched successfully",
+        200,
+      ),
+    );
+  } catch (error: any) {
+    logger.error("[FastProductionRequestController] getDraft:", error);
+    const message = error?.message || "Failed to fetch fast production draft";
     return res.status(400).json(ApiResponse.error(message, 400));
   }
 };
@@ -290,14 +314,19 @@ export const revokeFastProductionRequestController = async (
     return res.status(200).json(
       ApiResponse.success(
         result,
-        "Fast production draft fetched successfully",
+        "Fast production status cancelled successfully",
         200,
       ),
     );
   } catch (error: any) {
-    logger.error("[FastProductionRequestController] getDraft:", error);
-    return res
-      .status(500)
-      .json(ApiResponse.error("Failed to fetch fast production draft", 500));
+    logger.error("[FastProductionRequestController] revoke:", error);
+    const message = error?.message || "Failed to cancel fast production";
+    const statusCode =
+      message.startsWith("Validation failed") ||
+      message.includes("not found")
+        ? 400
+        : 500;
+
+    return res.status(statusCode).json(ApiResponse.error(message, statusCode));
   }
 };
