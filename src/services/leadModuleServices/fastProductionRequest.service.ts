@@ -1567,3 +1567,67 @@ export const getFastProductionRequestDetails = async (
     requests: requestsWithSignedUrls,
   };
 };
+
+export const getFastProductionRequestDraft = async (
+  leadId: number,
+  vendorId: number,
+) => {
+  const batch = await prisma.fastProductionRequestBatch.findFirst({
+    where: {
+      lead_id: leadId,
+      vendor_id: vendorId,
+      status: "draft",
+    },
+    include: {
+      requests: {
+        include: {
+          finishes: true,
+          documents: {
+            include: {
+              document: true,
+            },
+          },
+        },
+        orderBy: {
+          instance_id: "asc",
+        },
+      },
+    },
+  });
+
+  if (!batch) {
+    return null;
+  }
+
+  // Generate signed URLs for documents
+  const requestsWithSignedUrls = await Promise.all(
+    batch.requests.map(async (req: any) => {
+      const documentsWithUrls = await Promise.all(
+        req.documents.map(async (docMapping: any) => {
+          const signedUrl = await generateSignedUrl(
+            docMapping.document.doc_sys_name,
+            3600,
+            "inline",
+          ).catch(() => null);
+          return {
+            ...docMapping,
+            document: {
+              ...docMapping.document,
+              signedUrl,
+            },
+          };
+        }),
+      );
+      return {
+        ...req,
+        documents: documentsWithUrls,
+      };
+    }),
+  );
+
+  return {
+    ...batch,
+    requests: requestsWithSignedUrls,
+  };
+};
+

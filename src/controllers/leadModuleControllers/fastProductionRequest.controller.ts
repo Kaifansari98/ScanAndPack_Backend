@@ -8,6 +8,7 @@ import {
   saveFastProductionRequestDraft,
   SaveFastProductionDraftInput,
   limitFastProductionCreation,
+  getFastProductionRequestDraft,
   revokeFastProductionRequest,
   RevokeFastProductionInput,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
@@ -250,19 +251,14 @@ export const revokeFastProductionRequestController = async (
     return res.status(200).json(
       ApiResponse.success(
         result,
-        "Fast production status cancelled successfully",
+        "Fast production draft fetched successfully",
         200,
       ),
     );
   } catch (error: any) {
-    logger.error("[FastProductionRequestController] revoke:", error);
-    const message = error?.message || "Failed to cancel fast production";
-    const statusCode =
-      message.startsWith("Validation failed") ||
-      message.includes("not found")
-        ? 400
-        : 500;
-
-    return res.status(statusCode).json(ApiResponse.error(message, statusCode));
+    logger.error("[FastProductionRequestController] getDraft:", error);
+    return res
+      .status(500)
+      .json(ApiResponse.error("Failed to fetch fast production draft", 500));
   }
 };
