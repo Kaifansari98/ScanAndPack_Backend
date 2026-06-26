@@ -490,7 +490,7 @@ export class TaskController {
     try {
       const leadId = Number(req.params.leadId);
       const taskId = Number(req.params.taskId);
-      const { action, acted_by, remark } = req.body;
+      const { action, acted_by, remark, production_target_date } = req.body;
 
       if (!leadId || !taskId || !acted_by || !action) {
         return res.status(400).json({
@@ -505,6 +505,9 @@ export class TaskController {
         action,
         acted_by: Number(acted_by),
         remark,
+        production_target_date: production_target_date
+          ? new Date(production_target_date)
+          : undefined,
       });
 
       return res.status(200).json({
@@ -513,7 +516,13 @@ export class TaskController {
         data: result,
       });
     } catch (error: any) {
-      return res.status(500).json({
+      const statusCode =
+        error?.message?.startsWith("Validation failed") ||
+        error?.message?.includes("required")
+          ? 400
+          : 500;
+
+      return res.status(statusCode).json({
         success: false,
         message: error.message || "Failed to update fast production request",
       });
