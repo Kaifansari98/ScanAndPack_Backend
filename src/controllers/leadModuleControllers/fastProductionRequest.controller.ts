@@ -13,6 +13,7 @@ import {
   revokeFastProductionRequest,
   RevokeFastProductionInput,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
+import { prisma } from "../../prisma/client";
 
 const getSingleValue = (value: string | string[] | undefined) =>
   Array.isArray(value) ? value[0] : value;
@@ -243,15 +244,40 @@ export const getFastProductionDetailsController = async (
 ) => {
   try {
     const leadId = Number(req.params.leadId);
-    const taskId = req.query.taskId ? Number(req.query.taskId) : undefined;
+    const vendorId = Number(req.params.vendorId);
+    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
-    if (!leadId || !taskId) {
+    if (!leadId || !vendorId) {
       return res
         .status(400)
-        .json(ApiResponse.error("leadId and taskId are required", 400));
+        .json(ApiResponse.error("leadId and vendorId are required", 400));
     }
 
-    const requests = await getFastProductionRequestDetails(leadId, taskId);
+    const requests = await prisma.fastProductionRequest.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+        ...(franchiseId ? { franchise_id: franchiseId } : {}),
+        status: {
+          not: "draft"
+        }
+      },
+      select: {
+        id: true,
+        lead_id: true,
+        instance_id: true,
+        client_required_delivery_date: true,
+        status: true,
+        instance: {
+          select: {
+            title: true,
+          }
+        }
+      },
+      orderBy: {
+        instance_id: "asc"
+      }
+    });
 
     return res.status(200).json(
       ApiResponse.success(
