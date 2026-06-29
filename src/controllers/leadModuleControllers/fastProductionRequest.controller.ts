@@ -52,6 +52,8 @@ export const createFastProductionRequestController = async (
       hardware_selection: getSingleValue(req.body.hardware_selection) ?? "",
       accessory_selection: getSingleValue(req.body.accessory_selection) ?? "",
       special_requirements: getSingleValue(req.body.special_requirements) ?? "",
+      tentative_order_login_date:
+        getSingleValue(req.body.tentative_order_login_date) ?? "",
       client_required_delivery_date:
         getSingleValue(req.body.client_required_delivery_date) ?? "",
       remarks: getSingleValue(req.body.remarks) ?? null,
@@ -266,6 +268,7 @@ export const getFastProductionDetailsController = async (
         id: true,
         lead_id: true,
         instance_id: true,
+        tentative_order_login_date: true,
         client_required_delivery_date: true,
         status: true,
         instance: {
