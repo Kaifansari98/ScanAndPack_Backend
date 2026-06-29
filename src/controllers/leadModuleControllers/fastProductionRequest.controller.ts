@@ -12,6 +12,7 @@ import {
   getFastProductionRequestDetails,
   revokeFastProductionRequest,
   RevokeFastProductionInput,
+  getLatestActiveFastProductionBatchDetails,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
 
 const getSingleValue = (value: string | string[] | undefined) =>
@@ -245,13 +246,18 @@ export const getFastProductionDetailsController = async (
     const leadId = Number(req.params.leadId);
     const taskId = req.query.taskId ? Number(req.query.taskId) : undefined;
 
-    if (!leadId || !taskId) {
+    if (!leadId) {
       return res
         .status(400)
-        .json(ApiResponse.error("leadId and taskId are required", 400));
+        .json(ApiResponse.error("leadId is required", 400));
     }
 
-    const requests = await getFastProductionRequestDetails(leadId, taskId);
+    let requests;
+    if (taskId) {
+      requests = await getFastProductionRequestDetails(leadId, taskId);
+    } else {
+      requests = await getLatestActiveFastProductionBatchDetails(leadId);
+    }
 
     return res.status(200).json(
       ApiResponse.success(
