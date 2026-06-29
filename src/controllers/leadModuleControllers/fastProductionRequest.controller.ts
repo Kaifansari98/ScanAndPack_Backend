@@ -281,7 +281,7 @@ export const getFastProductionRequestDraftController = async (
         .json(ApiResponse.error("vendorId and leadId are required", 400));
     }
 
-    const result = await getFastProductionRequestDraft(vendorId, leadId);
+    const result = await getFastProductionRequestDraft(leadId, vendorId);
 
     return res.status(200).json(
       ApiResponse.success(
