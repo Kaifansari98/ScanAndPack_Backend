@@ -35,7 +35,7 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
 
 
 
-    
+
 
     // ─────────────────────────────────────────────
     // 2) Fetch all pages
@@ -82,7 +82,7 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
       );
     }
 
-     try {
+    try {
       await prisma.apiRequestLog.create({
         data: {
           endpoint: "syncProductsFromExternalService",
@@ -106,10 +106,10 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
     console.log("Total Products:", allProducts.length);
 
 
-     const invalidProducts = allProducts.filter(
+    const invalidProducts = allProducts.filter(
       (p) =>
         !p?.nItemId ||
-        p?.nItemId === 0 
+        p?.nItemId === 0
         ||
         !p?.sCode ||
         !String(p.sCode).trim()
@@ -214,7 +214,9 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
         });
 
         existingProducts.forEach((p) => {
-          productMap.set(p.item_id, p.id);
+          if (p.item_id !== null) {
+            productMap.set(p.item_id, p.id);
+          }
         });
 
         for (const p of allProducts) {
@@ -291,7 +293,7 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
 
             alt_uom_text: p.sAltUomText || null,
 
-            brand_id: brandId??null,
+            brand_id: brandId ?? null,
             category_id: categoryId,
 
             article_code: p.sCode || null,
@@ -370,7 +372,7 @@ export const syncCadbidProductFromExternalService = async (vendor_id: number) =>
 
 
 const PAGE_SIZE = 20;
- 
+
 export const getProductMasterService = async (
   vendor_id: number,
   page: number,
@@ -382,27 +384,27 @@ export const getProductMasterService = async (
 ) => {
   try {
     const skip = (page - 1) * PAGE_SIZE;
- 
+
     const where: any = {
       vendor_id,
-      ...(active      ? { active }                                                           : {}),
-      ...(category_id ? { category_id }                                                      : {}),
-      ...(brand_id    ? { brand_id }                                                         : {}),
-      ...(procurement ? { procurement: { contains: procurement, mode: "insensitive" } }      : {}),
+      ...(active ? { active } : {}),
+      ...(category_id ? { category_id } : {}),
+      ...(brand_id ? { brand_id } : {}),
+      ...(procurement ? { procurement: { contains: procurement, mode: "insensitive" } } : {}),
       ...(search
         ? {
-            OR: [
-              { product_name:  { contains: search, mode: "insensitive" } },
-              { article_code:  { contains: search, mode: "insensitive" } },
-              { vendor_code:   { contains: search, mode: "insensitive" } },
-              { group:         { contains: search, mode: "insensitive" } },
-              { finish:        { contains: search, mode: "insensitive" } },
-              { core_material: { contains: search, mode: "insensitive" } },
-            ],
-          }
+          OR: [
+            { product_name: { contains: search, mode: "insensitive" } },
+            { article_code: { contains: search, mode: "insensitive" } },
+            { vendor_code: { contains: search, mode: "insensitive" } },
+            { group: { contains: search, mode: "insensitive" } },
+            { finish: { contains: search, mode: "insensitive" } },
+            { core_material: { contains: search, mode: "insensitive" } },
+          ],
+        }
         : {}),
     };
- 
+
     const [total, products] = await Promise.all([
       prisma.productMaster.count({ where }),
       prisma.productMaster.findMany({
@@ -446,11 +448,11 @@ export const getProductMasterService = async (
           created_at: true,
           updated_at: true,
           // ── Stock ─────────────────────────────────────────────────────────
-          current_stock:    true,    // auto-updated on GRN confirmation
+          current_stock: true,    // auto-updated on GRN confirmation
           stock_updated_at: true,    // ← added
           // ── Category + Brand ──────────────────────────────────────────────
           category: { select: { id: true, category_name: true } },
-          brand:    { select: { id: true, brand_name: true } },
+          brand: { select: { id: true, brand_name: true } },
           // ── HSN mapping (for tax rates) ────────────────────────────────────
           // hsn_id is the FK; include the joined row so the frontend can
           // display/use cgst_rate, sgst_rate, igst_rate without a second call
@@ -466,12 +468,12 @@ export const getProductMasterService = async (
         },
       }),
     ]);
- 
+
     return validationResponse(1, "Products fetched", {
       products,
       total,
       page,
-      page_size:   PAGE_SIZE,
+      page_size: PAGE_SIZE,
       total_pages: Math.ceil(total / PAGE_SIZE),
     });
   } catch (error) {
@@ -480,7 +482,7 @@ export const getProductMasterService = async (
   }
 };
 
- 
+
 export const getProductFiltersService = async (vendor_id: number) => {
   try {
     const [categories, brands, procurementValues] = await Promise.all([
@@ -502,11 +504,11 @@ export const getProductFiltersService = async (vendor_id: number) => {
         orderBy: { procurement: "asc" },
       }),
     ]);
- 
+
     const procurements = procurementValues
       .map(p => p.procurement)
       .filter(Boolean) as string[];
- 
+
     return validationResponse(1, "Filters fetched", { categories, brands, procurements });
   } catch (error) {
     console.error("getProductFiltersService error:", error);
@@ -547,7 +549,7 @@ export const getProductPurchaseHistoryService = async (
               id: true, intent_no: true, status: true, priority: true,
               created_at: true,
               createdBy: { select: { id: true, user_name: true } },
-              category:  { select: { id: true, category_name: true } },
+              category: { select: { id: true, category_name: true } },
             },
           },
           vendorMappings: {
@@ -571,7 +573,7 @@ export const getProductPurchaseHistoryService = async (
             select: {
               id: true, po_no: true, status: true, created_at: true,
               expected_delivery_date: true,
-              companyVendor:  { select: { id: true, company_name: true, vendor_code: true } },
+              companyVendor: { select: { id: true, company_name: true, vendor_code: true } },
               purchaseIntent: { select: { id: true, intent_no: true } },
             },
           },
@@ -590,9 +592,9 @@ export const getProductPurchaseHistoryService = async (
             select: {
               id: true, grn_no: true, status: true,
               received_date: true, confirmed_at: true,
-              purchaseOrder:  { select: { id: true, po_no: true } },
-              companyVendor:  { select: { id: true, company_name: true, vendor_code: true } },
-              confirmedBy:    { select: { id: true, user_name: true } },
+              purchaseOrder: { select: { id: true, po_no: true } },
+              companyVendor: { select: { id: true, company_name: true, vendor_code: true } },
+              confirmedBy: { select: { id: true, user_name: true } },
             },
           },
           redeliveryRequests: {
@@ -607,14 +609,14 @@ export const getProductPurchaseHistoryService = async (
 
     // ── Aggregate stats ──────────────────────────────────────────────────────
 
-    const totalOrdered  = poItems.reduce((s, i) => s + parseFloat(i.ordered_qty.toString()), 0);
+    const totalOrdered = poItems.reduce((s, i) => s + parseFloat(i.ordered_qty.toString()), 0);
     const totalAccepted = grnItems
       .filter(i => i.grn.status === "Confirmed")
       .reduce((s, i) => s + parseFloat(i.accepted_qty.toString()), 0);
     const totalRejected = grnItems
       .filter(i => i.grn.status === "Confirmed")
       .reduce((s, i) => s + parseFloat(i.rejected_qty.toString()), 0);
-    const totalPending  = poItems
+    const totalPending = poItems
       .filter(i => ["Approved", "PartiallyReceived"].includes(i.purchaseOrder.status))
       .reduce((s, i) => s + (parseFloat(i.ordered_qty.toString()) - parseFloat(i.received_qty.toString())), 0);
 
@@ -638,108 +640,108 @@ export const getProductPurchaseHistoryService = async (
     return validationResponse(1, "Product history fetched", {
       product,
       stats: {
-        total_pi:        piItems.length,
-        total_po:        poItems.length,
-        total_grn:       grnItems.length,
-        total_ordered:   totalOrdered,
-        total_accepted:  totalAccepted,
-        total_rejected:  totalRejected,
-        total_pending:   Math.max(0, totalPending),
-        current_stock:   parseFloat((product.current_stock ?? 0).toString()),
+        total_pi: piItems.length,
+        total_po: poItems.length,
+        total_grn: grnItems.length,
+        total_ordered: totalOrdered,
+        total_accepted: totalAccepted,
+        total_rejected: totalRejected,
+        total_pending: Math.max(0, totalPending),
+        current_stock: parseFloat((product.current_stock ?? 0).toString()),
         // Value totals
-        total_pi_value:  totalPIValue,
-        total_po_value:  totalPOValue,
+        total_pi_value: totalPIValue,
+        total_po_value: totalPOValue,
         total_grn_value: totalGRNValue,
       },
 
       // ── Purchase Intents ────────────────────────────────────────────────────
       purchase_intents: piItems.map(i => ({
-        id:         i.purchaseIntent.id,
-        intent_no:  i.purchaseIntent.intent_no,
-        status:     i.purchaseIntent.status,
-        priority:   i.purchaseIntent.priority,
+        id: i.purchaseIntent.id,
+        intent_no: i.purchaseIntent.intent_no,
+        status: i.purchaseIntent.status,
+        priority: i.purchaseIntent.priority,
         created_at: i.purchaseIntent.created_at,
         created_by: i.purchaseIntent.createdBy?.user_name,
-        category:   i.purchaseIntent.category?.category_name,
-        uom:        i.uom,
-        remarks:    i.remarks,
+        category: i.purchaseIntent.category?.category_name,
+        uom: i.uom,
+        remarks: i.remarks,
         vendors: i.vendorMappings.map(vm => ({
-          vendor_name:     vm.companyVendor.company_name,
-          vendor_code:     vm.companyVendor.vendor_code,
-          required_qty:    dec(vm.required_qty),
+          vendor_name: vm.companyVendor.company_name,
+          vendor_code: vm.companyVendor.vendor_code,
+          required_qty: dec(vm.required_qty),
           estimated_price: dec(vm.estimated_price),
-          required_by:     vm.required_by_date,
+          required_by: vm.required_by_date,
           // ── Pricing ──────────────────────────────────────────────────────
-          mrp:             dec(vm.mrp),
-          discount_pct:    dec(vm.discount_pct),
-          rate:            dec(vm.rate),
-          tax_pct:         dec(vm.tax_pct),
-          cgst_pct:        dec(vm.cgst_pct),
-          sgst_pct:        dec(vm.sgst_pct),
-          igst_pct:        dec(vm.igst_pct),
-          amount:          dec(vm.amount),
-          tax_amount:      dec(vm.tax_amount),
-          total_amount:    dec(vm.total_amount),
+          mrp: dec(vm.mrp),
+          discount_pct: dec(vm.discount_pct),
+          rate: dec(vm.rate),
+          tax_pct: dec(vm.tax_pct),
+          cgst_pct: dec(vm.cgst_pct),
+          sgst_pct: dec(vm.sgst_pct),
+          igst_pct: dec(vm.igst_pct),
+          amount: dec(vm.amount),
+          tax_amount: dec(vm.tax_amount),
+          total_amount: dec(vm.total_amount),
         })),
       })),
 
       // ── Purchase Orders ─────────────────────────────────────────────────────
       purchase_orders: poItems.map(i => ({
-        id:                          i.purchaseOrder.id,
-        po_no:                       i.purchaseOrder.po_no,
-        status:                      i.purchaseOrder.status,
-        created_at:                  i.purchaseOrder.created_at,
-        expected_delivery_date:      i.purchaseOrder.expected_delivery_date,
-        supplier:                    i.purchaseOrder.companyVendor.company_name,
-        supplier_code:               i.purchaseOrder.companyVendor.vendor_code,
-        intent_no:                   i.purchaseOrder.purchaseIntent?.intent_no,
-        ordered_qty:                 dec(i.ordered_qty),
-        received_qty:                dec(i.received_qty),
-        uom:                         i.uom,
+        id: i.purchaseOrder.id,
+        po_no: i.purchaseOrder.po_no,
+        status: i.purchaseOrder.status,
+        created_at: i.purchaseOrder.created_at,
+        expected_delivery_date: i.purchaseOrder.expected_delivery_date,
+        supplier: i.purchaseOrder.companyVendor.company_name,
+        supplier_code: i.purchaseOrder.companyVendor.vendor_code,
+        intent_no: i.purchaseOrder.purchaseIntent?.intent_no,
+        ordered_qty: dec(i.ordered_qty),
+        received_qty: dec(i.received_qty),
+        uom: i.uom,
         expected_delivery_date_item: i.expected_delivery_date,
         // ── Pricing ──────────────────────────────────────────────────────────
-        unit_price:      dec(i.unit_price),
-        mrp:             dec(i.mrp),
-        discount_pct:    dec(i.discount_pct),
-        rate:            dec(i.rate),
-        tax_pct:         dec(i.tax_pct),
-        cgst_pct:        dec(i.cgst_pct),
-        sgst_pct:        dec(i.sgst_pct),
-        igst_pct:        dec(i.igst_pct),
-        amount:          dec(i.amount),
-        tax_amount:      dec(i.tax_amount),
-        total_amount:    dec(i.total_amount),
+        unit_price: dec(i.unit_price),
+        mrp: dec(i.mrp),
+        discount_pct: dec(i.discount_pct),
+        rate: dec(i.rate),
+        tax_pct: dec(i.tax_pct),
+        cgst_pct: dec(i.cgst_pct),
+        sgst_pct: dec(i.sgst_pct),
+        igst_pct: dec(i.igst_pct),
+        amount: dec(i.amount),
+        tax_amount: dec(i.tax_amount),
+        total_amount: dec(i.total_amount),
       })),
 
       // ── GRN Receipts ────────────────────────────────────────────────────────
       grn_receipts: grnItems.map(i => ({
-        id:               i.id,
-        grn_id:           i.grn.id,
-        grn_no:           i.grn.grn_no,
-        status:           i.grn.status,
-        received_date:    i.grn.received_date,
-        confirmed_at:     i.grn.confirmed_at,
-        confirmed_by:     i.grn.confirmedBy?.user_name,
-        po_no:            i.grn.purchaseOrder.po_no,
-        supplier:         i.grn.companyVendor.company_name,
-        received_qty:     dec(i.received_qty),
-        accepted_qty:     dec(i.accepted_qty),
-        rejected_qty:     dec(i.rejected_qty),
-        item_status:      i.status,
+        id: i.id,
+        grn_id: i.grn.id,
+        grn_no: i.grn.grn_no,
+        status: i.grn.status,
+        received_date: i.grn.received_date,
+        confirmed_at: i.grn.confirmed_at,
+        confirmed_by: i.grn.confirmedBy?.user_name,
+        po_no: i.grn.purchaseOrder.po_no,
+        supplier: i.grn.companyVendor.company_name,
+        received_qty: dec(i.received_qty),
+        accepted_qty: dec(i.accepted_qty),
+        rejected_qty: dec(i.rejected_qty),
+        item_status: i.status,
         rejection_reason: i.rejection_reason,
-        redeliveries:     i.redeliveryRequests,
+        redeliveries: i.redeliveryRequests,
         // ── Pricing (on accepted qty) ─────────────────────────────────────────
-        unit_price:      dec(i.unit_price),
-        mrp:             dec(i.mrp),
-        discount_pct:    dec(i.discount_pct),
-        rate:            dec(i.rate),
-        tax_pct:         dec(i.tax_pct),
-        cgst_pct:        dec(i.cgst_pct),
-        sgst_pct:        dec(i.sgst_pct),
-        igst_pct:        dec(i.igst_pct),
-        amount:          dec(i.amount),
-        tax_amount:      dec(i.tax_amount),
-        total_amount:    dec(i.total_amount),
+        unit_price: dec(i.unit_price),
+        mrp: dec(i.mrp),
+        discount_pct: dec(i.discount_pct),
+        rate: dec(i.rate),
+        tax_pct: dec(i.tax_pct),
+        cgst_pct: dec(i.cgst_pct),
+        sgst_pct: dec(i.sgst_pct),
+        igst_pct: dec(i.igst_pct),
+        amount: dec(i.amount),
+        tax_amount: dec(i.tax_amount),
+        total_amount: dec(i.total_amount),
       })),
     });
   } catch (e) {
