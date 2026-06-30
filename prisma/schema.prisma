@@ -579,6 +579,7 @@ model LeadMaster {
   is_small_order_request                      Boolean                               @default(false)
   is_client_approval_submitted                Boolean                               @default(false)
   client_required_order_login_complition_date DateTime?
+  tentative_order_login_date                  DateTime?
   expected_order_login_ready_date             DateTime?
   no_of_client_documents_initially_submitted  Int?
   hardware_packing_details_remark             String?                               @db.VarChar(2000)
@@ -1583,6 +1584,7 @@ model FastProductionRequest {
   hardware_selection            String                      @db.VarChar(4000)
   accessory_selection           String                      @db.VarChar(4000)
   special_requirements          String                      @db.VarChar(4000)
+  tentative_order_login_date    DateTime?
   client_required_delivery_date DateTime
   remarks                       String?                     @db.VarChar(2000)
   terms_accepted_at             DateTime

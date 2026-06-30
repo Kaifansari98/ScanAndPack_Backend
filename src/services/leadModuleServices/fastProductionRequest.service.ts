@@ -25,6 +25,9 @@ const fastProductionDraftSchema = Joi.object({
   hardware_selection: Joi.string().trim().required(),
   accessory_selection: Joi.string().trim().required(),
   special_requirements: Joi.string().trim().required(),
+  tentative_order_login_date: Joi.alternatives()
+    .try(Joi.string().isoDate(), Joi.date())
+    .required(),
   client_required_delivery_date: Joi.alternatives()
     .try(Joi.string().isoDate(), Joi.date())
     .required(),
@@ -68,6 +71,7 @@ export interface SaveFastProductionDraftInput {
   hardware_selection: string;
   accessory_selection: string;
   special_requirements: string;
+  tentative_order_login_date: string | Date;
   client_required_delivery_date: string | Date;
   remarks?: string | null;
   terms_version?: string | null;
@@ -356,6 +360,18 @@ const syncLeadFastProductionState = async (
     })
     : null;
 
+  const latestTentativeOrderLoginDate = latestActiveBatch
+    ? await tx.fastProductionRequest.aggregate({
+      where: {
+        batch_id: latestActiveBatch.id,
+        lead_id: leadId,
+      },
+      _max: {
+        tentative_order_login_date: true,
+      },
+    })
+    : null;
+
   await tx.leadMaster.update({
     where: { id: leadId },
     data: {
@@ -368,6 +384,8 @@ const syncLeadFastProductionState = async (
       fast_production_approved_at: approvedBatch?.approved_at ?? null,
       client_required_order_login_complition_date:
         latestClientRequiredDate?._max?.client_required_delivery_date ?? null,
+      tentative_order_login_date:
+        latestTentativeOrderLoginDate?._max?.tentative_order_login_date ?? null,
       updated_by: updatedBy,
     },
   });
@@ -379,6 +397,7 @@ const buildBatchTaskRemark = (
     hardware_selection: string;
     accessory_selection: string;
     special_requirements: string;
+    tentative_order_login_date: Date | null;
     client_required_delivery_date: Date;
     remarks: string | null;
     finishes: Array<{
@@ -405,6 +424,11 @@ const buildBatchTaskRemark = (
         `Hardware: ${request.hardware_selection}`,
         `Accessory: ${request.accessory_selection}`,
         `Special Requirements: ${request.special_requirements}`,
+        request.tentative_order_login_date
+          ? `Tentative Order Login Date: ${request.tentative_order_login_date
+            .toISOString()
+            .slice(0, 10)}`
+          : null,
         `Client Required Delivery Date: ${request.client_required_delivery_date
           .toISOString()
           .slice(0, 10)}`,
@@ -507,6 +531,11 @@ export const saveFastProductionRequestDraft = async (
   const clientRequiredDeliveryDate = new Date(value.client_required_delivery_date);
   if (Number.isNaN(clientRequiredDeliveryDate.getTime())) {
     throw new Error("Client required delivery date is invalid");
+  }
+
+  const tentativeOrderLoginDate = new Date(value.tentative_order_login_date);
+  if (Number.isNaN(tentativeOrderLoginDate.getTime())) {
+    throw new Error("Tentative order login date is invalid");
   }
 
   const uploadedFiles = await uploadFastProductionFiles(
@@ -631,6 +660,7 @@ export const saveFastProductionRequestDraft = async (
         hardware_selection: value.hardware_selection.trim(),
         accessory_selection: value.accessory_selection.trim(),
         special_requirements: value.special_requirements.trim(),
+        tentative_order_login_date: tentativeOrderLoginDate,
         client_required_delivery_date: clientRequiredDeliveryDate,
         remarks: value.remarks?.trim() || null,
         terms_accepted_at: new Date(),
@@ -641,6 +671,7 @@ export const saveFastProductionRequestDraft = async (
         hardware_selection: value.hardware_selection.trim(),
         accessory_selection: value.accessory_selection.trim(),
         special_requirements: value.special_requirements.trim(),
+        tentative_order_login_date: tentativeOrderLoginDate,
         client_required_delivery_date: clientRequiredDeliveryDate,
         remarks: value.remarks?.trim() || null,
         terms_version: value.terms_version?.trim() || "v1",

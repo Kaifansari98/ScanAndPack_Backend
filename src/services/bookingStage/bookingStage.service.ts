@@ -1928,6 +1928,20 @@ export class BookingStageService {
       }),
     ]);
 
+    const leadIds = leads.map((l: any) => l.id);
+    const activeFastProductionBatches = leadIds.length > 0
+      ? await prisma.fastProductionRequestBatch.findMany({
+          where: {
+            lead_id: { in: leadIds },
+            status: "pending_approvals"
+          },
+          select: {
+            lead_id: true
+          }
+        })
+      : [];
+    const pendingFastProductionLeadIds = new Set(activeFastProductionBatches.map(b => b.lead_id));
+
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
         if (lead.is_draft && isLeadComplete(lead)) {
@@ -1950,7 +1964,12 @@ export class BookingStageService {
           }),
         );
 
-        return { ...lead, documents: docsWithUrls };
+        return {
+          ...lead,
+          documents: docsWithUrls,
+          fast_production_request: pendingFastProductionLeadIds.has(lead.id),
+          has_pending_fast_production_request: pendingFastProductionLeadIds.has(lead.id),
+        };
       }),
     );
 
