@@ -248,37 +248,40 @@ export const getProjectById_old = async (id: number) => {
 
 
 export const getProjectById = async (id: number) => {
-  const [project, packagingMachine] = await Promise.all([
-    prisma.projectMaster.findUnique({
-      where: { id },
-      include: {
-        vendor: true,
-        createdByUser: true,
-        details: true,
-      },
-    }),
-
-    prisma.machineMaster.findFirst({
-      where: { machine_type_id: 18 },
-      select: {
-        id: true,
-        machine_name: true,
-        sequence_no: true,
-      },
-      orderBy: { id: "asc" },
-    }),
-  ]);
+  const project = await prisma.projectMaster.findUnique({
+    where: { id },
+    include: {
+      vendor: true,
+      createdByUser: true,
+      details: true,
+    },
+  });
 
   if (!project) return null;
+
+  const packagingMachine = await prisma.machineMaster.findFirst({
+    where: {
+      vendor_id: project.vendor_id,
+      machine_type_id: 18,
+    },
+    select: {
+      id: true,
+      machine_name: true,
+      sequence_no: true,
+    },
+    orderBy: {
+      id: "asc",
+    },
+  });
 
   const packagingStats = packagingMachine
     ? await getPackagingStats(id, project.vendor_id, packagingMachine)
     : {
-      total_items: 0,
-      total_packed: 0,
-      total_unpacked: 0,
-      total_weight: 0,
-    };
+        total_items: 0,
+        total_packed: 0,
+        total_unpacked: 0,
+        total_weight: 0,
+      };
 
   return {
     ...project,
@@ -312,8 +315,11 @@ const getPackagingStats = async (
         expected_in: true,
       },
       select: {
+        id: true,
+        project_id: true,
         cut_list_id: true,
         box_id: true,
+        actual_in_at: true,
       },
     }),
 
@@ -328,6 +334,7 @@ const getPackagingStats = async (
       },
       select: {
         id: true,
+        project_id: true,
         cut_list_id: true,
         sequence_no: true,
         actual_in_at: true,
@@ -335,61 +342,101 @@ const getPackagingStats = async (
     }),
   ]);
 
-  const lastPriorByCutList = new Map<
-    number,
-    {
-      sequence_no: number;
-      id: number;
-      scanned: boolean;
-    }
-  >();
+  /**
+   * Group prior rows by cut_list_id + sequence_no
+   * Example:
+   * cut_list_id 10 has qty 4
+   * last prior machine has 4 mapping rows
+   * scanned count = how many of those 4 rows have actual_in_at
+   */
+  type PriorKey = string;
+
+  const priorBySeq = new Map<PriorKey, typeof priorRows>();
 
   for (const row of priorRows) {
-    const sequenceNo = row.sequence_no ?? 0;
+    const seq = row.sequence_no ?? 0;
+    const key = `${row.cut_list_id}-${seq}`;
 
-    const existing = lastPriorByCutList.get(row.cut_list_id);
+    if (!priorBySeq.has(key)) {
+      priorBySeq.set(key, []);
+    }
 
-    if (
-      !existing ||
-      sequenceNo > existing.sequence_no ||
-      (sequenceNo === existing.sequence_no && row.id > existing.id)
-    ) {
-      lastPriorByCutList.set(row.cut_list_id, {
-        sequence_no: sequenceNo,
-        id: row.id,
-        scanned: row.actual_in_at !== null,
-      });
+    priorBySeq.get(key)!.push(row);
+  }
+
+  /**
+   * For each cut_list_id, find highest previous machine sequence.
+   */
+  const lastSeqMap = new Map<number, number>();
+
+  for (const row of priorRows) {
+    const seq = row.sequence_no ?? 0;
+    const currentSeq = lastSeqMap.get(row.cut_list_id) ?? -1;
+
+    if (seq > currentSeq) {
+      lastSeqMap.set(row.cut_list_id, seq);
     }
   }
 
-  let total_items = 0;
-  const packedCutListIds = new Set<number>();
+  /**
+   * Count eligible units per cut_list_id.
+   * Eligible means actual_in_at is completed at the last prior machine.
+   */
+  const eligibleUnitCount = new Map<number, number>();
+
+  for (const [cutListId, maxSeq] of lastSeqMap) {
+    const seqKey = `${cutListId}-${maxSeq}`;
+    const rows = priorBySeq.get(seqKey) ?? [];
+
+    const scannedCount = rows.filter((row) => row.actual_in_at !== null).length;
+
+    eligibleUnitCount.set(cutListId, scannedCount);
+  }
+
+  /**
+   * Group packaging rows by cut_list_id.
+   */
+  const packagingRowsByCutList = new Map<number, typeof packagingRows>();
 
   for (const row of packagingRows) {
-    const lastPrior = lastPriorByCutList.get(row.cut_list_id);
-
-    /**
-     * Part A:
-     * If cut list has previous machine, count only if last prior machine is scanned.
-     *
-     * Part B:
-     * If no previous machine, count directly.
-     */
-    if (!lastPrior || lastPrior.scanned) {
-      total_items++;
+    if (!packagingRowsByCutList.has(row.cut_list_id)) {
+      packagingRowsByCutList.set(row.cut_list_id, []);
     }
 
-    /**
-     * Existing logic:
-     * total_packed = distinct cut_list_id where box_id is assigned.
-     */
-    if (row.box_id !== null) {
-      packedCutListIds.add(row.cut_list_id);
+    packagingRowsByCutList.get(row.cut_list_id)!.push(row);
+  }
+
+  /**
+   * Final unit-level count.
+   */
+  let total_items = 0;
+  let total_packed = 0;
+
+  for (const [cutListId, rows] of packagingRowsByCutList) {
+    const hasPriorMachine = lastSeqMap.has(cutListId);
+
+    const sortedPackagingRows = [...rows].sort((a, b) => a.id - b.id);
+
+    if (hasPriorMachine) {
+      const eligible = eligibleUnitCount.get(cutListId) ?? 0;
+
+      total_items += eligible;
+
+      const eligiblePackagingRows = sortedPackagingRows.slice(0, eligible);
+
+      total_packed += eligiblePackagingRows.filter(
+        (row) => row.box_id !== null
+      ).length;
+    } else {
+      total_items += sortedPackagingRows.length;
+
+      total_packed += sortedPackagingRows.filter(
+        (row) => row.box_id !== null
+      ).length;
     }
   }
 
-  const total_packed = packedCutListIds.size;
-  const total_unpacked = total_items - total_packed;
+  const total_unpacked = Math.max(0, total_items - total_packed);
 
   return {
     total_items,
