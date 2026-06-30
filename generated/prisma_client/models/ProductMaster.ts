@@ -56,7 +56,6 @@ export type ProductMasterAvgAggregateOutputType = {
   stock_unit_id: number | null
   consumption_unit_id: number | null
   shelf_life_days: number | null
-  mrp: runtime.Decimal | null
   min_stock_qty: runtime.Decimal | null
   min_stock_unit_id: number | null
   max_stock_qty: runtime.Decimal | null
@@ -97,7 +96,6 @@ export type ProductMasterSumAggregateOutputType = {
   stock_unit_id: number | null
   consumption_unit_id: number | null
   shelf_life_days: number | null
-  mrp: runtime.Decimal | null
   min_stock_qty: runtime.Decimal | null
   min_stock_unit_id: number | null
   max_stock_qty: runtime.Decimal | null
@@ -157,7 +155,6 @@ export type ProductMasterMinAggregateOutputType = {
   consumption_unit_id: number | null
   shelf_life_days: number | null
   costing_method: $Enums.CostingMethod | null
-  mrp: runtime.Decimal | null
   min_stock_qty: runtime.Decimal | null
   min_stock_unit_id: number | null
   max_stock_qty: runtime.Decimal | null
@@ -218,7 +215,6 @@ export type ProductMasterMaxAggregateOutputType = {
   consumption_unit_id: number | null
   shelf_life_days: number | null
   costing_method: $Enums.CostingMethod | null
-  mrp: runtime.Decimal | null
   min_stock_qty: runtime.Decimal | null
   min_stock_unit_id: number | null
   max_stock_qty: runtime.Decimal | null
@@ -279,7 +275,6 @@ export type ProductMasterCountAggregateOutputType = {
   consumption_unit_id: number
   shelf_life_days: number
   costing_method: number
-  mrp: number
   min_stock_qty: number
   min_stock_unit_id: number
   max_stock_qty: number
@@ -323,7 +318,6 @@ export type ProductMasterAvgAggregateInputType = {
   stock_unit_id?: true
   consumption_unit_id?: true
   shelf_life_days?: true
-  mrp?: true
   min_stock_qty?: true
   min_stock_unit_id?: true
   max_stock_qty?: true
@@ -364,7 +358,6 @@ export type ProductMasterSumAggregateInputType = {
   stock_unit_id?: true
   consumption_unit_id?: true
   shelf_life_days?: true
-  mrp?: true
   min_stock_qty?: true
   min_stock_unit_id?: true
   max_stock_qty?: true
@@ -424,7 +417,6 @@ export type ProductMasterMinAggregateInputType = {
   consumption_unit_id?: true
   shelf_life_days?: true
   costing_method?: true
-  mrp?: true
   min_stock_qty?: true
   min_stock_unit_id?: true
   max_stock_qty?: true
@@ -485,7 +477,6 @@ export type ProductMasterMaxAggregateInputType = {
   consumption_unit_id?: true
   shelf_life_days?: true
   costing_method?: true
-  mrp?: true
   min_stock_qty?: true
   min_stock_unit_id?: true
   max_stock_qty?: true
@@ -546,7 +537,6 @@ export type ProductMasterCountAggregateInputType = {
   consumption_unit_id?: true
   shelf_life_days?: true
   costing_method?: true
-  mrp?: true
   min_stock_qty?: true
   min_stock_unit_id?: true
   max_stock_qty?: true
@@ -648,7 +638,7 @@ export type ProductMasterGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type ProductMasterGroupByOutputType = {
   id: number
   vendor_id: number
-  item_id: number
+  item_id: number | null
   rotation: number
   alt_conv_factor: number
   board_length: number
@@ -694,7 +684,6 @@ export type ProductMasterGroupByOutputType = {
   consumption_unit_id: number | null
   shelf_life_days: number | null
   costing_method: $Enums.CostingMethod
-  mrp: runtime.Decimal | null
   min_stock_qty: runtime.Decimal | null
   min_stock_unit_id: number | null
   max_stock_qty: runtime.Decimal | null
@@ -732,7 +721,7 @@ export type ProductMasterWhereInput = {
   NOT?: Prisma.ProductMasterWhereInput | Prisma.ProductMasterWhereInput[]
   id?: Prisma.IntFilter<"ProductMaster"> | number
   vendor_id?: Prisma.IntFilter<"ProductMaster"> | number
-  item_id?: Prisma.IntFilter<"ProductMaster"> | number
+  item_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   rotation?: Prisma.IntFilter<"ProductMaster"> | number
   alt_conv_factor?: Prisma.FloatFilter<"ProductMaster"> | number
   board_length?: Prisma.FloatFilter<"ProductMaster"> | number
@@ -778,7 +767,6 @@ export type ProductMasterWhereInput = {
   consumption_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   costing_method?: Prisma.EnumCostingMethodFilter<"ProductMaster"> | $Enums.CostingMethod
-  mrp?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   max_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -804,12 +792,13 @@ export type ProductMasterWhereInput = {
   reorderLevelUnit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   reorderBatchUnit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   stockHistories?: Prisma.ProductStockHistoryListRelationFilter
+  supplierMappings?: Prisma.ProductSupplierMappingListRelationFilter
 }
 
 export type ProductMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  item_id?: Prisma.SortOrder
+  item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   rotation?: Prisma.SortOrder
   alt_conv_factor?: Prisma.SortOrder
   board_length?: Prisma.SortOrder
@@ -855,7 +844,6 @@ export type ProductMasterOrderByWithRelationInput = {
   consumption_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrderInput | Prisma.SortOrder
   costing_method?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrderInput | Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -881,6 +869,7 @@ export type ProductMasterOrderByWithRelationInput = {
   reorderLevelUnit?: Prisma.UnitMasterOrderByWithRelationInput
   reorderBatchUnit?: Prisma.UnitMasterOrderByWithRelationInput
   stockHistories?: Prisma.ProductStockHistoryOrderByRelationAggregateInput
+  supplierMappings?: Prisma.ProductSupplierMappingOrderByRelationAggregateInput
 }
 
 export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -889,7 +878,7 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ProductMasterWhereInput[]
   NOT?: Prisma.ProductMasterWhereInput | Prisma.ProductMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"ProductMaster"> | number
-  item_id?: Prisma.IntFilter<"ProductMaster"> | number
+  item_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   rotation?: Prisma.IntFilter<"ProductMaster"> | number
   alt_conv_factor?: Prisma.FloatFilter<"ProductMaster"> | number
   board_length?: Prisma.FloatFilter<"ProductMaster"> | number
@@ -935,7 +924,6 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   consumption_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   costing_method?: Prisma.EnumCostingMethodFilter<"ProductMaster"> | $Enums.CostingMethod
-  mrp?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   max_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -961,12 +949,13 @@ export type ProductMasterWhereUniqueInput = Prisma.AtLeast<{
   reorderLevelUnit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   reorderBatchUnit?: Prisma.XOR<Prisma.UnitMasterNullableScalarRelationFilter, Prisma.UnitMasterWhereInput> | null
   stockHistories?: Prisma.ProductStockHistoryListRelationFilter
+  supplierMappings?: Prisma.ProductSupplierMappingListRelationFilter
 }, "id">
 
 export type ProductMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  item_id?: Prisma.SortOrder
+  item_id?: Prisma.SortOrderInput | Prisma.SortOrder
   rotation?: Prisma.SortOrder
   alt_conv_factor?: Prisma.SortOrder
   board_length?: Prisma.SortOrder
@@ -1012,7 +1001,6 @@ export type ProductMasterOrderByWithAggregationInput = {
   consumption_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrderInput | Prisma.SortOrder
   costing_method?: Prisma.SortOrder
-  mrp?: Prisma.SortOrderInput | Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrderInput | Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrderInput | Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -1035,7 +1023,7 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ProductMasterScalarWhereWithAggregatesInput | Prisma.ProductMasterScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ProductMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductMaster"> | number
-  item_id?: Prisma.IntWithAggregatesFilter<"ProductMaster"> | number
+  item_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   rotation?: Prisma.IntWithAggregatesFilter<"ProductMaster"> | number
   alt_conv_factor?: Prisma.FloatWithAggregatesFilter<"ProductMaster"> | number
   board_length?: Prisma.FloatWithAggregatesFilter<"ProductMaster"> | number
@@ -1081,7 +1069,6 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
   consumption_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   costing_method?: Prisma.EnumCostingMethodWithAggregatesFilter<"ProductMaster"> | $Enums.CostingMethod
-  mrp?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.IntNullableWithAggregatesFilter<"ProductMaster"> | number | null
   max_stock_qty?: Prisma.DecimalNullableWithAggregatesFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1094,7 +1081,7 @@ export type ProductMasterScalarWhereWithAggregatesInput = {
 }
 
 export type ProductMasterCreateInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -1133,7 +1120,6 @@ export type ProductMasterCreateInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1155,12 +1141,13 @@ export type ProductMasterCreateInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -1206,7 +1193,6 @@ export type ProductMasterUncheckedCreateInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1220,10 +1206,11 @@ export type ProductMasterUncheckedCreateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUpdateInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1262,7 +1249,6 @@ export type ProductMasterUpdateInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1284,12 +1270,13 @@ export type ProductMasterUpdateInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1335,7 +1322,6 @@ export type ProductMasterUncheckedUpdateInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1349,12 +1335,13 @@ export type ProductMasterUncheckedUpdateInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateManyInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -1400,7 +1387,6 @@ export type ProductMasterCreateManyInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1413,7 +1399,7 @@ export type ProductMasterCreateManyInput = {
 }
 
 export type ProductMasterUpdateManyMutationInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1452,7 +1438,6 @@ export type ProductMasterUpdateManyMutationInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1463,7 +1448,7 @@ export type ProductMasterUpdateManyMutationInput = {
 export type ProductMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -1509,7 +1494,6 @@ export type ProductMasterUncheckedUpdateManyInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -1580,7 +1564,6 @@ export type ProductMasterCountOrderByAggregateInput = {
   consumption_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   costing_method?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrder
@@ -1622,7 +1605,6 @@ export type ProductMasterAvgOrderByAggregateInput = {
   stock_unit_id?: Prisma.SortOrder
   consumption_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrder
@@ -1682,7 +1664,6 @@ export type ProductMasterMaxOrderByAggregateInput = {
   consumption_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   costing_method?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrder
@@ -1743,7 +1724,6 @@ export type ProductMasterMinOrderByAggregateInput = {
   consumption_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
   costing_method?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrder
@@ -1785,7 +1765,6 @@ export type ProductMasterSumOrderByAggregateInput = {
   stock_unit_id?: Prisma.SortOrder
   consumption_unit_id?: Prisma.SortOrder
   shelf_life_days?: Prisma.SortOrder
-  mrp?: Prisma.SortOrder
   min_stock_qty?: Prisma.SortOrder
   min_stock_unit_id?: Prisma.SortOrder
   max_stock_qty?: Prisma.SortOrder
@@ -2381,8 +2360,22 @@ export type ProductMasterUncheckedUpdateManyWithoutItemGroupNestedInput = {
   deleteMany?: Prisma.ProductMasterScalarWhereInput | Prisma.ProductMasterScalarWhereInput[]
 }
 
+export type ProductMasterCreateNestedOneWithoutSupplierMappingsInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedCreateWithoutSupplierMappingsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutSupplierMappingsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+}
+
+export type ProductMasterUpdateOneRequiredWithoutSupplierMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductMasterCreateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedCreateWithoutSupplierMappingsInput>
+  connectOrCreate?: Prisma.ProductMasterCreateOrConnectWithoutSupplierMappingsInput
+  upsert?: Prisma.ProductMasterUpsertWithoutSupplierMappingsInput
+  connect?: Prisma.ProductMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductMasterUpdateToOneWithWhereWithoutSupplierMappingsInput, Prisma.ProductMasterUpdateWithoutSupplierMappingsInput>, Prisma.ProductMasterUncheckedUpdateWithoutSupplierMappingsInput>
+}
+
 export type ProductMasterCreateWithoutVendorInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2421,7 +2414,6 @@ export type ProductMasterCreateWithoutVendorInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2442,11 +2434,12 @@ export type ProductMasterCreateWithoutVendorInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutVendorInput = {
   id?: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2492,7 +2485,6 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2506,6 +2498,7 @@ export type ProductMasterUncheckedCreateWithoutVendorInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutVendorInput = {
@@ -2540,7 +2533,7 @@ export type ProductMasterScalarWhereInput = {
   NOT?: Prisma.ProductMasterScalarWhereInput | Prisma.ProductMasterScalarWhereInput[]
   id?: Prisma.IntFilter<"ProductMaster"> | number
   vendor_id?: Prisma.IntFilter<"ProductMaster"> | number
-  item_id?: Prisma.IntFilter<"ProductMaster"> | number
+  item_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   rotation?: Prisma.IntFilter<"ProductMaster"> | number
   alt_conv_factor?: Prisma.FloatFilter<"ProductMaster"> | number
   board_length?: Prisma.FloatFilter<"ProductMaster"> | number
@@ -2586,7 +2579,6 @@ export type ProductMasterScalarWhereInput = {
   consumption_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   shelf_life_days?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   costing_method?: Prisma.EnumCostingMethodFilter<"ProductMaster"> | $Enums.CostingMethod
-  mrp?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.IntNullableFilter<"ProductMaster"> | number | null
   max_stock_qty?: Prisma.DecimalNullableFilter<"ProductMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2599,7 +2591,7 @@ export type ProductMasterScalarWhereInput = {
 }
 
 export type ProductMasterCreateWithoutCategoryInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2638,7 +2630,6 @@ export type ProductMasterCreateWithoutCategoryInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2659,12 +2650,13 @@ export type ProductMasterCreateWithoutCategoryInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2709,7 +2701,6 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2723,6 +2714,7 @@ export type ProductMasterUncheckedCreateWithoutCategoryInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutCategoryInput = {
@@ -2752,7 +2744,7 @@ export type ProductMasterUpdateManyWithWhereWithoutCategoryInput = {
 }
 
 export type ProductMasterCreateWithoutBrandInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2791,7 +2783,6 @@ export type ProductMasterCreateWithoutBrandInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2812,12 +2803,13 @@ export type ProductMasterCreateWithoutBrandInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutBrandInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2862,7 +2854,6 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2876,6 +2867,7 @@ export type ProductMasterUncheckedCreateWithoutBrandInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutBrandInput = {
@@ -2905,7 +2897,7 @@ export type ProductMasterUpdateManyWithWhereWithoutBrandInput = {
 }
 
 export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -2944,7 +2936,6 @@ export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -2965,12 +2956,13 @@ export type ProductMasterCreateWithoutPurchaseIntentItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3016,7 +3008,6 @@ export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3029,6 +3020,7 @@ export type ProductMasterUncheckedCreateWithoutPurchaseIntentItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutPurchaseIntentItemsInput = {
@@ -3048,7 +3040,7 @@ export type ProductMasterUpdateToOneWithWhereWithoutPurchaseIntentItemsInput = {
 }
 
 export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3087,7 +3079,6 @@ export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3108,12 +3099,13 @@ export type ProductMasterUpdateWithoutPurchaseIntentItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3159,7 +3151,6 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3172,10 +3163,11 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseIntentItemsInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3214,7 +3206,6 @@ export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3235,12 +3226,13 @@ export type ProductMasterCreateWithoutPurchaseOrderItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3286,7 +3278,6 @@ export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3299,6 +3290,7 @@ export type ProductMasterUncheckedCreateWithoutPurchaseOrderItemsInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutPurchaseOrderItemsInput = {
@@ -3318,7 +3310,7 @@ export type ProductMasterUpdateToOneWithWhereWithoutPurchaseOrderItemsInput = {
 }
 
 export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3357,7 +3349,6 @@ export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3378,12 +3369,13 @@ export type ProductMasterUpdateWithoutPurchaseOrderItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3429,7 +3421,6 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3442,10 +3433,11 @@ export type ProductMasterUncheckedUpdateWithoutPurchaseOrderItemsInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateWithoutGrnItemsInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3484,7 +3476,6 @@ export type ProductMasterCreateWithoutGrnItemsInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3505,12 +3496,13 @@ export type ProductMasterCreateWithoutGrnItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3556,7 +3548,6 @@ export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3569,6 +3560,7 @@ export type ProductMasterUncheckedCreateWithoutGrnItemsInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutGrnItemsInput = {
@@ -3588,7 +3580,7 @@ export type ProductMasterUpdateToOneWithWhereWithoutGrnItemsInput = {
 }
 
 export type ProductMasterUpdateWithoutGrnItemsInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3627,7 +3619,6 @@ export type ProductMasterUpdateWithoutGrnItemsInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3648,12 +3639,13 @@ export type ProductMasterUpdateWithoutGrnItemsInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -3699,7 +3691,6 @@ export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3712,10 +3703,11 @@ export type ProductMasterUncheckedUpdateWithoutGrnItemsInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateWithoutHsnInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3754,7 +3746,6 @@ export type ProductMasterCreateWithoutHsnInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3775,12 +3766,13 @@ export type ProductMasterCreateWithoutHsnInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutHsnInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3825,7 +3817,6 @@ export type ProductMasterUncheckedCreateWithoutHsnInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3839,6 +3830,7 @@ export type ProductMasterUncheckedCreateWithoutHsnInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutHsnInput = {
@@ -3868,7 +3860,7 @@ export type ProductMasterUpdateManyWithWhereWithoutHsnInput = {
 }
 
 export type ProductMasterCreateWithoutStockHistoriesInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3907,7 +3899,6 @@ export type ProductMasterCreateWithoutStockHistoriesInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3928,12 +3919,13 @@ export type ProductMasterCreateWithoutStockHistoriesInput = {
   maxStockUnit?: Prisma.UnitMasterCreateNestedOneWithoutMaxStockUnitProductsInput
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -3979,7 +3971,6 @@ export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -3992,6 +3983,7 @@ export type ProductMasterUncheckedCreateWithoutStockHistoriesInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -4011,7 +4003,7 @@ export type ProductMasterUpdateToOneWithWhereWithoutStockHistoriesInput = {
 }
 
 export type ProductMasterUpdateWithoutStockHistoriesInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4050,7 +4042,6 @@ export type ProductMasterUpdateWithoutStockHistoriesInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4071,12 +4062,13 @@ export type ProductMasterUpdateWithoutStockHistoriesInput = {
   maxStockUnit?: Prisma.UnitMasterUpdateOneWithoutMaxStockUnitProductsNestedInput
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -4122,7 +4114,6 @@ export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4135,10 +4126,11 @@ export type ProductMasterUncheckedUpdateWithoutStockHistoriesInput = {
   purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterCreateWithoutPrimaryUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4177,7 +4169,6 @@ export type ProductMasterCreateWithoutPrimaryUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4198,12 +4189,13 @@ export type ProductMasterCreateWithoutPrimaryUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutPrimaryUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4248,7 +4240,6 @@ export type ProductMasterUncheckedCreateWithoutPrimaryUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4262,6 +4253,7 @@ export type ProductMasterUncheckedCreateWithoutPrimaryUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutPrimaryUnitInput = {
@@ -4275,7 +4267,7 @@ export type ProductMasterCreateManyPrimaryUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutStockUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4314,7 +4306,6 @@ export type ProductMasterCreateWithoutStockUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4335,12 +4326,13 @@ export type ProductMasterCreateWithoutStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4385,7 +4377,6 @@ export type ProductMasterUncheckedCreateWithoutStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4399,6 +4390,7 @@ export type ProductMasterUncheckedCreateWithoutStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutStockUnitInput = {
@@ -4412,7 +4404,7 @@ export type ProductMasterCreateManyStockUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutConsumptionUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4451,7 +4443,6 @@ export type ProductMasterCreateWithoutConsumptionUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4472,12 +4463,13 @@ export type ProductMasterCreateWithoutConsumptionUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutConsumptionUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4522,7 +4514,6 @@ export type ProductMasterUncheckedCreateWithoutConsumptionUnitInput = {
   stock_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4536,6 +4527,7 @@ export type ProductMasterUncheckedCreateWithoutConsumptionUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutConsumptionUnitInput = {
@@ -4549,7 +4541,7 @@ export type ProductMasterCreateManyConsumptionUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutMinStockUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4588,7 +4580,6 @@ export type ProductMasterCreateWithoutMinStockUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4609,12 +4600,13 @@ export type ProductMasterCreateWithoutMinStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutMinStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4660,7 +4652,6 @@ export type ProductMasterUncheckedCreateWithoutMinStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_unit_id?: number | null
@@ -4673,6 +4664,7 @@ export type ProductMasterUncheckedCreateWithoutMinStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutMinStockUnitInput = {
@@ -4686,7 +4678,7 @@ export type ProductMasterCreateManyMinStockUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutMaxStockUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4725,7 +4717,6 @@ export type ProductMasterCreateWithoutMaxStockUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4746,12 +4737,13 @@ export type ProductMasterCreateWithoutMaxStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutMaxStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4797,7 +4789,6 @@ export type ProductMasterUncheckedCreateWithoutMaxStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4810,6 +4801,7 @@ export type ProductMasterUncheckedCreateWithoutMaxStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutMaxStockUnitInput = {
@@ -4823,7 +4815,7 @@ export type ProductMasterCreateManyMaxStockUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutReorderLevelUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4862,7 +4854,6 @@ export type ProductMasterCreateWithoutReorderLevelUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4883,12 +4874,13 @@ export type ProductMasterCreateWithoutReorderLevelUnitInput = {
   maxStockUnit?: Prisma.UnitMasterCreateNestedOneWithoutMaxStockUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutReorderLevelUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4934,7 +4926,6 @@ export type ProductMasterUncheckedCreateWithoutReorderLevelUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -4947,6 +4938,7 @@ export type ProductMasterUncheckedCreateWithoutReorderLevelUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutReorderLevelUnitInput = {
@@ -4960,7 +4952,7 @@ export type ProductMasterCreateManyReorderLevelUnitInputEnvelope = {
 }
 
 export type ProductMasterCreateWithoutReorderBatchUnitInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -4999,7 +4991,6 @@ export type ProductMasterCreateWithoutReorderBatchUnitInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5020,12 +5011,13 @@ export type ProductMasterCreateWithoutReorderBatchUnitInput = {
   maxStockUnit?: Prisma.UnitMasterCreateNestedOneWithoutMaxStockUnitProductsInput
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutReorderBatchUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5071,7 +5063,6 @@ export type ProductMasterUncheckedCreateWithoutReorderBatchUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5084,6 +5075,7 @@ export type ProductMasterUncheckedCreateWithoutReorderBatchUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutReorderBatchUnitInput = {
@@ -5209,7 +5201,7 @@ export type ProductMasterUpdateManyWithWhereWithoutReorderBatchUnitInput = {
 }
 
 export type ProductMasterCreateWithoutItemGroupInput = {
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5248,7 +5240,6 @@ export type ProductMasterCreateWithoutItemGroupInput = {
   stock_updated_at?: Date | string | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5269,12 +5260,13 @@ export type ProductMasterCreateWithoutItemGroupInput = {
   reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
   reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterUncheckedCreateWithoutItemGroupInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5319,7 +5311,6 @@ export type ProductMasterUncheckedCreateWithoutItemGroupInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5333,6 +5324,7 @@ export type ProductMasterUncheckedCreateWithoutItemGroupInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
   grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductMasterCreateOrConnectWithoutItemGroupInput = {
@@ -5361,9 +5353,73 @@ export type ProductMasterUpdateManyWithWhereWithoutItemGroupInput = {
   data: Prisma.XOR<Prisma.ProductMasterUpdateManyMutationInput, Prisma.ProductMasterUncheckedUpdateManyWithoutItemGroupInput>
 }
 
-export type ProductMasterCreateManyVendorInput = {
+export type ProductMasterCreateWithoutSupplierMappingsInput = {
+  item_id?: number | null
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  shelf_life_days?: number | null
+  costing_method?: $Enums.CostingMethod
+  min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_type?: $Enums.ProductItemType
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductsInput
+  brand?: Prisma.BrandMasterCreateNestedOneWithoutProductsInput
+  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutProductsInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemCreateNestedManyWithoutProductInput
+  hsn?: Prisma.HsnProductMappingCreateNestedOneWithoutProductsInput
+  itemGroup?: Prisma.ItemGroupMasterCreateNestedOneWithoutProductsInput
+  primaryUnit?: Prisma.UnitMasterCreateNestedOneWithoutPrimaryUnitProductsInput
+  stockUnit?: Prisma.UnitMasterCreateNestedOneWithoutStockUnitProductsInput
+  consumptionUnit?: Prisma.UnitMasterCreateNestedOneWithoutConsumptionUnitProductsInput
+  minStockUnit?: Prisma.UnitMasterCreateNestedOneWithoutMinStockUnitProductsInput
+  maxStockUnit?: Prisma.UnitMasterCreateNestedOneWithoutMaxStockUnitProductsInput
+  reorderLevelUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderLevelUnitProductsInput
+  reorderBatchUnit?: Prisma.UnitMasterCreateNestedOneWithoutReorderBatchUnitProductsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutProductInput
+}
+
+export type ProductMasterUncheckedCreateWithoutSupplierMappingsInput = {
   id?: number
-  item_id: number
+  vendor_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5409,7 +5465,6 @@ export type ProductMasterCreateManyVendorInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5419,10 +5474,30 @@ export type ProductMasterCreateManyVendorInput = {
   reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_batch_unit_id?: number | null
   item_type?: $Enums.ProductItemType
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutProductInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutProductInput
+  grnItems?: Prisma.GRNItemUncheckedCreateNestedManyWithoutProductInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutProductInput
 }
 
-export type ProductMasterUpdateWithoutVendorInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+export type ProductMasterCreateOrConnectWithoutSupplierMappingsInput = {
+  where: Prisma.ProductMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedCreateWithoutSupplierMappingsInput>
+}
+
+export type ProductMasterUpsertWithoutSupplierMappingsInput = {
+  update: Prisma.XOR<Prisma.ProductMasterUpdateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedUpdateWithoutSupplierMappingsInput>
+  create: Prisma.XOR<Prisma.ProductMasterCreateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedCreateWithoutSupplierMappingsInput>
+  where?: Prisma.ProductMasterWhereInput
+}
+
+export type ProductMasterUpdateToOneWithWhereWithoutSupplierMappingsInput = {
+  where?: Prisma.ProductMasterWhereInput
+  data: Prisma.XOR<Prisma.ProductMasterUpdateWithoutSupplierMappingsInput, Prisma.ProductMasterUncheckedUpdateWithoutSupplierMappingsInput>
+}
+
+export type ProductMasterUpdateWithoutSupplierMappingsInput = {
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5461,7 +5536,192 @@ export type ProductMasterUpdateWithoutVendorInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item_type?: Prisma.EnumProductItemTypeFieldUpdateOperationsInput | $Enums.ProductItemType
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductsNestedInput
+  brand?: Prisma.BrandMasterUpdateOneWithoutProductsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutProductsNestedInput
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUpdateManyWithoutProductNestedInput
+  hsn?: Prisma.HsnProductMappingUpdateOneWithoutProductsNestedInput
+  itemGroup?: Prisma.ItemGroupMasterUpdateOneWithoutProductsNestedInput
+  primaryUnit?: Prisma.UnitMasterUpdateOneWithoutPrimaryUnitProductsNestedInput
+  stockUnit?: Prisma.UnitMasterUpdateOneWithoutStockUnitProductsNestedInput
+  consumptionUnit?: Prisma.UnitMasterUpdateOneWithoutConsumptionUnitProductsNestedInput
+  minStockUnit?: Prisma.UnitMasterUpdateOneWithoutMinStockUnitProductsNestedInput
+  maxStockUnit?: Prisma.UnitMasterUpdateOneWithoutMaxStockUnitProductsNestedInput
+  reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
+  reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterUncheckedUpdateWithoutSupplierMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  brand_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  item_group_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  primary_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
+  min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  max_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_level_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  reorder_batch_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_batch_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  item_type?: Prisma.EnumProductItemTypeFieldUpdateOperationsInput | $Enums.ProductItemType
+  purchaseIntentItems?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutProductNestedInput
+  purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
+  grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductMasterCreateManyVendorInput = {
+  id?: number
+  item_id?: number | null
+  rotation?: number
+  alt_conv_factor?: number
+  board_length?: number
+  board_width?: number
+  dimension_1?: number
+  dimension_2?: number
+  dimension_3?: number
+  installation_charges?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: number
+  no_of_drill_holes?: number
+  pre_mill_width?: number
+  alt_uom_text?: string | null
+  brand_id?: number | null
+  category_id: number
+  article_code?: string | null
+  core_material?: string | null
+  edge_banding_color?: string | null
+  finish?: string | null
+  group?: string | null
+  hsn_code?: string | null
+  hsn_id?: number | null
+  product_name: string
+  procurement?: string | null
+  unit_of_measure?: string | null
+  vendor_code?: string | null
+  custom_field_1?: string | null
+  custom_field_2?: string | null
+  custom_field_3?: string | null
+  created_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  updated_by?: number | null
+  active?: $Enums.ProductActiveFlag
+  current_stock?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Date | string | null
+  item_group_id?: number | null
+  primary_unit_id?: number | null
+  stock_unit_id?: number | null
+  consumption_unit_id?: number | null
+  shelf_life_days?: number | null
+  costing_method?: $Enums.CostingMethod
+  min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  min_stock_unit_id?: number | null
+  max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  max_stock_unit_id?: number | null
+  reorder_level_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_level_unit_id?: number | null
+  reorder_batch_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  reorder_batch_unit_id?: number | null
+  item_type?: $Enums.ProductItemType
+}
+
+export type ProductMasterUpdateWithoutVendorInput = {
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rotation?: Prisma.IntFieldUpdateOperationsInput | number
+  alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_length?: Prisma.FloatFieldUpdateOperationsInput | number
+  board_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_1?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_2?: Prisma.FloatFieldUpdateOperationsInput | number
+  dimension_3?: Prisma.FloatFieldUpdateOperationsInput | number
+  installation_charges?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  item1_weight?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level1_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level2_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  level3_price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  moq?: Prisma.IntFieldUpdateOperationsInput | number
+  no_of_drill_holes?: Prisma.IntFieldUpdateOperationsInput | number
+  pre_mill_width?: Prisma.FloatFieldUpdateOperationsInput | number
+  alt_uom_text?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  article_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  core_material?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  edge_banding_color?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  finish?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  group?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  hsn_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  product_name?: Prisma.StringFieldUpdateOperationsInput | string
+  procurement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  unit_of_measure?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vendor_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  custom_field_3?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  active?: Prisma.EnumProductActiveFlagFieldUpdateOperationsInput | $Enums.ProductActiveFlag
+  current_stock?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5482,11 +5742,12 @@ export type ProductMasterUpdateWithoutVendorInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5532,7 +5793,6 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5546,11 +5806,12 @@ export type ProductMasterUncheckedUpdateWithoutVendorInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5596,7 +5857,6 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5611,7 +5871,7 @@ export type ProductMasterUncheckedUpdateManyWithoutVendorInput = {
 export type ProductMasterCreateManyCategoryInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5656,7 +5916,6 @@ export type ProductMasterCreateManyCategoryInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5669,7 +5928,7 @@ export type ProductMasterCreateManyCategoryInput = {
 }
 
 export type ProductMasterUpdateWithoutCategoryInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5708,7 +5967,6 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5729,12 +5987,13 @@ export type ProductMasterUpdateWithoutCategoryInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5779,7 +6038,6 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5793,12 +6051,13 @@ export type ProductMasterUncheckedUpdateWithoutCategoryInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5843,7 +6102,6 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5858,7 +6116,7 @@ export type ProductMasterUncheckedUpdateManyWithoutCategoryInput = {
 export type ProductMasterCreateManyBrandInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -5903,7 +6161,6 @@ export type ProductMasterCreateManyBrandInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5916,7 +6173,7 @@ export type ProductMasterCreateManyBrandInput = {
 }
 
 export type ProductMasterUpdateWithoutBrandInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -5955,7 +6212,6 @@ export type ProductMasterUpdateWithoutBrandInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -5976,12 +6232,13 @@ export type ProductMasterUpdateWithoutBrandInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6026,7 +6283,6 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6040,12 +6296,13 @@ export type ProductMasterUncheckedUpdateWithoutBrandInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6090,7 +6347,6 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6105,7 +6361,7 @@ export type ProductMasterUncheckedUpdateManyWithoutBrandInput = {
 export type ProductMasterCreateManyHsnInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6150,7 +6406,6 @@ export type ProductMasterCreateManyHsnInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6163,7 +6418,7 @@ export type ProductMasterCreateManyHsnInput = {
 }
 
 export type ProductMasterUpdateWithoutHsnInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6202,7 +6457,6 @@ export type ProductMasterUpdateWithoutHsnInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6223,12 +6477,13 @@ export type ProductMasterUpdateWithoutHsnInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutHsnInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6273,7 +6528,6 @@ export type ProductMasterUncheckedUpdateWithoutHsnInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6287,12 +6541,13 @@ export type ProductMasterUncheckedUpdateWithoutHsnInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6337,7 +6592,6 @@ export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6352,7 +6606,7 @@ export type ProductMasterUncheckedUpdateManyWithoutHsnInput = {
 export type ProductMasterCreateManyPrimaryUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6397,7 +6651,6 @@ export type ProductMasterCreateManyPrimaryUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6412,7 +6665,7 @@ export type ProductMasterCreateManyPrimaryUnitInput = {
 export type ProductMasterCreateManyStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6457,7 +6710,6 @@ export type ProductMasterCreateManyStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6472,7 +6724,7 @@ export type ProductMasterCreateManyStockUnitInput = {
 export type ProductMasterCreateManyConsumptionUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6517,7 +6769,6 @@ export type ProductMasterCreateManyConsumptionUnitInput = {
   stock_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6532,7 +6783,7 @@ export type ProductMasterCreateManyConsumptionUnitInput = {
 export type ProductMasterCreateManyMinStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6578,7 +6829,6 @@ export type ProductMasterCreateManyMinStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_unit_id?: number | null
@@ -6592,7 +6842,7 @@ export type ProductMasterCreateManyMinStockUnitInput = {
 export type ProductMasterCreateManyMaxStockUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6638,7 +6888,6 @@ export type ProductMasterCreateManyMaxStockUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6652,7 +6901,7 @@ export type ProductMasterCreateManyMaxStockUnitInput = {
 export type ProductMasterCreateManyReorderLevelUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6698,7 +6947,6 @@ export type ProductMasterCreateManyReorderLevelUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6712,7 +6960,7 @@ export type ProductMasterCreateManyReorderLevelUnitInput = {
 export type ProductMasterCreateManyReorderBatchUnitInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -6758,7 +7006,6 @@ export type ProductMasterCreateManyReorderBatchUnitInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6770,7 +7017,7 @@ export type ProductMasterCreateManyReorderBatchUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutPrimaryUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6809,7 +7056,6 @@ export type ProductMasterUpdateWithoutPrimaryUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6830,12 +7076,13 @@ export type ProductMasterUpdateWithoutPrimaryUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutPrimaryUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6880,7 +7127,6 @@ export type ProductMasterUncheckedUpdateWithoutPrimaryUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6894,12 +7140,13 @@ export type ProductMasterUncheckedUpdateWithoutPrimaryUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutPrimaryUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6944,7 +7191,6 @@ export type ProductMasterUncheckedUpdateManyWithoutPrimaryUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -6957,7 +7203,7 @@ export type ProductMasterUncheckedUpdateManyWithoutPrimaryUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutStockUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -6996,7 +7242,6 @@ export type ProductMasterUpdateWithoutStockUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7017,12 +7262,13 @@ export type ProductMasterUpdateWithoutStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7067,7 +7313,6 @@ export type ProductMasterUncheckedUpdateWithoutStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7081,12 +7326,13 @@ export type ProductMasterUncheckedUpdateWithoutStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7131,7 +7377,6 @@ export type ProductMasterUncheckedUpdateManyWithoutStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7144,7 +7389,7 @@ export type ProductMasterUncheckedUpdateManyWithoutStockUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutConsumptionUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7183,7 +7428,6 @@ export type ProductMasterUpdateWithoutConsumptionUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7204,12 +7448,13 @@ export type ProductMasterUpdateWithoutConsumptionUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutConsumptionUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7254,7 +7499,6 @@ export type ProductMasterUncheckedUpdateWithoutConsumptionUnitInput = {
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7268,12 +7512,13 @@ export type ProductMasterUncheckedUpdateWithoutConsumptionUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutConsumptionUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7318,7 +7563,6 @@ export type ProductMasterUncheckedUpdateManyWithoutConsumptionUnitInput = {
   stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7331,7 +7575,7 @@ export type ProductMasterUncheckedUpdateManyWithoutConsumptionUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutMinStockUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7370,7 +7614,6 @@ export type ProductMasterUpdateWithoutMinStockUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7391,12 +7634,13 @@ export type ProductMasterUpdateWithoutMinStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutMinStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7442,7 +7686,6 @@ export type ProductMasterUncheckedUpdateWithoutMinStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7455,12 +7698,13 @@ export type ProductMasterUncheckedUpdateWithoutMinStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutMinStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7506,7 +7750,6 @@ export type ProductMasterUncheckedUpdateManyWithoutMinStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7518,7 +7761,7 @@ export type ProductMasterUncheckedUpdateManyWithoutMinStockUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutMaxStockUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7557,7 +7800,6 @@ export type ProductMasterUpdateWithoutMaxStockUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7578,12 +7820,13 @@ export type ProductMasterUpdateWithoutMaxStockUnitInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutMaxStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7629,7 +7872,6 @@ export type ProductMasterUncheckedUpdateWithoutMaxStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7642,12 +7884,13 @@ export type ProductMasterUncheckedUpdateWithoutMaxStockUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutMaxStockUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7693,7 +7936,6 @@ export type ProductMasterUncheckedUpdateManyWithoutMaxStockUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7705,7 +7947,7 @@ export type ProductMasterUncheckedUpdateManyWithoutMaxStockUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7744,7 +7986,6 @@ export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7765,12 +8006,13 @@ export type ProductMasterUpdateWithoutReorderLevelUnitInput = {
   maxStockUnit?: Prisma.UnitMasterUpdateOneWithoutMaxStockUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutReorderLevelUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7816,7 +8058,6 @@ export type ProductMasterUncheckedUpdateWithoutReorderLevelUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7829,12 +8070,13 @@ export type ProductMasterUncheckedUpdateWithoutReorderLevelUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7880,7 +8122,6 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7892,7 +8133,7 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderLevelUnitInput = {
 }
 
 export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -7931,7 +8172,6 @@ export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -7952,12 +8192,13 @@ export type ProductMasterUpdateWithoutReorderBatchUnitInput = {
   maxStockUnit?: Prisma.UnitMasterUpdateOneWithoutMaxStockUnitProductsNestedInput
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutReorderBatchUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -8003,7 +8244,6 @@ export type ProductMasterUncheckedUpdateWithoutReorderBatchUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8016,12 +8256,13 @@ export type ProductMasterUncheckedUpdateWithoutReorderBatchUnitInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -8067,7 +8308,6 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8081,7 +8321,7 @@ export type ProductMasterUncheckedUpdateManyWithoutReorderBatchUnitInput = {
 export type ProductMasterCreateManyItemGroupInput = {
   id?: number
   vendor_id: number
-  item_id: number
+  item_id?: number | null
   rotation?: number
   alt_conv_factor?: number
   board_length?: number
@@ -8126,7 +8366,6 @@ export type ProductMasterCreateManyItemGroupInput = {
   consumption_unit_id?: number | null
   shelf_life_days?: number | null
   costing_method?: $Enums.CostingMethod
-  mrp?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: number | null
   max_stock_qty?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8139,7 +8378,7 @@ export type ProductMasterCreateManyItemGroupInput = {
 }
 
 export type ProductMasterUpdateWithoutItemGroupInput = {
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -8178,7 +8417,6 @@ export type ProductMasterUpdateWithoutItemGroupInput = {
   stock_updated_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   reorder_level_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8199,12 +8437,13 @@ export type ProductMasterUpdateWithoutItemGroupInput = {
   reorderLevelUnit?: Prisma.UnitMasterUpdateOneWithoutReorderLevelUnitProductsNestedInput
   reorderBatchUnit?: Prisma.UnitMasterUpdateOneWithoutReorderBatchUnitProductsNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateWithoutItemGroupInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -8249,7 +8488,6 @@ export type ProductMasterUncheckedUpdateWithoutItemGroupInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8263,12 +8501,13 @@ export type ProductMasterUncheckedUpdateWithoutItemGroupInput = {
   purchaseOrderItems?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutProductNestedInput
   grnItems?: Prisma.GRNItemUncheckedUpdateManyWithoutProductNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutProductNestedInput
+  supplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductMasterUncheckedUpdateManyWithoutItemGroupInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  item_id?: Prisma.IntFieldUpdateOperationsInput | number
+  item_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   rotation?: Prisma.IntFieldUpdateOperationsInput | number
   alt_conv_factor?: Prisma.FloatFieldUpdateOperationsInput | number
   board_length?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -8313,7 +8552,6 @@ export type ProductMasterUncheckedUpdateManyWithoutItemGroupInput = {
   consumption_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   shelf_life_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   costing_method?: Prisma.EnumCostingMethodFieldUpdateOperationsInput | $Enums.CostingMethod
-  mrp?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   min_stock_unit_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   max_stock_qty?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
@@ -8335,6 +8573,7 @@ export type ProductMasterCountOutputType = {
   purchaseOrderItems: number
   grnItems: number
   stockHistories: number
+  supplierMappings: number
 }
 
 export type ProductMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8342,6 +8581,7 @@ export type ProductMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Ext
   purchaseOrderItems?: boolean | ProductMasterCountOutputTypeCountPurchaseOrderItemsArgs
   grnItems?: boolean | ProductMasterCountOutputTypeCountGrnItemsArgs
   stockHistories?: boolean | ProductMasterCountOutputTypeCountStockHistoriesArgs
+  supplierMappings?: boolean | ProductMasterCountOutputTypeCountSupplierMappingsArgs
 }
 
 /**
@@ -8380,6 +8620,13 @@ export type ProductMasterCountOutputTypeCountGrnItemsArgs<ExtArgs extends runtim
  */
 export type ProductMasterCountOutputTypeCountStockHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ProductStockHistoryWhereInput
+}
+
+/**
+ * ProductMasterCountOutputType without action
+ */
+export type ProductMasterCountOutputTypeCountSupplierMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductSupplierMappingWhereInput
 }
 
 
@@ -8432,7 +8679,6 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   consumption_unit_id?: boolean
   shelf_life_days?: boolean
   costing_method?: boolean
-  mrp?: boolean
   min_stock_qty?: boolean
   min_stock_unit_id?: boolean
   max_stock_qty?: boolean
@@ -8458,6 +8704,7 @@ export type ProductMasterSelect<ExtArgs extends runtime.Types.Extensions.Interna
   reorderLevelUnit?: boolean | Prisma.ProductMaster$reorderLevelUnitArgs<ExtArgs>
   reorderBatchUnit?: boolean | Prisma.ProductMaster$reorderBatchUnitArgs<ExtArgs>
   stockHistories?: boolean | Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>
+  supplierMappings?: boolean | Prisma.ProductMaster$supplierMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productMaster"]>
 
@@ -8510,7 +8757,6 @@ export type ProductMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   consumption_unit_id?: boolean
   shelf_life_days?: boolean
   costing_method?: boolean
-  mrp?: boolean
   min_stock_qty?: boolean
   min_stock_unit_id?: boolean
   max_stock_qty?: boolean
@@ -8583,7 +8829,6 @@ export type ProductMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   consumption_unit_id?: boolean
   shelf_life_days?: boolean
   costing_method?: boolean
-  mrp?: boolean
   min_stock_qty?: boolean
   min_stock_unit_id?: boolean
   max_stock_qty?: boolean
@@ -8656,7 +8901,6 @@ export type ProductMasterSelectScalar = {
   consumption_unit_id?: boolean
   shelf_life_days?: boolean
   costing_method?: boolean
-  mrp?: boolean
   min_stock_qty?: boolean
   min_stock_unit_id?: boolean
   max_stock_qty?: boolean
@@ -8668,7 +8912,7 @@ export type ProductMasterSelectScalar = {
   item_type?: boolean
 }
 
-export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "hsn_id" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "stock_updated_at" | "item_group_id" | "primary_unit_id" | "stock_unit_id" | "consumption_unit_id" | "shelf_life_days" | "costing_method" | "mrp" | "min_stock_qty" | "min_stock_unit_id" | "max_stock_qty" | "max_stock_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "item_type", ExtArgs["result"]["productMaster"]>
+export type ProductMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "item_id" | "rotation" | "alt_conv_factor" | "board_length" | "board_width" | "dimension_1" | "dimension_2" | "dimension_3" | "installation_charges" | "item1_weight" | "level1_price" | "level2_price" | "level3_price" | "moq" | "no_of_drill_holes" | "pre_mill_width" | "alt_uom_text" | "brand_id" | "category_id" | "article_code" | "core_material" | "edge_banding_color" | "finish" | "group" | "hsn_code" | "hsn_id" | "product_name" | "procurement" | "unit_of_measure" | "vendor_code" | "custom_field_1" | "custom_field_2" | "custom_field_3" | "created_by" | "created_at" | "updated_at" | "updated_by" | "active" | "current_stock" | "stock_updated_at" | "item_group_id" | "primary_unit_id" | "stock_unit_id" | "consumption_unit_id" | "shelf_life_days" | "costing_method" | "min_stock_qty" | "min_stock_unit_id" | "max_stock_qty" | "max_stock_unit_id" | "reorder_level_qty" | "reorder_level_unit_id" | "reorder_batch_qty" | "reorder_batch_unit_id" | "item_type", ExtArgs["result"]["productMaster"]>
 export type ProductMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   brand?: boolean | Prisma.ProductMaster$brandArgs<ExtArgs>
@@ -8686,6 +8930,7 @@ export type ProductMasterInclude<ExtArgs extends runtime.Types.Extensions.Intern
   reorderLevelUnit?: boolean | Prisma.ProductMaster$reorderLevelUnitArgs<ExtArgs>
   reorderBatchUnit?: boolean | Prisma.ProductMaster$reorderBatchUnitArgs<ExtArgs>
   stockHistories?: boolean | Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>
+  supplierMappings?: boolean | Prisma.ProductMaster$supplierMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.ProductMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -8736,11 +8981,12 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     reorderLevelUnit: Prisma.$UnitMasterPayload<ExtArgs> | null
     reorderBatchUnit: Prisma.$UnitMasterPayload<ExtArgs> | null
     stockHistories: Prisma.$ProductStockHistoryPayload<ExtArgs>[]
+    supplierMappings: Prisma.$ProductSupplierMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
-    item_id: number
+    item_id: number | null
     rotation: number
     alt_conv_factor: number
     board_length: number
@@ -8786,7 +9032,6 @@ export type $ProductMasterPayload<ExtArgs extends runtime.Types.Extensions.Inter
     consumption_unit_id: number | null
     shelf_life_days: number | null
     costing_method: $Enums.CostingMethod
-    mrp: runtime.Decimal | null
     min_stock_qty: runtime.Decimal | null
     min_stock_unit_id: number | null
     max_stock_qty: runtime.Decimal | null
@@ -9206,6 +9451,7 @@ export interface Prisma__ProductMasterClient<T, Null = never, ExtArgs extends ru
   reorderLevelUnit<T extends Prisma.ProductMaster$reorderLevelUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$reorderLevelUnitArgs<ExtArgs>>): Prisma.Prisma__UnitMasterClient<runtime.Types.Result.GetResult<Prisma.$UnitMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   reorderBatchUnit<T extends Prisma.ProductMaster$reorderBatchUnitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$reorderBatchUnitArgs<ExtArgs>>): Prisma.Prisma__UnitMasterClient<runtime.Types.Result.GetResult<Prisma.$UnitMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stockHistories<T extends Prisma.ProductMaster$stockHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$stockHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductStockHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  supplierMappings<T extends Prisma.ProductMaster$supplierMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductMaster$supplierMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSupplierMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9283,7 +9529,6 @@ export interface ProductMasterFieldRefs {
   readonly consumption_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly shelf_life_days: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly costing_method: Prisma.FieldRef<"ProductMaster", 'CostingMethod'>
-  readonly mrp: Prisma.FieldRef<"ProductMaster", 'Decimal'>
   readonly min_stock_qty: Prisma.FieldRef<"ProductMaster", 'Decimal'>
   readonly min_stock_unit_id: Prisma.FieldRef<"ProductMaster", 'Int'>
   readonly max_stock_qty: Prisma.FieldRef<"ProductMaster", 'Decimal'>
@@ -9977,6 +10222,30 @@ export type ProductMaster$stockHistoriesArgs<ExtArgs extends runtime.Types.Exten
   take?: number
   skip?: number
   distinct?: Prisma.ProductStockHistoryScalarFieldEnum | Prisma.ProductStockHistoryScalarFieldEnum[]
+}
+
+/**
+ * ProductMaster.supplierMappings
+ */
+export type ProductMaster$supplierMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductSupplierMapping
+   */
+  select?: Prisma.ProductSupplierMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductSupplierMapping
+   */
+  omit?: Prisma.ProductSupplierMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductSupplierMappingInclude<ExtArgs> | null
+  where?: Prisma.ProductSupplierMappingWhereInput
+  orderBy?: Prisma.ProductSupplierMappingOrderByWithRelationInput | Prisma.ProductSupplierMappingOrderByWithRelationInput[]
+  cursor?: Prisma.ProductSupplierMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductSupplierMappingScalarFieldEnum | Prisma.ProductSupplierMappingScalarFieldEnum[]
 }
 
 /**

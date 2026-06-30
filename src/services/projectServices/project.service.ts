@@ -189,7 +189,7 @@ const getPackagingTotal = async (
 
 // ── getProjectById ────────────────────────────────────────────────────────────
 
-export const getProjectById = async (id: number) => {
+export const getProjectById_old = async (id: number) => {
   const [project, packagingMachine] = await Promise.all([
     prisma.projectMaster.findUnique({
       where: { id },
@@ -219,14 +219,14 @@ export const getProjectById = async (id: number) => {
 
     packagingMachineId
       ? prisma.cutListMachineMapping.groupBy({
-          by: ["cut_list_id"],
-          where: {
-            project_id: id,
-            machine_id: packagingMachineId,
-            expected_in: true,
-            box_id: { not: null },
-          },
-        })
+        by: ["cut_list_id"],
+        where: {
+          project_id: id,
+          machine_id: packagingMachineId,
+          expected_in: true,
+          box_id: { not: null },
+        },
+      })
       : Promise.resolve([]),
   ]);
 
@@ -243,6 +243,159 @@ export const getProjectById = async (id: number) => {
       total_unpacked,
       total_weight: 0,
     },
+  };
+};
+
+
+export const getProjectById = async (id: number) => {
+  const [project, packagingMachine] = await Promise.all([
+    prisma.projectMaster.findUnique({
+      where: { id },
+      include: {
+        vendor: true,
+        createdByUser: true,
+        details: true,
+      },
+    }),
+
+    prisma.machineMaster.findFirst({
+      where: { machine_type_id: 18 },
+      select: {
+        id: true,
+        machine_name: true,
+        sequence_no: true,
+      },
+      orderBy: { id: "asc" },
+    }),
+  ]);
+
+  if (!project) return null;
+
+  const packagingStats = packagingMachine
+    ? await getPackagingStats(id, project.vendor_id, packagingMachine)
+    : {
+      total_items: 0,
+      total_packed: 0,
+      total_unpacked: 0,
+      total_weight: 0,
+    };
+
+  return {
+    ...project,
+    machine_id: packagingMachine?.id ?? null,
+    machine_name: packagingMachine?.machine_name ?? null,
+    totals: packagingStats,
+  };
+};
+
+const getPackagingStats = async (
+  project_id: number,
+  vendor_id: number,
+  machine: {
+    id: number;
+    sequence_no: number | null;
+  }
+): Promise<{
+  total_items: number;
+  total_packed: number;
+  total_unpacked: number;
+  total_weight: number;
+}> => {
+  const machineSeq = machine.sequence_no ?? 0;
+
+  const [packagingRows, priorRows] = await Promise.all([
+    prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        machine_id: machine.id,
+        expected_in: true,
+      },
+      select: {
+        cut_list_id: true,
+        box_id: true,
+      },
+    }),
+
+    prisma.cutListMachineMapping.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        expected_in: true,
+        sequence_no: {
+          lt: machineSeq,
+        },
+      },
+      select: {
+        id: true,
+        cut_list_id: true,
+        sequence_no: true,
+        actual_in_at: true,
+      },
+    }),
+  ]);
+
+  const lastPriorByCutList = new Map<
+    number,
+    {
+      sequence_no: number;
+      id: number;
+      scanned: boolean;
+    }
+  >();
+
+  for (const row of priorRows) {
+    const sequenceNo = row.sequence_no ?? 0;
+
+    const existing = lastPriorByCutList.get(row.cut_list_id);
+
+    if (
+      !existing ||
+      sequenceNo > existing.sequence_no ||
+      (sequenceNo === existing.sequence_no && row.id > existing.id)
+    ) {
+      lastPriorByCutList.set(row.cut_list_id, {
+        sequence_no: sequenceNo,
+        id: row.id,
+        scanned: row.actual_in_at !== null,
+      });
+    }
+  }
+
+  let total_items = 0;
+  const packedCutListIds = new Set<number>();
+
+  for (const row of packagingRows) {
+    const lastPrior = lastPriorByCutList.get(row.cut_list_id);
+
+    /**
+     * Part A:
+     * If cut list has previous machine, count only if last prior machine is scanned.
+     *
+     * Part B:
+     * If no previous machine, count directly.
+     */
+    if (!lastPrior || lastPrior.scanned) {
+      total_items++;
+    }
+
+    /**
+     * Existing logic:
+     * total_packed = distinct cut_list_id where box_id is assigned.
+     */
+    if (row.box_id !== null) {
+      packedCutListIds.add(row.cut_list_id);
+    }
+  }
+
+  const total_packed = packedCutListIds.size;
+  const total_unpacked = total_items - total_packed;
+
+  return {
+    total_items,
+    total_packed,
+    total_unpacked,
+    total_weight: 0,
   };
 };
 
@@ -270,14 +423,14 @@ export const getProjectItemById = (id: number) => {
 
 
 export const getProjectsByVendorIdService = async (vendorId: number) => {
- 
+
   // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
     where: { vendor_id: vendorId, machine_type_id: 18 },
     select: { id: true, sequence_no: true },
     orderBy: { id: "asc" },
   });
- 
+
   // ── 2. Fetch all projects ────────────────────────────────────────────────
   const projects = await prisma.projectMaster.findMany({
     where: { vendor_id: vendorId },
@@ -314,7 +467,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       },
     },
   });
- 
+
   if (!packagingMachine) {
     return projects.map((project) => ({
       id: project.id,
@@ -332,18 +485,18 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       any_factory_out: false,
     }));
   }
- 
-  const pkgMachineId  = packagingMachine.id;
+
+  const pkgMachineId = packagingMachine.id;
   const pkgMachineSeq = packagingMachine.sequence_no ?? 0;
   const allProjectIds = projects.map((p) => p.id);
- 
+
   // ── 3. Fetch mapping rows ────────────────────────────────────────────────
   //
   // KEY CHANGE: we now work at the MAPPING ROW level, not cut_list_id level.
   // Each mapping row = one panel unit. qty=4 → 4 rows → 4 units counted.
   //
   const [priorRows, packagingRows, allBoxes] = await Promise.all([
- 
+
     // Prior-machine rows: one row per unit per prior machine
     prisma.cutListMachineMapping.findMany({
       where: {
@@ -360,7 +513,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         actual_in_at: true,
       },
     }),
- 
+
     // Packaging machine rows: one row per unit
     prisma.cutListMachineMapping.findMany({
       where: {
@@ -377,7 +530,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         actual_in_at: true,
       },
     }),
- 
+
     // Boxes
     prisma.boxMaster.findMany({
       where: {
@@ -392,7 +545,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       },
     }),
   ]);
- 
+
   // ── 4. Build prior-machine lookup: for each (project_id, cut_list_id),
   //       find the highest-sequence prior row per unit.
   //
@@ -417,17 +570,17 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
   //  For each (project_id, cut_list_id), count how many prior-machine rows
   //  (of the LAST prior machine, by highest seq) have actual_in_at != null.
   //  That count = number of eligible units for this cut_list in this project.
- 
+
   // Group prior rows by (project_id, cut_list_id, sequence_no)
   type PriorKey = string; // `${project_id}-${cut_list_id}-${sequence_no}`
   const priorBySeq = new Map<PriorKey, typeof priorRows>();
- 
+
   for (const row of priorRows) {
     const key: PriorKey = `${row.project_id}-${row.cut_list_id}-${row.sequence_no}`;
     if (!priorBySeq.has(key)) priorBySeq.set(key, []);
     priorBySeq.get(key)!.push(row);
   }
- 
+
   // For each (project_id, cut_list_id) find the highest sequence_no present
   const lastSeqMap = new Map<string, number>(); // `${pid}-${clid}` → max seq
   for (const row of priorRows) {
@@ -435,7 +588,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
     const cur = lastSeqMap.get(key) ?? -1;
     if (row.sequence_no > cur) lastSeqMap.set(key, row.sequence_no);
   }
- 
+
   // Count scanned units at last prior machine per (project_id, cut_list_id)
   // eligibleUnitCount[`${pid}-${clid}`] = number of units that passed last prior machine
   const eligibleUnitCount = new Map<string, number>();
@@ -445,7 +598,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
     const scanned = rows.filter(r => r.actual_in_at !== null).length;
     eligibleUnitCount.set(pkKey, scanned);
   }
- 
+
   // cut_lists that have NO prior machine at all → all units are eligible
   const cutListsWithPriorByProject = new Map<number, Set<number>>();
   for (const row of priorRows) {
@@ -453,36 +606,36 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
       cutListsWithPriorByProject.set(row.project_id, new Set());
     cutListsWithPriorByProject.get(row.project_id)!.add(row.cut_list_id);
   }
- 
+
   // ── 5. Build factory_out / site_in per project ────────────────────────────
   const boxesByProject = new Map<number, typeof allBoxes>();
   for (const box of allBoxes) {
     if (!boxesByProject.has(box.project_id)) boxesByProject.set(box.project_id, []);
     boxesByProject.get(box.project_id)!.push(box);
   }
- 
+
   // ── 6. Compute totals per project ─────────────────────────────────────────
   const result = projects.map((project) => {
-    const pid      = project.id;
+    const pid = project.id;
     const hasPrior = cutListsWithPriorByProject.get(pid) ?? new Set<number>();
- 
+
     // Group packaging rows by cut_list_id
     const pkgByClid = new Map<number, typeof packagingRows>();
     for (const row of packagingRows.filter(r => r.project_id === pid)) {
       if (!pkgByClid.has(row.cut_list_id)) pkgByClid.set(row.cut_list_id, []);
       pkgByClid.get(row.cut_list_id)!.push(row);
     }
- 
-    let totalItems  = 0;
+
+    let totalItems = 0;
     let totalPacked = 0;
- 
+
     for (const [clid, rows] of pkgByClid) {
       const clKey = `${pid}-${clid}`;
- 
+
       if (hasPrior.has(clid)) {
         // Only units that passed the last prior machine are eligible
         const eligible = eligibleUnitCount.get(clKey) ?? 0;
-        totalItems  += eligible;
+        totalItems += eligible;
         // Packed = units that are eligible AND have box_id set
         // We pair by position: first `eligible` rows sorted by id
         const sortedRows = [...rows].sort((a, b) => a.id - b.id);
@@ -490,55 +643,55 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         totalPacked += eligibleRows.filter(r => r.box_id !== null).length;
       } else {
         // No prior machine → all units eligible
-        totalItems  += rows.length;
+        totalItems += rows.length;
         totalPacked += rows.filter(r => r.box_id !== null).length;
       }
     }
- 
+
     const totalUnpacked = Math.max(0, totalItems - totalPacked);
- 
+
     // Dispatch status
-    const projectBoxes    = boxesByProject.get(pid) ?? [];
+    const projectBoxes = boxesByProject.get(pid) ?? [];
     const anyFactoryOutNull = projectBoxes.length === 0 || projectBoxes.some(b => b.factory_out_at === null);
-    const allFactoryOutSet  = projectBoxes.length > 0 && projectBoxes.every(b => b.factory_out_at !== null);
-    const anyFactoryOutSet  = projectBoxes.some(b => b.factory_out_at !== null);
-    const anySiteInNull     = projectBoxes.some(b => b.site_in_at === null);
- 
+    const allFactoryOutSet = projectBoxes.length > 0 && projectBoxes.every(b => b.factory_out_at !== null);
+    const anyFactoryOutSet = projectBoxes.some(b => b.factory_out_at !== null);
+    const anySiteInNull = projectBoxes.some(b => b.site_in_at === null);
+
     const latestFactoryOutAt = anyFactoryOutNull
       ? null
       : projectBoxes.reduce<Date | null>((latest, b) => {
-          if (!b.factory_out_at) return latest;
-          return !latest || b.factory_out_at > latest ? b.factory_out_at : latest;
-        }, null);
- 
+        if (!b.factory_out_at) return latest;
+        return !latest || b.factory_out_at > latest ? b.factory_out_at : latest;
+      }, null);
+
     const latestSiteInAt = !allFactoryOutSet || anySiteInNull
       ? null
       : projectBoxes.reduce<Date | null>((latest, b) => {
-          if (!b.site_in_at) return latest;
-          return !latest || b.site_in_at > latest ? b.site_in_at : latest;
-        }, null);
- 
+        if (!b.site_in_at) return latest;
+        return !latest || b.site_in_at > latest ? b.site_in_at : latest;
+      }, null);
+
     return {
-      id:             project.id,
-      project_name:   project.project_name,
-      vendor_id:      project.vendor_id,
-      created_by:     project.created_by,
+      id: project.id,
+      project_name: project.project_name,
+      vendor_id: project.vendor_id,
+      created_by: project.created_by,
       project_status: project.project_status,
-      created_at:     project.created_at,
-      createdByUser:  project.createdByUser,
-      details:        project.details,
+      created_at: project.created_at,
+      createdByUser: project.createdByUser,
+      details: project.details,
       aggregatedTotals: {
-        total_items:    totalItems,
-        total_packed:   totalPacked,
+        total_items: totalItems,
+        total_packed: totalPacked,
         total_unpacked: totalUnpacked,
       },
-      factory_out_at:  latestFactoryOutAt,
-      site_in_at:      latestSiteInAt,
+      factory_out_at: latestFactoryOutAt,
+      site_in_at: latestSiteInAt,
       all_factory_out: allFactoryOutSet,
       any_factory_out: anyFactoryOutSet,
     };
   });
- 
+
   return result;
 };
 

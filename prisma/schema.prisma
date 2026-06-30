@@ -139,9 +139,10 @@ model VendorMaster {
 
   poPaymentSchedules POPaymentSchedule[]
 
-  poPayments POPayment[]
-  units      UnitMaster[]
-  itemGroups ItemGroupMaster[]
+  poPayments              POPayment[]
+  units                   UnitMaster[]
+  itemGroups              ItemGroupMaster[]
+  productSupplierMappings ProductSupplierMapping[]
 
   @@index([state_id])
 }
@@ -1622,7 +1623,8 @@ model CompanyVendorsMaster {
 
   defaultPaymentTerm PaymentTermMaster? @relation("SupplierDefaultPaymentTerm", fields: [default_payment_term_id], references: [id], onDelete: SetNull)
 
-  paymentTerms PaymentTermMaster[] @relation("SupplierPaymentTerms")
+  paymentTerms            PaymentTermMaster[]      @relation("SupplierPaymentTerms")
+  productSupplierMappings ProductSupplierMapping[]
 
   @@index([default_payment_term_id])
   @@index([state_id])
@@ -2056,6 +2058,10 @@ model CutListMachineMapping {
   @@index([project_id])
   @@index([vendor_id])
   @@index([sequence_no])
+   @@index([project_id, vendor_id, machine_id, expected_in])
+  @@index([project_id, vendor_id, expected_in, sequence_no])
+  @@index([project_id, vendor_id, cut_list_id])
+  @@index([project_id, machine_id, expected_in, box_id])
 }
 
 model UserMachineMapping {
@@ -2477,7 +2483,7 @@ model BrandMaster {
 model ProductMaster {
   id                   Int               @id @default(autoincrement())
   vendor_id            Int
-  item_id              Int
+  item_id              Int?
   rotation             Int               @default(0)
   alt_conv_factor      Float             @default(0)
   board_length         Float             @default(0)
@@ -2527,8 +2533,6 @@ model ProductMaster {
 
   costing_method CostingMethod @default(FIFO)
 
-  mrp Decimal? @db.Decimal(18, 2)
-
   min_stock_qty     Decimal? @db.Decimal(18, 3)
   min_stock_unit_id Int?
 
@@ -2561,9 +2565,9 @@ model ProductMaster {
   reorderLevelUnit UnitMaster? @relation("ProductReorderLevelUnit", fields: [reorder_level_unit_id], references: [id], onDelete: SetNull)
   reorderBatchUnit UnitMaster? @relation("ProductReorderBatchUnit", fields: [reorder_batch_unit_id], references: [id], onDelete: SetNull)
 
-  stockHistories ProductStockHistory[] @relation("StockHistoryProduct")
+  stockHistories   ProductStockHistory[]    @relation("StockHistoryProduct")
+  supplierMappings ProductSupplierMapping[]
 
-  
   @@index([vendor_id])
   @@index([brand_id])
   @@index([category_id])
@@ -3110,11 +3114,11 @@ model POPayment {
 }
 
 model UnitMaster {
-  id        Int     @id @default(autoincrement())
-  vendor_id Int
-  unit_name String
+  id         Int     @id @default(autoincrement())
+  vendor_id  Int
+  unit_name  String
   unit_class String
-  is_active Boolean @default(true)
+  is_active  Boolean @default(true)
 
   created_by Int?
   updated_by Int?
@@ -3154,6 +3158,33 @@ model ItemGroupMaster {
 
   @@unique([vendor_id, group_name])
   @@index([vendor_id])
+}
+
+model ProductSupplierMapping {
+  id                Int @id @default(autoincrement())
+  vendor_id         Int
+  product_id        Int
+  company_vendor_id Int
+
+  supplier_item_code String?
+  amount             Decimal? @db.Decimal(18, 2)
+
+  is_active Boolean @default(true)
+
+  created_by Int?
+  updated_by Int?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor        VendorMaster         @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  product       ProductMaster        @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  companyVendor CompanyVendorsMaster @relation(fields: [company_vendor_id], references: [id], onDelete: Cascade)
+
+  @@unique([vendor_id, product_id, company_vendor_id])
+  @@index([vendor_id])
+  @@index([product_id])
+  @@index([company_vendor_id])
+  @@index([supplier_item_code])
 }
 
 enum PaymentMode {

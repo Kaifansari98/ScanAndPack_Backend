@@ -734,3 +734,8 @@ export type UnitMaster = Prisma.UnitMasterModel
  * 
  */
 export type ItemGroupMaster = Prisma.ItemGroupMasterModel
+/**
+ * Model ProductSupplierMapping
+ * 
+ */
+export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel

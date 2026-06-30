@@ -506,6 +506,7 @@ export type VendorMasterWhereInput = {
   poPayments?: Prisma.POPaymentListRelationFilter
   units?: Prisma.UnitMasterListRelationFilter
   itemGroups?: Prisma.ItemGroupMasterListRelationFilter
+  productSupplierMappings?: Prisma.ProductSupplierMappingListRelationFilter
 }
 
 export type VendorMasterOrderByWithRelationInput = {
@@ -638,6 +639,7 @@ export type VendorMasterOrderByWithRelationInput = {
   poPayments?: Prisma.POPaymentOrderByRelationAggregateInput
   units?: Prisma.UnitMasterOrderByRelationAggregateInput
   itemGroups?: Prisma.ItemGroupMasterOrderByRelationAggregateInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingOrderByRelationAggregateInput
 }
 
 export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -773,6 +775,7 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   poPayments?: Prisma.POPaymentListRelationFilter
   units?: Prisma.UnitMasterListRelationFilter
   itemGroups?: Prisma.ItemGroupMasterListRelationFilter
+  productSupplierMappings?: Prisma.ProductSupplierMappingListRelationFilter
 }, "id">
 
 export type VendorMasterOrderByWithAggregationInput = {
@@ -971,6 +974,7 @@ export type VendorMasterCreateInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateInput = {
@@ -1102,6 +1106,7 @@ export type VendorMasterUncheckedCreateInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUpdateInput = {
@@ -1232,6 +1237,7 @@ export type VendorMasterUpdateInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateInput = {
@@ -1363,6 +1369,7 @@ export type VendorMasterUncheckedUpdateInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyInput = {
@@ -3071,6 +3078,20 @@ export type VendorMasterUpdateOneRequiredWithoutItemGroupsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutItemGroupsInput, Prisma.VendorMasterUpdateWithoutItemGroupsInput>, Prisma.VendorMasterUncheckedUpdateWithoutItemGroupsInput>
 }
 
+export type VendorMasterCreateNestedOneWithoutProductSupplierMappingsInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+}
+
+export type VendorMasterUpdateOneRequiredWithoutProductSupplierMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.VendorMasterCreateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput>
+  connectOrCreate?: Prisma.VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput
+  upsert?: Prisma.VendorMasterUpsertWithoutProductSupplierMappingsInput
+  connect?: Prisma.VendorMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VendorMasterUpdateToOneWithWhereWithoutProductSupplierMappingsInput, Prisma.VendorMasterUpdateWithoutProductSupplierMappingsInput>, Prisma.VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput>
+}
+
 export type VendorMasterCreateWithoutAddressesInput = {
   vendor_name: string
   vendor_code: string
@@ -3198,6 +3219,7 @@ export type VendorMasterCreateWithoutAddressesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAddressesInput = {
@@ -3328,6 +3350,7 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAddressesInput = {
@@ -3473,6 +3496,7 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
@@ -3603,6 +3627,7 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTaxInfoInput = {
@@ -3732,6 +3757,7 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
@@ -3862,6 +3888,7 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTaxInfoInput = {
@@ -4007,6 +4034,7 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
@@ -4137,6 +4165,7 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPrivilegeMastersInput = {
@@ -4266,6 +4295,7 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
@@ -4396,6 +4426,7 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPrivilegeMastersInput = {
@@ -4541,6 +4572,7 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
@@ -4671,6 +4703,7 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUsersInput = {
@@ -4800,6 +4833,7 @@ export type VendorMasterCreateWithoutUsersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUsersInput = {
@@ -4930,6 +4964,7 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUsersInput = {
@@ -5075,6 +5110,7 @@ export type VendorMasterUpdateWithoutUsersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUsersInput = {
@@ -5205,6 +5241,7 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserSessionsInput = {
@@ -5334,6 +5371,7 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
@@ -5464,6 +5502,7 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserSessionsInput = {
@@ -5609,6 +5648,7 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
@@ -5739,6 +5779,7 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -5868,6 +5909,7 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -5998,6 +6040,7 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -6143,6 +6186,7 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -6273,6 +6317,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectsInput = {
@@ -6402,6 +6447,7 @@ export type VendorMasterCreateWithoutProjectsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectsInput = {
@@ -6532,6 +6578,7 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectsInput = {
@@ -6677,6 +6724,7 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
@@ -6807,6 +6855,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectDetailsInput = {
@@ -6936,6 +6985,7 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
@@ -7066,6 +7116,7 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectDetailsInput = {
@@ -7211,6 +7262,7 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
@@ -7341,6 +7393,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectItemsInput = {
@@ -7470,6 +7523,7 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
@@ -7600,6 +7654,7 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectItemsInput = {
@@ -7745,6 +7800,7 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
@@ -7875,6 +7931,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBoxesInput = {
@@ -8004,6 +8061,7 @@ export type VendorMasterCreateWithoutBoxesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBoxesInput = {
@@ -8134,6 +8192,7 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBoxesInput = {
@@ -8279,6 +8338,7 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
@@ -8409,6 +8469,7 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutScanItemsInput = {
@@ -8538,6 +8599,7 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
@@ -8668,6 +8730,7 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutScanItemsInput = {
@@ -8813,6 +8876,7 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
@@ -8943,6 +9007,7 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTokensInput = {
@@ -9072,6 +9137,7 @@ export type VendorMasterCreateWithoutTokensInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTokensInput = {
@@ -9202,6 +9268,7 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTokensInput = {
@@ -9347,6 +9414,7 @@ export type VendorMasterUpdateWithoutTokensInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTokensInput = {
@@ -9477,6 +9545,7 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadsInput = {
@@ -9606,6 +9675,7 @@ export type VendorMasterCreateWithoutLeadsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadsInput = {
@@ -9736,6 +9806,7 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadsInput = {
@@ -9881,6 +9952,7 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
@@ -10011,6 +10083,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -10140,6 +10213,7 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -10270,6 +10344,7 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -10415,6 +10490,7 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
@@ -10545,6 +10621,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadUserMappingsInput = {
@@ -10674,6 +10751,7 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
@@ -10804,6 +10882,7 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadUserMappingsInput = {
@@ -10949,6 +11028,7 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
@@ -11079,6 +11159,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -11208,6 +11289,7 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -11338,6 +11420,7 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -11483,6 +11566,7 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -11613,6 +11697,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteTypesInput = {
@@ -11742,6 +11827,7 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
@@ -11872,6 +11958,7 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteTypesInput = {
@@ -12017,6 +12104,7 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
@@ -12147,6 +12235,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSourcesInput = {
@@ -12276,6 +12365,7 @@ export type VendorMasterCreateWithoutSourcesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSourcesInput = {
@@ -12406,6 +12496,7 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSourcesInput = {
@@ -12551,6 +12642,7 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
@@ -12681,6 +12773,7 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutAccountsInput = {
@@ -12810,6 +12903,7 @@ export type VendorMasterCreateWithoutAccountsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutAccountsInput = {
@@ -12940,6 +13034,7 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutAccountsInput = {
@@ -13085,6 +13180,7 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
@@ -13215,6 +13311,7 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductMapsInput = {
@@ -13344,6 +13441,7 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
@@ -13474,6 +13572,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductMapsInput = {
@@ -13619,6 +13718,7 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
@@ -13749,6 +13849,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductTypesInput = {
@@ -13878,6 +13979,7 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
@@ -14008,6 +14110,7 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductTypesInput = {
@@ -14153,6 +14256,7 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
@@ -14283,6 +14387,7 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCarcassTypesInput = {
@@ -14412,6 +14517,7 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
@@ -14542,6 +14648,7 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCarcassTypesInput = {
@@ -14687,6 +14794,7 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
@@ -14817,6 +14925,7 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutShutterTypesInput = {
@@ -14946,6 +15055,7 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
@@ -15076,6 +15186,7 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutShutterTypesInput = {
@@ -15221,6 +15332,7 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
@@ -15351,6 +15463,7 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHandleTypesInput = {
@@ -15480,6 +15593,7 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
@@ -15610,6 +15724,7 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHandleTypesInput = {
@@ -15755,6 +15870,7 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
@@ -15885,6 +16001,7 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutTimelineRulesInput = {
@@ -16014,6 +16131,7 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
@@ -16144,6 +16262,7 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutTimelineRulesInput = {
@@ -16289,6 +16408,7 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
@@ -16419,6 +16539,7 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentsInput = {
@@ -16548,6 +16669,7 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
@@ -16678,6 +16800,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentsInput = {
@@ -16823,6 +16946,7 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -16953,6 +17077,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatRoomsInput = {
@@ -17082,6 +17207,7 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
@@ -17212,6 +17338,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatRoomsInput = {
@@ -17357,6 +17484,7 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
@@ -17487,6 +17615,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
@@ -17616,6 +17745,7 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
@@ -17746,6 +17876,7 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadChatDocumentsInput = {
@@ -17891,6 +18022,7 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
@@ -18021,6 +18153,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInput = {
@@ -18150,6 +18283,7 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
@@ -18280,6 +18414,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInput = {
@@ -18425,6 +18560,7 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
@@ -18555,6 +18691,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
@@ -18684,6 +18821,7 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
@@ -18814,6 +18952,7 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -18959,6 +19098,7 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
@@ -19089,6 +19229,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductStructureInstancesInput = {
@@ -19218,6 +19359,7 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -19348,6 +19490,7 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -19493,6 +19636,7 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -19623,6 +19767,7 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -19752,6 +19897,7 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
@@ -19882,6 +20028,7 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSelfAssignTaskTypeMastersInput = {
@@ -20027,6 +20174,7 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
@@ -20157,6 +20305,7 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentsInput = {
@@ -20286,6 +20435,7 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
@@ -20416,6 +20566,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentsInput = {
@@ -20561,6 +20712,7 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
@@ -20691,6 +20843,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLedgersInput = {
@@ -20820,6 +20973,7 @@ export type VendorMasterCreateWithoutLedgersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLedgersInput = {
@@ -20950,6 +21104,7 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLedgersInput = {
@@ -21095,6 +21250,7 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
@@ -21225,6 +21381,7 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDocumentTypesInput = {
@@ -21354,6 +21511,7 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
@@ -21484,6 +21642,7 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDocumentTypesInput = {
@@ -21629,6 +21788,7 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
@@ -21759,6 +21919,7 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -21888,6 +22049,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput = {
@@ -22018,6 +22180,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestTypeMastersInput = {
@@ -22163,6 +22326,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput = {
@@ -22293,6 +22457,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
@@ -22422,6 +22587,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
@@ -22552,6 +22718,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestsInput = {
@@ -22697,6 +22864,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
@@ -22827,6 +22995,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -22956,6 +23125,7 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = {
@@ -23086,6 +23256,7 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSmallOrderRequestDocumentsInput = {
@@ -23231,6 +23402,7 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = {
@@ -23361,6 +23533,7 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadAmcContractsInput = {
@@ -23490,6 +23663,7 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
@@ -23620,6 +23794,7 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadAmcContractsInput = {
@@ -23765,6 +23940,7 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
@@ -23895,6 +24071,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
@@ -24024,6 +24201,7 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
@@ -24154,6 +24332,7 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadServiceSchedulesInput = {
@@ -24299,6 +24478,7 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
@@ -24429,6 +24609,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStatusTypesInput = {
@@ -24558,6 +24739,7 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
@@ -24688,6 +24870,7 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStatusTypesInput = {
@@ -24833,6 +25016,7 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
@@ -24963,6 +25147,7 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadStatusLogsInput = {
@@ -25092,6 +25277,7 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -25222,6 +25408,7 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -25367,6 +25554,7 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -25497,6 +25685,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingInput = {
@@ -25626,6 +25815,7 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
@@ -25756,6 +25946,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingInput = {
@@ -25901,6 +26092,7 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
@@ -26031,6 +26223,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitsInput = {
@@ -26160,6 +26353,7 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
@@ -26290,6 +26484,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitsInput = {
@@ -26435,6 +26630,7 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
@@ -26565,6 +26761,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMeetingTypesInput = {
@@ -26694,6 +26891,7 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
@@ -26824,6 +27022,7 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMeetingTypesInput = {
@@ -26969,6 +27168,7 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
@@ -27099,6 +27299,7 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
@@ -27228,6 +27429,7 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
@@ -27358,6 +27560,7 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignMeetingDocsMappingInput = {
@@ -27503,6 +27706,7 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
@@ -27633,6 +27837,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
@@ -27762,6 +27967,7 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
@@ -27892,6 +28098,7 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutClientVisitDocumentMappingsInput = {
@@ -28037,6 +28244,7 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
@@ -28167,6 +28375,7 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDesignSelectionInput = {
@@ -28296,6 +28505,7 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
@@ -28426,6 +28636,7 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDesignSelectionInput = {
@@ -28571,6 +28782,7 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
@@ -28701,6 +28913,7 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
@@ -28830,6 +29043,7 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
@@ -28960,6 +29174,7 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -29105,6 +29320,7 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
@@ -29235,6 +29451,7 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
@@ -29364,6 +29581,7 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
@@ -29494,6 +29712,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTypeMasterInput = {
@@ -29639,6 +29858,7 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
@@ -29769,6 +29989,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteSupervisorsInput = {
@@ -29898,6 +30119,7 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
@@ -30028,6 +30250,7 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteSupervisorsInput = {
@@ -30173,6 +30396,7 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
@@ -30303,6 +30527,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserLeadTasksInput = {
@@ -30432,6 +30657,7 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
@@ -30562,6 +30788,7 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserLeadTasksInput = {
@@ -30707,6 +30934,7 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
@@ -30837,6 +31065,7 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
@@ -30966,6 +31195,7 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -31096,6 +31326,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -31241,6 +31472,7 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -31371,6 +31603,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
@@ -31500,6 +31733,7 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -31630,6 +31864,7 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -31775,6 +32010,7 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -31905,6 +32141,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -32034,6 +32271,7 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -32164,6 +32402,7 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -32309,6 +32548,7 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -32439,6 +32679,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
@@ -32568,6 +32809,7 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
@@ -32698,6 +32940,7 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompanyVendorsMasterInput = {
@@ -32843,6 +33086,7 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
@@ -32973,6 +33217,7 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
@@ -33102,6 +33347,7 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -33232,6 +33478,7 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -33377,6 +33624,7 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -33507,6 +33755,7 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutSiteReadinessInput = {
@@ -33636,6 +33885,7 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
@@ -33766,6 +34016,7 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutSiteReadinessInput = {
@@ -33911,6 +34162,7 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
@@ -34041,6 +34293,7 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallersInput = {
@@ -34170,6 +34423,7 @@ export type VendorMasterCreateWithoutInstallersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallersInput = {
@@ -34300,6 +34554,7 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallersInput = {
@@ -34445,6 +34700,7 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
@@ -34575,6 +34831,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallerMappingsInput = {
@@ -34704,6 +34961,7 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
@@ -34834,6 +35092,7 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallerMappingsInput = {
@@ -34979,6 +35238,7 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
@@ -35109,6 +35369,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdatesInput = {
@@ -35238,6 +35499,7 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
@@ -35368,6 +35630,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdatesInput = {
@@ -35513,6 +35776,7 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
@@ -35643,6 +35907,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
@@ -35772,6 +36037,7 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
@@ -35902,6 +36168,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationUpdateDocsInput = {
@@ -36047,6 +36314,7 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
@@ -36177,6 +36445,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
@@ -36306,6 +36575,7 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
@@ -36436,6 +36706,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousMasterInput = {
@@ -36581,6 +36852,7 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
@@ -36711,6 +36983,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
@@ -36840,6 +37113,7 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
@@ -36970,6 +37244,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTypeMasterInput = {
@@ -37115,6 +37390,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
@@ -37245,6 +37521,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
@@ -37374,6 +37651,7 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
@@ -37504,6 +37782,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousTeamMasterInput = {
@@ -37649,6 +37928,7 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
@@ -37779,6 +38059,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
@@ -37908,6 +38189,7 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
@@ -38038,6 +38320,7 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMiscellaneousDocumentInput = {
@@ -38183,6 +38466,7 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
@@ -38313,6 +38597,7 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -38442,6 +38727,7 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -38572,6 +38858,7 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -38717,6 +39004,7 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -38847,6 +39135,7 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
@@ -38976,6 +39265,7 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
@@ -39106,6 +39396,7 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutIssueLogTypeMasterInput = {
@@ -39251,6 +39542,7 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
@@ -39381,6 +39673,7 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationMastersInput = {
@@ -39510,6 +39803,7 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
@@ -39640,6 +39934,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationMastersInput = {
@@ -39785,6 +40080,7 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
@@ -39915,6 +40211,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutNotificationsInput = {
@@ -40044,6 +40341,7 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
@@ -40174,6 +40472,7 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutNotificationsInput = {
@@ -40319,6 +40618,7 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
@@ -40449,6 +40749,7 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserPushTokensInput = {
@@ -40578,6 +40879,7 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
@@ -40708,6 +41010,7 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserPushTokensInput = {
@@ -40853,6 +41156,7 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
@@ -40983,6 +41287,7 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
@@ -41112,6 +41417,7 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
@@ -41242,6 +41548,7 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorModulesMappingsInput = {
@@ -41387,6 +41694,7 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
@@ -41517,6 +41825,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutMachineMasterInput = {
@@ -41646,6 +41955,7 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
@@ -41776,6 +42086,7 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutMachineMasterInput = {
@@ -41921,6 +42232,7 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
@@ -42051,6 +42363,7 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListInput = {
@@ -42180,6 +42493,7 @@ export type VendorMasterCreateWithoutCutListInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListInput = {
@@ -42310,6 +42624,7 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListInput = {
@@ -42455,6 +42770,7 @@ export type VendorMasterUpdateWithoutCutListInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListInput = {
@@ -42585,6 +42901,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCutListMachineMappingInput = {
@@ -42714,6 +43031,7 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
@@ -42844,6 +43162,7 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCutListMachineMappingInput = {
@@ -42989,6 +43308,7 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
@@ -43119,6 +43439,7 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUserMachineMappingInput = {
@@ -43248,6 +43569,7 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
@@ -43378,6 +43700,7 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUserMachineMappingInput = {
@@ -43523,6 +43846,7 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
@@ -43653,6 +43977,7 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutVendorSettingInput = {
@@ -43782,6 +44107,7 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
@@ -43912,6 +44238,7 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutVendorSettingInput = {
@@ -44057,6 +44384,7 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
@@ -44187,6 +44515,7 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectMasterInput = {
@@ -44316,6 +44645,7 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
@@ -44446,6 +44776,7 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectMasterInput = {
@@ -44591,6 +44922,7 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
@@ -44721,6 +45053,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDefectedItemsInput = {
@@ -44850,6 +45183,7 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
@@ -44980,6 +45314,7 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDefectedItemsInput = {
@@ -45125,6 +45460,7 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
@@ -45255,6 +45591,7 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutFranchisesInput = {
@@ -45384,6 +45721,7 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
@@ -45514,6 +45852,7 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutFranchisesInput = {
@@ -45659,6 +45998,7 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
@@ -45789,6 +46129,7 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -45918,6 +46259,7 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -46048,6 +46390,7 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -46193,6 +46536,7 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -46323,6 +46667,7 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStateInput = {
@@ -46452,6 +46797,7 @@ export type VendorMasterCreateWithoutStateInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStateInput = {
@@ -46582,6 +46928,7 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStateInput = {
@@ -46770,6 +47117,7 @@ export type VendorMasterCreateWithoutThemesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutThemesInput = {
@@ -46900,6 +47248,7 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutThemesInput = {
@@ -47045,6 +47394,7 @@ export type VendorMasterUpdateWithoutThemesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutThemesInput = {
@@ -47175,6 +47525,7 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
@@ -47304,6 +47655,7 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
@@ -47434,6 +47786,7 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutExternalPlatformTokensInput = {
@@ -47579,6 +47932,7 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
@@ -47709,6 +48063,7 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -47838,6 +48193,7 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -47968,6 +48324,7 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -48113,6 +48470,7 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappingsInput = {
@@ -48243,6 +48601,7 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutCompletionPhotosInput = {
@@ -48372,6 +48731,7 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -48502,6 +48862,7 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -48647,6 +49008,7 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -48777,6 +49139,7 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
@@ -48906,6 +49269,7 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
@@ -49036,6 +49400,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesMasterInput = {
@@ -49181,6 +49546,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
@@ -49311,6 +49677,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -49440,6 +49807,7 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInput = {
@@ -49570,6 +49938,7 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsInput = {
@@ -49715,6 +50084,7 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInput = {
@@ -49845,6 +50215,7 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutBrandsInput = {
@@ -49974,6 +50345,7 @@ export type VendorMasterCreateWithoutBrandsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutBrandsInput = {
@@ -50104,6 +50476,7 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutBrandsInput = {
@@ -50249,6 +50622,7 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
@@ -50379,6 +50753,7 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutProductsInput = {
@@ -50508,6 +50883,7 @@ export type VendorMasterCreateWithoutProductsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutProductsInput = {
@@ -50638,6 +51014,7 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutProductsInput = {
@@ -50783,6 +51160,7 @@ export type VendorMasterUpdateWithoutProductsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutProductsInput = {
@@ -50913,6 +51291,7 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseIntentsInput = {
@@ -51042,6 +51421,7 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
@@ -51172,6 +51552,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseIntentsInput = {
@@ -51317,6 +51698,7 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
@@ -51447,6 +51829,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPurchaseOrdersInput = {
@@ -51576,6 +51959,7 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
@@ -51706,6 +52090,7 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPurchaseOrdersInput = {
@@ -51851,6 +52236,7 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
@@ -51981,6 +52367,7 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutGrnsInput = {
@@ -52110,6 +52497,7 @@ export type VendorMasterCreateWithoutGrnsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutGrnsInput = {
@@ -52240,6 +52628,7 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutGrnsInput = {
@@ -52385,6 +52774,7 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
@@ -52515,6 +52905,7 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutDebitCreditNotesInput = {
@@ -52644,6 +53035,7 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
@@ -52774,6 +53166,7 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutDebitCreditNotesInput = {
@@ -52919,6 +53312,7 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
@@ -53049,6 +53443,7 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
@@ -53178,6 +53573,7 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
@@ -53308,6 +53704,7 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutRedeliveryRequestsInput = {
@@ -53453,6 +53850,7 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
@@ -53583,6 +53981,7 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutHsnMappingsInput = {
@@ -53712,6 +54111,7 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
@@ -53842,6 +54242,7 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutHsnMappingsInput = {
@@ -53987,6 +54388,7 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
@@ -54117,6 +54519,7 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutStockHistoriesInput = {
@@ -54246,6 +54649,7 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -54376,6 +54780,7 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -54521,6 +54926,7 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -54651,6 +55057,7 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPaymentTermsInput = {
@@ -54780,6 +55187,7 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
@@ -54910,6 +55318,7 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPaymentTermsInput = {
@@ -55055,6 +55464,7 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
@@ -55185,6 +55595,7 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
@@ -55314,6 +55725,7 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
@@ -55444,6 +55856,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentSchedulesInput = {
@@ -55589,6 +56002,7 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
@@ -55719,6 +56133,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutPoPaymentsInput = {
@@ -55848,6 +56263,7 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
@@ -55978,6 +56394,7 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutPoPaymentsInput = {
@@ -56123,6 +56540,7 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
@@ -56253,6 +56671,7 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutUnitsInput = {
@@ -56382,6 +56801,7 @@ export type VendorMasterCreateWithoutUnitsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutUnitsInput = {
@@ -56512,6 +56932,7 @@ export type VendorMasterUncheckedCreateWithoutUnitsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutUnitsInput = {
@@ -56657,6 +57078,7 @@ export type VendorMasterUpdateWithoutUnitsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
@@ -56787,6 +57209,7 @@ export type VendorMasterUncheckedUpdateWithoutUnitsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateWithoutItemGroupsInput = {
@@ -56916,6 +57339,7 @@ export type VendorMasterCreateWithoutItemGroupsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
@@ -57046,6 +57470,7 @@ export type VendorMasterUncheckedCreateWithoutItemGroupsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
   poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
   units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedCreateNestedManyWithoutVendorInput
 }
 
 export type VendorMasterCreateOrConnectWithoutItemGroupsInput = {
@@ -57191,6 +57616,7 @@ export type VendorMasterUpdateWithoutItemGroupsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
@@ -57321,6 +57747,545 @@ export type VendorMasterUncheckedUpdateWithoutItemGroupsInput = {
   poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterCreateWithoutProductSupplierMappingsInput = {
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingCreateNestedManyWithoutVendorInput
+  state?: Prisma.StateMasterCreateNestedOneWithoutVendorsInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput = {
+  id?: number
+  vendor_name: string
+  vendor_code: string
+  vendor_report_code?: string | null
+  primary_contact_number: string
+  primary_contact_email: string
+  primary_contact_name: string
+  country_code: string
+  head_office_id?: number | null
+  status?: string
+  logo: string
+  time_zone: string
+  subdomain_url?: string | null
+  IsAccountLocInEnabled?: boolean | null
+  is_crm_enabled?: boolean
+  is_custom_doc_nomenclature_enabled?: boolean
+  is_inventory_enabled?: boolean
+  is_tracktrace_enabled?: boolean
+  is_approval_task_enabled?: boolean
+  is_client_visit_enabled?: boolean
+  is_this_vendor_is_custom_usertype_only?: boolean | null
+  is_year_wise_lead_code_enabled?: boolean
+  eligible_booking_days?: number | null
+  is_self_assign_task_type_master_enabed?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  state_id?: number | null
+  accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
+  boxes?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutVendorInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutVendorInput
+  CutList?: Prisma.CutListUncheckedCreateNestedManyWithoutVendorInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  defectMaster?: Prisma.DefectMasterUncheckedCreateNestedManyWithoutVendorMasterInput
+  defectedItems?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutVendorInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedCreateNestedManyWithoutVendorInput
+  franchises?: Prisma.FranchiseMasterUncheckedCreateNestedManyWithoutVendorInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutVendorInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutVendorInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  installers?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutVendorInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  timelineRules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutVendorInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutVendorInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutVendorInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutVendorInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutVendorInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutVendorInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutVendorInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutVendorInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutVendorInput
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutVendorInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutVendorInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutVendorInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutVendorInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutVendorInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutVendorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutVendorInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutVendorInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutVendorInput
+  machineMaster?: Prisma.MachineMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedCreateNestedManyWithoutVendorInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutVendorInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutVendorInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutVendorInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  productStructure?: Prisma.ProductStructureUncheckedCreateNestedManyWithoutVendorInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutVendorInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutVendorInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedCreateNestedManyWithoutVendorInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutVendorInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutVendorInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutVendorInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  sources?: Prisma.SourceMasterUncheckedCreateNestedManyWithoutVendorInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  themes?: Prisma.ThemeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutVendorInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutVendorInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedCreateNestedManyWithoutVendorInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutVendorInput
+  users?: Prisma.UserMasterUncheckedCreateNestedManyWithoutVendorInput
+  userSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutVendorInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutVendorInput
+  addresses?: Prisma.VendorAddressUncheckedCreateNestedManyWithoutVendorInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedCreateNestedManyWithoutVendorInput
+  vendorSetting?: Prisma.VendorSettingUncheckedCreateNestedManyWithoutVendorInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedCreateNestedManyWithoutVendorInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedCreateNestedManyWithoutVendorInput
+  tokens?: Prisma.VendorTokensUncheckedCreateNestedManyWithoutVendorInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutVendorInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutVendorInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedCreateNestedManyWithoutVendorInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutVendorInput
+  brands?: Prisma.BrandMasterUncheckedCreateNestedManyWithoutVendorInput
+  products?: Prisma.ProductMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutVendorInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutVendorInput
+  grns?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutVendorInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutVendorInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutVendorInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedCreateNestedManyWithoutVendorInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutVendorInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedCreateNestedManyWithoutVendorInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedCreateNestedManyWithoutVendorInput
+  poPayments?: Prisma.POPaymentUncheckedCreateNestedManyWithoutVendorInput
+  units?: Prisma.UnitMasterUncheckedCreateNestedManyWithoutVendorInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedCreateNestedManyWithoutVendorInput
+}
+
+export type VendorMasterCreateOrConnectWithoutProductSupplierMappingsInput = {
+  where: Prisma.VendorMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput>
+}
+
+export type VendorMasterUpsertWithoutProductSupplierMappingsInput = {
+  update: Prisma.XOR<Prisma.VendorMasterUpdateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput>
+  create: Prisma.XOR<Prisma.VendorMasterCreateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedCreateWithoutProductSupplierMappingsInput>
+  where?: Prisma.VendorMasterWhereInput
+}
+
+export type VendorMasterUpdateToOneWithWhereWithoutProductSupplierMappingsInput = {
+  where?: Prisma.VendorMasterWhereInput
+  data: Prisma.XOR<Prisma.VendorMasterUpdateWithoutProductSupplierMappingsInput, Prisma.VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput>
+}
+
+export type VendorMasterUpdateWithoutProductSupplierMappingsInput = {
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUpdateManyWithoutVendorNestedInput
+  state?: Prisma.StateMasterUpdateOneWithoutVendorsNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+}
+
+export type VendorMasterUncheckedUpdateWithoutProductSupplierMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_code?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_report_code?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  primary_contact_number?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_email?: Prisma.StringFieldUpdateOperationsInput | string
+  primary_contact_name?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  head_office_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.StringFieldUpdateOperationsInput | string
+  time_zone?: Prisma.StringFieldUpdateOperationsInput | string
+  subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_crm_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_custom_doc_nomenclature_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_inventory_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_tracktrace_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_approval_task_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_visit_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_this_vendor_is_custom_usertype_only?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
+  boxes?: Prisma.BoxMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CompanyVendorsMaster?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  CutList?: Prisma.CutListUncheckedUpdateManyWithoutVendorNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  defectMaster?: Prisma.DefectMasterUncheckedUpdateManyWithoutVendorMasterNestedInput
+  defectedItems?: Prisma.DefectedItemUncheckedUpdateManyWithoutVendorNestedInput
+  documentTypes?: Prisma.DocumentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notificationMasters?: Prisma.EmailNotificationMasterUncheckedUpdateManyWithoutVendorNestedInput
+  franchises?: Prisma.FranchiseMasterUncheckedUpdateManyWithoutVendorNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutVendorNestedInput
+  installationUpdateDocs?: Prisma.InstallationUpdateDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  installers?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  issueLogTypeMaster?: Prisma.IssueLogTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  carcassTypes?: Prisma.CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  shutterTypes?: Prisma.ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  handleTypes?: Prisma.HandleTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  timelineRules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutVendorNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutVendorNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutVendorNestedInput
+  meetingTypes?: Prisma.MeetingTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutVendorNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutVendorNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutVendorNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutVendorNestedInput
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutVendorNestedInput
+  leadAmcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutVendorNestedInput
+  leadSuperAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductMaps?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutVendorNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadServiceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutVendorNestedInput
+  leadUserMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutVendorNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutVendorNestedInput
+  machineMaster?: Prisma.MachineMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousDocument?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTeamMaster?: Prisma.MiscellaneousTeamMasterUncheckedUpdateManyWithoutVendorNestedInput
+  miscellaneousTypeMaster?: Prisma.MiscellaneousTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutVendorNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTypeMaster?: Prisma.PaymentTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productStructure?: Prisma.ProductStructureUncheckedUpdateManyWithoutVendorNestedInput
+  productTypes?: Prisma.ProductTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestTypeMasters?: Prisma.SmallOrderRequestTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  smallOrderRequestDocuments?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutVendorNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutVendorNestedInput
+  projectItems?: Prisma.ProjectItemsMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutVendorNestedInput
+  scanItems?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutVendorNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutVendorNestedInput
+  siteTypes?: Prisma.SiteTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  sources?: Prisma.SourceMasterUncheckedUpdateManyWithoutVendorNestedInput
+  statusTypes?: Prisma.StatusTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  themes?: Prisma.ThemeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userLeadTasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutVendorNestedInput
+  userMachineMapping?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutVendorNestedInput
+  privilegeMasters?: Prisma.PrivilegeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutVendorNestedInput
+  users?: Prisma.UserMasterUncheckedUpdateManyWithoutVendorNestedInput
+  userSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutVendorNestedInput
+  userPushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutVendorNestedInput
+  addresses?: Prisma.VendorAddressUncheckedUpdateManyWithoutVendorNestedInput
+  vendorModulesMappings?: Prisma.VendorModulesMappingUncheckedUpdateManyWithoutVendorNestedInput
+  vendorSetting?: Prisma.VendorSettingUncheckedUpdateManyWithoutVendorNestedInput
+  selfAssignTaskTypeMasters?: Prisma.SelfAssignTaskTypeMasterUncheckedUpdateManyWithoutVendorNestedInput
+  taxInfo?: Prisma.VendorTaxInfoUncheckedUpdateManyWithoutVendorNestedInput
+  tokens?: Prisma.VendorTokensUncheckedUpdateManyWithoutVendorNestedInput
+  externalPlatformTokens?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutVendorNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutVendorNestedInput
+  leadExternalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesMaster?: Prisma.ProjectCategoriesMasterUncheckedUpdateManyWithoutVendorNestedInput
+  projectCategoriesVendorMappings?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutVendorNestedInput
+  brands?: Prisma.BrandMasterUncheckedUpdateManyWithoutVendorNestedInput
+  products?: Prisma.ProductMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseIntents?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutVendorNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutVendorNestedInput
+  grns?: Prisma.GRNMasterUncheckedUpdateManyWithoutVendorNestedInput
+  debitCreditNotes?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutVendorNestedInput
+  redeliveryRequests?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutVendorNestedInput
+  hsnMappings?: Prisma.HsnProductMappingUncheckedUpdateManyWithoutVendorNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutVendorNestedInput
+  paymentTerms?: Prisma.PaymentTermMasterUncheckedUpdateManyWithoutVendorNestedInput
+  poPaymentSchedules?: Prisma.POPaymentScheduleUncheckedUpdateManyWithoutVendorNestedInput
+  poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
+  units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
+  itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterCreateManyStateInput = {
@@ -57479,6 +58444,7 @@ export type VendorMasterUpdateWithoutStateInput = {
   poPayments?: Prisma.POPaymentUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateWithoutStateInput = {
@@ -57609,6 +58575,7 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   poPayments?: Prisma.POPaymentUncheckedUpdateManyWithoutVendorNestedInput
   units?: Prisma.UnitMasterUncheckedUpdateManyWithoutVendorNestedInput
   itemGroups?: Prisma.ItemGroupMasterUncheckedUpdateManyWithoutVendorNestedInput
+  productSupplierMappings?: Prisma.ProductSupplierMappingUncheckedUpdateManyWithoutVendorNestedInput
 }
 
 export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
@@ -57747,6 +58714,7 @@ export type VendorMasterCountOutputType = {
   poPayments: number
   units: number
   itemGroups: number
+  productSupplierMappings: number
 }
 
 export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -57851,6 +58819,7 @@ export type VendorMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Exte
   poPayments?: boolean | VendorMasterCountOutputTypeCountPoPaymentsArgs
   units?: boolean | VendorMasterCountOutputTypeCountUnitsArgs
   itemGroups?: boolean | VendorMasterCountOutputTypeCountItemGroupsArgs
+  productSupplierMappings?: boolean | VendorMasterCountOutputTypeCountProductSupplierMappingsArgs
 }
 
 /**
@@ -58570,6 +59539,13 @@ export type VendorMasterCountOutputTypeCountItemGroupsArgs<ExtArgs extends runti
   where?: Prisma.ItemGroupMasterWhereInput
 }
 
+/**
+ * VendorMasterCountOutputType without action
+ */
+export type VendorMasterCountOutputTypeCountProductSupplierMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProductSupplierMappingWhereInput
+}
+
 
 export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -58701,6 +59677,7 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   poPayments?: boolean | Prisma.VendorMaster$poPaymentsArgs<ExtArgs>
   units?: boolean | Prisma.VendorMaster$unitsArgs<ExtArgs>
   itemGroups?: boolean | Prisma.VendorMaster$itemGroupsArgs<ExtArgs>
+  productSupplierMappings?: boolean | Prisma.VendorMaster$productSupplierMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["vendorMaster"]>
 
@@ -58900,6 +59877,7 @@ export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.Interna
   poPayments?: boolean | Prisma.VendorMaster$poPaymentsArgs<ExtArgs>
   units?: boolean | Prisma.VendorMaster$unitsArgs<ExtArgs>
   itemGroups?: boolean | Prisma.VendorMaster$itemGroupsArgs<ExtArgs>
+  productSupplierMappings?: boolean | Prisma.VendorMaster$productSupplierMappingsArgs<ExtArgs>
   _count?: boolean | Prisma.VendorMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VendorMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -59014,6 +59992,7 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     poPayments: Prisma.$POPaymentPayload<ExtArgs>[]
     units: Prisma.$UnitMasterPayload<ExtArgs>[]
     itemGroups: Prisma.$ItemGroupMasterPayload<ExtArgs>[]
+    productSupplierMappings: Prisma.$ProductSupplierMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -59539,6 +60518,7 @@ export interface Prisma__VendorMasterClient<T, Null = never, ExtArgs extends run
   poPayments<T extends Prisma.VendorMaster$poPaymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$poPaymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   units<T extends Prisma.VendorMaster$unitsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$unitsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UnitMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   itemGroups<T extends Prisma.VendorMaster$itemGroupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$itemGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ItemGroupMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  productSupplierMappings<T extends Prisma.VendorMaster$productSupplierMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMaster$productSupplierMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSupplierMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -62436,6 +63416,30 @@ export type VendorMaster$itemGroupsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ItemGroupMasterScalarFieldEnum | Prisma.ItemGroupMasterScalarFieldEnum[]
+}
+
+/**
+ * VendorMaster.productSupplierMappings
+ */
+export type VendorMaster$productSupplierMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProductSupplierMapping
+   */
+  select?: Prisma.ProductSupplierMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProductSupplierMapping
+   */
+  omit?: Prisma.ProductSupplierMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProductSupplierMappingInclude<ExtArgs> | null
+  where?: Prisma.ProductSupplierMappingWhereInput
+  orderBy?: Prisma.ProductSupplierMappingOrderByWithRelationInput | Prisma.ProductSupplierMappingOrderByWithRelationInput[]
+  cursor?: Prisma.ProductSupplierMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProductSupplierMappingScalarFieldEnum | Prisma.ProductSupplierMappingScalarFieldEnum[]
 }
 
 /**

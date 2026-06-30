@@ -189,7 +189,8 @@ export const ModelName = {
   POPaymentSchedule: 'POPaymentSchedule',
   POPayment: 'POPayment',
   UnitMaster: 'UnitMaster',
-  ItemGroupMaster: 'ItemGroupMaster'
+  ItemGroupMaster: 'ItemGroupMaster',
+  ProductSupplierMapping: 'ProductSupplierMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2138,7 +2139,6 @@ export const ProductMasterScalarFieldEnum = {
   consumption_unit_id: 'consumption_unit_id',
   shelf_life_days: 'shelf_life_days',
   costing_method: 'costing_method',
-  mrp: 'mrp',
   min_stock_qty: 'min_stock_qty',
   min_stock_unit_id: 'min_stock_unit_id',
   max_stock_qty: 'max_stock_qty',
@@ -2547,6 +2547,23 @@ export const ItemGroupMasterScalarFieldEnum = {
 } as const
 
 export type ItemGroupMasterScalarFieldEnum = (typeof ItemGroupMasterScalarFieldEnum)[keyof typeof ItemGroupMasterScalarFieldEnum]
+
+
+export const ProductSupplierMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_id: 'product_id',
+  company_vendor_id: 'company_vendor_id',
+  supplier_item_code: 'supplier_item_code',
+  amount: 'amount',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappingScalarFieldEnum)[keyof typeof ProductSupplierMappingScalarFieldEnum]
 
 
 export const SortOrder = {
