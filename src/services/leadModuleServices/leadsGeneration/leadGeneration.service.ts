@@ -1235,6 +1235,7 @@ export const getLeadById = async (
       lead: {
         ...lead,
         has_pending_fast_production_request: !!pendingFastProductionRequest,
+        fast_production_request: !!pendingFastProductionRequest,
         smallOrderRequest:
           linkedSmallOrderRequestWithDocs && isSmallOrderRequestLead
             ? linkedSmallOrderRequestWithDocs

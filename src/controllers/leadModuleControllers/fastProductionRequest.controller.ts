@@ -248,7 +248,6 @@ export const getFastProductionDetailsController = async (
   try {
     const leadId = Number(req.params.leadId);
     const vendorId = Number(req.params.vendorId);
-    const franchiseId = req.query.franchise_id ? Number(req.query.franchise_id) : undefined;
 
     if (!leadId || !vendorId) {
       return res
@@ -256,36 +255,21 @@ export const getFastProductionDetailsController = async (
         .json(ApiResponse.error("leadId and vendorId are required", 400));
     }
 
-    const requests = await prisma.fastProductionRequest.findMany({
-      where: {
-        lead_id: leadId,
-        vendor_id: vendorId,
-        ...(franchiseId ? { franchise_id: franchiseId } : {}),
-        status: {
-          not: "draft"
-        }
-      },
-      select: {
-        id: true,
-        lead_id: true,
-        instance_id: true,
-        tentative_order_login_date: true,
-        client_required_delivery_date: true,
-        status: true,
-        instance: {
-          select: {
-            title: true,
-          }
-        }
-      },
-      orderBy: {
-        instance_id: "asc"
-      }
-    });
+    const result = await getLatestActiveFastProductionBatchDetails(leadId);
+
+    if (!result) {
+      return res.status(200).json(
+        ApiResponse.success(
+          null,
+          "No active fast production request found",
+          200
+        )
+      );
+    }
 
     return res.status(200).json(
       ApiResponse.success(
-        requests,
+        result,
         "Fast production details retrieved successfully",
         200,
       ),
