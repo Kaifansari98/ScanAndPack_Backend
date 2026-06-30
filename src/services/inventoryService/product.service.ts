@@ -1,5 +1,4 @@
-import { Prisma } from "@prisma/client";
-import { prisma } from "../../prisma/client";
+import { prisma,Prisma } from '../../prisma/client';
 import { validationResponse } from "../../utils/validationResponse";
 
 type ProductPayload = {
