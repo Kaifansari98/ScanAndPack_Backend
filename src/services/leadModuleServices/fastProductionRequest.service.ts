@@ -867,14 +867,6 @@ export const finalizeFastProductionRequestBatch = async (
         ? [
           {
             batch_id: batch.id,
-            approver_role: "SUPER_ADMIN" as const,
-            approver_user_id: superAdminUser.id,
-            status: "approved" as const,
-            remark: "Auto-approved because the requester is super-admin",
-            acted_at: new Date(),
-          },
-          {
-            batch_id: batch.id,
             approver_role: "FACTORY_ADMIN" as const,
             approver_user_id: factoryUser.id,
           },
