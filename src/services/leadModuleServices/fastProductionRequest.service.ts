@@ -1007,12 +1007,6 @@ export const actOnFastProductionRequestTask = async (
     throw new Error("Remark is required when rejecting a fast production request");
   }
 
-  if (value.action === "approve" && !value.production_target_date) {
-    throw new Error(
-      "Production target date is required when approving a fast production request",
-    );
-  }
-
   const actor = await prisma.userMaster.findUnique({
     where: { id: value.acted_by },
     select: {
@@ -1032,6 +1026,16 @@ export const actOnFastProductionRequestTask = async (
   }
 
   const actorRole = normalizeRole(actor.user_type.user_type);
+
+  if (
+    value.action === "approve" &&
+    !value.production_target_date &&
+    actorRole !== "super-admin"
+  ) {
+    throw new Error(
+      "Production target date is required when approving a fast production request",
+    );
+  }
 
   const task = await prisma.userLeadTask.findFirst({
     where: {
