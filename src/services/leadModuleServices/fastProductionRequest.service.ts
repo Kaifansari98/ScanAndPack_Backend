@@ -1678,3 +1678,105 @@ export const getFastProductionRequestDraft = async (
     requests: requestsWithSignedUrls,
   };
 };
+
+export const getLatestActiveFastProductionBatchDetails = async (
+  leadId: number,
+) => {
+  const batch: any = await prisma.fastProductionRequestBatch.findFirst({
+    where: {
+      lead_id: leadId,
+      status: {
+        in: ["approved", "pending_approvals", "draft"],
+      },
+    },
+    orderBy: {
+      id: "desc",
+    },
+    include: {
+      requester: {
+        select: {
+          id: true,
+          user_name: true,
+          user_email: true,
+        },
+      },
+      lead: {
+        select: {
+          id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+        },
+      },
+      requests: {
+        include: {
+          instance: {
+            select: {
+              id: true,
+              title: true,
+              productStructure: {
+                select: {
+                  type: true,
+                },
+              },
+            },
+          },
+          finishes: true,
+          documents: {
+            include: {
+              document: true,
+            },
+          },
+        },
+        orderBy: {
+          instance_id: "asc",
+        },
+      },
+      approvals: {
+        include: {
+          approver: {
+            select: {
+              id: true,
+              user_name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!batch) {
+    return null;
+  }
+
+  // Generate signed URLs for documents
+  const requestsWithSignedUrls = await Promise.all(
+    batch.requests.map(async (req: any) => {
+      const documentsWithUrls = await Promise.all(
+        req.documents.map(async (docMapping: any) => {
+          const signedUrl = await generateSignedUrl(
+            docMapping.document.doc_sys_name,
+            3600,
+            "inline",
+          ).catch(() => null);
+          return {
+            ...docMapping,
+            document: {
+              ...docMapping.document,
+              signedUrl,
+            },
+          };
+        }),
+      );
+      return {
+        ...req,
+        documents: documentsWithUrls,
+      };
+    }),
+  );
+
+  return {
+    ...batch,
+    requests: requestsWithSignedUrls,
+  };
+};

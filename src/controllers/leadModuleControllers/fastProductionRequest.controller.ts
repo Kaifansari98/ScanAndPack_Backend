@@ -12,6 +12,7 @@ import {
   getFastProductionRequestDetails,
   revokeFastProductionRequest,
   RevokeFastProductionInput,
+  getLatestActiveFastProductionBatchDetails,
 } from "../../services/leadModuleServices/fastProductionRequest.service";
 import { prisma } from "../../prisma/client";
 
