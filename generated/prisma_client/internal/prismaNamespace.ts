@@ -11190,6 +11190,7 @@ export const VendorMasterScalarFieldEnum = {
   is_client_visit_enabled: 'is_client_visit_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
+  handlesLargeScaleProjects: 'handlesLargeScaleProjects',
   eligible_booking_days: 'eligible_booking_days',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
   createdAt: 'createdAt',

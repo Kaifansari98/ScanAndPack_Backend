@@ -261,6 +261,7 @@ export class LeadController {
       const files = (req.files as Express.Multer.File[]) || [];
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
+      const numericVendorId = Number(vendor_id);
       let productStructureInstances = req.body.product_structure_instances;
 
       if (typeof productStructureInstances === "string") {
@@ -275,19 +276,31 @@ export class LeadController {
       }
 
       // 1. Resolve the vendor's Open status ID dynamically
-      const openStatus = await prisma.statusTypeMaster.findFirst({
-        where: {
-          vendor_id: Number(vendor_id),
-          tag: "Type 1", // ✅ Open status
-        },
-        select: { id: true },
-      });
+      const [vendor, openStatus] = await Promise.all([
+        prisma.vendorMaster.findUnique({
+          where: { id: numericVendorId },
+          select: { handlesLargeScaleProjects: true },
+        }),
+        prisma.statusTypeMaster.findFirst({
+          where: {
+            vendor_id: numericVendorId,
+            tag: "Type 1", // ✅ Open status
+          },
+          select: { id: true },
+        }),
+      ]);
+
+      if (!vendor) {
+        throw new Error(`Vendor ${vendor_id} not found`);
+      }
 
       if (!openStatus) {
         throw new Error(
           `Open status (Type 1) not found for vendor ${vendor_id}`,
         );
       }
+
+      const requiresFurnitureSelection = !vendor.handlesLargeScaleProjects;
 
       const payload = {
         ...req.body,
@@ -296,7 +309,7 @@ export class LeadController {
           : undefined,
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id) || undefined,
-        vendor_id: Number(req.body.vendor_id),
+        vendor_id: numericVendorId,
         franchise_id: Number(req.body.franchise_id),
         created_by: Number(req.body.created_by),
         priority: getSingleBodyValue(req.body.priority)?.trim() || undefined,
@@ -319,8 +332,20 @@ export class LeadController {
         site_map_link: req.body.site_map_link || null,
       };
 
+      if (!requiresFurnitureSelection) {
+        payload.product_types = undefined;
+        payload.product_structures = undefined;
+        payload.product_structure_instances = undefined;
+      }
+
       // 🧩 Use draft or full schema dynamically
-      const schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
+      let schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
+      if (!draftMode && !requiresFurnitureSelection) {
+        schemaToUse = schemaToUse.fork(
+          ["product_types", "product_structures"],
+          (schema) => schema.optional(),
+        );
+      }
 
       const { error, value } = schemaToUse.validate(payload, {
         convert: true,
