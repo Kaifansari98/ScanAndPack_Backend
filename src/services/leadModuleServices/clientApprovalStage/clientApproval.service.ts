@@ -200,7 +200,7 @@ export class ClientApprovalService {
           }),
         ]);
 
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: data.vendor_id,
           franchiseId: leadInfo?.franchise_id ?? null,
           excludeUserId: data.created_by,
@@ -244,6 +244,7 @@ export class ClientApprovalService {
             await sendPaymentAddedEmail({
               vendor_id: data.vendor_id,
               franchise_id: franchiseId,
+              allowSuperAdmin: isSuperAdminFallback,
               toEmail: admin.user_email,
               toName: admin.user_name ?? undefined,
               leadCode,
@@ -609,7 +610,6 @@ export class ClientApprovalService {
     account_id: number;
     assign_to_user_id: number;
     created_by: number;
-    required_date: Date;
   }) {
     const response: any = {};
 
@@ -625,13 +625,12 @@ export class ClientApprovalService {
       );
     }
 
-    // Step 2. Update lead status + store date
+    // Step 2. Update lead status
     const updatedLead = await prisma.leadMaster.update({
       where: { id: data.lead_id },
       data: {
         status_id: techCheckStatus.id,
         tech_check_reached_at: new Date(),
-        client_required_order_login_complition_date: data.required_date,
         updated_by: data.created_by,
         updated_at: new Date(),
       },

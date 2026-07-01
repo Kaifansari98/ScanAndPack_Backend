@@ -779,7 +779,7 @@ export class DispatchPlanningService {
       );
 
       // Admins — franchise-filtered, no super-admin
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: lead.vendor_id,
         franchiseId,
         excludeUserId: actorId,

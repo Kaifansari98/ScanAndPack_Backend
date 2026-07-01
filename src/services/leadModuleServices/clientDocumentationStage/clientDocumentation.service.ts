@@ -425,7 +425,7 @@ export class ClientDocumentationService {
       const redirectPath = `/dashboard/leads/deails/${data.lead_id}?accountId=${leadInfo.account_id}`;
 
       // Fetch active admins
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: leadInfo.vendor_id,
         franchiseId: leadInfo.franchise_id ?? null,
         excludeUserId: data.updated_by,

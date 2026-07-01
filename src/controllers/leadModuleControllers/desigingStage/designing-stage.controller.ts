@@ -2089,6 +2089,8 @@ export class DesigingStageController {
           status_id: true,
           is_amc_opted: true,
           amc_opted_at: true,
+          is_fast_production: true,
+          client_required_order_login_complition_date: true,
           total_required_chs_manufacturing_days: true,
           statusType: {
             select: {
@@ -2113,6 +2115,9 @@ export class DesigingStageController {
           status_tag: lead.statusType?.tag,
           is_amc_opted: lead.is_amc_opted,
           amc_opted_at: lead.amc_opted_at,
+          is_fast_production: lead.is_fast_production,
+          client_required_order_login_complition_date:
+            lead.client_required_order_login_complition_date,
           total_required_chs_manufacturing_days:
             lead.total_required_chs_manufacturing_days,
         },

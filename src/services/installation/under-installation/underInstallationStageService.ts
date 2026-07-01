@@ -241,7 +241,7 @@ export class UnderInstallationStageService {
       const projectUrl = `${baseUrl}${redirectPath}`;
 
       // Admins — franchise-filtered, no super-admin
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: lead.vendor_id,
         franchiseId,
         excludeUserId: actorId,
@@ -3294,7 +3294,7 @@ export class UnderInstallationStageService {
       ]);
 
       const recipientMap = new Map<number, { id: number; user_name: string | null; user_email: string | null }>();
-      for (const u of [...admins, ...salesExecutives]) recipientMap.set(u.id, u);
+      for (const u of [...admins.recipients, ...salesExecutives]) recipientMap.set(u.id, u);
       const recipients = Array.from(recipientMap.values());
 
       if (!recipients.length) return result;
@@ -3334,6 +3334,7 @@ export class UnderInstallationStageService {
           if (user.user_email) {
             await sendLeadMovedToFinalHandoverEmail({
               vendor_id: vendorId,
+              allowSuperAdmin: admins.isSuperAdminFallback,
               toEmail: user.user_email,
               toName: user.user_name ?? undefined,
               leadCode,
@@ -3476,23 +3477,6 @@ export class UnderInstallationStageService {
     return "Installation requirements not met.";
   }
 
-  private async checkMiscellaneous(vendorId: number, leadId: number) {
-    const pending = await prisma.miscellaneousMaster.count({
-      where: {
-        vendor_id: vendorId,
-        lead_id: leadId,
-        is_resolved: false,
-      },
-    });
-
-    return {
-      ok: pending === 0,
-      msg:
-        pending === 0
-          ? null
-          : "Miscellaneous items are still pending to be resolved.",
-    };
-  }
 
   private async checkRequiredDocuments(vendorId: number, leadId: number) {
     const requiredTags = ["Type 25", "Type 26"]; // Final Site + Handover Docs
@@ -3533,14 +3517,6 @@ export class UnderInstallationStageService {
         step: "installationBase",
       };
 
-    // Step 2: Miscellaneous
-    const misc = await this.checkMiscellaneous(vendorId, leadId);
-    if (!misc.ok)
-      return {
-        isReady: false,
-        message: misc.msg,
-        step: "miscPending",
-      };
 
     // Step 3: Documents
     const docs = await this.checkRequiredDocuments(vendorId, leadId);

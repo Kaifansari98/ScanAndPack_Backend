@@ -60,6 +60,7 @@ const renderTemplate = (template: string, values: Record<string, string>) => {
 //  backend user email
 // 2
 export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -251,6 +252,7 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -262,6 +264,7 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
 };
 // 3
 export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -444,6 +447,7 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -455,6 +459,7 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
 };
 // 4
 export const sendOrderLoginReminderEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -642,6 +647,7 @@ export const sendOrderLoginReminderEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -653,6 +659,7 @@ export const sendOrderLoginReminderEmail = async (payload: {
 };
 // 5
 export const sendOrderLoginCompletedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -829,6 +836,7 @@ export const sendOrderLoginCompletedEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -840,6 +848,7 @@ export const sendOrderLoginCompletedEmail = async (payload: {
 };
 //6
 export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -994,6 +1003,7 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1006,6 +1016,7 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
 
 // 9
 export const sendUnderInstallationAssignedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1178,6 +1189,7 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1191,6 +1203,7 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
 // factory user email
 // 1
 export const sendLeadMovedToDispatchEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1395,6 +1408,7 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1407,6 +1421,7 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
 
 // types
 export type TechCheckAssignedEmailPayload = {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1600,6 +1615,7 @@ export const sendTechCheckAssignedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1611,6 +1627,7 @@ export const sendTechCheckAssignedEmail = async (
 };
 
 export const sendSiteSupervisorAssignedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1722,10 +1739,12 @@ export const sendSiteSupervisorAssignedEmail = async (payload: {
   const text = template ? renderTemplate(template.text, templateValues) : defaultText;
   const html = template ? renderTemplate(template.html, templateValues) : defaultHtml;
 
-  return sendBrevoEmail({ toEmail: payload.toEmail, toName: payload.toName, subject, text, html }, identity);
+  return sendBrevoEmail({ allowSuperAdmin: payload.allowSuperAdmin,
+      toEmail: payload.toEmail, toName: payload.toName, subject, text, html }, identity);
 };
 
 export const sendBookingDoneApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1839,6 +1858,7 @@ export const sendBookingDoneApprovedEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1850,6 +1870,7 @@ export const sendBookingDoneApprovedEmail = async (payload: {
 };
 
 export const sendOrderLoginApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -1967,6 +1988,7 @@ export const sendOrderLoginApprovedEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1978,6 +2000,7 @@ export const sendOrderLoginApprovedEmail = async (payload: {
 };
 
 export const sendDispatchPlanningApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   toName?: string;
@@ -2095,6 +2118,7 @@ export const sendDispatchPlanningApprovedEmail = async (payload: {
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2106,6 +2130,7 @@ export const sendDispatchPlanningApprovedEmail = async (payload: {
 };
 
 export interface SmallOrderRequestSiteSupervisorApprovalEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   site_supervisor_name: string;
@@ -2261,6 +2286,7 @@ export const sendSmallOrderRequestSiteSupervisorApprovalEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.site_supervisor_name,
       subject,
@@ -2272,6 +2298,7 @@ export const sendSmallOrderRequestSiteSupervisorApprovalEmail = async (
 };
 
 export interface SmallOrderRequestStoreAdminApprovalEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   store_admin_name: string;
@@ -2427,6 +2454,7 @@ export const sendSmallOrderRequestStoreAdminApprovalEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.store_admin_name,
       subject,
@@ -2442,6 +2470,7 @@ export const sendSmallOrderRequestStoreAdminApprovalEmail = async (
 // ==========================================
 
 export interface SmallOrderRequestSupervisorApprovedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -2596,6 +2625,7 @@ export const sendSmallOrderRequestSupervisorApprovedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -2607,6 +2637,7 @@ export const sendSmallOrderRequestSupervisorApprovedEmail = async (
 };
 
 export interface SmallOrderRequestSupervisorRejectedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -2764,6 +2795,7 @@ export const sendSmallOrderRequestSupervisorRejectedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -2779,6 +2811,7 @@ export const sendSmallOrderRequestSupervisorRejectedEmail = async (
 // ==========================================
 
 export interface SmallOrderRequestAdminApprovedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -2933,6 +2966,7 @@ export const sendSmallOrderRequestAdminApprovedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -2944,6 +2978,7 @@ export const sendSmallOrderRequestAdminApprovedEmail = async (
 };
 
 export interface SmallOrderRequestAdminRejectedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -3101,6 +3136,7 @@ export const sendSmallOrderRequestAdminRejectedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -3112,6 +3148,7 @@ export const sendSmallOrderRequestAdminRejectedEmail = async (
 };
 
 export interface NewSmallOrderLeadAssignedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   order_login_user_name: string;
@@ -3260,6 +3297,7 @@ export const sendNewSmallOrderLeadAssignedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.order_login_user_name,
       subject,
@@ -3271,6 +3309,7 @@ export const sendNewSmallOrderLeadAssignedEmail = async (
 };
 
 export interface SmallOrderRequestFullyApprovedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -3423,6 +3462,7 @@ export const sendSmallOrderRequestFullyApprovedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -3434,6 +3474,7 @@ export const sendSmallOrderRequestFullyApprovedEmail = async (
 };
 
 export interface SmallOrderSentToPreProductionEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   pre_production_user_name: string;
@@ -3582,6 +3623,7 @@ export const sendSmallOrderSentToPreProductionEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.pre_production_user_name,
       subject,
@@ -3593,6 +3635,7 @@ export const sendSmallOrderSentToPreProductionEmail = async (
 };
 
 export interface SmallOrderSentToFactoryEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   factory_user_name: string;
@@ -3741,6 +3784,7 @@ export const sendSmallOrderSentToFactoryEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.factory_user_name,
       subject,
@@ -3752,6 +3796,7 @@ export const sendSmallOrderSentToFactoryEmail = async (
 };
 
 export interface SmallOrderProductionCompletedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -3900,6 +3945,7 @@ export const sendSmallOrderProductionCompletedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,
@@ -3911,6 +3957,7 @@ export const sendSmallOrderProductionCompletedEmail = async (
 };
 
 export interface SmallOrderReadyForDispatchEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   factory_user_name: string;
@@ -4059,6 +4106,7 @@ export const sendSmallOrderReadyForDispatchEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.factory_user_name,
       subject,
@@ -4070,6 +4118,7 @@ export const sendSmallOrderReadyForDispatchEmail = async (
 };
 
 export interface SmallOrderDispatchedForInstallationEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   site_supervisor_name: string;
@@ -4225,6 +4274,7 @@ export const sendSmallOrderDispatchedForInstallationEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.site_supervisor_name,
       subject,
@@ -4236,6 +4286,7 @@ export const sendSmallOrderDispatchedForInstallationEmail = async (
 };
 
 export interface SmallOrderDispatchedEmailPayload {
+  allowSuperAdmin?: boolean;
   vendor_id: number;
   toEmail: string;
   sales_executive_name: string;
@@ -4391,6 +4442,7 @@ export const sendSmallOrderDispatchedEmail = async (
 
   return sendBrevoEmail(
     {
+      allowSuperAdmin: payload.allowSuperAdmin,
       toEmail: payload.toEmail,
       toName: payload.sales_executive_name,
       subject,

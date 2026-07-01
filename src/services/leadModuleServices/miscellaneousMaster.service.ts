@@ -182,6 +182,8 @@ export const getPendingMiscellaneousLeads = async (
     source?: Array<number | string>;
     date_range?: { from: string; to: string };
   } = {},
+  userId?: number,
+  userType?: string
 ): Promise<{ leads: any[]; count: number }> => {
   const skip = (page - 1) * limit;
 
@@ -189,11 +191,29 @@ export const getPendingMiscellaneousLeads = async (
   // STEP 1 → Get Lead IDs having pending Misc
   // ===============================
 
+  const leadFilter: any = {};
+  if (franchiseId) leadFilter.franchise_id = franchiseId;
+  
+  // We need to fetch mapped leads first if we have a restrictive user
+  let mappedLeadIds: number[] = [];
+  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: { user_id: userId, vendor_id: vendorId, status: "active" },
+      select: { lead_id: true }
+    });
+    mappedLeadIds = mappedLeads.map((m) => m.lead_id);
+
+    leadFilter.OR = [
+      { assign_to: userId },
+      { id: { in: mappedLeadIds } }
+    ];
+  }
+
   const miscLeadIds = await prisma.miscellaneousMaster.findMany({
     where: {
       vendor_id: vendorId,
       is_resolved: false,
-      ...(franchiseId ? { lead: { franchise_id: franchiseId } } : {}),
+      ...(Object.keys(leadFilter).length > 0 ? { lead: leadFilter } : {}),
     },
     select: { lead_id: true },
     distinct: ["lead_id"],
@@ -218,6 +238,15 @@ export const getPendingMiscellaneousLeads = async (
     if (!where.AND) where.AND = [];
     (where.AND as Prisma.LeadMasterWhereInput[]).push(condition);
   };
+
+  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+    addAnd({
+      OR: [
+        { assign_to: userId },
+        { id: { in: mappedLeadIds } }
+      ]
+    });
+  }
 
   const contains = (value?: string) =>
     value ? { contains: value, mode: "insensitive" as const } : undefined;
@@ -397,13 +426,32 @@ export const getPendingMiscellaneousLeads = async (
 export const getPendingMiscellaneousLeadCountService = async (
   vendorId: number,
   franchiseId?: number,
+  userId?: number,
+  userType?: string
 ): Promise<number> => {
+
+  const leadFilter: any = {};
+  if (franchiseId) leadFilter.franchise_id = franchiseId;
+  
+  if (userId && !["admin", "super-admin", "auditor"].includes(userType || "")) {
+    // Get leads mapped to this user (e.g. site-supervisor, factory, backend)
+    const mappedLeads = await prisma.leadUserMapping.findMany({
+      where: { user_id: userId, vendor_id: vendorId, status: "active" },
+      select: { lead_id: true }
+    });
+    const mappedLeadIds = mappedLeads.map((m) => m.lead_id);
+
+    leadFilter.OR = [
+      { assign_to: userId },
+      { id: { in: mappedLeadIds } }
+    ];
+  }
 
   const result = await prisma.miscellaneousMaster.findMany({
     where: {
       vendor_id: vendorId,
       is_resolved: false,
-      ...(franchiseId ? { lead: { franchise_id: franchiseId } } : {}),
+      ...(Object.keys(leadFilter).length > 0 ? { lead: leadFilter } : {}),
     },
     select: { lead_id: true },
     distinct: ["lead_id"],

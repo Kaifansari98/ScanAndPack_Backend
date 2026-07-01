@@ -106,6 +106,7 @@ export class TechCheckController {
       const {
         assign_to_user_id,
         account_id,
+        client_required_order_login_complition_date,
         product_structure_instance_id,
       } = req.body;
 
@@ -123,6 +124,9 @@ export class TechCheckController {
             userId,
             Number(assign_to_user_id || 0),
             Number(account_id || 0),
+            client_required_order_login_complition_date
+              ? new Date(client_required_order_login_complition_date)
+              : undefined,
             baseUrl,
             instanceId
           );
@@ -157,6 +161,9 @@ export class TechCheckController {
         userId,
         Number(assign_to_user_id),
         Number(account_id),
+        client_required_order_login_complition_date
+          ? new Date(client_required_order_login_complition_date)
+          : undefined,
         baseUrl,
         undefined
       );

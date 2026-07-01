@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import {
   getAllCarcassTypes,
+  getFastProductionTimelineRules,
   getAllHandleTypes,
   getAllShutterTypes,
 } from "../../services/leadModuleServices/selectionMaster.service";
@@ -45,6 +46,21 @@ export const fetchAllHandleTypes = async (req: Request, res: Response) => {
 
     const types = await getAllHandleTypes(vendor_id);
     return res.status(200).json({ success: true, data: types });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchFastProductionTimelineRules = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const rules = await getFastProductionTimelineRules(vendor_id);
+    return res.status(200).json({ success: true, data: rules });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }

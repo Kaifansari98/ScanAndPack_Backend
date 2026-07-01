@@ -119,6 +119,8 @@ model VendorMaster {
   taxInfo                             VendorTaxInfo[]
   tokens                              VendorTokens[]
   externalPlatformTokens              ExternalPlatformToken[]
+  fastProductionRequests              FastProductionRequest[]
+  fastProductionRequestBatches        FastProductionRequestBatch[]
 
   completionPhotos                     DefectCompletionPhoto[]
   leadExternalPlatformCustomerMappings LeadExternalPlatformCustomerMapping[]
@@ -292,6 +294,17 @@ model UserMaster {
   leadServiceSchedulesUpdated                LeadServiceSchedule[]                  @relation("LeadServiceScheduleUpdatedBy")
   leadServiceSchedulesCompleted              LeadServiceSchedule[]                  @relation("LeadServiceScheduleCompletedBy")
   leadServiceSchedulesRejected               LeadServiceSchedule[]                  @relation("LeadServiceScheduleRejectedBy")
+  fastProductionRequestsAsRequester          FastProductionRequest[]                @relation("FastProductionRequester")
+  fastProductionRequestsCreated              FastProductionRequest[]                @relation("FastProductionCreatedBy")
+  fastProductionRequestsUpdated              FastProductionRequest[]                @relation("FastProductionUpdatedBy")
+  fastProductionRequestsRevoked              FastProductionRequest[]                @relation("FastProductionRevokedBy")
+  fastProductionRequestBatchesAsRequester    FastProductionRequestBatch[]           @relation("FastProductionBatchRequester")
+  fastProductionRequestBatchesCreated        FastProductionRequestBatch[]           @relation("FastProductionBatchCreatedBy")
+  fastProductionRequestBatchesUpdated        FastProductionRequestBatch[]           @relation("FastProductionBatchUpdatedBy")
+  fastProductionRequestBatchesRevoked        FastProductionRequestBatch[]           @relation("FastProductionBatchRevokedBy")
+  fastProductionApprovals                    FastProductionApproval[]               @relation("FastProductionApprover")
+  fastProductionRequestDocumentsCreated      FastProductionRequestDocument[]        @relation("FastProductionDocCreatedBy")
+  fastProductionStatusLogs                   FastProductionStatusLog[]              @relation("FastProductionStatusActor")
   franchise                                  FranchiseMaster?                       @relation(fields: [franchise_id], references: [id])
   user_type                                  UserTypeMaster                         @relation(fields: [user_type_id], references: [id])
   vendor                                     VendorMaster                           @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -569,6 +582,7 @@ model LeadMaster {
   is_small_order_request                      Boolean                               @default(false)
   is_client_approval_submitted                Boolean                               @default(false)
   client_required_order_login_complition_date DateTime?
+  tentative_order_login_date                  DateTime?
   expected_order_login_ready_date             DateTime?
   no_of_client_documents_initially_submitted  Int?
   hardware_packing_details_remark             String?                               @db.VarChar(2000)
@@ -581,6 +595,9 @@ model LeadMaster {
   onsite_contact_person_name                  String?
   onsite_contact_person_number                String?
   required_date_for_dispatch                  DateTime?
+  is_fast_production                         Boolean                               @default(false)
+  fast_production_status                     FastProductionRequestStatus?
+  fast_production_approved_at                DateTime?
   alt_onsite_contact_person_name              String?
   alt_onsite_contact_person_number            String?
   dispatch_date                               DateTime?
@@ -660,6 +677,8 @@ model LeadMaster {
   externalPlatformCustomerMappings            LeadExternalPlatformCustomerMapping[]
   projectDetails                              ProjectDetails[]
   BoxMaster                                   BoxMaster[]
+  fastProductionRequests                      FastProductionRequest[]
+  fastProductionRequestBatches                FastProductionRequestBatch[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
 }
@@ -793,6 +812,8 @@ model AccountMaster {
   payments                            PaymentInfo[]
   siteReadiness                       SiteReadiness[]
   tasks                               UserLeadTask[]
+  fastProductionRequests              FastProductionRequest[]
+  fastProductionRequestBatches        FastProductionRequestBatch[]
 }
 
 model LeadProductMapping {
@@ -860,12 +881,14 @@ model TimelineRule {
   id                         Int               @id @default(autoincrement())
   vendor_id                  Int
   carcass_id                 Int
-  shutter_id                 Int
+  shutter_id                 Int?
   kitchen_manufacturing_days Int
   other_manufacturing_days   Int
+  kitchen_manufacturing_days_for_fast_production Int?
+  other_manufacturing_days_for_fast_production   Int?
   created_at                 DateTime          @default(now())
   carcass                    CarcassTypeMaster @relation(fields: [carcass_id], references: [id], onDelete: Cascade)
-  shutter                    ShutterTypeMaster @relation(fields: [shutter_id], references: [id], onDelete: Cascade)
+  shutter                    ShutterTypeMaster? @relation(fields: [shutter_id], references: [id], onDelete: Cascade)
   vendor                     VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([vendor_id, carcass_id, shutter_id])
@@ -894,6 +917,7 @@ model LeadDocuments {
   clientVisitDocumentMappings         LeadClientVisitDocumentMapping[]
   leadDocumentLogs                    LeadDocumentLogs[]
   amcContracts                        LeadAmcContract[]                    @relation("LeadAmcContractDocument")
+  fastProductionRequestDocuments      FastProductionRequestDocument[]
   account                             AccountMaster?                       @relation(fields: [account_id], references: [id], onDelete: Cascade)
   completedServiceSchedules           LeadServiceSchedule[]                @relation("LeadServiceScheduleCompletionDocument")
   createdBy                           UserMaster                           @relation("DocumentCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
@@ -1059,6 +1083,7 @@ model LeadProductStructureInstance {
   updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
   vendor                                     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   tasks                                      UserLeadTask[]
+  fastProductionRequests                     FastProductionRequest[]
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
 }
@@ -1504,8 +1529,161 @@ model UserLeadTask {
   lead                   LeadMaster                    @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   smallOrderRequest      SmallOrderRequest?            @relation("SmallOrderRequestTasks", fields: [small_order_request_id], references: [id])
   detailedLogs           LeadDetailedLogs[]
+  fastProductionRequest  FastProductionRequest?
   user                   UserMaster                    @relation("LeadTask_User", fields: [user_id], references: [id], onDelete: Cascade)
   vendor                 VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model FastProductionRequestBatch {
+  id                Int                          @id @default(autoincrement())
+  vendor_id         Int
+  lead_id           Int
+  account_id        Int
+  franchise_id      Int?
+  requester_user_id Int
+  month_bucket      DateTime
+  status            FastProductionRequestStatus  @default(draft)
+  terms_accepted_at DateTime
+  terms_version     String?                      @db.VarChar(100)
+  approved_at       DateTime?
+  rejected_at       DateTime?
+  revoked_at        DateTime?
+  revoked_by        Int?
+  revocation_remark String?                      @db.VarChar(2000)
+  created_by        Int
+  created_at        DateTime                     @default(now())
+  updated_by        Int?
+  updated_at        DateTime                     @updatedAt
+
+  vendor      VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead        LeadMaster                 @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account     AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  franchise   FranchiseMaster?           @relation(fields: [franchise_id], references: [id])
+  requester   UserMaster                 @relation("FastProductionBatchRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
+  createdBy   UserMaster                 @relation("FastProductionBatchCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy   UserMaster?                @relation("FastProductionBatchUpdatedBy", fields: [updated_by], references: [id])
+  revokedBy   UserMaster?                @relation("FastProductionBatchRevokedBy", fields: [revoked_by], references: [id])
+  requests    FastProductionRequest[]
+  approvals   FastProductionApproval[]
+  status_logs FastProductionStatusLog[]
+
+  @@index([vendor_id, lead_id])
+  @@index([vendor_id, requester_user_id, month_bucket])
+  @@index([vendor_id, status])
+}
+
+model FastProductionRequest {
+  id                            Int                         @id @default(autoincrement())
+  batch_id                      Int
+  vendor_id                     Int
+  lead_id                       Int
+  account_id                    Int
+  instance_id                   Int
+  franchise_id                  Int?
+  task_id                       Int?                        @unique
+  requester_user_id             Int
+  month_bucket                  DateTime
+  status                        FastProductionRequestStatus @default(draft)
+  hardware_selection            String                      @db.VarChar(4000)
+  accessory_selection           String                      @db.VarChar(4000)
+  special_requirements          String                      @db.VarChar(4000)
+  tentative_order_login_date    DateTime?
+  client_required_delivery_date DateTime
+  remarks                       String?                     @db.VarChar(2000)
+  terms_accepted_at             DateTime
+  terms_version                 String?                     @db.VarChar(100)
+  approved_at                   DateTime?
+  rejected_at                   DateTime?
+  revoked_at                    DateTime?
+  revoked_by                    Int?
+  revocation_remark             String?                     @db.VarChar(2000)
+  created_by                    Int
+  created_at                    DateTime                    @default(now())
+  updated_by                    Int?
+  updated_at                    DateTime                    @updatedAt
+
+  batch         FastProductionRequestBatch   @relation(fields: [batch_id], references: [id], onDelete: Cascade)
+  vendor        VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead          LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account       AccountMaster                @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  instance      LeadProductStructureInstance @relation(fields: [instance_id], references: [id])
+  franchise     FranchiseMaster?             @relation(fields: [franchise_id], references: [id])
+  requester     UserMaster                   @relation("FastProductionRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
+  createdBy     UserMaster                   @relation("FastProductionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy     UserMaster?                  @relation("FastProductionUpdatedBy", fields: [updated_by], references: [id])
+  revokedBy     UserMaster?                  @relation("FastProductionRevokedBy", fields: [revoked_by], references: [id])
+  task          UserLeadTask?                @relation(fields: [task_id], references: [id])
+  finishes      FastProductionFinish[]
+  documents     FastProductionRequestDocument[]
+
+  @@unique([batch_id, instance_id])
+  @@index([batch_id])
+  @@index([vendor_id, lead_id])
+  @@index([instance_id])
+  @@index([vendor_id, lead_id, instance_id])
+  @@index([vendor_id, requester_user_id, month_bucket])
+  @@index([vendor_id, status])
+}
+
+model FastProductionFinish {
+  id                 Int                           @id @default(autoincrement())
+  request_id         Int
+  component          FastProductionFinishComponent
+  finish_category    String                        @db.VarChar(255)
+  finish_description String                        @db.VarChar(2000)
+  created_at         DateTime                      @default(now())
+
+  request FastProductionRequest @relation(fields: [request_id], references: [id], onDelete: Cascade)
+
+  @@unique([request_id, component])
+  @@index([request_id])
+}
+
+model FastProductionApproval {
+  id               Int                          @id @default(autoincrement())
+  batch_id         Int
+  approver_role    FastProductionApproverRole
+  approver_user_id Int?
+  status           FastProductionApprovalStatus @default(pending)
+  remark           String?                      @db.VarChar(2000)
+  acted_at         DateTime?
+  created_at       DateTime                     @default(now())
+
+  batch    FastProductionRequestBatch @relation(fields: [batch_id], references: [id], onDelete: Cascade)
+  approver UserMaster?               @relation("FastProductionApprover", fields: [approver_user_id], references: [id])
+
+  @@unique([batch_id, approver_role])
+  @@index([approver_user_id])
+}
+
+model FastProductionRequestDocument {
+  id         Int      @id @default(autoincrement())
+  request_id Int
+  document_id Int
+  created_by Int
+  created_at DateTime @default(now())
+
+  request   FastProductionRequest @relation(fields: [request_id], references: [id], onDelete: Cascade)
+  document  LeadDocuments         @relation(fields: [document_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster            @relation("FastProductionDocCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([request_id])
+  @@index([document_id])
+}
+
+model FastProductionStatusLog {
+  id           Int                         @id @default(autoincrement())
+  batch_id     Int
+  from_status  FastProductionRequestStatus?
+  to_status    FastProductionRequestStatus
+  actor_user_id Int
+  remark       String?                     @db.VarChar(2000)
+  created_at   DateTime                    @default(now())
+
+  batch FastProductionRequestBatch @relation(fields: [batch_id], references: [id], onDelete: Cascade)
+  actor UserMaster                @relation("FastProductionStatusActor", fields: [actor_user_id], references: [id], onDelete: Cascade)
+
+  @@index([batch_id])
 }
 
 model LeadDetailedLogs {
@@ -2210,6 +2388,8 @@ model FranchiseMaster {
   headSiteSupervisorFranchiseMappings HeadSiteSupervisorFranchiseMapping[]
   leads                               LeadMaster[]
   leadSuperAdminApprovalLocIns        LeadSuperAdminApprovalLocIns[]
+  fastProductionRequests              FastProductionRequest[]
+  fastProductionRequestBatches        FastProductionRequestBatch[]
   users                               UserMaster[]
 
   @@unique([vendor_id, franchise_code])
@@ -3312,6 +3492,7 @@ enum NotificationType {
   CHAT_MENTION
   LEAD_MILESTONE
   LEAD_ACTION
+  APPROVAL
 }
 
 enum SuperAdminApprovalType {
@@ -3391,6 +3572,31 @@ enum ApprovalRequestStatus {
   pending
   approved
   rejected
+}
+
+enum FastProductionRequestStatus {
+  draft
+  pending_approvals
+  approved
+  rejected
+  revoked
+}
+
+enum FastProductionApproverRole {
+  SUPER_ADMIN
+  FACTORY_ADMIN
+}
+
+enum FastProductionApprovalStatus {
+  pending
+  approved
+  rejected
+}
+
+enum FastProductionFinishComponent {
+  CARCASS
+  SHUTTER
+  HANDLE
 }
 
 enum SmallOrderRequestSource {

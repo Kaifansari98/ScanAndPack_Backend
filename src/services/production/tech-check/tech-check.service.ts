@@ -36,6 +36,12 @@ export class TechCheckService {
   private leadSuperAdminApprovalLockInService =
     new LeadSuperAdminApprovalLockInService();
 
+  private getTodayAtMidnight() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today;
+  }
+
   public async getInstanceTechCheckStatus(
     vendorId: number,
     leadId: number,
@@ -68,6 +74,7 @@ export class TechCheckService {
     userId: number,
     assignToUserId: number,
     accountId: number,
+    requiredDate: Date | undefined,
     baseUrl: string,
     productStructureInstanceId?: number,
   ): Promise<ApproveTechCheckResult> {
@@ -78,6 +85,42 @@ export class TechCheckService {
           select: { IsAccountLocInEnabled: true },
         });
         const isAccountLocInEnabled = vendor?.IsAccountLocInEnabled === true;
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: leadId },
+          select: {
+            id: true,
+            is_fast_production: true,
+            client_required_order_login_complition_date: true,
+          },
+        });
+
+        if (!lead) {
+          throw new Error("Lead not found");
+        }
+
+        const shouldRequireClientDate = lead.is_fast_production !== true;
+        const today = this.getTodayAtMidnight();
+        const currentLeadRequiredDate =
+          lead.client_required_order_login_complition_date
+            ? new Date(lead.client_required_order_login_complition_date)
+            : null;
+
+        if (currentLeadRequiredDate) {
+          currentLeadRequiredDate.setHours(0, 0, 0, 0);
+        }
+
+        const effectiveRequiredDate =
+          lead.is_fast_production === true
+            ? currentLeadRequiredDate && currentLeadRequiredDate < today
+              ? today
+              : currentLeadRequiredDate ?? undefined
+            : requiredDate;
+
+        if (shouldRequireClientDate && !effectiveRequiredDate) {
+          throw new Error(
+            "client_required_order_login_complition_date is required",
+          );
+        }
 
         if (productStructureInstanceId) {
           const instance = await tx.leadProductStructureInstance.findFirst({
@@ -103,6 +146,20 @@ export class TechCheckService {
             data: {
               is_tech_check_completed: true,
               tech_check_completed_at: new Date(),
+              updated_by: userId,
+              updated_at: new Date(),
+            },
+          });
+
+          await tx.leadMaster.update({
+            where: { id: leadId },
+            data: {
+              ...(effectiveRequiredDate
+                ? {
+                    client_required_order_login_complition_date:
+                      effectiveRequiredDate,
+                  }
+                : {}),
               updated_by: userId,
               updated_at: new Date(),
             },
@@ -196,6 +253,12 @@ export class TechCheckService {
               data: {
                 status_id: orderLoginStatus.id,
                 tech_check_completed_at: new Date(),
+                ...(effectiveRequiredDate
+                  ? {
+                      client_required_order_login_complition_date:
+                        effectiveRequiredDate,
+                    }
+                  : {}),
                 updated_by: userId,
                 updated_at: new Date(),
               },
@@ -316,6 +379,12 @@ export class TechCheckService {
           data: {
             status_id: orderLoginStatus.id,
             tech_check_completed_at: new Date(),
+            ...(effectiveRequiredDate
+              ? {
+                  client_required_order_login_complition_date:
+                    effectiveRequiredDate,
+                }
+              : {}),
             updated_by: userId,
             updated_at: new Date(),
           },
@@ -470,7 +539,7 @@ export class TechCheckService {
         // ✅ redirectPath with instance_id
         const redirectPath = buildRedirectPath(lead.account_id);
 
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: lead.vendor_id,
           franchiseId: lead.franchise_id ?? null,
           excludeUserId: actorId,

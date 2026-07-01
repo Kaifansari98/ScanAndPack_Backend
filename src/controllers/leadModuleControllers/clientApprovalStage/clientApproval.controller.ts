@@ -364,7 +364,6 @@ export class ClientApprovalController {
         account_id,
         assign_to_user_id,
         created_by,
-        client_required_order_login_complition_date,
       } = req.body;
 
       if (
@@ -372,13 +371,12 @@ export class ClientApprovalController {
         !vendorId ||
         !account_id ||
         !assign_to_user_id ||
-        !created_by ||
-        !client_required_order_login_complition_date
+        !created_by
       ) {
         res.status(400).json({
           success: false,
           message:
-            "Missing required fields: leadId, vendorId, account_id, assign_to_user_id, created_by, client_required_order_login_complition_date",
+            "Missing required fields: leadId, vendorId, account_id, assign_to_user_id, created_by",
         });
         return;
       }
@@ -389,7 +387,6 @@ export class ClientApprovalController {
         account_id: parseInt(account_id),
         assign_to_user_id: parseInt(assign_to_user_id),
         created_by: parseInt(created_by),
-        required_date: new Date(client_required_order_login_complition_date),
       };
 
       const result = await clientApprovalService.requestToTechCheck(dto);
@@ -597,7 +594,7 @@ export class ClientApprovalController {
         const redirectUrl = qs ? `${stagePath}?${qs}` : stagePath;
 
         // Only admins matching vendor_id + franchise_id
-        const users = await getFranchiseAdminRecipients({
+        const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: dto.vendor_id,
           franchiseId,
           excludeUserId: dto.created_by,
@@ -636,7 +633,8 @@ export class ClientApprovalController {
             .map((user) =>
               sendMajorMilestoneEmail({
                 vendor_id: dto.vendor_id,
-                toEmail: user.user_email!,
+                allowSuperAdmin: isSuperAdminFallback,
+              toEmail: user.user_email!,
                 toName: user.user_name ?? undefined,
                 leadCode,
                 leadName: leadName || "Lead",

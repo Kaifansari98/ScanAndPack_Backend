@@ -423,7 +423,14 @@ export class BookingStageService {
         });
 
         if (data.siteSupervisorId) {
-          // 5. Assign Site Supervisor
+          // Fetch actual role of the assigned supervisor
+          const supervisorUser = await tx.userMaster.findUnique({
+            where: { id: data.siteSupervisorId },
+            include: { user_type: true },
+          });
+          const supervisorRole = supervisorUser?.user_type?.user_type?.toLowerCase() || "site-supervisor";
+
+          // 5. Assign Site Supervisor mapping
           const supervisor = await tx.leadSiteSupervisorMapping.create({
             data: {
               lead_id: data.lead_id,
@@ -445,7 +452,7 @@ export class BookingStageService {
               account_id: data.account_id,
               lead_id: data.lead_id,
               user_id: data.siteSupervisorId,
-              type: "site-supervisor",
+              type: supervisorRole as any, // dynamically set role (e.g. head-site-supervisor or site-supervisor)
               status: "active",
               created_by: data.created_by,
             },
@@ -572,6 +579,25 @@ export class BookingStageService {
           vendorId: data.vendor_id,
           actionMessage,
         });
+
+        // Check if Accounts Lock-in is enabled for the vendor
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: data.vendor_id },
+          select: { IsAccountLocInEnabled: true },
+        });
+
+        if (vendor?.IsAccountLocInEnabled) {
+          await this.leadSuperAdminApprovalLockInService.createBookingDoneLockIn(
+            {
+              vendor_id: data.vendor_id,
+              lead_id: data.lead_id,
+              created_by: data.created_by,
+              base_date: new Date(),
+              clientBaseUrl: data.baseUrl,
+            },
+            tx,
+          );
+        }
 
         return response;
       },
@@ -810,7 +836,7 @@ export class BookingStageService {
         const franchiseId = lead?.franchise_id ?? null;
 
         // Fetch Active Admins
-        const admins = await getFranchiseAdminRecipients({
+        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: lead.vendor_id,
           franchiseId,
           excludeUserId: actorId,
@@ -1902,6 +1928,20 @@ export class BookingStageService {
       }),
     ]);
 
+    const leadIds = leads.map((l: any) => l.id);
+    const activeFastProductionBatches = leadIds.length > 0
+      ? await prisma.fastProductionRequestBatch.findMany({
+          where: {
+            lead_id: { in: leadIds },
+            status: "pending_approvals"
+          },
+          select: {
+            lead_id: true
+          }
+        })
+      : [];
+    const pendingFastProductionLeadIds = new Set(activeFastProductionBatches.map(b => b.lead_id));
+
     const processed = await Promise.all(
       leads.map(async (lead: any) => {
         if (lead.is_draft && isLeadComplete(lead)) {
@@ -1924,7 +1964,12 @@ export class BookingStageService {
           }),
         );
 
-        return { ...lead, documents: docsWithUrls };
+        return {
+          ...lead,
+          documents: docsWithUrls,
+          fast_production_request: pendingFastProductionLeadIds.has(lead.id),
+          has_pending_fast_production_request: pendingFastProductionLeadIds.has(lead.id),
+        };
       }),
     );
 
@@ -2378,7 +2423,7 @@ export class BookingStageService {
         }),
       ]);
 
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: data.vendor_id,
         franchiseId: leadInfo?.franchise_id ?? null,
         excludeUserId: data.created_by,
@@ -2419,7 +2464,8 @@ export class BookingStageService {
           await sendPaymentAddedEmail({
             vendor_id: data.vendor_id,
             franchise_id: franchiseId,
-            toEmail: admin.user_email,
+            allowSuperAdmin: isSuperAdminFallback,
+              toEmail: admin.user_email,
             toName: admin.user_name ?? undefined,
             leadCode,
             leadName: leadName || "Lead",

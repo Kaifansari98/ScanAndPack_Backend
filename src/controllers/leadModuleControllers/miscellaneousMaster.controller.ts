@@ -243,6 +243,7 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
   try {
     const vendorId = Number(req.params.vendorId);
     const userType = String(req.body.user_type || "").toLowerCase();
+    const userId = req.body.user_id ? Number(req.body.user_id) : undefined;
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
@@ -335,7 +336,9 @@ export const  getPendingMiscellaneousLeads = async (req: Request, res: Response)
       franchiseId,
       page,
       limit,
-      filters
+      filters,
+      userId,
+      userType
     );
 
     return res.status(200).json({
@@ -371,6 +374,7 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
   try {
     const vendorId = Number(req.params.vendorId);
     const userType = String(req.query.user_type || "").toLowerCase();
+    const userId = req.query.user_id ? Number(req.query.user_id) : undefined;
     const skipFranchiseFilter =
       userType === "factory" ||
       userType === "site-supervisor" ||
@@ -389,7 +393,9 @@ export const  getPendingMiscellaneousLeadCount = async (req: Request, res: Respo
 
     const count = await getPendingMiscellaneousLeadCountService(
       vendorId,
-      franchiseId
+      franchiseId,
+      userId,
+      userType
     );
 
     return res.status(200).json({

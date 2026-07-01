@@ -47,6 +47,7 @@ import {
 } from "../../controllers/leadModuleControllers/paymentType.controller";
 import {
   fetchAllCarcassTypes,
+  fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
   fetchAllShutterTypes,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
@@ -56,6 +57,15 @@ import {
   getSmallOrderRequestsByLeadController,
   markSmallOrderRequestResolvedController,
 } from "../../controllers/leadModuleControllers/smallOrderRequest.controller";
+import {
+  createFastProductionRequestController,
+  finalizeFastProductionRequestBatchController,
+  checkFastProductionLimitController,
+  checkFastProductionStatusController,
+  getFastProductionDetailsController,
+  getFastProductionRequestDraftController,
+  revokeFastProductionRequestController,
+} from "../../controllers/leadModuleControllers/fastProductionRequest.controller";
 
 const leadsRouter = Router();
 const MAX_FILES = parseInt(process.env.UPLOAD_MAX_FILES || "40");
@@ -80,6 +90,35 @@ leadsRouter.post(
   handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
   createSmallOrderRequestController,
 );
+leadsRouter.post(
+  "/fast-production-requests",
+  handleMulterUpload(uploadLeadSitePhotos.array("documents", MAX_FILES)),
+  createFastProductionRequestController,
+);
+leadsRouter.post(
+  "/fast-production-requests/finalize",
+  finalizeFastProductionRequestBatchController,
+);
+leadsRouter.post(
+  "/fast-production-requests/revoke",
+  revokeFastProductionRequestController,
+);
+leadsRouter.get(
+  "/fast-production-requests/check-limit",
+  checkFastProductionLimitController,
+);
+leadsRouter.get(
+  "/fast-production-requests/vendor/:vendorId/lead/:leadId/status",
+  checkFastProductionStatusController,
+);
+leadsRouter.get(
+  "/fast-production-requests/vendor/:vendorId/lead/:leadId/details",
+  getFastProductionDetailsController,
+);
+leadsRouter.get(
+  "/fast-production-requests/draft/vendor/:vendorId/lead/:leadId",
+  getFastProductionRequestDraftController,
+);
 leadsRouter.get(
   "/small-order-requests/vendor/:vendorId/lead/:leadId",
   getSmallOrderRequestsByLeadController,
@@ -91,6 +130,10 @@ leadsRouter.patch(
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
+leadsRouter.get(
+  "/get-fast-production-timeline-rules/:vendor_id",
+  fetchFastProductionTimelineRules,
+);
 leadsRouter.delete("/delete-product-type/:id", removeProductType);
 leadsRouter.patch("/update-product-type-status/:id", toggleProductTypeStatus);
 leadsRouter.get("/get-all-site-types/:vendor_id", fetchAllSiteTypes);
@@ -238,6 +281,11 @@ leadsRouter.get(
 leadsRouter.delete(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",
   leadController.deleteLeadProductStructureInstance
+);
+// DELETE all product structure instances and mappings for a lead and vendor
+leadsRouter.delete(
+  "/lead/:leadId/vendor/:vendorId/clear-structures",
+  leadController.clearLeadProductStructures
 );
 // UPDATE product structure instance for a lead and vendor
 leadsRouter.put(

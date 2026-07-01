@@ -1,4 +1,5 @@
 import { prisma } from "../../prisma/client";
+import logger from "../../utils/logger";
 
 type GetFranchiseAdminRecipientsInput = {
   vendorId: number;
@@ -13,17 +14,22 @@ export type FranchiseAdminRecipient = {
   user_email: string | null;
 };
 
+export type AdminRecipientsResult = {
+  recipients: FranchiseAdminRecipient[];
+  isSuperAdminFallback: boolean;
+};
+
 export async function getFranchiseAdminRecipients(
   input: GetFranchiseAdminRecipientsInput,
-): Promise<FranchiseAdminRecipient[]> {
+): Promise<AdminRecipientsResult> {
   const { vendorId, franchiseId, excludeUserId, candidateUserIds } = input;
 
   if (franchiseId == null) {
-    return [];
+    return { recipients: [], isSuperAdminFallback: false };
   }
 
   if (candidateUserIds && candidateUserIds.length === 0) {
-    return [];
+    return { recipients: [], isSuperAdminFallback: false };
   }
 
   const idFilter =
@@ -35,7 +41,7 @@ export async function getFranchiseAdminRecipients(
           ? { not: excludeUserId }
           : undefined;
 
-  return prisma.userMaster.findMany({
+  const admins = await prisma.userMaster.findMany({
     where: {
       vendor_id: vendorId,
       franchise_id: franchiseId,
@@ -51,4 +57,36 @@ export async function getFranchiseAdminRecipients(
       user_email: true,
     },
   });
+
+  // ✅ If franchise has active admins, return them
+  if (admins.length > 0) {
+    return { recipients: admins, isSuperAdminFallback: false };
+  }
+
+  // ✅ Fallback: No active admins for this franchise → return all super-admins for the vendor
+  logger.info("No active franchise admins found, falling back to super-admins", {
+    vendor_id: vendorId,
+    franchise_id: franchiseId,
+  });
+
+  const superAdminIdFilter =
+    excludeUserId != null ? { not: excludeUserId } : undefined;
+
+  const superAdmins = await prisma.userMaster.findMany({
+    where: {
+      vendor_id: vendorId,
+      status: "active",
+      user_type: {
+        user_type: { equals: "super-admin", mode: "insensitive" },
+      },
+      ...(superAdminIdFilter ? { id: superAdminIdFilter } : {}),
+    },
+    select: {
+      id: true,
+      user_name: true,
+      user_email: true,
+    },
+  });
+
+  return { recipients: superAdmins, isSuperAdminFallback: true };
 }

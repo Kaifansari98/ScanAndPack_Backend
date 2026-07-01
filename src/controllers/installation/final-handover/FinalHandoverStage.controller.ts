@@ -460,7 +460,7 @@ export class FinalHandoverStageController {
           lead?.lead_code ?? `LEAD-${String(leadId).padStart(4, "0")}`;
         const franchiseId = lead?.franchise_id ?? null;
         if (mappings.length > 0 || franchiseId != null) {
-          const users = await getFranchiseAdminRecipients({
+          const { recipients: users, isSuperAdminFallback } = await getFranchiseAdminRecipients({
             vendorId,
             franchiseId,
           });

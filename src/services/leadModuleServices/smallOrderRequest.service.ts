@@ -21,6 +21,7 @@ import {
   sendSmallOrderRequestFullyApprovedEmail,
   sendNewSmallOrderLeadAssignedEmail,
 } from "../email/brevoEmail2.service";
+import { LeadSuperAdminApprovalLockInService } from "../leadSuperAdminApprovalLockIn/leadSuperAdminApprovalLockIn.service";
 
 const SMALL_ORDER_REQUEST_DOCUMENT_TAG = "SMALL_ORDER_REQUEST_DOCUMENT";
 const SMALL_ORDER_REQUEST_TASK_TYPE = "Small order request";
@@ -699,6 +700,36 @@ const createSmallOrderLeadFromRequest = async ({
     },
   });
 
+  const vendor = await tx.vendorMaster.findUnique({
+    where: { id: request.vendor_id },
+    select: { IsAccountLocInEnabled: true },
+  });
+
+  if (vendor?.IsAccountLocInEnabled) {
+    const lockInService = new LeadSuperAdminApprovalLockInService();
+    try {
+      await lockInService.createOrderLoginLockIn(
+        {
+          vendor_id: request.vendor_id,
+          lead_id: newLead.id,
+          created_by: request.created_by,
+          instance_id: instance.id,
+          clientBaseUrl: process.env.CLIENT_BASE_URL || process.env.FRONTEND_URL || "http://localhost:3000",
+        },
+        tx
+      );
+    } catch (lockInError: any) {
+      logger.warn(
+        "Order Login lock-in creation failed during small order lead creation",
+        {
+          lead_id: newLead.id,
+          instance_id: instance.id,
+          error: lockInError?.message,
+        }
+      );
+    }
+  }
+
   await createLeadLog(tx, {
     vendor_id: request.vendor_id,
     lead_id: newLead.id,
@@ -928,7 +959,7 @@ export const createSmallOrderRequest = async (
   );
   const siteSupervisorRecipients = siteSupervisorsRaw.map((item) => item.user);
 
-  const franchiseAdmins = await getFranchiseAdminRecipients({
+  const { recipients: franchiseAdmins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
     vendorId: value.vendor_id,
     franchiseId: lead.franchise_id ?? actor.franchise_id ?? null,
     excludeUserId: value.created_by,

@@ -1396,7 +1396,7 @@ export class PostProductionService {
       const redirectPath = adminRtdQs ? `${adminLeadDetailsBase}?${adminRtdQs}` : adminLeadDetailsBase;
 
       // Fetch Active Admin Users for the lead franchise only
-      const admins = await getFranchiseAdminRecipients({
+      const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
         vendorId: lead.vendor_id,
         franchiseId: lead.franchise_id ?? null,
         excludeUserId: actorId,

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { TaskService } from "../../services/task/task.service";
 import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
+import { actOnFastProductionRequestTask, getFastProductionRequestDetails } from "../../services/leadModuleServices/fastProductionRequest.service";
 import logger from "../../../src/utils/logger";
 import { date } from "joi";
 
@@ -481,6 +482,76 @@ export class TaskController {
       return res.status(500).json({
         success: false,
         message: error.message || "Failed to reschedule self-assign task",
+      });
+    }
+  }
+
+  static async actOnFastProductionRequestTask(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+      const { action, acted_by, remark, production_target_date } = req.body;
+
+      if (!leadId || !taskId || !acted_by || !action) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId, taskId, action, and acted_by are required",
+        });
+      }
+
+      const result = await actOnFastProductionRequestTask({
+        lead_id: leadId,
+        task_id: taskId,
+        action,
+        acted_by: Number(acted_by),
+        remark,
+        production_target_date: production_target_date
+          ? new Date(production_target_date)
+          : undefined,
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Fast production request updated successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      const statusCode =
+        error?.message?.startsWith("Validation failed") ||
+        error?.message?.includes("required")
+          ? 400
+          : 500;
+
+      return res.status(statusCode).json({
+        success: false,
+        message: error.message || "Failed to update fast production request",
+      });
+    }
+  }
+
+  static async getFastProductionRequestDetails(req: Request, res: Response) {
+    try {
+      const leadId = Number(req.params.leadId);
+      const taskId = Number(req.params.taskId);
+
+      if (!leadId || !taskId) {
+        return res.status(400).json({
+          success: false,
+          message: "leadId and taskId are required",
+        });
+      }
+
+      const result = await getFastProductionRequestDetails(leadId, taskId);
+
+      return res.status(200).json({
+        success: true,
+        message: "Fast production request details fetched successfully",
+        data: result,
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: error.message || "Failed to fetch fast production request details",
       });
     }
   }
