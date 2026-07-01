@@ -93,6 +93,8 @@ model VendorMaster {
   payments                            PaymentInfo[]
   paymentTypeMaster                   PaymentTypeMaster[]
   productStructure                    ProductStructure[]
+  productSubStructures                ProductSubStructure[]
+  productItemCodes                    ProductItemCode[]
   productTypes                        ProductTypeMaster[]
   smallOrderRequests                  SmallOrderRequest[]
   smallOrderRequestTypeMasters        SmallOrderRequestTypeMaster[]
@@ -576,6 +578,7 @@ model LeadMaster {
   pending_amount                              Float?
   total_project_amount                        Float?
   is_draft                                    Boolean                               @default(false)
+  isLargeScaleProjectLead                     Boolean                               @default(false)
   lead_code                                   String
   is_small_order_request                      Boolean                               @default(false)
   is_client_approval_submitted                Boolean                               @default(false)
@@ -1022,7 +1025,47 @@ model ProductStructure {
   status                      String                         @default("active")
   productStructureInstances   LeadProductStructureInstance[]
   leadProductStructureMapping LeadProductStructureMapping[]
+  productSubStructures        ProductSubStructure[]
+  productItemCodes            ProductItemCode[]
   vendor                      VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model ProductSubStructure {
+  id                        Int                            @id @default(autoincrement())
+  type                      String
+  vendor_id                 Int
+  product_structure_id      Int
+  status                    String                         @default("active")
+  created_at                DateTime                       @default(now())
+  updated_at                DateTime                       @updatedAt
+  leadProductStructureInstances LeadProductStructureInstance[]
+  productStructure          ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productItemCodes          ProductItemCode[]
+  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([product_structure_id])
+}
+
+model ProductItemCode {
+  id                        Int                            @id @default(autoincrement())
+  item_code                 String
+  vendor_id                 Int
+  product_structure_id      Int
+  sub_product_structure_id  Int?
+  description               String?                        @db.VarChar(2000)
+  specification             String?                        @db.VarChar(2000)
+  status                    String                         @default("active")
+  created_at                DateTime                       @default(now())
+  updated_at                DateTime                       @updatedAt
+  leadProductStructureInstances LeadProductStructureInstance[]
+  productStructure          ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  subProductStructure       ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
+  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([product_structure_id])
+  @@index([sub_product_structure_id])
 }
 
 model LeadProductStructureMapping {
@@ -1046,9 +1089,13 @@ model LeadProductStructureInstance {
   account_id                                 Int
   product_type_id                            Int
   product_structure_id                       Int
+  sub_product_structure_id                   Int?
+  product_item_code_id                       Int?
   quantity_index                             Int
+  quantity                                   Int?
   title                                      String
   status                                     ProductInstanceStatus @default(open)
+  isLargeScaleProjectInstance                Boolean               @default(false)
   description                                String?               @db.VarChar(2000)
   created_by                                 Int
   created_at                                 DateTime              @default(now())
@@ -1076,6 +1123,8 @@ model LeadProductStructureInstance {
   documents                                  LeadDocuments[]
   account                                    AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
   lead                                       LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  productItemCode                            ProductItemCode?      @relation(fields: [product_item_code_id], references: [id], onDelete: SetNull)
+  subProductStructure                        ProductSubStructure?  @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
   productStructure                           ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   productType                                ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
@@ -1084,6 +1133,8 @@ model LeadProductStructureInstance {
   fastProductionRequests                     FastProductionRequest[]
 
   @@unique([lead_id, vendor_id, product_structure_id, quantity_index], name: "uniq_structure_instance")
+  @@index([sub_product_structure_id])
+  @@index([product_item_code_id])
 }
 
 model SelfAssignTaskTypeMaster {
