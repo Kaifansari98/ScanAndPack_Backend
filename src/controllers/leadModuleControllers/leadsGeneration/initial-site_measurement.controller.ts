@@ -249,6 +249,7 @@ export class PaymentUploadController {
         remark,
         assignee_user_id: Number(user_id),
         created_by: Number(actorId),
+        baseUrl: resolveClientBaseUrl(req),
       });
 
       // ===============================
