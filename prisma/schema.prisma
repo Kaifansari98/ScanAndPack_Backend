@@ -2057,11 +2057,17 @@ model CutListMachineMapping {
   @@index([machine_id])
   @@index([project_id])
   @@index([vendor_id])
-  @@index([sequence_no])
-   @@index([project_id, vendor_id, machine_id, expected_in])
-  @@index([project_id, vendor_id, expected_in, sequence_no])
-  @@index([project_id, vendor_id, cut_list_id])
+  
+  
+   @@index([vendor_id, project_id, machine_id, expected_in])
+   
+  @@index([vendor_id, project_id, expected_in])
+  
+  @@index([vendor_id, project_id, cut_list_id, sequence_no, expected_in])
+  
   @@index([project_id, machine_id, expected_in, box_id])
+
+  
 }
 
 model UserMachineMapping {
