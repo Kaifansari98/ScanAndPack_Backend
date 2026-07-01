@@ -18,10 +18,10 @@ const fastProductionDraftSchema = Joi.object({
   instance_id: Joi.number().integer().positive().required(),
   carcass_finish_category: Joi.array().items(Joi.string().trim()).min(1).required(),
   carcass_finish_description: Joi.string().trim().required(),
-  shutter_finish_category: Joi.array().items(Joi.string().trim()).min(1).required(),
-  shutter_finish_description: Joi.string().trim().required(),
-  handles_finish_category: Joi.array().items(Joi.string().trim()).min(1).required(),
-  handles_finish_description: Joi.string().trim().required(),
+  shutter_finish_category: Joi.array().items(Joi.string().trim()).optional(),
+  shutter_finish_description: Joi.string().trim().allow("").optional(),
+  handles_finish_category: Joi.array().items(Joi.string().trim()).optional(),
+  handles_finish_description: Joi.string().trim().allow("").optional(),
   hardware_selection: Joi.string().trim().required(),
   accessory_selection: Joi.string().trim().required(),
   special_requirements: Joi.string().trim().required(),
@@ -64,10 +64,10 @@ export interface SaveFastProductionDraftInput {
   instance_id: number;
   carcass_finish_category: string[];
   carcass_finish_description: string;
-  shutter_finish_category: string[];
-  shutter_finish_description: string;
-  handles_finish_category: string[];
-  handles_finish_description: string;
+  shutter_finish_category?: string[];
+  shutter_finish_description?: string;
+  handles_finish_category?: string[];
+  handles_finish_description?: string;
   hardware_selection: string;
   accessory_selection: string;
   special_requirements: string;
@@ -694,20 +694,20 @@ export const saveFastProductionRequestDraft = async (
         {
           request_id: request.id,
           component: "CARCASS",
-          finish_category: joinFinishValues(value.carcass_finish_category),
-          finish_description: value.carcass_finish_description.trim(),
+          finish_category: joinFinishValues(value.carcass_finish_category || []),
+          finish_description: (value.carcass_finish_description || "").trim(),
         },
         {
           request_id: request.id,
           component: "SHUTTER",
-          finish_category: joinFinishValues(value.shutter_finish_category),
-          finish_description: value.shutter_finish_description.trim(),
+          finish_category: joinFinishValues(value.shutter_finish_category || []),
+          finish_description: (value.shutter_finish_description || "").trim(),
         },
         {
           request_id: request.id,
           component: "HANDLE",
-          finish_category: joinFinishValues(value.handles_finish_category),
-          finish_description: value.handles_finish_description.trim(),
+          finish_category: joinFinishValues(value.handles_finish_category || []),
+          finish_description: (value.handles_finish_description || "").trim(),
         },
       ],
     });
@@ -999,12 +999,6 @@ export const actOnFastProductionRequestTask = async (
     throw new Error("Remark is required when rejecting a fast production request");
   }
 
-  if (value.action === "approve" && !value.production_target_date) {
-    throw new Error(
-      "Production target date is required when approving a fast production request",
-    );
-  }
-
   const actor = await prisma.userMaster.findUnique({
     where: { id: value.acted_by },
     select: {
@@ -1024,6 +1018,16 @@ export const actOnFastProductionRequestTask = async (
   }
 
   const actorRole = normalizeRole(actor.user_type.user_type);
+
+  if (
+    value.action === "approve" &&
+    !value.production_target_date &&
+    actorRole !== "super-admin"
+  ) {
+    throw new Error(
+      "Production target date is required when approving a fast production request",
+    );
+  }
 
   const task = await prisma.userLeadTask.findFirst({
     where: {
