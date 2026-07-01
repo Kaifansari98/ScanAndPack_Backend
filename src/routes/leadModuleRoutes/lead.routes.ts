@@ -277,6 +277,11 @@ leadsRouter.delete(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",
   leadController.deleteLeadProductStructureInstance
 );
+// DELETE all product structure instances and mappings for a lead and vendor
+leadsRouter.delete(
+  "/lead/:leadId/vendor/:vendorId/clear-structures",
+  leadController.clearLeadProductStructures
+);
 // UPDATE product structure instance for a lead and vendor
 leadsRouter.put(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",

@@ -7,6 +7,7 @@ import {
   getLeadsByVendorAndUser,
   getLeadProductStructureInstances,
   deleteLeadProductStructureInstance,
+  clearLeadProductStructures,
   updateLeadProductStructureInstance,
   createLeadProductStructureInstance,
   getSiteSupervisorByVendor,
@@ -364,9 +365,9 @@ export class LeadController {
           const [assignedUser, createdByUser] = await Promise.all([
             value.assign_to
               ? prisma.userMaster.findUnique({
-                  where: { id: value.assign_to },
-                  select: { user_email: true, user_name: true },
-                })
+                where: { id: value.assign_to },
+                select: { user_email: true, user_name: true },
+              })
               : Promise.resolve(null),
             prisma.userMaster.findUnique({
               where: { id: value.created_by },
@@ -389,23 +390,22 @@ export class LeadController {
           const leadUrl = `${clientBaseUrl}/dashboard/leads/details/${result.lead.id}?accountId=${result.lead.account_id}`;
           const createdOn = result.lead.created_at
             ? new Date(result.lead.created_at).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
             : new Date().toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              });
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
           const createdByName =
             createdByUser?.user_name ?? assignedUser?.user_name ?? "System";
           const leadCode =
             (result.lead as any).lead_code ??
             `LEAD-${String(result.lead.id).padStart(4, "0")}`;
-          const contactDetails = `${result.lead.country_code ?? ""} ${
-            result.lead.contact_no ?? ""
-          }`.trim();
+          const contactDetails = `${result.lead.country_code ?? ""} ${result.lead.contact_no ?? ""
+            }`.trim();
 
           const productTypeIds = Array.isArray(value.product_types)
             ? value.product_types
@@ -416,21 +416,21 @@ export class LeadController {
           const [productTypes, productStructures] = await Promise.all([
             productTypeIds.length
               ? prisma.productTypeMaster.findMany({
-                  where: {
-                    vendor_id: value.vendor_id,
-                    id: { in: productTypeIds },
-                  },
-                  select: { type: true },
-                })
+                where: {
+                  vendor_id: value.vendor_id,
+                  id: { in: productTypeIds },
+                },
+                select: { type: true },
+              })
               : Promise.resolve([]),
             productStructureIds.length
               ? prisma.productStructure.findMany({
-                  where: {
-                    vendor_id: value.vendor_id,
-                    id: { in: productStructureIds },
-                  },
-                  select: { type: true },
-                })
+                where: {
+                  vendor_id: value.vendor_id,
+                  id: { in: productStructureIds },
+                },
+                select: { type: true },
+              })
               : Promise.resolve([]),
           ]);
           const furnitureType =
@@ -539,13 +539,13 @@ export class LeadController {
 
       let cadbidSync:
         | {
-            success: boolean;
-            status?: number;
-            response?: unknown;
-            error?: string;
-            skipped?: boolean;
-            reason?: string;
-          }
+          success: boolean;
+          status?: number;
+          response?: unknown;
+          error?: string;
+          skipped?: boolean;
+          reason?: string;
+        }
         | undefined;
 
       const backendEnvironment = String(
@@ -982,6 +982,55 @@ export class LeadController {
     }
   };
 
+  clearLeadProductStructures = async (
+    req: Request,
+    res: Response,
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+      const deletedBy = req.body?.updated_by
+        ? Number(req.body.updated_by)
+        : null;
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      const result = await clearLeadProductStructures(
+        leadId,
+        vendorId,
+        deletedBy,
+      );
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            result,
+            "Lead product structures cleared successfully",
+            200,
+          ),
+        );
+    } catch (error: any) {
+      console.error(
+        "[CONTROLLER] clearLeadProductStructures error:",
+        error,
+      );
+      return res
+        .status(500)
+        .json(ApiResponse.error("Failed to clear product structures", 500));
+    }
+  };
+
   updateLeadProductStructureInstance = async (
     req: Request,
     res: Response,
@@ -1228,8 +1277,8 @@ export class LeadController {
               400,
               validationResult.errors
                 ? validationResult.errors.map(
-                    (e: any) => `${e.field}: ${e.message}`,
-                  )
+                  (e: any) => `${e.field}: ${e.message}`,
+                )
                 : undefined,
             ),
           );
@@ -1551,12 +1600,12 @@ export class LeadController {
         const [oldType, newType] = await Promise.all([
           mapping.product_type_id
             ? prisma.productTypeMaster.findFirst({
-                where: {
-                  id: mapping.product_type_id,
-                  vendor_id: lead.vendor_id,
-                },
-                select: { type: true },
-              })
+              where: {
+                id: mapping.product_type_id,
+                vendor_id: lead.vendor_id,
+              },
+              select: { type: true },
+            })
             : Promise.resolve(null),
           prisma.productTypeMaster.findFirst({
             where: {
@@ -1987,8 +2036,8 @@ export class LeadController {
               400,
               validationResult.errors
                 ? validationResult.errors.map(
-                    (e: any) => `${e.field}: ${e.message}`,
-                  )
+                  (e: any) => `${e.field}: ${e.message}`,
+                )
                 : undefined,
             ),
           );
@@ -2194,19 +2243,19 @@ export class LeadController {
         current_assignment: {
           assigned_to: lead.assignedTo
             ? {
-                id: lead.assignedTo.id,
-                name: lead.assignedTo.user_name,
-                contact: lead.assignedTo.user_contact,
-                email: lead.assignedTo.user_email,
-              }
+              id: lead.assignedTo.id,
+              name: lead.assignedTo.user_name,
+              contact: lead.assignedTo.user_contact,
+              email: lead.assignedTo.user_email,
+            }
             : null,
           assigned_by: lead.assignedBy
             ? {
-                id: lead.assignedBy.id,
-                name: lead.assignedBy.user_name,
-                contact: lead.assignedBy.user_contact,
-                email: lead.assignedBy.user_email,
-              }
+              id: lead.assignedBy.id,
+              name: lead.assignedBy.user_name,
+              contact: lead.assignedBy.user_contact,
+              email: lead.assignedBy.user_email,
+            }
             : null,
           assigned_at: lead.updated_at,
         },
@@ -2533,7 +2582,7 @@ export class LeadController {
                         ? `QC Document "${existingDoc.doc_og_name}" was deleted.`
                         : existingDoc.documentType?.tag === "Type 39"
                           ? `AMC Contract Document "${existingDoc.doc_og_name}" was deleted.`
-              : `Document "${existingDoc.doc_og_name}" was deleted.`;
+                          : `Document "${existingDoc.doc_og_name}" was deleted.`;
 
         const detailedLog = await createLeadLog(prisma, {
           vendor_id: Number(vendorId),
@@ -2679,7 +2728,7 @@ export class LeadController {
     }
   };
 
-  
+
   getAllLeadDocuments = async (req: Request, res: Response) => {
     try {
       const vendorId = Number(req.params.vendorId);
