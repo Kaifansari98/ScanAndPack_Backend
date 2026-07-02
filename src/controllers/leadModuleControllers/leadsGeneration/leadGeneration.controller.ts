@@ -1107,6 +1107,15 @@ export class LeadController {
       const leadId = Number(req.params.leadId);
       const vendorId = Number(req.params.vendorId);
       const productStructureId = Number(req.body.product_structure_id);
+      const subProductStructureId = req.body.sub_product_structure_id
+        ? Number(req.body.sub_product_structure_id)
+        : null;
+      const productItemCodeId = req.body.product_item_code_id
+        ? Number(req.body.product_item_code_id)
+        : null;
+      const quantity = req.body.quantity ? Number(req.body.quantity) : null;
+      const isLargeScaleProjectInstance =
+        req.body.isLargeScaleProjectInstance === true;
       const title = String(req.body.title || "").trim();
       const description =
         req.body.description !== undefined ? String(req.body.description) : "";
@@ -1132,10 +1141,31 @@ export class LeadController {
           );
       }
 
-      if (!title) {
+      if (!title && !productItemCodeId) {
         return res
           .status(400)
           .json(ApiResponse.error("Title is required", 400));
+      }
+
+      if (
+        subProductStructureId !== null &&
+        Number.isNaN(subProductStructureId)
+      ) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid sub product structure ID provided", 400));
+      }
+
+      if (productItemCodeId !== null && Number.isNaN(productItemCodeId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid product item code ID provided", 400));
+      }
+
+      if (quantity !== null && (Number.isNaN(quantity) || quantity <= 0)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Quantity must be greater than 0", 400));
       }
 
       if (!createdBy || Number.isNaN(createdBy)) {
@@ -1151,6 +1181,10 @@ export class LeadController {
         title,
         description,
         created_by: createdBy,
+        sub_product_structure_id: subProductStructureId,
+        product_item_code_id: productItemCodeId,
+        quantity,
+        isLargeScaleProjectInstance,
       });
 
       return res
@@ -1171,6 +1205,21 @@ export class LeadController {
         return res
           .status(404)
           .json(ApiResponse.notFound("Product structure not found"));
+      }
+      if (message.includes("Sub product structure not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Sub product structure not found"));
+      }
+      if (message.includes("Product item code not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Product item code not found"));
+      }
+      if (message.includes("does not match")) {
+        return res
+          .status(400)
+          .json(ApiResponse.error(message, 400));
       }
       if (message.includes("Product type not found")) {
         return res

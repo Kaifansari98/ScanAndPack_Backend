@@ -83,9 +83,13 @@ export const addProductItemCode = async (
         },
         include: {
             productStructure: {
-                select: {
-                    id: true,
-                    type: true,
+                include: {
+                    productType: {
+                        select: {
+                            id: true,
+                            type: true,
+                        },
+                    },
                 },
             },
             subProductStructure: {
@@ -122,9 +126,13 @@ export const getAllProductItemCodes = async (
         },
         include: {
             productStructure: {
-                select: {
-                    id: true,
-                    type: true,
+                include: {
+                    productType: {
+                        select: {
+                            id: true,
+                            type: true,
+                        },
+                    },
                 },
             },
             subProductStructure: {
