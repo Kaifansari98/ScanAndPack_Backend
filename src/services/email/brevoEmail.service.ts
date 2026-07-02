@@ -314,6 +314,17 @@ export type DispatchPlanningApprovalRequiredEmailPayload = {
   ctaLink?: string;
 };
 
+export type FastProductionApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  raisedBy: string;
+  ctaLink?: string;
+};
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
 const LEAD_ASSIGNED_TEMPLATE_KEY = "LEAD_ASSIGNED";
@@ -347,6 +358,8 @@ const ORDER_LOGIN_APPROVAL_REQUIRED_TEMPLATE_KEY =
   "ORDER_LOGIN_APPROVAL_REQUIRED";
 const DISPATCH_PLANNING_APPROVAL_REQUIRED_TEMPLATE_KEY =
   "DISPATCH_PLANNING_APPROVAL_REQUIRED";
+const FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "FAST_PRODUCTION_APPROVAL_REQUIRED";
 
 export const LEAD_STAGE_TEMPLATE_KEYS = {
   ISM_STAGE: "LEAD_MOVED_TO_ISM_STAGE",
@@ -8492,3 +8505,175 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
     identity,
   );
 };
+
+export const sendFastProductionApprovalRequiredEmail = async (
+  payload: FastProductionApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.toName ?? "there"},`,
+    "",
+    `A Fast Production request has been raised by ${payload.raisedBy} for ${payload.leadCode} - ${payload.leadName}.`,
+    "",
+    "The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.",
+    "",
+    "Please review the request and approve or reject it.",
+    "",
+    payload.ctaLink ? `Review Fast Production Request: ${payload.ctaLink}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <style>
+    .lead-info-row {
+      display: table;
+      width: 100%;
+      padding: 4px 0;
+    }
+    .lead-info-label {
+      display: table-cell;
+      width: 40%;
+      color: #6b7280;
+      font-size: 14px;
+      vertical-align: top;
+    }
+    .lead-info-value {
+      display: table-cell;
+      width: 60%;
+      color: #111827;
+      font-weight: 600;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .lead-info-row {
+        display: block !important;
+        margin-bottom: 4px !important;
+      }
+      .lead-info-label,
+      .lead-info-value {
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Fast Production Approval Request</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hi ${payload.toName ?? "there"},</p>
+              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
+                A Fast Production request has been raised by <strong>${payload.raisedBy}</strong> for the following lead. The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.
+              </p>
+              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Name</span>
+                    <span class="lead-info-value">${payload.leadName}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Lead Code</span>
+                    <span class="lead-info-value">${payload.leadCode}</span>
+                  </div>
+                </td></tr>
+                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
+                  <div class="lead-info-row">
+                    <span class="lead-info-label">Raised By</span>
+                    <span class="lead-info-value">${payload.raisedBy}</span>
+                  </div>
+                </td></tr>
+              </table>
+              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+                Please review the request and approve or reject it at the earliest.
+              </p>
+              ${
+                payload.ctaLink
+                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+                      <tr>
+                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
+                          <a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Review Fast Production Request</a>
+                        </td>
+                      </tr>
+                    </table>`
+                  : ""
+              }
+              <p style="margin:0;font-size:14px;color:#4b5563;">
+                Note: The fast production timeline will only be applied after your approval.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    raisedBy: payload.raisedBy,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+
