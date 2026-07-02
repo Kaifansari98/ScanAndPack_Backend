@@ -1,6 +1,21 @@
 import { prisma } from "../../prisma/client";
 import { ProductType, ProductTypeInput } from "../../types/leadModule.types";
 
+const getNextProductTypeTag = async (vendorId: number) => {
+    const existingTags = await prisma.productTypeMaster.findMany({
+        where: { vendor_id: vendorId },
+        select: { tag: true },
+    });
+
+    const maxNumber = existingTags.reduce((max, item) => {
+        const match = /^Type\s+(\d+)$/i.exec(String(item.tag || "").trim());
+        const current = match ? Number(match[1]) : 0;
+        return current > max ? current : max;
+    }, 0);
+
+    return `Type ${maxNumber + 1}`;
+};
+
 export const addProductType = async (payload: ProductTypeInput): Promise<ProductType> => {
     console.log("[SERVICE] addProductType called", payload);
 
@@ -14,11 +29,13 @@ export const addProductType = async (payload: ProductTypeInput): Promise<Product
         throw new Error("Invalid vendor_id");
     }
 
+    const nextTag = await getNextProductTypeTag(payload.vendor_id);
+
     // ✅ Create new product type
     const productType = await prisma.productTypeMaster.create({
         data: {
             type: payload.type,
-            tag: payload.tag,
+            tag: nextTag,
             vendor_id: payload.vendor_id,
         }
     });

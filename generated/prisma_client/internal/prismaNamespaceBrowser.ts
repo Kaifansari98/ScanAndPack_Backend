@@ -89,6 +89,8 @@ export const ModelName = {
   LeadChatMention: 'LeadChatMention',
   LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
+  ProductSubStructure: 'ProductSubStructure',
+  ProductItemCode: 'ProductItemCode',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   LeadProductStructureInstance: 'LeadProductStructureInstance',
   SelfAssignTaskTypeMaster: 'SelfAssignTaskTypeMaster',
@@ -528,6 +530,7 @@ export const LeadMasterScalarFieldEnum = {
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
+  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
   lead_code: 'lead_code',
   is_small_order_request: 'is_small_order_request',
   is_client_approval_submitted: 'is_client_approval_submitted',
@@ -843,11 +846,41 @@ export const ProductStructureScalarFieldEnum = {
   id: 'id',
   type: 'type',
   vendor_id: 'vendor_id',
+  product_type_id: 'product_type_id',
   parent: 'parent',
   status: 'status'
 } as const
 
 export type ProductStructureScalarFieldEnum = (typeof ProductStructureScalarFieldEnum)[keyof typeof ProductStructureScalarFieldEnum]
+
+
+export const ProductSubStructureScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  vendor_id: 'vendor_id',
+  product_structure_id: 'product_structure_id',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProductSubStructureScalarFieldEnum = (typeof ProductSubStructureScalarFieldEnum)[keyof typeof ProductSubStructureScalarFieldEnum]
+
+
+export const ProductItemCodeScalarFieldEnum = {
+  id: 'id',
+  item_code: 'item_code',
+  vendor_id: 'vendor_id',
+  product_structure_id: 'product_structure_id',
+  sub_product_structure_id: 'sub_product_structure_id',
+  description: 'description',
+  specification: 'specification',
+  status: 'status',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProductItemCodeScalarFieldEnum = (typeof ProductItemCodeScalarFieldEnum)[keyof typeof ProductItemCodeScalarFieldEnum]
 
 
 export const LeadProductStructureMappingScalarFieldEnum = {
@@ -870,9 +903,13 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   account_id: 'account_id',
   product_type_id: 'product_type_id',
   product_structure_id: 'product_structure_id',
+  sub_product_structure_id: 'sub_product_structure_id',
+  product_item_code_id: 'product_item_code_id',
   quantity_index: 'quantity_index',
+  quantity: 'quantity',
   title: 'title',
   status: 'status',
+  isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
   description: 'description',
   created_by: 'created_by',
   created_at: 'created_at',

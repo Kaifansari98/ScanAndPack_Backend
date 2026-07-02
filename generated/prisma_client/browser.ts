@@ -208,6 +208,16 @@ export type LeadChatDocument = Prisma.LeadChatDocumentModel
  */
 export type ProductStructure = Prisma.ProductStructureModel
 /**
+ * Model ProductSubStructure
+ * 
+ */
+export type ProductSubStructure = Prisma.ProductSubStructureModel
+/**
+ * Model ProductItemCode
+ * 
+ */
+export type ProductItemCode = Prisma.ProductItemCodeModel
+/**
  * Model LeadProductStructureMapping
  * 
  */

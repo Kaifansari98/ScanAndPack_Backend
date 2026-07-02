@@ -27,6 +27,14 @@ import {
   editProductStructureParent,
   removeProductStructureType,
 } from "../../controllers/leadModuleControllers/productStructureType.controller";
+import {
+  createProductSubStructure,
+  fetchAllProductSubStructures,
+} from "../../controllers/leadModuleControllers/productSubStructure.controller";
+import {
+  createProductItemCode,
+  fetchAllProductItemCodes,
+} from "../../controllers/leadModuleControllers/productItemCode.controller";
 import { uploadLeadSitePhotos } from "../../utils/wasabiClient";
 import { handleMulterUpload } from "../../middlewares/handleMulterUpload";
 import { leadController } from "../../controllers/leadModuleControllers/leadsGeneration/leadGeneration.controller";
@@ -77,6 +85,8 @@ leadsRouter.post("/create-product-type", createProductType);
 leadsRouter.post("/create-site-type", createSiteType);
 leadsRouter.post("/create-source-type", createSourceType);
 leadsRouter.post("/create-product-structure", createProductStructureType);
+leadsRouter.post("/create-product-sub-structure", createProductSubStructure);
+leadsRouter.post("/create-product-item-code", createProductItemCode);
 leadsRouter.get("/get-all-status-types/:vendor_id", fetchAllStatusTypes);
 leadsRouter.get("/get-all-payment-types/:vendor_id", fetchAllPaymentTypes);
 leadsRouter.get("/get-all-document-types/:vendor_id", fetchAllDocumentTypes);
@@ -145,6 +155,14 @@ leadsRouter.get(
   "/get-all-productStructure-types/:vendor_id",
   fetchAllProductStructureTypes
 )
+leadsRouter.get(
+  "/get-all-product-sub-structures/:vendor_id",
+  fetchAllProductSubStructures
+);
+leadsRouter.get(
+  "/get-all-product-item-codes/:vendor_id",
+  fetchAllProductItemCodes
+);
 leadsRouter.patch(
   "/update-productStructure-type/:id",
   editProductStructureParent

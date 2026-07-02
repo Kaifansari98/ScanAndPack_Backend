@@ -15,12 +15,37 @@ export const addProductStructureType = async (payload: ProductStructureTypeInput
         throw new Error("Invalid vendor_id");
     }
 
+    let resolvedParent = payload.parent ?? null;
+    let resolvedProductTypeId: number | null = payload.product_type_id ?? null;
+
+    if (resolvedProductTypeId) {
+        const productType = await prisma.productTypeMaster.findFirst({
+            where: {
+                id: resolvedProductTypeId,
+                vendor_id: payload.vendor_id,
+                status: "active",
+            },
+        });
+
+        if (!productType) {
+            console.error("[SERVICE] Product type not found", {
+                product_type_id: resolvedProductTypeId,
+                vendor_id: payload.vendor_id,
+            });
+            throw new Error("Invalid product_type_id");
+        }
+
+        resolvedParent = productType.type;
+        resolvedProductTypeId = productType.id;
+    }
+
     // ✅ Create new product type
     const productStructureType = await prisma.productStructure.create({
         data: {
             type: payload.type,
-            parent: payload.parent,
+            parent: resolvedParent,
             vendor_id: payload.vendor_id,
+            product_type_id: resolvedProductTypeId,
         }
     });
 
@@ -43,6 +68,14 @@ export const getAllProductStructureTypes = async (vendor_id: number): Promise<Pr
 
     const types = await prisma.productStructure.findMany({
         where: { vendor_id: vendor_id, status: "active" },
+        include: {
+            productType: {
+                select: {
+                    id: true,
+                    type: true,
+                },
+            },
+        },
     })
 
     console.log("[SERVICE] Found productStructure types", { count: types.length });
