@@ -30,6 +30,7 @@ import fs from "node:fs/promises";
 import { NotificationService } from "../../../../src/services/notification/notification.service";
 import { validateSelfAssignTask } from "../../../utils/selfAssignTaskType";
 import { getFranchiseAdminRecipients } from "../../notification/adminRecipients.service";
+import { sendLeadMovedToDesigningEmail } from "../../email/brevoEmail.service";
 
 export interface CreateBDISMPaymentUploadDto {
   lead_id: number;
@@ -1168,6 +1169,23 @@ export class PaymentUploadService {
               ? `/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
               : `/dashboard/leads/details/${data.lead_id}`,
           });
+
+          // 📧 Send Email Notification
+          if (admin.user_email) {
+            await sendLeadMovedToDesigningEmail({
+              allowSuperAdmin: isSuperAdminFallback,
+              vendor_id: lead.vendor_id,
+              toEmail: admin.user_email,
+              toName: admin.user_name || "Admin",
+              leadCode: leadCode,
+              leadName: leadName,
+              updatedBy: actor?.user_name || "System",
+              updatedAt: updatedAt,
+              projectUrl: projectUrl,
+            }).catch((e) =>
+              logger.error("Failed to send designing email", { error: e.message }),
+            );
+          }
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
