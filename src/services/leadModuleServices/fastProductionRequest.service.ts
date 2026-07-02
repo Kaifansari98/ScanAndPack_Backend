@@ -7,6 +7,17 @@ import { NotificationType } from "../../prisma/generated";
 import { generateSignedUrl, uploadToWasabiInitialSiteMeasurementFile } from "../../utils/wasabiClient";
 import { NotificationService } from "../notification/notification.service";
 import { createTaskHistoryLog } from "../task/taskHistory.service";
+import { sendFastProductionApprovalRequiredEmail } from "../email/brevoEmail.service";
+import {
+  sendFastProductionApprovalRequiredFactoryEmail,
+  sendFastProductionSuperAdminApprovedEmail,
+  sendFastProductionSuperAdminRejectedEmail,
+  sendFastProductionFactoryApprovedEmail,
+  sendFastProductionFactoryRejectedEmail,
+  sendFastProductionFullyApprovedSalesExecEmail,
+  sendFastProductionFullyApprovedSuperAdminEmail,
+  sendFastProductionFullyApprovedFactoryEmail,
+} from "../email/brevoEmail2.service";
 
 const FAST_PRODUCTION_REQUEST_TASK_TYPE = "Request Fast Production";
 const FAST_PRODUCTION_REQUEST_DOCUMENT_TAG = "FAST_PRODUCTION_REQUEST_DOCUMENT";
@@ -212,12 +223,19 @@ const closeTask = async (
   return updatedTask;
 };
 
-const findFirstActiveUserByRole = async (
+type ActiveUserRecord = {
+  id: number;
+  user_name: string | null;
+  user_email: string | null;
+  user_type: { user_type: string | null } | null;
+};
+
+const findAllActiveUsersByRole = async (
   tx: any,
   vendorId: number,
   role: "super-admin" | "factory",
-) =>
-  tx.userMaster.findFirst({
+): Promise<ActiveUserRecord[]> =>
+  tx.userMaster.findMany({
     where: {
       vendor_id: vendorId,
       status: "active",
@@ -849,40 +867,40 @@ export const finalizeFastProductionRequestBatch = async (
       throw new Error("All instances must be submitted before sending the approval request");
     }
 
-    const [superAdminUser, factoryUser] = await Promise.all([
-      findFirstActiveUserByRole(tx, value.vendor_id, "super-admin"),
-      findFirstActiveUserByRole(tx, value.vendor_id, "factory"),
+    const [superAdminUsers, factoryUsers] = await Promise.all([
+      findAllActiveUsersByRole(tx, value.vendor_id, "super-admin"),
+      findAllActiveUsersByRole(tx, value.vendor_id, "factory"),
     ]);
 
-    if (!superAdminUser) {
+    if (superAdminUsers.length === 0) {
       throw new Error("No active super-admin user found for this vendor");
     }
 
-    if (!factoryUser) {
+    if (factoryUsers.length === 0) {
       throw new Error("No active factory user found for this vendor");
     }
 
+    // Build approvals: if requester is super-admin, only factory approves;
+    // otherwise both super-admin(s) and factory approve.
     const approvalsToCreate =
       actorRole === "super-admin"
-        ? [
-          {
+        ? factoryUsers.map((u) => ({
             batch_id: batch.id,
             approver_role: "FACTORY_ADMIN" as const,
-            approver_user_id: factoryUser.id,
-          },
-        ]
+            approver_user_id: u.id,
+          }))
         : [
-          {
-            batch_id: batch.id,
-            approver_role: "SUPER_ADMIN" as const,
-            approver_user_id: superAdminUser.id,
-          },
-          {
-            batch_id: batch.id,
-            approver_role: "FACTORY_ADMIN" as const,
-            approver_user_id: factoryUser.id,
-          },
-        ];
+            ...superAdminUsers.map((u) => ({
+              batch_id: batch.id,
+              approver_role: "SUPER_ADMIN" as const,
+              approver_user_id: u.id,
+            })),
+            ...factoryUsers.map((u) => ({
+              batch_id: batch.id,
+              approver_role: "FACTORY_ADMIN" as const,
+              approver_user_id: u.id,
+            })),
+          ];
 
     await tx.fastProductionRequestBatch.update({
       where: { id: batch.id },
@@ -918,9 +936,16 @@ export const finalizeFastProductionRequestBatch = async (
     });
 
     const taskRemark = buildBatchTaskRemark(batch.requests);
-    const recipients: Array<{ id: number; taskId: number }> = [];
-    const taskRecipients =
-      actorRole === "super-admin" ? [factoryUser] : [superAdminUser, factoryUser];
+    const recipients: Array<{ id: number; taskId: number; role: "super-admin" | "factory" }> = [];
+
+    // Task recipients: factory always; super-admins only when requester is not super-admin
+    const taskRecipients: Array<{ id: number; user_name: string | null; user_email: string | null; role: "super-admin" | "factory" }> =
+      actorRole === "super-admin"
+        ? factoryUsers.map((u) => ({ ...u, role: "factory" as const }))
+        : [
+            ...superAdminUsers.map((u) => ({ ...u, role: "super-admin" as const })),
+            ...factoryUsers.map((u) => ({ ...u, role: "factory" as const })),
+          ];
 
     for (const recipient of taskRecipients) {
       const task = await tx.userLeadTask.create({
@@ -947,7 +972,7 @@ export const finalizeFastProductionRequestBatch = async (
         actionType: "CREATE",
       });
 
-      recipients.push({ id: recipient.id, taskId: task.id });
+      recipients.push({ id: recipient.id, taskId: task.id, role: recipient.role });
     }
 
     await syncLeadFastProductionState(tx, value.lead_id, value.created_by);
@@ -957,29 +982,76 @@ export const finalizeFastProductionRequestBatch = async (
       status: "pending_approvals" as const,
       recipients,
       instanceCount: batch.requests.length,
+      superAdminUsers: actorRole === "super-admin" ? [] : superAdminUsers,
+      factoryUsers,
     };
   });
 
   await cache.del(`dashboard:tasks:${value.vendor_id}:${value.created_by}`);
   await cache.del(`performance:snapshot:${value.vendor_id}:${value.created_by}`);
 
+  const leadName = `${lead.firstname ?? ""} ${lead.lastname ?? ""}`.trim() || "Lead";
+  const leadCode = lead.lead_code ?? `Lead #${lead.id}`;
+  const raisedBy = actor.user_name ?? "Sales Executive";
+
   for (const recipient of result.recipients) {
     await cache.del(`dashboard:tasks:${value.vendor_id}:${recipient.id}`);
     await cache.del(`performance:snapshot:${value.vendor_id}:${recipient.id}`);
 
+    // In-app notification
     NotificationService.createAndSend({
       vendor_id: value.vendor_id,
       user_id: recipient.id,
       sender_id: value.created_by,
       type: NotificationType.TASK_ASSIGNED,
       title: "Fast Production Approval Request",
-      message: `A fast production request covering ${result.instanceCount} instance(s) is pending your approval for ${lead.lead_code ?? `Lead #${lead.id}`}.`,
+      message: `A fast production request covering ${result.instanceCount} instance(s) is pending your approval for ${leadCode}.`,
       entity_type: "fast_production_request",
       entity_id: result.batchId,
       redirect_url: `/dashboard/my-tasks?taskId=${recipient.taskId}`,
     }).catch((notificationError: any) => {
       logger.error("[FastProductionRequest] Notification create failed:", notificationError);
     });
+
+    const ctaLink = `/dashboard/my-tasks?taskId=${recipient.taskId}`;
+
+    // Email: super-admin recipients
+    if (recipient.role === "super-admin") {
+      const superAdminUser = result.superAdminUsers.find((u: ActiveUserRecord) => u.id === recipient.id);
+      if (superAdminUser?.user_email) {
+        sendFastProductionApprovalRequiredEmail({
+          allowSuperAdmin: true,
+          vendor_id: value.vendor_id,
+          toEmail: superAdminUser.user_email,
+          toName: superAdminUser.user_name ?? undefined,
+          leadCode,
+          leadName,
+          raisedBy,
+          ctaLink,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Approval email to super-admin failed:", emailError);
+        });
+      }
+    }
+
+    // Email: factory recipients
+    if (recipient.role === "factory") {
+      const factoryUser = result.factoryUsers.find((u: ActiveUserRecord) => u.id === recipient.id);
+      if (factoryUser?.user_email) {
+        sendFastProductionApprovalRequiredFactoryEmail({
+          allowSuperAdmin: true,
+          vendor_id: value.vendor_id,
+          toEmail: factoryUser.user_email,
+          toName: factoryUser.user_name ?? undefined,
+          leadCode,
+          leadName,
+          raisedBy,
+          ctaLink,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Approval email to factory user failed:", emailError);
+        });
+      }
+    }
   }
 
   return result;
@@ -1086,6 +1158,7 @@ export const actOnFastProductionRequestTask = async (
           lead_code: true,
           firstname: true,
           lastname: true,
+          client_required_order_login_complition_date: true,
         },
       },
       approvals: {
@@ -1094,6 +1167,12 @@ export const actOnFastProductionRequestTask = async (
           approver_role: true,
           approver_user_id: true,
           status: true,
+          approver: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
         },
       },
       requests: {
@@ -1281,26 +1360,204 @@ export const actOnFastProductionRequestTask = async (
     await cache.del(`performance:snapshot:${task.vendor_id}:${userId}`);
   }
 
+  let notificationTitle = "";
+  let notificationMessage = "";
+  const leadFullName = `${batch.lead.firstname ?? ""} ${batch.lead.lastname ?? ""}`.trim() || "Lead";
+
+  if (value.action === "approve") {
+    if (result.isFullyApproved) {
+      const timelineDate = batch.lead.client_required_order_login_complition_date ?? value.production_target_date;
+      const timelineStr = timelineDate ? new Date(timelineDate).toISOString().slice(0, 10) : "N/A";
+
+      notificationTitle = "Fast Production Fully Approved";
+      notificationMessage = `The Fast Production request for ${batch.lead.lead_code} - ${leadFullName} has been fully approved and the updated timeline has been applied.`;
+
+      if (batch.requester.user_email) {
+        sendFastProductionFullyApprovedSalesExecEmail({
+          allowSuperAdmin: true,
+          vendor_id: task.vendor_id,
+          toEmail: batch.requester.user_email,
+          salesExecutiveName: batch.requester.user_name || "Sales Executive",
+          leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+          leadName: leadFullName,
+          fastProductionTimeline: timelineStr,
+          ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Fully Approved email to Sales Exec failed:", emailError);
+        });
+      }
+
+      const updatedApprovals = await prisma.fastProductionApproval.findMany({
+        where: { batch_id: batch.id },
+        include: {
+          approver: {
+            select: { user_name: true, user_email: true },
+          },
+        },
+      });
+
+      for (const approval of updatedApprovals) {
+        if (!approval.approver_user_id) continue;
+
+        if (approval.approver_role === "SUPER_ADMIN") {
+          if (approval.approver?.user_email) {
+            sendFastProductionFullyApprovedSuperAdminEmail({
+              allowSuperAdmin: true,
+              vendor_id: task.vendor_id,
+              toEmail: approval.approver.user_email,
+              superAdminName: approval.approver.user_name || "Super Admin",
+              leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+              leadName: leadFullName,
+              ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+            }).catch((emailError: any) => {
+              logger.error("[FastProductionRequest] Fully Approved email to Super Admin failed:", emailError);
+            });
+          }
+
+          NotificationService.createAndSend({
+            vendor_id: task.vendor_id,
+            user_id: approval.approver_user_id,
+            sender_id: value.acted_by,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "Fast Production Timeline Applied",
+            message: `Fast Production has been approved for ${batch.lead.lead_code} - ${leadFullName} and the updated timeline has been applied.`,
+            entity_type: "fast_production_request",
+            entity_id: batch.id,
+            redirect_url: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+          }).catch((notificationError: any) => {
+            logger.error("Fully Approved in-app to Super Admin failed:", notificationError);
+          });
+
+        } else if (approval.approver_role === "FACTORY_ADMIN") {
+          if (approval.approver?.user_email) {
+            sendFastProductionFullyApprovedFactoryEmail({
+              allowSuperAdmin: true,
+              vendor_id: task.vendor_id,
+              toEmail: approval.approver.user_email,
+              factoryUserName: approval.approver.user_name || "Factory User",
+              leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+              leadName: leadFullName,
+              ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+            }).catch((emailError: any) => {
+              logger.error("[FastProductionRequest] Fully Approved email to Factory failed:", emailError);
+            });
+          }
+
+          NotificationService.createAndSend({
+            vendor_id: task.vendor_id,
+            user_id: approval.approver_user_id,
+            sender_id: value.acted_by,
+            type: NotificationType.TASK_ASSIGNED,
+            title: "Fast Production Timeline Applied",
+            message: `Fast Production has been approved for ${batch.lead.lead_code} - ${leadFullName}. Please follow the updated production timeline.`,
+            entity_type: "fast_production_request",
+            entity_id: batch.id,
+            redirect_url: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+          }).catch((notificationError: any) => {
+            logger.error("Fully Approved in-app to Factory User failed:", notificationError);
+          });
+        }
+      }
+    } else if (actorRole === "super-admin") {
+      notificationTitle = "Super Admin Approved";
+      notificationMessage = `${actor.user_name} has approved the Fast Production request for ${batch.lead.lead_code} - ${leadFullName}.`;
+
+      if (batch.requester.user_email) {
+        sendFastProductionSuperAdminApprovedEmail({
+          allowSuperAdmin: true,
+          vendor_id: task.vendor_id,
+          toEmail: batch.requester.user_email,
+          salesExecutiveName: batch.requester.user_name || "Sales Executive",
+          superAdminName: actor.user_name || "Super Admin",
+          leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+          leadName: leadFullName,
+          ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Approved email to Sales Exec failed:", emailError);
+        });
+      }
+    } else if (actorRole === "factory") {
+      const expectedReadyDate = value.production_target_date
+        ? new Date(value.production_target_date).toISOString().slice(0, 10)
+        : "N/A";
+        
+      notificationTitle = "Factory User Approved";
+      notificationMessage = `${actor.user_name} has approved the Fast Production request for ${batch.lead.lead_code} - ${leadFullName}. The Expected Ready Date is ${expectedReadyDate}`;
+
+      if (batch.requester.user_email) {
+        sendFastProductionFactoryApprovedEmail({
+          allowSuperAdmin: true,
+          vendor_id: task.vendor_id,
+          toEmail: batch.requester.user_email,
+          salesExecutiveName: batch.requester.user_name || "Sales Executive",
+          factoryUserName: actor.user_name || "Factory User",
+          leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+          leadName: leadFullName,
+          expectedReadyDate,
+          ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Factory Approved email to Sales Exec failed:", emailError);
+        });
+      }
+    } else {
+      notificationTitle = "Fast Production Request Partially Approved";
+      notificationMessage = "One approval has been recorded. Awaiting the remaining approver.";
+    }
+  } else {
+    if (actorRole === "super-admin") {
+      notificationTitle = "Fast Production Rejected";
+      notificationMessage = `${actor.user_name} has rejected the Fast Production request for ${batch.lead.lead_code} - ${leadFullName}.`;
+
+      if (batch.requester.user_email) {
+        sendFastProductionSuperAdminRejectedEmail({
+          allowSuperAdmin: true,
+          vendor_id: task.vendor_id,
+          toEmail: batch.requester.user_email,
+          salesExecutiveName: batch.requester.user_name || "Sales Executive",
+          superAdminName: actor.user_name || "Super Admin",
+          leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+          leadName: leadFullName,
+          rejectionReason: value.remark?.trim() || "No reason provided",
+          ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Rejected email to Sales Exec failed:", emailError);
+        });
+      }
+    } else if (actorRole === "factory") {
+      notificationTitle = "Fast Production Rejected";
+      notificationMessage = `${actor.user_name} has rejected the Fast Production request for ${batch.lead.lead_code} - ${leadFullName}.`;
+
+      if (batch.requester.user_email) {
+        sendFastProductionFactoryRejectedEmail({
+          allowSuperAdmin: true,
+          vendor_id: task.vendor_id,
+          toEmail: batch.requester.user_email,
+          salesExecutiveName: batch.requester.user_name || "Sales Executive",
+          factoryUserName: actor.user_name || "Factory User",
+          leadCode: batch.lead.lead_code ?? `Lead #${batch.lead.id}`,
+          leadName: leadFullName,
+          rejectionReason: value.remark?.trim() || "No reason provided",
+          ctaLink: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
+        }).catch((emailError: any) => {
+          logger.error("[FastProductionRequest] Factory Rejected email to Sales Exec failed:", emailError);
+        });
+      }
+    } else {
+      notificationTitle = "Fast Production Request Rejected";
+      notificationMessage = "Your fast production request has been rejected.";
+    }
+  }
+
   NotificationService.createAndSend({
     vendor_id: task.vendor_id,
     user_id: batch.requester.id,
     sender_id: value.acted_by,
     type: NotificationType.TASK_ASSIGNED,
-    title:
-      value.action === "approve"
-        ? result.isFullyApproved
-          ? "Fast Production Request Approved"
-          : "Fast Production Request Partially Approved"
-        : "Fast Production Request Rejected",
-    message:
-      value.action === "approve"
-        ? result.isFullyApproved
-          ? "Your fast production request has been fully approved."
-          : "One approval has been recorded. Awaiting the remaining approver."
-        : "Your fast production request has been rejected.",
+    title: notificationTitle,
+    message: notificationMessage,
     entity_type: "fast_production_request",
     entity_id: batch.id,
-    redirect_url: "/dashboard/my-tasks",
+    redirect_url: `/dashboard/leads/leadstable/details/${batch.lead.id}?accountId=${task.account_id}`,
   }).catch((notificationError: any) => {
     logger.error("[FastProductionRequest] Requester notification failed:", notificationError);
   });
