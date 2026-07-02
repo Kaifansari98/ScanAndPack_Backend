@@ -1,3 +1,4 @@
+import { applyVendorDomain } from "./brevoEmail.service";
 import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
 import logger from "../../../src/utils/logger";
@@ -68,7 +69,8 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Moved to Production with Partial Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -272,7 +274,8 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Action Required: Complete Order Login Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -467,7 +470,8 @@ export const sendOrderLoginReminderEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Reminder: Order Login Pending for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -669,7 +673,8 @@ export const sendOrderLoginCompletedEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Order Login Completed – Production Ready for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -859,7 +864,8 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
   projectUrl: string;
   orderLoginComplete?: boolean;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const olComplete = payload.orderLoginComplete !== false;
 
   const defaultSubject = olComplete
@@ -1026,7 +1032,8 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
   dispatchedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Under Installation`;
 
   const defaultText = [
@@ -1220,7 +1227,8 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   movedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch Stage`;
 
   const defaultText = [
@@ -1436,7 +1444,8 @@ export type TechCheckAssignedEmailPayload = {
 export const sendTechCheckAssignedEmail = async (
   payload: TechCheckAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Tech Check Review Required for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1638,7 +1647,8 @@ export const sendSiteSupervisorAssignedEmail = async (payload: {
   assignedOn: string;
   leadUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Site Supervisor Assigned on ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1754,7 +1764,8 @@ export const sendBookingDoneApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay} cleared at Booking Done Stage`;
 
@@ -1880,7 +1891,8 @@ export const sendOrderLoginApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay} cleared for Order Login`;
 
@@ -2010,7 +2022,8 @@ export const sendDispatchPlanningApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay}  cleared for Dispatch Planning`;
 
@@ -2143,7 +2156,8 @@ export interface SmallOrderRequestSiteSupervisorApprovalEmailPayload {
 export const sendSmallOrderRequestSiteSupervisorApprovalEmail = async (
   payload: SmallOrderRequestSiteSupervisorApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2311,7 +2325,8 @@ export interface SmallOrderRequestStoreAdminApprovalEmailPayload {
 export const sendSmallOrderRequestStoreAdminApprovalEmail = async (
   payload: SmallOrderRequestStoreAdminApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2483,7 +2498,8 @@ export interface SmallOrderRequestSupervisorApprovedEmailPayload {
 export const sendSmallOrderRequestSupervisorApprovedEmail = async (
   payload: SmallOrderRequestSupervisorApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approved by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2651,7 +2667,8 @@ export interface SmallOrderRequestSupervisorRejectedEmailPayload {
 export const sendSmallOrderRequestSupervisorRejectedEmail = async (
   payload: SmallOrderRequestSupervisorRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Rejected by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2824,7 +2841,8 @@ export interface SmallOrderRequestAdminApprovedEmailPayload {
 export const sendSmallOrderRequestAdminApprovedEmail = async (
   payload: SmallOrderRequestAdminApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approved by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2992,7 +3010,8 @@ export interface SmallOrderRequestAdminRejectedEmailPayload {
 export const sendSmallOrderRequestAdminRejectedEmail = async (
   payload: SmallOrderRequestAdminRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Rejected by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3160,7 +3179,8 @@ export interface NewSmallOrderLeadAssignedEmailPayload {
 export const sendNewSmallOrderLeadAssignedEmail = async (
   payload: NewSmallOrderLeadAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Small Order Lead Assigned – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3321,7 +3341,8 @@ export interface SmallOrderRequestFullyApprovedEmailPayload {
 export const sendSmallOrderRequestFullyApprovedEmail = async (
   payload: SmallOrderRequestFullyApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Fully Approved – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3486,7 +3507,8 @@ export interface SmallOrderSentToPreProductionEmailPayload {
 export const sendSmallOrderSentToPreProductionEmail = async (
   payload: SmallOrderSentToPreProductionEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Sent for Pre Production – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3647,7 +3669,8 @@ export interface SmallOrderSentToFactoryEmailPayload {
 export const sendSmallOrderSentToFactoryEmail = async (
   payload: SmallOrderSentToFactoryEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Sent for Production – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3808,7 +3831,8 @@ export interface SmallOrderProductionCompletedEmailPayload {
 export const sendSmallOrderProductionCompletedEmail = async (
   payload: SmallOrderProductionCompletedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Production Completed – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3969,7 +3993,8 @@ export interface SmallOrderReadyForDispatchEmailPayload {
 export const sendSmallOrderReadyForDispatchEmail = async (
   payload: SmallOrderReadyForDispatchEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Ready for Dispatch – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4131,7 +4156,8 @@ export interface SmallOrderDispatchedForInstallationEmailPayload {
 export const sendSmallOrderDispatchedForInstallationEmail = async (
   payload: SmallOrderDispatchedForInstallationEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Dispatched for Installation – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4299,7 +4325,8 @@ export interface SmallOrderDispatchedEmailPayload {
 export const sendSmallOrderDispatchedEmail = async (
   payload: SmallOrderDispatchedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Dispatched – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
