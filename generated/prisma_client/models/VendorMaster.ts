@@ -65,6 +65,8 @@ export type VendorMasterMinAggregateOutputType = {
   is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
+  is_email_noti_enabled: boolean | null
+  is_in_app_noti_enabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -95,6 +97,8 @@ export type VendorMasterMaxAggregateOutputType = {
   is_year_wise_lead_code_enabled: boolean | null
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean | null
+  is_email_noti_enabled: boolean | null
+  is_in_app_noti_enabled: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
   state_id: number | null
@@ -125,6 +129,8 @@ export type VendorMasterCountAggregateOutputType = {
   is_year_wise_lead_code_enabled: number
   eligible_booking_days: number
   is_self_assign_task_type_master_enabed: number
+  is_email_noti_enabled: number
+  is_in_app_noti_enabled: number
   createdAt: number
   updatedAt: number
   state_id: number
@@ -171,6 +177,8 @@ export type VendorMasterMinAggregateInputType = {
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
+  is_email_noti_enabled?: true
+  is_in_app_noti_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -201,6 +209,8 @@ export type VendorMasterMaxAggregateInputType = {
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
+  is_email_noti_enabled?: true
+  is_in_app_noti_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -231,6 +241,8 @@ export type VendorMasterCountAggregateInputType = {
   is_year_wise_lead_code_enabled?: true
   eligible_booking_days?: true
   is_self_assign_task_type_master_enabed?: true
+  is_email_noti_enabled?: true
+  is_in_app_noti_enabled?: true
   createdAt?: true
   updatedAt?: true
   state_id?: true
@@ -348,6 +360,8 @@ export type VendorMasterGroupByOutputType = {
   is_year_wise_lead_code_enabled: boolean
   eligible_booking_days: number | null
   is_self_assign_task_type_master_enabed: boolean
+  is_email_noti_enabled: boolean
+  is_in_app_noti_enabled: boolean
   createdAt: Date
   updatedAt: Date
   state_id: number | null
@@ -401,6 +415,8 @@ export type VendorMasterWhereInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -533,6 +549,8 @@ export type VendorMasterOrderByWithRelationInput = {
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
+  is_email_noti_enabled?: Prisma.SortOrder
+  is_in_app_noti_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -668,6 +686,8 @@ export type VendorMasterWhereUniqueInput = Prisma.AtLeast<{
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -800,6 +820,8 @@ export type VendorMasterOrderByWithAggregationInput = {
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrderInput | Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
+  is_email_noti_enabled?: Prisma.SortOrder
+  is_in_app_noti_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -838,6 +860,8 @@ export type VendorMasterScalarWhereWithAggregatesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_email_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
+  is_in_app_noti_enabled?: Prisma.BoolWithAggregatesFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableWithAggregatesFilter<"VendorMaster"> | number | null
@@ -867,6 +891,8 @@ export type VendorMasterCreateInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -998,6 +1024,8 @@ export type VendorMasterUncheckedCreateInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -1128,6 +1156,8 @@ export type VendorMasterUpdateInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -1259,6 +1289,8 @@ export type VendorMasterUncheckedUpdateInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1390,6 +1422,8 @@ export type VendorMasterCreateManyInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -1419,6 +1453,8 @@ export type VendorMasterUpdateManyMutationInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1448,6 +1484,8 @@ export type VendorMasterUncheckedUpdateManyInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1478,6 +1516,8 @@ export type VendorMasterCountOrderByAggregateInput = {
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
+  is_email_noti_enabled?: Prisma.SortOrder
+  is_in_app_noti_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1515,6 +1555,8 @@ export type VendorMasterMaxOrderByAggregateInput = {
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
+  is_email_noti_enabled?: Prisma.SortOrder
+  is_in_app_noti_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -1545,6 +1587,8 @@ export type VendorMasterMinOrderByAggregateInput = {
   is_year_wise_lead_code_enabled?: Prisma.SortOrder
   eligible_booking_days?: Prisma.SortOrder
   is_self_assign_task_type_master_enabed?: Prisma.SortOrder
+  is_email_noti_enabled?: Prisma.SortOrder
+  is_in_app_noti_enabled?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   state_id?: Prisma.SortOrder
@@ -3095,6 +3139,8 @@ export type VendorMasterCreateWithoutAddressesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3225,6 +3271,8 @@ export type VendorMasterUncheckedCreateWithoutAddressesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -3370,6 +3418,8 @@ export type VendorMasterUpdateWithoutAddressesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -3500,6 +3550,8 @@ export type VendorMasterUncheckedUpdateWithoutAddressesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -3629,6 +3681,8 @@ export type VendorMasterCreateWithoutTaxInfoInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -3759,6 +3813,8 @@ export type VendorMasterUncheckedCreateWithoutTaxInfoInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -3904,6 +3960,8 @@ export type VendorMasterUpdateWithoutTaxInfoInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4034,6 +4092,8 @@ export type VendorMasterUncheckedUpdateWithoutTaxInfoInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4163,6 +4223,8 @@ export type VendorMasterCreateWithoutPrivilegeMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4293,6 +4355,8 @@ export type VendorMasterUncheckedCreateWithoutPrivilegeMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4438,6 +4502,8 @@ export type VendorMasterUpdateWithoutPrivilegeMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -4568,6 +4634,8 @@ export type VendorMasterUncheckedUpdateWithoutPrivilegeMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -4697,6 +4765,8 @@ export type VendorMasterCreateWithoutUsersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -4827,6 +4897,8 @@ export type VendorMasterUncheckedCreateWithoutUsersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -4972,6 +5044,8 @@ export type VendorMasterUpdateWithoutUsersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5102,6 +5176,8 @@ export type VendorMasterUncheckedUpdateWithoutUsersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5231,6 +5307,8 @@ export type VendorMasterCreateWithoutUserSessionsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5361,6 +5439,8 @@ export type VendorMasterUncheckedCreateWithoutUserSessionsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -5506,6 +5586,8 @@ export type VendorMasterUpdateWithoutUserSessionsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -5636,6 +5718,8 @@ export type VendorMasterUncheckedUpdateWithoutUserSessionsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -5765,6 +5849,8 @@ export type VendorMasterCreateWithoutUserPrivilegeMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -5895,6 +5981,8 @@ export type VendorMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -6040,6 +6128,8 @@ export type VendorMasterUpdateWithoutUserPrivilegeMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6170,6 +6260,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6299,6 +6391,8 @@ export type VendorMasterCreateWithoutProjectsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6429,6 +6523,8 @@ export type VendorMasterUncheckedCreateWithoutProjectsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -6574,6 +6670,8 @@ export type VendorMasterUpdateWithoutProjectsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -6704,6 +6802,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -6833,6 +6933,8 @@ export type VendorMasterCreateWithoutProjectDetailsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -6963,6 +7065,8 @@ export type VendorMasterUncheckedCreateWithoutProjectDetailsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7108,6 +7212,8 @@ export type VendorMasterUpdateWithoutProjectDetailsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7238,6 +7344,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectDetailsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7367,6 +7475,8 @@ export type VendorMasterCreateWithoutProjectItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -7497,6 +7607,8 @@ export type VendorMasterUncheckedCreateWithoutProjectItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -7642,6 +7754,8 @@ export type VendorMasterUpdateWithoutProjectItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -7772,6 +7886,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -7901,6 +8017,8 @@ export type VendorMasterCreateWithoutBoxesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8031,6 +8149,8 @@ export type VendorMasterUncheckedCreateWithoutBoxesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -8176,6 +8296,8 @@ export type VendorMasterUpdateWithoutBoxesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8306,6 +8428,8 @@ export type VendorMasterUncheckedUpdateWithoutBoxesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8435,6 +8559,8 @@ export type VendorMasterCreateWithoutScanItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -8565,6 +8691,8 @@ export type VendorMasterUncheckedCreateWithoutScanItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -8710,6 +8838,8 @@ export type VendorMasterUpdateWithoutScanItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -8840,6 +8970,8 @@ export type VendorMasterUncheckedUpdateWithoutScanItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -8969,6 +9101,8 @@ export type VendorMasterCreateWithoutTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9099,6 +9233,8 @@ export type VendorMasterUncheckedCreateWithoutTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9244,6 +9380,8 @@ export type VendorMasterUpdateWithoutTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9374,6 +9512,8 @@ export type VendorMasterUncheckedUpdateWithoutTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -9503,6 +9643,8 @@ export type VendorMasterCreateWithoutLeadsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -9633,6 +9775,8 @@ export type VendorMasterUncheckedCreateWithoutLeadsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -9778,6 +9922,8 @@ export type VendorMasterUpdateWithoutLeadsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -9908,6 +10054,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10037,6 +10185,8 @@ export type VendorMasterCreateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10167,6 +10317,8 @@ export type VendorMasterUncheckedCreateWithoutLeadSuperAdminApprovalLocInsInput 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -10312,6 +10464,8 @@ export type VendorMasterUpdateWithoutLeadSuperAdminApprovalLocInsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10442,6 +10596,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadSuperAdminApprovalLocInsInput 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -10571,6 +10727,8 @@ export type VendorMasterCreateWithoutLeadUserMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -10701,6 +10859,8 @@ export type VendorMasterUncheckedCreateWithoutLeadUserMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -10846,6 +11006,8 @@ export type VendorMasterUpdateWithoutLeadUserMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -10976,6 +11138,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadUserMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11105,6 +11269,8 @@ export type VendorMasterCreateWithoutLeadActivityStatusLogInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11235,6 +11401,8 @@ export type VendorMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -11380,6 +11548,8 @@ export type VendorMasterUpdateWithoutLeadActivityStatusLogInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -11510,6 +11680,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -11639,6 +11811,8 @@ export type VendorMasterCreateWithoutSiteTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -11769,6 +11943,8 @@ export type VendorMasterUncheckedCreateWithoutSiteTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -11914,6 +12090,8 @@ export type VendorMasterUpdateWithoutSiteTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12044,6 +12222,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12173,6 +12353,8 @@ export type VendorMasterCreateWithoutSourcesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -12303,6 +12485,8 @@ export type VendorMasterUncheckedCreateWithoutSourcesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -12448,6 +12632,8 @@ export type VendorMasterUpdateWithoutSourcesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -12578,6 +12764,8 @@ export type VendorMasterUncheckedUpdateWithoutSourcesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -12707,6 +12895,8 @@ export type VendorMasterCreateWithoutAccountsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   boxes?: Prisma.BoxMasterCreateNestedManyWithoutVendorInput
@@ -12837,6 +13027,8 @@ export type VendorMasterUncheckedCreateWithoutAccountsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -12982,6 +13174,8 @@ export type VendorMasterUpdateWithoutAccountsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   boxes?: Prisma.BoxMasterUpdateManyWithoutVendorNestedInput
@@ -13112,6 +13306,8 @@ export type VendorMasterUncheckedUpdateWithoutAccountsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13241,6 +13437,8 @@ export type VendorMasterCreateWithoutLeadProductMapsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13371,6 +13569,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductMapsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -13516,6 +13716,8 @@ export type VendorMasterUpdateWithoutLeadProductMapsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -13646,6 +13848,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductMapsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -13775,6 +13979,8 @@ export type VendorMasterCreateWithoutProductTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -13905,6 +14111,8 @@ export type VendorMasterUncheckedCreateWithoutProductTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -14050,6 +14258,8 @@ export type VendorMasterUpdateWithoutProductTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14180,6 +14390,8 @@ export type VendorMasterUncheckedUpdateWithoutProductTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14309,6 +14521,8 @@ export type VendorMasterCreateWithoutCarcassTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14439,6 +14653,8 @@ export type VendorMasterUncheckedCreateWithoutCarcassTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -14584,6 +14800,8 @@ export type VendorMasterUpdateWithoutCarcassTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -14714,6 +14932,8 @@ export type VendorMasterUncheckedUpdateWithoutCarcassTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -14843,6 +15063,8 @@ export type VendorMasterCreateWithoutShutterTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -14973,6 +15195,8 @@ export type VendorMasterUncheckedCreateWithoutShutterTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -15118,6 +15342,8 @@ export type VendorMasterUpdateWithoutShutterTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15248,6 +15474,8 @@ export type VendorMasterUncheckedUpdateWithoutShutterTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15377,6 +15605,8 @@ export type VendorMasterCreateWithoutHandleTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -15507,6 +15737,8 @@ export type VendorMasterUncheckedCreateWithoutHandleTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -15652,6 +15884,8 @@ export type VendorMasterUpdateWithoutHandleTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -15782,6 +16016,8 @@ export type VendorMasterUncheckedUpdateWithoutHandleTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -15911,6 +16147,8 @@ export type VendorMasterCreateWithoutTimelineRulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16041,6 +16279,8 @@ export type VendorMasterUncheckedCreateWithoutTimelineRulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16186,6 +16426,8 @@ export type VendorMasterUpdateWithoutTimelineRulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16316,6 +16558,8 @@ export type VendorMasterUncheckedUpdateWithoutTimelineRulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16445,6 +16689,8 @@ export type VendorMasterCreateWithoutDocumentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -16575,6 +16821,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -16720,6 +16968,8 @@ export type VendorMasterUpdateWithoutDocumentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -16850,6 +17100,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -16979,6 +17231,8 @@ export type VendorMasterCreateWithoutLeadChatRoomsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17109,6 +17363,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -17254,6 +17510,8 @@ export type VendorMasterUpdateWithoutLeadChatRoomsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17384,6 +17642,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -17513,6 +17773,8 @@ export type VendorMasterCreateWithoutLeadChatDocumentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -17643,6 +17905,8 @@ export type VendorMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -17788,6 +18052,8 @@ export type VendorMasterUpdateWithoutLeadChatDocumentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -17918,6 +18184,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18047,6 +18315,8 @@ export type VendorMasterCreateWithoutProductStructureInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18177,6 +18447,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18322,6 +18594,8 @@ export type VendorMasterUpdateWithoutProductStructureInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18452,6 +18726,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -18581,6 +18857,8 @@ export type VendorMasterCreateWithoutLeadProductStructureMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -18711,6 +18989,8 @@ export type VendorMasterUncheckedCreateWithoutLeadProductStructureMappingInput =
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -18856,6 +19136,8 @@ export type VendorMasterUpdateWithoutLeadProductStructureMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -18986,6 +19268,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadProductStructureMappingInput =
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19115,6 +19399,8 @@ export type VendorMasterCreateWithoutProductStructureInstancesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19245,6 +19531,8 @@ export type VendorMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -19390,6 +19678,8 @@ export type VendorMasterUpdateWithoutProductStructureInstancesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -19520,6 +19810,8 @@ export type VendorMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -19649,6 +19941,8 @@ export type VendorMasterCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -19779,6 +20073,8 @@ export type VendorMasterUncheckedCreateWithoutSelfAssignTaskTypeMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -19924,6 +20220,8 @@ export type VendorMasterUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20054,6 +20352,8 @@ export type VendorMasterUncheckedUpdateWithoutSelfAssignTaskTypeMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20183,6 +20483,8 @@ export type VendorMasterCreateWithoutPaymentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20313,6 +20615,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20458,6 +20762,8 @@ export type VendorMasterUpdateWithoutPaymentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -20588,6 +20894,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -20717,6 +21025,8 @@ export type VendorMasterCreateWithoutLedgersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -20847,6 +21157,8 @@ export type VendorMasterUncheckedCreateWithoutLedgersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -20992,6 +21304,8 @@ export type VendorMasterUpdateWithoutLedgersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21122,6 +21436,8 @@ export type VendorMasterUncheckedUpdateWithoutLedgersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21251,6 +21567,8 @@ export type VendorMasterCreateWithoutDocumentTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21381,6 +21699,8 @@ export type VendorMasterUncheckedCreateWithoutDocumentTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -21526,6 +21846,8 @@ export type VendorMasterUpdateWithoutDocumentTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -21656,6 +21978,8 @@ export type VendorMasterUncheckedUpdateWithoutDocumentTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -21785,6 +22109,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestTypeMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -21915,6 +22241,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestTypeMastersInput 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22060,6 +22388,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestTypeMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22190,6 +22520,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestTypeMastersInput 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22319,6 +22651,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22449,6 +22783,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -22594,6 +22930,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -22724,6 +23062,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -22853,6 +23193,8 @@ export type VendorMasterCreateWithoutSmallOrderRequestDocumentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -22983,6 +23325,8 @@ export type VendorMasterUncheckedCreateWithoutSmallOrderRequestDocumentsInput = 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -23128,6 +23472,8 @@ export type VendorMasterUpdateWithoutSmallOrderRequestDocumentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23258,6 +23604,8 @@ export type VendorMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsInput = 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23387,6 +23735,8 @@ export type VendorMasterCreateWithoutLeadAmcContractsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -23517,6 +23867,8 @@ export type VendorMasterUncheckedCreateWithoutLeadAmcContractsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -23662,6 +24014,8 @@ export type VendorMasterUpdateWithoutLeadAmcContractsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -23792,6 +24146,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadAmcContractsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -23921,6 +24277,8 @@ export type VendorMasterCreateWithoutLeadServiceSchedulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24051,6 +24409,8 @@ export type VendorMasterUncheckedCreateWithoutLeadServiceSchedulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24196,6 +24556,8 @@ export type VendorMasterUpdateWithoutLeadServiceSchedulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24326,6 +24688,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadServiceSchedulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24455,6 +24819,8 @@ export type VendorMasterCreateWithoutStatusTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -24585,6 +24951,8 @@ export type VendorMasterUncheckedCreateWithoutStatusTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -24730,6 +25098,8 @@ export type VendorMasterUpdateWithoutStatusTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -24860,6 +25230,8 @@ export type VendorMasterUncheckedUpdateWithoutStatusTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -24989,6 +25361,8 @@ export type VendorMasterCreateWithoutLeadStatusLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25119,6 +25493,8 @@ export type VendorMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -25264,6 +25640,8 @@ export type VendorMasterUpdateWithoutLeadStatusLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25394,6 +25772,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -25523,6 +25903,8 @@ export type VendorMasterCreateWithoutDesignMeetingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -25653,6 +26035,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -25798,6 +26182,8 @@ export type VendorMasterUpdateWithoutDesignMeetingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -25928,6 +26314,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26057,6 +26445,8 @@ export type VendorMasterCreateWithoutClientVisitsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26187,6 +26577,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -26332,6 +26724,8 @@ export type VendorMasterUpdateWithoutClientVisitsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26462,6 +26856,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -26591,6 +26987,8 @@ export type VendorMasterCreateWithoutMeetingTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -26721,6 +27119,8 @@ export type VendorMasterUncheckedCreateWithoutMeetingTypesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -26866,6 +27266,8 @@ export type VendorMasterUpdateWithoutMeetingTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -26996,6 +27398,8 @@ export type VendorMasterUncheckedUpdateWithoutMeetingTypesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27125,6 +27529,8 @@ export type VendorMasterCreateWithoutDesignMeetingDocsMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27255,6 +27661,8 @@ export type VendorMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27400,6 +27808,8 @@ export type VendorMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -27530,6 +27940,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -27659,6 +28071,8 @@ export type VendorMasterCreateWithoutClientVisitDocumentMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -27789,6 +28203,8 @@ export type VendorMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput =
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -27934,6 +28350,8 @@ export type VendorMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28064,6 +28482,8 @@ export type VendorMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput =
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28193,6 +28613,8 @@ export type VendorMasterCreateWithoutDesignSelectionInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28323,6 +28745,8 @@ export type VendorMasterUncheckedCreateWithoutDesignSelectionInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -28468,6 +28892,8 @@ export type VendorMasterUpdateWithoutDesignSelectionInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -28598,6 +29024,8 @@ export type VendorMasterUncheckedUpdateWithoutDesignSelectionInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -28727,6 +29155,8 @@ export type VendorMasterCreateWithoutChsSelectionMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -28857,6 +29287,8 @@ export type VendorMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29002,6 +29434,8 @@ export type VendorMasterUpdateWithoutChsSelectionMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29132,6 +29566,8 @@ export type VendorMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29261,6 +29697,8 @@ export type VendorMasterCreateWithoutPaymentTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29391,6 +29829,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -29536,6 +29976,8 @@ export type VendorMasterUpdateWithoutPaymentTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -29666,6 +30108,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29795,6 +30239,8 @@ export type VendorMasterCreateWithoutSiteSupervisorsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -29925,6 +30371,8 @@ export type VendorMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -30070,6 +30518,8 @@ export type VendorMasterUpdateWithoutSiteSupervisorsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30200,6 +30650,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30329,6 +30781,8 @@ export type VendorMasterCreateWithoutUserLeadTasksInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30459,6 +30913,8 @@ export type VendorMasterUncheckedCreateWithoutUserLeadTasksInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -30604,6 +31060,8 @@ export type VendorMasterUpdateWithoutUserLeadTasksInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -30734,6 +31192,8 @@ export type VendorMasterUncheckedUpdateWithoutUserLeadTasksInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30863,6 +31323,8 @@ export type VendorMasterCreateWithoutFastProductionRequestBatchesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -30993,6 +31455,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestBatchesInput 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31138,6 +31602,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestBatchesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -31268,6 +31734,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31397,6 +31865,8 @@ export type VendorMasterCreateWithoutFastProductionRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -31527,6 +31997,8 @@ export type VendorMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -31672,6 +32144,8 @@ export type VendorMasterUpdateWithoutFastProductionRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -31802,6 +32276,8 @@ export type VendorMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -31931,6 +32407,8 @@ export type VendorMasterCreateWithoutLeadDetailedLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -32061,6 +32539,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -32206,6 +32686,8 @@ export type VendorMasterUpdateWithoutLeadDetailedLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -32336,6 +32818,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32465,6 +32949,8 @@ export type VendorMasterCreateWithoutLeadDocumentLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -32595,6 +33081,8 @@ export type VendorMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -32740,6 +33228,8 @@ export type VendorMasterUpdateWithoutLeadDocumentLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -32870,6 +33360,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -32999,6 +33491,8 @@ export type VendorMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -33129,6 +33623,8 @@ export type VendorMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMapping
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33274,6 +33770,8 @@ export type VendorMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -33404,6 +33902,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMapping
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -33533,6 +34033,8 @@ export type VendorMasterCreateWithoutCompanyVendorsMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -33663,6 +34165,8 @@ export type VendorMasterUncheckedCreateWithoutCompanyVendorsMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -33808,6 +34312,8 @@ export type VendorMasterUpdateWithoutCompanyVendorsMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -33938,6 +34444,8 @@ export type VendorMasterUncheckedUpdateWithoutCompanyVendorsMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34067,6 +34575,8 @@ export type VendorMasterCreateWithoutOrderLoginDetailsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -34197,6 +34707,8 @@ export type VendorMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -34342,6 +34854,8 @@ export type VendorMasterUpdateWithoutOrderLoginDetailsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -34472,6 +34986,8 @@ export type VendorMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -34601,6 +35117,8 @@ export type VendorMasterCreateWithoutSiteReadinessInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -34731,6 +35249,8 @@ export type VendorMasterUncheckedCreateWithoutSiteReadinessInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -34876,6 +35396,8 @@ export type VendorMasterUpdateWithoutSiteReadinessInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -35006,6 +35528,8 @@ export type VendorMasterUncheckedUpdateWithoutSiteReadinessInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35135,6 +35659,8 @@ export type VendorMasterCreateWithoutInstallersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -35265,6 +35791,8 @@ export type VendorMasterUncheckedCreateWithoutInstallersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -35410,6 +35938,8 @@ export type VendorMasterUpdateWithoutInstallersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -35540,6 +36070,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -35669,6 +36201,8 @@ export type VendorMasterCreateWithoutInstallerMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -35799,6 +36333,8 @@ export type VendorMasterUncheckedCreateWithoutInstallerMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -35944,6 +36480,8 @@ export type VendorMasterUpdateWithoutInstallerMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -36074,6 +36612,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36203,6 +36743,8 @@ export type VendorMasterCreateWithoutInstallationUpdatesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -36333,6 +36875,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -36478,6 +37022,8 @@ export type VendorMasterUpdateWithoutInstallationUpdatesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -36608,6 +37154,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -36737,6 +37285,8 @@ export type VendorMasterCreateWithoutInstallationUpdateDocsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -36867,6 +37417,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationUpdateDocsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -37012,6 +37564,8 @@ export type VendorMasterUpdateWithoutInstallationUpdateDocsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -37142,6 +37696,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationUpdateDocsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37271,6 +37827,8 @@ export type VendorMasterCreateWithoutMiscellaneousMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -37401,6 +37959,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -37546,6 +38106,8 @@ export type VendorMasterUpdateWithoutMiscellaneousMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -37676,6 +38238,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -37805,6 +38369,8 @@ export type VendorMasterCreateWithoutMiscellaneousTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -37935,6 +38501,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38080,6 +38648,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -38210,6 +38780,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38339,6 +38911,8 @@ export type VendorMasterCreateWithoutMiscellaneousTeamMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -38469,6 +39043,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousTeamMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -38614,6 +39190,8 @@ export type VendorMasterUpdateWithoutMiscellaneousTeamMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -38744,6 +39322,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousTeamMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -38873,6 +39453,8 @@ export type VendorMasterCreateWithoutMiscellaneousDocumentInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -39003,6 +39585,8 @@ export type VendorMasterUncheckedCreateWithoutMiscellaneousDocumentInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -39148,6 +39732,8 @@ export type VendorMasterUpdateWithoutMiscellaneousDocumentInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -39278,6 +39864,8 @@ export type VendorMasterUncheckedUpdateWithoutMiscellaneousDocumentInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39407,6 +39995,8 @@ export type VendorMasterCreateWithoutInstallationIssueLogMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -39537,6 +40127,8 @@ export type VendorMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -39682,6 +40274,8 @@ export type VendorMasterUpdateWithoutInstallationIssueLogMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -39812,6 +40406,8 @@ export type VendorMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -39941,6 +40537,8 @@ export type VendorMasterCreateWithoutIssueLogTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -40071,6 +40669,8 @@ export type VendorMasterUncheckedCreateWithoutIssueLogTypeMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40216,6 +40816,8 @@ export type VendorMasterUpdateWithoutIssueLogTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -40346,6 +40948,8 @@ export type VendorMasterUncheckedUpdateWithoutIssueLogTypeMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -40475,6 +41079,8 @@ export type VendorMasterCreateWithoutNotificationMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -40605,6 +41211,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationMastersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -40750,6 +41358,8 @@ export type VendorMasterUpdateWithoutNotificationMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -40880,6 +41490,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationMastersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41009,6 +41621,8 @@ export type VendorMasterCreateWithoutNotificationsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -41139,6 +41753,8 @@ export type VendorMasterUncheckedCreateWithoutNotificationsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -41284,6 +41900,8 @@ export type VendorMasterUpdateWithoutNotificationsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -41414,6 +42032,8 @@ export type VendorMasterUncheckedUpdateWithoutNotificationsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -41543,6 +42163,8 @@ export type VendorMasterCreateWithoutUserPushTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -41673,6 +42295,8 @@ export type VendorMasterUncheckedCreateWithoutUserPushTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -41818,6 +42442,8 @@ export type VendorMasterUpdateWithoutUserPushTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -41948,6 +42574,8 @@ export type VendorMasterUncheckedUpdateWithoutUserPushTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42077,6 +42705,8 @@ export type VendorMasterCreateWithoutVendorModulesMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -42207,6 +42837,8 @@ export type VendorMasterUncheckedCreateWithoutVendorModulesMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42352,6 +42984,8 @@ export type VendorMasterUpdateWithoutVendorModulesMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -42482,6 +43116,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorModulesMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -42611,6 +43247,8 @@ export type VendorMasterCreateWithoutMachineMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -42741,6 +43379,8 @@ export type VendorMasterUncheckedCreateWithoutMachineMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -42886,6 +43526,8 @@ export type VendorMasterUpdateWithoutMachineMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -43016,6 +43658,8 @@ export type VendorMasterUncheckedUpdateWithoutMachineMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43145,6 +43789,8 @@ export type VendorMasterCreateWithoutCutListInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -43275,6 +43921,8 @@ export type VendorMasterUncheckedCreateWithoutCutListInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -43420,6 +44068,8 @@ export type VendorMasterUpdateWithoutCutListInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -43550,6 +44200,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -43679,6 +44331,8 @@ export type VendorMasterCreateWithoutCutListMachineMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -43809,6 +44463,8 @@ export type VendorMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -43954,6 +44610,8 @@ export type VendorMasterUpdateWithoutCutListMachineMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -44084,6 +44742,8 @@ export type VendorMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44213,6 +44873,8 @@ export type VendorMasterCreateWithoutUserMachineMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -44343,6 +45005,8 @@ export type VendorMasterUncheckedCreateWithoutUserMachineMappingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -44488,6 +45152,8 @@ export type VendorMasterUpdateWithoutUserMachineMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -44618,6 +45284,8 @@ export type VendorMasterUncheckedUpdateWithoutUserMachineMappingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -44747,6 +45415,8 @@ export type VendorMasterCreateWithoutVendorSettingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -44877,6 +45547,8 @@ export type VendorMasterUncheckedCreateWithoutVendorSettingInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -45022,6 +45694,8 @@ export type VendorMasterUpdateWithoutVendorSettingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -45152,6 +45826,8 @@ export type VendorMasterUncheckedUpdateWithoutVendorSettingInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45281,6 +45957,8 @@ export type VendorMasterCreateWithoutDefectMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -45411,6 +46089,8 @@ export type VendorMasterUncheckedCreateWithoutDefectMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -45556,6 +46236,8 @@ export type VendorMasterUpdateWithoutDefectMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -45686,6 +46368,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -45815,6 +46499,8 @@ export type VendorMasterCreateWithoutDefectedItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -45945,6 +46631,8 @@ export type VendorMasterUncheckedCreateWithoutDefectedItemsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -46090,6 +46778,8 @@ export type VendorMasterUpdateWithoutDefectedItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -46220,6 +46910,8 @@ export type VendorMasterUncheckedUpdateWithoutDefectedItemsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46349,6 +47041,8 @@ export type VendorMasterCreateWithoutFranchisesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -46479,6 +47173,8 @@ export type VendorMasterUncheckedCreateWithoutFranchisesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -46624,6 +47320,8 @@ export type VendorMasterUpdateWithoutFranchisesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -46754,6 +47452,8 @@ export type VendorMasterUncheckedUpdateWithoutFranchisesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -46883,6 +47583,8 @@ export type VendorMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -47013,6 +47715,8 @@ export type VendorMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMapping
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -47158,6 +47862,8 @@ export type VendorMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = 
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -47288,6 +47994,8 @@ export type VendorMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMapping
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -47417,6 +48125,8 @@ export type VendorMasterCreateWithoutStateInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -47547,6 +48257,8 @@ export type VendorMasterUncheckedCreateWithoutStateInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutVendorInput
@@ -47706,6 +48418,8 @@ export type VendorMasterScalarWhereInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   eligible_booking_days?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_email_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFilter<"VendorMaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"VendorMaster"> | Date | string
   state_id?: Prisma.IntNullableFilter<"VendorMaster"> | number | null
@@ -47735,6 +48449,8 @@ export type VendorMasterCreateWithoutThemesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -47865,6 +48581,8 @@ export type VendorMasterUncheckedCreateWithoutThemesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -48010,6 +48728,8 @@ export type VendorMasterUpdateWithoutThemesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -48140,6 +48860,8 @@ export type VendorMasterUncheckedUpdateWithoutThemesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48269,6 +48991,8 @@ export type VendorMasterCreateWithoutExternalPlatformTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -48399,6 +49123,8 @@ export type VendorMasterUncheckedCreateWithoutExternalPlatformTokensInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -48544,6 +49270,8 @@ export type VendorMasterUpdateWithoutExternalPlatformTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -48674,6 +49402,8 @@ export type VendorMasterUncheckedUpdateWithoutExternalPlatformTokensInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -48803,6 +49533,8 @@ export type VendorMasterCreateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -48933,6 +49665,8 @@ export type VendorMasterUncheckedCreateWithoutLeadExternalPlatformCustomerMappin
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -49078,6 +49812,8 @@ export type VendorMasterUpdateWithoutLeadExternalPlatformCustomerMappingsInput =
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -49208,6 +49944,8 @@ export type VendorMasterUncheckedUpdateWithoutLeadExternalPlatformCustomerMappin
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49337,6 +50075,8 @@ export type VendorMasterCreateWithoutCompletionPhotosInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -49467,6 +50207,8 @@ export type VendorMasterUncheckedCreateWithoutCompletionPhotosInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -49612,6 +50354,8 @@ export type VendorMasterUpdateWithoutCompletionPhotosInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -49742,6 +50486,8 @@ export type VendorMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -49871,6 +50617,8 @@ export type VendorMasterCreateWithoutProjectCategoriesMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -50001,6 +50749,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesMasterInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -50146,6 +50896,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -50276,6 +51028,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesMasterInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -50405,6 +51159,8 @@ export type VendorMasterCreateWithoutProjectCategoriesVendorMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -50535,6 +51291,8 @@ export type VendorMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsInp
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -50680,6 +51438,8 @@ export type VendorMasterUpdateWithoutProjectCategoriesVendorMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -50810,6 +51570,8 @@ export type VendorMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsInp
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -50939,6 +51701,8 @@ export type VendorMasterCreateWithoutBrandsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -51069,6 +51833,8 @@ export type VendorMasterUncheckedCreateWithoutBrandsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -51214,6 +51980,8 @@ export type VendorMasterUpdateWithoutBrandsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -51344,6 +52112,8 @@ export type VendorMasterUncheckedUpdateWithoutBrandsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -51473,6 +52243,8 @@ export type VendorMasterCreateWithoutProductsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -51603,6 +52375,8 @@ export type VendorMasterUncheckedCreateWithoutProductsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -51748,6 +52522,8 @@ export type VendorMasterUpdateWithoutProductsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -51878,6 +52654,8 @@ export type VendorMasterUncheckedUpdateWithoutProductsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -52007,6 +52785,8 @@ export type VendorMasterCreateWithoutPurchaseIntentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -52137,6 +52917,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseIntentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -52282,6 +53064,8 @@ export type VendorMasterUpdateWithoutPurchaseIntentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -52412,6 +53196,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseIntentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -52541,6 +53327,8 @@ export type VendorMasterCreateWithoutPurchaseOrdersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -52671,6 +53459,8 @@ export type VendorMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -52816,6 +53606,8 @@ export type VendorMasterUpdateWithoutPurchaseOrdersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -52946,6 +53738,8 @@ export type VendorMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -53075,6 +53869,8 @@ export type VendorMasterCreateWithoutGrnsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -53205,6 +54001,8 @@ export type VendorMasterUncheckedCreateWithoutGrnsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -53350,6 +54148,8 @@ export type VendorMasterUpdateWithoutGrnsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -53480,6 +54280,8 @@ export type VendorMasterUncheckedUpdateWithoutGrnsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -53609,6 +54411,8 @@ export type VendorMasterCreateWithoutDebitCreditNotesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -53739,6 +54543,8 @@ export type VendorMasterUncheckedCreateWithoutDebitCreditNotesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -53884,6 +54690,8 @@ export type VendorMasterUpdateWithoutDebitCreditNotesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -54014,6 +54822,8 @@ export type VendorMasterUncheckedUpdateWithoutDebitCreditNotesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -54143,6 +54953,8 @@ export type VendorMasterCreateWithoutRedeliveryRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -54273,6 +55085,8 @@ export type VendorMasterUncheckedCreateWithoutRedeliveryRequestsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -54418,6 +55232,8 @@ export type VendorMasterUpdateWithoutRedeliveryRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -54548,6 +55364,8 @@ export type VendorMasterUncheckedUpdateWithoutRedeliveryRequestsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -54677,6 +55495,8 @@ export type VendorMasterCreateWithoutHsnMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -54807,6 +55627,8 @@ export type VendorMasterUncheckedCreateWithoutHsnMappingsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -54952,6 +55774,8 @@ export type VendorMasterUpdateWithoutHsnMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -55082,6 +55906,8 @@ export type VendorMasterUncheckedUpdateWithoutHsnMappingsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -55211,6 +56037,8 @@ export type VendorMasterCreateWithoutStockHistoriesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -55341,6 +56169,8 @@ export type VendorMasterUncheckedCreateWithoutStockHistoriesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -55486,6 +56316,8 @@ export type VendorMasterUpdateWithoutStockHistoriesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -55616,6 +56448,8 @@ export type VendorMasterUncheckedUpdateWithoutStockHistoriesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -55745,6 +56579,8 @@ export type VendorMasterCreateWithoutPaymentTermsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -55875,6 +56711,8 @@ export type VendorMasterUncheckedCreateWithoutPaymentTermsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -56020,6 +56858,8 @@ export type VendorMasterUpdateWithoutPaymentTermsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -56150,6 +56990,8 @@ export type VendorMasterUncheckedUpdateWithoutPaymentTermsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -56279,6 +57121,8 @@ export type VendorMasterCreateWithoutPoPaymentSchedulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -56409,6 +57253,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentSchedulesInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -56554,6 +57400,8 @@ export type VendorMasterUpdateWithoutPoPaymentSchedulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -56684,6 +57532,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentSchedulesInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -56813,6 +57663,8 @@ export type VendorMasterCreateWithoutPoPaymentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountMasterCreateNestedManyWithoutVendorInput
@@ -56943,6 +57795,8 @@ export type VendorMasterUncheckedCreateWithoutPoPaymentsInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   state_id?: number | null
@@ -57088,6 +57942,8 @@ export type VendorMasterUpdateWithoutPoPaymentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -57218,6 +58074,8 @@ export type VendorMasterUncheckedUpdateWithoutPoPaymentsInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   state_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -57348,6 +58206,8 @@ export type VendorMasterCreateManyStateInput = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: number | null
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -57376,6 +58236,8 @@ export type VendorMasterUpdateWithoutStateInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUpdateManyWithoutVendorNestedInput
@@ -57506,6 +58368,8 @@ export type VendorMasterUncheckedUpdateWithoutStateInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountMasterUncheckedUpdateManyWithoutVendorNestedInput
@@ -57636,6 +58500,8 @@ export type VendorMasterUncheckedUpdateManyWithoutStateInput = {
   is_year_wise_lead_code_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   eligible_booking_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_self_assign_task_type_master_enabed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_email_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_in_app_noti_enabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -58596,6 +59462,8 @@ export type VendorMasterSelect<ExtArgs extends runtime.Types.Extensions.Internal
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -58729,6 +59597,8 @@ export type VendorMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -58760,6 +59630,8 @@ export type VendorMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
@@ -58791,12 +59663,14 @@ export type VendorMasterSelectScalar = {
   is_year_wise_lead_code_enabled?: boolean
   eligible_booking_days?: boolean
   is_self_assign_task_type_master_enabed?: boolean
+  is_email_noti_enabled?: boolean
+  is_in_app_noti_enabled?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   state_id?: boolean
 }
 
-export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
+export type VendorMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_name" | "vendor_code" | "vendor_report_code" | "primary_contact_number" | "primary_contact_email" | "primary_contact_name" | "country_code" | "head_office_id" | "status" | "logo" | "time_zone" | "subdomain_url" | "IsAccountLocInEnabled" | "is_crm_enabled" | "is_custom_doc_nomenclature_enabled" | "is_inventory_enabled" | "is_tracktrace_enabled" | "is_approval_task_enabled" | "is_client_visit_enabled" | "is_this_vendor_is_custom_usertype_only" | "is_year_wise_lead_code_enabled" | "eligible_booking_days" | "is_self_assign_task_type_master_enabed" | "is_email_noti_enabled" | "is_in_app_noti_enabled" | "createdAt" | "updatedAt" | "state_id", ExtArgs["result"]["vendorMaster"]>
 export type VendorMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   accounts?: boolean | Prisma.VendorMaster$accountsArgs<ExtArgs>
   boxes?: boolean | Prisma.VendorMaster$boxesArgs<ExtArgs>
@@ -59040,6 +59914,8 @@ export type $VendorMasterPayload<ExtArgs extends runtime.Types.Extensions.Intern
     is_year_wise_lead_code_enabled: boolean
     eligible_booking_days: number | null
     is_self_assign_task_type_master_enabed: boolean
+    is_email_noti_enabled: boolean
+    is_in_app_noti_enabled: boolean
     createdAt: Date
     updatedAt: Date
     state_id: number | null
@@ -59592,6 +60468,8 @@ export interface VendorMasterFieldRefs {
   readonly is_year_wise_lead_code_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly eligible_booking_days: Prisma.FieldRef<"VendorMaster", 'Int'>
   readonly is_self_assign_task_type_master_enabed: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_email_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
+  readonly is_in_app_noti_enabled: Prisma.FieldRef<"VendorMaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"VendorMaster", 'DateTime'>
   readonly state_id: Prisma.FieldRef<"VendorMaster", 'Int'>

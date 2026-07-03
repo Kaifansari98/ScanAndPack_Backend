@@ -11192,6 +11192,8 @@ export const VendorMasterScalarFieldEnum = {
   is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
   eligible_booking_days: 'eligible_booking_days',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
+  is_email_noti_enabled: 'is_email_noti_enabled',
+  is_in_app_noti_enabled: 'is_in_app_noti_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id'

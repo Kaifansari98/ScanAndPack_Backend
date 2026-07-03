@@ -62,6 +62,7 @@ export const applyVendorDomain = async <T extends { vendor_id?: number }>(payloa
 };
 
 export type BrevoEmailPayload = {
+  vendor_id?: number;
   toEmail: string;
   toName?: string | null;
   subject: string;
@@ -394,7 +395,18 @@ export const sendBrevoEmail = async (
   identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
-  const brevoEnabled = process.env.BREVO_ENABLED === "true";
+  let brevoEnabled = process.env.BREVO_ENABLED === "true";
+
+  if (payload.vendor_id) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: payload.vendor_id },
+      select: { is_email_noti_enabled: true }
+    });
+    if (vendor) {
+      brevoEnabled = vendor.is_email_noti_enabled;
+    }
+  }
+
   const forcedSenderEmail = process.env.BREVO_SENDER_EMAIL;
 
   const senderEmail = forcedSenderEmail || identity?.senderEmail;
@@ -578,6 +590,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject: defaultSubject,
@@ -782,6 +795,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -993,6 +1007,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1196,6 +1211,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1398,6 +1414,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1509,6 +1526,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1705,6 +1723,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1914,6 +1933,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2114,6 +2134,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2314,6 +2335,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2515,6 +2537,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2725,6 +2748,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2933,6 +2957,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3123,6 +3148,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3330,6 +3356,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3519,6 +3546,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3709,6 +3737,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3907,6 +3936,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3999,6 +4029,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
     {
       subject: defaultSubject,
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       text: defaultText,
@@ -4176,6 +4207,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4361,6 +4393,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4567,6 +4600,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4780,6 +4814,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4985,6 +5020,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5190,6 +5226,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5375,6 +5412,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5560,6 +5598,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5745,6 +5784,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5930,6 +5970,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6115,6 +6156,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6300,6 +6342,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6485,6 +6528,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6670,6 +6714,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6855,6 +6900,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7040,6 +7086,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7227,6 +7274,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7412,6 +7460,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7635,6 +7684,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7826,6 +7876,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7984,6 +8035,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8117,6 +8169,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8246,6 +8299,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8356,6 +8410,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8496,6 +8551,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8628,6 +8684,7 @@ export const sendFastProductionApprovalRequiredEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,

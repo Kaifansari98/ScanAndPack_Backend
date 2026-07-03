@@ -32,6 +32,8 @@ model VendorMaster {
   is_year_wise_lead_code_enabled         Boolean  @default(false)
   eligible_booking_days                  Int?
   is_self_assign_task_type_master_enabed Boolean  @default(true)
+  is_email_noti_enabled                  Boolean  @default(true)
+  is_in_app_noti_enabled                 Boolean  @default(true)
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
