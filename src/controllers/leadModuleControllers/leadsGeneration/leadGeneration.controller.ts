@@ -37,6 +37,7 @@ import {
   assignLeadToUser,
   getLeadById,
   editTaskISMService,
+  updateLeadStageService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { prisma } from "../../../prisma/client";
 import { createLeadLog } from "../../../utils/leadDetailedLog";
@@ -2915,6 +2916,49 @@ export class LeadController {
         );
     } catch (error: any) {
       logger.error("[CONTROLLER] fetchFollowUpUsers error", error);
+      return res
+        .status(500)
+        .json(ApiResponse.error(error.message || "Internal server error"));
+    }
+  };
+
+  /**
+   * Update lead stage by tag
+   */
+  public updateLeadStage = async (req: Request, res: Response) => {
+    try {
+      const leadId = Number(req.params.id);
+      const { stageTag, actionMessage } = req.body;
+      const vendorId = req.body.vendor_id || (req as any).user?.vendor_id;
+      const accountId = req.body.account_id || (req as any).user?.account_id || 0;
+      const userId = req.body.updated_by || (req as any).user?.id;
+
+      if (!leadId || !stageTag) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("leadId and stageTag are required"));
+      }
+
+      if (!vendorId || !userId) {
+        return res
+          .status(401)
+          .json(ApiResponse.error("Unauthorized: missing user details"));
+      }
+
+      const result = await updateLeadStageService(
+        leadId,
+        vendorId,
+        accountId,
+        stageTag,
+        userId,
+        actionMessage || "Lead stage updated via API"
+      );
+
+      return res
+        .status(200)
+        .json(ApiResponse.success(result, "Lead stage updated successfully"));
+    } catch (error: any) {
+      logger.error("[CONTROLLER] updateLeadStage error", error);
       return res
         .status(500)
         .json(ApiResponse.error(error.message || "Internal server error"));

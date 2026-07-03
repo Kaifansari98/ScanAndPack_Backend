@@ -93,6 +93,12 @@ router.post(
 );
 
 router.post(
+  "/site-photos/upload",
+  handleMulterUpload(diskUploadFields),
+  paymentUploadController.uploadAdditionalSitePhotos
+);
+
+router.post(
   "/booking-done-ism/upload",
   handleMulterUpload(diskUploadFields),
   validatePaymentUpload,
@@ -264,6 +270,12 @@ router.get(
 
 // GET ISM details by leadId
 router.get("/leadId/:leadId", paymentUploadController.getISMDetailsByLeadId);
+
+// GET check if ISM is uploaded
+router.get(
+  "/leadId/:leadId/check-ism-uploaded",
+  paymentUploadController.checkIsmUploaded
+);
 
 // GET only payment info by leadId
 router.get(

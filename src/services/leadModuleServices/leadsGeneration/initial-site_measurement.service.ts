@@ -628,6 +628,44 @@ export class PaymentUploadService {
     }
   }
 
+  public async checkIsmUploaded(leadId: number): Promise<{ isUploaded: boolean }> {
+    try {
+      const lead = await prisma.leadMaster.findUnique({
+        where: { id: leadId },
+        select: { vendor_id: true },
+      });
+
+      if (!lead) {
+        throw new Error("Lead not found");
+      }
+
+      const vendorId = lead.vendor_id;
+
+      const docType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: vendorId, tag: "Type 3" },
+        select: { id: true },
+      });
+
+      if (!docType) {
+        return { isUploaded: false };
+      }
+
+      const docCount = await prisma.leadDocuments.count({
+        where: {
+          lead_id: leadId,
+          vendor_id: vendorId,
+          doc_type_id: docType.id,
+          is_deleted: false,
+        },
+      });
+
+      return { isUploaded: docCount > 0 };
+    } catch (error: any) {
+      console.error("[PaymentUploadService] checkIsmUploaded Error:", error);
+      throw new Error(`Failed to check ISM upload status: ${error.message}`);
+    }
+  }
+
   public async getISMPaymentInfoByLeadId(leadId: number): Promise<any> {
     try {
       // 1. Get vendor_id from leadMaster
@@ -946,45 +984,52 @@ export class PaymentUploadService {
           }
 
           if (!data.skip_status_update) {
-            // 6. Update LeadMaster status (status "Type 2" → "Type 3")
-            const statusFrom = await tx.statusTypeMaster.findFirst({
-              where: { vendor_id: data.vendor_id, tag: "Type 2" },
-            });
-            const statusTo = await tx.statusTypeMaster.findFirst({
-              where: { vendor_id: data.vendor_id, tag: "Type 3" },
+            const vendor = await tx.vendorMaster.findUnique({
+              where: { id: data.vendor_id },
+              select: { is_this_vendor_is_custom_usertype_only: true },
             });
 
-            if (statusFrom && statusTo) {
-              await tx.leadMaster.updateMany({
-                where: {
-                  id: data.lead_id,
-                  vendor_id: data.vendor_id,
-                  status_id: statusFrom.id,
-                },
-                data: {
-                  status_id: statusTo.id,
-                },
+            if (!vendor?.is_this_vendor_is_custom_usertype_only) {
+              // 6. Update LeadMaster status (status "Type 2" → "Type 3")
+              const statusFrom = await tx.statusTypeMaster.findFirst({
+                where: { vendor_id: data.vendor_id, tag: "Type 2" },
               });
-            }
+              const statusTo = await tx.statusTypeMaster.findFirst({
+                where: { vendor_id: data.vendor_id, tag: "Type 3" },
+              });
 
-            // 6B. Insert into LeadStatusLogs
-            if (statusFrom && statusTo) {
-              await tx.leadStatusLogs.create({
-                data: {
+              if (statusFrom && statusTo) {
+                await tx.leadMaster.updateMany({
+                  where: {
+                    id: data.lead_id,
+                    vendor_id: data.vendor_id,
+                    status_id: statusFrom.id,
+                  },
+                  data: {
+                    status_id: statusTo.id,
+                  },
+                });
+              }
+
+              // 6B. Insert into LeadStatusLogs
+              if (statusFrom && statusTo) {
+                await tx.leadStatusLogs.create({
+                  data: {
+                    lead_id: data.lead_id,
+                    account_id: data.account_id,
+                    vendor_id: data.vendor_id,
+                    status_id: statusTo.id,
+                    created_by: data.created_by,
+                    created_at: new Date(),
+                  },
+                });
+
+                logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
                   lead_id: data.lead_id,
-                  account_id: data.account_id,
-                  vendor_id: data.vendor_id,
-                  status_id: statusTo.id,
-                  created_by: data.created_by,
-                  created_at: new Date(),
-                },
-              });
-
-              logger.info("📌 LeadStatusLogs entry added for ISM → Type 3", {
-                lead_id: data.lead_id,
-                from: statusFrom.id,
-                to: statusTo.id,
-              });
+                  from: statusFrom.id,
+                  to: statusTo.id,
+                });
+              }
             }
 
             // 7. Mark related userLeadTask as completed
@@ -1131,13 +1176,21 @@ export class PaymentUploadService {
           ? `${baseUrl}/dashboard/leads/details/${data.lead_id}?accountId=${lead.account_id}`
           : `${baseUrl}/dashboard/leads/details/${data.lead_id}`;
 
-        const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
-          vendorId: lead.vendor_id,
-          franchiseId: lead.franchise_id ?? null,
-          excludeUserId: actorId,
+        const vendor = await prisma.vendorMaster.findUnique({
+          where: { id: data.vendor_id },
+          select: { is_this_vendor_is_custom_usertype_only: true },
         });
 
-        for (const admin of admins) {
+        const shouldSendNotification = !data.skip_status_update && !vendor?.is_this_vendor_is_custom_usertype_only;
+
+        if (shouldSendNotification) {
+          const { recipients: admins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
+            vendorId: lead.vendor_id,
+            franchiseId: lead.franchise_id ?? null,
+            excludeUserId: actorId,
+          });
+
+          for (const admin of admins) {
           // 🔔 In-App
           await NotificationService.createAndSend({
             vendor_id: lead.vendor_id,
@@ -1169,6 +1222,7 @@ export class PaymentUploadService {
               logger.error("Failed to send designing email", { error: e.message }),
             );
           }
+        }
         }
       } catch (err: any) {
         logger.warn("⚠️ Designing stage notification failed", {
@@ -2350,6 +2404,99 @@ export class PaymentUploadService {
     } catch (error: any) {
       console.error("[PaymentUploadService] Error updating payment:", error);
       throw new Error(`Failed to update payment upload: ${error.message}`);
+    }
+  }
+  public async uploadAdditionalSitePhotos(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    updated_by: number;
+    currentSitePhotos: Express.Multer.File[];
+    sitePhotoInstanceIds?: (number | null)[];
+  }): Promise<{ documentsUploaded: any[]; message: string }> {
+    try {
+      if (!data.currentSitePhotos || data.currentSitePhotos.length === 0) {
+        throw new Error("No site photos provided");
+      }
+
+      const response = {
+        documentsUploaded: [] as any[],
+        message: "Site photos uploaded successfully",
+      };
+
+      const uploadedSitePhotos: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+
+      for (const [index, photo] of data.currentSitePhotos.entries()) {
+        const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          photo.path,
+          data.vendor_id,
+          data.lead_id,
+          photo.originalname,
+          photo.mimetype,
+          "current_site_photos",
+        );
+
+        await fs.unlink(photo.path);
+        uploadedSitePhotos.push({
+          originalName: photo.originalname,
+          s3Key,
+          productStructureInstanceId:
+            data.sitePhotoInstanceIds?.[index] ?? null,
+        });
+      }
+
+      await prisma.$transaction(async (tx: any) => {
+        // Fetch correct account_id from the lead to avoid foreign key constraints from bad frontend data
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: { account_id: true }
+        });
+
+        if (!lead) {
+          throw new Error("Lead not found");
+        }
+
+        const sitePhotoDocType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 2" },
+        });
+
+        if (!sitePhotoDocType) {
+          throw new Error(
+            "Document type (site photos) not found for this vendor",
+          );
+        }
+
+        for (const uploaded of uploadedSitePhotos) {
+          const document = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: uploaded.originalName,
+              doc_sys_name: uploaded.s3Key,
+              created_by: data.updated_by,
+              doc_type_id: sitePhotoDocType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
+            },
+          });
+
+          response.documentsUploaded.push({
+            id: document.id,
+            type: "current_site_photo",
+            originalName: uploaded.originalName,
+            s3Key: uploaded.s3Key,
+          });
+        }
+      });
+
+      return response;
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error uploading additional photos:", error);
+      throw new Error(`Failed to upload additional site photos: ${error.message}`);
     }
   }
 

@@ -191,6 +191,12 @@ leadsRouter.delete(
 );
 
 leadsRouter.put("/update/:leadId/userId/:userId", leadController.updateLead);
+
+leadsRouter.patch(
+  "/:id/stage",
+  leadController.updateLeadStage
+);
+
 leadsRouter.patch(
   "/vendorId/:vendorId/leadId/:leadId/block",
   leadController.blockLead

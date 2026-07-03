@@ -3704,3 +3704,64 @@ export const getClientRequiredCompletionDate = async (
 
   return lead?.client_required_order_login_complition_date || null;
 };
+
+export const updateLeadStageService = async (
+  leadId: number,
+  vendorId: number,
+  accountId: number,
+  stageTag: string, // e.g. "Type 1", "Measurement", etc.
+  userId: number,
+  actionMessage: string = "Lead stage updated",
+) => {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      });
+
+      if (!existingLead) {
+        throw new Error("Lead not found or access denied");
+      }
+
+      // Find the status ID for the given tag
+      const statusType = await tx.statusTypeMaster.findFirst({
+        where: { tag: stageTag, vendor_id: vendorId },
+      });
+
+      if (!statusType) {
+        throw new Error(`Stage with tag '${stageTag}' not found for this vendor`);
+      }
+
+      const newStatusId = statusType.id;
+
+      // Update lead stage (status_id)
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: leadId },
+        data: {
+          status_id: newStatusId,
+          updated_by: userId,
+        },
+      });
+
+      // Create history log
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existingLead.account_id!,
+        action: actionMessage,
+        action_type: "STATUS_CHANGE",
+        created_by: userId,
+        created_at: new Date(),
+        stage_id: newStatusId, // Explicity set the stage_id for the log
+      });
+
+      return updatedLead;
+    });
+
+    return { success: true, data: result };
+  } catch (error: any) {
+    logger.error("Error in updateLeadStageService", { error: error.message });
+    throw new Error(error.message || "Failed to update lead stage");
+  }
+};
+
