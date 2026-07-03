@@ -4501,6 +4501,7 @@ export const sendFastProductionApprovalRequiredFactoryEmail = async (payload: {
   raisedBy: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -4672,6 +4673,7 @@ export const sendFastProductionSuperAdminApprovedEmail = async (payload: {
   salesExecutiveName: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Approved by Super Admin for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -4783,6 +4785,7 @@ export const sendFastProductionSuperAdminRejectedEmail = async (payload: {
   rejectionReason: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Rejected by Super Admin for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -4900,6 +4903,7 @@ export const sendFastProductionFactoryApprovedEmail = async (payload: {
   expectedReadyDate: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Approved by Factory User for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5017,6 +5021,7 @@ export const sendFastProductionFactoryRejectedEmail = async (payload: {
   rejectionReason: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Rejected by Factory User for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5133,6 +5138,7 @@ export const sendFastProductionFullyApprovedSalesExecEmail = async (payload: {
   fastProductionTimeline: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Fully Approved for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5247,6 +5253,7 @@ export const sendFastProductionFullyApprovedSuperAdminEmail = async (payload: {
   superAdminName: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Timeline Applied for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5355,6 +5362,7 @@ export const sendFastProductionFullyApprovedFactoryEmail = async (payload: {
   factoryUserName: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Timeline Applied for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5468,6 +5476,7 @@ export const sendFastProductionApprovalPendingReminderSuperAdminEmail = async (p
   superAdminName: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Reminder: Fast Production Approval Pending for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -5576,6 +5585,7 @@ export const sendFastProductionApprovalPendingReminderFactoryEmail = async (payl
   factoryUserName: string;
   ctaLink?: string;
 }): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Reminder: Fast Production Approval Pending for ${payload.leadCode} - ${payload.leadName}`;
 
