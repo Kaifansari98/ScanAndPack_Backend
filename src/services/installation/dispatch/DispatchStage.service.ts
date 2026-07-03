@@ -592,6 +592,33 @@ export class DispatchStageService {
         )?.type ?? null
       : null;
 
+    let miscType = await prisma.miscellaneousTypeMaster.findFirst({
+      where: { name: "Pending Materials", vendor_id: vendorId },
+    });
+    if (!miscType) {
+      miscType = await prisma.miscellaneousTypeMaster.create({
+        data: {
+          name: "Pending Materials",
+          vendor_id: vendorId,
+          created_by: createdBy,
+        },
+      });
+    }
+
+    const misc = await prisma.miscellaneousMaster.create({
+      data: {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: accountId,
+        misc_type_id: miscType.id,
+        problem_description: remark || "Pending Material Added in Dispatch",
+        reorder_material_details: "Pending Material",
+        expected_ready_date: new Date(dueDate),
+        created_by: createdBy,
+        misc_approved: true,
+      },
+    });
+
     const task = await prisma.userLeadTask.create({
       data: {
         vendor_id: vendorId,
