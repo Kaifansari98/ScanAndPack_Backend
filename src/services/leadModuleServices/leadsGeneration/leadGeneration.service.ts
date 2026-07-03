@@ -2579,25 +2579,31 @@ export const getSalesExecutivesByVendor = async (
           vendor_id: vendorId,
           status: "active",
           ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
-          user_type: {
-            user_type: {
-              equals: "custom",
-              mode: "insensitive",
-            },
-          },
-          ...(options?.requiredPrivilegeCode
-            ? {
-              userPrivilegeMappings: {
-                some: {
-                  is_allowed: true,
-                  privilege: {
-                    code: options.requiredPrivilegeCode,
-                    is_active: true,
-                  },
-                },
+          OR: [
+            {
+              user_type: {
+                user_type: { in: ["super-admin"] },
               },
-            }
-            : {}),
+            },
+            {
+              user_type: {
+                user_type: { equals: "custom", mode: "insensitive" },
+              },
+              ...(options?.requiredPrivilegeCode
+                ? {
+                    userPrivilegeMappings: {
+                      some: {
+                        is_allowed: true,
+                        privilege: {
+                          code: options.requiredPrivilegeCode,
+                          is_active: true,
+                        },
+                      },
+                    },
+                  }
+                : {}),
+            },
+          ],
         },
         include: {
           user_type: true,
@@ -2633,30 +2639,13 @@ export const getSalesExecutivesByVendor = async (
       }));
     }
 
-    // First, find the user type ID for 'sales-executive'
-    const salesExecutiveType = await prisma.userTypeMaster.findFirst({
-      where: {
-        user_type: {
-          equals: "sales-executive",
-          mode: "insensitive", // Case insensitive search
-        },
-      },
-    });
-
-    if (!salesExecutiveType) {
-      console.log("[SERVICE] Sales executive user type not found");
-      return [];
-    }
-
-    console.log(
-      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`,
-    );
-
     // Fetch all users with sales-executive role for the specified vendor
     const salesExecutives = await prisma.userMaster.findMany({
       where: {
         vendor_id: vendorId,
-        user_type_id: salesExecutiveType.id,
+        user_type: {
+          user_type: { in: ["sales-executive"] },
+        },
         // Optionally filter only active users
         status: "active",
         ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
