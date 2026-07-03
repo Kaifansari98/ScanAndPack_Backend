@@ -8509,6 +8509,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
 export const sendFastProductionApprovalRequiredEmail = async (
   payload: FastProductionApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
 
