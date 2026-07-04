@@ -193,7 +193,8 @@ export const ModelName = {
   PaymentTermMaster: 'PaymentTermMaster',
   PaymentTermStage: 'PaymentTermStage',
   POPaymentSchedule: 'POPaymentSchedule',
-  POPayment: 'POPayment'
+  POPayment: 'POPayment',
+  Architechuremaster: 'Architechuremaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2623,6 +2624,22 @@ export const POPaymentScalarFieldEnum = {
 } as const
 
 export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
+
+
+export const ArchitechuremasterScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  name: 'name',
+  email: 'email',
+  mobile: 'mobile',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  isdeletetd: 'isdeletetd',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
 
 
 export const SortOrder = {

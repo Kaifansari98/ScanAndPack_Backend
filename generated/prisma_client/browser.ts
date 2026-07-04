@@ -732,3 +732,8 @@ export type POPaymentSchedule = Prisma.POPaymentScheduleModel
  * 
  */
 export type POPayment = Prisma.POPaymentModel
+/**
+ * Model Architechuremaster
+ * 
+ */
+export type Architechuremaster = Prisma.ArchitechuremasterModel
