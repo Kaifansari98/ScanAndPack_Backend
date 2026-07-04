@@ -4,7 +4,65 @@ import { prisma } from "../../prisma/client";
 import logger from "../../../src/utils/logger";
 import { resolveEmailIdentity } from "../../../src/validations/emailIdentity.resolver";
 
+
+export const applyVendorDomain = async <T extends { vendor_id?: number }>(payload: T): Promise<T> => {
+  let domain = process.env.FRONTEND_URL || "http://localhost:3000";
+
+  try {
+    if (payload.vendor_id) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: payload.vendor_id },
+        select: { subdomain_url: true }
+      });
+      if (vendor?.subdomain_url && vendor.subdomain_url.trim().length > 0) {
+        domain = vendor.subdomain_url.trim();
+      }
+    }
+  } catch (e) {
+    // Ignore DB errors and use fallback domain
+  }
+
+  // FORCE domain to have http/https so Sendinblue never throws "host missing"
+  if (!/^https?:\/\//i.test(domain)) {
+    if (domain.includes('localhost')) {
+      domain = 'http://' + domain;
+    } else {
+      domain = 'https://' + domain;
+    }
+  }
+  domain = domain.replace(/\/$/, ""); // remove trailing slash
+
+  const newPayload = { ...payload } as any;
+  const urlKeys = ['projectUrl', 'leadUrl', 'taskUrl', 'conversationUrl', 'detailsUrl', 'loginUrl', 'dashboardUrl', 'vendorUrl'];
+  
+  for (const key of urlKeys) {
+    let originalUrl = newPayload[key];
+    if (originalUrl && typeof originalUrl === 'string') {
+      try {
+        originalUrl = originalUrl.trim();
+        // Check if originalUrl is a full absolute URL
+        if (/^https?:\/\//i.test(originalUrl)) {
+          const urlObj = new URL(originalUrl);
+          newPayload[key] = originalUrl.replace(urlObj.origin, domain);
+        } else {
+          // If it's a relative path or missing protocol (e.g. "localhost:3000/dashboard")
+          if (!originalUrl.startsWith('/')) {
+             const firstSlashIdx = originalUrl.indexOf('/');
+             originalUrl = firstSlashIdx !== -1 ? originalUrl.substring(firstSlashIdx) : '/';
+          }
+          newPayload[key] = `${domain}${originalUrl}`;
+        }
+      } catch (e) {
+        // Ultimate fallback to ensure a valid URL is passed to Sendinblue
+        newPayload[key] = domain;
+      }
+    }
+  }
+  return newPayload;
+};
+
 export type BrevoEmailPayload = {
+  vendor_id?: number;
   toEmail: string;
   toName?: string | null;
   subject: string;
@@ -257,6 +315,17 @@ export type DispatchPlanningApprovalRequiredEmailPayload = {
   ctaLink?: string;
 };
 
+export type FastProductionApprovalRequiredEmailPayload = {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  raisedBy: string;
+  ctaLink?: string;
+};
+
 const BREVO_API_URL = "https://api.brevo.com/v3/smtp/email";
 const LEAD_CREATED_TEMPLATE_KEY = "LEAD_CREATED";
 const LEAD_ASSIGNED_TEMPLATE_KEY = "LEAD_ASSIGNED";
@@ -290,6 +359,8 @@ const ORDER_LOGIN_APPROVAL_REQUIRED_TEMPLATE_KEY =
   "ORDER_LOGIN_APPROVAL_REQUIRED";
 const DISPATCH_PLANNING_APPROVAL_REQUIRED_TEMPLATE_KEY =
   "DISPATCH_PLANNING_APPROVAL_REQUIRED";
+const FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY =
+  "FAST_PRODUCTION_APPROVAL_REQUIRED";
 
 export const LEAD_STAGE_TEMPLATE_KEYS = {
   ISM_STAGE: "LEAD_MOVED_TO_ISM_STAGE",
@@ -324,7 +395,18 @@ export const sendBrevoEmail = async (
   identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
-  const brevoEnabled = process.env.BREVO_ENABLED === "true";
+  let brevoEnabled = process.env.BREVO_ENABLED === "true";
+
+  if (payload.vendor_id) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: payload.vendor_id },
+      select: { is_email_noti_enabled: true }
+    });
+    if (vendor) {
+      brevoEnabled = vendor.is_email_noti_enabled;
+    }
+  }
+
   const forcedSenderEmail = process.env.BREVO_SENDER_EMAIL;
 
   const senderEmail = forcedSenderEmail || identity?.senderEmail;
@@ -439,7 +521,8 @@ export const sendBrevoEmail = async (
 export const sendNewMeetingAddedEmail = async (
   payload: NewMeetingAddedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Meeting Added - ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -507,6 +590,7 @@ export const sendNewMeetingAddedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject: defaultSubject,
@@ -520,7 +604,8 @@ export const sendNewMeetingAddedEmail = async (
 export const sendLeadCreatedEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Lead Created: ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -710,6 +795,7 @@ export const sendLeadCreatedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -723,7 +809,8 @@ export const sendLeadCreatedEmail = async (
 export const sendLeadAssignedEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -920,6 +1007,7 @@ export const sendLeadAssignedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -933,7 +1021,8 @@ export const sendLeadAssignedEmail = async (
 export const sendLeadAssignedToSiteSupervisorEmail = async (
   payload: LeadCreatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lead Assigned: ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1122,6 +1211,7 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1135,7 +1225,8 @@ export const sendLeadAssignedToSiteSupervisorEmail = async (
 export const sendTaskAssignedEmail = async (
   payload: TaskAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Task Assigned: ${payload.taskTitle} for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1323,6 +1414,7 @@ export const sendTaskAssignedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1336,7 +1428,8 @@ export const sendTaskAssignedEmail = async (
 export const sendChatMentionEmail = async (
   payload: ChatMentionEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `You Were Mentioned on ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -1433,6 +1526,7 @@ export const sendChatMentionEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1446,7 +1540,8 @@ export const sendChatMentionEmail = async (
 export const sendMajorMilestoneEmail = async (
   payload: MajorMilestoneEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatMilestoneDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -1628,6 +1723,7 @@ export const sendMajorMilestoneEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1641,7 +1737,8 @@ export const sendMajorMilestoneEmail = async (
 export const sendLeadOnHoldEmail = async (
   payload: LeadOnHoldEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatOnHoldDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -1836,6 +1933,7 @@ export const sendLeadOnHoldEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1849,7 +1947,8 @@ export const sendLeadOnHoldEmail = async (
 export const sendLeadLostApprovalEmail = async (
   payload: LeadLostApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Approval Required: Lead Marked as Lost - ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2035,6 +2134,7 @@ export const sendLeadLostApprovalEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2048,7 +2148,8 @@ export const sendLeadLostApprovalEmail = async (
 export const sendLeadLostApprovedEmail = async (
   payload: LeadLostApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lost Lead Request Approved: ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2234,6 +2335,7 @@ export const sendLeadLostApprovedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2248,7 +2350,8 @@ export const sendLeadLostApprovedEmail = async (
 export const sendLeadLostRejectedEmail = async (
   payload: LeadLostRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Lost Lead Request Rejected: ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2434,6 +2537,7 @@ export const sendLeadLostRejectedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2448,7 +2552,8 @@ export const sendLeadLostRejectedEmail = async (
 export const sendLeadActiveEmail = async (
   payload: LeadActiveEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatActiveDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -2643,6 +2748,7 @@ export const sendLeadActiveEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2657,7 +2763,8 @@ export const sendLeadActiveEmail = async (
 export const sendLeadMarkedActiveEmail = async (
   payload: LeadMarkedActiveEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const formatDate = (value: string) => {
     const parsed = new Date(value);
     if (Number.isNaN(parsed.getTime())) return value;
@@ -2850,6 +2957,7 @@ export const sendLeadMarkedActiveEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2864,7 +2972,8 @@ export const sendLeadMarkedActiveEmail = async (
 export const sendReadyToDispatchEmail = async (
   payload: ReadyToDispatchEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} is Ready to Dispatch`;
 
   const defaultText = [
@@ -3039,6 +3148,7 @@ export const sendReadyToDispatchEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3063,7 +3173,8 @@ export const sendMiscRequirementEmail = async (payload: {
   requirementDescription: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Miscellaneous Requirement Raised for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3245,6 +3356,7 @@ export const sendMiscRequirementEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3259,7 +3371,8 @@ export const sendMiscRequirementEmail = async (payload: {
 export const sendMiscERDUpdatedEmail = async (
   payload: MiscERDUpdatedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Miscellaneous ERD Date has been Updated for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3433,6 +3546,7 @@ export const sendMiscERDUpdatedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3454,7 +3568,8 @@ export const sendMarkAsReadyEmail = async (payload: {
   readyAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Miscellaneous Requirement Ready for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3622,6 +3737,7 @@ export const sendMarkAsReadyEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3644,7 +3760,8 @@ export const sendMiscResolvedEmail = async (payload: {
   resolvedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Miscellaneous Requirement Resolved for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3819,6 +3936,7 @@ export const sendMiscResolvedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3841,7 +3959,8 @@ export const sendMiscRequiredDeliveryDateEmail = async (payload: {
   deliveryDate: string;
   projectUrl?: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Required Delivery Date Set for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3910,6 +4029,7 @@ export const sendMiscRequiredDeliveryDateEmail = async (payload: {
     {
       subject: defaultSubject,
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       text: defaultText,
@@ -3929,7 +4049,8 @@ export const sendFinalHandoverEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Final Handover Initiated for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4086,6 +4207,7 @@ export const sendFinalHandoverEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4106,7 +4228,8 @@ export const sendProjectCompletedEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} Project Completed Successfully`;
 
   const defaultText = [
@@ -4270,6 +4393,7 @@ export const sendProjectCompletedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4293,7 +4417,8 @@ export const sendTechCheckApprovedEmail = async (payload: {
   approvedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Tech Check Approved for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4475,6 +4600,7 @@ export const sendTechCheckApprovedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4498,7 +4624,8 @@ export const sendTechCheckRejectedEmail = async (payload: {
   remark?: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Tech Check Rejected for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4687,6 +4814,7 @@ export const sendTechCheckRejectedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4709,7 +4837,8 @@ export const sendRevisedDocumentsUploadedEmail = async (payload: {
   uploadedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Revised Documents Submitted for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4891,6 +5020,7 @@ export const sendRevisedDocumentsUploadedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4913,7 +5043,8 @@ export const sendOrderLoginEnabledEmail = async (payload: {
   approvedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Order Login Enabled for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -5095,6 +5226,7 @@ export const sendOrderLoginEnabledEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5119,7 +5251,8 @@ export const sendLeadMovedToISMEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to ISM Stage`;
 
   const defaultText = [
@@ -5279,6 +5412,7 @@ export const sendLeadMovedToISMEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5303,7 +5437,8 @@ export const sendLeadMovedToDesigningEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Designing stage`;
 
   const defaultText = [
@@ -5463,6 +5598,7 @@ export const sendLeadMovedToDesigningEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5487,7 +5623,8 @@ export const sendLeadMovedToBookingEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Booking Done for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -5647,6 +5784,7 @@ export const sendLeadMovedToBookingEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5671,7 +5809,8 @@ export const sendLeadMovedToClientDocumentationEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered the Client Documentation stage`;
 
   const defaultText = [
@@ -5831,6 +5970,7 @@ export const sendLeadMovedToClientDocumentationEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5855,7 +5995,8 @@ export const sendLeadMovedToClientApprovalEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} awaiting client approval`;
 
   const defaultText = [
@@ -6015,6 +6156,7 @@ export const sendLeadMovedToClientApprovalEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6039,7 +6181,8 @@ export const sendLeadMovedToOrderLoginEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Order Login stage`;
 
   const defaultText = [
@@ -6199,6 +6342,7 @@ export const sendLeadMovedToOrderLoginEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6223,7 +6367,8 @@ export const sendLeadMovedToProductionEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} is now in Production`;
 
   const defaultText = [
@@ -6383,6 +6528,7 @@ export const sendLeadMovedToProductionEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6407,7 +6553,8 @@ export const sendLeadMovedToReadyToDispatchEmail = async (payload: {
   markedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} marked Ready to Dispatch`;
 
   const defaultText = [
@@ -6567,6 +6714,7 @@ export const sendLeadMovedToReadyToDispatchEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6591,7 +6739,8 @@ export const sendLeadMovedToDispatchPlanningEmail = async (payload: {
   movedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch Planning`;
 
   const defaultText = [
@@ -6751,6 +6900,7 @@ export const sendLeadMovedToDispatchPlanningEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6775,7 +6925,8 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   movedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved for Dispatch`;
 
   const defaultText = [
@@ -6935,6 +7086,7 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6959,7 +7111,8 @@ export const sendLeadMovedToUnderInstallationEmail = async (payload: {
   dispatchedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Under Installation`;
 
   const defaultText = [
@@ -7121,6 +7274,7 @@ export const sendLeadMovedToUnderInstallationEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7145,7 +7299,8 @@ export const sendLeadMovedToFinalHandoverEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} entered Final Handover`;
 
   const defaultText = [
@@ -7305,6 +7460,7 @@ export const sendLeadMovedToFinalHandoverEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7328,7 +7484,8 @@ export const sendOrderLoginAssignedEmail = async (payload: {
   assignedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Order Login Assigned for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -7527,6 +7684,7 @@ export const sendOrderLoginAssignedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7540,7 +7698,8 @@ export const sendOrderLoginAssignedEmail = async (payload: {
 export const sendBookingDoneApprovalRequiredEmail = async (
   payload: BookingDoneApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Booking Done Stage`;
 
   const defaultText = [
@@ -7717,6 +7876,7 @@ export const sendBookingDoneApprovalRequiredEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7730,7 +7890,8 @@ export const sendBookingDoneApprovalRequiredEmail = async (
 export const sendOrderLoginApprovalRequiredEmail = async (
   payload: OrderLoginApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Order Login Stage`;
 
   const defaultText = [
@@ -7874,6 +8035,7 @@ export const sendOrderLoginApprovalRequiredEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7887,7 +8049,8 @@ export const sendOrderLoginApprovalRequiredEmail = async (
 export const sendDispatchPlanningApprovalRequiredEmail = async (
   payload: DispatchPlanningApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Approval Required: ${payload.leadCode} - ${payload.leadName} moved to Dispatch Planning Stage`;
 
   const defaultText = [
@@ -8006,6 +8169,7 @@ export const sendDispatchPlanningApprovalRequiredEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8020,7 +8184,8 @@ export const sendDispatchPlanningApprovalRequiredEmail = async (
 export const sendPaymentAddedEmail = async (
   payload: PaymentAddedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Payment Added for ${payload.leadCode} - ${payload.leadName}`;
   const defaultText = [
     `Hello ${payload.toName ?? "there"},`,
@@ -8134,6 +8299,7 @@ export const sendPaymentAddedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8158,7 +8324,8 @@ export const sendFinalHandoverCompletedEmail = async (payload: {
   updatedOn: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const subject = `Final Handover completed for ${payload.leadCode} \u2013 ${payload.leadName}`;
 
   const text = [
@@ -8243,6 +8410,7 @@ export const sendFinalHandoverCompletedEmail = async (payload: {
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8256,7 +8424,8 @@ export const sendFinalHandoverCompletedEmail = async (payload: {
 export const sendFinalMeasurementUploadedEmail = async (
   payload: FinalMeasurementUploadedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
 
   const defaultSubject = `Upload Client Documentation for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -8382,6 +8551,7 @@ export const sendFinalMeasurementUploadedEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8391,3 +8561,137 @@ export const sendFinalMeasurementUploadedEmail = async (
     identity,
   );
 };
+
+export const sendFastProductionApprovalRequiredEmail = async (
+  payload: FastProductionApprovalRequiredEmailPayload,
+): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.toName ?? "there"},`,
+    "",
+    `A Fast Production request has been raised by ${payload.raisedBy} for ${payload.leadCode} - ${payload.leadName}.`,
+    "",
+    "The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.",
+    "",
+    "Please review the request and approve or reject it.",
+    "",
+    payload.ctaLink ? `Review Fast Production Request: ${payload.ctaLink}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approval Request</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">A Fast Production request has been raised by ${payload.raisedBy} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">Please review the request and approve or reject it at the earliest.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Raised By</div>
+          <div class="lead-info-value">${payload.raisedBy}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Fast Production Request
+              </a>
+            </div>`
+          : ""
+      }
+      <p style="margin:16px 0 0;font-size:14px;color:#4b5563;">
+        Note: The fast production timeline will only be applied after your approval.
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    raisedBy: payload.raisedBy,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: {
+      vendor_id: payload.vendor_id,
+      template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
+      active: true,
+    },
+  });
+
+  logger.info("Brevo email template source", {
+    template_key: FAST_PRODUCTION_APPROVAL_REQUIRED_TEMPLATE_KEY,
+    vendor_id: payload.vendor_id,
+    source: template ? "db" : "default",
+  });
+
+  const subject = template?.subject?.trim()
+    ? renderTemplate(template.subject, templateValues)
+    : defaultSubject;
+
+  const text = template?.text?.trim()
+    ? renderTemplate(template.text, templateValues)
+    : defaultText;
+
+  const html = template?.html?.trim()
+    ? renderTemplate(template.html, templateValues)
+    : defaultHtml;
+
+  return sendBrevoEmail(
+    {
+      allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
+      toEmail: payload.toEmail,
+      toName: payload.toName,
+      subject,
+      text,
+      html,
+    },
+    identity,
+  );
+};
+

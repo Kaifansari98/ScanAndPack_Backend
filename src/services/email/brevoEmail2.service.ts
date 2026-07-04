@@ -1,3 +1,4 @@
+import { applyVendorDomain } from "./brevoEmail.service";
 import { prisma } from "../../../src/prisma/client";
 import { BrevoEmailResult, sendBrevoEmail } from "./brevoEmail.service";
 import logger from "../../../src/utils/logger";
@@ -21,6 +22,14 @@ export const ORDER_LOGIN_TEMPLATE_KEYS = {
   BOOKING_DONE_APPROVED_TEMPLATE_KEY: "BOOKING_DONE_APPROVED",
   ORDER_LOGIN_APPROVED_TEMPLATE_KEY: "ORDER_LOGIN_APPROVED",
   DISPATCH_PLANNING_APPROVED_TEMPLATE_KEY: "DISPATCH_PLANNING_APPROVED",
+  FAST_PRODUCTION_APPROVAL_REQUIRED_FACTORY: "FAST_PRODUCTION_APPROVAL_REQUIRED_FACTORY",
+  FAST_PRODUCTION_SUPER_ADMIN_APPROVED: "FAST_PRODUCTION_SUPER_ADMIN_APPROVED",
+  FAST_PRODUCTION_SUPER_ADMIN_REJECTED: "FAST_PRODUCTION_SUPER_ADMIN_REJECTED",
+  FAST_PRODUCTION_FACTORY_APPROVED: "FAST_PRODUCTION_FACTORY_APPROVED",
+  FAST_PRODUCTION_FACTORY_REJECTED: "FAST_PRODUCTION_FACTORY_REJECTED",
+  FAST_PRODUCTION_FULLY_APPROVED_SALES_EXEC: "FAST_PRODUCTION_FULLY_APPROVED_SALES_EXEC",
+  FAST_PRODUCTION_FULLY_APPROVED_SUPER_ADMIN: "FAST_PRODUCTION_FULLY_APPROVED_SUPER_ADMIN",
+  FAST_PRODUCTION_FULLY_APPROVED_FACTORY: "FAST_PRODUCTION_FULLY_APPROVED_FACTORY",
 };
 
 export const SMALL_ORDER_TEMPLATE_KEYS = {
@@ -68,7 +77,8 @@ export const sendMovedToProductionOrderLoginPendingEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Moved to Production with Partial Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -272,7 +282,8 @@ export const sendMovedToProductionWithoutOrderLoginEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Action Required: Complete Order Login Details for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -467,7 +478,8 @@ export const sendOrderLoginReminderEmail = async (payload: {
   leadName: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Reminder: Order Login Pending for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -669,7 +681,8 @@ export const sendOrderLoginCompletedEmail = async (payload: {
   updatedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Order Login Completed – Production Ready for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -859,7 +872,8 @@ export const sendMovedToProductionWithOrderLoginEmail = async (payload: {
   projectUrl: string;
   orderLoginComplete?: boolean;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const olComplete = payload.orderLoginComplete !== false;
 
   const defaultSubject = olComplete
@@ -1026,7 +1040,8 @@ export const sendUnderInstallationAssignedEmail = async (payload: {
   dispatchedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Under Installation`;
 
   const defaultText = [
@@ -1220,7 +1235,8 @@ export const sendLeadMovedToDispatchEmail = async (payload: {
   movedAt: string;
   projectUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `${payload.leadCode} - ${payload.leadName} moved to Dispatch Stage`;
 
   const defaultText = [
@@ -1436,7 +1452,8 @@ export type TechCheckAssignedEmailPayload = {
 export const sendTechCheckAssignedEmail = async (
   payload: TechCheckAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Tech Check Review Required for ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1638,7 +1655,8 @@ export const sendSiteSupervisorAssignedEmail = async (payload: {
   assignedOn: string;
   leadUrl: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Site Supervisor Assigned on ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -1754,7 +1772,8 @@ export const sendBookingDoneApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay} cleared at Booking Done Stage`;
 
@@ -1880,7 +1899,8 @@ export const sendOrderLoginApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay} cleared for Order Login`;
 
@@ -2010,7 +2030,8 @@ export const sendDispatchPlanningApprovedEmail = async (payload: {
   approvalDate: string;
   ctaLink: string;
 }): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const leadDisplay = `${payload.leadCode} - ${payload.leadName}`.trim();
   const defaultSubject = `Approved: ${leadDisplay}  cleared for Dispatch Planning`;
 
@@ -2143,7 +2164,8 @@ export interface SmallOrderRequestSiteSupervisorApprovalEmailPayload {
 export const sendSmallOrderRequestSiteSupervisorApprovalEmail = async (
   payload: SmallOrderRequestSiteSupervisorApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2311,7 +2333,8 @@ export interface SmallOrderRequestStoreAdminApprovalEmailPayload {
 export const sendSmallOrderRequestStoreAdminApprovalEmail = async (
   payload: SmallOrderRequestStoreAdminApprovalEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approval Request – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2483,7 +2506,8 @@ export interface SmallOrderRequestSupervisorApprovedEmailPayload {
 export const sendSmallOrderRequestSupervisorApprovedEmail = async (
   payload: SmallOrderRequestSupervisorApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approved by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2651,7 +2675,8 @@ export interface SmallOrderRequestSupervisorRejectedEmailPayload {
 export const sendSmallOrderRequestSupervisorRejectedEmail = async (
   payload: SmallOrderRequestSupervisorRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Rejected by Site Supervisor – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2824,7 +2849,8 @@ export interface SmallOrderRequestAdminApprovedEmailPayload {
 export const sendSmallOrderRequestAdminApprovedEmail = async (
   payload: SmallOrderRequestAdminApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Approved by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -2992,7 +3018,8 @@ export interface SmallOrderRequestAdminRejectedEmailPayload {
 export const sendSmallOrderRequestAdminRejectedEmail = async (
   payload: SmallOrderRequestAdminRejectedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Rejected by Store Admin – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3160,7 +3187,8 @@ export interface NewSmallOrderLeadAssignedEmailPayload {
 export const sendNewSmallOrderLeadAssignedEmail = async (
   payload: NewSmallOrderLeadAssignedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `New Small Order Lead Assigned – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3321,7 +3349,8 @@ export interface SmallOrderRequestFullyApprovedEmailPayload {
 export const sendSmallOrderRequestFullyApprovedEmail = async (
   payload: SmallOrderRequestFullyApprovedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Fully Approved – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3486,7 +3515,8 @@ export interface SmallOrderSentToPreProductionEmailPayload {
 export const sendSmallOrderSentToPreProductionEmail = async (
   payload: SmallOrderSentToPreProductionEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Sent for Pre Production – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3647,7 +3677,8 @@ export interface SmallOrderSentToFactoryEmailPayload {
 export const sendSmallOrderSentToFactoryEmail = async (
   payload: SmallOrderSentToFactoryEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Sent for Production – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3808,7 +3839,8 @@ export interface SmallOrderProductionCompletedEmailPayload {
 export const sendSmallOrderProductionCompletedEmail = async (
   payload: SmallOrderProductionCompletedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Production Completed – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -3969,7 +4001,8 @@ export interface SmallOrderReadyForDispatchEmailPayload {
 export const sendSmallOrderReadyForDispatchEmail = async (
   payload: SmallOrderReadyForDispatchEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Ready for Dispatch – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4131,7 +4164,8 @@ export interface SmallOrderDispatchedForInstallationEmailPayload {
 export const sendSmallOrderDispatchedForInstallationEmail = async (
   payload: SmallOrderDispatchedForInstallationEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Dispatched for Installation – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4299,7 +4333,8 @@ export interface SmallOrderDispatchedEmailPayload {
 export const sendSmallOrderDispatchedEmail = async (
   payload: SmallOrderDispatchedEmailPayload,
 ): Promise<BrevoEmailResult> => {
-  const identity = await resolveEmailIdentity(payload.vendor_id);
+  payload = await applyVendorDomain(payload);
+const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Small Order Dispatched – ${payload.leadCode} - ${payload.leadName}`;
 
   const defaultText = [
@@ -4451,4 +4486,867 @@ export const sendSmallOrderDispatchedEmail = async (
     },
     identity,
   );
+};
+
+// Fast Production Approval Request — Factory User
+
+
+export const sendFastProductionApprovalRequiredFactoryEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  raisedBy: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.toName ?? "there"},`,
+    "",
+    `A Fast Production request has been raised by ${payload.raisedBy} for ${payload.leadCode} - ${payload.leadName}.`,
+    "",
+    "The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.",
+    "",
+    "Please review the request and approve or reject it.",
+    "",
+    payload.ctaLink ? `Review Fast Production Request: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approval Request</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">A Fast Production request has been raised by ${payload.raisedBy} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">Please review the request and approve or reject it.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    raisedBy: payload.raisedBy,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_APPROVAL_REQUIRED_FACTORY, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionSuperAdminApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  superAdminName: string;
+  salesExecutiveName: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approved by Super Admin for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.salesExecutiveName},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been approved by ${payload.superAdminName}.`,
+    "",
+    "The request is now awaiting Factory User approval, if not already completed.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approved by Super Admin</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.salesExecutiveName},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by <strong>${payload.superAdminName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The request is now awaiting Factory User approval, if not already completed.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    sales_executive_name: payload.salesExecutiveName,
+    super_admin_name: payload.superAdminName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_SUPER_ADMIN_APPROVED, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionSuperAdminRejectedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  superAdminName: string;
+  salesExecutiveName: string;
+  rejectionReason: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Rejected by Super Admin for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.salesExecutiveName},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been rejected by ${payload.superAdminName}.`,
+    `Reason: ${payload.rejectionReason}`,
+    "",
+    "The fast production timeline will not be applied to this project.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Rejected by Super Admin</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.salesExecutiveName},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been rejected by <strong>${payload.superAdminName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The fast production timeline will not be applied to this project.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Reason</div>
+          <div class="lead-info-value">${payload.rejectionReason}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    sales_executive_name: payload.salesExecutiveName,
+    super_admin_name: payload.superAdminName,
+    rejection_reason: payload.rejectionReason,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_SUPER_ADMIN_REJECTED, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionFactoryApprovedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  factoryUserName: string;
+  salesExecutiveName: string;
+  expectedReadyDate: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Approved by Factory User for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.salesExecutiveName},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been approved by ${payload.factoryUserName}.`,
+    `Expected Ready Date: ${payload.expectedReadyDate}`,
+    "",
+    "The request is now awaiting Super Admin approval, if not already completed.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approved by Factory User</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.salesExecutiveName},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by <strong>${payload.factoryUserName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The request is now awaiting Super Admin approval, if not already completed.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Expected Ready Date</div>
+          <div class="lead-info-value">${payload.expectedReadyDate}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    sales_executive_name: payload.salesExecutiveName,
+    factory_user_name: payload.factoryUserName,
+    expectedReadyDate: payload.expectedReadyDate,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_FACTORY_APPROVED, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionFactoryRejectedEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  factoryUserName: string;
+  salesExecutiveName: string;
+  rejectionReason: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Rejected by Factory User for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.salesExecutiveName},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been rejected by ${payload.factoryUserName}.`,
+    `Reason: ${payload.rejectionReason}`,
+    "",
+    "The fast production timeline will not be applied to this project.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Rejected by Factory User</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.salesExecutiveName},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been rejected by <strong>${payload.factoryUserName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The fast production timeline will not be applied to this project.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Reason</div>
+          <div class="lead-info-value">${payload.rejectionReason}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    sales_executive_name: payload.salesExecutiveName,
+    factory_user_name: payload.factoryUserName,
+    rejection_reason: payload.rejectionReason,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_FACTORY_REJECTED, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionFullyApprovedSalesExecEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  salesExecutiveName: string;
+  fastProductionTimeline: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Fully Approved for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.salesExecutiveName},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been approved by both the Super Admin and Factory User.`,
+    "The fast production timeline has now been applied to the selected project.",
+    `Timeline: ${payload.fastProductionTimeline}`,
+    "",
+    payload.ctaLink ? `View Updated Project Timeline: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Fully Approved</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.salesExecutiveName},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by both the Super Admin and Factory User.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The fast production timeline has now been applied to the selected project.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Timeline</div>
+          <div class="lead-info-value">${payload.fastProductionTimeline}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    sales_executive_name: payload.salesExecutiveName,
+    fast_production_timeline: payload.fastProductionTimeline,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_FULLY_APPROVED_SALES_EXEC, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionFullyApprovedSuperAdminEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  superAdminName: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Timeline Applied for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.superAdminName ?? payload.toName ?? "there"},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been approved by both required users.`,
+    "The fast production timeline has now been applied to the selected project.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Timeline Applied</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.superAdminName ?? payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by both required users.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The fast production timeline has now been applied to the selected project.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    super_admin_name: payload.superAdminName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_FULLY_APPROVED_SUPER_ADMIN, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
+};
+
+export const sendFastProductionFullyApprovedFactoryEmail = async (payload: {
+  allowSuperAdmin?: boolean;
+  vendor_id: number;
+  toEmail: string;
+  toName?: string | null;
+  leadCode: string;
+  leadName: string;
+  factoryUserName: string;
+  ctaLink?: string;
+}): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
+  const identity = await resolveEmailIdentity(payload.vendor_id);
+  const defaultSubject = `Fast Production Timeline Applied for ${payload.leadCode} - ${payload.leadName}`;
+
+  const defaultText = [
+    `Hi ${payload.factoryUserName ?? payload.toName ?? "there"},`,
+    "",
+    `The Fast Production request for ${payload.leadCode} has been approved by both required users.`,
+    "The fast production timeline has now been applied to the selected project.",
+    "",
+    payload.ctaLink ? `View Details: ${payload.ctaLink}` : "",
+  ].filter(Boolean).join("\n");
+
+  const defaultHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
+    @media only screen and (max-width: 600px) {
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Timeline Applied</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.factoryUserName ?? payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">The Fast Production request for <strong>${payload.leadCode} - ${payload.leadName}</strong> has been approved by both required users.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The fast production timeline has now been applied to the selected project.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Details
+              </a>
+            </div>`
+          : ""
+      }
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+  const templateValues = {
+    toName: payload.toName ?? "there",
+    factory_user_name: payload.factoryUserName,
+    leadCode: payload.leadCode,
+    leadName: payload.leadName,
+    ctaLink: payload.ctaLink ?? "",
+  };
+
+  const template = await prisma.emailNotificationMaster.findFirst({
+    where: { vendor_id: payload.vendor_id, template_key: ORDER_LOGIN_TEMPLATE_KEYS.FAST_PRODUCTION_FULLY_APPROVED_FACTORY, active: true },
+  });
+
+  return sendBrevoEmail({
+    allowSuperAdmin: payload.allowSuperAdmin,
+    toEmail: payload.toEmail,
+    toName: payload.toName,
+    subject: template ? renderTemplate(template.subject || defaultSubject, templateValues) : defaultSubject,
+    text: template ? renderTemplate(template.text, templateValues) : defaultText,
+    html: template ? renderTemplate(template.html, templateValues) : defaultHtml,
+  }, identity);
 };

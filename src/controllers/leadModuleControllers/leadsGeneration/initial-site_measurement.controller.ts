@@ -136,6 +136,25 @@ export class PaymentUploadController {
     }
   };
 
+  public checkIsmUploaded = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      if (!leadId || isNaN(leadId)) {
+        res.status(400).json({ success: false, message: "Invalid lead ID" });
+        return;
+      }
+
+      const result = await this.paymentUploadService.checkIsmUploaded(leadId);
+      res.status(200).json({ success: true, data: result });
+    } catch (error: any) {
+      console.error("[PaymentUploadController] checkIsmUploaded Error:", error);
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
   public getISMPaymentInfoByLeadId = async (
     req: Request,
     res: Response,
@@ -1213,6 +1232,88 @@ export class PaymentUploadController {
       res.status(statusCode).json({
         success: false,
         message: message,
+        error: error.message,
+      });
+    }
+  };
+
+  public uploadAdditionalSitePhotos = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, updated_by } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message: "lead_id, account_id, vendor_id, and updated_by are required",
+        });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const currentSitePhotos = files?.current_site_photos || [];
+
+      if (currentSitePhotos.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one site photo must be provided",
+        });
+        return;
+      }
+
+      const validImageTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+        "image/bmp",
+        "image/tiff",
+        "image/heic",
+        "image/heif",
+        "image/avif",
+        "image/svg+xml",
+      ];
+
+      for (const photo of currentSitePhotos) {
+        if (!validImageTypes.includes(photo.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message: "Site photos must be valid image files (JPEG, JPG, PNG, GIF, etc)",
+          });
+          return;
+        }
+      }
+
+      let sitePhotoInstanceIds: (number | null)[] | undefined;
+      try {
+        if (req.body.site_photo_instance_ids) {
+          sitePhotoInstanceIds = JSON.parse(req.body.site_photo_instance_ids);
+        }
+      } catch (e) {
+        console.warn("Could not parse site_photo_instance_ids");
+      }
+
+      const result = await this.paymentUploadService.uploadAdditionalSitePhotos({
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        vendor_id: Number(vendor_id),
+        updated_by: Number(updated_by),
+        currentSitePhotos,
+        sitePhotoInstanceIds,
+      });
+
+      res.status(200).json({
+        success: true,
+        ...result,
+      });
+    } catch (error: any) {
+      console.error("[Controller] uploadAdditionalSitePhotos error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload site photos",
         error: error.message,
       });
     }

@@ -33,6 +33,8 @@ model VendorMaster {
   handlesLargeScaleProjects              Boolean  @default(false)
   eligible_booking_days                  Int?
   is_self_assign_task_type_master_enabed Boolean  @default(true)
+  is_email_noti_enabled                  Boolean  @default(true)
+  is_in_app_noti_enabled                 Boolean  @default(true)
   createdAt                              DateTime @default(now())
   updatedAt                              DateTime @updatedAt
   state_id                               Int?
@@ -144,7 +146,8 @@ model VendorMaster {
 
   poPaymentSchedules POPaymentSchedule[]
 
-  poPayments POPayment[]
+  poPayments          POPayment[]
+  architechuremasters Architechuremaster[]
 
   @@index([state_id])
 }
@@ -337,6 +340,7 @@ model UserMaster {
   poItemsUpdated                             PurchaseOrderItem[]                    @relation("POItemUpdatedBy")
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
+  architechuremasters                        Architechuremaster[]
 }
 
 model UserDocument {
@@ -596,9 +600,9 @@ model LeadMaster {
   onsite_contact_person_name                  String?
   onsite_contact_person_number                String?
   required_date_for_dispatch                  DateTime?
-  is_fast_production                         Boolean                               @default(false)
-  fast_production_status                     FastProductionRequestStatus?
-  fast_production_approved_at                DateTime?
+  is_fast_production                          Boolean                               @default(false)
+  fast_production_status                      FastProductionRequestStatus?
+  fast_production_approved_at                 DateTime?
   alt_onsite_contact_person_name              String?
   alt_onsite_contact_person_number            String?
   dispatch_date                               DateTime?
@@ -880,18 +884,18 @@ model HandleTypeMaster {
 }
 
 model TimelineRule {
-  id                         Int               @id @default(autoincrement())
-  vendor_id                  Int
-  carcass_id                 Int
-  shutter_id                 Int?
-  kitchen_manufacturing_days Int
-  other_manufacturing_days   Int
+  id                                             Int                @id @default(autoincrement())
+  vendor_id                                      Int
+  carcass_id                                     Int
+  shutter_id                                     Int?
+  kitchen_manufacturing_days                     Int
+  other_manufacturing_days                       Int
   kitchen_manufacturing_days_for_fast_production Int?
   other_manufacturing_days_for_fast_production   Int?
-  created_at                 DateTime          @default(now())
-  carcass                    CarcassTypeMaster @relation(fields: [carcass_id], references: [id], onDelete: Cascade)
-  shutter                    ShutterTypeMaster? @relation(fields: [shutter_id], references: [id], onDelete: Cascade)
-  vendor                     VendorMaster      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  created_at                                     DateTime           @default(now())
+  carcass                                        CarcassTypeMaster  @relation(fields: [carcass_id], references: [id], onDelete: Cascade)
+  shutter                                        ShutterTypeMaster? @relation(fields: [shutter_id], references: [id], onDelete: Cascade)
+  vendor                                         VendorMaster       @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([vendor_id, carcass_id, shutter_id])
   @@index([carcass_id])
@@ -1089,7 +1093,7 @@ model LeadProductStructureMapping {
 }
 
 model LeadProductStructureInstance {
-  id                                         Int                   @id @default(autoincrement())
+  id                                         Int                     @id @default(autoincrement())
   vendor_id                                  Int
   lead_id                                    Int
   account_id                                 Int
@@ -1100,13 +1104,13 @@ model LeadProductStructureInstance {
   quantity_index                             Int
   quantity                                   Int?
   title                                      String
-  status                                     ProductInstanceStatus @default(open)
+  status                                     ProductInstanceStatus   @default(open)
   isLargeScaleProjectInstance                Boolean               @default(false)
-  description                                String?               @db.VarChar(2000)
+  description                                String?                 @db.VarChar(2000)
   created_by                                 Int
-  created_at                                 DateTime              @default(now())
+  created_at                                 DateTime                @default(now())
   updated_by                                 Int?
-  updated_at                                 DateTime              @updatedAt
+  updated_at                                 DateTime                @updatedAt
   is_order_login_completed                   Boolean?
   order_login_completed_at                   DateTime?
   is_under_production                        Boolean?
@@ -1117,24 +1121,24 @@ model LeadProductStructureInstance {
   is_production_completed                    Boolean?
   production_completed_at                    DateTime?
   production_erd_date                        DateTime?
-  pre_prod_remark                            String?               @db.VarChar(2000)
-  woodwork_packing_details_remark            String?               @db.VarChar(2000)
-  hardware_packing_details_remark            String?               @db.VarChar(2000)
+  pre_prod_remark                            String?                 @db.VarChar(2000)
+  woodwork_packing_details_remark            String?                 @db.VarChar(2000)
+  hardware_packing_details_remark            String?                 @db.VarChar(2000)
   no_of_boxes                                Int?
   no_of_client_documents_initially_submitted Int?
   is_tech_check_completed                    Boolean?
   tech_check_completed_at                    DateTime?
-  is_order_login_filled                      Boolean?              @default(false)
+  is_order_login_filled                      Boolean?                @default(false)
   designSelections                           LeadDesignSelection[]
   documents                                  LeadDocuments[]
-  account                                    AccountMaster         @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  lead                                       LeadMaster            @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account                                    AccountMaster           @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  lead                                       LeadMaster              @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   productItemCode                            ProductItemCode?      @relation(fields: [product_item_code_id], references: [id], onDelete: SetNull)
   subProductStructure                        ProductSubStructure?  @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
-  productStructure                           ProductStructure      @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  productType                                ProductTypeMaster     @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
-  updatedBy                                  UserMaster?           @relation(fields: [updated_by], references: [id])
-  vendor                                     VendorMaster          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productStructure                           ProductStructure        @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productType                                ProductTypeMaster       @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
+  updatedBy                                  UserMaster?             @relation(fields: [updated_by], references: [id])
+  vendor                                     VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   tasks                                      UserLeadTask[]
   fastProductionRequests                     FastProductionRequest[]
 
@@ -1590,34 +1594,34 @@ model UserLeadTask {
 }
 
 model FastProductionRequestBatch {
-  id                Int                          @id @default(autoincrement())
+  id                Int                         @id @default(autoincrement())
   vendor_id         Int
   lead_id           Int
   account_id        Int
   franchise_id      Int?
   requester_user_id Int
   month_bucket      DateTime
-  status            FastProductionRequestStatus  @default(draft)
+  status            FastProductionRequestStatus @default(draft)
   terms_accepted_at DateTime
-  terms_version     String?                      @db.VarChar(100)
+  terms_version     String?                     @db.VarChar(100)
   approved_at       DateTime?
   rejected_at       DateTime?
   revoked_at        DateTime?
   revoked_by        Int?
-  revocation_remark String?                      @db.VarChar(2000)
+  revocation_remark String?                     @db.VarChar(2000)
   created_by        Int
-  created_at        DateTime                     @default(now())
+  created_at        DateTime                    @default(now())
   updated_by        Int?
-  updated_at        DateTime                     @updatedAt
+  updated_at        DateTime                    @updatedAt
 
-  vendor      VendorMaster               @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead        LeadMaster                 @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  account     AccountMaster              @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  franchise   FranchiseMaster?           @relation(fields: [franchise_id], references: [id])
-  requester   UserMaster                 @relation("FastProductionBatchRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
-  createdBy   UserMaster                 @relation("FastProductionBatchCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  updatedBy   UserMaster?                @relation("FastProductionBatchUpdatedBy", fields: [updated_by], references: [id])
-  revokedBy   UserMaster?                @relation("FastProductionBatchRevokedBy", fields: [revoked_by], references: [id])
+  vendor      VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead        LeadMaster                @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account     AccountMaster             @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  franchise   FranchiseMaster?          @relation(fields: [franchise_id], references: [id])
+  requester   UserMaster                @relation("FastProductionBatchRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
+  createdBy   UserMaster                @relation("FastProductionBatchCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy   UserMaster?               @relation("FastProductionBatchUpdatedBy", fields: [updated_by], references: [id])
+  revokedBy   UserMaster?               @relation("FastProductionBatchRevokedBy", fields: [revoked_by], references: [id])
   requests    FastProductionRequest[]
   approvals   FastProductionApproval[]
   status_logs FastProductionStatusLog[]
@@ -1657,19 +1661,19 @@ model FastProductionRequest {
   updated_by                    Int?
   updated_at                    DateTime                    @updatedAt
 
-  batch         FastProductionRequestBatch   @relation(fields: [batch_id], references: [id], onDelete: Cascade)
-  vendor        VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead          LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  account       AccountMaster                @relation(fields: [account_id], references: [id], onDelete: Cascade)
-  instance      LeadProductStructureInstance @relation(fields: [instance_id], references: [id])
-  franchise     FranchiseMaster?             @relation(fields: [franchise_id], references: [id])
-  requester     UserMaster                   @relation("FastProductionRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
-  createdBy     UserMaster                   @relation("FastProductionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
-  updatedBy     UserMaster?                  @relation("FastProductionUpdatedBy", fields: [updated_by], references: [id])
-  revokedBy     UserMaster?                  @relation("FastProductionRevokedBy", fields: [revoked_by], references: [id])
-  task          UserLeadTask?                @relation(fields: [task_id], references: [id])
-  finishes      FastProductionFinish[]
-  documents     FastProductionRequestDocument[]
+  batch     FastProductionRequestBatch      @relation(fields: [batch_id], references: [id], onDelete: Cascade)
+  vendor    VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  account   AccountMaster                   @relation(fields: [account_id], references: [id], onDelete: Cascade)
+  instance  LeadProductStructureInstance    @relation(fields: [instance_id], references: [id])
+  franchise FranchiseMaster?                @relation(fields: [franchise_id], references: [id])
+  requester UserMaster                      @relation("FastProductionRequester", fields: [requester_user_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster                      @relation("FastProductionCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  updatedBy UserMaster?                     @relation("FastProductionUpdatedBy", fields: [updated_by], references: [id])
+  revokedBy UserMaster?                     @relation("FastProductionRevokedBy", fields: [revoked_by], references: [id])
+  task      UserLeadTask?                   @relation(fields: [task_id], references: [id])
+  finishes  FastProductionFinish[]
+  documents FastProductionRequestDocument[]
 
   @@unique([batch_id, instance_id])
   @@index([batch_id])
@@ -1705,18 +1709,18 @@ model FastProductionApproval {
   created_at       DateTime                     @default(now())
 
   batch    FastProductionRequestBatch @relation(fields: [batch_id], references: [id], onDelete: Cascade)
-  approver UserMaster?               @relation("FastProductionApprover", fields: [approver_user_id], references: [id])
+  approver UserMaster?                @relation("FastProductionApprover", fields: [approver_user_id], references: [id])
 
   @@unique([batch_id, approver_role])
   @@index([approver_user_id])
 }
 
 model FastProductionRequestDocument {
-  id         Int      @id @default(autoincrement())
-  request_id Int
+  id          Int      @id @default(autoincrement())
+  request_id  Int
   document_id Int
-  created_by Int
-  created_at DateTime @default(now())
+  created_by  Int
+  created_at  DateTime @default(now())
 
   request   FastProductionRequest @relation(fields: [request_id], references: [id], onDelete: Cascade)
   document  LeadDocuments         @relation(fields: [document_id], references: [id], onDelete: Cascade)
@@ -1727,16 +1731,16 @@ model FastProductionRequestDocument {
 }
 
 model FastProductionStatusLog {
-  id           Int                         @id @default(autoincrement())
-  batch_id     Int
-  from_status  FastProductionRequestStatus?
-  to_status    FastProductionRequestStatus
+  id            Int                          @id @default(autoincrement())
+  batch_id      Int
+  from_status   FastProductionRequestStatus?
+  to_status     FastProductionRequestStatus
   actor_user_id Int
-  remark       String?                     @db.VarChar(2000)
-  created_at   DateTime                    @default(now())
+  remark        String?                      @db.VarChar(2000)
+  created_at    DateTime                     @default(now())
 
   batch FastProductionRequestBatch @relation(fields: [batch_id], references: [id], onDelete: Cascade)
-  actor UserMaster                @relation("FastProductionStatusActor", fields: [actor_user_id], references: [id], onDelete: Cascade)
+  actor UserMaster                 @relation("FastProductionStatusActor", fields: [actor_user_id], references: [id], onDelete: Cascade)
 
   @@index([batch_id])
 }
@@ -3299,6 +3303,22 @@ model POPayment {
 
   @@index([vendor_id])
   @@index([po_payment_schedule_id])
+}
+
+model Architechuremaster {
+  id         Int       @id @default(autoincrement())
+  vendorId   Int
+  name       String
+  email      String
+  mobile     String
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  createdBy  Int
+  isdeletetd Boolean   @default(false)
+  deletedAt  DateTime?
+
+  vendor VendorMaster @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  user   UserMaster   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
 }
 
 enum PaymentMode {

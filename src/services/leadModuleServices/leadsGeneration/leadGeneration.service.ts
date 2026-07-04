@@ -269,12 +269,12 @@ export const createLeadService = async (
         const existingAccount =
           matchConditions.length > 0
             ? await tx.accountMaster.findFirst({
-                where: {
-                  vendor_id,
-                  is_deleted: false,
-                  OR: matchConditions,
-                },
-              })
+              where: {
+                vendor_id,
+                is_deleted: false,
+                OR: matchConditions,
+              },
+            })
             : null;
 
         const account =
@@ -385,14 +385,14 @@ export const createLeadService = async (
           }),
           franchise_id
             ? tx.userMaster.findMany({
-                where: {
-                  vendor_id,
-                  franchise_id,
-                  status: "active",
-                  user_type: { user_type: "admin" },
-                },
-                select: { id: true },
-              })
+              where: {
+                vendor_id,
+                franchise_id,
+                status: "active",
+                user_type: { user_type: "admin" },
+              },
+              select: { id: true },
+            })
             : Promise.resolve([]),
         ]);
 
@@ -502,8 +502,8 @@ export const createLeadService = async (
           product_structure_instances.length > 0
             ? product_structure_instances
             : product_structures.map((product_structure_id) => ({
-                product_structure_id,
-              }));
+              product_structure_id,
+            }));
 
         if (!instanceProductTypeId) {
           logger.warn(
@@ -985,17 +985,17 @@ export const getLeadById = async (
     const customViewPrivilege =
       userType === "custom"
         ? await prisma.userPrivilegeMapping.findFirst({
-            where: {
-              user_id: userId,
-              vendor_id: vendorId,
-              is_allowed: true,
-              privilege: {
-                code: customViewPrivilegeCode,
-                is_active: true,
-              },
+          where: {
+            user_id: userId,
+            vendor_id: vendorId,
+            is_allowed: true,
+            privilege: {
+              code: customViewPrivilegeCode,
+              is_active: true,
             },
-            select: { id: true },
-          })
+          },
+          select: { id: true },
+        })
         : null;
 
     // 2️⃣ Base condition (vendor-scoped)
@@ -1065,57 +1065,57 @@ export const getLeadById = async (
     const linkedSmallOrderRequest =
       isSmallOrderRequestLead && lead.lead_code
         ? await prisma.smallOrderRequest.findFirst({
-            where: {
-              vendor_id: vendorId,
-              so_code: {
-                equals: lead.lead_code.trim(),
-                mode: "insensitive",
+          where: {
+            vendor_id: vendorId,
+            so_code: {
+              equals: lead.lead_code.trim(),
+              mode: "insensitive",
+            },
+          },
+          select: {
+            id: true,
+            is_request_resolved: true,
+            request_source: true,
+            request_type_id: true,
+            requestType: {
+              select: {
+                id: true,
+                type: true,
+                type_key: true,
               },
             },
-            select: {
-              id: true,
-              is_request_resolved: true,
-              request_source: true,
-              request_type_id: true,
-              requestType: {
-                select: {
-                  id: true,
-                  type: true,
-                  type_key: true,
-                },
-              },
-              documents: {
-                select: {
-                  id: true,
-                  document_id: true,
-                  created_at: true,
-                  document: {
-                    select: {
-                      doc_og_name: true,
-                      doc_sys_name: true,
-                    },
+            documents: {
+              select: {
+                id: true,
+                document_id: true,
+                created_at: true,
+                document: {
+                  select: {
+                    doc_og_name: true,
+                    doc_sys_name: true,
                   },
                 },
               },
             },
-          })
+          },
+        })
         : null;
 
     const linkedSmallOrderRequestWithDocs = linkedSmallOrderRequest
       ? {
-          ...linkedSmallOrderRequest,
-          documents: await Promise.all(
-            linkedSmallOrderRequest.documents.map(async (doc) => ({
-              id: doc.id,
-              document_id: doc.document_id,
-              original_name: doc.document?.doc_og_name ?? "",
-              signed_url: doc.document?.doc_sys_name
-                ? await generateSignedUrl(doc.document.doc_sys_name, 3600, "inline")
-                : null,
-              created_at: doc.created_at,
-            })),
-          ),
-        }
+        ...linkedSmallOrderRequest,
+        documents: await Promise.all(
+          linkedSmallOrderRequest.documents.map(async (doc) => ({
+            id: doc.id,
+            document_id: doc.document_id,
+            original_name: doc.document?.doc_og_name ?? "",
+            signed_url: doc.document?.doc_sys_name
+              ? await generateSignedUrl(doc.document.doc_sys_name, 3600, "inline")
+              : null,
+            created_at: doc.created_at,
+          })),
+        ),
+      }
       : null;
 
     const pendingFastProductionRequest = await prisma.fastProductionRequestBatch.findFirst({
@@ -1157,13 +1157,13 @@ export const getLeadById = async (
     const activityStatusPayload =
       latestActivityStatus && latestActivityStatus.activity_status !== "onGoing"
         ? {
-            user_id: latestActivityStatus.user_id,
-            activity_status: latestActivityStatus.activity_status,
-            activity_status_remark: latestActivityStatus.activity_status_remark,
-            created_by: latestActivityStatus.created_by,
-            created_by_name: latestActivityStatus.createdBy?.user_name ?? null,
-            created_at: latestActivityStatus.created_at,
-          }
+          user_id: latestActivityStatus.user_id,
+          activity_status: latestActivityStatus.activity_status,
+          activity_status_remark: latestActivityStatus.activity_status_remark,
+          created_by: latestActivityStatus.created_by,
+          created_by_name: latestActivityStatus.createdBy?.user_name ?? null,
+          created_at: latestActivityStatus.created_at,
+        }
         : null;
 
     const oldestSiteSupervisorMapping = await prisma.leadUserMapping.findFirst({
@@ -1244,24 +1244,24 @@ export const getLeadById = async (
         latest_activity_status: activityStatusPayload,
         assigned_site_supervisor_from_mapping: oldestSiteSupervisorMapping
           ? {
-              user_id: oldestSiteSupervisorMapping.user_id,
-              user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
-              created_at: oldestSiteSupervisorMapping.created_at,
-            }
+            user_id: oldestSiteSupervisorMapping.user_id,
+            user_name: oldestSiteSupervisorMapping.user?.user_name ?? null,
+            created_at: oldestSiteSupervisorMapping.created_at,
+          }
           : null,
         assigned_ism_user_from_mapping: oldestIsmMapping
           ? {
-              user_id: oldestIsmMapping.user_id,
-              user_name: oldestIsmMapping.user?.user_name ?? null,
-              created_at: oldestIsmMapping.created_at,
-            }
+            user_id: oldestIsmMapping.user_id,
+            user_name: oldestIsmMapping.user?.user_name ?? null,
+            created_at: oldestIsmMapping.created_at,
+          }
           : null,
         assigned_designer_from_mapping: oldestDesignerMapping
           ? {
-              user_id: oldestDesignerMapping.user_id,
-              user_name: oldestDesignerMapping.user?.user_name ?? null,
-              created_at: oldestDesignerMapping.created_at,
-            }
+            user_id: oldestDesignerMapping.user_id,
+            user_name: oldestDesignerMapping.user?.user_name ?? null,
+            created_at: oldestDesignerMapping.created_at,
+          }
           : null,
       },
       userInfo: {
@@ -1523,6 +1523,57 @@ export const deleteLeadProductStructureInstance = async (
   }
 };
 
+export const clearLeadProductStructures = async (
+  leadId: number,
+  vendorId: number,
+  deletedBy?: number | null,
+) => {
+  try {
+    const instancesCount = await prisma.leadProductStructureInstance.deleteMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    const mappingsCount = await prisma.leadProductStructureMapping.deleteMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+    });
+
+    if (instancesCount.count > 0 || mappingsCount.count > 0) {
+      const lead = await prisma.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId },
+        select: { account_id: true }
+      });
+      
+      if (lead) {
+        await createLeadLog(prisma, {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          account_id: lead.account_id!,
+          action: `All Product structure mappings and instances cleared.`,
+          action_type: "DELETE",
+          created_by: deletedBy ?? 0,
+          created_at: new Date(),
+        });
+      }
+    }
+
+    return { instancesDeleted: instancesCount.count, mappingsDeleted: mappingsCount.count };
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error clearing lead product structures:",
+      error,
+    );
+    throw new Error(
+      `Failed to clear lead product structures: ${error.message}`,
+    );
+  }
+};
+
 export const updateLeadProductStructureInstance = async ({
   leadId,
   vendorId,
@@ -1588,9 +1639,9 @@ export const updateLeadProductStructureInstance = async ({
         description: description?.trim() || null,
         ...(pre_prod_remark !== undefined
           ? {
-              pre_prod_remark:
-                pre_prod_remark == null ? null : pre_prod_remark.trim() || null,
-            }
+            pre_prod_remark:
+              pre_prod_remark == null ? null : pre_prod_remark.trim() || null,
+          }
           : {}),
         updated_by: updated_by ?? null,
       },
@@ -2025,9 +2076,8 @@ export const updateLeadService = async (
 
     // Only update account fields if lead contact info is being updated
     if (firstname !== undefined || lastname !== undefined) {
-      accountUpdateData.name = `${firstname || existingLead.firstname} ${
-        lastname || existingLead.lastname
-      }`;
+      accountUpdateData.name = `${firstname || existingLead.firstname} ${lastname || existingLead.lastname
+        }`;
     }
     if (country_code !== undefined)
       accountUpdateData.country_code = country_code;
@@ -2113,15 +2163,13 @@ export const updateLeadService = async (
 
         const assigneeEmail = hydratedLead.assignedTo?.user_email?.trim();
         if (hydratedLead.assign_to && assigneeEmail) {
-          const leadName = `${hydratedLead.firstname ?? ""} ${
-            hydratedLead.lastname ?? ""
-          }`.trim();
+          const leadName = `${hydratedLead.firstname ?? ""} ${hydratedLead.lastname ?? ""
+            }`.trim();
           const leadCode =
             (hydratedLead as any).lead_code ??
             `LEAD-${String(hydratedLead.id).padStart(4, "0")}`;
-          const contactDetails = `${hydratedLead.country_code ?? ""} ${
-            hydratedLead.contact_no ?? ""
-          }`.trim();
+          const contactDetails = `${hydratedLead.country_code ?? ""} ${hydratedLead.contact_no ?? ""
+            }`.trim();
           const furnitureType =
             hydratedLead.productMappings
               ?.map((item) => item.productType?.type)
@@ -2134,15 +2182,15 @@ export const updateLeadService = async (
               .join(", ") || "—";
           const createdDate = hydratedLead.created_at
             ? new Date(hydratedLead.created_at).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
             : new Date().toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              });
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            });
           const createdByName = hydratedLead.createdBy?.user_name ?? "System";
           const baseUrl = clientBaseUrl;
           const leadUrl = `${baseUrl}/dashboard/leads/details/${hydratedLead.id}?accountId=${hydratedLead.account_id}`;
@@ -2180,39 +2228,39 @@ export const updateLeadService = async (
       await Promise.all([
         existingLead.site_type_id
           ? tx.siteTypeMaster.findFirst({
-              where: {
-                id: existingLead.site_type_id,
-                vendor_id,
-              },
-              select: { type: true },
-            })
+            where: {
+              id: existingLead.site_type_id,
+              vendor_id,
+            },
+            select: { type: true },
+          })
           : Promise.resolve(null),
         updatedLead.site_type_id
           ? tx.siteTypeMaster.findFirst({
-              where: {
-                id: updatedLead.site_type_id,
-                vendor_id,
-              },
-              select: { type: true },
-            })
+            where: {
+              id: updatedLead.site_type_id,
+              vendor_id,
+            },
+            select: { type: true },
+          })
           : Promise.resolve(null),
         existingLead.source_id
           ? tx.sourceMaster.findFirst({
-              where: {
-                id: existingLead.source_id,
-                vendor_id,
-              },
-              select: { type: true },
-            })
+            where: {
+              id: existingLead.source_id,
+              vendor_id,
+            },
+            select: { type: true },
+          })
           : Promise.resolve(null),
         updatedLead.source_id
           ? tx.sourceMaster.findFirst({
-              where: {
-                id: updatedLead.source_id,
-                vendor_id,
-              },
-              select: { type: true },
-            })
+            where: {
+              id: updatedLead.source_id,
+              vendor_id,
+            },
+            select: { type: true },
+          })
           : Promise.resolve(null),
       ]);
 
@@ -2512,12 +2560,11 @@ export const isContactOrEmailExists = async (
         : "email",
     lead: existingLead
       ? {
-          lead_id: existingLead.id,
-          lead_code: existingLead.lead_code,
-          lead_name: `${existingLead.firstname ?? ""} ${
-            existingLead.lastname ?? ""
+        lead_id: existingLead.id,
+        lead_code: existingLead.lead_code,
+        lead_name: `${existingLead.firstname ?? ""} ${existingLead.lastname ?? ""
           }`.trim(),
-        }
+      }
       : null,
   };
 };
@@ -2623,25 +2670,31 @@ export const getSalesExecutivesByVendor = async (
           vendor_id: vendorId,
           status: "active",
           ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
-          user_type: {
-            user_type: {
-              equals: "custom",
-              mode: "insensitive",
+          OR: [
+            {
+              user_type: {
+                user_type: { in: ["super-admin"] },
+              },
             },
-          },
-          ...(options?.requiredPrivilegeCode
-            ? {
-                userPrivilegeMappings: {
-                  some: {
-                    is_allowed: true,
-                    privilege: {
-                      code: options.requiredPrivilegeCode,
-                      is_active: true,
+            {
+              user_type: {
+                user_type: { equals: "custom", mode: "insensitive" },
+              },
+              ...(options?.requiredPrivilegeCode
+                ? {
+                    userPrivilegeMappings: {
+                      some: {
+                        is_allowed: true,
+                        privilege: {
+                          code: options.requiredPrivilegeCode,
+                          is_active: true,
+                        },
+                      },
                     },
-                  },
-                },
-              }
-            : {}),
+                  }
+                : {}),
+            },
+          ],
         },
         include: {
           user_type: true,
@@ -2677,30 +2730,13 @@ export const getSalesExecutivesByVendor = async (
       }));
     }
 
-    // First, find the user type ID for 'sales-executive'
-    const salesExecutiveType = await prisma.userTypeMaster.findFirst({
-      where: {
-        user_type: {
-          equals: "sales-executive",
-          mode: "insensitive", // Case insensitive search
-        },
-      },
-    });
-
-    if (!salesExecutiveType) {
-      console.log("[SERVICE] Sales executive user type not found");
-      return [];
-    }
-
-    console.log(
-      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`,
-    );
-
     // Fetch all users with sales-executive role for the specified vendor
     const salesExecutives = await prisma.userMaster.findMany({
       where: {
         vendor_id: vendorId,
-        user_type_id: salesExecutiveType.id,
+        user_type: {
+          user_type: { in: ["sales-executive"] },
+        },
         // Optionally filter only active users
         status: "active",
         ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
@@ -3031,9 +3067,9 @@ export const assignLeadToUser = async (
     const previousAssignee =
       lead.assign_to !== null
         ? await prisma.userMaster.findUnique({
-            where: { id: lead.assign_to },
-            select: { user_name: true },
-          })
+          where: { id: lead.assign_to },
+          select: { user_name: true },
+        })
         : null;
 
     if (lead.assign_to === payload.assign_to) {
@@ -3237,15 +3273,13 @@ export const assignLeadToUser = async (
         });
 
         if (leadDetails) {
-          const leadName = `${leadDetails.firstname ?? ""} ${
-            leadDetails.lastname ?? ""
-          }`.trim();
+          const leadName = `${leadDetails.firstname ?? ""} ${leadDetails.lastname ?? ""
+            }`.trim();
           const leadCode =
             leadDetails.lead_code ??
             `LEAD-${String(leadDetails.id).padStart(4, "0")}`;
-          const contactDetails = `${leadDetails.country_code ?? ""} ${
-            leadDetails.contact_no ?? ""
-          }`.trim();
+          const contactDetails = `${leadDetails.country_code ?? ""} ${leadDetails.contact_no ?? ""
+            }`.trim();
           const furnitureType =
             leadDetails.productMappings
               ?.map((item) => item.productType?.type)
@@ -3258,10 +3292,10 @@ export const assignLeadToUser = async (
               .join(", ") || "—";
           const createdDate = leadDetails.created_at
             ? new Date(leadDetails.created_at).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-              })
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
             : "—";
           const createdByName = adminUser.user_name ?? "Admin";
           const baseUrl = clientBaseUrl || "http://localhost:3000";
@@ -3528,9 +3562,9 @@ export const getLeadLogsWithDocuments = async (params: {
   const resolvedUserType =
     user_type_id != null
       ? await prisma.userTypeMaster.findFirst({
-          where: { id: user_type_id },
-          select: { user_type: true },
-        })
+        where: { id: user_type_id },
+        select: { user_type: true },
+      })
       : null;
 
   const role = normalizeUserType(resolvedUserType?.user_type);
@@ -3555,10 +3589,10 @@ export const getLeadLogsWithDocuments = async (params: {
     role === "backend"
       ? ["Type 10"]
       : role === "admin" ||
-          role === "sales-executive" ||
-          role === "site-supervisor" ||
-          role === "head-site-supervisor" ||
-          role === "tech-check"
+        role === "sales-executive" ||
+        role === "site-supervisor" ||
+        role === "head-site-supervisor" ||
+        role === "tech-check"
         ? ["Type 9", "Type 10"]
         : [];
 
@@ -3582,10 +3616,10 @@ export const getLeadLogsWithDocuments = async (params: {
     vendor_id,
     ...(allowedHistoryTypes
       ? {
-          history_type: history_type
-            ? history_type
-            : { in: allowedHistoryTypes },
-        }
+        history_type: history_type
+          ? history_type
+          : { in: allowedHistoryTypes },
+      }
       : history_type
         ? { history_type }
         : {}),
@@ -3692,9 +3726,9 @@ export const getLeadLogsWithDocuments = async (params: {
         action_type: log.action_type,
         stage: log.stage
           ? {
-              id: log.stage.id,
-              name: log.stage.type,
-            }
+            id: log.stage.id,
+            name: log.stage.type,
+          }
           : null,
         created_at: log.created_at,
         created_by: {
@@ -3750,3 +3784,64 @@ export const getClientRequiredCompletionDate = async (
 
   return lead?.client_required_order_login_complition_date || null;
 };
+
+export const updateLeadStageService = async (
+  leadId: number,
+  vendorId: number,
+  accountId: number,
+  stageTag: string, // e.g. "Type 1", "Measurement", etc.
+  userId: number,
+  actionMessage: string = "Lead stage updated",
+) => {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      });
+
+      if (!existingLead) {
+        throw new Error("Lead not found or access denied");
+      }
+
+      // Find the status ID for the given tag
+      const statusType = await tx.statusTypeMaster.findFirst({
+        where: { tag: stageTag, vendor_id: vendorId },
+      });
+
+      if (!statusType) {
+        throw new Error(`Stage with tag '${stageTag}' not found for this vendor`);
+      }
+
+      const newStatusId = statusType.id;
+
+      // Update lead stage (status_id)
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: leadId },
+        data: {
+          status_id: newStatusId,
+          updated_by: userId,
+        },
+      });
+
+      // Create history log
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existingLead.account_id!,
+        action: actionMessage,
+        action_type: "STATUS_CHANGE",
+        created_by: userId,
+        created_at: new Date(),
+        stage_id: newStatusId, // Explicity set the stage_id for the log
+      });
+
+      return updatedLead;
+    });
+
+    return { success: true, data: result };
+  } catch (error: any) {
+    logger.error("Error in updateLeadStageService", { error: error.message });
+    throw new Error(error.message || "Failed to update lead stage");
+  }
+};
+

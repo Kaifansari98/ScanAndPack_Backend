@@ -1611,7 +1611,7 @@ export class UnderInstallationStageService {
       where: {
         vendor_id,
         lead_id,
-        task_type: "Miscellaneous",
+        task_type: { in: ["Miscellaneous", "Pending Materials"] },
       },
       select: {
         id: true,
@@ -1644,10 +1644,12 @@ export class UnderInstallationStageService {
 
         const remarkKey = `${m.reorder_material_details} - ${m.problem_description}`;
         const miscTaskKey = `[misc:${m.id}]`;
+        const pendingMaterialKey = m.problem_description;
         const taskForMisc = miscTasks.find(
           (t) =>
             (t.remark && t.remark.includes(miscTaskKey)) ||
-            t.remark === remarkKey,
+            t.remark === remarkKey ||
+            (m.reorder_material_details === "Pending Material" && t.remark === pendingMaterialKey),
         );
 
         const deliveryTaskForMisc = miscTasks.find(
@@ -1906,12 +1908,21 @@ export class UnderInstallationStageService {
 
       const miscTaskKey = `[misc:${existing.id}]`;
       const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
+
       const readyTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
-          task_type: "Miscellaneous",
-          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
           status: "completed",
         },
         select: { id: true },
@@ -2338,7 +2349,7 @@ export class UnderInstallationStageService {
         where: {
           id: task_id,
           vendor_id,
-          task_type: "Miscellaneous",
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
         },
         select: {
           id: true,
@@ -2460,13 +2471,21 @@ export class UnderInstallationStageService {
 
       const miscTaskKey = `[misc:${existing.id}]`;
       const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
 
       const existingTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id: existing.lead_id,
-          task_type: "Miscellaneous",
-          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
         },
         select: { id: true },
       });
@@ -3557,6 +3576,8 @@ export class UnderInstallationStageService {
         select: {
           id: true,
           account_id: true,
+          reorder_material_details: true,
+          problem_description: true,
         },
       });
 
@@ -3577,14 +3598,23 @@ export class UnderInstallationStageService {
       });
 
       const miscTaskKey = `[misc:${existing.id}]`;
+      const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
 
       // Fetch latest misc task (for deep link)
       const resolvedTask = await tx.userLeadTask.findFirst({
         where: {
           vendor_id,
           lead_id,
-          task_type: "Miscellaneous",
-          remark: { contains: miscTaskKey },
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
         },
         orderBy: { id: "desc" },
         select: { id: true },
@@ -3730,6 +3760,15 @@ export class UnderInstallationStageService {
 
       const miscTaskKey = `[misc:${existing.id}]`;
       const remarkKey = `${existing.reorder_material_details} - ${existing.problem_description}`;
+      const pendingMaterialKey = existing.problem_description;
+
+      const orConditions = [
+        { remark: { contains: miscTaskKey } },
+        { remark: remarkKey },
+      ];
+      if (existing.reorder_material_details === "Pending Material") {
+        orConditions.push({ remark: pendingMaterialKey });
+      }
 
       // Close misc task
       const updatedTasks = await tx.userLeadTask.updateMany({
@@ -3737,8 +3776,8 @@ export class UnderInstallationStageService {
           vendor_id,
           lead_id,
           account_id: existing.account_id,
-          task_type: "Miscellaneous",
-          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
           status: "open",
         },
         data: {
@@ -3755,8 +3794,8 @@ export class UnderInstallationStageService {
         where: {
           vendor_id,
           lead_id,
-          task_type: "Miscellaneous",
-          OR: [{ remark: { contains: miscTaskKey } }, { remark: remarkKey }],
+          task_type: { in: ["Miscellaneous", "Pending Materials"] },
+          OR: orConditions,
         },
         orderBy: { id: "desc" },
         select: { id: true },

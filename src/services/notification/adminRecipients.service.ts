@@ -58,35 +58,13 @@ export async function getFranchiseAdminRecipients(
     },
   });
 
-  // ✅ If franchise has active admins, return them
-  if (admins.length > 0) {
-    return { recipients: admins, isSuperAdminFallback: false };
+  // ✅ Return active franchise admins (if none, return empty array)
+  if (admins.length === 0) {
+    logger.info("No active franchise admins found, fallback disabled", {
+      vendor_id: vendorId,
+      franchise_id: franchiseId,
+    });
   }
 
-  // ✅ Fallback: No active admins for this franchise → return all super-admins for the vendor
-  logger.info("No active franchise admins found, falling back to super-admins", {
-    vendor_id: vendorId,
-    franchise_id: franchiseId,
-  });
-
-  const superAdminIdFilter =
-    excludeUserId != null ? { not: excludeUserId } : undefined;
-
-  const superAdmins = await prisma.userMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-      status: "active",
-      user_type: {
-        user_type: { equals: "super-admin", mode: "insensitive" },
-      },
-      ...(superAdminIdFilter ? { id: superAdminIdFilter } : {}),
-    },
-    select: {
-      id: true,
-      user_name: true,
-      user_email: true,
-    },
-  });
-
-  return { recipients: superAdmins, isSuperAdminFallback: true };
+  return { recipients: admins, isSuperAdminFallback: false };
 }

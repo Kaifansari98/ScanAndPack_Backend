@@ -1120,14 +1120,15 @@ export class DesigingStageController {
 
           // 3️⃣ DB insert
           for (const file of files) {
-            const finalOriginalName = useCustomVendorFlow
+            const designTypePrefix = req.body.design_type ? `[${req.body.design_type}] ` : '';
+            const finalOriginalName = designTypePrefix + (useCustomVendorFlow
               ? (() => {
                   const extension = path.extname(file.originalname || "");
                   const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
                   nextRevision += 1;
                   return renamedOriginalName;
                 })()
-              : file.originalname;
+              : file.originalname);
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
               Number(vendorId),
