@@ -555,6 +555,7 @@ model LeadMaster {
   source_id                                   Int?
   archetech_name                              String?
   archetech_number                            String?
+  architect_id                                Int?
   designer_remark                             String?
   created_by                                  Int
   created_at                                  DateTime                              @default(now())
@@ -660,6 +661,7 @@ model LeadMaster {
   statusType                                  StatusTypeMaster?                     @relation(fields: [status_id], references: [id], onDelete: Cascade)
   updatedBy                                   UserMaster?                           @relation("LeadUpdatedBy", fields: [updated_by], references: [id])
   vendor                                      VendorMaster                          @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  architect                                   Architechuremaster?                   @relation(fields: [architect_id], references: [id])
   productMappings                             LeadProductMapping[]
   productStructureInstances                   LeadProductStructureInstance[]
   leadProductStructureMapping                 LeadProductStructureMapping[]
@@ -3248,19 +3250,20 @@ model POPayment {
 }
 
 model Architechuremaster {
-  id         Int       @id @default(autoincrement())
-  vendorId   Int
-  name       String
-  email      String
-  mobile     String
-  isActive   Boolean   @default(true)
-  createdAt  DateTime  @default(now())
-  createdBy  Int
-  isdeletetd Boolean   @default(false)
-  deletedAt  DateTime?
+  id        Int       @id @default(autoincrement())
+  vendorId  Int
+  name      String
+  email     String
+  mobile    String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  createdBy Int
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime?
 
   vendor VendorMaster @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   user   UserMaster   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  leads  LeadMaster[]
 }
 
 enum PaymentMode {

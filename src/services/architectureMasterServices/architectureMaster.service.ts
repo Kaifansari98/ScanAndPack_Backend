@@ -32,7 +32,7 @@ export class ArchitectureMasterService {
     const skip = (page - 1) * limit;
 
     const whereCondition: any = {
-      isdeletetd: false,
+      isDeleted: false,
     };
 
     if (search) {
@@ -53,14 +53,14 @@ export class ArchitectureMasterService {
       prisma.architechuremaster.count({ where: whereCondition }),
     ]);
 
-    // Map `movile` back to `mobile` and `isdeletetd` to `is_deleted` for consistency in response if needed
+    // Map `movile` back to `mobile` and `isDeleted` to `is_deleted` for consistency in response if needed
     const formattedData = data.map((item) => ({
       ...item,
       mobile: item.mobile,
       is_active: item.isActive,
       created_at: item.createdAt,
       created_by: item.createdBy,
-      is_deleted: item.isdeletetd,
+      is_deleted: item.isDeleted,
       deleted_at: item.deletedAt,
     }));
 
@@ -80,7 +80,7 @@ export class ArchitectureMasterService {
     const data = await prisma.architechuremaster.findFirst({
       where: {
         id: Number(id),
-        isdeletetd: false,
+        isDeleted: false,
       },
     });
     
@@ -91,7 +91,7 @@ export class ArchitectureMasterService {
         is_active: data.isActive,
         created_at: data.createdAt,
         created_by: data.createdBy,
-        is_deleted: data.isdeletetd,
+        is_deleted: data.isDeleted,
         deleted_at: data.deletedAt,
       };
     }
@@ -129,7 +129,7 @@ export class ArchitectureMasterService {
       is_active: updatedData.isActive,
       created_at: updatedData.createdAt,
       created_by: updatedData.createdBy,
-      is_deleted: updatedData.isdeletetd,
+      is_deleted: updatedData.isDeleted,
       deleted_at: updatedData.deletedAt,
     };
   }
@@ -141,7 +141,7 @@ export class ArchitectureMasterService {
     const deletedData = await prisma.architechuremaster.update({
       where: { id: Number(id) },
       data: {
-        isdeletetd: true,
+        isDeleted: true,
         deletedAt: new Date(),
       },
     });
@@ -151,7 +151,7 @@ export class ArchitectureMasterService {
       is_active: deletedData.isActive,
       created_at: deletedData.createdAt,
       created_by: deletedData.createdBy,
-      is_deleted: deletedData.isdeletetd,
+      is_deleted: deletedData.isDeleted,
       deleted_at: deletedData.deletedAt,
     };
   }
@@ -172,8 +172,30 @@ export class ArchitectureMasterService {
       is_active: updatedData.isActive,
       created_at: updatedData.createdAt,
       created_by: updatedData.createdBy,
-      is_deleted: updatedData.isdeletetd,
+      is_deleted: updatedData.isDeleted,
       deleted_at: updatedData.deletedAt,
     };
+  }
+
+  /**
+   * Get simple list of active architects for dropdowns
+   */
+  async getArchitectsList(vendorId: string | number) {
+    const data = await prisma.architechuremaster.findMany({
+      where: {
+        vendorId: Number(vendorId),
+        isDeleted: false,
+        isActive: true,
+      },
+      select: {
+        id: true,
+        name: true,
+        mobile: true,
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
+    return data;
   }
 }

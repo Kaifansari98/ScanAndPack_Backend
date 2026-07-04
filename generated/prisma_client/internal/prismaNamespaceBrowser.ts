@@ -506,6 +506,7 @@ export const LeadMasterScalarFieldEnum = {
   source_id: 'source_id',
   archetech_name: 'archetech_name',
   archetech_number: 'archetech_number',
+  architect_id: 'architect_id',
   designer_remark: 'designer_remark',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -2635,7 +2636,7 @@ export const ArchitechuremasterScalarFieldEnum = {
   isActive: 'isActive',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
-  isdeletetd: 'isdeletetd',
+  isDeleted: 'isDeleted',
   deletedAt: 'deletedAt'
 } as const
 
