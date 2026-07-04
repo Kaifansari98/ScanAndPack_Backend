@@ -60,6 +60,7 @@ const assignTaskISMSchema = Joi.object({
   remark: Joi.string().allow("", null),
   assignee_user_id: Joi.number().integer().positive().required(),
   created_by: Joi.number().integer().positive().required(),
+  baseUrl: Joi.string().uri().allow("", null).optional(),
 });
 
 const RESTRICTED_TASK_TYPE = "Initial Site Measurement" as const;
@@ -149,7 +150,15 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
     );
   }
 
-  const { lead_id, task_type, due_date, remark, assignee_user_id, created_by } =
+  const {
+    lead_id,
+    task_type,
+    due_date,
+    remark,
+    assignee_user_id,
+    created_by,
+    baseUrl,
+  } =
     value;
 
   const result = await prisma.$transaction(async (tx) => {
@@ -444,6 +453,14 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
         const redirectUrl = accountId 
           ? `/dashboard/leads/details/${lead_id}?accountId=${accountId}`
           : `/dashboard/leads/details/${lead_id}`;
+        const resolvedBaseUrl =
+          (typeof baseUrl === "string" && baseUrl.trim().length > 0
+            ? baseUrl
+            : process.env.CLIENT_BASE_URL ||
+              process.env.FRONTEND_URL ||
+              "http://localhost:3000"
+          ).replace(/\/$/, "");
+        const projectUrl = `${resolvedBaseUrl}${redirectUrl}`;
 
         const { recipients, isSuperAdminFallback } = await getFranchiseAdminRecipients({
           vendorId: leadData.vendor_id,
@@ -483,7 +500,7 @@ export const assignTaskISMService = async (payload: AssignTaskISMInput) => {
               leadName,
               updatedBy,
               updatedAt,
-              projectUrl: redirectUrl,
+              projectUrl,
             });
           } catch (e) {
              logger.warn("Brevo email failed for ISM stage", e);
