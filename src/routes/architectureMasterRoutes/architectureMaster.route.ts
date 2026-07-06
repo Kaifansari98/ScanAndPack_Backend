@@ -11,5 +11,6 @@ router.get("/get-architecture/:id", architectureMasterController.getSingle);
 router.put("/update-architecture/:id", architectureMasterController.update);
 router.put("/update-status/:id", architectureMasterController.updateStatus);
 router.delete("/delete-architecture/:id", architectureMasterController.delete);
+router.get("/dropdown-list/:vendorId", architectureMasterController.getArchitectsList);
 
 export default router;

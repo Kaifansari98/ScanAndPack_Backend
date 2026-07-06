@@ -2,7 +2,7 @@
 export interface ProductTypeInput {
     vendor_id: number;
     type: string;
-    tag: string;
+    tag?: string;
 }
   
 export interface ProductType {
@@ -48,15 +48,67 @@ export interface SourceType{
 export interface ProductStructureTypeInput {
     vendor_id: number;
     type: string;
-    parent: string;
+    parent?: string;
+    product_type_id?: number | null;
 }
 
 export interface ProductStructureType{
     id: number;
     type: string;
     vendor_id: number;
+    product_type_id?: number | null;
     parent?: string | null;
     status?: string;
+    productType?: {
+        id: number;
+        type: string;
+    } | null;
+}
+
+export interface ProductSubStructureInput {
+    vendor_id: number;
+    type: string;
+    product_structure_id: number;
+}
+
+export interface ProductSubStructureType {
+    id: number;
+    type: string;
+    vendor_id: number;
+    product_structure_id: number;
+    status?: string;
+    productStructure?: {
+        id: number;
+        type: string;
+    } | null;
+}
+
+export interface ProductItemCodeInput {
+    vendor_id: number;
+    item_code: string;
+    product_structure_id: number;
+    sub_product_structure_id: number;
+    description: string;
+    specification: string;
+}
+
+export interface ProductItemCodeType {
+    id: number;
+    item_code: string;
+    vendor_id: number;
+    product_structure_id: number;
+    sub_product_structure_id?: number | null;
+    description?: string | null;
+    specification?: string | null;
+    status?: string;
+    productStructure?: {
+        id: number;
+        type: string;
+    } | null;
+    subProductStructure?: {
+        id: number;
+        type: string;
+    } | null;
 }
 
 export interface CarcassType {
@@ -135,6 +187,7 @@ export interface CreateLeadDTO {
     site_type_id?: number;
     source_id: number;
     archetech_name?: string;
+    architect_id?: number;
     archetech_number?: string;
     designer_remark?: string;
     vendor_id: number;
@@ -173,6 +226,7 @@ export interface UpdateLeadDTO {
     source_id: number;
     priority?: string;
     archetech_name?: string;
+    architect_id?: number;
     archetech_number?: string;
     designer_remark?: string;
     updated_by: number;

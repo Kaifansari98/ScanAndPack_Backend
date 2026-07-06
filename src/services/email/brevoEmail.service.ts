@@ -62,6 +62,7 @@ export const applyVendorDomain = async <T extends { vendor_id?: number }>(payloa
 };
 
 export type BrevoEmailPayload = {
+  vendor_id?: number;
   toEmail: string;
   toName?: string | null;
   subject: string;
@@ -394,7 +395,18 @@ export const sendBrevoEmail = async (
   identity?: EmailIdentity, // ← NEW PARAMETER
 ): Promise<BrevoEmailResult> => {
   const apiKey = process.env.BREVO_API_KEY;
-  const brevoEnabled = process.env.BREVO_ENABLED === "true";
+  let brevoEnabled = process.env.BREVO_ENABLED === "true";
+
+  if (payload.vendor_id) {
+    const vendor = await prisma.vendorMaster.findUnique({
+      where: { id: payload.vendor_id },
+      select: { is_email_noti_enabled: true }
+    });
+    if (vendor) {
+      brevoEnabled = vendor.is_email_noti_enabled;
+    }
+  }
+
   const forcedSenderEmail = process.env.BREVO_SENDER_EMAIL;
 
   const senderEmail = forcedSenderEmail || identity?.senderEmail;
@@ -578,6 +590,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject: defaultSubject,
@@ -782,6 +795,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -993,6 +1007,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1196,6 +1211,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1398,6 +1414,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1509,6 +1526,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1705,6 +1723,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -1914,6 +1933,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2114,6 +2134,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2314,6 +2335,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2515,6 +2537,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2725,6 +2748,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -2933,6 +2957,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3123,6 +3148,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3330,6 +3356,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3519,6 +3546,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3709,6 +3737,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3907,6 +3936,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -3999,6 +4029,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
     {
       subject: defaultSubject,
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       text: defaultText,
@@ -4176,6 +4207,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4361,6 +4393,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4567,6 +4600,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4780,6 +4814,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -4985,6 +5020,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5190,6 +5226,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5375,6 +5412,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5560,6 +5598,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5745,6 +5784,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -5930,6 +5970,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6115,6 +6156,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6300,6 +6342,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6485,6 +6528,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6670,6 +6714,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -6855,6 +6900,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7040,6 +7086,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7227,6 +7274,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7412,6 +7460,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7635,6 +7684,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7826,6 +7876,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -7984,6 +8035,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8117,6 +8169,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8246,6 +8299,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8356,6 +8410,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8496,6 +8551,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,
@@ -8509,6 +8565,7 @@ const identity = await resolveEmailIdentity(payload.vendor_id);
 export const sendFastProductionApprovalRequiredEmail = async (
   payload: FastProductionApprovalRequiredEmailPayload,
 ): Promise<BrevoEmailResult> => {
+  payload = await applyVendorDomain(payload);
   const identity = await resolveEmailIdentity(payload.vendor_id);
   const defaultSubject = `Fast Production Approval Request for ${payload.leadCode} - ${payload.leadName}`;
 
@@ -8531,102 +8588,62 @@ export const sendFastProductionApprovalRequiredEmail = async (
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <style>
-    .lead-info-row {
-      display: table;
-      width: 100%;
-      padding: 4px 0;
-    }
-    .lead-info-label {
-      display: table-cell;
-      width: 40%;
-      color: #6b7280;
-      font-size: 14px;
-      vertical-align: top;
-    }
-    .lead-info-value {
-      display: table-cell;
-      width: 60%;
-      color: #111827;
-      font-weight: 600;
-      font-size: 14px;
-      word-break: break-word;
-    }
-
+    .lead-info-row { display: table; width: 100%; padding: 4px 0; }
+    .lead-info-label { display: table-cell; width: 40%; color: #6b7280; font-size: 14px; vertical-align: top; }
+    .lead-info-value { display: table-cell; width: 60%; color: #111827; font-weight: 600; font-size: 14px; word-break: break-word; }
     @media only screen and (max-width: 600px) {
-      .lead-info-row {
-        display: block !important;
-        margin-bottom: 4px !important;
-      }
-      .lead-info-label,
-      .lead-info-value {
-        display: block !important;
-        width: 100% !important;
-      }
+      .lead-info-row { display: block !important; border-bottom: 1px solid #e5e7eb; margin-bottom: 4px; padding-bottom: 4px; }
+      .lead-info-row:last-child { border-bottom: none; }
+      .lead-info-label, .lead-info-value { display: block; width: 100%; }
+      .lead-info-label { font-size: 13px; margin-bottom: 4px; }
     }
   </style>
 </head>
-<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
-    <tr>
-      <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.1);">
-          <tr>
-            <td style="background-color:#111827;padding:24px 32px;">
-              <p style="margin:0;font-size:20px;font-weight:700;color:#ffffff;">Fast Production Approval Request</p>
-            </td>
-          </tr>
-          <tr>
-            <td style="padding:32px;">
-              <p style="margin:0 0 24px;font-size:15px;color:#374151;">Hi ${payload.toName ?? "there"},</p>
-              <p style="margin:0 0 24px;font-size:15px;color:#374151;">
-                A Fast Production request has been raised by <strong>${payload.raisedBy}</strong> for the following lead. The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.
-              </p>
-              <p style="margin:0 0 12px;font-size:15px;color:#111827;font-weight:600;">Lead Details:</p>
-              <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;border-top:1px solid #e5e7eb;">
-                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
-                  <div class="lead-info-row">
-                    <span class="lead-info-label">Lead Name</span>
-                    <span class="lead-info-value">${payload.leadName}</span>
-                  </div>
-                </td></tr>
-                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
-                  <div class="lead-info-row">
-                    <span class="lead-info-label">Lead Code</span>
-                    <span class="lead-info-value">${payload.leadCode}</span>
-                  </div>
-                </td></tr>
-                <tr><td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
-                  <div class="lead-info-row">
-                    <span class="lead-info-label">Raised By</span>
-                    <span class="lead-info-value">${payload.raisedBy}</span>
-                  </div>
-                </td></tr>
-              </table>
-              <p style="margin:0 0 20px;font-size:15px;color:#374151;">
-                Please review the request and approve or reject it at the earliest.
-              </p>
-              ${
-                payload.ctaLink
-                  ? `<table cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
-                      <tr>
-                        <td style="background-color:#111827;border-radius:6px;padding:12px 24px;">
-                          <a href="${payload.ctaLink}" style="color:#ffffff;font-size:14px;font-weight:600;text-decoration:none;">Review Fast Production Request</a>
-                        </td>
-                      </tr>
-                    </table>`
-                  : ""
-              }
-              <p style="margin:0;font-size:14px;color:#4b5563;">
-                Note: The fast production timeline will only be applied after your approval.
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+<body style="margin:0;padding:0;font-family:Arial,sans-serif;">
+  <div style="background:#f9fafb;padding:10px;">
+    <div style="max-width:520px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:10px;padding:20px;">
+      <h2 style="margin:0 0 12px;font-size:18px;color:#111827;">Fast Production Approval Request</h2>
+      <p style="margin:0 0 12px;color:#111827;">Hi ${payload.toName ?? "there"},</p>
+      
+      <p style="margin:0 0 16px;color:#4b5563;">A Fast Production request has been raised by ${payload.raisedBy} for <strong>${payload.leadCode} - ${payload.leadName}</strong>.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">The client requires delivery at the earliest, and this request requires your approval before the fast production timeline can be applied.</p>
+      <p style="margin:0 0 16px;color:#4b5563;">Please review the request and approve or reject it at the earliest.</p>
+
+      <div style="border:1px solid #e5e7eb;border-radius:8px;padding:12px;background:#f8fafc;">
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Name</div>
+          <div class="lead-info-value">${payload.leadName}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Lead Code</div>
+          <div class="lead-info-value">${payload.leadCode}</div>
+        </div>
+        <div class="lead-info-row">
+          <div class="lead-info-label">Raised By</div>
+          <div class="lead-info-value">${payload.raisedBy}</div>
+        </div>
+      </div>
+
+      ${
+        payload.ctaLink
+          ? `<div style="margin:16px 0 0;text-align:start;">
+              <a
+                href="${payload.ctaLink}"
+                style="display:inline-block;background:#111827;color:#ffffff;text-decoration:none;padding:10px 16px;border-radius:6px;font-size:14px;"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Review Fast Production Request
+              </a>
+            </div>`
+          : ""
+      }
+      <p style="margin:16px 0 0;font-size:14px;color:#4b5563;">
+        Note: The fast production timeline will only be applied after your approval.
+      </p>
+    </div>
+  </div>
 </body>
 </html>`;
 
@@ -8667,6 +8684,7 @@ export const sendFastProductionApprovalRequiredEmail = async (
   return sendBrevoEmail(
     {
       allowSuperAdmin: payload.allowSuperAdmin ?? true,
+      vendor_id: payload.vendor_id,
       toEmail: payload.toEmail,
       toName: payload.toName,
       subject,

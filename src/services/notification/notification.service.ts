@@ -79,7 +79,17 @@ export const NotificationService = {
     notification: Notification | null;
     delivery: PushDeliverySummary | null;
   }> {
-    const notificationsEnabled = process.env.NOTIFICATIONS_ENABLED === "true";
+    let notificationsEnabled = process.env.NOTIFICATIONS_ENABLED === "true";
+    if (input.vendor_id) {
+      const vendor = await prisma.vendorMaster.findUnique({
+        where: { id: input.vendor_id },
+        select: { is_in_app_noti_enabled: true }
+      });
+      if (vendor) {
+        notificationsEnabled = vendor.is_in_app_noti_enabled;
+      }
+    }
+
     if (!notificationsEnabled) {
       logger.info("Notification skipped: notifications disabled", {
         user_id: input.user_id,

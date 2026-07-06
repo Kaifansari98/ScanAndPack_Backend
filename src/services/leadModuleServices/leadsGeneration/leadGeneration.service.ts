@@ -186,6 +186,7 @@ export const createLeadService = async (
     status_id,
     source_id,
     archetech_name,
+    architect_id,
     archetech_number,
     designer_remark,
     vendor_id,
@@ -313,6 +314,7 @@ export const createLeadService = async (
           status_id,
           source_id,
           archetech_name,
+          architect_id: architect_id ? Number(architect_id) : null,
           archetech_number,
           designer_remark,
           vendor_id,
@@ -1453,6 +1455,17 @@ export const getLeadProductStructureInstances = async (
       include: {
         productStructure: true,
         productType: true,
+        subProductStructure: true,
+        productItemCode: {
+          include: {
+            productStructure: {
+              include: {
+                productType: true,
+              },
+            },
+            subProductStructure: true,
+          },
+        },
       },
       orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
     });
@@ -1665,6 +1678,10 @@ export const createLeadProductStructureInstance = async ({
   title,
   description,
   created_by,
+  sub_product_structure_id,
+  product_item_code_id,
+  quantity,
+  isLargeScaleProjectInstance,
 }: {
   leadId: number;
   vendorId: number;
@@ -1672,6 +1689,10 @@ export const createLeadProductStructureInstance = async ({
   title: string;
   description?: string | null;
   created_by: number;
+  sub_product_structure_id?: number | null;
+  product_item_code_id?: number | null;
+  quantity?: number | null;
+  isLargeScaleProjectInstance?: boolean;
 }) => {
   try {
     const lead = await prisma.leadMaster.findFirst({
@@ -1698,7 +1719,7 @@ export const createLeadProductStructureInstance = async ({
       throw new Error("Product structure not found");
     }
 
-    const productType = await prisma.leadProductMapping.findFirst({
+    const leadProductType = await prisma.leadProductMapping.findFirst({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
@@ -1706,13 +1727,81 @@ export const createLeadProductStructureInstance = async ({
       select: { product_type_id: true },
     });
 
-    if (!productType?.product_type_id) {
+    let resolvedProductTypeId = leadProductType?.product_type_id || null;
+    let resolvedStructureId = product_structure_id;
+    let resolvedSubStructureId = sub_product_structure_id ?? null;
+    let resolvedItemCodeId = product_item_code_id ?? null;
+    let resolvedTitle = title.trim();
+    let resolvedDescription = description?.trim() || null;
+    let resolvedIsLargeScale = Boolean(isLargeScaleProjectInstance);
+
+    if (resolvedItemCodeId) {
+      const itemCode = await prisma.productItemCode.findFirst({
+        where: {
+          id: resolvedItemCodeId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        include: {
+          productStructure: true,
+          subProductStructure: true,
+        },
+      });
+
+      if (!itemCode) {
+        throw new Error("Product item code not found");
+      }
+
+      if (itemCode.product_structure_id !== product_structure_id) {
+        throw new Error("Product structure does not match selected item code");
+      }
+
+      if (
+        resolvedSubStructureId &&
+        itemCode.sub_product_structure_id &&
+        itemCode.sub_product_structure_id !== resolvedSubStructureId
+      ) {
+        throw new Error("Sub product structure does not match selected item code");
+      }
+
+      resolvedStructureId = itemCode.product_structure_id;
+      resolvedSubStructureId = itemCode.sub_product_structure_id ?? null;
+      resolvedTitle = resolvedTitle || itemCode.item_code;
+      resolvedDescription = resolvedDescription || itemCode.description || null;
+      resolvedIsLargeScale = true;
+      resolvedProductTypeId =
+        itemCode.productStructure.product_type_id || resolvedProductTypeId;
+    }
+
+    if (resolvedSubStructureId) {
+      const subStructure = await prisma.productSubStructure.findFirst({
+        where: {
+          id: resolvedSubStructureId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+      });
+
+      if (!subStructure) {
+        throw new Error("Sub product structure not found");
+      }
+
+      if (subStructure.product_structure_id !== resolvedStructureId) {
+        throw new Error("Sub product structure does not match selected product structure");
+      }
+    }
+
+    if (!resolvedProductTypeId) {
+      resolvedProductTypeId = structure.product_type_id ?? null;
+    }
+
+    if (!resolvedProductTypeId) {
       throw new Error("Product type not found");
     }
 
     const productTypeMaster = await prisma.productTypeMaster.findFirst({
       where: {
-        id: productType.product_type_id,
+        id: resolvedProductTypeId,
         vendor_id: vendorId,
       },
       select: { type: true },
@@ -1722,7 +1811,7 @@ export const createLeadProductStructureInstance = async ({
       .toLowerCase()
       .includes("kitchen");
 
-    if (!isKitchenType) {
+    if (!resolvedItemCodeId && !isKitchenType) {
       const existingMappings =
         await prisma.leadProductStructureMapping.findMany({
           where: {
@@ -1762,7 +1851,7 @@ export const createLeadProductStructureInstance = async ({
               vendor_id: vendorId,
               lead_id: leadId,
               account_id: lead.account_id,
-              product_type_id: productType.product_type_id,
+              product_type_id: resolvedProductTypeId,
               product_structure_id: mapping.product_structure_id,
               quantity_index: 1,
               title: mappingStructure.type,
@@ -1778,7 +1867,7 @@ export const createLeadProductStructureInstance = async ({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_structure_id,
+        product_structure_id: resolvedStructureId,
       },
     });
 
@@ -1788,7 +1877,7 @@ export const createLeadProductStructureInstance = async ({
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: lead.account_id,
-          product_structure_id,
+          product_structure_id: resolvedStructureId,
           created_by,
         },
       });
@@ -1798,7 +1887,7 @@ export const createLeadProductStructureInstance = async ({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_structure_id,
+        product_structure_id: resolvedStructureId,
       },
       _max: { quantity_index: true },
     });
@@ -1810,11 +1899,15 @@ export const createLeadProductStructureInstance = async ({
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: lead.account_id,
-        product_type_id: productType.product_type_id,
-        product_structure_id,
+        product_type_id: resolvedProductTypeId,
+        product_structure_id: resolvedStructureId,
+        sub_product_structure_id: resolvedSubStructureId,
+        product_item_code_id: resolvedItemCodeId,
         quantity_index: quantityIndex,
-        title: title.trim(),
-        description: description?.trim() || null,
+        quantity: quantity ?? null,
+        title: resolvedTitle,
+        description: resolvedDescription,
+        isLargeScaleProjectInstance: resolvedIsLargeScale,
         created_by,
       },
     });
@@ -1953,6 +2046,7 @@ export const updateLeadService = async (
     source_id,
     priority,
     archetech_name,
+    architect_id,
     archetech_number,
     designer_remark,
     updated_by,
@@ -2041,6 +2135,8 @@ export const updateLeadService = async (
     }
     if (archetech_name !== undefined)
       leadUpdateData.archetech_name = archetech_name;
+    if (architect_id !== undefined)
+      leadUpdateData.architect_id = architect_id ? Number(architect_id) : null;
     if (archetech_number !== undefined)
       leadUpdateData.archetech_number = archetech_number;
     if (designer_remark !== undefined)
@@ -2579,25 +2675,31 @@ export const getSalesExecutivesByVendor = async (
           vendor_id: vendorId,
           status: "active",
           ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
-          user_type: {
-            user_type: {
-              equals: "custom",
-              mode: "insensitive",
-            },
-          },
-          ...(options?.requiredPrivilegeCode
-            ? {
-              userPrivilegeMappings: {
-                some: {
-                  is_allowed: true,
-                  privilege: {
-                    code: options.requiredPrivilegeCode,
-                    is_active: true,
-                  },
-                },
+          OR: [
+            {
+              user_type: {
+                user_type: { in: ["super-admin"] },
               },
-            }
-            : {}),
+            },
+            {
+              user_type: {
+                user_type: { equals: "custom", mode: "insensitive" },
+              },
+              ...(options?.requiredPrivilegeCode
+                ? {
+                    userPrivilegeMappings: {
+                      some: {
+                        is_allowed: true,
+                        privilege: {
+                          code: options.requiredPrivilegeCode,
+                          is_active: true,
+                        },
+                      },
+                    },
+                  }
+                : {}),
+            },
+          ],
         },
         include: {
           user_type: true,
@@ -2633,30 +2735,13 @@ export const getSalesExecutivesByVendor = async (
       }));
     }
 
-    // First, find the user type ID for 'sales-executive'
-    const salesExecutiveType = await prisma.userTypeMaster.findFirst({
-      where: {
-        user_type: {
-          equals: "sales-executive",
-          mode: "insensitive", // Case insensitive search
-        },
-      },
-    });
-
-    if (!salesExecutiveType) {
-      console.log("[SERVICE] Sales executive user type not found");
-      return [];
-    }
-
-    console.log(
-      `[SERVICE] Found sales executive type ID: ${salesExecutiveType.id}`,
-    );
-
     // Fetch all users with sales-executive role for the specified vendor
     const salesExecutives = await prisma.userMaster.findMany({
       where: {
         vendor_id: vendorId,
-        user_type_id: salesExecutiveType.id,
+        user_type: {
+          user_type: { in: ["sales-executive"] },
+        },
         // Optionally filter only active users
         status: "active",
         ...(franchiseId !== undefined ? { franchise_id: franchiseId } : {}),
@@ -3704,3 +3789,64 @@ export const getClientRequiredCompletionDate = async (
 
   return lead?.client_required_order_login_complition_date || null;
 };
+
+export const updateLeadStageService = async (
+  leadId: number,
+  vendorId: number,
+  accountId: number,
+  stageTag: string, // e.g. "Type 1", "Measurement", etc.
+  userId: number,
+  actionMessage: string = "Lead stage updated",
+) => {
+  try {
+    const result = await prisma.$transaction(async (tx) => {
+      const existingLead = await tx.leadMaster.findFirst({
+        where: { id: leadId, vendor_id: vendorId, is_deleted: false },
+      });
+
+      if (!existingLead) {
+        throw new Error("Lead not found or access denied");
+      }
+
+      // Find the status ID for the given tag
+      const statusType = await tx.statusTypeMaster.findFirst({
+        where: { tag: stageTag, vendor_id: vendorId },
+      });
+
+      if (!statusType) {
+        throw new Error(`Stage with tag '${stageTag}' not found for this vendor`);
+      }
+
+      const newStatusId = statusType.id;
+
+      // Update lead stage (status_id)
+      const updatedLead = await tx.leadMaster.update({
+        where: { id: leadId },
+        data: {
+          status_id: newStatusId,
+          updated_by: userId,
+        },
+      });
+
+      // Create history log
+      await createLeadLog(tx, {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        account_id: existingLead.account_id!,
+        action: actionMessage,
+        action_type: "STATUS_CHANGE",
+        created_by: userId,
+        created_at: new Date(),
+        stage_id: newStatusId, // Explicity set the stage_id for the log
+      });
+
+      return updatedLead;
+    });
+
+    return { success: true, data: result };
+  } catch (error: any) {
+    logger.error("Error in updateLeadStageService", { error: error.message });
+    throw new Error(error.message || "Failed to update lead stage");
+  }
+};
+
