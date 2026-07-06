@@ -99,6 +99,12 @@ router.post(
 );
 
 router.post(
+  "/measurement-documents/upload",
+  handleMulterUpload(diskUploadFields),
+  paymentUploadController.uploadMeasurementDocuments
+);
+
+router.post(
   "/booking-done-ism/upload",
   handleMulterUpload(diskUploadFields),
   validatePaymentUpload,

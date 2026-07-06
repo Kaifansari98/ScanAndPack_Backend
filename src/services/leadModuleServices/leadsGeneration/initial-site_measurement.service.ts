@@ -2517,6 +2517,99 @@ export class PaymentUploadService {
     }
   }
 
+  public async uploadMeasurementDocuments(data: {
+    lead_id: number;
+    account_id: number;
+    vendor_id: number;
+    updated_by: number;
+    uploadPdf: Express.Multer.File[];
+    pdfFileInstanceIds?: (number | null)[];
+  }): Promise<{ documentsUploaded: any[]; message: string }> {
+    try {
+      if (!data.uploadPdf || data.uploadPdf.length === 0) {
+        throw new Error("No measurement documents provided");
+      }
+
+      const response = {
+        documentsUploaded: [] as any[],
+        message: "Measurement documents uploaded successfully",
+      };
+
+      const uploadedPdfDocuments: {
+        originalName: string;
+        s3Key: string;
+        productStructureInstanceId: number | null;
+      }[] = [];
+
+      for (const [index, pdfFile] of data.uploadPdf.entries()) {
+        const s3Key = await uploadToWasabiInitialSiteMeasurementFile(
+          pdfFile.path,
+          data.vendor_id,
+          data.lead_id,
+          pdfFile.originalname,
+          pdfFile.mimetype,
+          "initial_site_measurement_documents",
+        );
+
+        await fs.unlink(pdfFile.path);
+        uploadedPdfDocuments.push({
+          originalName: pdfFile.originalname,
+          s3Key,
+          productStructureInstanceId:
+            data.pdfFileInstanceIds?.[index] ?? null,
+        });
+      }
+
+      await prisma.$transaction(async (tx: any) => {
+        const lead = await tx.leadMaster.findUnique({
+          where: { id: data.lead_id },
+          select: { account_id: true }
+        });
+
+        if (!lead) {
+          throw new Error("Lead not found");
+        }
+
+        const pdfDocType = await tx.documentTypeMaster.findFirst({
+          where: { vendor_id: data.vendor_id, tag: "Type 3" },
+        });
+
+        if (!pdfDocType) {
+          throw new Error(
+            "Document type (measurement documents) not found for this vendor",
+          );
+        }
+
+        for (const uploaded of uploadedPdfDocuments) {
+          const document = await tx.leadDocuments.create({
+            data: {
+              doc_og_name: uploaded.originalName,
+              doc_sys_name: uploaded.s3Key,
+              created_by: data.updated_by,
+              doc_type_id: pdfDocType.id,
+              account_id: lead.account_id,
+              lead_id: data.lead_id,
+              vendor_id: data.vendor_id,
+              product_structure_instance_id: uploaded.productStructureInstanceId,
+            },
+          });
+
+          response.documentsUploaded.push({
+            id: document.id,
+            type: "initial_site_measurement_documents",
+            originalName: uploaded.originalName,
+            s3Key: uploaded.s3Key,
+          });
+        }
+      });
+
+      return response;
+    } catch (error: any) {
+      console.error("[PaymentUploadService] Error uploading measurement documents:", error);
+      throw new Error(`Failed to upload measurement documents: ${error.message}`);
+    }
+  }
+
   public async softDeleteDocument(
     documentId: number,
     userId: number,
