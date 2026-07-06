@@ -613,291 +613,285 @@ export const createProjectService = async (
     const unique_project_id = randomUUID();
 
     /* STEP 8 — Transaction */
-    const result = await prisma.$transaction(async (tx) => {
-      const project = await tx.projectMaster.create({
-        data: {
-          project_name: validPayload.projectName,
-          unique_project_id,
-          vendor_id: vendor.id,
-          created_by: createdByUserId,
-          project_status: "Initiated",
-          is_grouping: false,
-          lead_id,
-        },
-      });
+    /* STEP 8 — Transaction */
+    const result = await prisma.$transaction(
+      async (tx) => {
+        const project = await tx.projectMaster.create({
+          data: {
+            project_name: validPayload.projectName,
+            unique_project_id,
+            vendor_id: vendor.id,
+            created_by: createdByUserId,
+            project_status: "Initiated",
+            is_grouping: false,
+            lead_id,
+          },
+        });
 
-      resolvedProjectId = project.id;
+        resolvedProjectId = project.id;
 
-      const totalItems = validPayload.items.reduce((sum, item) => {
-        return sum + Number(item.qty);
-      }, 0);
+        const totalItems = validPayload.items.reduce((sum, item) => {
+          return sum + Number(item.qty);
+        }, 0);
 
-      await tx.projectDetails.create({
-        data: {
-          project_id: project.id,
-          vendor_id: vendor.id,
-          lead_id,
-          room_name: validPayload.projectName,
-          total_items: totalItems,
-          total_packed: 0,
-          total_unpacked: totalItems,
-          is_grouping: false,
-          start_date: new Date(),
-          estimated_completion_date: null,
-        },
-      });
-
-      for (const item of validPayload.items) {
-        const quantity = Number(item.qty);
-
-        const hasEdgeBanding =
-          !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
-
-        const row = await tx.cutList.create({
+        await tx.projectDetails.create({
           data: {
             project_id: project.id,
             vendor_id: vendor.id,
-            description: item.name,
-            length: Number(item.l1),
-            width: Number(item.l2),
-            thickness: Number(item.l3),
-            qty: quantity,
-            material_details: item.articleCode,
-            item_name: item.name,
-            status: "Active",
-            created_by: createdByUserId,
             lead_id,
-            elf: item.el1 || "",
-            elb: item.el2 || "",
-            esl: item.sl1 || "",
-            esr: item.sl2 || "",
-            unique_code: "",
-            unique_code_2: item.barcode2 || null,
-            group_name: item.groupName || null,
-            category_name: item.categoryName || null,
-            procurement: item.procurement || null,
+            room_name: validPayload.projectName,
+            total_items: totalItems,
+            total_packed: 0,
+            total_unpacked: totalItems,
+            is_grouping: false,
+            start_date: new Date(),
+            estimated_completion_date: null,
           },
         });
 
-        const uniqueCode = item.barcode1 || `${row.id}-${project.id}`;
-
-        await tx.cutList.update({
-          where: {
-            id: row.id,
-          },
-          data: {
-            unique_code: uniqueCode,
-          },
-        });
-
-        const itemCategoryName = (item.categoryName ?? "")
-          .trim()
-          .toLowerCase();
-
-        const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
-
-        const hasType4 = categoryTypeIds.includes(4);
-        const hasType3 = categoryTypeIds.includes(3);
-        const hasType1Or2 = categoryTypeIds.some(
-          (typeId) => typeId === 1 || typeId === 2,
-        );
-
-        const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
-
-        /**
-         * Type 4:
-         * Skip machine mapping entirely.
-         */
-        if (hasType4) {
-          continue;
-        }
-
-        /**
-         * Type 3:
-         * Only scan/pack machine types 17 and 18.
-         */
-        if (hasType3 && !isNormalFlow) {
-          const scanPackMachineTypeIds = [17, 18];
-
-          for (const machineTypeId of scanPackMachineTypeIds) {
-            const machine = await tx.machineMaster.findFirst({
-              where: {
-                vendor_id: vendor.id,
-                machine_type_id: machineTypeId,
-              },
-              select: {
-                id: true,
-                sequence_no: true,
-              },
-            });
-
-            if (!machine) continue;
-
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: machine.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id,
-                  sequence_no: machine.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                },
-              });
-            }
-          }
-
-          continue;
-        }
-
-        /**
-         * Normal flow:
-         * - Edgebanding machine type 11 if edge banding exists
-         * - Cutting machine type 3
-         * - CNC machine type 7 if thickness > 9
-         * - Default scan/pack machine types 17 and 18
-         */
-
-        if (hasEdgeBanding) {
-          const edgeBandingMachine = await tx.machineMaster.findFirst({
-            where: {
-              vendor_id: vendor.id,
-              machine_type_id: 11,
-            },
-            select: {
-              id: true,
-              sequence_no: true,
-            },
-          });
-
-          if (!edgeBandingMachine) {
-            throw new Error("Edgebanding machine is not configured");
-          }
-
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: edgeBandingMachine.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id,
-                sequence_no: edgeBandingMachine.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-              },
-            });
-          }
-        }
-
-        const cuttingMachine = await tx.machineMaster.findFirst({
+        /*
+        |--------------------------------------------------------------------------
+        | Fetch machines only once
+        |--------------------------------------------------------------------------
+        */
+        const machines = await tx.machineMaster.findMany({
           where: {
             vendor_id: vendor.id,
-            machine_type_id: 3,
-            status: "ACTIVE",
+            machine_type_id: {
+              in: [3, 7, 11, 17, 18],
+            },
           },
           select: {
             id: true,
+            machine_type_id: true,
             sequence_no: true,
+            status: true,
           },
           orderBy: {
             id: "asc",
           },
         });
 
-        if (cuttingMachine) {
+        const getMachine = (
+          machineTypeId: number,
+          activeOnly: boolean = false,
+        ) => {
+          return machines.find((machine) => {
+            if (machine.machine_type_id !== machineTypeId) return false;
+
+            if (activeOnly && machine.status !== "ACTIVE") return false;
+
+            return true;
+          });
+        };
+
+        const cutListMachineMappingRows: any[] = [];
+
+        const pushMachineMappingRows = ({
+          cutListId,
+          machine,
+          quantity,
+        }: {
+          cutListId: number;
+          machine: {
+            id: number;
+            sequence_no: number | null;
+          };
+          quantity: number;
+        }) => {
           for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: cuttingMachine.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id,
-                sequence_no: cuttingMachine.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-              },
+            cutListMachineMappingRows.push({
+              cut_list_id: cutListId,
+              machine_id: machine.id,
+              project_id: project.id,
+              vendor_id: vendor.id,
+              lead_id,
+              sequence_no: machine.sequence_no ?? 0,
+              status: "Pending",
+              created_by: createdByUserId,
+              expected_in: true,
             });
           }
-        }
+        };
 
-        if (Number(item.l3) > 9) {
-          const cncMachine = await tx.machineMaster.findFirst({
-            where: {
+        for (const item of validPayload.items) {
+          const quantity = Number(item.qty);
+
+          const hasEdgeBanding =
+            !!item.el1 || !!item.el2 || !!item.sl1 || !!item.sl2;
+
+          const row = await tx.cutList.create({
+            data: {
+              project_id: project.id,
               vendor_id: vendor.id,
-              machine_type_id: 7,
-              status: "ACTIVE",
-            },
-            select: {
-              id: true,
-              sequence_no: true,
-            },
-            orderBy: {
-              id: "asc",
+              description: item.name,
+              length: Number(item.l1),
+              width: Number(item.l2),
+              thickness: Number(item.l3),
+              qty: quantity,
+              material_details: item.articleCode,
+              item_name: item.name,
+              status: "Active",
+              created_by: createdByUserId,
+              lead_id,
+              elf: item.el1 || "",
+              elb: item.el2 || "",
+              esl: item.sl1 || "",
+              esr: item.sl2 || "",
+              unique_code: "",
+              unique_code_2: item.barcode2 || null,
+              group_name: item.groupName || null,
+              category_name: item.categoryName || null,
+              procurement: item.procurement || null,
             },
           });
 
-          if (cncMachine) {
-            for (let i = 0; i < quantity; i++) {
-              await tx.cutListMachineMapping.create({
-                data: {
-                  cut_list_id: row.id,
-                  machine_id: cncMachine.id,
-                  project_id: project.id,
-                  vendor_id: vendor.id,
-                  lead_id,
-                  sequence_no: cncMachine.sequence_no ?? 0,
-                  status: "Pending",
-                  created_by: createdByUserId,
-                  expected_in: true,
-                },
+          const uniqueCode = cleanText(item.barcode1) || `${row.id}-${project.id}`;
+
+          await tx.cutList.update({
+            where: {
+              id: row.id,
+            },
+            data: {
+              unique_code: uniqueCode,
+            },
+          });
+
+          const itemCategoryName = (item.categoryName ?? "")
+            .trim()
+            .toLowerCase();
+
+          const categoryTypeIds = categoryTypeMap.get(itemCategoryName) ?? [];
+
+          const hasType4 = categoryTypeIds.includes(4);
+          const hasType3 = categoryTypeIds.includes(3);
+          const hasType1Or2 = categoryTypeIds.some(
+            (typeId) => typeId === 1 || typeId === 2,
+          );
+
+          const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 4 — Skip machine mapping
+          |--------------------------------------------------------------------------
+          */
+          if (hasType4) {
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Type 3 — Only Scan/Pack machine types 17 and 18
+          |--------------------------------------------------------------------------
+          */
+          if (hasType3 && !isNormalFlow) {
+            const scanMachine = getMachine(17);
+            const packMachine = getMachine(18);
+
+            if (scanMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: scanMachine,
+                quantity,
+              });
+            }
+
+            if (packMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: packMachine,
+                quantity,
+              });
+            }
+
+            continue;
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Normal flow
+          |--------------------------------------------------------------------------
+          */
+
+          if (hasEdgeBanding) {
+            const edgeBandingMachine = getMachine(11);
+
+            if (!edgeBandingMachine) {
+              throw new Error("Edgebanding machine is not configured");
+            }
+
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: edgeBandingMachine,
+              quantity,
+            });
+          }
+
+          const cuttingMachine = getMachine(3, true);
+
+          if (cuttingMachine) {
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: cuttingMachine,
+              quantity,
+            });
+          }
+
+          if (Number(item.l3) > 9) {
+            const cncMachine = getMachine(7, true);
+
+            if (cncMachine) {
+              pushMachineMappingRows({
+                cutListId: row.id,
+                machine: cncMachine,
+                quantity,
               });
             }
           }
-        }
 
-        const defaultMachineTypeIds = [17, 18];
+          const scanMachine = getMachine(17);
+          const packMachine = getMachine(18);
 
-        for (const machineTypeId of defaultMachineTypeIds) {
-          const machine = await tx.machineMaster.findFirst({
-            where: {
-              vendor_id: vendor.id,
-              machine_type_id: machineTypeId,
-            },
-            select: {
-              id: true,
-              sequence_no: true,
-            },
-          });
+          if (scanMachine) {
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: scanMachine,
+              quantity,
+            });
+          }
 
-          if (!machine) continue;
-
-          for (let i = 0; i < quantity; i++) {
-            await tx.cutListMachineMapping.create({
-              data: {
-                cut_list_id: row.id,
-                machine_id: machine.id,
-                project_id: project.id,
-                vendor_id: vendor.id,
-                lead_id,
-                sequence_no: machine.sequence_no ?? 0,
-                status: "Pending",
-                created_by: createdByUserId,
-                expected_in: true,
-              },
+          if (packMachine) {
+            pushMachineMappingRows({
+              cutListId: row.id,
+              machine: packMachine,
+              quantity,
             });
           }
         }
-      }
 
-      return project;
-    });
+        /*
+        |--------------------------------------------------------------------------
+        | Bulk insert machine mappings
+        |--------------------------------------------------------------------------
+        */
+        const chunkSize = 1000;
+
+        for (let i = 0; i < cutListMachineMappingRows.length; i += chunkSize) {
+          const chunk = cutListMachineMappingRows.slice(i, i + chunkSize);
+
+          await tx.cutListMachineMapping.createMany({
+            data: chunk,
+          });
+        }
+
+        return project;
+      },
+      {
+        maxWait: 10000,
+        timeout: 30000,
+      },
+    );
 
     /* STEP 9 — Success API log */
     try {
