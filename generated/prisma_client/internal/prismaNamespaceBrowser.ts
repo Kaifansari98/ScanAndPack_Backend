@@ -196,18 +196,11 @@ export const ModelName = {
   PaymentTermStage: 'PaymentTermStage',
   POPaymentSchedule: 'POPaymentSchedule',
   POPayment: 'POPayment',
-<<<<<<< HEAD
-  Architechuremaster: 'Architechuremaster'
-=======
-<<<<<<< HEAD
-  Architechuremaster: 'Architechuremaster'
-=======
   UnitMaster: 'UnitMaster',
   ItemGroupMaster: 'ItemGroupMaster',
   ProductSupplierMapping: 'ProductSupplierMapping',
-  POPaymentScheduleHistory: 'POPaymentScheduleHistory'
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
->>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
+  POPaymentScheduleHistory: 'POPaymentScheduleHistory',
+  Architechuremaster: 'Architechuremaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2303,7 +2296,22 @@ export const ProductMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   active: 'active',
   current_stock: 'current_stock',
-  stock_updated_at: 'stock_updated_at'
+  stock_updated_at: 'stock_updated_at',
+  item_group_id: 'item_group_id',
+  primary_unit_id: 'primary_unit_id',
+  stock_unit_id: 'stock_unit_id',
+  consumption_unit_id: 'consumption_unit_id',
+  shelf_life_days: 'shelf_life_days',
+  costing_method: 'costing_method',
+  min_stock_qty: 'min_stock_qty',
+  min_stock_unit_id: 'min_stock_unit_id',
+  max_stock_qty: 'max_stock_qty',
+  max_stock_unit_id: 'max_stock_unit_id',
+  reorder_level_qty: 'reorder_level_qty',
+  reorder_level_unit_id: 'reorder_level_unit_id',
+  reorder_batch_qty: 'reorder_batch_qty',
+  reorder_batch_unit_id: 'reorder_batch_unit_id',
+  item_type: 'item_type'
 } as const
 
 export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
@@ -2678,25 +2686,6 @@ export const POPaymentScalarFieldEnum = {
 export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
 
 
-<<<<<<< HEAD
-export const ArchitechuremasterScalarFieldEnum = {
-=======
-<<<<<<< HEAD
-export const ArchitechuremasterScalarFieldEnum = {
-  id: 'id',
-  vendorId: 'vendorId',
-  name: 'name',
-  email: 'email',
-  mobile: 'mobile',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt'
-} as const
-
-export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
-=======
 export const UnitMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -2744,7 +2733,6 @@ export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappi
 
 
 export const POPaymentScheduleHistoryScalarFieldEnum = {
->>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
   id: 'id',
   vendor_id: 'vendor_id',
   po_payment_schedule_id: 'po_payment_schedule_id',
@@ -2762,12 +2750,23 @@ export const POPaymentScheduleHistoryScalarFieldEnum = {
   created_at: 'created_at'
 } as const
 
-<<<<<<< HEAD
-export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
-=======
 export type POPaymentScheduleHistoryScalarFieldEnum = (typeof POPaymentScheduleHistoryScalarFieldEnum)[keyof typeof POPaymentScheduleHistoryScalarFieldEnum]
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
->>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
+
+
+export const ArchitechuremasterScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  name: 'name',
+  email: 'email',
+  mobile: 'mobile',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
 
 
 export const SortOrder = {

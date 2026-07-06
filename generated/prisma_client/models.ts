@@ -153,16 +153,9 @@ export type * from './models/PaymentTermMaster'
 export type * from './models/PaymentTermStage'
 export type * from './models/POPaymentSchedule'
 export type * from './models/POPayment'
-<<<<<<< HEAD
-export type * from './models/Architechuremaster'
-=======
-<<<<<<< HEAD
-export type * from './models/Architechuremaster'
-=======
 export type * from './models/UnitMaster'
 export type * from './models/ItemGroupMaster'
 export type * from './models/ProductSupplierMapping'
 export type * from './models/POPaymentScheduleHistory'
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
->>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
+export type * from './models/Architechuremaster'
 export type * from './commonInputTypes'
