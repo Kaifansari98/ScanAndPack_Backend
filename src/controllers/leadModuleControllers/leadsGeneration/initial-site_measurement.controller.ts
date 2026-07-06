@@ -1319,6 +1319,81 @@ export class PaymentUploadController {
     }
   };
 
+  public uploadMeasurementDocuments = async (
+    req: Request,
+    res: Response,
+  ): Promise<void> => {
+    try {
+      const { lead_id, account_id, vendor_id, updated_by } = req.body;
+
+      if (!lead_id || !account_id || !vendor_id || !updated_by) {
+        res.status(400).json({
+          success: false,
+          message: "lead_id, account_id, vendor_id, and updated_by are required",
+        });
+        return;
+      }
+
+      const files = req.files as { [fieldname: string]: Express.Multer.File[] };
+      const uploadPdf = files?.upload_pdf || [];
+
+      if (uploadPdf.length === 0) {
+        res.status(400).json({
+          success: false,
+          message: "At least one measurement document must be provided",
+        });
+        return;
+      }
+
+      const validFileTypes = [
+        "application/pdf",
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+      ];
+
+      for (const file of uploadPdf) {
+        if (!validFileTypes.includes(file.mimetype)) {
+          res.status(400).json({
+            success: false,
+            message: "Measurement documents must be valid PDF or image files",
+          });
+          return;
+        }
+      }
+
+      let pdfFileInstanceIds: (number | null)[] | undefined;
+      try {
+        if (req.body.upload_pdf_instance_ids) {
+          pdfFileInstanceIds = JSON.parse(req.body.upload_pdf_instance_ids);
+        }
+      } catch (e) {
+        console.warn("Could not parse upload_pdf_instance_ids");
+      }
+
+      const result = await this.paymentUploadService.uploadMeasurementDocuments({
+        lead_id: Number(lead_id),
+        account_id: Number(account_id),
+        vendor_id: Number(vendor_id),
+        updated_by: Number(updated_by),
+        uploadPdf,
+        pdfFileInstanceIds,
+      });
+
+      res.status(200).json({
+        success: true,
+        ...result,
+      });
+    } catch (error: any) {
+      console.error("[Controller] uploadMeasurementDocuments error:", error);
+      res.status(500).json({
+        success: false,
+        message: "Failed to upload measurement documents",
+        error: error.message,
+      });
+    }
+  };
+
   // PUT /api/payment-upload/documents/:documentId/delete
   public softDeleteDocument = async (
     req: Request,
