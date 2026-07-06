@@ -3860,3 +3860,11 @@ enum ProductItemType {
   Goods
   Services
 }
+
+enum PaymentScheduleAction {
+  Created
+  Rescheduled
+  PaymentMarked
+  StatusChanged
+  Cancelled
+}
