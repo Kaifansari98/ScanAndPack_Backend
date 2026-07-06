@@ -1411,6 +1411,40 @@ export type EnumPaymentModeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumPaymentModeFilter<$PrismaModel>
 }
 
+export type EnumPaymentScheduleActionFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleAction | Prisma.EnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel> | $Enums.PaymentScheduleAction
+}
+
+export type EnumPaymentScheduleStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleStatus | Prisma.EnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel> | $Enums.PaymentScheduleStatus | null
+}
+
+export type EnumPaymentScheduleActionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleAction | Prisma.EnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentScheduleActionWithAggregatesFilter<$PrismaModel> | $Enums.PaymentScheduleAction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel>
+}
+
+export type EnumPaymentScheduleStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleStatus | Prisma.EnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPaymentScheduleStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PaymentScheduleStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -2743,6 +2777,40 @@ export type NestedEnumPaymentModeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPaymentModeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPaymentModeFilter<$PrismaModel>
+}
+
+export type NestedEnumPaymentScheduleActionFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleAction | Prisma.EnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel> | $Enums.PaymentScheduleAction
+}
+
+export type NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleStatus | Prisma.EnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel> | $Enums.PaymentScheduleStatus | null
+}
+
+export type NestedEnumPaymentScheduleActionWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleAction | Prisma.EnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  in?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PaymentScheduleAction[] | Prisma.ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPaymentScheduleActionWithAggregatesFilter<$PrismaModel> | $Enums.PaymentScheduleAction
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentScheduleActionFilter<$PrismaModel>
+}
+
+export type NestedEnumPaymentScheduleStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PaymentScheduleStatus | Prisma.EnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PaymentScheduleStatus[] | Prisma.ListEnumPaymentScheduleStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPaymentScheduleStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PaymentScheduleStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPaymentScheduleStatusNullableFilter<$PrismaModel>
 }
 
 

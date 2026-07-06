@@ -325,7 +325,7 @@ export type PurchaseIntentMasterGroupByOutputType = {
   id: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id: number | null
   status: $Enums.PurchaseIntentStatus
   priority: $Enums.PurchaseIntentPriority
   remarks: string | null
@@ -373,7 +373,7 @@ export type PurchaseIntentMasterWhereInput = {
   id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
   vendor_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
   intent_no?: Prisma.StringFilter<"PurchaseIntentMaster"> | string
-  category_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
+  category_id?: Prisma.IntNullableFilter<"PurchaseIntentMaster"> | number | null
   status?: Prisma.EnumPurchaseIntentStatusFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentPriority
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentMaster"> | string | null
@@ -393,7 +393,7 @@ export type PurchaseIntentMasterWhereInput = {
   tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
+  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -408,7 +408,7 @@ export type PurchaseIntentMasterOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   intent_no?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   priority?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -446,7 +446,7 @@ export type PurchaseIntentMasterWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.PurchaseIntentMasterWhereInput[]
   NOT?: Prisma.PurchaseIntentMasterWhereInput | Prisma.PurchaseIntentMasterWhereInput[]
   vendor_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
-  category_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
+  category_id?: Prisma.IntNullableFilter<"PurchaseIntentMaster"> | number | null
   status?: Prisma.EnumPurchaseIntentStatusFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentPriority
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentMaster"> | string | null
@@ -466,7 +466,7 @@ export type PurchaseIntentMasterWhereUniqueInput = Prisma.AtLeast<{
   tax_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.DecimalNullableFilter<"PurchaseIntentMaster"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
-  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput>
+  category?: Prisma.XOR<Prisma.ProjectCategoriesMasterNullableScalarRelationFilter, Prisma.ProjectCategoriesMasterWhereInput> | null
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -481,7 +481,7 @@ export type PurchaseIntentMasterOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
   intent_no?: Prisma.SortOrder
-  category_id?: Prisma.SortOrder
+  category_id?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   priority?: Prisma.SortOrder
   remarks?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -514,7 +514,7 @@ export type PurchaseIntentMasterScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentMaster"> | number
   vendor_id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentMaster"> | number
   intent_no?: Prisma.StringWithAggregatesFilter<"PurchaseIntentMaster"> | string
-  category_id?: Prisma.IntWithAggregatesFilter<"PurchaseIntentMaster"> | number
+  category_id?: Prisma.IntNullableWithAggregatesFilter<"PurchaseIntentMaster"> | number | null
   status?: Prisma.EnumPurchaseIntentStatusWithAggregatesFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityWithAggregatesFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentPriority
   remarks?: Prisma.StringNullableWithAggregatesFilter<"PurchaseIntentMaster"> | string | null
@@ -551,7 +551,7 @@ export type PurchaseIntentMasterCreateInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -566,7 +566,7 @@ export type PurchaseIntentMasterUncheckedCreateInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -606,7 +606,7 @@ export type PurchaseIntentMasterUpdateInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -621,7 +621,7 @@ export type PurchaseIntentMasterUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -649,7 +649,7 @@ export type PurchaseIntentMasterCreateManyInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -691,7 +691,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1189,7 +1189,7 @@ export type PurchaseIntentMasterCreateWithoutVendorInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -1203,7 +1203,7 @@ export type PurchaseIntentMasterCreateWithoutVendorInput = {
 export type PurchaseIntentMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1260,7 +1260,7 @@ export type PurchaseIntentMasterScalarWhereInput = {
   id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
   vendor_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
   intent_no?: Prisma.StringFilter<"PurchaseIntentMaster"> | string
-  category_id?: Prisma.IntFilter<"PurchaseIntentMaster"> | number
+  category_id?: Prisma.IntNullableFilter<"PurchaseIntentMaster"> | number | null
   status?: Prisma.EnumPurchaseIntentStatusFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFilter<"PurchaseIntentMaster"> | $Enums.PurchaseIntentPriority
   remarks?: Prisma.StringNullableFilter<"PurchaseIntentMaster"> | string | null
@@ -1297,7 +1297,7 @@ export type PurchaseIntentMasterCreateWithoutCreatedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
@@ -1311,7 +1311,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutCreatedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1360,7 +1360,7 @@ export type PurchaseIntentMasterCreateWithoutUpdatedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
@@ -1374,7 +1374,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutUpdatedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1423,7 +1423,7 @@ export type PurchaseIntentMasterCreateWithoutApprovedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
@@ -1437,7 +1437,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutApprovedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1486,7 +1486,7 @@ export type PurchaseIntentMasterCreateWithoutRejectedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -1500,7 +1500,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutRejectedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1549,7 +1549,7 @@ export type PurchaseIntentMasterCreateWithoutDeletedByInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -1563,7 +1563,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutDeletedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1771,7 +1771,7 @@ export type PurchaseIntentMasterCreateWithoutItemsInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -1785,7 +1785,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutItemsInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1840,7 +1840,7 @@ export type PurchaseIntentMasterUpdateWithoutItemsInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -1854,7 +1854,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutItemsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1893,7 +1893,7 @@ export type PurchaseIntentMasterCreateWithoutStatusLogsInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -1907,7 +1907,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutStatusLogsInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -1962,7 +1962,7 @@ export type PurchaseIntentMasterUpdateWithoutStatusLogsInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -1976,7 +1976,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutStatusLogsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2015,7 +2015,7 @@ export type PurchaseIntentMasterCreateWithoutPurchaseOrdersInput = {
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
-  category: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
@@ -2029,7 +2029,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2084,7 +2084,7 @@ export type PurchaseIntentMasterUpdateWithoutPurchaseOrdersInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -2098,7 +2098,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2124,7 +2124,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
 export type PurchaseIntentMasterCreateManyVendorInput = {
   id?: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2160,7 +2160,7 @@ export type PurchaseIntentMasterUpdateWithoutVendorInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -2174,7 +2174,7 @@ export type PurchaseIntentMasterUpdateWithoutVendorInput = {
 export type PurchaseIntentMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2201,7 +2201,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutVendorInput = {
 export type PurchaseIntentMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2226,7 +2226,7 @@ export type PurchaseIntentMasterCreateManyCreatedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2250,7 +2250,7 @@ export type PurchaseIntentMasterCreateManyUpdatedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2274,7 +2274,7 @@ export type PurchaseIntentMasterCreateManyApprovedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2298,7 +2298,7 @@ export type PurchaseIntentMasterCreateManyRejectedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2322,7 +2322,7 @@ export type PurchaseIntentMasterCreateManyDeletedByInput = {
   id?: number
   vendor_id: number
   intent_no: string
-  category_id: number
+  category_id?: number | null
   status?: $Enums.PurchaseIntentStatus
   priority?: $Enums.PurchaseIntentPriority
   remarks?: string | null
@@ -2358,7 +2358,7 @@ export type PurchaseIntentMasterUpdateWithoutCreatedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
@@ -2372,7 +2372,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2399,7 +2399,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2435,7 +2435,7 @@ export type PurchaseIntentMasterUpdateWithoutUpdatedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
@@ -2449,7 +2449,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2476,7 +2476,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2512,7 +2512,7 @@ export type PurchaseIntentMasterUpdateWithoutApprovedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
@@ -2526,7 +2526,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutApprovedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2553,7 +2553,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2589,7 +2589,7 @@ export type PurchaseIntentMasterUpdateWithoutRejectedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -2603,7 +2603,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutRejectedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2630,7 +2630,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2666,7 +2666,7 @@ export type PurchaseIntentMasterUpdateWithoutDeletedByInput = {
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
-  category?: Prisma.ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
@@ -2680,7 +2680,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutDeletedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2707,7 +2707,7 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   intent_no?: Prisma.StringFieldUpdateOperationsInput | string
-  category_id?: Prisma.IntFieldUpdateOperationsInput | number
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
   priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
   remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2901,7 +2901,7 @@ export type PurchaseIntentMasterSelect<ExtArgs extends runtime.Types.Extensions.
   tax_amount?: boolean
   total_amount?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -2937,7 +2937,7 @@ export type PurchaseIntentMasterSelectCreateManyAndReturn<ExtArgs extends runtim
   tax_amount?: boolean
   total_amount?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -2969,7 +2969,7 @@ export type PurchaseIntentMasterSelectUpdateManyAndReturn<ExtArgs extends runtim
   tax_amount?: boolean
   total_amount?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -3005,7 +3005,7 @@ export type PurchaseIntentMasterSelectScalar = {
 export type PurchaseIntentMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "intent_no" | "category_id" | "status" | "priority" | "remarks" | "created_by" | "updated_by" | "approved_by" | "approved_at" | "rejected_by" | "rejected_at" | "rejection_reason" | "is_deleted" | "deleted_at" | "deleted_by" | "created_at" | "updated_at" | "amount" | "tax_amount" | "total_amount", ExtArgs["result"]["purchaseIntentMaster"]>
 export type PurchaseIntentMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -3018,7 +3018,7 @@ export type PurchaseIntentMasterInclude<ExtArgs extends runtime.Types.Extensions
 }
 export type PurchaseIntentMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -3027,7 +3027,7 @@ export type PurchaseIntentMasterIncludeCreateManyAndReturn<ExtArgs extends runti
 }
 export type PurchaseIntentMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
-  category?: boolean | Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>
+  category?: boolean | Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
   updatedBy?: boolean | Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
@@ -3039,7 +3039,7 @@ export type $PurchaseIntentMasterPayload<ExtArgs extends runtime.Types.Extension
   name: "PurchaseIntentMaster"
   objects: {
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
-    category: Prisma.$ProjectCategoriesMasterPayload<ExtArgs>
+    category: Prisma.$ProjectCategoriesMasterPayload<ExtArgs> | null
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     approvedBy: Prisma.$UserMasterPayload<ExtArgs> | null
@@ -3053,7 +3053,7 @@ export type $PurchaseIntentMasterPayload<ExtArgs extends runtime.Types.Extension
     id: number
     vendor_id: number
     intent_no: string
-    category_id: number
+    category_id: number | null
     status: $Enums.PurchaseIntentStatus
     priority: $Enums.PurchaseIntentPriority
     remarks: string | null
@@ -3467,7 +3467,7 @@ readonly fields: PurchaseIntentMasterFieldRefs;
 export interface Prisma__PurchaseIntentMasterClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  category<T extends Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectCategoriesMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  category<T extends Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$categoryArgs<ExtArgs>>): Prisma.Prisma__ProjectCategoriesMasterClient<runtime.Types.Result.GetResult<Prisma.$ProjectCategoriesMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   approvedBy<T extends Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3925,6 +3925,25 @@ export type PurchaseIntentMasterDeleteManyArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many PurchaseIntentMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * PurchaseIntentMaster.category
+ */
+export type PurchaseIntentMaster$categoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectCategoriesMaster
+   */
+  select?: Prisma.ProjectCategoriesMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectCategoriesMaster
+   */
+  omit?: Prisma.ProjectCategoriesMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectCategoriesMasterInclude<ExtArgs> | null
+  where?: Prisma.ProjectCategoriesMasterWhereInput
 }
 
 /**

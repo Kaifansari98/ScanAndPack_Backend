@@ -864,26 +864,26 @@ export const updatePurchaseIntentService = async (
       (x) => x.product_id
     );
 
-    const validProducts =
-      await prisma.productMaster.findMany({
-        where: {
-          id: {
-            in: productIds,
-          },
-          vendor_id,
-          category_id: finalCategoryId,
-        },
-        select: {
-          id: true,
-        },
-      });
+    // const validProducts =
+    //   await prisma.productMaster.findMany({
+    //     where: {
+    //       id: {
+    //         in: productIds,
+    //       },
+    //       vendor_id,
+    //       category_id: finalCategoryId,
+    //     },
+    //     select: {
+    //       id: true,
+    //     },
+    //   });
 
-    if (validProducts.length !== productIds.length) {
-      return validationResponse(
-        0,
-        "One or more products are invalid"
-      );
-    }
+    // if (validProducts.length !== productIds.length) {
+    //   return validationResponse(
+    //     0,
+    //     "One or more products are invalid"
+    //   );
+    // }
 
     /**
      * validate suppliers

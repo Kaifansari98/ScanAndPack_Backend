@@ -196,7 +196,18 @@ export const ModelName = {
   PaymentTermStage: 'PaymentTermStage',
   POPaymentSchedule: 'POPaymentSchedule',
   POPayment: 'POPayment',
+<<<<<<< HEAD
   Architechuremaster: 'Architechuremaster'
+=======
+<<<<<<< HEAD
+  Architechuremaster: 'Architechuremaster'
+=======
+  UnitMaster: 'UnitMaster',
+  ItemGroupMaster: 'ItemGroupMaster',
+  ProductSupplierMapping: 'ProductSupplierMapping',
+  POPaymentScheduleHistory: 'POPaymentScheduleHistory'
+>>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+>>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2632,6 +2643,8 @@ export const POPaymentScheduleScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   purchase_order_id: 'purchase_order_id',
+  grn_id: 'grn_id',
+  payment_term_stage_id: 'payment_term_stage_id',
   stage_no: 'stage_no',
   stage_name: 'stage_name',
   trigger_type: 'trigger_type',
@@ -2665,6 +2678,10 @@ export const POPaymentScalarFieldEnum = {
 export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
 
 
+<<<<<<< HEAD
+export const ArchitechuremasterScalarFieldEnum = {
+=======
+<<<<<<< HEAD
 export const ArchitechuremasterScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
@@ -2679,6 +2696,78 @@ export const ArchitechuremasterScalarFieldEnum = {
 } as const
 
 export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
+=======
+export const UnitMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  unit_name: 'unit_name',
+  unit_class: 'unit_class',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type UnitMasterScalarFieldEnum = (typeof UnitMasterScalarFieldEnum)[keyof typeof UnitMasterScalarFieldEnum]
+
+
+export const ItemGroupMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  group_name: 'group_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ItemGroupMasterScalarFieldEnum = (typeof ItemGroupMasterScalarFieldEnum)[keyof typeof ItemGroupMasterScalarFieldEnum]
+
+
+export const ProductSupplierMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_id: 'product_id',
+  company_vendor_id: 'company_vendor_id',
+  supplier_item_code: 'supplier_item_code',
+  amount: 'amount',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappingScalarFieldEnum)[keyof typeof ProductSupplierMappingScalarFieldEnum]
+
+
+export const POPaymentScheduleHistoryScalarFieldEnum = {
+>>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
+  id: 'id',
+  vendor_id: 'vendor_id',
+  po_payment_schedule_id: 'po_payment_schedule_id',
+  action: 'action',
+  old_due_date: 'old_due_date',
+  new_due_date: 'new_due_date',
+  old_status: 'old_status',
+  new_status: 'new_status',
+  old_scheduled_amount: 'old_scheduled_amount',
+  new_scheduled_amount: 'new_scheduled_amount',
+  paid_amount: 'paid_amount',
+  payment_id: 'payment_id',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+<<<<<<< HEAD
+export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
+=======
+export type POPaymentScheduleHistoryScalarFieldEnum = (typeof POPaymentScheduleHistoryScalarFieldEnum)[keyof typeof POPaymentScheduleHistoryScalarFieldEnum]
+>>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+>>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
 
 
 export const SortOrder = {

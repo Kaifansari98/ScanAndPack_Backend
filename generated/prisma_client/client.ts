@@ -765,7 +765,36 @@ export type POPaymentSchedule = Prisma.POPaymentScheduleModel
  */
 export type POPayment = Prisma.POPaymentModel
 /**
+<<<<<<< HEAD
  * Model Architechuremaster
  * 
  */
 export type Architechuremaster = Prisma.ArchitechuremasterModel
+=======
+<<<<<<< HEAD
+ * Model Architechuremaster
+ * 
+ */
+export type Architechuremaster = Prisma.ArchitechuremasterModel
+=======
+ * Model UnitMaster
+ * 
+ */
+export type UnitMaster = Prisma.UnitMasterModel
+/**
+ * Model ItemGroupMaster
+ * 
+ */
+export type ItemGroupMaster = Prisma.ItemGroupMasterModel
+/**
+ * Model ProductSupplierMapping
+ * 
+ */
+export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel
+/**
+ * Model POPaymentScheduleHistory
+ * 
+ */
+export type POPaymentScheduleHistory = Prisma.POPaymentScheduleHistoryModel
+>>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+>>>>>>> 63df8cd9882def6a179a59d9f7a043b01028d6ae
