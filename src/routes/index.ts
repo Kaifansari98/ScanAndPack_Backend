@@ -59,12 +59,8 @@ import cadbidIntegrationWithFurnixcrmRoutes from "./cadbid-integration-with-furn
 import inventoryRoutes from "./inventoryRoutes/inventory.routes";
 import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
 import grnRoutes from "./grnRoutes/grn.routes";
-<<<<<<< HEAD
 import architectureMasterRoutes from "./architectureMasterRoutes/architectureMaster.route";
-=======
-
 import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
