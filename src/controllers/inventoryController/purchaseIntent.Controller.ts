@@ -141,9 +141,11 @@ export const create = async (req: Request, res: Response) => {
   if (!vendor_id) return res.status(400).json(ApiResponse.error("Invalid vendor_id", 400));
   if (!user_id)   return res.status(400).json(ApiResponse.error("Invalid or missing user_id", 400));
 
+  
   const { category_id, priority, remarks, items } = req.body;
-  if (!category_id || !items?.length)
-    return res.status(400).json(ApiResponse.error("category_id and at least one item are required", 400));
+  console.log("items?.length",items?.length);
+  if (!items?.length)
+    return res.status(400).json(ApiResponse.error("Atleast one item are required", 400));
 
   for (const item of items) {
     if (!item.product_id)

@@ -59,6 +59,8 @@ import cadbidIntegrationWithFurnixcrmRoutes from "./cadbid-integration-with-furn
 import inventoryRoutes from "./inventoryRoutes/inventory.routes";
 import purchaseOrderRoutes from "./purchaseOrderRoutes/purchaseOrder.routes";
 import grnRoutes from "./grnRoutes/grn.routes";
+
+import paymentRequisitionRoutes from "./inventoryRoutes/payment-requisitions.routes";
 const router = Router();
 
 router.use("/dashboard", DashboardRouter);
@@ -135,5 +137,7 @@ router.use(
   "/cadbid-integration-with-furnixcrm",
   cadbidIntegrationWithFurnixcrmRoutes,
 );
+
+router.use("/inventory/payment-requisitions", paymentRequisitionRoutes);
 
 export { router };

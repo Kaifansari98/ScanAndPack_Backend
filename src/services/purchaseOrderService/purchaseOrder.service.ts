@@ -2,6 +2,10 @@ import { tr } from "node_modules/zod/v4/locales/index.cjs";
 import { prisma } from "../../prisma/client";
 import { validationResponse } from "../../utils/validationResponse";
 
+import { createPaymentSchedulesForPO } from "../inventoryService/payment-requisition.service";
+import { createPOApprovalPaymentSchedules } from "../inventoryService/payment-schedule-generator.service";
+
+
 // ─── Generate PO number ───────────────────────────────────────────────────────
 
 async function generatePoNo(vendor_id: number): Promise<string> {
@@ -743,29 +747,104 @@ export const updatePOStatusService = async (
   remarks?: string
 ) => {
   try {
-    if (!vendor_id || vendor_id <= 0)
+    if (!vendor_id || vendor_id <= 0) {
       return validationResponse(0, "Invalid vendor_id");
-    if (!user_id || user_id <= 0)
-      return validationResponse(0, "Invalid user_id — cannot update status without a valid user");
+    }
+
+    if (!user_id || user_id <= 0) {
+      return validationResponse(
+        0,
+        "Invalid user_id — cannot update status without a valid user"
+      );
+    }
 
     const po = await prisma.purchaseOrderMaster.findFirst({
-      where: { id, vendor_id, is_deleted: false },
-      select: { id: true, status: true },
+      where: {
+        id,
+        vendor_id,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        status: true,
+      },
     });
-    if (!po) return validationResponse(0, "Purchase order not found");
+
+    if (!po) {
+      return validationResponse(0, "Purchase order not found");
+    }
 
     const allowed = ALLOWED_TRANSITIONS[po.status] ?? [];
-    if (!allowed.includes(to_status))
-      return validationResponse(0, `Cannot move from ${po.status} to ${to_status}`);
 
-    const updated = await prisma.purchaseOrderMaster.update({
-      where: { id },
-      data: {
-        status: to_status as any,
-        updated_by: user_id,
-        ...(remarks ? { remarks } : {}),
-      },
-      select: { id: true, po_no: true, status: true },
+    if (!allowed.includes(to_status)) {
+      return validationResponse(
+        0,
+        `Cannot move from ${po.status} to ${to_status}`
+      );
+    }
+
+    const updated = await prisma.$transaction(async (tx) => {
+      const updatedPO = await tx.purchaseOrderMaster.update({
+        where: {
+          id,
+        },
+        data: {
+          status: to_status as any,
+          updated_by: user_id,
+          ...(remarks ? { remarks } : {}),
+        },
+        select: {
+          id: true,
+          po_no: true,
+          status: true,
+        },
+      });
+
+      if (po.status === "Draft" && to_status === "Approved") {
+        await createPOApprovalPaymentSchedules(
+          tx,
+          id,
+          vendor_id,
+          user_id
+        );
+      }
+
+      if (to_status === "Cancelled") {
+        const schedules = await tx.pOPaymentSchedule.findMany({
+          where: {
+            vendor_id,
+            purchase_order_id: id,
+            status: {
+              in: ["Pending", "PartiallyPaid", "Overdue"],
+            },
+          },
+        });
+
+        for (const schedule of schedules) {
+          await tx.pOPaymentSchedule.update({
+            where: {
+              id: schedule.id,
+            },
+            data: {
+              status: "Cancelled",
+            },
+          });
+
+          await tx.pOPaymentScheduleHistory.create({
+            data: {
+              vendor_id,
+              po_payment_schedule_id: schedule.id,
+              action: "Cancelled",
+              old_status: schedule.status,
+              new_status: "Cancelled",
+              remarks: remarks || "PO cancelled",
+              created_by: user_id,
+            },
+          });
+        }
+      }
+
+      return updatedPO;
     });
 
     return validationResponse(1, "Status updated", updated);

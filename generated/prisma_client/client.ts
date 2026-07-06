@@ -739,3 +739,8 @@ export type ItemGroupMaster = Prisma.ItemGroupMasterModel
  * 
  */
 export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel
+/**
+ * Model POPaymentScheduleHistory
+ * 
+ */
+export type POPaymentScheduleHistory = Prisma.POPaymentScheduleHistoryModel

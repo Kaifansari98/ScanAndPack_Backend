@@ -399,6 +399,7 @@ export type UserMasterWhereInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemListRelationFilter
   poItemsDeleted?: Prisma.PurchaseOrderItemListRelationFilter
   stockHistories?: Prisma.ProductStockHistoryListRelationFilter
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }
 
 export type UserMasterOrderByWithRelationInput = {
@@ -529,6 +530,7 @@ export type UserMasterOrderByWithRelationInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   poItemsDeleted?: Prisma.PurchaseOrderItemOrderByRelationAggregateInput
   stockHistories?: Prisma.ProductStockHistoryOrderByRelationAggregateInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryOrderByRelationAggregateInput
 }
 
 export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -662,6 +664,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   poItemsUpdated?: Prisma.PurchaseOrderItemListRelationFilter
   poItemsDeleted?: Prisma.PurchaseOrderItemListRelationFilter
   stockHistories?: Prisma.ProductStockHistoryListRelationFilter
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
 }, "id" | "user_contact">
 
 export type UserMasterOrderByWithAggregationInput = {
@@ -826,6 +829,7 @@ export type UserMasterCreateInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateInput = {
@@ -953,6 +957,7 @@ export type UserMasterUncheckedCreateInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUpdateInput = {
@@ -1079,6 +1084,7 @@ export type UserMasterUpdateInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateInput = {
@@ -1206,6 +1212,7 @@ export type UserMasterUncheckedUpdateInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateManyInput = {
@@ -3108,6 +3115,20 @@ export type UserMasterUpdateOneWithoutStockHistoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutStockHistoriesInput, Prisma.UserMasterUpdateWithoutStockHistoriesInput>, Prisma.UserMasterUncheckedUpdateWithoutStockHistoriesInput>
 }
 
+export type UserMasterCreateNestedOneWithoutPoPaymentScheduleHistoriesInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutPoPaymentScheduleHistoriesInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
+export type UserMasterUpdateOneRequiredWithoutPoPaymentScheduleHistoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutPoPaymentScheduleHistoriesInput
+  upsert?: Prisma.UserMasterUpsertWithoutPoPaymentScheduleHistoriesInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput>, Prisma.UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput>
+}
+
 export type UserMasterCreateWithoutVendorInput = {
   user_name: string
   user_contact: string
@@ -3231,6 +3252,7 @@ export type UserMasterCreateWithoutVendorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutVendorInput = {
@@ -3357,6 +3379,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutVendorInput = {
@@ -3526,6 +3549,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUser_typeInput = {
@@ -3652,6 +3676,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUser_typeInput = {
@@ -3803,6 +3828,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsInput = {
@@ -3929,6 +3955,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsInput = {
@@ -4070,6 +4097,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -4196,6 +4224,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSessionsInput = {
@@ -4321,6 +4350,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSessionsInput = {
@@ -4447,6 +4477,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSessionsInput = {
@@ -4577,6 +4608,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
@@ -4703,6 +4735,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutRevokedSessionsInput = {
@@ -4844,6 +4877,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSessionsInput = {
@@ -4970,6 +5004,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutRevokedSessionsInput = {
@@ -5106,6 +5141,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
@@ -5232,6 +5268,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -5357,6 +5394,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -5483,6 +5521,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -5624,6 +5663,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -5750,6 +5790,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
@@ -5875,6 +5916,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
@@ -6001,6 +6043,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
@@ -6142,6 +6185,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
@@ -6268,6 +6312,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutBoxesFactoryOutInput = {
@@ -6393,6 +6438,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
@@ -6519,6 +6565,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesFactoryOutInput = {
@@ -6649,6 +6696,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
@@ -6775,6 +6823,7 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesSiteInInput = {
@@ -6916,6 +6965,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
@@ -7042,6 +7092,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxesSiteInInput = {
@@ -7178,6 +7229,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
@@ -7304,6 +7356,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutScanItemsCreatedInput = {
@@ -7429,6 +7482,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
@@ -7555,6 +7609,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutScanItemsCreatedInput = {
@@ -7696,6 +7751,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
@@ -7822,6 +7878,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
@@ -7947,6 +8004,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
@@ -8073,6 +8131,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
@@ -8203,6 +8262,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
@@ -8329,6 +8389,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
@@ -8459,6 +8520,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
@@ -8585,6 +8647,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
@@ -8715,6 +8778,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
@@ -8841,6 +8905,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsUpdatedInput = {
@@ -8982,6 +9047,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
@@ -9108,6 +9174,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsDelegatedInput = {
@@ -9244,6 +9311,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
@@ -9370,6 +9438,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsCreatedInput = {
@@ -9506,6 +9575,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
@@ -9632,6 +9702,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsUpdatedInput = {
@@ -9768,6 +9839,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
@@ -9894,6 +9966,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -10019,6 +10092,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -10145,6 +10219,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -10275,6 +10350,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -10401,6 +10477,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -10542,6 +10619,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -10668,6 +10746,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -10804,6 +10883,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -10930,6 +11010,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
@@ -11055,6 +11136,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
@@ -11181,6 +11263,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
@@ -11311,6 +11394,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
@@ -11437,6 +11521,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
@@ -11567,6 +11652,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
@@ -11693,6 +11779,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserAsUserInput = {
@@ -11834,6 +11921,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
@@ -11960,6 +12048,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserUpdatedInput = {
@@ -12096,6 +12185,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
@@ -12222,6 +12312,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserAsUserInput = {
@@ -12358,6 +12449,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
@@ -12484,6 +12576,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -12609,6 +12702,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -12735,6 +12829,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -12876,6 +12971,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -13002,6 +13098,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
@@ -13127,6 +13224,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
@@ -13253,6 +13351,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
@@ -13383,6 +13482,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
@@ -13509,6 +13609,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsUpdatedInput = {
@@ -13650,6 +13751,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
@@ -13776,6 +13878,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutAccountsUpdatedInput = {
@@ -13912,6 +14015,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
@@ -14038,6 +14142,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
@@ -14163,6 +14268,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
@@ -14289,6 +14395,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProductsCreatedInput = {
@@ -14430,6 +14537,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
@@ -14556,6 +14664,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
@@ -14681,6 +14790,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
@@ -14807,6 +14917,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
@@ -14937,6 +15048,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
@@ -15063,6 +15175,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsDeletedInput = {
@@ -15204,6 +15317,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
@@ -15330,6 +15444,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDocumentsDeletedInput = {
@@ -15466,6 +15581,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
@@ -15592,6 +15708,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
@@ -15717,6 +15834,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
@@ -15843,6 +15961,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
@@ -15973,6 +16092,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
@@ -16099,6 +16219,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersInput = {
@@ -16240,6 +16361,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
@@ -16366,6 +16488,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatMembersInput = {
@@ -16502,6 +16625,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
@@ -16628,6 +16752,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
@@ -16753,6 +16878,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
@@ -16879,6 +17005,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMessagesSentInput = {
@@ -17020,6 +17147,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
@@ -17146,6 +17274,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
@@ -17271,6 +17400,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
@@ -17397,6 +17527,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMentionsInput = {
@@ -17538,6 +17669,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
@@ -17664,6 +17796,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -17789,6 +17922,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -17915,6 +18049,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
@@ -18045,6 +18180,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
@@ -18171,6 +18307,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsDeletedInput = {
@@ -18312,6 +18449,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
@@ -18438,6 +18576,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatDocumentsDeletedInput = {
@@ -18574,6 +18713,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
@@ -18700,6 +18840,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
@@ -18825,6 +18966,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -18951,6 +19093,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -19092,6 +19235,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -19218,6 +19362,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
@@ -19343,6 +19488,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
@@ -19469,6 +19615,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPaymentsCreatedInput = {
@@ -19610,6 +19757,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
@@ -19736,6 +19884,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
@@ -19861,6 +20010,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
@@ -19987,6 +20137,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLedgersCreatedInput = {
@@ -20128,6 +20279,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
@@ -20254,6 +20406,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -20379,6 +20532,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -20505,6 +20659,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsCreatedInput = {
@@ -20635,6 +20790,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
@@ -20761,6 +20917,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsUpdatedInput = {
@@ -20902,6 +21059,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
@@ -21028,6 +21186,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSmallOrderRequestsUpdatedInput = {
@@ -21164,6 +21323,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
@@ -21290,6 +21450,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -21415,6 +21576,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -21541,6 +21703,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -21682,6 +21845,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -21808,6 +21972,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
@@ -21933,6 +22098,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
@@ -22059,6 +22225,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsCreatedInput = {
@@ -22189,6 +22356,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
@@ -22315,6 +22483,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsUpdatedInput = {
@@ -22456,6 +22625,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
@@ -22582,6 +22752,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadAmcContractsUpdatedInput = {
@@ -22718,6 +22889,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
@@ -22844,6 +23016,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -22969,6 +23142,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -23095,6 +23269,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCompletedInput = {
@@ -23225,6 +23400,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
@@ -23351,6 +23527,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCreatedInput = {
@@ -23481,6 +23658,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = {
@@ -23607,6 +23785,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesRejectedInput = {
@@ -23737,6 +23916,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -23863,6 +24043,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesUpdatedInput = {
@@ -24004,6 +24185,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput = {
@@ -24130,6 +24312,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesCreatedInput = {
@@ -24266,6 +24449,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
@@ -24392,6 +24576,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesRejectedInput = {
@@ -24528,6 +24713,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = {
@@ -24654,6 +24840,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesUpdatedInput = {
@@ -24790,6 +24977,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -24916,6 +25104,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
@@ -25041,6 +25230,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -25167,6 +25357,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -25308,6 +25499,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -25434,6 +25626,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
@@ -25559,6 +25752,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
@@ -25685,6 +25879,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
@@ -25815,6 +26010,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
@@ -25941,6 +26137,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsUpdatedInput = {
@@ -26082,6 +26279,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
@@ -26208,6 +26406,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignMeetingsUpdatedInput = {
@@ -26344,6 +26543,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
@@ -26470,6 +26670,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitsCreatedInput = {
@@ -26595,6 +26796,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
@@ -26721,6 +26923,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsCreatedInput = {
@@ -26851,6 +27054,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
@@ -26977,6 +27181,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsUpdatedInput = {
@@ -27118,6 +27323,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
@@ -27244,6 +27450,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutClientVisitsUpdatedInput = {
@@ -27380,6 +27587,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
@@ -27506,6 +27714,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -27631,6 +27840,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -27757,6 +27967,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -27898,6 +28109,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -28024,6 +28236,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -28149,6 +28362,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -28275,6 +28489,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -28416,6 +28631,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -28542,6 +28758,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
@@ -28667,6 +28884,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
@@ -28793,6 +29011,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
@@ -28923,6 +29142,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
@@ -29049,6 +29269,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsUpdatedInput = {
@@ -29190,6 +29411,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
@@ -29316,6 +29538,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignSelectionsUpdatedInput = {
@@ -29452,6 +29675,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
@@ -29578,6 +29802,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutChsMappingCreatedByInput = {
@@ -29703,6 +29928,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
@@ -29829,6 +30055,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingCreatedByInput = {
@@ -29959,6 +30186,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
@@ -30085,6 +30313,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingUpdatedByInput = {
@@ -30226,6 +30455,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
@@ -30352,6 +30582,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutChsMappingUpdatedByInput = {
@@ -30488,6 +30719,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
@@ -30614,6 +30846,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
@@ -30739,6 +30972,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
@@ -30865,6 +31099,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
@@ -30995,6 +31230,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
@@ -31121,6 +31357,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsInput = {
@@ -31262,6 +31499,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
@@ -31388,6 +31626,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSupervisorMappingsInput = {
@@ -31524,6 +31763,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
@@ -31650,6 +31890,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
@@ -31775,6 +32016,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
@@ -31901,6 +32143,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
@@ -32031,6 +32274,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
@@ -32157,6 +32401,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
@@ -32287,6 +32532,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
@@ -32413,6 +32659,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksAssignedInput = {
@@ -32554,6 +32801,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
@@ -32680,6 +32928,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksCreatedInput = {
@@ -32816,6 +33065,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
@@ -32942,6 +33192,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksAssignedInput = {
@@ -33078,6 +33329,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
@@ -33204,6 +33456,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
@@ -33329,6 +33582,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -33455,6 +33709,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -33596,6 +33851,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -33722,6 +33978,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
@@ -33847,6 +34104,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -33973,6 +34231,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -34114,6 +34373,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -34240,6 +34500,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34365,6 +34626,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34491,6 +34753,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34632,6 +34895,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -34758,6 +35022,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
@@ -34883,6 +35148,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
@@ -35009,6 +35275,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
@@ -35139,6 +35406,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
@@ -35265,6 +35533,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
@@ -35395,6 +35664,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
@@ -35521,6 +35791,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsUpdatedInput = {
@@ -35662,6 +35933,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
@@ -35788,6 +36060,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsDeletedInput = {
@@ -35924,6 +36197,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
@@ -36050,6 +36324,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsUpdatedInput = {
@@ -36186,6 +36461,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
@@ -36312,6 +36588,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
@@ -36437,6 +36714,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -36563,6 +36841,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -36693,6 +36972,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
@@ -36819,6 +37099,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginsUpdatedInput = {
@@ -36960,6 +37241,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -37086,6 +37368,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginsUpdatedInput = {
@@ -37222,6 +37505,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
@@ -37348,6 +37632,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
@@ -37473,6 +37758,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
@@ -37599,6 +37885,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
@@ -37729,6 +38016,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
@@ -37855,6 +38143,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessUpdatedInput = {
@@ -37996,6 +38285,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
@@ -38122,6 +38412,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutSiteReadinessUpdatedInput = {
@@ -38258,6 +38549,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
@@ -38384,6 +38676,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
@@ -38509,6 +38802,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
@@ -38635,6 +38929,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersCreatedInput = {
@@ -38776,6 +39071,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
@@ -38902,6 +39198,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
@@ -39027,6 +39324,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
@@ -39153,6 +39451,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersAssignedInput = {
@@ -39294,6 +39593,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
@@ -39420,6 +39720,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
@@ -39545,6 +39846,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
@@ -39671,6 +39973,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationUpdatesCreatedInput = {
@@ -39812,6 +40115,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
@@ -39938,6 +40242,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
@@ -40063,6 +40368,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
@@ -40189,6 +40495,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
@@ -40319,6 +40626,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
@@ -40445,6 +40753,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
@@ -40586,6 +40895,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
@@ -40712,6 +41022,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscUpdatedInput = {
@@ -40848,6 +41159,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
@@ -40974,6 +41286,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
@@ -41099,6 +41412,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
@@ -41225,6 +41539,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscDocumentsCreatedInput = {
@@ -41366,6 +41681,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
@@ -41492,6 +41808,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -41617,6 +41934,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -41743,6 +42061,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -41884,6 +42203,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -42010,6 +42330,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
@@ -42135,6 +42456,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
@@ -42261,6 +42583,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
@@ -42391,6 +42714,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -42517,6 +42841,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -42658,6 +42983,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
@@ -42784,6 +43110,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationsReceivedInput = {
@@ -42920,6 +43247,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -43046,6 +43374,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPushTokensInput = {
@@ -43171,6 +43500,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPushTokensInput = {
@@ -43297,6 +43627,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPushTokensInput = {
@@ -43438,6 +43769,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
@@ -43564,6 +43896,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOperatorInput = {
@@ -43689,6 +44022,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOperatorInput = {
@@ -43815,6 +44149,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOperatorInput = {
@@ -43945,6 +44280,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
@@ -44071,6 +44407,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutMappingSiteInsInput = {
@@ -44212,6 +44549,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOperatorInput = {
@@ -44338,6 +44676,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutMappingSiteInsInput = {
@@ -44474,6 +44813,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
@@ -44600,6 +44940,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
@@ -44725,6 +45066,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
@@ -44851,6 +45193,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
@@ -44981,6 +45324,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
@@ -45107,6 +45451,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
@@ -45237,6 +45582,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
@@ -45363,6 +45709,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserMachineMappingsInput = {
@@ -45504,6 +45851,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
@@ -45630,6 +45978,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutUpdatedUserMachineMappingsInput = {
@@ -45766,6 +46115,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
@@ -45892,6 +46242,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutUserMachineMappingsInput = {
@@ -46028,6 +46379,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
@@ -46154,6 +46506,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -46279,6 +46632,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -46405,6 +46759,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
@@ -46535,6 +46890,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
@@ -46661,6 +47017,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput = {
@@ -46802,6 +47159,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
@@ -46928,6 +47286,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput = {
@@ -47064,6 +47423,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
@@ -47190,6 +47550,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedDefectsInput = {
@@ -47315,6 +47676,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
@@ -47441,6 +47803,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
@@ -47582,6 +47945,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
@@ -47708,6 +48072,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutFranchiseInput = {
@@ -47833,6 +48198,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutFranchiseInput = {
@@ -47959,6 +48325,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutFranchiseInput = {
@@ -48110,6 +48477,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -48236,6 +48604,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -48366,6 +48735,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -48492,6 +48862,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -48633,6 +49004,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -48759,6 +49131,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -48895,6 +49268,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -49021,6 +49395,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
@@ -49146,6 +49521,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
@@ -49272,6 +49648,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput = {
@@ -49413,6 +49790,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
@@ -49539,6 +49917,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutActivityLogsInput = {
@@ -49664,6 +50043,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
@@ -49790,6 +50170,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutActivityLogsInput = {
@@ -49931,6 +50312,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
@@ -50057,6 +50439,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -50182,6 +50565,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -50308,6 +50692,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput = {
@@ -50438,6 +50823,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput = {
@@ -50564,6 +50950,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput = {
@@ -50705,6 +51092,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput = {
@@ -50831,6 +51219,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutExternalPlatformTokensUpdatedInput = {
@@ -50967,6 +51356,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput = {
@@ -51093,6 +51483,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutCompletionPhotosInput = {
@@ -51218,6 +51609,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -51344,6 +51736,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -51485,6 +51878,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -51611,6 +52005,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -51736,6 +52131,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -51862,6 +52258,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -51992,6 +52389,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -52118,6 +52516,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -52259,6 +52658,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -52385,6 +52785,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -52521,6 +52922,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -52647,6 +53049,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
@@ -52772,6 +53175,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
@@ -52898,6 +53302,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsCreatedInput = {
@@ -53028,6 +53433,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
@@ -53154,6 +53560,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsUpdatedInput = {
@@ -53284,6 +53691,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
@@ -53410,6 +53818,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsApprovedInput = {
@@ -53540,6 +53949,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
@@ -53666,6 +54076,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsRejectedInput = {
@@ -53796,6 +54207,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
@@ -53922,6 +54334,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsDeletedInput = {
@@ -54063,6 +54476,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
@@ -54189,6 +54603,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsUpdatedInput = {
@@ -54325,6 +54740,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
@@ -54451,6 +54867,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsApprovedInput = {
@@ -54587,6 +55004,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
@@ -54713,6 +55131,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsRejectedInput = {
@@ -54849,6 +55268,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
@@ -54975,6 +55395,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsDeletedInput = {
@@ -55111,6 +55532,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
@@ -55237,6 +55659,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -55362,6 +55785,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -55488,6 +55912,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentStatusLogsInput = {
@@ -55629,6 +56054,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
@@ -55755,6 +56181,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
@@ -55880,6 +56307,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
@@ -56006,6 +56434,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
@@ -56136,6 +56565,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
@@ -56262,6 +56692,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersUpdatedInput = {
@@ -56403,6 +56834,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
@@ -56529,6 +56961,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseOrdersUpdatedInput = {
@@ -56665,6 +57098,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
@@ -56791,6 +57225,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutPoItemsCreatedInput = {
@@ -56916,6 +57351,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
@@ -57042,6 +57478,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsCreatedInput = {
@@ -57172,6 +57609,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
@@ -57298,6 +57736,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsUpdatedInput = {
@@ -57428,6 +57867,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
@@ -57554,6 +57994,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsDeletedInput = {
@@ -57695,6 +58136,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
@@ -57821,6 +58263,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsUpdatedInput = {
@@ -57957,6 +58400,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
@@ -58083,6 +58527,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsDeletedInput = {
@@ -58219,6 +58664,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
@@ -58345,6 +58791,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutGrnsCreatedInput = {
@@ -58470,6 +58917,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
@@ -58596,6 +59044,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsCreatedInput = {
@@ -58726,6 +59175,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
@@ -58852,6 +59302,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsUpdatedInput = {
@@ -58982,6 +59433,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
@@ -59108,6 +59560,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsConfirmedInput = {
@@ -59249,6 +59702,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
@@ -59375,6 +59829,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsUpdatedInput = {
@@ -59511,6 +59966,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
@@ -59637,6 +60093,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsConfirmedInput = {
@@ -59773,6 +60230,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
@@ -59899,6 +60357,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutDcnsCreatedInput = {
@@ -60024,6 +60483,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
@@ -60150,6 +60610,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsCreatedInput = {
@@ -60280,6 +60741,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
@@ -60406,6 +60868,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsSettledInput = {
@@ -60547,6 +61010,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
@@ -60673,6 +61137,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUpsertWithoutDcnsSettledInput = {
@@ -60809,6 +61274,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
@@ -60935,6 +61401,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
@@ -61060,6 +61527,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
@@ -61186,6 +61654,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutRedeliveriesCreatedInput = {
@@ -61327,6 +61796,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
@@ -61453,6 +61923,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterCreateWithoutStockHistoriesInput = {
@@ -61578,6 +62049,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
   poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -61704,6 +62176,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -61845,6 +62318,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -61971,6 +62445,529 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutPoPaymentScheduleHistoriesInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput>
+}
+
+export type UserMasterUpsertWithoutPoPaymentScheduleHistoriesInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutPoPaymentScheduleHistoriesInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput, Prisma.UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput>
+}
+
+export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
@@ -62110,6 +63107,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
@@ -62236,6 +63234,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -62389,6 +63388,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
@@ -62515,6 +63515,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
@@ -62668,6 +63669,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -62794,6 +63796,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
   poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
   stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -62928,6 +63931,7 @@ export type UserMasterCountOutputType = {
   poItemsUpdated: number
   poItemsDeleted: number
   stockHistories: number
+  poPaymentScheduleHistories: number
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -63043,6 +64047,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   poItemsUpdated?: boolean | UserMasterCountOutputTypeCountPoItemsUpdatedArgs
   poItemsDeleted?: boolean | UserMasterCountOutputTypeCountPoItemsDeletedArgs
   stockHistories?: boolean | UserMasterCountOutputTypeCountStockHistoriesArgs
+  poPaymentScheduleHistories?: boolean | UserMasterCountOutputTypeCountPoPaymentScheduleHistoriesArgs
 }
 
 /**
@@ -63839,6 +64844,13 @@ export type UserMasterCountOutputTypeCountStockHistoriesArgs<ExtArgs extends run
   where?: Prisma.ProductStockHistoryWhereInput
 }
 
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountPoPaymentScheduleHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.POPaymentScheduleHistoryWhereInput
+}
+
 
 export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -63968,6 +64980,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   poItemsUpdated?: boolean | Prisma.UserMaster$poItemsUpdatedArgs<ExtArgs>
   poItemsDeleted?: boolean | Prisma.UserMaster$poItemsDeletedArgs<ExtArgs>
   stockHistories?: boolean | Prisma.UserMaster$stockHistoriesArgs<ExtArgs>
+  poPaymentScheduleHistories?: boolean | Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
@@ -64139,6 +65152,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   poItemsUpdated?: boolean | Prisma.UserMaster$poItemsUpdatedArgs<ExtArgs>
   poItemsDeleted?: boolean | Prisma.UserMaster$poItemsDeletedArgs<ExtArgs>
   stockHistories?: boolean | Prisma.UserMaster$stockHistoriesArgs<ExtArgs>
+  poPaymentScheduleHistories?: boolean | Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -64270,6 +65284,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     poItemsUpdated: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     poItemsDeleted: Prisma.$PurchaseOrderItemPayload<ExtArgs>[]
     stockHistories: Prisma.$ProductStockHistoryPayload<ExtArgs>[]
+    poPaymentScheduleHistories: Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -64793,6 +65808,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   poItemsUpdated<T extends Prisma.UserMaster$poItemsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$poItemsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   poItemsDeleted<T extends Prisma.UserMaster$poItemsDeletedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$poItemsDeletedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   stockHistories<T extends Prisma.UserMaster$stockHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$stockHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductStockHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  poPaymentScheduleHistories<T extends Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -67939,6 +68955,30 @@ export type UserMaster$stockHistoriesArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ProductStockHistoryScalarFieldEnum | Prisma.ProductStockHistoryScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.poPaymentScheduleHistories
+ */
+export type UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the POPaymentScheduleHistory
+   */
+  select?: Prisma.POPaymentScheduleHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the POPaymentScheduleHistory
+   */
+  omit?: Prisma.POPaymentScheduleHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.POPaymentScheduleHistoryInclude<ExtArgs> | null
+  where?: Prisma.POPaymentScheduleHistoryWhereInput
+  orderBy?: Prisma.POPaymentScheduleHistoryOrderByWithRelationInput | Prisma.POPaymentScheduleHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.POPaymentScheduleHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.POPaymentScheduleHistoryScalarFieldEnum | Prisma.POPaymentScheduleHistoryScalarFieldEnum[]
 }
 
 /**

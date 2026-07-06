@@ -190,7 +190,8 @@ export const ModelName = {
   POPayment: 'POPayment',
   UnitMaster: 'UnitMaster',
   ItemGroupMaster: 'ItemGroupMaster',
-  ProductSupplierMapping: 'ProductSupplierMapping'
+  ProductSupplierMapping: 'ProductSupplierMapping',
+  POPaymentScheduleHistory: 'POPaymentScheduleHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2487,6 +2488,8 @@ export const POPaymentScheduleScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
   purchase_order_id: 'purchase_order_id',
+  grn_id: 'grn_id',
+  payment_term_stage_id: 'payment_term_stage_id',
   stage_no: 'stage_no',
   stage_name: 'stage_name',
   trigger_type: 'trigger_type',
@@ -2564,6 +2567,27 @@ export const ProductSupplierMappingScalarFieldEnum = {
 } as const
 
 export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappingScalarFieldEnum)[keyof typeof ProductSupplierMappingScalarFieldEnum]
+
+
+export const POPaymentScheduleHistoryScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  po_payment_schedule_id: 'po_payment_schedule_id',
+  action: 'action',
+  old_due_date: 'old_due_date',
+  new_due_date: 'new_due_date',
+  old_status: 'old_status',
+  new_status: 'new_status',
+  old_scheduled_amount: 'old_scheduled_amount',
+  new_scheduled_amount: 'new_scheduled_amount',
+  paid_amount: 'paid_amount',
+  payment_id: 'payment_id',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  created_at: 'created_at'
+} as const
+
+export type POPaymentScheduleHistoryScalarFieldEnum = (typeof POPaymentScheduleHistoryScalarFieldEnum)[keyof typeof POPaymentScheduleHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -1,5 +1,7 @@
 import { prisma } from "../../prisma/client";
 import { validationResponse } from "../../utils/validationResponse";
+import { createGRNPaymentSchedules } from "../inventoryService/payment-schedule-generator.service";
+
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -292,14 +294,23 @@ export const createGRNService = async (payload: CreateGRNPayload) => {
       const orderedQty = toNum(poItem.ordered_qty);
       const alreadyReceivedQty = toNum(poItem.received_qty);
       const remainingQty = round2(orderedQty - alreadyReceivedQty);
-      const currentReceivedQty = toNum(item.received_qty);
+      // const currentReceivedQty = toNum(item.received_qty);
 
-      if (currentReceivedQty > remainingQty) {
-        return validationResponse(
-          0,
-          `Received qty cannot be greater than remaining qty for product ${item.product_id}. Remaining qty is ${remainingQty}`
-        );
-      }
+      // if (currentReceivedQty > remainingQty) {
+      //   return validationResponse(
+      //     0,
+      //     `Received qty cannot be greater than remaining qty for product ${item.product_id}. Remaining qty is ${remainingQty}`
+      //   );
+      // }
+
+      const currentAcceptedQty = toNum(item.accepted_qty);
+
+if (currentAcceptedQty > remainingQty) {
+  return validationResponse(
+    0,
+    `Accepted qty cannot be greater than remaining qty for product ${item.product_id}. Remaining qty is ${remainingQty}`
+  );
+}
     }
 
     const productIds = normalizedItems.map((item: any) => item.product_id);
@@ -622,13 +633,24 @@ export const createGRNService = async (payload: CreateGRNPayload) => {
           },
         });
 
+        // await tx.purchaseOrderItem.update({
+        //   where: {
+        //     id: item.purchase_order_item_id,
+        //   },
+        //   data: {
+        //     received_qty: {
+        //       increment: toNum(item.received_qty),
+        //     },
+        //   },
+        // });
+
         await tx.purchaseOrderItem.update({
           where: {
             id: item.purchase_order_item_id,
           },
           data: {
             received_qty: {
-              increment: toNum(item.received_qty),
+              increment: toNum(item.accepted_qty),
             },
           },
         });
@@ -700,103 +722,199 @@ export const createGRNService = async (payload: CreateGRNPayload) => {
 
 // ─── CONFIRM GRN ─────────────────────────────────────────────────────────────
 
-export const confirmGRNService = async (grn_id: number, vendor_id: number, user_id: number) => {
+export const confirmGRNService = async (
+  grn_id: number,
+  vendor_id: number,
+  user_id: number
+) => {
   try {
     const grn = await prisma.gRNMaster.findFirst({
-      where: { id: grn_id, vendor_id },
+      where: {
+        id: grn_id,
+        vendor_id,
+      },
       include: {
         items: true,
-        purchaseOrder: { select: { id: true, items: { select: { id: true, ordered_qty: true } } } },
+        purchaseOrder: {
+          select: {
+            id: true,
+            status: true,
+            payment_term_id: true,
+          },
+        },
       },
     });
-    if (!grn) return validationResponse(0, "GRN not found");
-    if (grn.status !== "Draft") return validationResponse(0, "Only Draft GRNs can be confirmed");
 
-    await prisma.$transaction(async (tx) => {
-      // Confirm GRN
-      await tx.gRNMaster.update({
-        where: { id: grn_id },
-        data: { status: "Confirmed", confirmed_by: user_id, confirmed_at: new Date(), updated_by: user_id },
+    if (!grn) {
+      return validationResponse(0, "GRN not found");
+    }
+
+    if (grn.status !== "Draft") {
+      return validationResponse(0, "Only Draft GRNs can be confirmed");
+    }
+
+    if (!grn.purchaseOrder) {
+      return validationResponse(0, "Purchase order not found for this GRN");
+    }
+
+    const poStatus = String(grn.purchaseOrder.status || "").trim();
+
+    // if (!["Approved", "PartiallyReceived"].includes(poStatus)) {
+    //   return validationResponse(
+    //     0,
+    //     `Cannot confirm GRN because PO status is ${poStatus || "Unknown"}`
+    //   );
+    // }
+
+    const result = await prisma.$transaction(async (tx) => {
+      /**
+       * 1. Confirm GRN
+       */
+      const confirmedGRN = await tx.gRNMaster.update({
+        where: {
+          id: grn_id,
+        },
+        data: {
+          status: "Confirmed",
+          confirmed_by: user_id,
+          confirmed_at: new Date(),
+          updated_by: user_id,
+        },
+        select: {
+          id: true,
+          grn_no: true,
+          status: true,
+          purchase_order_id: true,
+        },
       });
 
-      // Update received_qty on each PO item (only accepted qty counts toward fulfillment)
-      // Also increment current_stock on ProductMaster for each accepted qty
+      /**
+       * 2. Update product stock only.
+       *
+       * Important:
+       * purchaseOrderItem.received_qty is already updated during GRN creation,
+       * so do NOT update PO item received_qty again here.
+       *
+       * Only accepted_qty should go into stock.
+       */
       for (const item of grn.items) {
-        await tx.purchaseOrderItem.update({
-          where: { id: item.po_item_id },
-          data: { received_qty: { increment: item.accepted_qty } },
+        const acceptedQty = Number(item.accepted_qty || 0);
+
+        console.log("acceptedQty:", acceptedQty);
+
+        if (acceptedQty <= 0) {
+          continue;
+        }
+
+        const before = await tx.productMaster.findUnique({
+          where: {
+            id: item.product_id,
+          },
+          select: {
+            current_stock: true,
+          },
         });
 
-        // Only accepted goods go into stock (rejected are not stocked)
-        if (parseFloat(item.accepted_qty.toString()) > 0) {
-          // Fetch current stock before update
-          const before = await tx.productMaster.findUnique({
-            where: { id: item.product_id },
-            select: { current_stock: true },
-          });
-          const oldStock = parseFloat((before?.current_stock ?? 0).toString());
-          const newStock = oldStock + parseFloat(item.accepted_qty.toString());
+        const oldStock = Number(before?.current_stock || 0);
+        const newStock = oldStock + acceptedQty;
 
-          await tx.productMaster.update({
-            where: { id: item.product_id },
-            data: { current_stock: newStock, stock_updated_at: new Date() },
-          });
+        console.log("oldStock:", oldStock);
+        console.log("newStock:", newStock);
 
-          // Write stock history
-          await tx.productStockHistory.create({
-            data: {
-              vendor_id,
-              product_id: item.product_id,
-              old_stock: oldStock,
-              new_stock: newStock,
-              change: parseFloat(item.accepted_qty.toString()),
-              source: "GRNConfirmation",
-              changed_by: user_id,
-              remarks: `GRN ${grn.grn_no} confirmed`,
-            },
-          });
-        }
+        await tx.productMaster.update({
+          where: {
+            id: item.product_id,
+          },
+          data: {
+            current_stock: newStock,
+            stock_updated_at: new Date(),
+          },
+        });
+
+        await tx.productStockHistory.create({
+          data: {
+            vendor_id,
+            product_id: item.product_id,
+            old_stock: oldStock,
+            new_stock: newStock,
+            change: acceptedQty,
+            source: "GRNConfirmation",
+            changed_by: user_id,
+            remarks: `GRN ${grn.grn_no} confirmed`,
+          },
+        });
       }
 
-      // Determine new PO status:
-      // - "Received" only if accepted qty >= ordered qty for ALL items
-      // - "PartiallyReceived" if some accepted but not all
-      // Rejected qty does NOT count toward fulfillment — must be redelivered or noted
+      /**
+       * 3. Recalculate PO status.
+       *
+       * purchaseOrderItem.received_qty already contains accepted qty from GRN creation.
+       * So just read it and decide PO status.
+       */
       const poItems = await tx.purchaseOrderItem.findMany({
-        where: { purchase_order_id: grn.purchase_order_id },
-        select: { ordered_qty: true, received_qty: true },
-      });
-      const totalOrdered = poItems.reduce((s, i) => s + parseFloat(i.ordered_qty.toString()), 0);
-      const totalAccepted = poItems.reduce((s, i) => s + parseFloat(i.received_qty.toString()), 0);
-
-      // Also count any rejected items from ALL confirmed GRNs for this PO
-      const allRejected = await tx.gRNItem.aggregate({
         where: {
-          grn: { purchase_order_id: grn.purchase_order_id, status: "Confirmed" },
-          rejected_qty: { gt: 0 },
+          purchase_order_id: grn.purchase_order_id,
         },
-        _sum: { rejected_qty: true },
+        select: {
+          id: true,
+          ordered_qty: true,
+          received_qty: true,
+        },
       });
-      const totalRejected = parseFloat((allRejected._sum.rejected_qty ?? 0).toString());
+
+      const totalAcceptedQty = poItems.reduce((sum, item) => {
+        return sum + Number(item.received_qty || 0);
+      }, 0);
+
+      const allItemsFullyAccepted = poItems.every((item) => {
+        const orderedQty = Number(item.ordered_qty || 0);
+        const acceptedQtyTillNow = Number(item.received_qty || 0);
+
+        return acceptedQtyTillNow >= orderedQty;
+      });
 
       let newPOStatus: string;
-      if (totalAccepted >= totalOrdered) {
-        newPOStatus = "Received";            // fully fulfilled via accepted qty
-      } else if (totalAccepted > 0) {
-        newPOStatus = "PartiallyReceived";   // some accepted, more expected
+
+      if (allItemsFullyAccepted) {
+        newPOStatus = "Received";
+      } else if (totalAcceptedQty > 0) {
+        newPOStatus = "PartiallyReceived";
       } else {
-        newPOStatus = "Approved";            // nothing accepted yet (all rejected)
+        newPOStatus = "Approved";
       }
 
-      await tx.purchaseOrderMaster.update({
-        where: { id: grn.purchase_order_id },
-        data: { status: newPOStatus as any },
+      console.log("PO status calculation:", {
+        po_id: grn.purchase_order_id,
+        totalAcceptedQty,
+        allItemsFullyAccepted,
+        newPOStatus,
       });
+
+      await tx.purchaseOrderMaster.update({
+        where: {
+          id: grn.purchase_order_id,
+        },
+        data: {
+          status: newPOStatus as any,
+          updated_by: user_id,
+        },
+      });
+
+      /**
+       * 4. Generate payment requisition schedules for GRN-triggered stages.
+       */
+      await createGRNPaymentSchedules(tx, grn_id, vendor_id, user_id);
+
+      return {
+        grn: confirmedGRN,
+        po_status: newPOStatus,
+        total_accepted_qty: totalAcceptedQty,
+      };
     });
 
-    return validationResponse(1, "GRN confirmed");
+    return validationResponse(1, "GRN confirmed", result);
   } catch (e) {
-    console.error(e);
+    console.error("confirmGRNService error:", e);
     return validationResponse(0, "Failed to confirm GRN");
   }
 };
