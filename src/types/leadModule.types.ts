@@ -187,6 +187,7 @@ export interface CreateLeadDTO {
     site_type_id?: number;
     source_id: number;
     archetech_name?: string;
+    architect_id?: number;
     archetech_number?: string;
     designer_remark?: string;
     vendor_id: number;
@@ -225,6 +226,7 @@ export interface UpdateLeadDTO {
     source_id: number;
     priority?: string;
     archetech_name?: string;
+    architect_id?: number;
     archetech_number?: string;
     designer_remark?: string;
     updated_by: number;

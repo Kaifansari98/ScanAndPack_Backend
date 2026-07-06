@@ -145,4 +145,22 @@ export class ArchitectureMasterController {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to update architecture master status"));
     }
   }
+
+  /**
+   * Get Architect List for Dropdowns
+   */
+  async getArchitectsList(req: Request, res: Response) {
+    try {
+      const vendorId = req.params.vendorId || (req as any).user?.vendor_id;
+      
+      if (!vendorId) {
+        return res.status(400).json(ApiResponse.validationError("Vendor ID is required"));
+      }
+
+      const list = await architectureMasterService.getArchitectsList(vendorId);
+      return res.status(200).json(ApiResponse.success(list, "Architects list fetched successfully"));
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architects list"));
+    }
+  }
 }

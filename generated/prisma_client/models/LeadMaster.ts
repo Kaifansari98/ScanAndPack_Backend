@@ -30,6 +30,7 @@ export type LeadMasterAvgAggregateOutputType = {
   id: number | null
   site_type_id: number | null
   source_id: number | null
+  architect_id: number | null
   created_by: number | null
   updated_by: number | null
   vendor_id: number | null
@@ -52,6 +53,7 @@ export type LeadMasterSumAggregateOutputType = {
   id: number | null
   site_type_id: number | null
   source_id: number | null
+  architect_id: number | null
   created_by: number | null
   updated_by: number | null
   vendor_id: number | null
@@ -83,6 +85,7 @@ export type LeadMasterMinAggregateOutputType = {
   source_id: number | null
   archetech_name: string | null
   archetech_number: string | null
+  architect_id: number | null
   designer_remark: string | null
   created_by: number | null
   created_at: Date | null
@@ -173,6 +176,7 @@ export type LeadMasterMaxAggregateOutputType = {
   source_id: number | null
   archetech_name: string | null
   archetech_number: string | null
+  architect_id: number | null
   designer_remark: string | null
   created_by: number | null
   created_at: Date | null
@@ -263,6 +267,7 @@ export type LeadMasterCountAggregateOutputType = {
   source_id: number
   archetech_name: number
   archetech_number: number
+  architect_id: number
   designer_remark: number
   created_by: number
   created_at: number
@@ -346,6 +351,7 @@ export type LeadMasterAvgAggregateInputType = {
   id?: true
   site_type_id?: true
   source_id?: true
+  architect_id?: true
   created_by?: true
   updated_by?: true
   vendor_id?: true
@@ -368,6 +374,7 @@ export type LeadMasterSumAggregateInputType = {
   id?: true
   site_type_id?: true
   source_id?: true
+  architect_id?: true
   created_by?: true
   updated_by?: true
   vendor_id?: true
@@ -399,6 +406,7 @@ export type LeadMasterMinAggregateInputType = {
   source_id?: true
   archetech_name?: true
   archetech_number?: true
+  architect_id?: true
   designer_remark?: true
   created_by?: true
   created_at?: true
@@ -489,6 +497,7 @@ export type LeadMasterMaxAggregateInputType = {
   source_id?: true
   archetech_name?: true
   archetech_number?: true
+  architect_id?: true
   designer_remark?: true
   created_by?: true
   created_at?: true
@@ -579,6 +588,7 @@ export type LeadMasterCountAggregateInputType = {
   source_id?: true
   archetech_name?: true
   archetech_number?: true
+  architect_id?: true
   designer_remark?: true
   created_by?: true
   created_at?: true
@@ -756,6 +766,7 @@ export type LeadMasterGroupByOutputType = {
   source_id: number | null
   archetech_name: string | null
   archetech_number: string | null
+  architect_id: number | null
   designer_remark: string | null
   created_by: number
   created_at: Date
@@ -869,6 +880,7 @@ export type LeadMasterWhereInput = {
   source_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   archetech_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   archetech_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  architect_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   designer_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   created_by?: Prisma.IntFilter<"LeadMaster"> | number
   created_at?: Prisma.DateTimeFilter<"LeadMaster"> | Date | string
@@ -975,6 +987,7 @@ export type LeadMasterWhereInput = {
   statusType?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
   productMappings?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
@@ -1010,6 +1023,7 @@ export type LeadMasterOrderByWithRelationInput = {
   source_id?: Prisma.SortOrderInput | Prisma.SortOrder
   archetech_name?: Prisma.SortOrderInput | Prisma.SortOrder
   archetech_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  architect_id?: Prisma.SortOrderInput | Prisma.SortOrder
   designer_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -1116,6 +1130,7 @@ export type LeadMasterOrderByWithRelationInput = {
   statusType?: Prisma.StatusTypeMasterOrderByWithRelationInput
   updatedBy?: Prisma.UserMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
+  architect?: Prisma.ArchitechuremasterOrderByWithRelationInput
   productMappings?: Prisma.LeadProductMappingOrderByRelationAggregateInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
@@ -1155,6 +1170,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   source_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   archetech_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   archetech_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  architect_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   designer_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   created_by?: Prisma.IntFilter<"LeadMaster"> | number
   created_at?: Prisma.DateTimeFilter<"LeadMaster"> | Date | string
@@ -1261,6 +1277,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   statusType?: Prisma.XOR<Prisma.StatusTypeMasterNullableScalarRelationFilter, Prisma.StatusTypeMasterWhereInput> | null
   updatedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
+  architect?: Prisma.XOR<Prisma.ArchitechuremasterNullableScalarRelationFilter, Prisma.ArchitechuremasterWhereInput> | null
   productMappings?: Prisma.LeadProductMappingListRelationFilter
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
@@ -1296,6 +1313,7 @@ export type LeadMasterOrderByWithAggregationInput = {
   source_id?: Prisma.SortOrderInput | Prisma.SortOrder
   archetech_name?: Prisma.SortOrderInput | Prisma.SortOrder
   archetech_number?: Prisma.SortOrderInput | Prisma.SortOrder
+  architect_id?: Prisma.SortOrderInput | Prisma.SortOrder
   designer_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -1394,6 +1412,7 @@ export type LeadMasterScalarWhereWithAggregatesInput = {
   source_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   archetech_name?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   archetech_number?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
+  architect_id?: Prisma.IntNullableWithAggregatesFilter<"LeadMaster"> | number | null
   designer_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadMaster"> | string | null
   created_by?: Prisma.IntWithAggregatesFilter<"LeadMaster"> | number
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadMaster"> | Date | string
@@ -1579,6 +1598,7 @@ export type LeadMasterCreateInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -1614,6 +1634,7 @@ export type LeadMasterUncheckedCreateInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -1840,6 +1861,7 @@ export type LeadMasterUpdateInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -1875,6 +1897,7 @@ export type LeadMasterUncheckedUpdateInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2006,6 +2029,7 @@ export type LeadMasterCreateManyInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -2175,6 +2199,7 @@ export type LeadMasterUncheckedUpdateManyInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2285,6 +2310,7 @@ export type LeadMasterCountOrderByAggregateInput = {
   source_id?: Prisma.SortOrder
   archetech_name?: Prisma.SortOrder
   archetech_number?: Prisma.SortOrder
+  architect_id?: Prisma.SortOrder
   designer_remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -2366,6 +2392,7 @@ export type LeadMasterAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   site_type_id?: Prisma.SortOrder
   source_id?: Prisma.SortOrder
+  architect_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
@@ -2397,6 +2424,7 @@ export type LeadMasterMaxOrderByAggregateInput = {
   source_id?: Prisma.SortOrder
   archetech_name?: Prisma.SortOrder
   archetech_number?: Prisma.SortOrder
+  architect_id?: Prisma.SortOrder
   designer_remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -2487,6 +2515,7 @@ export type LeadMasterMinOrderByAggregateInput = {
   source_id?: Prisma.SortOrder
   archetech_name?: Prisma.SortOrder
   archetech_number?: Prisma.SortOrder
+  architect_id?: Prisma.SortOrder
   designer_remark?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
@@ -2568,6 +2597,7 @@ export type LeadMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   site_type_id?: Prisma.SortOrder
   source_id?: Prisma.SortOrder
+  architect_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   updated_by?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
@@ -3637,6 +3667,48 @@ export type LeadMasterUpdateOneRequiredWithoutExternalPlatformCustomerMappingsNe
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutExternalPlatformCustomerMappingsInput, Prisma.LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInput>
 }
 
+export type LeadMasterCreateNestedManyWithoutArchitectInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput> | Prisma.LeadMasterCreateWithoutArchitectInput[] | Prisma.LeadMasterUncheckedCreateWithoutArchitectInput[]
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutArchitectInput | Prisma.LeadMasterCreateOrConnectWithoutArchitectInput[]
+  createMany?: Prisma.LeadMasterCreateManyArchitectInputEnvelope
+  connect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+}
+
+export type LeadMasterUncheckedCreateNestedManyWithoutArchitectInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput> | Prisma.LeadMasterCreateWithoutArchitectInput[] | Prisma.LeadMasterUncheckedCreateWithoutArchitectInput[]
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutArchitectInput | Prisma.LeadMasterCreateOrConnectWithoutArchitectInput[]
+  createMany?: Prisma.LeadMasterCreateManyArchitectInputEnvelope
+  connect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+}
+
+export type LeadMasterUpdateManyWithoutArchitectNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput> | Prisma.LeadMasterCreateWithoutArchitectInput[] | Prisma.LeadMasterUncheckedCreateWithoutArchitectInput[]
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutArchitectInput | Prisma.LeadMasterCreateOrConnectWithoutArchitectInput[]
+  upsert?: Prisma.LeadMasterUpsertWithWhereUniqueWithoutArchitectInput | Prisma.LeadMasterUpsertWithWhereUniqueWithoutArchitectInput[]
+  createMany?: Prisma.LeadMasterCreateManyArchitectInputEnvelope
+  set?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  disconnect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  delete?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  connect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  update?: Prisma.LeadMasterUpdateWithWhereUniqueWithoutArchitectInput | Prisma.LeadMasterUpdateWithWhereUniqueWithoutArchitectInput[]
+  updateMany?: Prisma.LeadMasterUpdateManyWithWhereWithoutArchitectInput | Prisma.LeadMasterUpdateManyWithWhereWithoutArchitectInput[]
+  deleteMany?: Prisma.LeadMasterScalarWhereInput | Prisma.LeadMasterScalarWhereInput[]
+}
+
+export type LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput> | Prisma.LeadMasterCreateWithoutArchitectInput[] | Prisma.LeadMasterUncheckedCreateWithoutArchitectInput[]
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutArchitectInput | Prisma.LeadMasterCreateOrConnectWithoutArchitectInput[]
+  upsert?: Prisma.LeadMasterUpsertWithWhereUniqueWithoutArchitectInput | Prisma.LeadMasterUpsertWithWhereUniqueWithoutArchitectInput[]
+  createMany?: Prisma.LeadMasterCreateManyArchitectInputEnvelope
+  set?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  disconnect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  delete?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  connect?: Prisma.LeadMasterWhereUniqueInput | Prisma.LeadMasterWhereUniqueInput[]
+  update?: Prisma.LeadMasterUpdateWithWhereUniqueWithoutArchitectInput | Prisma.LeadMasterUpdateWithWhereUniqueWithoutArchitectInput[]
+  updateMany?: Prisma.LeadMasterUpdateManyWithWhereWithoutArchitectInput | Prisma.LeadMasterUpdateManyWithWhereWithoutArchitectInput[]
+  deleteMany?: Prisma.LeadMasterScalarWhereInput | Prisma.LeadMasterScalarWhereInput[]
+}
+
 export type LeadMasterCreateWithoutVendorInput = {
   firstname: string
   lastname: string
@@ -3744,6 +3816,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -3779,6 +3852,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -3938,6 +4012,7 @@ export type LeadMasterScalarWhereInput = {
   source_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   archetech_name?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   archetech_number?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
+  architect_id?: Prisma.IntNullableFilter<"LeadMaster"> | number | null
   designer_remark?: Prisma.StringNullableFilter<"LeadMaster"> | string | null
   created_by?: Prisma.IntFilter<"LeadMaster"> | number
   created_at?: Prisma.DateTimeFilter<"LeadMaster"> | Date | string
@@ -4122,6 +4197,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -4157,6 +4233,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -4391,6 +4468,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -4426,6 +4504,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -4660,6 +4739,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -4695,6 +4775,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_at?: Date | string
   updated_by?: number | null
@@ -4929,6 +5010,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -4964,6 +5046,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -5263,6 +5346,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -5297,6 +5381,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -5538,6 +5623,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -5572,6 +5658,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -5797,6 +5884,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -5831,6 +5919,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -6072,6 +6161,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -6106,6 +6196,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -6331,6 +6422,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -6365,6 +6457,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -6610,6 +6703,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -6645,6 +6739,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -6885,6 +6980,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -6920,6 +7016,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7145,6 +7242,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -7179,6 +7277,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -7420,6 +7519,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -7454,6 +7554,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -7678,6 +7779,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -7713,6 +7815,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -7953,6 +8056,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -7988,6 +8092,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -8212,6 +8317,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -8246,6 +8352,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -8497,6 +8604,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -8531,6 +8639,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   site_type_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -8782,6 +8891,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -8817,6 +8927,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -9068,6 +9179,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
@@ -9102,6 +9214,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -9343,6 +9456,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
@@ -9377,6 +9491,7 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -9601,6 +9716,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -9636,6 +9752,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -9876,6 +9993,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -9911,6 +10029,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10135,6 +10254,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -10170,6 +10290,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -10410,6 +10531,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -10445,6 +10567,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -10669,6 +10792,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -10704,6 +10828,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -10944,6 +11069,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -10979,6 +11105,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11204,6 +11331,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
@@ -11238,6 +11366,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -11479,6 +11608,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
@@ -11513,6 +11643,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -11738,6 +11869,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
@@ -11772,6 +11904,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -12013,6 +12146,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
@@ -12047,6 +12181,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12272,6 +12407,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -12306,6 +12442,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -12547,6 +12684,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -12581,6 +12719,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -12806,6 +12945,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -12840,6 +12980,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -13081,6 +13222,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -13115,6 +13257,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13339,6 +13482,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -13374,6 +13518,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -13614,6 +13759,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -13649,6 +13795,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -13873,6 +14020,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -13908,6 +14056,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -14148,6 +14297,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -14183,6 +14333,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14408,6 +14559,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -14442,6 +14594,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -14683,6 +14836,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -14717,6 +14871,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -14941,6 +15096,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -14976,6 +15132,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -15227,6 +15384,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -15261,6 +15419,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -15502,6 +15661,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -15536,6 +15696,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -15760,6 +15921,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -15795,6 +15957,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -16035,6 +16198,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -16070,6 +16234,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16294,6 +16459,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -16329,6 +16495,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -16569,6 +16736,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -16604,6 +16772,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -16828,6 +16997,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -16863,6 +17033,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -17103,6 +17274,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -17138,6 +17310,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17362,6 +17535,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -17397,6 +17571,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -17637,6 +17812,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -17672,6 +17848,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -17896,6 +18073,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -17931,6 +18109,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -18171,6 +18350,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -18206,6 +18386,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18430,6 +18611,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -18465,6 +18647,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -18705,6 +18888,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -18740,6 +18924,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -18965,6 +19150,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -18999,6 +19185,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -19240,6 +19427,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -19274,6 +19462,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -19499,6 +19688,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -19533,6 +19723,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -19774,6 +19965,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -19808,6 +20000,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20033,6 +20226,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -20067,6 +20261,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -20308,6 +20503,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -20342,6 +20538,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -20567,6 +20764,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -20601,6 +20799,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -20842,6 +21041,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -20876,6 +21076,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21100,6 +21301,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -21135,6 +21337,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -21375,6 +21578,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -21410,6 +21614,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -21634,6 +21839,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -21669,6 +21875,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -21909,6 +22116,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -21944,6 +22152,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22168,6 +22377,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -22203,6 +22413,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -22443,6 +22654,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -22478,6 +22690,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -22703,6 +22916,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -22737,6 +22951,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -22978,6 +23193,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -23012,6 +23228,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23237,6 +23454,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -23271,6 +23489,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -23512,6 +23731,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -23546,6 +23766,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -23770,6 +23991,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -23805,6 +24027,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -24045,6 +24268,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -24080,6 +24304,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24304,6 +24529,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -24339,6 +24565,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -24579,6 +24806,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -24614,6 +24842,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -24839,6 +25068,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -24873,6 +25103,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -25114,6 +25345,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -25148,6 +25380,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25372,6 +25605,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -25407,6 +25641,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -25647,6 +25882,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -25682,6 +25918,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -25906,6 +26143,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -25941,6 +26179,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -26181,6 +26420,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -26216,6 +26456,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26440,6 +26681,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -26475,6 +26717,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -26715,6 +26958,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -26750,6 +26994,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -26975,6 +27220,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -27009,6 +27255,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -27250,6 +27497,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -27284,6 +27532,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -27508,6 +27757,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -27543,6 +27793,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -27794,6 +28045,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
   productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
@@ -27828,6 +28080,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -28069,6 +28322,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -28103,6 +28357,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28220,6 +28475,293 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
 }
 
+export type LeadMasterCreateWithoutArchitectInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  isLargeScaleProjectLead?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  tentative_order_login_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutArchitectInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  isLargeScaleProjectLead?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  tentative_order_login_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutArchitectInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput>
+}
+
+export type LeadMasterCreateManyArchitectInputEnvelope = {
+  data: Prisma.LeadMasterCreateManyArchitectInput | Prisma.LeadMasterCreateManyArchitectInput[]
+  skipDuplicates?: boolean
+}
+
+export type LeadMasterUpsertWithWhereUniqueWithoutArchitectInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutArchitectInput, Prisma.LeadMasterUncheckedUpdateWithoutArchitectInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutArchitectInput, Prisma.LeadMasterUncheckedCreateWithoutArchitectInput>
+}
+
+export type LeadMasterUpdateWithWhereUniqueWithoutArchitectInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutArchitectInput, Prisma.LeadMasterUncheckedUpdateWithoutArchitectInput>
+}
+
+export type LeadMasterUpdateManyWithWhereWithoutArchitectInput = {
+  where: Prisma.LeadMasterScalarWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateManyMutationInput, Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectInput>
+}
+
 export type LeadMasterCreateManyVendorInput = {
   id?: number
   firstname: string
@@ -28233,6 +28775,7 @@ export type LeadMasterCreateManyVendorInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -28416,6 +28959,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -28451,6 +28995,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28581,6 +29126,7 @@ export type LeadMasterUncheckedUpdateManyWithoutVendorInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -28670,6 +29216,7 @@ export type LeadMasterCreateManyAssignedToInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -28759,6 +29306,7 @@ export type LeadMasterCreateManyAssignedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -28848,6 +29396,7 @@ export type LeadMasterCreateManyCreatedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_at?: Date | string
   updated_by?: number | null
@@ -28937,6 +29486,7 @@ export type LeadMasterCreateManyUpdatedByInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -29120,6 +29670,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -29155,6 +29706,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29285,6 +29837,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedToInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29468,6 +30021,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -29503,6 +30057,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29633,6 +30188,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAssignedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -29816,6 +30372,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -29851,6 +30408,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -29981,6 +30539,7 @@ export type LeadMasterUncheckedUpdateManyWithoutCreatedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -30164,6 +30723,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -30199,6 +30759,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30329,6 +30890,7 @@ export type LeadMasterUncheckedUpdateManyWithoutUpdatedByInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30513,6 +31075,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -30547,6 +31110,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30677,6 +31241,7 @@ export type LeadMasterUncheckedUpdateManyWithoutBoxMasterInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -30766,6 +31331,7 @@ export type LeadMasterCreateManySiteTypeInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -30950,6 +31516,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -30984,6 +31551,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31114,6 +31682,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSiteTypeInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31203,6 +31772,7 @@ export type LeadMasterCreateManySourceInput = {
   site_type_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -31387,6 +31957,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -31421,6 +31992,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31551,6 +32123,7 @@ export type LeadMasterUncheckedUpdateManyWithoutSourceInput = {
   site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31641,6 +32214,7 @@ export type LeadMasterCreateManyAccountInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -31824,6 +32398,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -31859,6 +32434,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -31989,6 +32565,7 @@ export type LeadMasterUncheckedUpdateManyWithoutAccountInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32078,6 +32655,7 @@ export type LeadMasterCreateManyStatusTypeInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -32261,6 +32839,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -32296,6 +32875,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32426,6 +33006,7 @@ export type LeadMasterUncheckedUpdateManyWithoutStatusTypeInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32515,6 +33096,7 @@ export type LeadMasterCreateManyFranchiseInput = {
   source_id?: number | null
   archetech_name?: string | null
   archetech_number?: string | null
+  architect_id?: number | null
   designer_remark?: string | null
   created_by: number
   created_at?: Date | string
@@ -32698,6 +33280,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
   updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
   productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
@@ -32733,6 +33316,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32863,6 +33447,7 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -32933,6 +33518,447 @@ export type LeadMasterUncheckedUpdateManyWithoutFranchiseInput = {
   amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type LeadMasterCreateManyArchitectInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  isLargeScaleProjectLead?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  tentative_order_login_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+}
+
+export type LeadMasterUpdateWithoutArchitectInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateManyWithoutArchitectInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -33343,6 +34369,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   source_id?: boolean
   archetech_name?: boolean
   archetech_number?: boolean
+  architect_id?: boolean
   designer_remark?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -33449,6 +34476,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
   productMappings?: boolean | Prisma.LeadMaster$productMappingsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>
@@ -33485,6 +34513,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   source_id?: boolean
   archetech_name?: boolean
   archetech_number?: boolean
+  architect_id?: boolean
   designer_remark?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -33570,6 +34599,7 @@ export type LeadMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
 }, ExtArgs["result"]["leadMaster"]>
 
 export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -33585,6 +34615,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   source_id?: boolean
   archetech_name?: boolean
   archetech_number?: boolean
+  architect_id?: boolean
   designer_remark?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -33670,6 +34701,7 @@ export type LeadMasterSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
 }, ExtArgs["result"]["leadMaster"]>
 
 export type LeadMasterSelectScalar = {
@@ -33685,6 +34717,7 @@ export type LeadMasterSelectScalar = {
   source_id?: boolean
   archetech_name?: boolean
   archetech_number?: boolean
+  architect_id?: boolean
   designer_remark?: boolean
   created_by?: boolean
   created_at?: boolean
@@ -33762,7 +34795,7 @@ export type LeadMasterSelectScalar = {
   lead_blocked_at?: boolean
 }
 
-export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "isLargeScaleProjectLead" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "tentative_order_login_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "is_fast_production" | "fast_production_status" | "fast_production_approved_at" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
+export type LeadMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstname" | "lastname" | "country_code" | "contact_no" | "alt_contact_no" | "email" | "site_address" | "site_type_id" | "source_id" | "archetech_name" | "archetech_number" | "architect_id" | "designer_remark" | "created_by" | "created_at" | "updated_by" | "updated_at" | "vendor_id" | "assign_to" | "assigned_by" | "account_id" | "deleted_at" | "deleted_by" | "is_deleted" | "status_id" | "priority" | "initial_site_measurement_date" | "final_desc_note" | "advance_payment_date" | "site_map_link" | "activity_status" | "activity_status_remark" | "booking_amount" | "pending_amount" | "total_project_amount" | "is_draft" | "isLargeScaleProjectLead" | "lead_code" | "is_small_order_request" | "is_client_approval_submitted" | "client_required_order_login_complition_date" | "tentative_order_login_date" | "expected_order_login_ready_date" | "no_of_client_documents_initially_submitted" | "hardware_packing_details_remark" | "woodwork_packing_details_remark" | "no_of_boxes" | "dispatch_planning_remark" | "material_lift_availability" | "material_lift_size" | "vehicle_approachability_for_dispatch" | "onsite_contact_person_name" | "onsite_contact_person_number" | "required_date_for_dispatch" | "is_fast_production" | "fast_production_status" | "fast_production_approved_at" | "alt_onsite_contact_person_name" | "alt_onsite_contact_person_number" | "dispatch_date" | "dispatch_remark" | "driver_name" | "driver_number" | "vehicle_no" | "tech_check_reached_at" | "tech_check_completed_at" | "actual_installation_start_date" | "actual_installation_completion_at" | "carcass_installation_completion_date" | "expected_installation_end_date" | "is_carcass_installation_completed" | "is_shutter_installation_completed" | "shutter_installation_completion_date" | "usable_handover_pending_work_details" | "mrp_value" | "usable_handover_completed" | "usable_handover_completed_at" | "is_amc_opted" | "amc_opted_at" | "amc_plan_started_at" | "amc_plan_closed_at" | "final_handover_marked_at" | "franchise_id" | "order_login_prod_files_remark" | "total_required_chs_manufacturing_days" | "is_blocked" | "lead_blocked_at", ExtArgs["result"]["leadMaster"]>
 export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cutList?: boolean | Prisma.LeadMaster$cutListArgs<ExtArgs>
   cutListMachineMapping?: boolean | Prisma.LeadMaster$cutListMachineMappingArgs<ExtArgs>
@@ -33795,6 +34828,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
   productMappings?: boolean | Prisma.LeadMaster$productMappingsArgs<ExtArgs>
   productStructureInstances?: boolean | Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>
@@ -33828,6 +34862,7 @@ export type LeadMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.E
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
 }
 export type LeadMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
@@ -33840,6 +34875,7 @@ export type LeadMasterIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   statusType?: boolean | Prisma.LeadMaster$statusTypeArgs<ExtArgs>
   updatedBy?: boolean | Prisma.LeadMaster$updatedByArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
+  architect?: boolean | Prisma.LeadMaster$architectArgs<ExtArgs>
 }
 
 export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -33876,6 +34912,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     statusType: Prisma.$StatusTypeMasterPayload<ExtArgs> | null
     updatedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
+    architect: Prisma.$ArchitechuremasterPayload<ExtArgs> | null
     productMappings: Prisma.$LeadProductMappingPayload<ExtArgs>[]
     productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
     leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
@@ -33910,6 +34947,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     source_id: number | null
     archetech_name: string | null
     archetech_number: string | null
+    architect_id: number | null
     designer_remark: string | null
     created_by: number
     created_at: Date
@@ -34410,6 +35448,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   statusType<T extends Prisma.LeadMaster$statusTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$statusTypeArgs<ExtArgs>>): Prisma.Prisma__StatusTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$StatusTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   updatedBy<T extends Prisma.LeadMaster$updatedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$updatedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  architect<T extends Prisma.LeadMaster$architectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$architectArgs<ExtArgs>>): Prisma.Prisma__ArchitechuremasterClient<runtime.Types.Result.GetResult<Prisma.$ArchitechuremasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   productMappings<T extends Prisma.LeadMaster$productMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$productMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   productStructureInstances<T extends Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProductStructureMapping<T extends Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -34471,6 +35510,7 @@ export interface LeadMasterFieldRefs {
   readonly source_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly archetech_name: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly archetech_number: Prisma.FieldRef<"LeadMaster", 'String'>
+  readonly architect_id: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly designer_remark: Prisma.FieldRef<"LeadMaster", 'String'>
   readonly created_by: Prisma.FieldRef<"LeadMaster", 'Int'>
   readonly created_at: Prisma.FieldRef<"LeadMaster", 'DateTime'>
@@ -35600,6 +36640,25 @@ export type LeadMaster$updatedByArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * LeadMaster.architect
+ */
+export type LeadMaster$architectArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Architechuremaster
+   */
+  select?: Prisma.ArchitechuremasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Architechuremaster
+   */
+  omit?: Prisma.ArchitechuremasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArchitechuremasterInclude<ExtArgs> | null
+  where?: Prisma.ArchitechuremasterWhereInput
 }
 
 /**

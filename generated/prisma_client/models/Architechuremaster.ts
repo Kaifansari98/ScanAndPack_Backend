@@ -47,7 +47,7 @@ export type ArchitechuremasterMinAggregateOutputType = {
   isActive: boolean | null
   createdAt: Date | null
   createdBy: number | null
-  isdeletetd: boolean | null
+  isDeleted: boolean | null
   deletedAt: Date | null
 }
 
@@ -60,7 +60,7 @@ export type ArchitechuremasterMaxAggregateOutputType = {
   isActive: boolean | null
   createdAt: Date | null
   createdBy: number | null
-  isdeletetd: boolean | null
+  isDeleted: boolean | null
   deletedAt: Date | null
 }
 
@@ -73,7 +73,7 @@ export type ArchitechuremasterCountAggregateOutputType = {
   isActive: number
   createdAt: number
   createdBy: number
-  isdeletetd: number
+  isDeleted: number
   deletedAt: number
   _all: number
 }
@@ -100,7 +100,7 @@ export type ArchitechuremasterMinAggregateInputType = {
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isdeletetd?: true
+  isDeleted?: true
   deletedAt?: true
 }
 
@@ -113,7 +113,7 @@ export type ArchitechuremasterMaxAggregateInputType = {
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isdeletetd?: true
+  isDeleted?: true
   deletedAt?: true
 }
 
@@ -126,7 +126,7 @@ export type ArchitechuremasterCountAggregateInputType = {
   isActive?: true
   createdAt?: true
   createdBy?: true
-  isdeletetd?: true
+  isDeleted?: true
   deletedAt?: true
   _all?: true
 }
@@ -226,7 +226,7 @@ export type ArchitechuremasterGroupByOutputType = {
   isActive: boolean
   createdAt: Date
   createdBy: number
-  isdeletetd: boolean
+  isDeleted: boolean
   deletedAt: Date | null
   _count: ArchitechuremasterCountAggregateOutputType | null
   _avg: ArchitechuremasterAvgAggregateOutputType | null
@@ -262,10 +262,11 @@ export type ArchitechuremasterWhereInput = {
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isdeletetd?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  leads?: Prisma.LeadMasterListRelationFilter
 }
 
 export type ArchitechuremasterOrderByWithRelationInput = {
@@ -277,10 +278,11 @@ export type ArchitechuremasterOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isdeletetd?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   user?: Prisma.UserMasterOrderByWithRelationInput
+  leads?: Prisma.LeadMasterOrderByRelationAggregateInput
 }
 
 export type ArchitechuremasterWhereUniqueInput = Prisma.AtLeast<{
@@ -295,10 +297,11 @@ export type ArchitechuremasterWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isdeletetd?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   user?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  leads?: Prisma.LeadMasterListRelationFilter
 }, "id">
 
 export type ArchitechuremasterOrderByWithAggregationInput = {
@@ -310,7 +313,7 @@ export type ArchitechuremasterOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isdeletetd?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ArchitechuremasterCountOrderByAggregateInput
   _avg?: Prisma.ArchitechuremasterAvgOrderByAggregateInput
@@ -331,7 +334,7 @@ export type ArchitechuremasterScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntWithAggregatesFilter<"Architechuremaster"> | number
-  isdeletetd?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
+  isDeleted?: Prisma.BoolWithAggregatesFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Architechuremaster"> | Date | string | null
 }
 
@@ -341,10 +344,11 @@ export type ArchitechuremasterCreateInput = {
   mobile: string
   isActive?: boolean
   createdAt?: Date | string
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterUncheckedCreateInput = {
@@ -356,8 +360,9 @@ export type ArchitechuremasterUncheckedCreateInput = {
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterUpdateInput = {
@@ -366,10 +371,11 @@ export type ArchitechuremasterUpdateInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateInput = {
@@ -381,8 +387,9 @@ export type ArchitechuremasterUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterCreateManyInput = {
@@ -394,7 +401,7 @@ export type ArchitechuremasterCreateManyInput = {
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
 }
 
@@ -404,7 +411,7 @@ export type ArchitechuremasterUpdateManyMutationInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -417,7 +424,7 @@ export type ArchitechuremasterUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -431,6 +438,11 @@ export type ArchitechuremasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ArchitechuremasterNullableScalarRelationFilter = {
+  is?: Prisma.ArchitechuremasterWhereInput | null
+  isNot?: Prisma.ArchitechuremasterWhereInput | null
+}
+
 export type ArchitechuremasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendorId?: Prisma.SortOrder
@@ -440,7 +452,7 @@ export type ArchitechuremasterCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isdeletetd?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
 
@@ -459,7 +471,7 @@ export type ArchitechuremasterMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isdeletetd?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
 
@@ -472,7 +484,7 @@ export type ArchitechuremasterMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   createdBy?: Prisma.SortOrder
-  isdeletetd?: Prisma.SortOrder
+  isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
 }
 
@@ -566,15 +578,32 @@ export type ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ArchitechuremasterScalarWhereInput | Prisma.ArchitechuremasterScalarWhereInput[]
 }
 
+export type ArchitechuremasterCreateNestedOneWithoutLeadsInput = {
+  create?: Prisma.XOR<Prisma.ArchitechuremasterCreateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ArchitechuremasterCreateOrConnectWithoutLeadsInput
+  connect?: Prisma.ArchitechuremasterWhereUniqueInput
+}
+
+export type ArchitechuremasterUpdateOneWithoutLeadsNestedInput = {
+  create?: Prisma.XOR<Prisma.ArchitechuremasterCreateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedCreateWithoutLeadsInput>
+  connectOrCreate?: Prisma.ArchitechuremasterCreateOrConnectWithoutLeadsInput
+  upsert?: Prisma.ArchitechuremasterUpsertWithoutLeadsInput
+  disconnect?: Prisma.ArchitechuremasterWhereInput | boolean
+  delete?: Prisma.ArchitechuremasterWhereInput | boolean
+  connect?: Prisma.ArchitechuremasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArchitechuremasterUpdateToOneWithWhereWithoutLeadsInput, Prisma.ArchitechuremasterUpdateWithoutLeadsInput>, Prisma.ArchitechuremasterUncheckedUpdateWithoutLeadsInput>
+}
+
 export type ArchitechuremasterCreateWithoutVendorInput = {
   name: string
   email: string
   mobile: string
   isActive?: boolean
   createdAt?: Date | string
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
   user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterUncheckedCreateWithoutVendorInput = {
@@ -585,8 +614,9 @@ export type ArchitechuremasterUncheckedCreateWithoutVendorInput = {
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterCreateOrConnectWithoutVendorInput = {
@@ -627,7 +657,7 @@ export type ArchitechuremasterScalarWhereInput = {
   isActive?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Architechuremaster"> | Date | string
   createdBy?: Prisma.IntFilter<"Architechuremaster"> | number
-  isdeletetd?: Prisma.BoolFilter<"Architechuremaster"> | boolean
+  isDeleted?: Prisma.BoolFilter<"Architechuremaster"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"Architechuremaster"> | Date | string | null
 }
 
@@ -637,9 +667,10 @@ export type ArchitechuremasterCreateWithoutUserInput = {
   mobile: string
   isActive?: boolean
   createdAt?: Date | string
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
   vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
+  leads?: Prisma.LeadMasterCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterUncheckedCreateWithoutUserInput = {
@@ -650,8 +681,9 @@ export type ArchitechuremasterUncheckedCreateWithoutUserInput = {
   mobile: string
   isActive?: boolean
   createdAt?: Date | string
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
+  leads?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutArchitectInput
 }
 
 export type ArchitechuremasterCreateOrConnectWithoutUserInput = {
@@ -680,6 +712,72 @@ export type ArchitechuremasterUpdateManyWithWhereWithoutUserInput = {
   data: Prisma.XOR<Prisma.ArchitechuremasterUpdateManyMutationInput, Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserInput>
 }
 
+export type ArchitechuremasterCreateWithoutLeadsInput = {
+  name: string
+  email: string
+  mobile: string
+  isActive?: boolean
+  createdAt?: Date | string
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutArchitechuremastersInput
+  user: Prisma.UserMasterCreateNestedOneWithoutArchitechuremastersInput
+}
+
+export type ArchitechuremasterUncheckedCreateWithoutLeadsInput = {
+  id?: number
+  vendorId: number
+  name: string
+  email: string
+  mobile: string
+  isActive?: boolean
+  createdAt?: Date | string
+  createdBy: number
+  isDeleted?: boolean
+  deletedAt?: Date | string | null
+}
+
+export type ArchitechuremasterCreateOrConnectWithoutLeadsInput = {
+  where: Prisma.ArchitechuremasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArchitechuremasterCreateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedCreateWithoutLeadsInput>
+}
+
+export type ArchitechuremasterUpsertWithoutLeadsInput = {
+  update: Prisma.XOR<Prisma.ArchitechuremasterUpdateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedUpdateWithoutLeadsInput>
+  create: Prisma.XOR<Prisma.ArchitechuremasterCreateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedCreateWithoutLeadsInput>
+  where?: Prisma.ArchitechuremasterWhereInput
+}
+
+export type ArchitechuremasterUpdateToOneWithWhereWithoutLeadsInput = {
+  where?: Prisma.ArchitechuremasterWhereInput
+  data: Prisma.XOR<Prisma.ArchitechuremasterUpdateWithoutLeadsInput, Prisma.ArchitechuremasterUncheckedUpdateWithoutLeadsInput>
+}
+
+export type ArchitechuremasterUpdateWithoutLeadsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+}
+
+export type ArchitechuremasterUncheckedUpdateWithoutLeadsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendorId?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  mobile?: Prisma.StringFieldUpdateOperationsInput | string
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdBy?: Prisma.IntFieldUpdateOperationsInput | number
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type ArchitechuremasterCreateManyVendorInput = {
   id?: number
   name: string
@@ -688,7 +786,7 @@ export type ArchitechuremasterCreateManyVendorInput = {
   isActive?: boolean
   createdAt?: Date | string
   createdBy: number
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
 }
 
@@ -698,9 +796,10 @@ export type ArchitechuremasterUpdateWithoutVendorInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateWithoutVendorInput = {
@@ -711,8 +810,9 @@ export type ArchitechuremasterUncheckedUpdateWithoutVendorInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateManyWithoutVendorInput = {
@@ -723,7 +823,7 @@ export type ArchitechuremasterUncheckedUpdateManyWithoutVendorInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdBy?: Prisma.IntFieldUpdateOperationsInput | number
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
@@ -735,7 +835,7 @@ export type ArchitechuremasterCreateManyUserInput = {
   mobile: string
   isActive?: boolean
   createdAt?: Date | string
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: Date | string | null
 }
 
@@ -745,9 +845,10 @@ export type ArchitechuremasterUpdateWithoutUserInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutArchitechuremastersNestedInput
+  leads?: Prisma.LeadMasterUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateWithoutUserInput = {
@@ -758,8 +859,9 @@ export type ArchitechuremasterUncheckedUpdateWithoutUserInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  leads?: Prisma.LeadMasterUncheckedUpdateManyWithoutArchitectNestedInput
 }
 
 export type ArchitechuremasterUncheckedUpdateManyWithoutUserInput = {
@@ -770,10 +872,39 @@ export type ArchitechuremasterUncheckedUpdateManyWithoutUserInput = {
   mobile?: Prisma.StringFieldUpdateOperationsInput | string
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  isdeletetd?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
+
+/**
+ * Count Type ArchitechuremasterCountOutputType
+ */
+
+export type ArchitechuremasterCountOutputType = {
+  leads: number
+}
+
+export type ArchitechuremasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  leads?: boolean | ArchitechuremasterCountOutputTypeCountLeadsArgs
+}
+
+/**
+ * ArchitechuremasterCountOutputType without action
+ */
+export type ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArchitechuremasterCountOutputType
+   */
+  select?: Prisma.ArchitechuremasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ArchitechuremasterCountOutputType without action
+ */
+export type ArchitechuremasterCountOutputTypeCountLeadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadMasterWhereInput
+}
 
 
 export type ArchitechuremasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -785,10 +916,12 @@ export type ArchitechuremasterSelect<ExtArgs extends runtime.Types.Extensions.In
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
+  _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["architechuremaster"]>
 
 export type ArchitechuremasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -800,7 +933,7 @@ export type ArchitechuremasterSelectCreateManyAndReturn<ExtArgs extends runtime.
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -815,7 +948,7 @@ export type ArchitechuremasterSelectUpdateManyAndReturn<ExtArgs extends runtime.
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
@@ -830,14 +963,16 @@ export type ArchitechuremasterSelectScalar = {
   isActive?: boolean
   createdAt?: boolean
   createdBy?: boolean
-  isdeletetd?: boolean
+  isDeleted?: boolean
   deletedAt?: boolean
 }
 
-export type ArchitechuremasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "name" | "email" | "mobile" | "isActive" | "createdAt" | "createdBy" | "isdeletetd" | "deletedAt", ExtArgs["result"]["architechuremaster"]>
+export type ArchitechuremasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendorId" | "name" | "email" | "mobile" | "isActive" | "createdAt" | "createdBy" | "isDeleted" | "deletedAt", ExtArgs["result"]["architechuremaster"]>
 export type ArchitechuremasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  leads?: boolean | Prisma.Architechuremaster$leadsArgs<ExtArgs>
+  _count?: boolean | Prisma.ArchitechuremasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArchitechuremasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -853,6 +988,7 @@ export type $ArchitechuremasterPayload<ExtArgs extends runtime.Types.Extensions.
   objects: {
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     user: Prisma.$UserMasterPayload<ExtArgs>
+    leads: Prisma.$LeadMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -863,7 +999,7 @@ export type $ArchitechuremasterPayload<ExtArgs extends runtime.Types.Extensions.
     isActive: boolean
     createdAt: Date
     createdBy: number
-    isdeletetd: boolean
+    isDeleted: boolean
     deletedAt: Date | null
   }, ExtArgs["result"]["architechuremaster"]>
   composites: {}
@@ -1261,6 +1397,7 @@ export interface Prisma__ArchitechuremasterClient<T, Null = never, ExtArgs exten
   readonly [Symbol.toStringTag]: "PrismaPromise"
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  leads<T extends Prisma.Architechuremaster$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Architechuremaster$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1298,7 +1435,7 @@ export interface ArchitechuremasterFieldRefs {
   readonly isActive: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Architechuremaster", 'DateTime'>
   readonly createdBy: Prisma.FieldRef<"Architechuremaster", 'Int'>
-  readonly isdeletetd: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
+  readonly isDeleted: Prisma.FieldRef<"Architechuremaster", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"Architechuremaster", 'DateTime'>
 }
     
@@ -1698,6 +1835,30 @@ export type ArchitechuremasterDeleteManyArgs<ExtArgs extends runtime.Types.Exten
    * Limit how many Architechuremasters to delete.
    */
   limit?: number
+}
+
+/**
+ * Architechuremaster.leads
+ */
+export type Architechuremaster$leadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadMaster
+   */
+  select?: Prisma.LeadMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadMaster
+   */
+  omit?: Prisma.LeadMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadMasterInclude<ExtArgs> | null
+  where?: Prisma.LeadMasterWhereInput
+  orderBy?: Prisma.LeadMasterOrderByWithRelationInput | Prisma.LeadMasterOrderByWithRelationInput[]
+  cursor?: Prisma.LeadMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadMasterScalarFieldEnum | Prisma.LeadMasterScalarFieldEnum[]
 }
 
 /**
