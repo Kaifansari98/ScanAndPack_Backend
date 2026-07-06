@@ -208,16 +208,6 @@ export type LeadChatDocument = Prisma.LeadChatDocumentModel
  */
 export type ProductStructure = Prisma.ProductStructureModel
 /**
- * Model ProductSubStructure
- * 
- */
-export type ProductSubStructure = Prisma.ProductSubStructureModel
-/**
- * Model ProductItemCode
- * 
- */
-export type ProductItemCode = Prisma.ProductItemCodeModel
-/**
  * Model LeadProductStructureMapping
  * 
  */
@@ -743,7 +733,17 @@ export type POPaymentSchedule = Prisma.POPaymentScheduleModel
  */
 export type POPayment = Prisma.POPaymentModel
 /**
- * Model Architechuremaster
+ * Model UnitMaster
  * 
  */
-export type Architechuremaster = Prisma.ArchitechuremasterModel
+export type UnitMaster = Prisma.UnitMasterModel
+/**
+ * Model ItemGroupMaster
+ * 
+ */
+export type ItemGroupMaster = Prisma.ItemGroupMasterModel
+/**
+ * Model ProductSupplierMapping
+ * 
+ */
+export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel

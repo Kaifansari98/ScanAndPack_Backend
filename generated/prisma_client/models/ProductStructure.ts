@@ -29,20 +29,17 @@ export type AggregateProductStructure = {
 export type ProductStructureAvgAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  product_type_id: number | null
 }
 
 export type ProductStructureSumAggregateOutputType = {
   id: number | null
   vendor_id: number | null
-  product_type_id: number | null
 }
 
 export type ProductStructureMinAggregateOutputType = {
   id: number | null
   type: string | null
   vendor_id: number | null
-  product_type_id: number | null
   parent: string | null
   status: string | null
 }
@@ -51,7 +48,6 @@ export type ProductStructureMaxAggregateOutputType = {
   id: number | null
   type: string | null
   vendor_id: number | null
-  product_type_id: number | null
   parent: string | null
   status: string | null
 }
@@ -60,7 +56,6 @@ export type ProductStructureCountAggregateOutputType = {
   id: number
   type: number
   vendor_id: number
-  product_type_id: number
   parent: number
   status: number
   _all: number
@@ -70,20 +65,17 @@ export type ProductStructureCountAggregateOutputType = {
 export type ProductStructureAvgAggregateInputType = {
   id?: true
   vendor_id?: true
-  product_type_id?: true
 }
 
 export type ProductStructureSumAggregateInputType = {
   id?: true
   vendor_id?: true
-  product_type_id?: true
 }
 
 export type ProductStructureMinAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
-  product_type_id?: true
   parent?: true
   status?: true
 }
@@ -92,7 +84,6 @@ export type ProductStructureMaxAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
-  product_type_id?: true
   parent?: true
   status?: true
 }
@@ -101,7 +92,6 @@ export type ProductStructureCountAggregateInputType = {
   id?: true
   type?: true
   vendor_id?: true
-  product_type_id?: true
   parent?: true
   status?: true
   _all?: true
@@ -197,7 +187,6 @@ export type ProductStructureGroupByOutputType = {
   id: number
   type: string
   vendor_id: number
-  product_type_id: number | null
   parent: string | null
   status: string
   _count: ProductStructureCountAggregateOutputType | null
@@ -229,14 +218,10 @@ export type ProductStructureWhereInput = {
   id?: Prisma.IntFilter<"ProductStructure"> | number
   type?: Prisma.StringFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntFilter<"ProductStructure"> | number
-  product_type_id?: Prisma.IntNullableFilter<"ProductStructure"> | number | null
   parent?: Prisma.StringNullableFilter<"ProductStructure"> | string | null
   status?: Prisma.StringFilter<"ProductStructure"> | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
-  productSubStructures?: Prisma.ProductSubStructureListRelationFilter
-  productItemCodes?: Prisma.ProductItemCodeListRelationFilter
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -244,14 +229,10 @@ export type ProductStructureOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   parent?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   productStructureInstances?: Prisma.LeadProductStructureInstanceOrderByRelationAggregateInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOrderByRelationAggregateInput
-  productSubStructures?: Prisma.ProductSubStructureOrderByRelationAggregateInput
-  productItemCodes?: Prisma.ProductItemCodeOrderByRelationAggregateInput
-  productType?: Prisma.ProductTypeMasterOrderByWithRelationInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -262,14 +243,10 @@ export type ProductStructureWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ProductStructureWhereInput | Prisma.ProductStructureWhereInput[]
   type?: Prisma.StringFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntFilter<"ProductStructure"> | number
-  product_type_id?: Prisma.IntNullableFilter<"ProductStructure"> | number | null
   parent?: Prisma.StringNullableFilter<"ProductStructure"> | string | null
   status?: Prisma.StringFilter<"ProductStructure"> | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceListRelationFilter
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingListRelationFilter
-  productSubStructures?: Prisma.ProductSubStructureListRelationFilter
-  productItemCodes?: Prisma.ProductItemCodeListRelationFilter
-  productType?: Prisma.XOR<Prisma.ProductTypeMasterNullableScalarRelationFilter, Prisma.ProductTypeMasterWhereInput> | null
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -277,7 +254,6 @@ export type ProductStructureOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrderInput | Prisma.SortOrder
   parent?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   _count?: Prisma.ProductStructureCountOrderByAggregateInput
@@ -294,7 +270,6 @@ export type ProductStructureScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"ProductStructure"> | number
   type?: Prisma.StringWithAggregatesFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntWithAggregatesFilter<"ProductStructure"> | number
-  product_type_id?: Prisma.IntNullableWithAggregatesFilter<"ProductStructure"> | number | null
   parent?: Prisma.StringNullableWithAggregatesFilter<"ProductStructure"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"ProductStructure"> | string
 }
@@ -305,9 +280,6 @@ export type ProductStructureCreateInput = {
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
 }
 
@@ -315,13 +287,10 @@ export type ProductStructureUncheckedCreateInput = {
   id?: number
   type: string
   vendor_id: number
-  product_type_id?: number | null
   parent?: string | null
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
 }
 
 export type ProductStructureUpdateInput = {
@@ -330,9 +299,6 @@ export type ProductStructureUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
 }
 
@@ -340,20 +306,16 @@ export type ProductStructureUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
 }
 
 export type ProductStructureCreateManyInput = {
   id?: number
   type: string
   vendor_id: number
-  product_type_id?: number | null
   parent?: string | null
   status?: string
 }
@@ -368,7 +330,6 @@ export type ProductStructureUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -387,7 +348,6 @@ export type ProductStructureCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
   parent?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
@@ -395,14 +355,12 @@ export type ProductStructureCountOrderByAggregateInput = {
 export type ProductStructureAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type ProductStructureMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
   parent?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
@@ -411,7 +369,6 @@ export type ProductStructureMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
   parent?: Prisma.SortOrder
   status?: Prisma.SortOrder
 }
@@ -419,7 +376,6 @@ export type ProductStructureMinOrderByAggregateInput = {
 export type ProductStructureSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-  product_type_id?: Prisma.SortOrder
 }
 
 export type ProductStructureScalarRelationFilter = {
@@ -469,76 +425,6 @@ export type ProductStructureUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.ProductStructureScalarWhereInput | Prisma.ProductStructureScalarWhereInput[]
 }
 
-export type ProductStructureCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput> | Prisma.ProductStructureCreateWithoutProductTypeInput[] | Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput | Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.ProductStructureCreateManyProductTypeInputEnvelope
-  connect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-}
-
-export type ProductStructureUncheckedCreateNestedManyWithoutProductTypeInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput> | Prisma.ProductStructureCreateWithoutProductTypeInput[] | Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput | Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput[]
-  createMany?: Prisma.ProductStructureCreateManyProductTypeInputEnvelope
-  connect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-}
-
-export type ProductStructureUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput> | Prisma.ProductStructureCreateWithoutProductTypeInput[] | Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput | Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.ProductStructureUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.ProductStructureUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.ProductStructureCreateManyProductTypeInputEnvelope
-  set?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  disconnect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  delete?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  connect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  update?: Prisma.ProductStructureUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.ProductStructureUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.ProductStructureUpdateManyWithWhereWithoutProductTypeInput | Prisma.ProductStructureUpdateManyWithWhereWithoutProductTypeInput[]
-  deleteMany?: Prisma.ProductStructureScalarWhereInput | Prisma.ProductStructureScalarWhereInput[]
-}
-
-export type ProductStructureUncheckedUpdateManyWithoutProductTypeNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput> | Prisma.ProductStructureCreateWithoutProductTypeInput[] | Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput[]
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput | Prisma.ProductStructureCreateOrConnectWithoutProductTypeInput[]
-  upsert?: Prisma.ProductStructureUpsertWithWhereUniqueWithoutProductTypeInput | Prisma.ProductStructureUpsertWithWhereUniqueWithoutProductTypeInput[]
-  createMany?: Prisma.ProductStructureCreateManyProductTypeInputEnvelope
-  set?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  disconnect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  delete?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  connect?: Prisma.ProductStructureWhereUniqueInput | Prisma.ProductStructureWhereUniqueInput[]
-  update?: Prisma.ProductStructureUpdateWithWhereUniqueWithoutProductTypeInput | Prisma.ProductStructureUpdateWithWhereUniqueWithoutProductTypeInput[]
-  updateMany?: Prisma.ProductStructureUpdateManyWithWhereWithoutProductTypeInput | Prisma.ProductStructureUpdateManyWithWhereWithoutProductTypeInput[]
-  deleteMany?: Prisma.ProductStructureScalarWhereInput | Prisma.ProductStructureScalarWhereInput[]
-}
-
-export type ProductStructureCreateNestedOneWithoutProductSubStructuresInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedCreateWithoutProductSubStructuresInput>
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductSubStructuresInput
-  connect?: Prisma.ProductStructureWhereUniqueInput
-}
-
-export type ProductStructureUpdateOneRequiredWithoutProductSubStructuresNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedCreateWithoutProductSubStructuresInput>
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductSubStructuresInput
-  upsert?: Prisma.ProductStructureUpsertWithoutProductSubStructuresInput
-  connect?: Prisma.ProductStructureWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductStructureUpdateToOneWithWhereWithoutProductSubStructuresInput, Prisma.ProductStructureUpdateWithoutProductSubStructuresInput>, Prisma.ProductStructureUncheckedUpdateWithoutProductSubStructuresInput>
-}
-
-export type ProductStructureCreateNestedOneWithoutProductItemCodesInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedCreateWithoutProductItemCodesInput>
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductItemCodesInput
-  connect?: Prisma.ProductStructureWhereUniqueInput
-}
-
-export type ProductStructureUpdateOneRequiredWithoutProductItemCodesNestedInput = {
-  create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedCreateWithoutProductItemCodesInput>
-  connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutProductItemCodesInput
-  upsert?: Prisma.ProductStructureUpsertWithoutProductItemCodesInput
-  connect?: Prisma.ProductStructureWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductStructureUpdateToOneWithWhereWithoutProductItemCodesInput, Prisma.ProductStructureUpdateWithoutProductItemCodesInput>, Prisma.ProductStructureUncheckedUpdateWithoutProductItemCodesInput>
-}
-
 export type ProductStructureCreateNestedOneWithoutLeadProductStructureMappingInput = {
   create?: Prisma.XOR<Prisma.ProductStructureCreateWithoutLeadProductStructureMappingInput, Prisma.ProductStructureUncheckedCreateWithoutLeadProductStructureMappingInput>
   connectOrCreate?: Prisma.ProductStructureCreateOrConnectWithoutLeadProductStructureMappingInput
@@ -573,21 +459,15 @@ export type ProductStructureCreateWithoutVendorInput = {
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
 }
 
 export type ProductStructureUncheckedCreateWithoutVendorInput = {
   id?: number
   type: string
-  product_type_id?: number | null
   parent?: string | null
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
 }
 
 export type ProductStructureCreateOrConnectWithoutVendorInput = {
@@ -623,182 +503,8 @@ export type ProductStructureScalarWhereInput = {
   id?: Prisma.IntFilter<"ProductStructure"> | number
   type?: Prisma.StringFilter<"ProductStructure"> | string
   vendor_id?: Prisma.IntFilter<"ProductStructure"> | number
-  product_type_id?: Prisma.IntNullableFilter<"ProductStructure"> | number | null
   parent?: Prisma.StringNullableFilter<"ProductStructure"> | string | null
   status?: Prisma.StringFilter<"ProductStructure"> | string
-}
-
-export type ProductStructureCreateWithoutProductTypeInput = {
-  type: string
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
-}
-
-export type ProductStructureUncheckedCreateWithoutProductTypeInput = {
-  id?: number
-  type: string
-  vendor_id: number
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
-}
-
-export type ProductStructureCreateOrConnectWithoutProductTypeInput = {
-  where: Prisma.ProductStructureWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput>
-}
-
-export type ProductStructureCreateManyProductTypeInputEnvelope = {
-  data: Prisma.ProductStructureCreateManyProductTypeInput | Prisma.ProductStructureCreateManyProductTypeInput[]
-  skipDuplicates?: boolean
-}
-
-export type ProductStructureUpsertWithWhereUniqueWithoutProductTypeInput = {
-  where: Prisma.ProductStructureWhereUniqueInput
-  update: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductTypeInput, Prisma.ProductStructureUncheckedUpdateWithoutProductTypeInput>
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductTypeInput, Prisma.ProductStructureUncheckedCreateWithoutProductTypeInput>
-}
-
-export type ProductStructureUpdateWithWhereUniqueWithoutProductTypeInput = {
-  where: Prisma.ProductStructureWhereUniqueInput
-  data: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductTypeInput, Prisma.ProductStructureUncheckedUpdateWithoutProductTypeInput>
-}
-
-export type ProductStructureUpdateManyWithWhereWithoutProductTypeInput = {
-  where: Prisma.ProductStructureScalarWhereInput
-  data: Prisma.XOR<Prisma.ProductStructureUpdateManyMutationInput, Prisma.ProductStructureUncheckedUpdateManyWithoutProductTypeInput>
-}
-
-export type ProductStructureCreateWithoutProductSubStructuresInput = {
-  type: string
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
-}
-
-export type ProductStructureUncheckedCreateWithoutProductSubStructuresInput = {
-  id?: number
-  type: string
-  vendor_id: number
-  product_type_id?: number | null
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
-}
-
-export type ProductStructureCreateOrConnectWithoutProductSubStructuresInput = {
-  where: Prisma.ProductStructureWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedCreateWithoutProductSubStructuresInput>
-}
-
-export type ProductStructureUpsertWithoutProductSubStructuresInput = {
-  update: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedUpdateWithoutProductSubStructuresInput>
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedCreateWithoutProductSubStructuresInput>
-  where?: Prisma.ProductStructureWhereInput
-}
-
-export type ProductStructureUpdateToOneWithWhereWithoutProductSubStructuresInput = {
-  where?: Prisma.ProductStructureWhereInput
-  data: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductSubStructuresInput, Prisma.ProductStructureUncheckedUpdateWithoutProductSubStructuresInput>
-}
-
-export type ProductStructureUpdateWithoutProductSubStructuresInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
-}
-
-export type ProductStructureUncheckedUpdateWithoutProductSubStructuresInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
-}
-
-export type ProductStructureCreateWithoutProductItemCodesInput = {
-  type: string
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
-  vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
-}
-
-export type ProductStructureUncheckedCreateWithoutProductItemCodesInput = {
-  id?: number
-  type: string
-  vendor_id: number
-  product_type_id?: number | null
-  parent?: string | null
-  status?: string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-}
-
-export type ProductStructureCreateOrConnectWithoutProductItemCodesInput = {
-  where: Prisma.ProductStructureWhereUniqueInput
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedCreateWithoutProductItemCodesInput>
-}
-
-export type ProductStructureUpsertWithoutProductItemCodesInput = {
-  update: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedUpdateWithoutProductItemCodesInput>
-  create: Prisma.XOR<Prisma.ProductStructureCreateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedCreateWithoutProductItemCodesInput>
-  where?: Prisma.ProductStructureWhereInput
-}
-
-export type ProductStructureUpdateToOneWithWhereWithoutProductItemCodesInput = {
-  where?: Prisma.ProductStructureWhereInput
-  data: Prisma.XOR<Prisma.ProductStructureUpdateWithoutProductItemCodesInput, Prisma.ProductStructureUncheckedUpdateWithoutProductItemCodesInput>
-}
-
-export type ProductStructureUpdateWithoutProductItemCodesInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
-}
-
-export type ProductStructureUncheckedUpdateWithoutProductItemCodesInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
 }
 
 export type ProductStructureCreateWithoutLeadProductStructureMappingInput = {
@@ -806,9 +512,6 @@ export type ProductStructureCreateWithoutLeadProductStructureMappingInput = {
   parent?: string | null
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
 }
 
@@ -816,12 +519,9 @@ export type ProductStructureUncheckedCreateWithoutLeadProductStructureMappingInp
   id?: number
   type: string
   vendor_id: number
-  product_type_id?: number | null
   parent?: string | null
   status?: string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
 }
 
 export type ProductStructureCreateOrConnectWithoutLeadProductStructureMappingInput = {
@@ -845,9 +545,6 @@ export type ProductStructureUpdateWithoutLeadProductStructureMappingInput = {
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
 }
 
@@ -855,12 +552,9 @@ export type ProductStructureUncheckedUpdateWithoutLeadProductStructureMappingInp
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
 }
 
 export type ProductStructureCreateWithoutProductStructureInstancesInput = {
@@ -868,9 +562,6 @@ export type ProductStructureCreateWithoutProductStructureInstancesInput = {
   parent?: string | null
   status?: string
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeCreateNestedManyWithoutProductStructureInput
-  productType?: Prisma.ProductTypeMasterCreateNestedOneWithoutProductStructuresInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutProductStructureInput
 }
 
@@ -878,12 +569,9 @@ export type ProductStructureUncheckedCreateWithoutProductStructureInstancesInput
   id?: number
   type: string
   vendor_id: number
-  product_type_id?: number | null
   parent?: string | null
   status?: string
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutProductStructureInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedCreateNestedManyWithoutProductStructureInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedCreateNestedManyWithoutProductStructureInput
 }
 
 export type ProductStructureCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -907,9 +595,6 @@ export type ProductStructureUpdateWithoutProductStructureInstancesInput = {
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
 }
 
@@ -917,18 +602,14 @@ export type ProductStructureUncheckedUpdateWithoutProductStructureInstancesInput
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
 }
 
 export type ProductStructureCreateManyVendorInput = {
   id?: number
   type: string
-  product_type_id?: number | null
   parent?: string | null
   status?: string
 }
@@ -939,66 +620,20 @@ export type ProductStructureUpdateWithoutVendorInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  productType?: Prisma.ProductTypeMasterUpdateOneWithoutProductStructuresNestedInput
 }
 
 export type ProductStructureUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
 }
 
 export type ProductStructureUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.StringFieldUpdateOperationsInput | string
-  product_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type ProductStructureCreateManyProductTypeInput = {
-  id?: number
-  type: string
-  vendor_id: number
-  parent?: string | null
-  status?: string
-}
-
-export type ProductStructureUpdateWithoutProductTypeInput = {
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUpdateManyWithoutProductStructureNestedInput
-  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutProductStructureNestedInput
-}
-
-export type ProductStructureUncheckedUpdateWithoutProductTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
-  parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutProductStructureNestedInput
-  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutProductStructureNestedInput
-  productSubStructures?: Prisma.ProductSubStructureUncheckedUpdateManyWithoutProductStructureNestedInput
-  productItemCodes?: Prisma.ProductItemCodeUncheckedUpdateManyWithoutProductStructureNestedInput
-}
-
-export type ProductStructureUncheckedUpdateManyWithoutProductTypeInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  type?: Prisma.StringFieldUpdateOperationsInput | string
-  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   parent?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -1011,15 +646,11 @@ export type ProductStructureUncheckedUpdateManyWithoutProductTypeInput = {
 export type ProductStructureCountOutputType = {
   productStructureInstances: number
   leadProductStructureMapping: number
-  productSubStructures: number
-  productItemCodes: number
 }
 
 export type ProductStructureCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productStructureInstances?: boolean | ProductStructureCountOutputTypeCountProductStructureInstancesArgs
   leadProductStructureMapping?: boolean | ProductStructureCountOutputTypeCountLeadProductStructureMappingArgs
-  productSubStructures?: boolean | ProductStructureCountOutputTypeCountProductSubStructuresArgs
-  productItemCodes?: boolean | ProductStructureCountOutputTypeCountProductItemCodesArgs
 }
 
 /**
@@ -1046,33 +677,15 @@ export type ProductStructureCountOutputTypeCountLeadProductStructureMappingArgs<
   where?: Prisma.LeadProductStructureMappingWhereInput
 }
 
-/**
- * ProductStructureCountOutputType without action
- */
-export type ProductStructureCountOutputTypeCountProductSubStructuresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductSubStructureWhereInput
-}
-
-/**
- * ProductStructureCountOutputType without action
- */
-export type ProductStructureCountOutputTypeCountProductItemCodesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ProductItemCodeWhereInput
-}
-
 
 export type ProductStructureSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  product_type_id?: boolean
   parent?: boolean
   status?: boolean
   productStructureInstances?: boolean | Prisma.ProductStructure$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>
-  productSubStructures?: boolean | Prisma.ProductStructure$productSubStructuresArgs<ExtArgs>
-  productItemCodes?: boolean | Prisma.ProductStructure$productItemCodesArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductStructureCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStructure"]>
@@ -1081,10 +694,8 @@ export type ProductStructureSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  product_type_id?: boolean
   parent?: boolean
   status?: boolean
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStructure"]>
 
@@ -1092,10 +703,8 @@ export type ProductStructureSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  product_type_id?: boolean
   parent?: boolean
   status?: boolean
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["productStructure"]>
 
@@ -1103,27 +712,21 @@ export type ProductStructureSelectScalar = {
   id?: boolean
   type?: boolean
   vendor_id?: boolean
-  product_type_id?: boolean
   parent?: boolean
   status?: boolean
 }
 
-export type ProductStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "product_type_id" | "parent" | "status", ExtArgs["result"]["productStructure"]>
+export type ProductStructureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "vendor_id" | "parent" | "status", ExtArgs["result"]["productStructure"]>
 export type ProductStructureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   productStructureInstances?: boolean | Prisma.ProductStructure$productStructureInstancesArgs<ExtArgs>
   leadProductStructureMapping?: boolean | Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>
-  productSubStructures?: boolean | Prisma.ProductStructure$productSubStructuresArgs<ExtArgs>
-  productItemCodes?: boolean | Prisma.ProductStructure$productItemCodesArgs<ExtArgs>
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProductStructureCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductStructureIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 export type ProductStructureIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  productType?: boolean | Prisma.ProductStructure$productTypeArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
 }
 
@@ -1132,16 +735,12 @@ export type $ProductStructurePayload<ExtArgs extends runtime.Types.Extensions.In
   objects: {
     productStructureInstances: Prisma.$LeadProductStructureInstancePayload<ExtArgs>[]
     leadProductStructureMapping: Prisma.$LeadProductStructureMappingPayload<ExtArgs>[]
-    productSubStructures: Prisma.$ProductSubStructurePayload<ExtArgs>[]
-    productItemCodes: Prisma.$ProductItemCodePayload<ExtArgs>[]
-    productType: Prisma.$ProductTypeMasterPayload<ExtArgs> | null
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     type: string
     vendor_id: number
-    product_type_id: number | null
     parent: string | null
     status: string
   }, ExtArgs["result"]["productStructure"]>
@@ -1540,9 +1139,6 @@ export interface Prisma__ProductStructureClient<T, Null = never, ExtArgs extends
   readonly [Symbol.toStringTag]: "PrismaPromise"
   productStructureInstances<T extends Prisma.ProductStructure$productStructureInstancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$productStructureInstancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureInstancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadProductStructureMapping<T extends Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$leadProductStructureMappingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadProductStructureMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  productSubStructures<T extends Prisma.ProductStructure$productSubStructuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$productSubStructuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductSubStructurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  productItemCodes<T extends Prisma.ProductStructure$productItemCodesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$productItemCodesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductItemCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  productType<T extends Prisma.ProductStructure$productTypeArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProductStructure$productTypeArgs<ExtArgs>>): Prisma.Prisma__ProductTypeMasterClient<runtime.Types.Result.GetResult<Prisma.$ProductTypeMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1576,7 +1172,6 @@ export interface ProductStructureFieldRefs {
   readonly id: Prisma.FieldRef<"ProductStructure", 'Int'>
   readonly type: Prisma.FieldRef<"ProductStructure", 'String'>
   readonly vendor_id: Prisma.FieldRef<"ProductStructure", 'Int'>
-  readonly product_type_id: Prisma.FieldRef<"ProductStructure", 'Int'>
   readonly parent: Prisma.FieldRef<"ProductStructure", 'String'>
   readonly status: Prisma.FieldRef<"ProductStructure", 'String'>
 }
@@ -2025,73 +1620,6 @@ export type ProductStructure$leadProductStructureMappingArgs<ExtArgs extends run
   take?: number
   skip?: number
   distinct?: Prisma.LeadProductStructureMappingScalarFieldEnum | Prisma.LeadProductStructureMappingScalarFieldEnum[]
-}
-
-/**
- * ProductStructure.productSubStructures
- */
-export type ProductStructure$productSubStructuresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProductSubStructure
-   */
-  select?: Prisma.ProductSubStructureSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProductSubStructure
-   */
-  omit?: Prisma.ProductSubStructureOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductSubStructureInclude<ExtArgs> | null
-  where?: Prisma.ProductSubStructureWhereInput
-  orderBy?: Prisma.ProductSubStructureOrderByWithRelationInput | Prisma.ProductSubStructureOrderByWithRelationInput[]
-  cursor?: Prisma.ProductSubStructureWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProductSubStructureScalarFieldEnum | Prisma.ProductSubStructureScalarFieldEnum[]
-}
-
-/**
- * ProductStructure.productItemCodes
- */
-export type ProductStructure$productItemCodesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProductItemCode
-   */
-  select?: Prisma.ProductItemCodeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProductItemCode
-   */
-  omit?: Prisma.ProductItemCodeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductItemCodeInclude<ExtArgs> | null
-  where?: Prisma.ProductItemCodeWhereInput
-  orderBy?: Prisma.ProductItemCodeOrderByWithRelationInput | Prisma.ProductItemCodeOrderByWithRelationInput[]
-  cursor?: Prisma.ProductItemCodeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ProductItemCodeScalarFieldEnum | Prisma.ProductItemCodeScalarFieldEnum[]
-}
-
-/**
- * ProductStructure.productType
- */
-export type ProductStructure$productTypeArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ProductTypeMaster
-   */
-  select?: Prisma.ProductTypeMasterSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ProductTypeMaster
-   */
-  omit?: Prisma.ProductTypeMasterOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ProductTypeMasterInclude<ExtArgs> | null
-  where?: Prisma.ProductTypeMasterWhereInput
 }
 
 /**

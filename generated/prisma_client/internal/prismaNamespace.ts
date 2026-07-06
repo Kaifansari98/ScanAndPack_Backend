@@ -422,8 +422,6 @@ export const ModelName = {
   LeadChatMention: 'LeadChatMention',
   LeadChatDocument: 'LeadChatDocument',
   ProductStructure: 'ProductStructure',
-  ProductSubStructure: 'ProductSubStructure',
-  ProductItemCode: 'ProductItemCode',
   LeadProductStructureMapping: 'LeadProductStructureMapping',
   LeadProductStructureInstance: 'LeadProductStructureInstance',
   SelfAssignTaskTypeMaster: 'SelfAssignTaskTypeMaster',
@@ -529,7 +527,9 @@ export const ModelName = {
   PaymentTermStage: 'PaymentTermStage',
   POPaymentSchedule: 'POPaymentSchedule',
   POPayment: 'POPayment',
-  Architechuremaster: 'Architechuremaster'
+  UnitMaster: 'UnitMaster',
+  ItemGroupMaster: 'ItemGroupMaster',
+  ProductSupplierMapping: 'ProductSupplierMapping'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -545,7 +545,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "architechuremaster"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3358,154 +3358,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ProductStructureCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ProductStructureCountAggregateOutputType> | number
-        }
-      }
-    }
-    ProductSubStructure: {
-      payload: Prisma.$ProductSubStructurePayload<ExtArgs>
-      fields: Prisma.ProductSubStructureFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ProductSubStructureFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ProductSubStructureFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        findFirst: {
-          args: Prisma.ProductSubStructureFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ProductSubStructureFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        findMany: {
-          args: Prisma.ProductSubStructureFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>[]
-        }
-        create: {
-          args: Prisma.ProductSubStructureCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        createMany: {
-          args: Prisma.ProductSubStructureCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ProductSubStructureCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>[]
-        }
-        delete: {
-          args: Prisma.ProductSubStructureDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        update: {
-          args: Prisma.ProductSubStructureUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        deleteMany: {
-          args: Prisma.ProductSubStructureDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ProductSubStructureUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ProductSubStructureUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>[]
-        }
-        upsert: {
-          args: Prisma.ProductSubStructureUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSubStructurePayload>
-        }
-        aggregate: {
-          args: Prisma.ProductSubStructureAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProductSubStructure>
-        }
-        groupBy: {
-          args: Prisma.ProductSubStructureGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductSubStructureGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ProductSubStructureCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductSubStructureCountAggregateOutputType> | number
-        }
-      }
-    }
-    ProductItemCode: {
-      payload: Prisma.$ProductItemCodePayload<ExtArgs>
-      fields: Prisma.ProductItemCodeFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ProductItemCodeFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ProductItemCodeFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        findFirst: {
-          args: Prisma.ProductItemCodeFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ProductItemCodeFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        findMany: {
-          args: Prisma.ProductItemCodeFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>[]
-        }
-        create: {
-          args: Prisma.ProductItemCodeCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        createMany: {
-          args: Prisma.ProductItemCodeCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.ProductItemCodeCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>[]
-        }
-        delete: {
-          args: Prisma.ProductItemCodeDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        update: {
-          args: Prisma.ProductItemCodeUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        deleteMany: {
-          args: Prisma.ProductItemCodeDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ProductItemCodeUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.ProductItemCodeUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>[]
-        }
-        upsert: {
-          args: Prisma.ProductItemCodeUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductItemCodePayload>
-        }
-        aggregate: {
-          args: Prisma.ProductItemCodeAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateProductItemCode>
-        }
-        groupBy: {
-          args: Prisma.ProductItemCodeGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductItemCodeGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ProductItemCodeCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ProductItemCodeCountAggregateOutputType> | number
         }
       }
     }
@@ -11279,77 +11131,225 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Architechuremaster: {
-      payload: Prisma.$ArchitechuremasterPayload<ExtArgs>
-      fields: Prisma.ArchitechuremasterFieldRefs
+    UnitMaster: {
+      payload: Prisma.$UnitMasterPayload<ExtArgs>
+      fields: Prisma.UnitMasterFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.ArchitechuremasterFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload> | null
+          args: Prisma.UnitMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.ArchitechuremasterFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         findFirst: {
-          args: Prisma.ArchitechuremasterFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload> | null
+          args: Prisma.UnitMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.ArchitechuremasterFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         findMany: {
-          args: Prisma.ArchitechuremasterFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>[]
+          args: Prisma.UnitMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>[]
         }
         create: {
-          args: Prisma.ArchitechuremasterCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         createMany: {
-          args: Prisma.ArchitechuremasterCreateManyArgs<ExtArgs>
+          args: Prisma.UnitMasterCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.ArchitechuremasterCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>[]
+          args: Prisma.UnitMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>[]
         }
         delete: {
-          args: Prisma.ArchitechuremasterDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         update: {
-          args: Prisma.ArchitechuremasterUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         deleteMany: {
-          args: Prisma.ArchitechuremasterDeleteManyArgs<ExtArgs>
+          args: Prisma.UnitMasterDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.ArchitechuremasterUpdateManyArgs<ExtArgs>
+          args: Prisma.UnitMasterUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.ArchitechuremasterUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>[]
+          args: Prisma.UnitMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>[]
         }
         upsert: {
-          args: Prisma.ArchitechuremasterUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ArchitechuremasterPayload>
+          args: Prisma.UnitMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UnitMasterPayload>
         }
         aggregate: {
-          args: Prisma.ArchitechuremasterAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateArchitechuremaster>
+          args: Prisma.UnitMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUnitMaster>
         }
         groupBy: {
-          args: Prisma.ArchitechuremasterGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ArchitechuremasterGroupByOutputType>[]
+          args: Prisma.UnitMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnitMasterGroupByOutputType>[]
         }
         count: {
-          args: Prisma.ArchitechuremasterCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ArchitechuremasterCountAggregateOutputType> | number
+          args: Prisma.UnitMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UnitMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ItemGroupMaster: {
+      payload: Prisma.$ItemGroupMasterPayload<ExtArgs>
+      fields: Prisma.ItemGroupMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ItemGroupMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ItemGroupMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.ItemGroupMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ItemGroupMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        findMany: {
+          args: Prisma.ItemGroupMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>[]
+        }
+        create: {
+          args: Prisma.ItemGroupMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        createMany: {
+          args: Prisma.ItemGroupMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ItemGroupMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.ItemGroupMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        update: {
+          args: Prisma.ItemGroupMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.ItemGroupMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ItemGroupMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ItemGroupMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.ItemGroupMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ItemGroupMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.ItemGroupMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateItemGroupMaster>
+        }
+        groupBy: {
+          args: Prisma.ItemGroupMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ItemGroupMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ItemGroupMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ItemGroupMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProductSupplierMapping: {
+      payload: Prisma.$ProductSupplierMappingPayload<ExtArgs>
+      fields: Prisma.ProductSupplierMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProductSupplierMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProductSupplierMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.ProductSupplierMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProductSupplierMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        findMany: {
+          args: Prisma.ProductSupplierMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>[]
+        }
+        create: {
+          args: Prisma.ProductSupplierMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        createMany: {
+          args: Prisma.ProductSupplierMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProductSupplierMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.ProductSupplierMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        update: {
+          args: Prisma.ProductSupplierMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProductSupplierMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProductSupplierMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProductSupplierMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProductSupplierMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProductSupplierMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.ProductSupplierMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProductSupplierMapping>
+        }
+        groupBy: {
+          args: Prisma.ProductSupplierMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductSupplierMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProductSupplierMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProductSupplierMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -11415,11 +11415,8 @@ export const VendorMasterScalarFieldEnum = {
   is_client_visit_enabled: 'is_client_visit_enabled',
   is_this_vendor_is_custom_usertype_only: 'is_this_vendor_is_custom_usertype_only',
   is_year_wise_lead_code_enabled: 'is_year_wise_lead_code_enabled',
-  handlesLargeScaleProjects: 'handlesLargeScaleProjects',
   eligible_booking_days: 'eligible_booking_days',
   is_self_assign_task_type_master_enabed: 'is_self_assign_task_type_master_enabed',
-  is_email_noti_enabled: 'is_email_noti_enabled',
-  is_in_app_noti_enabled: 'is_in_app_noti_enabled',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   state_id: 'state_id'
@@ -11710,7 +11707,6 @@ export const LeadMasterScalarFieldEnum = {
   pending_amount: 'pending_amount',
   total_project_amount: 'total_project_amount',
   is_draft: 'is_draft',
-  isLargeScaleProjectLead: 'isLargeScaleProjectLead',
   lead_code: 'lead_code',
   is_small_order_request: 'is_small_order_request',
   is_client_approval_submitted: 'is_client_approval_submitted',
@@ -12026,41 +12022,11 @@ export const ProductStructureScalarFieldEnum = {
   id: 'id',
   type: 'type',
   vendor_id: 'vendor_id',
-  product_type_id: 'product_type_id',
   parent: 'parent',
   status: 'status'
 } as const
 
 export type ProductStructureScalarFieldEnum = (typeof ProductStructureScalarFieldEnum)[keyof typeof ProductStructureScalarFieldEnum]
-
-
-export const ProductSubStructureScalarFieldEnum = {
-  id: 'id',
-  type: 'type',
-  vendor_id: 'vendor_id',
-  product_structure_id: 'product_structure_id',
-  status: 'status',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type ProductSubStructureScalarFieldEnum = (typeof ProductSubStructureScalarFieldEnum)[keyof typeof ProductSubStructureScalarFieldEnum]
-
-
-export const ProductItemCodeScalarFieldEnum = {
-  id: 'id',
-  item_code: 'item_code',
-  vendor_id: 'vendor_id',
-  product_structure_id: 'product_structure_id',
-  sub_product_structure_id: 'sub_product_structure_id',
-  description: 'description',
-  specification: 'specification',
-  status: 'status',
-  created_at: 'created_at',
-  updated_at: 'updated_at'
-} as const
-
-export type ProductItemCodeScalarFieldEnum = (typeof ProductItemCodeScalarFieldEnum)[keyof typeof ProductItemCodeScalarFieldEnum]
 
 
 export const LeadProductStructureMappingScalarFieldEnum = {
@@ -12083,13 +12049,9 @@ export const LeadProductStructureInstanceScalarFieldEnum = {
   account_id: 'account_id',
   product_type_id: 'product_type_id',
   product_structure_id: 'product_structure_id',
-  sub_product_structure_id: 'sub_product_structure_id',
-  product_item_code_id: 'product_item_code_id',
   quantity_index: 'quantity_index',
-  quantity: 'quantity',
   title: 'title',
   status: 'status',
-  isLargeScaleProjectInstance: 'isLargeScaleProjectInstance',
   description: 'description',
   created_by: 'created_by',
   created_at: 'created_at',
@@ -13468,7 +13430,22 @@ export const ProductMasterScalarFieldEnum = {
   updated_by: 'updated_by',
   active: 'active',
   current_stock: 'current_stock',
-  stock_updated_at: 'stock_updated_at'
+  stock_updated_at: 'stock_updated_at',
+  item_group_id: 'item_group_id',
+  primary_unit_id: 'primary_unit_id',
+  stock_unit_id: 'stock_unit_id',
+  consumption_unit_id: 'consumption_unit_id',
+  shelf_life_days: 'shelf_life_days',
+  costing_method: 'costing_method',
+  min_stock_qty: 'min_stock_qty',
+  min_stock_unit_id: 'min_stock_unit_id',
+  max_stock_qty: 'max_stock_qty',
+  max_stock_unit_id: 'max_stock_unit_id',
+  reorder_level_qty: 'reorder_level_qty',
+  reorder_level_unit_id: 'reorder_level_unit_id',
+  reorder_batch_qty: 'reorder_batch_qty',
+  reorder_batch_unit_id: 'reorder_batch_unit_id',
+  item_type: 'item_type'
 } as const
 
 export type ProductMasterScalarFieldEnum = (typeof ProductMasterScalarFieldEnum)[keyof typeof ProductMasterScalarFieldEnum]
@@ -13841,20 +13818,50 @@ export const POPaymentScalarFieldEnum = {
 export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
 
 
-export const ArchitechuremasterScalarFieldEnum = {
+export const UnitMasterScalarFieldEnum = {
   id: 'id',
-  vendorId: 'vendorId',
-  name: 'name',
-  email: 'email',
-  mobile: 'mobile',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  isdeletetd: 'isdeletetd',
-  deletedAt: 'deletedAt'
+  vendor_id: 'vendor_id',
+  unit_name: 'unit_name',
+  unit_class: 'unit_class',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 } as const
 
-export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
+export type UnitMasterScalarFieldEnum = (typeof UnitMasterScalarFieldEnum)[keyof typeof UnitMasterScalarFieldEnum]
+
+
+export const ItemGroupMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  group_name: 'group_name',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ItemGroupMasterScalarFieldEnum = (typeof ItemGroupMasterScalarFieldEnum)[keyof typeof ItemGroupMasterScalarFieldEnum]
+
+
+export const ProductSupplierMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  product_id: 'product_id',
+  company_vendor_id: 'company_vendor_id',
+  supplier_item_code: 'supplier_item_code',
+  amount: 'amount',
+  is_active: 'is_active',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type ProductSupplierMappingScalarFieldEnum = (typeof ProductSupplierMappingScalarFieldEnum)[keyof typeof ProductSupplierMappingScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -14619,6 +14626,34 @@ export type ListEnumProductActiveFlagFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'CostingMethod'
+ */
+export type EnumCostingMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CostingMethod'>
+    
+
+
+/**
+ * Reference to a field of type 'CostingMethod[]'
+ */
+export type ListEnumCostingMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CostingMethod[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductItemType'
+ */
+export type EnumProductItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductItemType'>
+    
+
+
+/**
+ * Reference to a field of type 'ProductItemType[]'
+ */
+export type ListEnumProductItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductItemType[]'>
+    
+
+
+/**
  * Reference to a field of type 'PurchaseIntentStatus'
  */
 export type EnumPurchaseIntentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PurchaseIntentStatus'>
@@ -14918,8 +14953,6 @@ export type GlobalOmitConfig = {
   leadChatMention?: Prisma.LeadChatMentionOmit
   leadChatDocument?: Prisma.LeadChatDocumentOmit
   productStructure?: Prisma.ProductStructureOmit
-  productSubStructure?: Prisma.ProductSubStructureOmit
-  productItemCode?: Prisma.ProductItemCodeOmit
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingOmit
   leadProductStructureInstance?: Prisma.LeadProductStructureInstanceOmit
   selfAssignTaskTypeMaster?: Prisma.SelfAssignTaskTypeMasterOmit
@@ -15025,7 +15058,9 @@ export type GlobalOmitConfig = {
   paymentTermStage?: Prisma.PaymentTermStageOmit
   pOPaymentSchedule?: Prisma.POPaymentScheduleOmit
   pOPayment?: Prisma.POPaymentOmit
-  architechuremaster?: Prisma.ArchitechuremasterOmit
+  unitMaster?: Prisma.UnitMasterOmit
+  itemGroupMaster?: Prisma.ItemGroupMasterOmit
+  productSupplierMapping?: Prisma.ProductSupplierMappingOmit
 }
 
 /* Types for Logging */
