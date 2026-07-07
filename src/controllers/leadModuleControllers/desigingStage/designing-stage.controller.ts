@@ -13,6 +13,8 @@ import {
   uploadToWasabiMeetingDocs,
   uploadToWasabiMeetingDocsFile,
   uploadToWasabStage1DesingsFile,
+  uploadToWasabiCostingFile,
+  uploadToWasabiElectricalPlumbing,
 } from "../../../utils/wasabiClient";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -1197,6 +1199,472 @@ export class DesigingStageController {
       return res.status(500).json({
         success: false,
         message: error.message,
+      });
+    }
+  }
+
+  public static async uploadCostingFile(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, userId } = req.body;
+
+      if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one file is required",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const { uploadedDocs, actionMessage } = await prisma.$transaction(
+        async (tx) => {
+          const lead = await tx.leadMaster.findFirst({
+            where: {
+              id: Number(leadId),
+              vendor_id: Number(vendorId),
+              is_deleted: false,
+            },
+            select: { id: true, account_id: true },
+          });
+
+          if (!lead) {
+            throw new Error(`Invalid leadId ${leadId} for this vendor`);
+          }
+
+          if (!lead.account_id) {
+            throw new Error("No account linked with this lead");
+          }
+
+          const accountId = lead.account_id;
+
+          // Get-or-create the "Costing File" document type for this vendor
+          let costingFileDocType = await tx.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendorId), tag: "COSTING_FILE" },
+          });
+
+          if (!costingFileDocType) {
+            costingFileDocType = await tx.documentTypeMaster.create({
+              data: {
+                vendor_id: Number(vendorId),
+                type: "Costing File",
+                tag: "COSTING_FILE",
+                doc_title: "Costing File",
+                stage: "Designing",
+              },
+            });
+          }
+
+          const newDocs: any[] = [];
+          for (const file of files) {
+            const sysName = await uploadToWasabiCostingFile(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype,
+            );
+
+            await fs.unlink(file.path);
+
+            const doc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: file.originalname,
+                doc_sys_name: sysName,
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                account_id: Number(accountId),
+                doc_type_id: costingFileDocType.id,
+                created_by: Number(userId),
+              },
+            });
+
+            newDocs.push(doc);
+          }
+
+          const message =
+            newDocs.length > 1
+              ? `${newDocs.length} Costing files have been uploaded successfully.`
+              : "Costing file has been uploaded successfully.";
+
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            action: message,
+            action_type: "CREATE",
+            created_by: Number(userId),
+            created_at: new Date(),
+          });
+
+          await tx.leadDocumentLogs.createMany({
+            data: newDocs.map((doc) => ({
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: Number(userId),
+              created_at: new Date(),
+            })),
+          });
+
+          return { uploadedDocs: newDocs, actionMessage: message };
+        },
+      );
+
+      return res.status(201).json({
+        success: true,
+        message: actionMessage,
+        documents: uploadedDocs,
+      });
+    } catch (error: any) {
+      console.error("uploadCostingFile error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+
+  public static async getCostingFileDocuments(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+          logs: ["Missing required parameters: vendorId and leadId"],
+        });
+      }
+
+      const logs: any[] = [];
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+      });
+
+      if (!lead) {
+        return res.status(404).json({
+          success: false,
+          message: "Lead not found or access denied",
+          logs: [
+            "Lead verification failed: Lead not found or doesn't belong to vendor",
+          ],
+        });
+      }
+      logs.push("Lead verified successfully");
+
+      const costingFileDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: Number(vendorId), tag: "COSTING_FILE" },
+      });
+
+      // No costing files have ever been uploaded for this vendor yet —
+      // the type only gets created lazily on first upload.
+      if (!costingFileDocType) {
+        return res.status(200).json({
+          success: true,
+          message: "No costing file documents found",
+          logs: [...logs, "Costing File document type not yet created for vendor"],
+          data: {
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+            document_type: "Costing File",
+            total_documents: 0,
+            documents: [],
+            leadStage: "Unknown Stage",
+          },
+        });
+      }
+
+      const documents = await prisma.leadDocuments.findMany({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          doc_type_id: costingFileDocType.id,
+          is_deleted: false,
+        },
+        orderBy: { created_at: "desc" },
+        include: {
+          documentType: {
+            select: { id: true, type: true, tag: true },
+          },
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_contact: true,
+            },
+          },
+        },
+      });
+
+      const documentsWithSignedUrls = await Promise.all(
+        documents.map(async (doc: any) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return { ...doc, signedUrl };
+        }),
+      );
+
+      logs.push(
+        `Found ${documents.length} costing file documents for lead ${leadId}`,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Costing file documents fetched successfully",
+        logs,
+        data: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          document_type: costingFileDocType.type,
+          total_documents: documents.length,
+          documents: documentsWithSignedUrls,
+          leadStage: "Unknown Stage",
+        },
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        logs: [error.message],
+      });
+    }
+  }
+
+  public static async uploadElectricalPlumbing(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId, userId } = req.body;
+
+      if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "At least one file is required",
+        });
+      }
+
+      const files = req.files as Express.Multer.File[];
+      const { uploadedDocs, actionMessage } = await prisma.$transaction(
+        async (tx) => {
+          const lead = await tx.leadMaster.findFirst({
+            where: {
+              id: Number(leadId),
+              vendor_id: Number(vendorId),
+              is_deleted: false,
+            },
+            select: { id: true, account_id: true },
+          });
+
+          if (!lead) {
+            throw new Error(`Invalid leadId ${leadId} for this vendor`);
+          }
+
+          if (!lead.account_id) {
+            throw new Error("No account linked with this lead");
+          }
+
+          const accountId = lead.account_id;
+
+          // Get-or-create the "Electrical & Plumbing" document type for this vendor
+          let electricalPlumbingDocType = await tx.documentTypeMaster.findFirst({
+            where: { vendor_id: Number(vendorId), tag: "ELECTRICAL_PLUMBING" },
+          });
+
+          if (!electricalPlumbingDocType) {
+            electricalPlumbingDocType = await tx.documentTypeMaster.create({
+              data: {
+                vendor_id: Number(vendorId),
+                type: "Electrical & Plumbing",
+                tag: "ELECTRICAL_PLUMBING",
+                doc_title: "Electrical & Plumbing",
+                stage: "Designing",
+              },
+            });
+          }
+
+          const newDocs: any[] = [];
+          for (const file of files) {
+            const sysName = await uploadToWasabiElectricalPlumbing(
+              file.path,
+              Number(vendorId),
+              Number(leadId),
+              file.originalname,
+              file.mimetype,
+            );
+
+            await fs.unlink(file.path);
+
+            const doc = await tx.leadDocuments.create({
+              data: {
+                doc_og_name: file.originalname,
+                doc_sys_name: sysName,
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                account_id: Number(accountId),
+                doc_type_id: electricalPlumbingDocType.id,
+                created_by: Number(userId),
+              },
+            });
+
+            newDocs.push(doc);
+          }
+
+          const message =
+            newDocs.length > 1
+              ? `${newDocs.length} Electrical & Plumbing files have been uploaded successfully.`
+              : "Electrical & Plumbing file has been uploaded successfully.";
+
+          const detailedLog = await createLeadLog(tx, {
+            vendor_id: Number(vendorId),
+            lead_id: Number(leadId),
+            account_id: Number(accountId),
+            action: message,
+            action_type: "CREATE",
+            created_by: Number(userId),
+            created_at: new Date(),
+          });
+
+          await tx.leadDocumentLogs.createMany({
+            data: newDocs.map((doc) => ({
+              vendor_id: Number(vendorId),
+              lead_id: Number(leadId),
+              account_id: Number(accountId),
+              doc_id: doc.id,
+              lead_logs_id: detailedLog.id,
+              created_by: Number(userId),
+              created_at: new Date(),
+            })),
+          });
+
+          return { uploadedDocs: newDocs, actionMessage: message };
+        },
+      );
+
+      return res.status(201).json({
+        success: true,
+        message: actionMessage,
+        documents: uploadedDocs,
+      });
+    } catch (error: any) {
+      console.error("uploadElectricalPlumbing error:", error);
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+
+  public static async getElectricalPlumbingDocuments(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+          logs: ["Missing required parameters: vendorId and leadId"],
+        });
+      }
+
+      const logs: any[] = [];
+
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: Number(leadId),
+          vendor_id: Number(vendorId),
+          is_deleted: false,
+        },
+      });
+
+      if (!lead) {
+        return res.status(404).json({
+          success: false,
+          message: "Lead not found or access denied",
+          logs: [
+            "Lead verification failed: Lead not found or doesn't belong to vendor",
+          ],
+        });
+      }
+      logs.push("Lead verified successfully");
+
+      const electricalPlumbingDocType = await prisma.documentTypeMaster.findFirst({
+        where: { vendor_id: Number(vendorId), tag: "ELECTRICAL_PLUMBING" },
+      });
+
+      // No electrical & plumbing files have ever been uploaded for this vendor yet —
+      // the type only gets created lazily on first upload.
+      if (!electricalPlumbingDocType) {
+        return res.status(200).json({
+          success: true,
+          message: "No electrical & plumbing documents found",
+          logs: [...logs, "Electrical & Plumbing document type not yet created for vendor"],
+          data: {
+            lead_id: Number(leadId),
+            vendor_id: Number(vendorId),
+            document_type: "Electrical & Plumbing",
+            total_documents: 0,
+            documents: [],
+            leadStage: "Unknown Stage",
+          },
+        });
+      }
+
+      const documents = await prisma.leadDocuments.findMany({
+        where: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          doc_type_id: electricalPlumbingDocType.id,
+          is_deleted: false,
+        },
+        orderBy: { created_at: "desc" },
+        include: {
+          documentType: {
+            select: { id: true, type: true, tag: true },
+          },
+          createdBy: {
+            select: {
+              id: true,
+              user_name: true,
+              user_email: true,
+              user_contact: true,
+            },
+          },
+        },
+      });
+
+      const documentsWithSignedUrls = await Promise.all(
+        documents.map(async (doc: any) => {
+          const signedUrl = await generateSignedUrl(doc.doc_sys_name);
+          return { ...doc, signedUrl };
+        }),
+      );
+
+      logs.push(
+        `Found ${documents.length} electrical & plumbing documents for lead ${leadId}`,
+      );
+
+      return res.status(200).json({
+        success: true,
+        message: "Electrical & Plumbing documents fetched successfully",
+        logs,
+        data: {
+          lead_id: Number(leadId),
+          vendor_id: Number(vendorId),
+          document_type: electricalPlumbingDocType.type,
+          total_documents: documents.length,
+          documents: documentsWithSignedUrls,
+          leadStage: "Unknown Stage",
+        },
+      });
+    } catch (error: any) {
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        logs: [error.message],
       });
     }
   }

@@ -196,14 +196,11 @@ export const ModelName = {
   PaymentTermStage: 'PaymentTermStage',
   POPaymentSchedule: 'POPaymentSchedule',
   POPayment: 'POPayment',
-<<<<<<< HEAD
-  Architechuremaster: 'Architechuremaster'
-=======
   UnitMaster: 'UnitMaster',
   ItemGroupMaster: 'ItemGroupMaster',
   ProductSupplierMapping: 'ProductSupplierMapping',
-  POPaymentScheduleHistory: 'POPaymentScheduleHistory'
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+  POPaymentScheduleHistory: 'POPaymentScheduleHistory',
+  Architechuremaster: 'Architechuremaster'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2689,22 +2686,6 @@ export const POPaymentScalarFieldEnum = {
 export type POPaymentScalarFieldEnum = (typeof POPaymentScalarFieldEnum)[keyof typeof POPaymentScalarFieldEnum]
 
 
-<<<<<<< HEAD
-export const ArchitechuremasterScalarFieldEnum = {
-  id: 'id',
-  vendorId: 'vendorId',
-  name: 'name',
-  email: 'email',
-  mobile: 'mobile',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  createdBy: 'createdBy',
-  isDeleted: 'isDeleted',
-  deletedAt: 'deletedAt'
-} as const
-
-export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
-=======
 export const UnitMasterScalarFieldEnum = {
   id: 'id',
   vendor_id: 'vendor_id',
@@ -2770,7 +2751,22 @@ export const POPaymentScheduleHistoryScalarFieldEnum = {
 } as const
 
 export type POPaymentScheduleHistoryScalarFieldEnum = (typeof POPaymentScheduleHistoryScalarFieldEnum)[keyof typeof POPaymentScheduleHistoryScalarFieldEnum]
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+
+
+export const ArchitechuremasterScalarFieldEnum = {
+  id: 'id',
+  vendorId: 'vendorId',
+  name: 'name',
+  email: 'email',
+  mobile: 'mobile',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt'
+} as const
+
+export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
 
 
 export const SortOrder = {
