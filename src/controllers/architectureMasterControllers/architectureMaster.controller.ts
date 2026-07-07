@@ -29,7 +29,7 @@ export class ArchitectureMasterController {
         created_by
       });
 
-      return res.status(201).json(ApiResponse.created(newArchitecture, "Architecture master created successfully"));
+      return res.status(201).json(ApiResponse.created(newArchitecture, "Architect master created successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to create architecture master"));
     }
@@ -45,7 +45,7 @@ export class ArchitectureMasterController {
       const search = req.query.search as string | undefined;
 
       const result = await architectureMasterService.getAllArchitectureMasters(page, limit, search);
-      return res.status(200).json(ApiResponse.success(result, "Architecture masters fetched successfully"));
+      return res.status(200).json(ApiResponse.success(result, "Architect masters fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architecture masters"));
     }
@@ -61,10 +61,10 @@ export class ArchitectureMasterController {
       const architecture = await architectureMasterService.getArchitectureMasterById(id);
       
       if (!architecture) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
-      return res.status(200).json(ApiResponse.success(architecture, "Architecture master fetched successfully"));
+      return res.status(200).json(ApiResponse.success(architecture, "Architect master fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architecture master"));
     }
@@ -81,7 +81,7 @@ export class ArchitectureMasterController {
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const updated = await architectureMasterService.updateArchitectureMaster(id, {
@@ -92,7 +92,7 @@ export class ArchitectureMasterController {
         is_active
       });
 
-      return res.status(200).json(ApiResponse.success(updated, "Architecture master updated successfully"));
+      return res.status(200).json(ApiResponse.success(updated, "Architect master updated successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to update architecture master"));
     }
@@ -108,14 +108,14 @@ export class ArchitectureMasterController {
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const deletedBy = (req as any).user?.id;
       
       await architectureMasterService.deleteArchitectureMaster(id, deletedBy);
 
-      return res.status(200).json(ApiResponse.success(null, "Architecture master deleted successfully"));
+      return res.status(200).json(ApiResponse.success(null, "Architect master deleted successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to delete architecture master"));
     }
@@ -135,12 +135,12 @@ export class ArchitectureMasterController {
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const updated = await architectureMasterService.updateArchitectureMasterStatus(id, is_active);
 
-      return res.status(200).json(ApiResponse.success(updated, "Architecture master status updated successfully"));
+      return res.status(200).json(ApiResponse.success(updated, "Architect master status updated successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to update architecture master status"));
     }
