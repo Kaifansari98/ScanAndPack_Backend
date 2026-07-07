@@ -743,12 +743,6 @@ export type POPaymentSchedule = Prisma.POPaymentScheduleModel
  */
 export type POPayment = Prisma.POPaymentModel
 /**
-<<<<<<< HEAD
- * Model Architechuremaster
- * 
- */
-export type Architechuremaster = Prisma.ArchitechuremasterModel
-=======
  * Model UnitMaster
  * 
  */
@@ -768,4 +762,8 @@ export type ProductSupplierMapping = Prisma.ProductSupplierMappingModel
  * 
  */
 export type POPaymentScheduleHistory = Prisma.POPaymentScheduleHistoryModel
->>>>>>> 4fe214a84e0f251b474c1b8d8f972c2cc8eebed6
+/**
+ * Model Architechuremaster
+ * 
+ */
+export type Architechuremaster = Prisma.ArchitechuremasterModel
