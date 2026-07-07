@@ -440,6 +440,11 @@ export type ProjectCategoriesMasterScalarRelationFilter = {
   isNot?: Prisma.ProjectCategoriesMasterWhereInput
 }
 
+export type ProjectCategoriesMasterNullableScalarRelationFilter = {
+  is?: Prisma.ProjectCategoriesMasterWhereInput | null
+  isNot?: Prisma.ProjectCategoriesMasterWhereInput | null
+}
+
 export type ProjectCategoriesMasterCreateNestedManyWithoutVendorInput = {
   create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutVendorInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutVendorInput> | Prisma.ProjectCategoriesMasterCreateWithoutVendorInput[] | Prisma.ProjectCategoriesMasterUncheckedCreateWithoutVendorInput[]
   connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutVendorInput | Prisma.ProjectCategoriesMasterCreateOrConnectWithoutVendorInput[]
@@ -520,10 +525,12 @@ export type ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput = 
   connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
 }
 
-export type ProjectCategoriesMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput = {
+export type ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput = {
   create?: Prisma.XOR<Prisma.ProjectCategoriesMasterCreateWithoutPurchaseIntentsInput, Prisma.ProjectCategoriesMasterUncheckedCreateWithoutPurchaseIntentsInput>
   connectOrCreate?: Prisma.ProjectCategoriesMasterCreateOrConnectWithoutPurchaseIntentsInput
   upsert?: Prisma.ProjectCategoriesMasterUpsertWithoutPurchaseIntentsInput
+  disconnect?: Prisma.ProjectCategoriesMasterWhereInput | boolean
+  delete?: Prisma.ProjectCategoriesMasterWhereInput | boolean
   connect?: Prisma.ProjectCategoriesMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectCategoriesMasterUpdateToOneWithWhereWithoutPurchaseIntentsInput, Prisma.ProjectCategoriesMasterUpdateWithoutPurchaseIntentsInput>, Prisma.ProjectCategoriesMasterUncheckedUpdateWithoutPurchaseIntentsInput>
 }

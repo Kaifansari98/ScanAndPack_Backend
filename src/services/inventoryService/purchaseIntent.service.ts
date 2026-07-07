@@ -41,15 +41,16 @@ export const getPIProducts = async (
     const products = await prisma.productMaster.findMany({
       where: {
         vendor_id,
-        category_id,
         active: "Yes",
-        ...(search ? {
-          OR: [
-            { product_name: { contains: search, mode: "insensitive" } },
-            { article_code: { contains: search, mode: "insensitive" } },
-            { vendor_code: { contains: search, mode: "insensitive" } },
-          ],
-        } : {}),
+        ...(category_id ? { category_id: Number(category_id) } : {}),
+        ...(search
+          ? {
+            OR: [
+              { product_name: { contains: search, mode: "insensitive" } },
+              { article_code: { contains: search, mode: "insensitive" } },
+            ],
+          }
+          : {}),
       },
       select: {
         id: true,
@@ -105,12 +106,12 @@ export const getPICompanyVendors = async (vendor_id: number, search: string = ""
         is_deleted: false,
         ...(search
           ? {
-              OR: [
-                { company_name:     { contains: search, mode: "insensitive" } },
-                { vendor_code:      { contains: search, mode: "insensitive" } },
-                { point_of_contact: { contains: search, mode: "insensitive" } },
-              ],
-            }
+            OR: [
+              { company_name: { contains: search, mode: "insensitive" } },
+              { vendor_code: { contains: search, mode: "insensitive" } },
+              { point_of_contact: { contains: search, mode: "insensitive" } },
+            ],
+          }
           : {}),
       },
       select: {
@@ -132,7 +133,7 @@ export const getPICompanyVendors = async (vendor_id: number, search: string = ""
 };
 
 export const getPIPaymentTerms = async (vendor_id: number) => {
-  
+
   try {
     const paymentTerms = await prisma.paymentTermMaster.findMany({
       where: {
@@ -406,7 +407,7 @@ export const createPurchaseIntent = async (
     if (!items?.length) {
       return validationResponse(0, "At least one product is required");
     }
-   
+
 
     const category =
       await prisma.projectCategoriesMaster.findFirst({
@@ -483,9 +484,9 @@ export const createPurchaseIntent = async (
     }
     const isPaymentTermValid = await validatePaymentTerms(vendor_id, items);
 
-if (!isPaymentTermValid) {
-  return validationResponse(0, "One or more payment terms are invalid");
-}
+    if (!isPaymentTermValid) {
+      return validationResponse(0, "One or more payment terms are invalid");
+    }
 
     /**
      * calculate master totals
@@ -863,26 +864,26 @@ export const updatePurchaseIntentService = async (
       (x) => x.product_id
     );
 
-    const validProducts =
-      await prisma.productMaster.findMany({
-        where: {
-          id: {
-            in: productIds,
-          },
-          vendor_id,
-          category_id: finalCategoryId,
-        },
-        select: {
-          id: true,
-        },
-      });
+    // const validProducts =
+    //   await prisma.productMaster.findMany({
+    //     where: {
+    //       id: {
+    //         in: productIds,
+    //       },
+    //       vendor_id,
+    //       category_id: finalCategoryId,
+    //     },
+    //     select: {
+    //       id: true,
+    //     },
+    //   });
 
-    if (validProducts.length !== productIds.length) {
-      return validationResponse(
-        0,
-        "One or more products are invalid"
-      );
-    }
+    // if (validProducts.length !== productIds.length) {
+    //   return validationResponse(
+    //     0,
+    //     "One or more products are invalid"
+    //   );
+    // }
 
     /**
      * validate suppliers
@@ -919,9 +920,9 @@ export const updatePurchaseIntentService = async (
     }
     const isPaymentTermValid = await validatePaymentTerms(vendor_id, payload.items);
 
-if (!isPaymentTermValid) {
-  return validationResponse(0, "One or more payment terms are invalid");
-}
+    if (!isPaymentTermValid) {
+      return validationResponse(0, "One or more payment terms are invalid");
+    }
 
     /**
      * recalculate totals

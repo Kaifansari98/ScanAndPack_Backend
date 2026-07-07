@@ -1455,6 +1455,17 @@ export const getLeadProductStructureInstances = async (
       include: {
         productStructure: true,
         productType: true,
+        subProductStructure: true,
+        productItemCode: {
+          include: {
+            productStructure: {
+              include: {
+                productType: true,
+              },
+            },
+            subProductStructure: true,
+          },
+        },
       },
       orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
     });
@@ -1667,6 +1678,10 @@ export const createLeadProductStructureInstance = async ({
   title,
   description,
   created_by,
+  sub_product_structure_id,
+  product_item_code_id,
+  quantity,
+  isLargeScaleProjectInstance,
 }: {
   leadId: number;
   vendorId: number;
@@ -1674,6 +1689,10 @@ export const createLeadProductStructureInstance = async ({
   title: string;
   description?: string | null;
   created_by: number;
+  sub_product_structure_id?: number | null;
+  product_item_code_id?: number | null;
+  quantity?: number | null;
+  isLargeScaleProjectInstance?: boolean;
 }) => {
   try {
     const lead = await prisma.leadMaster.findFirst({
@@ -1700,7 +1719,7 @@ export const createLeadProductStructureInstance = async ({
       throw new Error("Product structure not found");
     }
 
-    const productType = await prisma.leadProductMapping.findFirst({
+    const leadProductType = await prisma.leadProductMapping.findFirst({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
@@ -1708,13 +1727,81 @@ export const createLeadProductStructureInstance = async ({
       select: { product_type_id: true },
     });
 
-    if (!productType?.product_type_id) {
+    let resolvedProductTypeId = leadProductType?.product_type_id || null;
+    let resolvedStructureId = product_structure_id;
+    let resolvedSubStructureId = sub_product_structure_id ?? null;
+    let resolvedItemCodeId = product_item_code_id ?? null;
+    let resolvedTitle = title.trim();
+    let resolvedDescription = description?.trim() || null;
+    let resolvedIsLargeScale = Boolean(isLargeScaleProjectInstance);
+
+    if (resolvedItemCodeId) {
+      const itemCode = await prisma.productItemCode.findFirst({
+        where: {
+          id: resolvedItemCodeId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+        include: {
+          productStructure: true,
+          subProductStructure: true,
+        },
+      });
+
+      if (!itemCode) {
+        throw new Error("Product item code not found");
+      }
+
+      if (itemCode.product_structure_id !== product_structure_id) {
+        throw new Error("Product structure does not match selected item code");
+      }
+
+      if (
+        resolvedSubStructureId &&
+        itemCode.sub_product_structure_id &&
+        itemCode.sub_product_structure_id !== resolvedSubStructureId
+      ) {
+        throw new Error("Sub product structure does not match selected item code");
+      }
+
+      resolvedStructureId = itemCode.product_structure_id;
+      resolvedSubStructureId = itemCode.sub_product_structure_id ?? null;
+      resolvedTitle = resolvedTitle || itemCode.item_code;
+      resolvedDescription = resolvedDescription || itemCode.description || null;
+      resolvedIsLargeScale = true;
+      resolvedProductTypeId =
+        itemCode.productStructure.product_type_id || resolvedProductTypeId;
+    }
+
+    if (resolvedSubStructureId) {
+      const subStructure = await prisma.productSubStructure.findFirst({
+        where: {
+          id: resolvedSubStructureId,
+          vendor_id: vendorId,
+          status: "active",
+        },
+      });
+
+      if (!subStructure) {
+        throw new Error("Sub product structure not found");
+      }
+
+      if (subStructure.product_structure_id !== resolvedStructureId) {
+        throw new Error("Sub product structure does not match selected product structure");
+      }
+    }
+
+    if (!resolvedProductTypeId) {
+      resolvedProductTypeId = structure.product_type_id ?? null;
+    }
+
+    if (!resolvedProductTypeId) {
       throw new Error("Product type not found");
     }
 
     const productTypeMaster = await prisma.productTypeMaster.findFirst({
       where: {
-        id: productType.product_type_id,
+        id: resolvedProductTypeId,
         vendor_id: vendorId,
       },
       select: { type: true },
@@ -1724,7 +1811,7 @@ export const createLeadProductStructureInstance = async ({
       .toLowerCase()
       .includes("kitchen");
 
-    if (!isKitchenType) {
+    if (!resolvedItemCodeId && !isKitchenType) {
       const existingMappings =
         await prisma.leadProductStructureMapping.findMany({
           where: {
@@ -1764,7 +1851,7 @@ export const createLeadProductStructureInstance = async ({
               vendor_id: vendorId,
               lead_id: leadId,
               account_id: lead.account_id,
-              product_type_id: productType.product_type_id,
+              product_type_id: resolvedProductTypeId,
               product_structure_id: mapping.product_structure_id,
               quantity_index: 1,
               title: mappingStructure.type,
@@ -1780,7 +1867,7 @@ export const createLeadProductStructureInstance = async ({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_structure_id,
+        product_structure_id: resolvedStructureId,
       },
     });
 
@@ -1790,7 +1877,7 @@ export const createLeadProductStructureInstance = async ({
           vendor_id: vendorId,
           lead_id: leadId,
           account_id: lead.account_id,
-          product_structure_id,
+          product_structure_id: resolvedStructureId,
           created_by,
         },
       });
@@ -1800,7 +1887,7 @@ export const createLeadProductStructureInstance = async ({
       where: {
         lead_id: leadId,
         vendor_id: vendorId,
-        product_structure_id,
+        product_structure_id: resolvedStructureId,
       },
       _max: { quantity_index: true },
     });
@@ -1812,11 +1899,15 @@ export const createLeadProductStructureInstance = async ({
         vendor_id: vendorId,
         lead_id: leadId,
         account_id: lead.account_id,
-        product_type_id: productType.product_type_id,
-        product_structure_id,
+        product_type_id: resolvedProductTypeId,
+        product_structure_id: resolvedStructureId,
+        sub_product_structure_id: resolvedSubStructureId,
+        product_item_code_id: resolvedItemCodeId,
         quantity_index: quantityIndex,
-        title: title.trim(),
-        description: description?.trim() || null,
+        quantity: quantity ?? null,
+        title: resolvedTitle,
+        description: resolvedDescription,
+        isLargeScaleProjectInstance: resolvedIsLargeScale,
         created_by,
       },
     });

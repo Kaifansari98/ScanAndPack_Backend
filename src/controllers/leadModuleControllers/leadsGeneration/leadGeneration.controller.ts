@@ -263,6 +263,7 @@ export class LeadController {
       const files = (req.files as Express.Multer.File[]) || [];
       const { vendor_id, is_draft } = req.body;
       const draftMode = String(is_draft) === "true";
+      const numericVendorId = Number(vendor_id);
       let productStructureInstances = req.body.product_structure_instances;
 
       if (typeof productStructureInstances === "string") {
@@ -277,19 +278,31 @@ export class LeadController {
       }
 
       // 1. Resolve the vendor's Open status ID dynamically
-      const openStatus = await prisma.statusTypeMaster.findFirst({
-        where: {
-          vendor_id: Number(vendor_id),
-          tag: "Type 1", // ✅ Open status
-        },
-        select: { id: true },
-      });
+      const [vendor, openStatus] = await Promise.all([
+        prisma.vendorMaster.findUnique({
+          where: { id: numericVendorId },
+          select: { handlesLargeScaleProjects: true },
+        }),
+        prisma.statusTypeMaster.findFirst({
+          where: {
+            vendor_id: numericVendorId,
+            tag: "Type 1", // ✅ Open status
+          },
+          select: { id: true },
+        }),
+      ]);
+
+      if (!vendor) {
+        throw new Error(`Vendor ${vendor_id} not found`);
+      }
 
       if (!openStatus) {
         throw new Error(
           `Open status (Type 1) not found for vendor ${vendor_id}`,
         );
       }
+
+      const requiresFurnitureSelection = !vendor.handlesLargeScaleProjects;
 
       const payload = {
         ...req.body,
@@ -298,7 +311,7 @@ export class LeadController {
           : undefined,
         status_id: openStatus.id, // <-- use openStatus' id here
         source_id: Number(req.body.source_id) || undefined,
-        vendor_id: Number(req.body.vendor_id),
+        vendor_id: numericVendorId,
         franchise_id: Number(req.body.franchise_id),
         created_by: Number(req.body.created_by),
         priority: getSingleBodyValue(req.body.priority)?.trim() || undefined,
@@ -321,8 +334,20 @@ export class LeadController {
         site_map_link: req.body.site_map_link || null,
       };
 
+      if (!requiresFurnitureSelection) {
+        payload.product_types = undefined;
+        payload.product_structures = undefined;
+        payload.product_structure_instances = undefined;
+      }
+
       // 🧩 Use draft or full schema dynamically
-      const schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
+      let schemaToUse = draftMode ? createLeadDraftSchema : createLeadSchema;
+      if (!draftMode && !requiresFurnitureSelection) {
+        schemaToUse = schemaToUse.fork(
+          ["product_types", "product_structures"],
+          (schema) => schema.optional(),
+        );
+      }
 
       const { error, value } = schemaToUse.validate(payload, {
         convert: true,
@@ -1132,6 +1157,15 @@ export class LeadController {
       const leadId = Number(req.params.leadId);
       const vendorId = Number(req.params.vendorId);
       const productStructureId = Number(req.body.product_structure_id);
+      const subProductStructureId = req.body.sub_product_structure_id
+        ? Number(req.body.sub_product_structure_id)
+        : null;
+      const productItemCodeId = req.body.product_item_code_id
+        ? Number(req.body.product_item_code_id)
+        : null;
+      const quantity = req.body.quantity ? Number(req.body.quantity) : null;
+      const isLargeScaleProjectInstance =
+        req.body.isLargeScaleProjectInstance === true;
       const title = String(req.body.title || "").trim();
       const description =
         req.body.description !== undefined ? String(req.body.description) : "";
@@ -1157,10 +1191,31 @@ export class LeadController {
           );
       }
 
-      if (!title) {
+      if (!title && !productItemCodeId) {
         return res
           .status(400)
           .json(ApiResponse.error("Title is required", 400));
+      }
+
+      if (
+        subProductStructureId !== null &&
+        Number.isNaN(subProductStructureId)
+      ) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid sub product structure ID provided", 400));
+      }
+
+      if (productItemCodeId !== null && Number.isNaN(productItemCodeId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid product item code ID provided", 400));
+      }
+
+      if (quantity !== null && (Number.isNaN(quantity) || quantity <= 0)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Quantity must be greater than 0", 400));
       }
 
       if (!createdBy || Number.isNaN(createdBy)) {
@@ -1176,6 +1231,10 @@ export class LeadController {
         title,
         description,
         created_by: createdBy,
+        sub_product_structure_id: subProductStructureId,
+        product_item_code_id: productItemCodeId,
+        quantity,
+        isLargeScaleProjectInstance,
       });
 
       return res
@@ -1196,6 +1255,21 @@ export class LeadController {
         return res
           .status(404)
           .json(ApiResponse.notFound("Product structure not found"));
+      }
+      if (message.includes("Sub product structure not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Sub product structure not found"));
+      }
+      if (message.includes("Product item code not found")) {
+        return res
+          .status(404)
+          .json(ApiResponse.notFound("Product item code not found"));
+      }
+      if (message.includes("does not match")) {
+        return res
+          .status(400)
+          .json(ApiResponse.error(message, 400));
       }
       if (message.includes("Product type not found")) {
         return res

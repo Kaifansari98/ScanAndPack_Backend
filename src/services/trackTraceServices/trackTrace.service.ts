@@ -3310,7 +3310,7 @@ async function sumQty(cutListIds: number[]): Promise<number> {
 // how the data is structured (qty=4 on CutList → 4 mapping rows per machine).
 // So COUNT of mapping rows = total panels correctly.
 
-export const getTraceTraceDashboard = async (vendor_id: number) => {
+export const getTraceTraceDashboard_old = async (vendor_id: number) => {
   try {
 
     // ── 1. Fetch all projects for this vendor ──────────────────────────────
@@ -3561,6 +3561,268 @@ export const getTraceTraceDashboard = async (vendor_id: number) => {
   }
 };
 
+
+export const getTraceTraceDashboard = async (vendor_id: number) => {
+  try {
+    // ── 1. Fetch projects and machines in parallel ─────────────────────────
+    const [projects, machines] = await Promise.all([
+      prisma.projectMaster.findMany({
+        where: { vendor_id },
+        select: {
+          id: true,
+          project_name: true,
+          project_status: true,
+          track_trace_status: true,
+          created_at: true,
+        },
+        orderBy: { created_at: "desc" },
+      }),
+
+      prisma.machineMaster.findMany({
+        where: {
+          vendor_id,
+          status: "ACTIVE",
+          scan_type: { not: "PASS" },
+        },
+        select: {
+          id: true,
+          machine_name: true,
+          sequence_no: true,
+          machine_type_id: true,
+        },
+        orderBy: { sequence_no: "asc" },
+      }),
+    ]);
+
+    const projectIds = projects.map((p) => p.id);
+
+    if (projectIds.length === 0) {
+      return validationResponse(1, "", {
+        active: [],
+        archived: [],
+        active_count: 0,
+        archived_count: 0,
+      });
+    }
+
+    // ── 2. Fetch all mappings ONCE ─────────────────────────────────────────
+    const mappings = machines.length
+      ? await prisma.cutListMachineMapping.findMany({
+          where: {
+            vendor_id,
+            project_id: { in: projectIds },
+            expected_in: true,
+          },
+          select: {
+            id: true,
+            project_id: true,
+            machine_id: true,
+            cut_list_id: true,
+            sequence_no: true,
+            actual_in_at: true,
+          },
+        })
+      : [];
+
+    type Mapping = (typeof mappings)[number];
+
+    type MachineStatus = {
+      machine_id: number;
+      machine_name: string;
+      sequence_no: number;
+      total: number;
+      scanned: number;
+      pending: number;
+      all_scanned: boolean;
+    };
+
+    const projectMachineKey = (projectId: number, machineId: number) =>
+      `${projectId}:${machineId}`;
+
+    const projectCutListKey = (
+      projectId: number,
+      cutListId: Mapping["cut_list_id"]
+    ) => `${projectId}:${String(cutListId)}`;
+
+    const pushToMap = <T>(map: Map<string, T[]>, key: string, value: T) => {
+      const existing = map.get(key);
+      if (existing) {
+        existing.push(value);
+      } else {
+        map.set(key, [value]);
+      }
+    };
+
+    // ── 3. Group mappings in memory ────────────────────────────────────────
+    const rowsByProjectMachine = new Map<string, Mapping[]>();
+    const rowsByProjectCutList = new Map<string, Mapping[]>();
+    const assignedCountByProjectMachine = new Map<string, number>();
+    const scannedCountByProjectMachine = new Map<string, number>();
+
+    for (const row of mappings) {
+      const pmKey = projectMachineKey(row.project_id, row.machine_id);
+      const pcKey = projectCutListKey(row.project_id, row.cut_list_id);
+
+      pushToMap(rowsByProjectMachine, pmKey, row);
+      pushToMap(rowsByProjectCutList, pcKey, row);
+
+      assignedCountByProjectMachine.set(
+        pmKey,
+        (assignedCountByProjectMachine.get(pmKey) ?? 0) + 1
+      );
+
+      if (row.actual_in_at !== null) {
+        scannedCountByProjectMachine.set(
+          pmKey,
+          (scannedCountByProjectMachine.get(pmKey) ?? 0) + 1
+        );
+      }
+    }
+
+    // Sort each cut_list flow by sequence number once
+    for (const rows of rowsByProjectCutList.values()) {
+      rows.sort((a, b) => (a.sequence_no ?? 0) - (b.sequence_no ?? 0));
+    }
+
+    const getLastPriorRow = (
+      projectId: number,
+      cutListId: Mapping["cut_list_id"],
+      currentSequenceNo: number
+    ) => {
+      const rows = rowsByProjectCutList.get(
+        projectCutListKey(projectId, cutListId)
+      );
+
+      if (!rows || rows.length === 0) return null;
+
+      // Rows are already sorted ASC, so scan from end
+      for (let i = rows.length - 1; i >= 0; i--) {
+        const rowSequenceNo = rows[i].sequence_no ?? 0;
+
+        if (rowSequenceNo < currentSequenceNo) {
+          return rows[i];
+        }
+      }
+
+      return null;
+    };
+
+    // ── 4. Build dashboard without DB calls inside loops ───────────────────
+    const buildProjectStatus = (project: (typeof projects)[number]) => {
+      const machineStatuses: MachineStatus[] = machines
+        .map((machine, index): MachineStatus | null => {
+          const pmKey = projectMachineKey(project.id, machine.id);
+
+          const rowsAtMachine = rowsByProjectMachine.get(pmKey) ?? [];
+          const assigned = rowsAtMachine.length;
+
+          if (assigned === 0) return null;
+
+          const scanned = scannedCountByProjectMachine.get(pmKey) ?? 0;
+
+          const machineSequenceNo = machine.sequence_no ?? 0;
+          const isQCStation =
+            machine.machine_type_id === 17 || machine.machine_type_id === 18;
+
+          let total = 0;
+
+          if (index === 0) {
+            // First machine: all assigned rows are eligible
+            total = assigned;
+          } else {
+            let eligible = 0;
+
+            for (const row of rowsAtMachine) {
+              const lastPriorRow = getLastPriorRow(
+                project.id,
+                row.cut_list_id,
+                machineSequenceNo
+              );
+
+              if (isQCStation) {
+                // QC rule:
+                // 1. If prior machine exists, previous machine must be scanned
+                // 2. If no prior machine exists, QC-only item is eligible
+                if (!lastPriorRow || lastPriorRow.actual_in_at !== null) {
+                  eligible++;
+                }
+              } else {
+                // Normal machine rule:
+                // Previous assigned machine must exist and be scanned
+                if (lastPriorRow?.actual_in_at !== null) {
+                  eligible++;
+                }
+              }
+            }
+
+            total = eligible;
+          }
+
+          const pending = Math.max(0, total - scanned);
+
+          return {
+            machine_id: machine.id,
+            machine_name: machine.machine_name,
+            sequence_no: machine.sequence_no ?? 0,
+            total,
+            scanned,
+            pending,
+            all_scanned: total > 0 && scanned >= total,
+          };
+        })
+        .filter((status): status is MachineStatus => status !== null);
+
+      const firstMachine = machines[0];
+      const lastMachine = machines[machines.length - 1];
+
+      const total_panels = firstMachine
+        ? assignedCountByProjectMachine.get(
+            projectMachineKey(project.id, firstMachine.id)
+          ) ?? 0
+        : 0;
+
+      const panels_scanned = lastMachine
+        ? scannedCountByProjectMachine.get(
+            projectMachineKey(project.id, lastMachine.id)
+          ) ?? 0
+        : 0;
+
+      return {
+        project_id: project.id,
+        project_name: project.project_name,
+        project_status: project.project_status,
+        track_trace_status: project.track_trace_status,
+        created_at: project.created_at.toISOString(),
+        panels_scanned,
+        total_panels,
+        machines: machineStatuses,
+      };
+    };
+
+    const allStatuses = projects.map(buildProjectStatus);
+
+    // ── 5. Split active and archived ───────────────────────────────────────
+    const activeStatuses = new Set(["Initiated", "Started"]);
+
+    const active = allStatuses.filter((p) =>
+      activeStatuses.has(p.project_status ?? "")
+    );
+
+    const archived = allStatuses.filter(
+      (p) => !activeStatuses.has(p.project_status ?? "")
+    );
+
+    return validationResponse(1, "", {
+      active,
+      archived,
+      active_count: active.length,
+      archived_count: archived.length,
+    });
+  } catch (error) {
+    console.error("Error in getTraceTraceDashboard", error);
+    return validationResponse(0, "Something went wrong");
+  }
+};
 
 
 export const getProjectCategories = async (vendor_id: number) => {

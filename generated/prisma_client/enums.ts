@@ -9,6 +9,17 @@
 * 🟢 You can import this file directly.
 */
 
+export const PaymentScheduleAction = {
+  Created: 'Created',
+  Rescheduled: 'Rescheduled',
+  PaymentMarked: 'PaymentMarked',
+  StatusChanged: 'StatusChanged',
+  Cancelled: 'Cancelled'
+} as const
+
+export type PaymentScheduleAction = (typeof PaymentScheduleAction)[keyof typeof PaymentScheduleAction]
+
+
 export const PaymentMode = {
   Cash: 'Cash',
   BankTransfer: 'BankTransfer',
@@ -531,3 +542,20 @@ export const DefectStatus = {
 } as const
 
 export type DefectStatus = (typeof DefectStatus)[keyof typeof DefectStatus]
+
+
+export const CostingMethod = {
+  FIFO: 'FIFO',
+  MANUAL: 'MANUAL'
+} as const
+
+export type CostingMethod = (typeof CostingMethod)[keyof typeof CostingMethod]
+
+
+export const ProductItemType = {
+  CapitalGoods: 'CapitalGoods',
+  Goods: 'Goods',
+  Services: 'Services'
+} as const
+
+export type ProductItemType = (typeof ProductItemType)[keyof typeof ProductItemType]

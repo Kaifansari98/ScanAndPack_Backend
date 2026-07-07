@@ -26,6 +26,15 @@ import {
   getVendorStateId,
 } from "../../controllers/inventoryController/purchaseIntent.Controller";
 
+import {
+  productCreate,
+  productDetail,
+  productList,
+  productMasters,
+  productRemove,
+  productUpdate,
+} from "../../controllers/inventoryController/product.controller";
+
 const router = Router();
 
 // ── Inventory / Products ──────────────────────────────────────────────────────
@@ -56,6 +65,13 @@ router.get("/stock/:vendor_id/download",                   downloadStockSheet);
 router.post("/stock/:vendor_id/upload", upload.single("file"), uploadStockSheet);
 router.get("/stock/:vendor_id/history/:product_id",        getProductStockHistory);
 router.get("/stock/:vendor_id/batches",                    getStockUploadBatches);
+
+router.get("/products/:vendor_id/masters", productMasters);
+router.get("/products/:vendor_id", productList);
+router.get("/products/:vendor_id/:id", productDetail);
+router.post("/products/:vendor_id", productCreate);
+router.put("/products/:vendor_id/:id", productUpdate);
+router.delete("/products/:vendor_id/:id", productRemove);
 
 
 export default router;
