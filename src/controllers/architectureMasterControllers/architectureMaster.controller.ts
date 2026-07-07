@@ -10,7 +10,7 @@ export class ArchitectureMasterController {
    */
   async create(req: Request, res: Response) {
     try {
-      const { vendorId, name, email, mobile, is_active } = req.body;
+      const { vendorId, name, email, mobile, alt_mobile, is_active } = req.body;
       
       // Basic validation
       if (!name || !email || !mobile) {
@@ -25,6 +25,7 @@ export class ArchitectureMasterController {
         name,
         email,
         mobile,
+        alt_mobile,
         is_active,
         created_by
       });
@@ -76,7 +77,7 @@ export class ArchitectureMasterController {
   async update(req: Request, res: Response) {
     try {
       const id = String(req.params.id);
-      const { vendorId, name, email, mobile, is_active } = req.body;
+      const { vendorId, name, email, mobile, alt_mobile, is_active } = req.body;
 
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
@@ -89,6 +90,7 @@ export class ArchitectureMasterController {
         name,
         email,
         mobile,
+        alt_mobile,
         is_active
       });
 
@@ -161,6 +163,37 @@ export class ArchitectureMasterController {
       return res.status(200).json(ApiResponse.success(list, "Architects list fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architects list"));
+    }
+  }
+
+  /**
+   * Upload Architecture Masters via CSV or XLSX
+   */
+  async uploadArchitects(req: Request, res: Response) {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.status(400).json(ApiResponse.validationError("CSV or XLSX file is required"));
+      }
+
+      const vendorId = Number(req.body.vendorId || req.params.vendorId || (req as any).user?.vendor_id);
+      if (!vendorId) {
+        return res.status(400).json(ApiResponse.validationError("Vendor ID is required"));
+      }
+
+      const createdBy = Number((req as any).user?.id || 1);
+      const isCsv = file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+      const result = await architectureMasterService.bulkUploadArchitects(
+        file.buffer,
+        isCsv,
+        vendorId,
+        createdBy
+      );
+
+      return res.status(200).json(ApiResponse.success(result, "Architects uploaded successfully"));
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message || "Failed to upload architects"));
     }
   }
 }

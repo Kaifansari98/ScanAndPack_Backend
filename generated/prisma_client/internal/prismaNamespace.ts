@@ -14232,6 +14232,7 @@ export const ArchitechuremasterScalarFieldEnum = {
   name: 'name',
   email: 'email',
   mobile: 'mobile',
+  alt_mobile: 'alt_mobile',
   isActive: 'isActive',
   createdAt: 'createdAt',
   createdBy: 'createdBy',
