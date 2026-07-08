@@ -446,11 +446,14 @@ export const updateScannedItem_old = async (payload: TrackTracePayload, is_check
 };
 
 //qty wise logic
+
+type ApiResponse = ReturnType<typeof validationResponse>;
+
 export const updateScannedItem = async (
   payload: TrackTracePayload,
   is_check: boolean = false,
   files: Express.Multer.File[] = [],
-) => {
+): Promise<ApiResponse> => {
   try {
     const {
       project_id,
