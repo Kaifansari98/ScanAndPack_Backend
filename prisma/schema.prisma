@@ -135,6 +135,12 @@ model VendorMaster {
   state                                StateMaster?                           @relation("VendorState", fields: [state_id], references: [id], onDelete: SetNull)
   stockHistories                       ProductStockHistory[]                  @relation("StockHistoryVendor")
 
+  additionalCostMasters AdditionalCostMaster[] @relation("AdditionalCostVendor")
+piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCostVendor")
+
+poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCostVendor")
+
+
   paymentTerms PaymentTermMaster[]
 
   poPaymentSchedules POPaymentSchedule[]
@@ -1623,6 +1629,11 @@ model CompanyVendorsMaster {
   debitCreditNotes             DebitCreditNote[]                 @relation("DCNSupplier")
   redeliveryRequests           RedeliveryRequest[]               @relation("RDSupplier")
 
+  piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCostCompanyVendor")
+
+poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCostCompanyVendor")
+
+
   defaultPaymentTerm PaymentTermMaster? @relation("SupplierDefaultPaymentTerm", fields: [default_payment_term_id], references: [id], onDelete: SetNull)
 
   paymentTerms            PaymentTermMaster[]      @relation("SupplierPaymentTerms")
@@ -2616,6 +2627,7 @@ model PurchaseIntentMaster {
   approvedBy UserMaster?              @relation("PIApprovedBy", fields: [approved_by], references: [id])
   rejectedBy UserMaster?              @relation("PIRejectedBy", fields: [rejected_by], references: [id])
   deletedBy  UserMaster?              @relation("PIDeletedBy", fields: [deleted_by], references: [id])
+  supplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCosts")
 
   items          PurchaseIntentItem[]
   statusLogs     PurchaseIntentStatusLog[]
@@ -2726,6 +2738,7 @@ model PurchaseOrderMaster {
 
   paymentSchedules POPaymentSchedule[]
   grns             GRNMaster[]         @relation("GRNPurchaseOrder")
+  supplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCosts")
 
   @@index([payment_term_id])
   @@index([vendor_id])
@@ -3182,8 +3195,11 @@ model ProductSupplierMapping {
   product_id        Int
   company_vendor_id Int
 
-  supplier_item_code String?
-  amount             Decimal? @db.Decimal(18, 2)
+  supplier_item_code         String?
+  amount                     Decimal? @db.Decimal(18, 2)
+  procurement_expense_amount Decimal? @db.Decimal(18, 2)
+  procurement_expense_pct    Decimal? @db.Decimal(8, 2)
+  procurement_expense_total  Decimal? @db.Decimal(18, 2)
 
   is_active Boolean @default(true)
 
@@ -3236,6 +3252,140 @@ model POPaymentScheduleHistory {
   @@index([po_payment_schedule_id])
   @@index([payment_id])
   @@index([created_by])
+}
+
+
+model AdditionalCostMaster {
+  id          Int      @id @default(autoincrement())
+  vendor_id   Int
+
+  cost_name   String
+  cost_code   String?
+  description String?
+
+  is_taxable  Boolean  @default(false)
+  tax_pct     Decimal  @default(0) @db.Decimal(5, 2)
+
+  is_active   Boolean  @default(true)
+  is_deleted  Boolean  @default(false)
+
+  created_by  Int?
+  updated_by  Int?
+  deleted_by  Int?
+
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime?
+
+  vendor VendorMaster @relation("AdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PIAdditionalCostMaster")
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[]   @relation("POAdditionalCostMaster")
+
+  @@unique([vendor_id, cost_name], map: "add_cost_master_vendor_cost_name_uq")
+  @@index([vendor_id], map: "add_cost_master_vendor_idx")
+  @@index([cost_code], map: "add_cost_master_code_idx")
+  @@index([is_active], map: "add_cost_master_active_idx")
+}
+
+
+model PurchaseIntentSupplierAdditionalCost {
+  id                   Int      @id @default(autoincrement())
+  vendor_id            Int
+
+  purchase_intent_id   Int
+  company_vendor_id    Int
+  additional_cost_id   Int
+
+  cost_name            String
+  calculation_type     AdditionalCostCalculationType @default(Fixed)
+
+  amount               Decimal  @default(0) @db.Decimal(18, 2)
+  percentage           Decimal  @default(0) @db.Decimal(8, 2)
+  base_amount          Decimal  @default(0) @db.Decimal(18, 2)
+
+  taxable_amount       Decimal  @default(0) @db.Decimal(18, 2)
+  tax_pct              Decimal  @default(0) @db.Decimal(5, 2)
+  tax_amount           Decimal  @default(0) @db.Decimal(18, 2)
+
+  total_amount         Decimal  @default(0) @db.Decimal(18, 2)
+
+  remarks              String?
+
+  created_by           Int?
+  updated_by           Int?
+
+  created_at           DateTime @default(now())
+  updated_at           DateTime @updatedAt
+
+  vendor VendorMaster @relation("PISupplierAdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade, map: "pi_sup_cost_vendor_fk")
+
+  purchaseIntent PurchaseIntentMaster @relation("PISupplierAdditionalCosts", fields: [purchase_intent_id], references: [id], onDelete: Cascade, map: "pi_sup_cost_pi_fk")
+
+  companyVendor CompanyVendorsMaster @relation("PISupplierAdditionalCostCompanyVendor", fields: [company_vendor_id], references: [id], map: "pi_sup_cost_company_vendor_fk")
+
+  additionalCost AdditionalCostMaster @relation("PIAdditionalCostMaster", fields: [additional_cost_id], references: [id], map: "pi_sup_cost_master_fk")
+
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POCostSourcePI")
+
+  @@index([vendor_id], map: "pi_sup_cost_vendor_idx")
+  @@index([purchase_intent_id], map: "pi_sup_cost_pi_idx")
+  @@index([company_vendor_id], map: "pi_sup_cost_company_vendor_idx")
+  @@index([additional_cost_id], map: "pi_sup_cost_master_idx")
+}
+
+model PurchaseOrderSupplierAdditionalCost {
+  id                            Int      @id @default(autoincrement())
+  vendor_id                     Int
+
+  purchase_order_id             Int
+  company_vendor_id             Int
+  additional_cost_id            Int
+
+  source_pi_additional_cost_id  Int?
+
+  cost_name                     String
+  calculation_type              AdditionalCostCalculationType @default(Fixed)
+
+  amount                        Decimal  @default(0) @db.Decimal(18, 2)
+  percentage                    Decimal  @default(0) @db.Decimal(8, 2)
+  base_amount                   Decimal  @default(0) @db.Decimal(18, 2)
+
+  taxable_amount                Decimal  @default(0) @db.Decimal(18, 2)
+  tax_pct                       Decimal  @default(0) @db.Decimal(5, 2)
+  tax_amount                    Decimal  @default(0) @db.Decimal(18, 2)
+
+  total_amount                  Decimal  @default(0) @db.Decimal(18, 2)
+
+  remarks                       String?
+
+  created_by                    Int?
+  updated_by                    Int?
+
+  created_at                    DateTime @default(now())
+  updated_at                    DateTime @updatedAt
+
+  vendor VendorMaster @relation("POSupplierAdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade, map: "po_sup_cost_vendor_fk")
+
+  purchaseOrder PurchaseOrderMaster @relation("POSupplierAdditionalCosts", fields: [purchase_order_id], references: [id], onDelete: Cascade, map: "po_sup_cost_po_fk")
+
+  companyVendor CompanyVendorsMaster @relation("POSupplierAdditionalCostCompanyVendor", fields: [company_vendor_id], references: [id], map: "po_sup_cost_company_vendor_fk")
+
+  additionalCost AdditionalCostMaster @relation("POAdditionalCostMaster", fields: [additional_cost_id], references: [id], map: "po_sup_cost_master_fk")
+
+  sourcePiAdditionalCost PurchaseIntentSupplierAdditionalCost? @relation("POCostSourcePI", fields: [source_pi_additional_cost_id], references: [id], map: "po_sup_cost_source_pi_fk")
+
+  @@index([vendor_id], map: "po_sup_cost_vendor_idx")
+  @@index([purchase_order_id], map: "po_sup_cost_po_idx")
+  @@index([company_vendor_id], map: "po_sup_cost_company_vendor_idx")
+  @@index([additional_cost_id], map: "po_sup_cost_master_idx")
+  @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
+}
+
+
+enum AdditionalCostCalculationType {
+  Fixed
+  Percentage
 }
 
 enum PaymentScheduleAction {

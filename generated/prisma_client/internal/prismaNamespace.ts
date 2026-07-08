@@ -524,7 +524,10 @@ export const ModelName = {
   UnitMaster: 'UnitMaster',
   ItemGroupMaster: 'ItemGroupMaster',
   ProductSupplierMapping: 'ProductSupplierMapping',
-  POPaymentScheduleHistory: 'POPaymentScheduleHistory'
+  POPaymentScheduleHistory: 'POPaymentScheduleHistory',
+  AdditionalCostMaster: 'AdditionalCostMaster',
+  PurchaseIntentSupplierAdditionalCost: 'PurchaseIntentSupplierAdditionalCost',
+  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -540,7 +543,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -10978,6 +10981,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    AdditionalCostMaster: {
+      payload: Prisma.$AdditionalCostMasterPayload<ExtArgs>
+      fields: Prisma.AdditionalCostMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdditionalCostMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdditionalCostMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.AdditionalCostMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdditionalCostMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        findMany: {
+          args: Prisma.AdditionalCostMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>[]
+        }
+        create: {
+          args: Prisma.AdditionalCostMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        createMany: {
+          args: Prisma.AdditionalCostMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdditionalCostMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.AdditionalCostMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        update: {
+          args: Prisma.AdditionalCostMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.AdditionalCostMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdditionalCostMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdditionalCostMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.AdditionalCostMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalCostMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.AdditionalCostMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdditionalCostMaster>
+        }
+        groupBy: {
+          args: Prisma.AdditionalCostMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalCostMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdditionalCostMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalCostMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    PurchaseIntentSupplierAdditionalCost: {
+      payload: Prisma.$PurchaseIntentSupplierAdditionalCostPayload<ExtArgs>
+      fields: Prisma.PurchaseIntentSupplierAdditionalCostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        findFirst: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        findMany: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>[]
+        }
+        create: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        createMany: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>[]
+        }
+        delete: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        update: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        deleteMany: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>[]
+        }
+        upsert: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload>
+        }
+        aggregate: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePurchaseIntentSupplierAdditionalCost>
+        }
+        groupBy: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseIntentSupplierAdditionalCostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PurchaseIntentSupplierAdditionalCostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseIntentSupplierAdditionalCostCountAggregateOutputType> | number
+        }
+      }
+    }
+    PurchaseOrderSupplierAdditionalCost: {
+      payload: Prisma.$PurchaseOrderSupplierAdditionalCostPayload<ExtArgs>
+      fields: Prisma.PurchaseOrderSupplierAdditionalCostFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        findFirst: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        findMany: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>[]
+        }
+        create: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        createMany: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>[]
+        }
+        delete: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        update: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        deleteMany: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>[]
+        }
+        upsert: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PurchaseOrderSupplierAdditionalCostPayload>
+        }
+        aggregate: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePurchaseOrderSupplierAdditionalCost>
+        }
+        groupBy: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseOrderSupplierAdditionalCostGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PurchaseOrderSupplierAdditionalCostCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PurchaseOrderSupplierAdditionalCostCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -13366,6 +13591,9 @@ export const ProductSupplierMappingScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   supplier_item_code: 'supplier_item_code',
   amount: 'amount',
+  procurement_expense_amount: 'procurement_expense_amount',
+  procurement_expense_pct: 'procurement_expense_pct',
+  procurement_expense_total: 'procurement_expense_total',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
@@ -13395,6 +13623,78 @@ export const POPaymentScheduleHistoryScalarFieldEnum = {
 } as const
 
 export type POPaymentScheduleHistoryScalarFieldEnum = (typeof POPaymentScheduleHistoryScalarFieldEnum)[keyof typeof POPaymentScheduleHistoryScalarFieldEnum]
+
+
+export const AdditionalCostMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  cost_name: 'cost_name',
+  cost_code: 'cost_code',
+  description: 'description',
+  is_taxable: 'is_taxable',
+  tax_pct: 'tax_pct',
+  is_active: 'is_active',
+  is_deleted: 'is_deleted',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type AdditionalCostMasterScalarFieldEnum = (typeof AdditionalCostMasterScalarFieldEnum)[keyof typeof AdditionalCostMasterScalarFieldEnum]
+
+
+export const PurchaseIntentSupplierAdditionalCostScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  purchase_intent_id: 'purchase_intent_id',
+  company_vendor_id: 'company_vendor_id',
+  additional_cost_id: 'additional_cost_id',
+  cost_name: 'cost_name',
+  calculation_type: 'calculation_type',
+  amount: 'amount',
+  percentage: 'percentage',
+  base_amount: 'base_amount',
+  taxable_amount: 'taxable_amount',
+  tax_pct: 'tax_pct',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PurchaseIntentSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseIntentSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseIntentSupplierAdditionalCostScalarFieldEnum]
+
+
+export const PurchaseOrderSupplierAdditionalCostScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  purchase_order_id: 'purchase_order_id',
+  company_vendor_id: 'company_vendor_id',
+  additional_cost_id: 'additional_cost_id',
+  source_pi_additional_cost_id: 'source_pi_additional_cost_id',
+  cost_name: 'cost_name',
+  calculation_type: 'calculation_type',
+  amount: 'amount',
+  percentage: 'percentage',
+  base_amount: 'base_amount',
+  taxable_amount: 'taxable_amount',
+  tax_pct: 'tax_pct',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PurchaseOrderSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -14311,6 +14611,20 @@ export type EnumPaymentScheduleActionFieldRefInput<$PrismaModel> = FieldRefInput
 export type ListEnumPaymentScheduleActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentScheduleAction[]'>
     
 
+
+/**
+ * Reference to a field of type 'AdditionalCostCalculationType'
+ */
+export type EnumAdditionalCostCalculationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdditionalCostCalculationType'>
+    
+
+
+/**
+ * Reference to a field of type 'AdditionalCostCalculationType[]'
+ */
+export type ListEnumAdditionalCostCalculationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AdditionalCostCalculationType[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -14547,6 +14861,9 @@ export type GlobalOmitConfig = {
   itemGroupMaster?: Prisma.ItemGroupMasterOmit
   productSupplierMapping?: Prisma.ProductSupplierMappingOmit
   pOPaymentScheduleHistory?: Prisma.POPaymentScheduleHistoryOmit
+  additionalCostMaster?: Prisma.AdditionalCostMasterOmit
+  purchaseIntentSupplierAdditionalCost?: Prisma.PurchaseIntentSupplierAdditionalCostOmit
+  purchaseOrderSupplierAdditionalCost?: Prisma.PurchaseOrderSupplierAdditionalCostOmit
 }
 
 /* Types for Logging */
