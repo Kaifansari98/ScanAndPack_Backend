@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { prisma } from "../../prisma/client";
 import { TaskService } from "../../services/task/task.service";
 import { editTaskISMService } from "../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
 import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
@@ -21,7 +22,7 @@ export class TaskController {
       }
 
       const { tasks, count } = await TaskService.getTasksByVendorAndUser2(
-        vendorId, 
+        vendorId,
         userId,
         franchiseId,
         1,
@@ -518,7 +519,7 @@ export class TaskController {
     } catch (error: any) {
       const statusCode =
         error?.message?.startsWith("Validation failed") ||
-        error?.message?.includes("required")
+          error?.message?.includes("required")
           ? 400
           : 500;
 
@@ -919,7 +920,7 @@ export class TaskController {
     }
   }
 
-  
+
   static async getActiveTasksByVendorAndLead(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);
@@ -999,17 +1000,95 @@ export class TaskController {
         error?.message || "Failed to update small order request task";
       const statusCode =
         message.includes("required") ||
-        message.includes("not found") ||
-        message.includes("not allowed") ||
-        message.includes("Only") ||
-        message.includes("already completed") ||
-        message.includes("No approval action")
+          message.includes("not found") ||
+          message.includes("not allowed") ||
+          message.includes("Only") ||
+          message.includes("already completed") ||
+          message.includes("No approval action")
           ? 400
           : 500;
 
       return res.status(statusCode).json({
         success: false,
         message,
+      });
+    }
+  }
+
+  static async getTaskDetails(req: Request, res: Response) {
+    try {
+      const taskId = Number(req.params.taskId);
+
+      if (isNaN(taskId)) {
+        return res.status(400).json({
+          success: false,
+          message: "Invalid taskId",
+        });
+      }
+
+      const task = await prisma.userLeadTask.findUnique({
+        where: { id: taskId },
+        include: {
+          lead: {
+            include: {
+              statusType: true,
+              createdBy: {
+                select: {
+                  user_name: true,
+                }
+              },
+              assignedTo: {
+                select: {
+                  user_name: true,
+                }
+              }
+            }
+          },
+          user: {
+            select: {
+              user_name: true,
+              user_email: true,
+            },
+          },
+          createdBy: {
+            select: {
+              user_name: true,
+            },
+          },
+          closedBy: {
+            select: {
+              user_name: true,
+            },
+          },
+          instance: {
+            select: {
+              title: true,
+            },
+          },
+        },
+      });
+
+      if (!task) {
+        return res.status(404).json({
+          success: false,
+          message: "Task not found",
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        data: task,
+      });
+    } catch (error: any) {
+      logger.error("[TaskController] getTaskDetails Error", {
+        error: error.message,
+        stack: error.stack,
+      });
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to fetch task details",
+        error: error.message,
       });
     }
   }

@@ -84,4 +84,9 @@ taskRouter.patch(
   TaskController.actOnFastProductionRequestTask,
 );
 
+taskRouter.get(
+  "/:taskId/details",
+  TaskController.getTaskDetails,
+);
+
 export default taskRouter;

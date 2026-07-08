@@ -1288,6 +1288,40 @@ export const uploadDesignQuotationFiles = multer({
   },
 });
 
+export const uploadCostingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/costing_file";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
+export const uploadElectricalPlumbingFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/electrical_plumbing";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
 export const uploadInitialSiteMeasurement = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
@@ -1370,6 +1404,60 @@ export const uploadToWasabiDesignQuotationFile = async (
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `design_quotation/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiCostingFile = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `costing_file/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiElectricalPlumbing = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `electrical_plumbing/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,

@@ -10,7 +10,7 @@ export class ArchitectureMasterController {
    */
   async create(req: Request, res: Response) {
     try {
-      const { vendorId, name, email, mobile, is_active } = req.body;
+      const { vendorId, name, email, mobile, alt_mobile, is_active } = req.body;
       
       // Basic validation
       if (!name || !email || !mobile) {
@@ -25,11 +25,12 @@ export class ArchitectureMasterController {
         name,
         email,
         mobile,
+        alt_mobile,
         is_active,
         created_by
       });
 
-      return res.status(201).json(ApiResponse.created(newArchitecture, "Architecture master created successfully"));
+      return res.status(201).json(ApiResponse.created(newArchitecture, "Architect master created successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to create architecture master"));
     }
@@ -45,7 +46,7 @@ export class ArchitectureMasterController {
       const search = req.query.search as string | undefined;
 
       const result = await architectureMasterService.getAllArchitectureMasters(page, limit, search);
-      return res.status(200).json(ApiResponse.success(result, "Architecture masters fetched successfully"));
+      return res.status(200).json(ApiResponse.success(result, "Architect masters fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architecture masters"));
     }
@@ -61,10 +62,10 @@ export class ArchitectureMasterController {
       const architecture = await architectureMasterService.getArchitectureMasterById(id);
       
       if (!architecture) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
-      return res.status(200).json(ApiResponse.success(architecture, "Architecture master fetched successfully"));
+      return res.status(200).json(ApiResponse.success(architecture, "Architect master fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architecture master"));
     }
@@ -76,12 +77,12 @@ export class ArchitectureMasterController {
   async update(req: Request, res: Response) {
     try {
       const id = String(req.params.id);
-      const { vendorId, name, email, mobile, is_active } = req.body;
+      const { vendorId, name, email, mobile, alt_mobile, is_active } = req.body;
 
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const updated = await architectureMasterService.updateArchitectureMaster(id, {
@@ -89,10 +90,11 @@ export class ArchitectureMasterController {
         name,
         email,
         mobile,
+        alt_mobile,
         is_active
       });
 
-      return res.status(200).json(ApiResponse.success(updated, "Architecture master updated successfully"));
+      return res.status(200).json(ApiResponse.success(updated, "Architect master updated successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to update architecture master"));
     }
@@ -108,14 +110,14 @@ export class ArchitectureMasterController {
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const deletedBy = (req as any).user?.id;
       
       await architectureMasterService.deleteArchitectureMaster(id, deletedBy);
 
-      return res.status(200).json(ApiResponse.success(null, "Architecture master deleted successfully"));
+      return res.status(200).json(ApiResponse.success(null, "Architect master deleted successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to delete architecture master"));
     }
@@ -135,12 +137,12 @@ export class ArchitectureMasterController {
       // Check if it exists
       const existing = await architectureMasterService.getArchitectureMasterById(id);
       if (!existing) {
-        return res.status(404).json(ApiResponse.notFound("Architecture master not found"));
+        return res.status(404).json(ApiResponse.notFound("Architect master not found"));
       }
 
       const updated = await architectureMasterService.updateArchitectureMasterStatus(id, is_active);
 
-      return res.status(200).json(ApiResponse.success(updated, "Architecture master status updated successfully"));
+      return res.status(200).json(ApiResponse.success(updated, "Architect master status updated successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to update architecture master status"));
     }
@@ -161,6 +163,37 @@ export class ArchitectureMasterController {
       return res.status(200).json(ApiResponse.success(list, "Architects list fetched successfully"));
     } catch (error: any) {
       return res.status(500).json(ApiResponse.error(error.message || "Failed to fetch architects list"));
+    }
+  }
+
+  /**
+   * Upload Architecture Masters via CSV or XLSX
+   */
+  async uploadArchitects(req: Request, res: Response) {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.status(400).json(ApiResponse.validationError("CSV or XLSX file is required"));
+      }
+
+      const vendorId = Number(req.body.vendorId || req.params.vendorId || (req as any).user?.vendor_id);
+      if (!vendorId) {
+        return res.status(400).json(ApiResponse.validationError("Vendor ID is required"));
+      }
+
+      const createdBy = Number((req as any).user?.id || 1);
+      const isCsv = file.originalname.endsWith(".csv") || file.mimetype === "text/csv";
+
+      const result = await architectureMasterService.bulkUploadArchitects(
+        file.buffer,
+        isCsv,
+        vendorId,
+        createdBy
+      );
+
+      return res.status(200).json(ApiResponse.success(result, "Architects uploaded successfully"));
+    } catch (error: any) {
+      return res.status(500).json(ApiResponse.error(error.message || "Failed to upload architects"));
     }
   }
 }

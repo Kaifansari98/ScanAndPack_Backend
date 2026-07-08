@@ -1073,6 +1073,10 @@ export class LeadController {
         req.body.pre_prod_remark !== undefined
           ? String(req.body.pre_prod_remark)
           : undefined;
+      const quantity =
+        req.body.quantity !== undefined
+          ? Number(req.body.quantity)
+          : undefined;
       const updatedBy = req.body.updated_by
         ? Number(req.body.updated_by)
         : null;
@@ -1117,6 +1121,7 @@ export class LeadController {
         title,
         description,
         pre_prod_remark: preProdRemark,
+        quantity: quantity !== undefined && !Number.isNaN(quantity) ? quantity : undefined,
         updated_by: updatedBy,
       });
 

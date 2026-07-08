@@ -1455,6 +1455,7 @@ export const getLeadProductStructureInstances = async (
       include: {
         productStructure: true,
         productType: true,
+        
         subProductStructure: true,
         productItemCode: {
           include: {
@@ -1584,6 +1585,7 @@ export const updateLeadProductStructureInstance = async ({
   title,
   description,
   pre_prod_remark,
+  quantity,
   updated_by,
 }: {
   leadId: number;
@@ -1593,6 +1595,7 @@ export const updateLeadProductStructureInstance = async ({
   title: string;
   description?: string | null;
   pre_prod_remark?: string | null;
+  quantity?: number | null;
   updated_by?: number | null;
 }) => {
   try {
@@ -1639,6 +1642,7 @@ export const updateLeadProductStructureInstance = async ({
         quantity_index: nextQuantityIndex,
         title: title.trim(),
         description: description?.trim() || null,
+        quantity: quantity !== undefined ? quantity : undefined,
         ...(pre_prod_remark !== undefined
           ? {
             pre_prod_remark:
