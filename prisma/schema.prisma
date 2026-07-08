@@ -19,6 +19,7 @@ model VendorMaster {
   head_office_id                         Int?
   status                                 String   @default("inactive")
   logo                                   String
+  icon                                   String?
   time_zone                              String
   subdomain_url                          String?
   IsAccountLocInEnabled                  Boolean? @default(false)

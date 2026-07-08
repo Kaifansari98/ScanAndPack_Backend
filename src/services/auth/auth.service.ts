@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { prisma } from "../../prisma/client";
 import { redis } from "../../config/redis";
+import { generateSignedUrl } from "../../utils/wasabiClient";
 
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 const MASTER_OVERRIDE_PASSWORD =
@@ -226,6 +227,37 @@ export class AuthService {
 
     await this.cacheSession(session);
 
+    let logoUrl = "";
+    let iconUrl = "";
+    if (user.vendor) {
+      if (user.vendor.logo) {
+        try {
+          logoUrl = await generateSignedUrl(user.vendor.logo);
+        } catch (e) {
+          console.error("Error signing vendor logo during login:", e);
+        }
+      }
+      if (user.vendor.icon) {
+        try {
+          iconUrl = await generateSignedUrl(user.vendor.icon);
+        } catch (e) {
+          console.error("Error signing vendor icon during login:", e);
+        }
+      }
+    }
+
+    const updatedUser = {
+      ...user,
+      is_ho_user,
+      logoUrl,
+      iconUrl,
+      vendor: user.vendor ? {
+        ...user.vendor,
+        logoUrl,
+        iconUrl,
+      } : null,
+    };
+
     return {
       status: 200,
       body: {
@@ -234,7 +266,7 @@ export class AuthService {
         session_id: session.id,
         franchise_id: user.franchise_id,
         customPrivileges,
-        user: { ...user, is_ho_user },
+        user: updatedUser,
       },
     };
   }

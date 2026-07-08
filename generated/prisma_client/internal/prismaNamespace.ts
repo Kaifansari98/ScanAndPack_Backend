@@ -11704,6 +11704,7 @@ export const VendorMasterScalarFieldEnum = {
   head_office_id: 'head_office_id',
   status: 'status',
   logo: 'logo',
+  icon: 'icon',
   time_zone: 'time_zone',
   subdomain_url: 'subdomain_url',
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',

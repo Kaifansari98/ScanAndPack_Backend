@@ -14,14 +14,22 @@ import {
   onboardVendorController,
   seedVendorMastersController,
   updateVendorController,
+  getVendorBySubdomainController,
 } from "../controllers/vendor.controller";
 import { verifyToken } from "../middlewares/auth.middleware";
+import { handleMulterUpload } from "../middlewares/handleMulterUpload";
+import { uploadVendorAssets } from "../middlewares/uploadWasabi";
 
 const router = Router();
 
-router.post("/", createVendor);
-router.post("/onboard", onboardVendorController);
-router.patch("/:vendor_id", verifyToken, updateVendorController);
+const vendorUploadFields = uploadVendorAssets.fields([
+  { name: "logo", maxCount: 1 },
+  { name: "icon", maxCount: 1 },
+]);
+
+router.post("/", handleMulterUpload(vendorUploadFields), createVendor);
+router.post("/onboard", handleMulterUpload(vendorUploadFields), onboardVendorController);
+router.patch("/:vendor_id", verifyToken, handleMulterUpload(vendorUploadFields), updateVendorController);
 router.post("/seed-masters", seedVendorMastersController);
 router.get("/", verifyToken, getAllVendors);
 router.get("/vendor-users", getVendorUsersController);
@@ -35,6 +43,7 @@ router.get(
   getPaymentsBetweenClientAndStoreReportController,
 );
 router.get("/reports/erd", getErdReportController);
+router.get("/public/by-subdomain", getVendorBySubdomainController);
 router.get("/:vendor_id", verifyToken, getVendorByIdController);
 
 export default router;

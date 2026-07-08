@@ -296,6 +296,7 @@ export class ArchitectureMasterService {
     }
 
     const createdArchitects = [];
+    const skippedRows: Array<{ row: Record<string, string>; reason: string }> = [];
     const errors: string[] = [];
     const validatedRows: any[] = [];
     let rowIndex = 1;
@@ -378,7 +379,79 @@ export class ArchitectureMasterService {
       throw new Error(errors.join(" | "));
     }
 
+    const uploadEmails = validatedRows
+      .map((row) => row.email?.trim().toLowerCase())
+      .filter(Boolean);
+    const uploadMobiles = validatedRows
+      .map((row) => row.mobile?.trim())
+      .filter(Boolean);
+
+    const existingArchitects = await prisma.architechuremaster.findMany({
+      where: {
+        OR: [
+          uploadEmails.length > 0
+            ? { email: { in: uploadEmails } }
+            : undefined,
+          uploadMobiles.length > 0
+            ? { mobile: { in: uploadMobiles } }
+            : undefined,
+        ].filter(Boolean) as any[],
+      },
+      select: {
+        email: true,
+        mobile: true,
+      },
+    });
+
+    const existingEmails = new Set(
+      existingArchitects
+        .map((row) => row.email?.trim().toLowerCase())
+        .filter(Boolean),
+    );
+    const existingMobiles = new Set(
+      existingArchitects
+        .map((row) => row.mobile?.trim())
+        .filter(Boolean),
+    );
+    const seenEmails = new Set<string>();
+    const seenMobiles = new Set<string>();
+
     for (const dataRow of validatedRows) {
+      const normalizedEmail = dataRow.email.trim().toLowerCase();
+      const normalizedMobile = dataRow.mobile.trim();
+
+      if (existingEmails.has(normalizedEmail)) {
+        skippedRows.push({
+          row: dataRow,
+          reason: `Architect with email ${dataRow.email} already exists`,
+        });
+        continue;
+      }
+
+      if (existingMobiles.has(normalizedMobile)) {
+        skippedRows.push({
+          row: dataRow,
+          reason: `Architect with contact ${dataRow.mobile} already exists`,
+        });
+        continue;
+      }
+
+      if (seenEmails.has(normalizedEmail)) {
+        skippedRows.push({
+          row: dataRow,
+          reason: `Duplicate email ${dataRow.email} found in uploaded file`,
+        });
+        continue;
+      }
+
+      if (seenMobiles.has(normalizedMobile)) {
+        skippedRows.push({
+          row: dataRow,
+          reason: `Duplicate contact ${dataRow.mobile} found in uploaded file`,
+        });
+        continue;
+      }
+
       try {
         const newArch = await (prisma.architechuremaster as any).create({
           data: {
@@ -392,16 +465,24 @@ export class ArchitectureMasterService {
           },
         });
         createdArchitects.push(newArch);
+        seenEmails.add(normalizedEmail);
+        seenMobiles.add(normalizedMobile);
       } catch (err: any) {
+        if (err?.code === "P2002") {
+          skippedRows.push({
+            row: dataRow,
+            reason: "Duplicate architect data already exists",
+          });
+          continue;
+        }
         throw new Error(`Failed to save architect data: ${err.message}`);
       }
     }
 
     return {
       successCount: createdArchitects.length,
-      skippedCount: 0,
-      skippedRows: [],
+      skippedCount: skippedRows.length,
+      skippedRows,
     };
   }
 }
-

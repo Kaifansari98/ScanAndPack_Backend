@@ -2008,3 +2008,28 @@ export const uploadPdfAndGetSignedUrl = async (
     }
   }
 };
+
+export const uploadToWasabiVendorAsset = async (
+  filePath: string,
+  assetType: "logo" | "icon",
+  originalName: string,
+  contentType: string
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `vendor-${assetType}s/${Date.now()}-${sanitizeFilename(originalName)}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 5 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+  return sysName;
+};
