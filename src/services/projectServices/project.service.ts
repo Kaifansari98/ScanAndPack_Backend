@@ -474,8 +474,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
   // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
     where: { vendor_id: vendorId, machine_type_id: 18 },
-    select: { id: true, sequence_no: true },
-    orderBy: { id: "asc" },
+    select: { id: true, sequence_no: true },    
   });
 
   // ── 2. Fetch all projects ────────────────────────────────────────────────
@@ -513,6 +512,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
         },
       },
     },
+    orderBy: { id: "desc" },
   });
 
   if (!packagingMachine) {

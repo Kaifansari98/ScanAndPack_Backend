@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const AdditionalCostCalculationType = {
+  Fixed: 'Fixed',
+  Percentage: 'Percentage'
+} as const
+
+export type AdditionalCostCalculationType = (typeof AdditionalCostCalculationType)[keyof typeof AdditionalCostCalculationType]
+
+
 export const PaymentMode = {
   Cash: 'Cash',
   BankTransfer: 'BankTransfer',

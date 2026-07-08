@@ -749,3 +749,189 @@ export const getProductPurchaseHistoryService = async (
     return validationResponse(0, "Failed to fetch product history");
   }
 };
+
+
+export const createHSNService = async (
+  vendor_id: number,
+  payload: {
+    hsn_code: string;
+    description?: string;
+    igst_rate?: number | string;
+  }
+) => {
+  try {
+    if (!vendor_id) {
+      return validationResponse(0, "Vendor ID is required");
+    }
+
+    if (!payload.hsn_code?.trim()) {
+      return validationResponse(0, "HSN code is required");
+    }
+
+    const hsnCode = payload.hsn_code.trim();
+
+    console.log("payload.igst_rate",payload.igst_rate);
+    if (
+      payload.igst_rate === undefined ||
+      payload.igst_rate === null || payload.igst_rate === ""
+    ) {
+      return validationResponse(0, "IGST rate is required");
+    }
+
+    const igstRate = Number(payload.igst_rate);
+
+    if (!Number.isFinite(igstRate)) {
+      return validationResponse(0, "IGST rate must be a valid number");
+    }
+
+    if (igstRate < 0) {
+      return validationResponse(0, "IGST rate must be greater than -1");
+    }
+
+    if (igstRate > 100) {
+      return validationResponse(0, "IGST rate cannot be greater than 100");
+    }
+
+    if (igstRate > 100) {
+      return validationResponse(0, "IGST rate cannot be greater than 100");
+    }
+
+    const cgstRate = Number((igstRate / 2).toFixed(2));
+    const sgstRate = Number((igstRate / 2).toFixed(2));
+
+    const existing = await prisma.hsnProductMapping.findFirst({
+      where: {
+        vendor_id,
+        hsn_code: hsnCode,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (existing) {
+      return validationResponse(0, "HSN code already exists");
+    }
+
+    const hsn = await prisma.hsnProductMapping.create({
+      data: {
+        vendor_id,
+        hsn_code: hsnCode,
+        description: payload.description?.trim() || null,
+
+        igst_rate: igstRate,
+        cgst_rate: cgstRate,
+        sgst_rate: sgstRate,
+        cess_rate: 0,
+
+        is_active: true,
+      },
+    });
+
+    return validationResponse(1, "HSN created successfully", hsn);
+  } catch (error) {
+    console.error("createHSNService error:", error);
+    return validationResponse(0, "Failed to create HSN");
+  }
+};
+
+
+
+export const getAdditionalCostMastersService = async (vendor_id: number) => {
+  try {
+    if (!vendor_id) {
+      return validationResponse(0, "Vendor ID is required");
+    }
+
+    const costs = await prisma.additionalCostMaster.findMany({
+      where: {
+        vendor_id,
+        is_active: true,
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+        cost_name: true,
+        cost_code: true,
+        description: true,
+        is_taxable: true,
+        tax_pct: true,
+      },
+      orderBy: {
+        cost_name: "asc",
+      },
+    });
+
+    return validationResponse(1, "Additional costs fetched", costs);
+  } catch (error) {
+    console.error("getAdditionalCostMastersService error:", error);
+    return validationResponse(0, "Failed to fetch additional costs");
+  }
+};
+
+
+export const createAdditionalCostMasterService = async (
+  vendor_id: number,
+  payload: {
+    cost_name: string;
+    cost_code?: string;
+    description?: string;
+    is_taxable?: boolean;
+    tax_pct?: number | string;
+    created_by?: number;
+  }
+) => {
+  try {
+    if (!vendor_id) {
+      return validationResponse(0, "Vendor ID is required");
+    }
+
+    if (!payload.cost_name?.trim()) {
+      return validationResponse(0, "Cost name is required");
+    }
+
+    const costName = payload.cost_name.trim();
+
+    const existing = await prisma.additionalCostMaster.findFirst({
+      where: {
+        vendor_id,
+        cost_name: {
+          equals: costName,
+          mode: "insensitive",
+        },
+        is_deleted: false,
+      },
+      select: {
+        id: true,
+      },
+    });
+
+    if (existing) {
+      return validationResponse(0, "Additional cost already exists");
+    }
+
+    const isTaxable = Boolean(payload.is_taxable);
+    const taxPct = isTaxable ? Number(payload.tax_pct || 0) : 0;
+
+    if (taxPct < 0 || taxPct > 100) {
+      return validationResponse(0, "Tax percentage must be between 0 and 100");
+    }
+
+    const cost = await prisma.additionalCostMaster.create({
+      data: {
+        vendor_id,
+        cost_name: costName,
+        cost_code: payload.cost_code?.trim() || null,
+        description: payload.description?.trim() || null,
+        is_taxable: isTaxable,
+        tax_pct: taxPct,
+        created_by: payload.created_by || null,
+      },
+    });
+
+    return validationResponse(1, "Additional cost created successfully", cost);
+  } catch (error) {
+    console.error("createAdditionalCostMasterService error:", error);
+    return validationResponse(0, "Failed to create additional cost");
+  }
+};

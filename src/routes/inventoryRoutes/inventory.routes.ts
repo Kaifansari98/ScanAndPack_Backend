@@ -4,6 +4,9 @@ import {
   getProductFilters,
   getProductMaster,
   getProductPurchaseHistory,
+  createHSN,
+  getAdditionalCostMasters,
+  createAdditionalCostMaster
 } from '../../controllers/inventoryController/inventory.controller';
 
 import {
@@ -72,6 +75,11 @@ router.get("/products/:vendor_id/:id", productDetail);
 router.post("/products/:vendor_id", productCreate);
 router.put("/products/:vendor_id/:id", productUpdate);
 router.delete("/products/:vendor_id/:id", productRemove);
+
+router.post("/hsn/:vendor_id", createHSN);
+
+router.get("/additional-costs/:vendor_id", getAdditionalCostMasters);
+router.post("/additional-costs/:vendor_id", createAdditionalCostMaster);
 
 
 export default router;

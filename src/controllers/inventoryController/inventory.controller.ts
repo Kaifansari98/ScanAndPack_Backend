@@ -103,3 +103,55 @@ export const getProductPurchaseHistory = async (req: Request, res: Response) => 
       : ApiResponse.error(result.message, 404)
   );
 };
+
+
+export const createHSN = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+
+    const result = await inventoryService.createHSNService(vendor_id, req.body);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createHSN controller error:", error);
+    return res.status(500).json({
+      status: 0,
+      message: "Failed to create HSN",
+    });
+  }
+};
+
+export const getAdditionalCostMasters = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+
+    const result = await inventoryService.getAdditionalCostMastersService(vendor_id);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("getAdditionalCostMasters error:", error);
+
+    return res.status(500).json({
+      status: 0,
+      message: "Failed to fetch additional costs",
+    });
+  }
+};
+
+
+export const createAdditionalCostMaster = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = Number(req.params.vendor_id);
+
+    const result = await inventoryService.createAdditionalCostMasterService(vendor_id, req.body);
+
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error("createAdditionalCostMaster error:", error);
+
+    return res.status(500).json({
+      status: 0,
+      message: "Failed to create additional cost",
+    });
+  }
+};

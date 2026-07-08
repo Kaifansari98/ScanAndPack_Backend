@@ -143,12 +143,17 @@ model VendorMaster {
   state                                StateMaster?                           @relation("VendorState", fields: [state_id], references: [id], onDelete: SetNull)
   stockHistories                       ProductStockHistory[]                  @relation("StockHistoryVendor")
 
+  additionalCostMasters     AdditionalCostMaster[]                 @relation("AdditionalCostVendor")
+  piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCostVendor")
+
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCostVendor")
+
   paymentTerms PaymentTermMaster[]
 
   poPaymentSchedules POPaymentSchedule[]
 
-  poPayments                          POPayment[]
-  architechuremasters Architechuremaster[]
+  poPayments                 POPayment[]
+  architechuremasters        Architechuremaster[]
   units                      UnitMaster[]
   itemGroups                 ItemGroupMaster[]
   productSupplierMappings    ProductSupplierMapping[]
@@ -1041,44 +1046,44 @@ model ProductStructure {
   leadProductStructureMapping LeadProductStructureMapping[]
   productSubStructures        ProductSubStructure[]
   productItemCodes            ProductItemCode[]
-  productType                 ProductTypeMaster?            @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
+  productType                 ProductTypeMaster?             @relation(fields: [product_type_id], references: [id], onDelete: SetNull)
   vendor                      VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([product_type_id])
 }
 
 model ProductSubStructure {
-  id                        Int                            @id @default(autoincrement())
-  type                      String
-  vendor_id                 Int
-  product_structure_id      Int
-  status                    String                         @default("active")
-  created_at                DateTime                       @default(now())
-  updated_at                DateTime                       @updatedAt
+  id                            Int                            @id @default(autoincrement())
+  type                          String
+  vendor_id                     Int
+  product_structure_id          Int
+  status                        String                         @default("active")
+  created_at                    DateTime                       @default(now())
+  updated_at                    DateTime                       @updatedAt
   leadProductStructureInstances LeadProductStructureInstance[]
-  productStructure          ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  productItemCodes          ProductItemCode[]
-  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productStructure              ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  productItemCodes              ProductItemCode[]
+  vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([product_structure_id])
 }
 
 model ProductItemCode {
-  id                        Int                            @id @default(autoincrement())
-  item_code                 String
-  vendor_id                 Int
-  product_structure_id      Int
-  sub_product_structure_id  Int?
-  description               String?                        @db.VarChar(2000)
-  specification             String?                        @db.VarChar(2000)
-  status                    String                         @default("active")
-  created_at                DateTime                       @default(now())
-  updated_at                DateTime                       @updatedAt
+  id                            Int                            @id @default(autoincrement())
+  item_code                     String
+  vendor_id                     Int
+  product_structure_id          Int
+  sub_product_structure_id      Int?
+  description                   String?                        @db.VarChar(2000)
+  specification                 String?                        @db.VarChar(2000)
+  status                        String                         @default("active")
+  created_at                    DateTime                       @default(now())
+  updated_at                    DateTime                       @updatedAt
   leadProductStructureInstances LeadProductStructureInstance[]
-  productStructure          ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
-  subProductStructure       ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
-  vendor                    VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  productStructure              ProductStructure               @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
+  subProductStructure           ProductSubStructure?           @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
+  vendor                        VendorMaster                   @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 
   @@unique([vendor_id, item_code, description, specification])
   @@index([vendor_id])
@@ -1113,7 +1118,7 @@ model LeadProductStructureInstance {
   quantity                                   Int?
   title                                      String
   status                                     ProductInstanceStatus   @default(open)
-  isLargeScaleProjectInstance                Boolean               @default(false)
+  isLargeScaleProjectInstance                Boolean                 @default(false)
   description                                String?                 @db.VarChar(2000)
   created_by                                 Int
   created_at                                 DateTime                @default(now())
@@ -1141,8 +1146,8 @@ model LeadProductStructureInstance {
   documents                                  LeadDocuments[]
   account                                    AccountMaster           @relation(fields: [account_id], references: [id], onDelete: Cascade)
   lead                                       LeadMaster              @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  productItemCode                            ProductItemCode?      @relation(fields: [product_item_code_id], references: [id], onDelete: SetNull)
-  subProductStructure                        ProductSubStructure?  @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
+  productItemCode                            ProductItemCode?        @relation(fields: [product_item_code_id], references: [id], onDelete: SetNull)
+  subProductStructure                        ProductSubStructure?    @relation(fields: [sub_product_structure_id], references: [id], onDelete: SetNull)
   productStructure                           ProductStructure        @relation(fields: [product_structure_id], references: [id], onDelete: Cascade)
   productType                                ProductTypeMaster       @relation(fields: [product_type_id], references: [id], onDelete: Cascade)
   updatedBy                                  UserMaster?             @relation(fields: [updated_by], references: [id])
@@ -1865,6 +1870,10 @@ model CompanyVendorsMaster {
   grns                         GRNMaster[]                       @relation("GRNSupplier")
   debitCreditNotes             DebitCreditNote[]                 @relation("DCNSupplier")
   redeliveryRequests           RedeliveryRequest[]               @relation("RDSupplier")
+
+  piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCostCompanyVendor")
+
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCostCompanyVendor")
 
   defaultPaymentTerm PaymentTermMaster? @relation("SupplierDefaultPaymentTerm", fields: [default_payment_term_id], references: [id], onDelete: SetNull)
 
@@ -2854,13 +2863,14 @@ model PurchaseIntentMaster {
   total_amount     Decimal?               @db.Decimal(18, 2)
 
   // Relations
-  vendor     VendorMaster             @relation("PIVendor", fields: [vendor_id], references: [id], onDelete: Cascade)
-  category   ProjectCategoriesMaster? @relation("PICategory", fields: [category_id], references: [id])
-  createdBy  UserMaster               @relation("PICreatedBy", fields: [created_by], references: [id])
-  updatedBy  UserMaster?              @relation("PIUpdatedBy", fields: [updated_by], references: [id])
-  approvedBy UserMaster?              @relation("PIApprovedBy", fields: [approved_by], references: [id])
-  rejectedBy UserMaster?              @relation("PIRejectedBy", fields: [rejected_by], references: [id])
-  deletedBy  UserMaster?              @relation("PIDeletedBy", fields: [deleted_by], references: [id])
+  vendor                  VendorMaster                           @relation("PIVendor", fields: [vendor_id], references: [id], onDelete: Cascade)
+  category                ProjectCategoriesMaster?               @relation("PICategory", fields: [category_id], references: [id])
+  createdBy               UserMaster                             @relation("PICreatedBy", fields: [created_by], references: [id])
+  updatedBy               UserMaster?                            @relation("PIUpdatedBy", fields: [updated_by], references: [id])
+  approvedBy              UserMaster?                            @relation("PIApprovedBy", fields: [approved_by], references: [id])
+  rejectedBy              UserMaster?                            @relation("PIRejectedBy", fields: [rejected_by], references: [id])
+  deletedBy               UserMaster?                            @relation("PIDeletedBy", fields: [deleted_by], references: [id])
+  supplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PISupplierAdditionalCosts")
 
   items          PurchaseIntentItem[]
   statusLogs     PurchaseIntentStatusLog[]
@@ -2969,8 +2979,9 @@ model PurchaseOrderMaster {
   items       PurchaseOrderItem[]
   paymentTerm PaymentTermMaster?  @relation(fields: [payment_term_id], references: [id], onDelete: SetNull)
 
-  paymentSchedules POPaymentSchedule[]
-  grns             GRNMaster[]         @relation("GRNPurchaseOrder")
+  paymentSchedules        POPaymentSchedule[]
+  grns                    GRNMaster[]                           @relation("GRNPurchaseOrder")
+  supplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POSupplierAdditionalCosts")
 
   @@index([payment_term_id])
   @@index([vendor_id])
@@ -3427,8 +3438,11 @@ model ProductSupplierMapping {
   product_id        Int
   company_vendor_id Int
 
-  supplier_item_code String?
-  amount             Decimal? @db.Decimal(18, 2)
+  supplier_item_code         String?
+  amount                     Decimal? @db.Decimal(18, 2)
+  procurement_expense_amount Decimal? @db.Decimal(18, 2)
+  procurement_expense_pct    Decimal? @db.Decimal(8, 2)
+  procurement_expense_total  Decimal? @db.Decimal(18, 2)
 
   is_active Boolean @default(true)
 
@@ -3482,21 +3496,152 @@ model POPaymentScheduleHistory {
 }
 
 model Architechuremaster {
-  id        Int       @id @default(autoincrement())
-  vendorId  Int
-  name      String
-  email     String
-  mobile    String
+  id         Int       @id @default(autoincrement())
+  vendorId   Int
+  name       String
+  email      String
+  mobile     String
   alt_mobile String?
-  isActive  Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  createdBy Int
-  isDeleted Boolean     @default(false)
-  deletedAt DateTime?
+  isActive   Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  createdBy  Int
+  isDeleted  Boolean   @default(false)
+  deletedAt  DateTime?
 
   vendor VendorMaster @relation(fields: [vendorId], references: [id], onDelete: Cascade)
   user   UserMaster   @relation(fields: [createdBy], references: [id], onDelete: Cascade)
   leads  LeadMaster[]
+}
+
+model AdditionalCostMaster {
+  id        Int @id @default(autoincrement())
+  vendor_id Int
+
+  cost_name   String
+  cost_code   String?
+  description String?
+
+  is_taxable Boolean @default(false)
+  tax_pct    Decimal @default(0) @db.Decimal(5, 2)
+
+  is_active  Boolean @default(true)
+  is_deleted Boolean @default(false)
+
+  created_by Int?
+  updated_by Int?
+  deleted_by Int?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  vendor VendorMaster @relation("AdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade)
+
+  piSupplierAdditionalCosts PurchaseIntentSupplierAdditionalCost[] @relation("PIAdditionalCostMaster")
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[]  @relation("POAdditionalCostMaster")
+
+  @@unique([vendor_id, cost_name], map: "add_cost_master_vendor_cost_name_uq")
+  @@index([vendor_id], map: "add_cost_master_vendor_idx")
+  @@index([cost_code], map: "add_cost_master_code_idx")
+  @@index([is_active], map: "add_cost_master_active_idx")
+}
+
+model PurchaseIntentSupplierAdditionalCost {
+  id        Int @id @default(autoincrement())
+  vendor_id Int
+
+  purchase_intent_id Int
+  company_vendor_id  Int
+  additional_cost_id Int
+
+  cost_name        String
+  calculation_type AdditionalCostCalculationType @default(Fixed)
+
+  amount      Decimal @default(0) @db.Decimal(18, 2)
+  percentage  Decimal @default(0) @db.Decimal(8, 2)
+  base_amount Decimal @default(0) @db.Decimal(18, 2)
+
+  taxable_amount Decimal @default(0) @db.Decimal(18, 2)
+  tax_pct        Decimal @default(0) @db.Decimal(5, 2)
+  tax_amount     Decimal @default(0) @db.Decimal(18, 2)
+
+  total_amount Decimal @default(0) @db.Decimal(18, 2)
+
+  remarks String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor VendorMaster @relation("PISupplierAdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade, map: "pi_sup_cost_vendor_fk")
+
+  purchaseIntent PurchaseIntentMaster @relation("PISupplierAdditionalCosts", fields: [purchase_intent_id], references: [id], onDelete: Cascade, map: "pi_sup_cost_pi_fk")
+
+  companyVendor CompanyVendorsMaster @relation("PISupplierAdditionalCostCompanyVendor", fields: [company_vendor_id], references: [id], map: "pi_sup_cost_company_vendor_fk")
+
+  additionalCost AdditionalCostMaster @relation("PIAdditionalCostMaster", fields: [additional_cost_id], references: [id], map: "pi_sup_cost_master_fk")
+
+  poSupplierAdditionalCosts PurchaseOrderSupplierAdditionalCost[] @relation("POCostSourcePI")
+
+  @@index([vendor_id], map: "pi_sup_cost_vendor_idx")
+  @@index([purchase_intent_id], map: "pi_sup_cost_pi_idx")
+  @@index([company_vendor_id], map: "pi_sup_cost_company_vendor_idx")
+  @@index([additional_cost_id], map: "pi_sup_cost_master_idx")
+}
+
+model PurchaseOrderSupplierAdditionalCost {
+  id        Int @id @default(autoincrement())
+  vendor_id Int
+
+  purchase_order_id  Int
+  company_vendor_id  Int
+  additional_cost_id Int
+
+  source_pi_additional_cost_id Int?
+
+  cost_name        String
+  calculation_type AdditionalCostCalculationType @default(Fixed)
+
+  amount      Decimal @default(0) @db.Decimal(18, 2)
+  percentage  Decimal @default(0) @db.Decimal(8, 2)
+  base_amount Decimal @default(0) @db.Decimal(18, 2)
+
+  taxable_amount Decimal @default(0) @db.Decimal(18, 2)
+  tax_pct        Decimal @default(0) @db.Decimal(5, 2)
+  tax_amount     Decimal @default(0) @db.Decimal(18, 2)
+
+  total_amount Decimal @default(0) @db.Decimal(18, 2)
+
+  remarks String?
+
+  created_by Int?
+  updated_by Int?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  vendor VendorMaster @relation("POSupplierAdditionalCostVendor", fields: [vendor_id], references: [id], onDelete: Cascade, map: "po_sup_cost_vendor_fk")
+
+  purchaseOrder PurchaseOrderMaster @relation("POSupplierAdditionalCosts", fields: [purchase_order_id], references: [id], onDelete: Cascade, map: "po_sup_cost_po_fk")
+
+  companyVendor CompanyVendorsMaster @relation("POSupplierAdditionalCostCompanyVendor", fields: [company_vendor_id], references: [id], map: "po_sup_cost_company_vendor_fk")
+
+  additionalCost AdditionalCostMaster @relation("POAdditionalCostMaster", fields: [additional_cost_id], references: [id], map: "po_sup_cost_master_fk")
+
+  sourcePiAdditionalCost PurchaseIntentSupplierAdditionalCost? @relation("POCostSourcePI", fields: [source_pi_additional_cost_id], references: [id], map: "po_sup_cost_source_pi_fk")
+
+  @@index([vendor_id], map: "po_sup_cost_vendor_idx")
+  @@index([purchase_order_id], map: "po_sup_cost_po_idx")
+  @@index([company_vendor_id], map: "po_sup_cost_company_vendor_idx")
+  @@index([additional_cost_id], map: "po_sup_cost_master_idx")
+  @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
+}
+
+enum AdditionalCostCalculationType {
+  Fixed
+  Percentage
 }
 
 enum PaymentMode {
