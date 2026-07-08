@@ -1,13 +1,54 @@
 import { Request, Response } from "express";
 import * as vendorService from "../services/vendor.service";
+import { uploadToWasabiVendorAsset } from "../utils/wasabiClient";
+import fs from "node:fs/promises";
 
 export const createVendor = async (req: Request, res: Response) => {
   try {
-    const vendor = await vendorService.createVendor(req.body);
+    const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
+    const logoFile = files?.logo?.[0];
+    const iconFile = files?.icon?.[0];
+
+    let logoUrl = req.body.logo || "";
+    let iconUrl = req.body.icon || "";
+
+    if (logoFile) {
+      logoUrl = await uploadToWasabiVendorAsset(
+        logoFile.path,
+        "logo",
+        logoFile.originalname,
+        logoFile.mimetype
+      );
+      await fs.unlink(logoFile.path);
+    }
+
+    if (iconFile) {
+      iconUrl = await uploadToWasabiVendorAsset(
+        iconFile.path,
+        "icon",
+        iconFile.originalname,
+        iconFile.mimetype
+      );
+      await fs.unlink(iconFile.path);
+    }
+
+    const vendorData = {
+      ...req.body,
+      logo: logoUrl,
+      icon: iconUrl,
+      handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
+      is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
+      is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
+      is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
+      head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
+    };
+
+    const vendor = await vendorService.createVendor(vendorData);
     res.status(201).json(vendor);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Vendor creation failed" });
+  } catch (err: any) {
+    console.error("Create Vendor Error:", err);
+    res.status(500).json({ error: err?.message || "Vendor creation failed" });
   }
 };
 
@@ -22,7 +63,58 @@ export const updateVendorController = async (req: Request, res: Response) => {
       });
     }
 
-    const vendor = await vendorService.updateVendor(vendorId, req.body);
+    const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
+    const logoFile = files?.logo?.[0];
+    const iconFile = files?.icon?.[0];
+
+    let logoUrl = req.body.logo;
+    let iconUrl = req.body.icon;
+
+    if (logoFile) {
+      logoUrl = await uploadToWasabiVendorAsset(
+        logoFile.path,
+        "logo",
+        logoFile.originalname,
+        logoFile.mimetype
+      );
+      await fs.unlink(logoFile.path);
+    }
+
+    if (iconFile) {
+      iconUrl = await uploadToWasabiVendorAsset(
+        iconFile.path,
+        "icon",
+        iconFile.originalname,
+        iconFile.mimetype
+      );
+      await fs.unlink(iconFile.path);
+    }
+
+    const vendorData = {
+      ...req.body,
+      ...(logoUrl !== undefined && { logo: logoUrl }),
+      ...(iconUrl !== undefined && { icon: iconUrl }),
+      handlesLargeScaleProjects: req.body.handlesLargeScaleProjects !== undefined 
+        ? (req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true)
+        : undefined,
+      is_crm_enabled: req.body.is_crm_enabled !== undefined
+        ? (req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true)
+        : undefined,
+      is_inventory_enabled: req.body.is_inventory_enabled !== undefined
+        ? (req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true)
+        : undefined,
+      is_tracktrace_enabled: req.body.is_tracktrace_enabled !== undefined
+        ? (req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true)
+        : undefined,
+      is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled !== undefined
+        ? (req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true)
+        : undefined,
+      head_office_id: req.body.head_office_id !== undefined
+        ? (req.body.head_office_id ? Number(req.body.head_office_id) : null)
+        : undefined,
+    };
+
+    const vendor = await vendorService.updateVendor(vendorId, vendorData);
 
     return res.status(200).json({
       success: true,
@@ -158,17 +250,56 @@ export const seedVendorMastersController = async (
 
 export const onboardVendorController = async (req: Request, res: Response) => {
   try {
-    const vendor = await vendorService.onboardVendor(req.body);
+    const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
+    const logoFile = files?.logo?.[0];
+    const iconFile = files?.icon?.[0];
+
+    let logoUrl = req.body.logo || "";
+    let iconUrl = req.body.icon || "";
+
+    if (logoFile) {
+      logoUrl = await uploadToWasabiVendorAsset(
+        logoFile.path,
+        "logo",
+        logoFile.originalname,
+        logoFile.mimetype
+      );
+      await fs.unlink(logoFile.path);
+    }
+
+    if (iconFile) {
+      iconUrl = await uploadToWasabiVendorAsset(
+        iconFile.path,
+        "icon",
+        iconFile.originalname,
+        iconFile.mimetype
+      );
+      await fs.unlink(iconFile.path);
+    }
+
+    const vendorData = {
+      ...req.body,
+      logo: logoUrl,
+      icon: iconUrl,
+      handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
+      is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
+      is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
+      is_tracktrace_enabled: req.body.is_tracktrace_enabled === "true" || req.body.is_tracktrace_enabled === true,
+      is_year_wise_lead_code_enabled: req.body.is_year_wise_lead_code_enabled === "true" || req.body.is_year_wise_lead_code_enabled === true,
+      head_office_id: req.body.head_office_id ? Number(req.body.head_office_id) : null,
+    };
+
+    const vendor = await vendorService.onboardVendor(vendorData);
     return res.status(201).json({
       success: true,
       message: "Vendor onboarded successfully",
       data: vendor,
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Onboard Vendor Error:", err);
     return res.status(500).json({
       success: false,
-      message: "Vendor onboarding failed",
+      message: err?.message || "Vendor onboarding failed",
     });
   }
 };
@@ -455,6 +586,40 @@ export const getPaymentsBetweenClientAndStoreReportController = async (
   } catch (error) {
     console.error("Payments Report Error:", error);
 
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+export const getVendorBySubdomainController = async (req: Request, res: Response) => {
+  try {
+    const subdomain = req.query.subdomain ? String(req.query.subdomain) : "";
+
+    if (!subdomain) {
+      return res.status(400).json({
+        success: false,
+        message: "subdomain parameter is required",
+      });
+    }
+
+    const vendor = await vendorService.getVendorBySubdomain(subdomain);
+
+    if (!vendor) {
+      return res.status(404).json({
+        success: false,
+        message: "Vendor not found for this subdomain",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Vendor metadata fetched successfully",
+      data: vendor,
+    });
+  } catch (error) {
+    console.error("Get Vendor By Subdomain Error:", error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",

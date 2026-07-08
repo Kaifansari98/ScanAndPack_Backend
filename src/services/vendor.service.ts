@@ -1,4 +1,5 @@
 import { prisma } from "../prisma/client";
+import { generateSignedUrl } from "../utils/wasabiClient";
 
 interface VendorTaxInfoPayload {
   tax_no: string;
@@ -115,6 +116,7 @@ export const createVendor = async (data: any) => {
     head_office_id,
     status,
     logo,
+    icon,
     time_zone,
     is_inventory_enabled,
     is_tracktrace_enabled,
@@ -132,6 +134,7 @@ export const createVendor = async (data: any) => {
       head_office_id,
       status,
       logo,
+      icon,
       time_zone,
       is_inventory_enabled,
       is_tracktrace_enabled,
@@ -196,6 +199,8 @@ export const getAllVendorsPaginated = async ({
         is_tracktrace_enabled: true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
+        logo: true,
+        icon: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -203,8 +208,34 @@ export const getAllVendorsPaginated = async ({
     prisma.vendorMaster.count({ where }),
   ]);
 
+  const updatedData = await Promise.all(
+    data.map(async (vendor) => {
+      let logoUrl = "";
+      let iconUrl = "";
+      if (vendor.logo) {
+        try {
+          logoUrl = await generateSignedUrl(vendor.logo);
+        } catch (e) {
+          console.error("Error generating logo signed url:", e);
+        }
+      }
+      if (vendor.icon) {
+        try {
+          iconUrl = await generateSignedUrl(vendor.icon);
+        } catch (e) {
+          console.error("Error generating icon signed url:", e);
+        }
+      }
+      return {
+        ...vendor,
+        logoUrl,
+        iconUrl,
+      };
+    })
+  );
+
   return {
-    data,
+    data: updatedData,
     pagination: {
       totalCount,
       currentPage: page,
@@ -1655,6 +1686,7 @@ export const onboardVendor = async (data: any) => {
     head_office_id,
     status,
     logo,
+    icon,
     time_zone,
     is_crm_enabled,
     is_inventory_enabled,
@@ -1674,6 +1706,7 @@ export const onboardVendor = async (data: any) => {
       head_office_id,
       status,
       logo,
+      icon,
       time_zone,
       is_crm_enabled,
       is_inventory_enabled,
@@ -1722,6 +1755,8 @@ export const updateVendor = async (vendorId: number, data: any) => {
     primary_contact_number,
     primary_contact_email,
     status,
+    logo,
+    icon,
     time_zone,
     is_crm_enabled,
     is_inventory_enabled,
@@ -1738,6 +1773,8 @@ export const updateVendor = async (vendorId: number, data: any) => {
       primary_contact_number,
       primary_contact_email,
       status,
+      logo,
+      icon,
       time_zone,
       is_crm_enabled,
       is_inventory_enabled,
@@ -1764,4 +1801,65 @@ export const getVendorSettingValue = async (vendorId: number, key: string) => {
   });
 
   return setting?.vendorSettings?.[0]?.value ?? setting?.default_value ?? null;
+};
+
+export const getVendorBySubdomain = async (subdomain: string) => {
+  // Normalize: remove http://, https://, www., paths, and queries
+  let clean = subdomain.trim().toLowerCase();
+  if (clean.includes("://")) {
+    clean = clean.split("://")[1];
+  }
+  if (clean.includes("/")) {
+    clean = clean.split("/")[0];
+  }
+  if (clean.startsWith("www.")) {
+    clean = clean.substring(4);
+  }
+  // E.g., if subdomain was "https://vloq.com/" -> clean is now "vloq.com"
+  
+  // Get the main name part (vloq from vloq.com or vloq.localhost)
+  const namePart = clean.split(".")[0];
+
+  const vendor = await prisma.vendorMaster.findFirst({
+    where: {
+      OR: [
+        { subdomain_url: { equals: clean, mode: "insensitive" } },
+        { subdomain_url: { contains: clean, mode: "insensitive" } },
+        { subdomain_url: { equals: namePart, mode: "insensitive" } },
+        { subdomain_url: { contains: namePart, mode: "insensitive" } }
+      ]
+    },
+    select: {
+      id: true,
+      vendor_name: true,
+      logo: true,
+      icon: true,
+    }
+  });
+
+  if (!vendor) return null;
+
+  let logoUrl = "";
+  let iconUrl = "";
+  if (vendor.logo) {
+    try {
+      logoUrl = await generateSignedUrl(vendor.logo);
+    } catch (e) {
+      console.error("Error generating logo signed url:", e);
+    }
+  }
+  if (vendor.icon) {
+    try {
+      iconUrl = await generateSignedUrl(vendor.icon);
+    } catch (e) {
+      console.error("Error generating icon signed url:", e);
+    }
+  }
+
+  return {
+    id: vendor.id,
+    vendor_name: vendor.vendor_name,
+    logoUrl,
+    iconUrl,
+  };
 };
