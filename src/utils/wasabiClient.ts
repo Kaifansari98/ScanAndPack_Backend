@@ -1322,6 +1322,23 @@ export const uploadElectricalPlumbingFiles = multer({
   },
 });
 
+export const uploadFinalIsmFiles = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      const dir = "/tmp/final_ism_upload";
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      cb(null, dir);
+    },
+    filename: (_req, file, cb) => {
+      cb(null, buildUniqueMulterFilename(file.originalname));
+    },
+  }),
+  limits: {
+    fileSize: 200 * 1024 * 1024, // 200 MB
+    files: 10,
+  },
+});
+
 export const uploadInitialSiteMeasurement = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
@@ -1458,6 +1475,33 @@ export const uploadToWasabiElectricalPlumbing = async (
 ) => {
   const ext = originalName.split(".").pop();
   const sysName = `electrical_plumbing/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
+
+  const upload = new Upload({
+    client: wasabi,
+    params: {
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: fs.createReadStream(filePath),
+      ContentType: contentType,
+    },
+    partSize: 10 * 1024 * 1024,
+    queueSize: 4,
+  });
+
+  await upload.done();
+
+  return sysName;
+};
+
+export const uploadToWasabiFinalIsmUpload = async (
+  filePath: string,
+  vendorId: number,
+  leadId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop();
+  const sysName = `final_ism_upload/${vendorId}/${leadId}/${uuidv4()}.${ext}`;
 
   const upload = new Upload({
     client: wasabi,
@@ -2011,7 +2055,7 @@ export const uploadPdfAndGetSignedUrl = async (
 
 export const uploadToWasabiVendorAsset = async (
   filePath: string,
-  assetType: "logo" | "icon",
+  assetType: "logo" | "icon" | "login_image",
   originalName: string,
   contentType: string
 ) => {

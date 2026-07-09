@@ -5,6 +5,7 @@ import { editTaskISMService } from "../../services/leadModuleServices/leadsGener
 import { actOnSmallOrderRequestTask } from "../../services/leadModuleServices/smallOrderRequest.service";
 import { actOnFastProductionRequestTask, getFastProductionRequestDetails } from "../../services/leadModuleServices/fastProductionRequest.service";
 import logger from "../../../src/utils/logger";
+import { ApprovalRequestService } from "../../services/approval-request/approvalRequest.service";
 import { date } from "joi";
 
 export class TaskController {
@@ -1075,9 +1076,20 @@ export class TaskController {
         });
       }
 
+      let approvalRequest = null;
+      try {
+        const approvalRequestService = new ApprovalRequestService();
+        approvalRequest = await approvalRequestService.getApprovalRequestDetails(task.lead_id, taskId);
+      } catch (err) {
+        // Not an approval task or not found
+      }
+
       return res.status(200).json({
         success: true,
-        data: task,
+        data: {
+          ...task,
+          approvalRequest,
+        },
       });
     } catch (error: any) {
       logger.error("[TaskController] getTaskDetails Error", {

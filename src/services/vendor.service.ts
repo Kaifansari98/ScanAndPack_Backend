@@ -117,6 +117,7 @@ export const createVendor = async (data: any) => {
     status,
     logo,
     icon,
+    login_image,
     time_zone,
     is_inventory_enabled,
     is_tracktrace_enabled,
@@ -135,6 +136,7 @@ export const createVendor = async (data: any) => {
       status,
       logo,
       icon,
+      login_image,
       time_zone,
       is_inventory_enabled,
       is_tracktrace_enabled,
@@ -191,16 +193,20 @@ export const getAllVendorsPaginated = async ({
         id: true,
         vendor_name: true,
         vendor_code: true,
+        subdomain_url: true,
         primary_contact_email: true,
         primary_contact_number: true,
         primary_contact_name: true,
         status: true,
+        handlesLargeScaleProjects: true,
+        is_crm_enabled: true,
         is_inventory_enabled: true,
         is_tracktrace_enabled: true,
         is_this_vendor_is_custom_usertype_only: true,
         is_year_wise_lead_code_enabled: true,
         logo: true,
         icon: true,
+        login_image: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -212,6 +218,7 @@ export const getAllVendorsPaginated = async ({
     data.map(async (vendor) => {
       let logoUrl = "";
       let iconUrl = "";
+      let loginImageUrl = "";
       if (vendor.logo) {
         try {
           logoUrl = await generateSignedUrl(vendor.logo);
@@ -226,10 +233,18 @@ export const getAllVendorsPaginated = async ({
           console.error("Error generating icon signed url:", e);
         }
       }
+      if (vendor.login_image) {
+        try {
+          loginImageUrl = await generateSignedUrl(vendor.login_image);
+        } catch (e) {
+          console.error("Error generating login_image signed url:", e);
+        }
+      }
       return {
         ...vendor,
         logoUrl,
         iconUrl,
+        loginImageUrl,
       };
     })
   );
@@ -1171,7 +1186,30 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
 };
 
 export const getVendorById = async (vendorId: number) => {
-  return prisma.vendorMaster.findUnique({ where: { id: vendorId } });
+  const vendor = await prisma.vendorMaster.findUnique({ where: { id: vendorId } });
+  if (!vendor) return null;
+
+  let logoUrl = "";
+  let iconUrl = "";
+  let loginImageUrl = "";
+
+  if (vendor.logo) {
+    try { logoUrl = await generateSignedUrl(vendor.logo); } catch (e) {
+      console.error("Error generating logo signed url:", e);
+    }
+  }
+  if (vendor.icon) {
+    try { iconUrl = await generateSignedUrl(vendor.icon); } catch (e) {
+      console.error("Error generating icon signed url:", e);
+    }
+  }
+  if (vendor.login_image) {
+    try { loginImageUrl = await generateSignedUrl(vendor.login_image); } catch (e) {
+      console.error("Error generating login_image signed url:", e);
+    }
+  }
+
+  return { ...vendor, logoUrl, iconUrl, loginImageUrl };
 };
 
 export const seedVendorMasters = async (vendorId: number) => {
@@ -1687,6 +1725,7 @@ export const onboardVendor = async (data: any) => {
     status,
     logo,
     icon,
+    login_image,
     time_zone,
     is_crm_enabled,
     is_inventory_enabled,
@@ -1707,6 +1746,7 @@ export const onboardVendor = async (data: any) => {
       status,
       logo,
       icon,
+      login_image,
       time_zone,
       is_crm_enabled,
       is_inventory_enabled,
@@ -1757,10 +1797,13 @@ export const updateVendor = async (vendorId: number, data: any) => {
     status,
     logo,
     icon,
+    login_image,
     time_zone,
     is_crm_enabled,
     is_inventory_enabled,
     is_tracktrace_enabled,
+    handlesLargeScaleProjects,
+    is_year_wise_lead_code_enabled,
   } = data;
 
   const vendor = await prisma.vendorMaster.update({
@@ -1775,10 +1818,13 @@ export const updateVendor = async (vendorId: number, data: any) => {
       status,
       logo,
       icon,
+      login_image,
       time_zone,
       is_crm_enabled,
       is_inventory_enabled,
       is_tracktrace_enabled,
+      handlesLargeScaleProjects,
+      is_year_wise_lead_code_enabled,
     },
   });
 
@@ -1834,6 +1880,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
       vendor_name: true,
       logo: true,
       icon: true,
+      login_image: true,
     }
   });
 
@@ -1841,6 +1888,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
 
   let logoUrl = "";
   let iconUrl = "";
+  let loginImageUrl = "";
   if (vendor.logo) {
     try {
       logoUrl = await generateSignedUrl(vendor.logo);
@@ -1855,11 +1903,19 @@ export const getVendorBySubdomain = async (subdomain: string) => {
       console.error("Error generating icon signed url:", e);
     }
   }
+  if (vendor.login_image) {
+    try {
+      loginImageUrl = await generateSignedUrl(vendor.login_image);
+    } catch (e) {
+      console.error("Error generating login_image signed url:", e);
+    }
+  }
 
   return {
     id: vendor.id,
     vendor_name: vendor.vendor_name,
     logoUrl,
     iconUrl,
+    loginImageUrl,
   };
 };
