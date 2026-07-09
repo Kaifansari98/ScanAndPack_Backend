@@ -25,6 +25,7 @@ const router = Router();
 const vendorUploadFields = uploadVendorAssets.fields([
   { name: "logo", maxCount: 1 },
   { name: "icon", maxCount: 1 },
+  { name: "login_image", maxCount: 1 },
 ]);
 
 router.post("/", handleMulterUpload(vendorUploadFields), createVendor);
