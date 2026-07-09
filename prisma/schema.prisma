@@ -352,6 +352,7 @@ model UserMaster {
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
+  boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
 }
 
 model UserDocument {
@@ -414,16 +415,23 @@ model UserPrivilegeMapping {
 }
 
 model ProjectMaster {
-  id                    Int                     @id @default(autoincrement())
-  project_name          String
-  vendor_id             Int
-  client_id             Int?
-  created_by            Int
-  project_status        String                  @default("Initiated")
-  created_at            DateTime                @default(now())
-  unique_project_id     String
-  is_grouping           Boolean                 @default(false)
-  lead_id               Int?
+  id                Int       @id @default(autoincrement())
+  project_name      String
+  vendor_id         Int
+  client_id         Int?
+  created_by        Int
+  project_status    String    @default("Initiated")
+  created_at        DateTime  @default(now())
+  unique_project_id String
+  is_grouping       Boolean   @default(false)
+  lead_id           Int?
+  order_no          String?
+  client_name       String?
+  client_address    String?
+  client_contact_no String?
+  updated_by        Int?
+  updated_at        DateTime? @updatedAt
+
   track_trace_status    String                  @default("Not Started")
   track_started_at      DateTime?
   track_completed_at    DateTime?
@@ -481,23 +489,24 @@ model ProjectItemsMaster {
 }
 
 model BoxMaster {
-  id                 Int       @id @default(autoincrement())
-  project_id         Int
-  vendor_id          Int
-  lead_id            Int?
-  box_name           String
-  box_status         BoxStatus
-  created_by         Int
-  created_date       DateTime  @default(now())
-  deleted_at         DateTime?
-  deleted_by         Int?
-  is_deleted         Boolean   @default(false)
-  project_details_id Int
-  factory_out_by     Int?
-  factory_out_at     DateTime?
-  site_in_by         Int?
-  site_in_at         DateTime?
-
+  id                    Int                     @id @default(autoincrement())
+  project_id            Int
+  vendor_id             Int
+  lead_id               Int?
+  box_name              String
+  box_status            BoxStatus
+  created_by            Int
+  created_date          DateTime                @default(now())
+  deleted_at            DateTime?
+  deleted_by            Int?
+  is_deleted            Boolean                 @default(false)
+  project_details_id    Int
+  factory_out_by        Int?
+  factory_out_at        DateTime?
+  site_in_by            Int?
+  site_in_at            DateTime?
+  packed_by             Int?
+  packed_at             DateTime?
   details               ProjectDetails          @relation("BoxDetails", fields: [project_details_id], references: [id], onDelete: Cascade)
   project               ProjectMaster           @relation(fields: [project_id], references: [id], onDelete: Cascade)
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -506,6 +515,7 @@ model BoxMaster {
   cutListMachineMapping CutListMachineMapping[]
   factoryOutByUser      UserMaster?             @relation("BoxFactoryOutBy", fields: [factory_out_by], references: [id])
   siteInByUser          UserMaster?             @relation("BoxSiteInBy", fields: [site_in_by], references: [id])
+  packedByUser          UserMaster?             @relation("BoxPackedByUser", fields: [packed_by], references: [id])
 }
 
 model ScanAndPackItem {
@@ -2261,6 +2271,7 @@ model CutList {
   elb                   String?
   esl                   String?
   esr                   String?
+  weight                Float                   @default(0)
   lead                  LeadMaster?             @relation(fields: [lead_id], references: [id])
   project               ProjectMaster           @relation(fields: [project_id], references: [id])
   vendor                VendorMaster            @relation(fields: [vendor_id], references: [id])
