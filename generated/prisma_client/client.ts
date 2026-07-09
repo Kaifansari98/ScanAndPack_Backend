@@ -789,3 +789,18 @@ export type POPaymentScheduleHistory = Prisma.POPaymentScheduleHistoryModel
  * 
  */
 export type Architechuremaster = Prisma.ArchitechuremasterModel
+/**
+ * Model AdditionalCostMaster
+ * 
+ */
+export type AdditionalCostMaster = Prisma.AdditionalCostMasterModel
+/**
+ * Model PurchaseIntentSupplierAdditionalCost
+ * 
+ */
+export type PurchaseIntentSupplierAdditionalCost = Prisma.PurchaseIntentSupplierAdditionalCostModel
+/**
+ * Model PurchaseOrderSupplierAdditionalCost
+ * 
+ */
+export type PurchaseOrderSupplierAdditionalCost = Prisma.PurchaseOrderSupplierAdditionalCostModel

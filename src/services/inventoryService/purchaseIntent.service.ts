@@ -70,6 +70,31 @@ export const getPIProducts = async (
             igst_rate: true,
           },
         },
+        supplierMappings: {
+          where: {
+            is_active: true,
+          },
+          select: {
+            id: true,
+            company_vendor_id: true,
+            supplier_item_code: true,
+            amount: true,
+
+            procurement_expense_amount: true,
+            procurement_expense_pct: true,
+            procurement_expense_total: true,
+
+            companyVendor: {
+              select: {
+                id: true,
+                company_name: true,
+                vendor_code: true,
+                state_id: true,
+                default_payment_term_id: true,
+              },
+            },
+          },
+        },
       },
       orderBy: { product_name: "asc" },
       take: 100,
@@ -87,6 +112,28 @@ export const getPIProducts = async (
         ? String(parseFloat(p.hsn.cgst_rate.toString()) + parseFloat(p.hsn.sgst_rate.toString()))
         : null,
       hsn: undefined,  // strip nested object
+      supplierMappings: p.supplierMappings.map((mapping) => ({
+        id: mapping.id,
+        company_vendor_id: mapping.company_vendor_id,
+        supplier_item_code: mapping.supplier_item_code,
+
+        amount: mapping.amount ? String(mapping.amount) : null,
+
+        procurement_expense_amount: mapping.procurement_expense_amount
+          ? String(mapping.procurement_expense_amount)
+          : null,
+
+        procurement_expense_pct: mapping.procurement_expense_pct
+          ? String(mapping.procurement_expense_pct)
+          : null,
+
+        procurement_expense_total: mapping.procurement_expense_total
+          ? String(mapping.procurement_expense_total)
+          : null,
+
+        companyVendor: mapping.companyVendor,
+      })),
+
     }));
 
     return validationResponse(1, "Products fetched", enriched);
@@ -289,6 +336,64 @@ const PI_DETAIL_INCLUDE = {
           level1_price: true,
           procurement: true,
           hsn_id: true,
+          category_id: true,
+
+          hsn: {
+            select: {
+              hsn_code: true,
+              cgst_rate: true,
+              sgst_rate: true,
+              igst_rate: true,
+            },
+          },
+
+          supplierMappings: {
+            where: {
+              is_active: true,
+            },
+            select: {
+              id: true,
+              company_vendor_id: true,
+              supplier_item_code: true,
+              amount: true,
+
+              procurement_expense_amount: true,
+              procurement_expense_pct: true,
+              procurement_expense_total: true,
+
+              companyVendor: {
+                select: {
+                  id: true,
+                  company_name: true,
+                  vendor_code: true,
+                  contact_no: true,
+                  email: true,
+                  state_id: true,
+                  default_payment_term_id: true,
+                },
+              },
+            },
+          },
+          supplierAdditionalCosts: {
+            include: {
+              companyVendor: {
+                select: {
+                  id: true,
+                  company_name: true,
+                  vendor_code: true,
+                },
+              },
+              additionalCost: {
+                select: {
+                  id: true,
+                  cost_name: true,
+                  cost_code: true,
+                  is_taxable: true,
+                  tax_pct: true,
+                },
+              },
+            },
+          },
         },
       },
 
@@ -350,6 +455,15 @@ interface CreatePIPayload {
     remarks?: string;
     vendors: VendorPayload[];
   }[];
+  supplier_additional_costs?: {
+    company_vendor_id: number;
+    additional_cost_id: number;
+    calculation_type: "Fixed" | "Percentage";
+    amount?: number;
+    percentage?: number;
+    tax_pct?: number;
+    remarks?: string;
+  }[];
 }
 
 
@@ -398,6 +512,7 @@ export const createPurchaseIntent = async (
       priority,
       remarks,
       items,
+      supplier_additional_costs = [],
     } = payload;
 
     if (!user_id || user_id <= 0) {
@@ -489,6 +604,55 @@ export const createPurchaseIntent = async (
     }
 
     /**
+ * validate additional cost supplier ids
+ */
+    if (supplier_additional_costs.length) {
+      const additionalCostSupplierIds = [
+        ...new Set(
+          supplier_additional_costs.map((c) => Number(c.company_vendor_id))
+        ),
+      ];
+
+      const invalidCostSupplier = additionalCostSupplierIds.find(
+        (supplierId) => !allVendorIds.includes(supplierId)
+      );
+
+      if (invalidCostSupplier) {
+        return validationResponse(
+          0,
+          "Additional cost supplier must be selected in PI supplier list"
+        );
+      }
+
+      const additionalCostIds = [
+        ...new Set(
+          supplier_additional_costs.map((c) => Number(c.additional_cost_id))
+        ),
+      ];
+
+      const validAdditionalCosts = await prisma.additionalCostMaster.findMany({
+        where: {
+          id: {
+            in: additionalCostIds,
+          },
+          vendor_id,
+          is_active: true,
+          is_deleted: false,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (validAdditionalCosts.length !== additionalCostIds.length) {
+        return validationResponse(
+          0,
+          "One or more additional costs are invalid"
+        );
+      }
+    }
+
+    /**
      * calculate master totals
      */
     let amount = 0;
@@ -503,9 +667,31 @@ export const createPurchaseIntent = async (
       }
     }
 
+
+    /**
+ * supplier-wise base amount for additional cost calculation
+ */
+    const supplierBaseAmountMap = new Map<number, number>();
+
+    for (const item of items) {
+      for (const v of item.vendors) {
+        const supplierId = Number(v.company_vendor_id);
+
+        supplierBaseAmountMap.set(
+          supplierId,
+          round2(
+            toNum(supplierBaseAmountMap.get(supplierId)) +
+            toNum(v.amount || 0)
+          )
+        );
+      }
+    }
+
     const intent_no = await generateIntentNo(vendor_id);
 
     const intent = await prisma.$transaction(async (tx) => {
+
+
       /**
        * create PI master
        */
@@ -553,6 +739,118 @@ export const createPurchaseIntent = async (
             ),
           });
         }
+      }
+
+      /**
+ * create supplier-wise additional costs
+ */
+      let additionalCostAmount = 0;
+      let additionalCostTaxAmount = 0;
+      let additionalCostTotalAmount = 0;
+
+      if (supplier_additional_costs.length) {
+        const costMasterIds = supplier_additional_costs.map((c) =>
+          Number(c.additional_cost_id)
+        );
+
+        const costMasters = await tx.additionalCostMaster.findMany({
+          where: {
+            id: {
+              in: costMasterIds,
+            },
+            vendor_id,
+            is_active: true,
+            is_deleted: false,
+          },
+          select: {
+            id: true,
+            cost_name: true,
+            tax_pct: true,
+            is_taxable: true,
+          },
+        });
+
+        const costMasterMap = new Map(costMasters.map((c) => [c.id, c]));
+
+        const additionalCostRows = supplier_additional_costs.map((cost) => {
+          const master = costMasterMap.get(Number(cost.additional_cost_id));
+
+          if (!master) {
+            throw new Error("Invalid additional cost selected");
+          }
+
+          const companyVendorId = Number(cost.company_vendor_id);
+
+          const baseAmount = toNum(
+            supplierBaseAmountMap.get(companyVendorId)
+          );
+
+          const taxPct = master.is_taxable
+            ? toNum(cost.tax_pct || master.tax_pct)
+            : 0;
+
+          const calculated = calculateAdditionalCost({
+            calculation_type: cost.calculation_type,
+            amount: cost.amount,
+            percentage: cost.percentage,
+            base_amount: baseAmount,
+            tax_pct: taxPct,
+          });
+
+          additionalCostAmount = round2(
+            additionalCostAmount + calculated.taxable_amount
+          );
+
+          additionalCostTaxAmount = round2(
+            additionalCostTaxAmount + calculated.tax_amount
+          );
+
+          additionalCostTotalAmount = round2(
+            additionalCostTotalAmount + calculated.total_amount
+          );
+
+          return {
+            vendor_id,
+            purchase_intent_id: pi.id,
+            company_vendor_id: companyVendorId,
+            additional_cost_id: Number(cost.additional_cost_id),
+
+            cost_name: master.cost_name,
+            calculation_type: cost.calculation_type,
+
+            amount: toNum(cost.amount),
+            percentage: toNum(cost.percentage),
+            base_amount: baseAmount,
+
+            taxable_amount: calculated.taxable_amount,
+            tax_pct: taxPct,
+            tax_amount: calculated.tax_amount,
+            total_amount: calculated.total_amount,
+
+            remarks: cost.remarks || null,
+            created_by: user_id,
+            updated_by: user_id,
+          };
+        });
+
+        await tx.purchaseIntentSupplierAdditionalCost.createMany({
+          data: additionalCostRows,
+        });
+
+        /**
+         * update PI master totals including additional costs
+         */
+        await tx.purchaseIntentMaster.update({
+          where: {
+            id: pi.id,
+          },
+          data: {
+            amount: round2(amount + additionalCostAmount),
+            tax_amount: round2(tax_amount + additionalCostTaxAmount),
+            total_amount: round2(total_amount + additionalCostTotalAmount),
+            updated_by: user_id,
+          },
+        });
       }
 
       /**
@@ -726,7 +1024,8 @@ export const getPurchaseIntentById = async (id: number, vendor_id: number) => {
     if (!intent) return validationResponse(0, "Purchase intent not found");
     return validationResponse(1, "Intent fetched", intent);
   } catch (e) {
-    return validationResponse(0, "Failed to fetch intent");
+    throw e;
+    //return validationResponse(0, "Failed to fetch intent");
   }
 };
 
@@ -1049,4 +1348,40 @@ export const updatePurchaseIntentService = async (
       "Failed to update purchase intent"
     );
   }
+};
+
+
+const toNum = (value: any) => {
+  const n = Number(value || 0);
+  return Number.isFinite(n) ? n : 0;
+};
+
+const round2 = (value: number) => Number(value.toFixed(2));
+
+const calculateAdditionalCost = ({
+  calculation_type,
+  amount,
+  percentage,
+  base_amount,
+  tax_pct,
+}: {
+  calculation_type: "Fixed" | "Percentage";
+  amount?: number;
+  percentage?: number;
+  base_amount: number;
+  tax_pct?: number;
+}) => {
+  const taxableAmount =
+    calculation_type === "Percentage"
+      ? round2((toNum(base_amount) * toNum(percentage)) / 100)
+      : round2(toNum(amount));
+
+  const taxAmount = round2((taxableAmount * toNum(tax_pct)) / 100);
+  const totalAmount = round2(taxableAmount + taxAmount);
+
+  return {
+    taxable_amount: taxableAmount,
+    tax_amount: taxAmount,
+    total_amount: totalAmount,
+  };
 };
