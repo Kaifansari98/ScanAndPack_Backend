@@ -200,7 +200,10 @@ export const ModelName = {
   ItemGroupMaster: 'ItemGroupMaster',
   ProductSupplierMapping: 'ProductSupplierMapping',
   POPaymentScheduleHistory: 'POPaymentScheduleHistory',
-  Architechuremaster: 'Architechuremaster'
+  Architechuremaster: 'Architechuremaster',
+  AdditionalCostMaster: 'AdditionalCostMaster',
+  PurchaseIntentSupplierAdditionalCost: 'PurchaseIntentSupplierAdditionalCost',
+  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -2724,6 +2727,9 @@ export const ProductSupplierMappingScalarFieldEnum = {
   company_vendor_id: 'company_vendor_id',
   supplier_item_code: 'supplier_item_code',
   amount: 'amount',
+  procurement_expense_amount: 'procurement_expense_amount',
+  procurement_expense_pct: 'procurement_expense_pct',
+  procurement_expense_total: 'procurement_expense_total',
   is_active: 'is_active',
   created_by: 'created_by',
   updated_by: 'updated_by',
@@ -2770,6 +2776,78 @@ export const ArchitechuremasterScalarFieldEnum = {
 } as const
 
 export type ArchitechuremasterScalarFieldEnum = (typeof ArchitechuremasterScalarFieldEnum)[keyof typeof ArchitechuremasterScalarFieldEnum]
+
+
+export const AdditionalCostMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  cost_name: 'cost_name',
+  cost_code: 'cost_code',
+  description: 'description',
+  is_taxable: 'is_taxable',
+  tax_pct: 'tax_pct',
+  is_active: 'is_active',
+  is_deleted: 'is_deleted',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  deleted_by: 'deleted_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at',
+  deleted_at: 'deleted_at'
+} as const
+
+export type AdditionalCostMasterScalarFieldEnum = (typeof AdditionalCostMasterScalarFieldEnum)[keyof typeof AdditionalCostMasterScalarFieldEnum]
+
+
+export const PurchaseIntentSupplierAdditionalCostScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  purchase_intent_id: 'purchase_intent_id',
+  company_vendor_id: 'company_vendor_id',
+  additional_cost_id: 'additional_cost_id',
+  cost_name: 'cost_name',
+  calculation_type: 'calculation_type',
+  amount: 'amount',
+  percentage: 'percentage',
+  base_amount: 'base_amount',
+  taxable_amount: 'taxable_amount',
+  tax_pct: 'tax_pct',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PurchaseIntentSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseIntentSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseIntentSupplierAdditionalCostScalarFieldEnum]
+
+
+export const PurchaseOrderSupplierAdditionalCostScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  purchase_order_id: 'purchase_order_id',
+  company_vendor_id: 'company_vendor_id',
+  additional_cost_id: 'additional_cost_id',
+  source_pi_additional_cost_id: 'source_pi_additional_cost_id',
+  cost_name: 'cost_name',
+  calculation_type: 'calculation_type',
+  amount: 'amount',
+  percentage: 'percentage',
+  base_amount: 'base_amount',
+  taxable_amount: 'taxable_amount',
+  tax_pct: 'tax_pct',
+  tax_amount: 'tax_amount',
+  total_amount: 'total_amount',
+  remarks: 'remarks',
+  created_by: 'created_by',
+  updated_by: 'updated_by',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+} as const
+
+export type PurchaseOrderSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum]
 
 
 export const SortOrder = {

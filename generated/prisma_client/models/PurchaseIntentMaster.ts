@@ -399,6 +399,7 @@ export type PurchaseIntentMasterWhereInput = {
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   rejectedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostListRelationFilter
   items?: Prisma.PurchaseIntentItemListRelationFilter
   statusLogs?: Prisma.PurchaseIntentStatusLogListRelationFilter
   purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
@@ -434,6 +435,7 @@ export type PurchaseIntentMasterOrderByWithRelationInput = {
   approvedBy?: Prisma.UserMasterOrderByWithRelationInput
   rejectedBy?: Prisma.UserMasterOrderByWithRelationInput
   deletedBy?: Prisma.UserMasterOrderByWithRelationInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostOrderByRelationAggregateInput
   items?: Prisma.PurchaseIntentItemOrderByRelationAggregateInput
   statusLogs?: Prisma.PurchaseIntentStatusLogOrderByRelationAggregateInput
   purchaseOrders?: Prisma.PurchaseOrderMasterOrderByRelationAggregateInput
@@ -472,6 +474,7 @@ export type PurchaseIntentMasterWhereUniqueInput = Prisma.AtLeast<{
   approvedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   rejectedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   deletedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostListRelationFilter
   items?: Prisma.PurchaseIntentItemListRelationFilter
   statusLogs?: Prisma.PurchaseIntentStatusLogListRelationFilter
   purchaseOrders?: Prisma.PurchaseOrderMasterListRelationFilter
@@ -557,6 +560,7 @@ export type PurchaseIntentMasterCreateInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -585,6 +589,7 @@ export type PurchaseIntentMasterUncheckedCreateInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -612,6 +617,7 @@ export type PurchaseIntentMasterUpdateInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -640,6 +646,7 @@ export type PurchaseIntentMasterUncheckedUpdateInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -1174,6 +1181,20 @@ export type PurchaseIntentMasterUpdateOneRequiredWithoutPurchaseOrdersNestedInpu
   update?: Prisma.XOR<Prisma.XOR<Prisma.PurchaseIntentMasterUpdateToOneWithWhereWithoutPurchaseOrdersInput, Prisma.PurchaseIntentMasterUpdateWithoutPurchaseOrdersInput>, Prisma.PurchaseIntentMasterUncheckedUpdateWithoutPurchaseOrdersInput>
 }
 
+export type PurchaseIntentMasterCreateNestedOneWithoutSupplierAdditionalCostsInput = {
+  create?: Prisma.XOR<Prisma.PurchaseIntentMasterCreateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedCreateWithoutSupplierAdditionalCostsInput>
+  connectOrCreate?: Prisma.PurchaseIntentMasterCreateOrConnectWithoutSupplierAdditionalCostsInput
+  connect?: Prisma.PurchaseIntentMasterWhereUniqueInput
+}
+
+export type PurchaseIntentMasterUpdateOneRequiredWithoutSupplierAdditionalCostsNestedInput = {
+  create?: Prisma.XOR<Prisma.PurchaseIntentMasterCreateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedCreateWithoutSupplierAdditionalCostsInput>
+  connectOrCreate?: Prisma.PurchaseIntentMasterCreateOrConnectWithoutSupplierAdditionalCostsInput
+  upsert?: Prisma.PurchaseIntentMasterUpsertWithoutSupplierAdditionalCostsInput
+  connect?: Prisma.PurchaseIntentMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PurchaseIntentMasterUpdateToOneWithWhereWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUpdateWithoutSupplierAdditionalCostsInput>, Prisma.PurchaseIntentMasterUncheckedUpdateWithoutSupplierAdditionalCostsInput>
+}
+
 export type PurchaseIntentMasterCreateWithoutVendorInput = {
   intent_no: string
   status?: $Enums.PurchaseIntentStatus
@@ -1195,6 +1216,7 @@ export type PurchaseIntentMasterCreateWithoutVendorInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1222,6 +1244,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutVendorInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1302,6 +1325,7 @@ export type PurchaseIntentMasterCreateWithoutCreatedByInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1329,6 +1353,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutCreatedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1365,6 +1390,7 @@ export type PurchaseIntentMasterCreateWithoutUpdatedByInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1392,6 +1418,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutUpdatedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1428,6 +1455,7 @@ export type PurchaseIntentMasterCreateWithoutApprovedByInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1455,6 +1483,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutApprovedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1491,6 +1520,7 @@ export type PurchaseIntentMasterCreateWithoutRejectedByInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1518,6 +1548,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutRejectedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1554,6 +1585,7 @@ export type PurchaseIntentMasterCreateWithoutDeletedByInput = {
   updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1581,6 +1613,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutDeletedByInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1697,6 +1730,7 @@ export type PurchaseIntentMasterCreateWithoutCategoryInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
@@ -1724,6 +1758,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutCategoryInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
@@ -1777,6 +1812,7 @@ export type PurchaseIntentMasterCreateWithoutItemsInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -1804,6 +1840,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutItemsInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -1846,6 +1883,7 @@ export type PurchaseIntentMasterUpdateWithoutItemsInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
 }
@@ -1873,6 +1911,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutItemsInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
 }
@@ -1899,6 +1938,7 @@ export type PurchaseIntentMasterCreateWithoutStatusLogsInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -1926,6 +1966,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutStatusLogsInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -1968,6 +2009,7 @@ export type PurchaseIntentMasterUpdateWithoutStatusLogsInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
 }
@@ -1995,6 +2037,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutStatusLogsInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
 }
@@ -2021,6 +2064,7 @@ export type PurchaseIntentMasterCreateWithoutPurchaseOrdersInput = {
   approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
   rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
   deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -2048,6 +2092,7 @@ export type PurchaseIntentMasterUncheckedCreateWithoutPurchaseOrdersInput = {
   amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedCreateNestedManyWithoutPurchaseIntentInput
   items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
 }
@@ -2090,6 +2135,7 @@ export type PurchaseIntentMasterUpdateWithoutPurchaseOrdersInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
 }
@@ -2117,8 +2163,135 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutPurchaseOrdersInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
+}
+
+export type PurchaseIntentMasterCreateWithoutSupplierAdditionalCostsInput = {
+  intent_no: string
+  status?: $Enums.PurchaseIntentStatus
+  priority?: $Enums.PurchaseIntentPriority
+  remarks?: string | null
+  approved_at?: Date | string | null
+  rejected_at?: Date | string | null
+  rejection_reason?: string | null
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutPurchaseIntentsInput
+  category?: Prisma.ProjectCategoriesMasterCreateNestedOneWithoutPurchaseIntentsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsCreatedInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsUpdatedInput
+  approvedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsApprovedInput
+  rejectedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsRejectedInput
+  deletedBy?: Prisma.UserMasterCreateNestedOneWithoutPurchaseIntentsDeletedInput
+  items?: Prisma.PurchaseIntentItemCreateNestedManyWithoutPurchaseIntentInput
+  statusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutPurchaseIntentInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutPurchaseIntentInput
+}
+
+export type PurchaseIntentMasterUncheckedCreateWithoutSupplierAdditionalCostsInput = {
+  id?: number
+  vendor_id: number
+  intent_no: string
+  category_id?: number | null
+  status?: $Enums.PurchaseIntentStatus
+  priority?: $Enums.PurchaseIntentPriority
+  remarks?: string | null
+  created_by: number
+  updated_by?: number | null
+  approved_by?: number | null
+  approved_at?: Date | string | null
+  rejected_by?: number | null
+  rejected_at?: Date | string | null
+  rejection_reason?: string | null
+  is_deleted?: boolean
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  items?: Prisma.PurchaseIntentItemUncheckedCreateNestedManyWithoutPurchaseIntentInput
+  statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutPurchaseIntentInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutPurchaseIntentInput
+}
+
+export type PurchaseIntentMasterCreateOrConnectWithoutSupplierAdditionalCostsInput = {
+  where: Prisma.PurchaseIntentMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.PurchaseIntentMasterCreateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedCreateWithoutSupplierAdditionalCostsInput>
+}
+
+export type PurchaseIntentMasterUpsertWithoutSupplierAdditionalCostsInput = {
+  update: Prisma.XOR<Prisma.PurchaseIntentMasterUpdateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedUpdateWithoutSupplierAdditionalCostsInput>
+  create: Prisma.XOR<Prisma.PurchaseIntentMasterCreateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedCreateWithoutSupplierAdditionalCostsInput>
+  where?: Prisma.PurchaseIntentMasterWhereInput
+}
+
+export type PurchaseIntentMasterUpdateToOneWithWhereWithoutSupplierAdditionalCostsInput = {
+  where?: Prisma.PurchaseIntentMasterWhereInput
+  data: Prisma.XOR<Prisma.PurchaseIntentMasterUpdateWithoutSupplierAdditionalCostsInput, Prisma.PurchaseIntentMasterUncheckedUpdateWithoutSupplierAdditionalCostsInput>
+}
+
+export type PurchaseIntentMasterUpdateWithoutSupplierAdditionalCostsInput = {
+  intent_no?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
+  priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutPurchaseIntentsNestedInput
+  category?: Prisma.ProjectCategoriesMasterUpdateOneWithoutPurchaseIntentsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutPurchaseIntentsCreatedNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
+  approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
+  rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
+  deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
+  statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
+}
+
+export type PurchaseIntentMasterUncheckedUpdateWithoutSupplierAdditionalCostsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  intent_no?: Prisma.StringFieldUpdateOperationsInput | string
+  category_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPurchaseIntentStatusFieldUpdateOperationsInput | $Enums.PurchaseIntentStatus
+  priority?: Prisma.EnumPurchaseIntentPriorityFieldUpdateOperationsInput | $Enums.PurchaseIntentPriority
+  remarks?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approved_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejected_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  rejected_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  rejection_reason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
+  statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
+  purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
 }
 
 export type PurchaseIntentMasterCreateManyVendorInput = {
@@ -2166,6 +2339,7 @@ export type PurchaseIntentMasterUpdateWithoutVendorInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2193,6 +2367,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutVendorInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2363,6 +2538,7 @@ export type PurchaseIntentMasterUpdateWithoutCreatedByInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2390,6 +2566,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutCreatedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2440,6 +2617,7 @@ export type PurchaseIntentMasterUpdateWithoutUpdatedByInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2467,6 +2645,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutUpdatedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2517,6 +2696,7 @@ export type PurchaseIntentMasterUpdateWithoutApprovedByInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2544,6 +2724,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutApprovedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2594,6 +2775,7 @@ export type PurchaseIntentMasterUpdateWithoutRejectedByInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2621,6 +2803,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutRejectedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2671,6 +2854,7 @@ export type PurchaseIntentMasterUpdateWithoutDeletedByInput = {
   updatedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsUpdatedNestedInput
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2698,6 +2882,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutDeletedByInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2772,6 +2957,7 @@ export type PurchaseIntentMasterUpdateWithoutCategoryInput = {
   approvedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsApprovedNestedInput
   rejectedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsRejectedNestedInput
   deletedBy?: Prisma.UserMasterUpdateOneWithoutPurchaseIntentsDeletedNestedInput
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUpdateManyWithoutPurchaseIntentNestedInput
@@ -2799,6 +2985,7 @@ export type PurchaseIntentMasterUncheckedUpdateWithoutCategoryInput = {
   amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   tax_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   total_amount?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  supplierAdditionalCosts?: Prisma.PurchaseIntentSupplierAdditionalCostUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   items?: Prisma.PurchaseIntentItemUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   statusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutPurchaseIntentNestedInput
   purchaseOrders?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutPurchaseIntentNestedInput
@@ -2834,12 +3021,14 @@ export type PurchaseIntentMasterUncheckedUpdateManyWithoutCategoryInput = {
  */
 
 export type PurchaseIntentMasterCountOutputType = {
+  supplierAdditionalCosts: number
   items: number
   statusLogs: number
   purchaseOrders: number
 }
 
 export type PurchaseIntentMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  supplierAdditionalCosts?: boolean | PurchaseIntentMasterCountOutputTypeCountSupplierAdditionalCostsArgs
   items?: boolean | PurchaseIntentMasterCountOutputTypeCountItemsArgs
   statusLogs?: boolean | PurchaseIntentMasterCountOutputTypeCountStatusLogsArgs
   purchaseOrders?: boolean | PurchaseIntentMasterCountOutputTypeCountPurchaseOrdersArgs
@@ -2853,6 +3042,13 @@ export type PurchaseIntentMasterCountOutputTypeDefaultArgs<ExtArgs extends runti
    * Select specific fields to fetch from the PurchaseIntentMasterCountOutputType
    */
   select?: Prisma.PurchaseIntentMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * PurchaseIntentMasterCountOutputType without action
+ */
+export type PurchaseIntentMasterCountOutputTypeCountSupplierAdditionalCostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseIntentSupplierAdditionalCostWhereInput
 }
 
 /**
@@ -2907,6 +3103,7 @@ export type PurchaseIntentMasterSelect<ExtArgs extends runtime.Types.Extensions.
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.PurchaseIntentMaster$rejectedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseIntentMaster$deletedByArgs<ExtArgs>
+  supplierAdditionalCosts?: boolean | Prisma.PurchaseIntentMaster$supplierAdditionalCostsArgs<ExtArgs>
   items?: boolean | Prisma.PurchaseIntentMaster$itemsArgs<ExtArgs>
   statusLogs?: boolean | Prisma.PurchaseIntentMaster$statusLogsArgs<ExtArgs>
   purchaseOrders?: boolean | Prisma.PurchaseIntentMaster$purchaseOrdersArgs<ExtArgs>
@@ -3011,6 +3208,7 @@ export type PurchaseIntentMasterInclude<ExtArgs extends runtime.Types.Extensions
   approvedBy?: boolean | Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>
   rejectedBy?: boolean | Prisma.PurchaseIntentMaster$rejectedByArgs<ExtArgs>
   deletedBy?: boolean | Prisma.PurchaseIntentMaster$deletedByArgs<ExtArgs>
+  supplierAdditionalCosts?: boolean | Prisma.PurchaseIntentMaster$supplierAdditionalCostsArgs<ExtArgs>
   items?: boolean | Prisma.PurchaseIntentMaster$itemsArgs<ExtArgs>
   statusLogs?: boolean | Prisma.PurchaseIntentMaster$statusLogsArgs<ExtArgs>
   purchaseOrders?: boolean | Prisma.PurchaseIntentMaster$purchaseOrdersArgs<ExtArgs>
@@ -3045,6 +3243,7 @@ export type $PurchaseIntentMasterPayload<ExtArgs extends runtime.Types.Extension
     approvedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     rejectedBy: Prisma.$UserMasterPayload<ExtArgs> | null
     deletedBy: Prisma.$UserMasterPayload<ExtArgs> | null
+    supplierAdditionalCosts: Prisma.$PurchaseIntentSupplierAdditionalCostPayload<ExtArgs>[]
     items: Prisma.$PurchaseIntentItemPayload<ExtArgs>[]
     statusLogs: Prisma.$PurchaseIntentStatusLogPayload<ExtArgs>[]
     purchaseOrders: Prisma.$PurchaseOrderMasterPayload<ExtArgs>[]
@@ -3473,6 +3672,7 @@ export interface Prisma__PurchaseIntentMasterClient<T, Null = never, ExtArgs ext
   approvedBy<T extends Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$approvedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   rejectedBy<T extends Prisma.PurchaseIntentMaster$rejectedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$rejectedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   deletedBy<T extends Prisma.PurchaseIntentMaster$deletedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$deletedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  supplierAdditionalCosts<T extends Prisma.PurchaseIntentMaster$supplierAdditionalCostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$supplierAdditionalCostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentSupplierAdditionalCostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   items<T extends Prisma.PurchaseIntentMaster$itemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   statusLogs<T extends Prisma.PurchaseIntentMaster$statusLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$statusLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseIntentStatusLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   purchaseOrders<T extends Prisma.PurchaseIntentMaster$purchaseOrdersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PurchaseIntentMaster$purchaseOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchaseOrderMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4020,6 +4220,30 @@ export type PurchaseIntentMaster$deletedByArgs<ExtArgs extends runtime.Types.Ext
    */
   include?: Prisma.UserMasterInclude<ExtArgs> | null
   where?: Prisma.UserMasterWhereInput
+}
+
+/**
+ * PurchaseIntentMaster.supplierAdditionalCosts
+ */
+export type PurchaseIntentMaster$supplierAdditionalCostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PurchaseIntentSupplierAdditionalCost
+   */
+  select?: Prisma.PurchaseIntentSupplierAdditionalCostSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PurchaseIntentSupplierAdditionalCost
+   */
+  omit?: Prisma.PurchaseIntentSupplierAdditionalCostOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseIntentSupplierAdditionalCostInclude<ExtArgs> | null
+  where?: Prisma.PurchaseIntentSupplierAdditionalCostWhereInput
+  orderBy?: Prisma.PurchaseIntentSupplierAdditionalCostOrderByWithRelationInput | Prisma.PurchaseIntentSupplierAdditionalCostOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseIntentSupplierAdditionalCostWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseIntentSupplierAdditionalCostScalarFieldEnum | Prisma.PurchaseIntentSupplierAdditionalCostScalarFieldEnum[]
 }
 
 /**

@@ -12,7 +12,12 @@ import {
   uploadDesigns,
   uploadMeetingDocs,
 } from "../../../middlewares/uploadWasabi";
-import { uploadDesignQuotationFiles } from "../../../utils/wasabiClient";
+import {
+  uploadDesignQuotationFiles,
+  uploadCostingFiles,
+  uploadElectricalPlumbingFiles,
+  uploadFinalIsmFiles,
+} from "../../../utils/wasabiClient";
 import { handleMulterUpload } from "../../../middlewares/handleMulterUpload";
 
 const DesigningStageRouter = Router();
@@ -69,6 +74,48 @@ DesigningStageRouter.post(
   "/upload-designs",
   handleMulterUpload(uploadDesigns.array("files")), // multiple files
   (req, res) => DesigingStageController.uploadDesigns(req, res),
+);
+
+// POST /api/leads/designing-stage/upload-costing-file
+// Form-data: vendorId, leadId, userId, files[]
+DesigningStageRouter.post(
+  "/upload-costing-file",
+  handleMulterUpload(uploadCostingFiles.array("files")), // multiple files
+  (req, res) => DesigingStageController.uploadCostingFile(req, res),
+);
+
+// GET /api/leads/designing-stage/:vendorId/:leadId/costing-file-documents
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/costing-file-documents",
+  (req, res) => DesigingStageController.getCostingFileDocuments(req, res),
+);
+
+// POST /api/leads/designing-stage/upload-electrical-plumbing
+// Form-data: vendorId, leadId, userId, files[]
+DesigningStageRouter.post(
+  "/upload-electrical-plumbing",
+  handleMulterUpload(uploadElectricalPlumbingFiles.array("files")), // multiple files
+  (req, res) => DesigingStageController.uploadElectricalPlumbing(req, res),
+);
+
+// GET /api/leads/designing-stage/:vendorId/:leadId/electrical-plumbing-documents
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/electrical-plumbing-documents",
+  (req, res) => DesigingStageController.getElectricalPlumbingDocuments(req, res),
+);
+
+// POST /api/leads/designing-stage/upload-final-ism
+// Form-data: vendorId, leadId, userId, files[]
+DesigningStageRouter.post(
+  "/upload-final-ism",
+  handleMulterUpload(uploadFinalIsmFiles.array("files")), // multiple files
+  (req, res) => DesigingStageController.uploadFinalIsmUpload(req, res),
+);
+
+// GET /api/leads/designing-stage/:vendorId/:leadId/final-ism-upload-documents
+DesigningStageRouter.get(
+  "/:vendorId/:leadId/final-ism-upload-documents",
+  (req, res) => DesigingStageController.getFinalIsmUploadDocuments(req, res),
 );
 
 // PUT /api/leads/design-meeting/:meetingId

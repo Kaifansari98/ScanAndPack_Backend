@@ -1,4 +1,4 @@
-import { prisma,Prisma } from '../../prisma/client';
+import { prisma, Prisma } from '../../prisma/client';
 import { validationResponse } from "../../utils/validationResponse";
 
 type ProductPayload = {
@@ -457,6 +457,44 @@ export const getProductById = async (vendor_id: number, id: number) => {
   }
 };
 
+
+const toNum = (value: any) => {
+  const n = Number(value || 0);
+  return Number.isFinite(n) ? n : 0;
+};
+
+const round2 = (value: number) => Number(value.toFixed(2));
+
+const calculateSupplierMappingAmounts = (s: any) => {
+  const amount = round2(toNum(s.amount));
+
+  const procurementExpenseAmount = round2(
+    toNum(s.procurement_expense_amount)
+  );
+
+  const procurementExpensePct = round2(
+    toNum(s.procurement_expense_pct)
+  );
+
+  const procurementExpenseByPct = round2(
+    (amount * procurementExpensePct) / 100
+  );
+
+  const procurementExpenseTotal = round2(
+    procurementExpenseAmount + procurementExpenseByPct
+  );
+
+  const finalAmount = round2(amount + procurementExpenseTotal);
+
+  return {
+    amount,
+    procurement_expense_amount: procurementExpenseAmount,
+    procurement_expense_pct: procurementExpensePct,
+    procurement_expense_total: procurementExpenseTotal,
+    final_amount: finalAmount,
+  };
+};
+
 export const createProduct = async (payload: ProductPayload) => {
   try {
     if (!payload.vendor_id) return validationResponse(0, "vendor_id is required");
@@ -489,15 +527,36 @@ export const createProduct = async (payload: ProductPayload) => {
 
       if (payload.suppliers?.length) {
         await tx.productSupplierMapping.createMany({
-          data: payload.suppliers.map((s) => ({
-            vendor_id: Number(payload.vendor_id),
-            product_id: createdProduct.id,
-            company_vendor_id: Number(s.company_vendor_id),
-            supplier_item_code: s.supplier_item_code?.trim() || null,
-            amount: toDecimal(s.amount),
-            created_by: payload.user_id || null,
-            updated_by: payload.user_id || null,
-          })),
+          data: payload.suppliers.map((s) => {
+            const calculated = calculateSupplierMappingAmounts(s);
+
+            return {
+              vendor_id: Number(payload.vendor_id),
+              product_id: createdProduct.id,
+              company_vendor_id: Number(s.company_vendor_id),
+
+              supplier_item_code: s.supplier_item_code?.trim() || null,
+
+              amount: toDecimal(calculated.amount),
+
+              procurement_expense_amount: toDecimal(
+                calculated.procurement_expense_amount
+              ),
+
+              procurement_expense_pct: toDecimal(
+                calculated.procurement_expense_pct
+              ),
+
+              procurement_expense_total: toDecimal(
+                calculated.procurement_expense_total
+              ),
+
+              final_amount: toDecimal(calculated.final_amount),
+
+              created_by: payload.user_id || null,
+              updated_by: payload.user_id || null,
+            };
+          }),
         });
       }
 
@@ -597,15 +656,36 @@ export const updateProduct = async (id: number, payload: ProductPayload) => {
 
       if (payload.suppliers?.length) {
         await tx.productSupplierMapping.createMany({
-          data: payload.suppliers.map((s) => ({
-            vendor_id: Number(payload.vendor_id),
-            product_id: id,
-            company_vendor_id: Number(s.company_vendor_id),
-            supplier_item_code: s.supplier_item_code?.trim() || null,
-            amount: toDecimal(s.amount),
-            created_by: payload.user_id || null,
-            updated_by: payload.user_id || null,
-          })),
+          data: payload.suppliers.map((s) => {
+            const calculated = calculateSupplierMappingAmounts(s);
+            console.log("calculated",calculated);
+            return {
+              vendor_id: Number(payload.vendor_id),
+              product_id: id,
+              company_vendor_id: Number(s.company_vendor_id),
+
+              supplier_item_code: s.supplier_item_code?.trim() || null,
+
+              amount: toDecimal(calculated.amount),
+
+              procurement_expense_amount: toDecimal(
+                calculated.procurement_expense_amount
+              ),
+
+              procurement_expense_pct: toDecimal(
+                calculated.procurement_expense_pct
+              ),
+
+              procurement_expense_total: toDecimal(
+                calculated.procurement_expense_total
+              ),
+
+              
+
+              created_by: payload.user_id || null,
+              updated_by: payload.user_id || null,
+            };
+          }),
         });
       }
     });
