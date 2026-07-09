@@ -1880,6 +1880,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
       vendor_name: true,
       logo: true,
       icon: true,
+      login_image: true,
     }
   });
 
@@ -1887,6 +1888,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
 
   let logoUrl = "";
   let iconUrl = "";
+  let loginImageUrl = "";
   if (vendor.logo) {
     try {
       logoUrl = await generateSignedUrl(vendor.logo);
@@ -1901,11 +1903,19 @@ export const getVendorBySubdomain = async (subdomain: string) => {
       console.error("Error generating icon signed url:", e);
     }
   }
+  if (vendor.login_image) {
+    try {
+      loginImageUrl = await generateSignedUrl(vendor.login_image);
+    } catch (e) {
+      console.error("Error generating login_image signed url:", e);
+    }
+  }
 
   return {
     id: vendor.id,
     vendor_name: vendor.vendor_name,
     logoUrl,
     iconUrl,
+    loginImageUrl,
   };
 };
