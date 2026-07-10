@@ -246,7 +246,7 @@ const findAllActiveUsersByRole = async (
         },
       },
     },
-    orderBy: { created_at: "asc" },
+    orderBy: { created_at: "asc" }, 
     select: {
       id: true,
       user_name: true,
