@@ -206,6 +206,7 @@ export type CarcassTypeMasterWhereInput = {
   vendor_id?: Prisma.IntFilter<"CarcassTypeMaster"> | number
   rules?: Prisma.TimelineRuleListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
+  leadMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -215,6 +216,7 @@ export type CarcassTypeMasterOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   rules?: Prisma.TimelineRuleOrderByRelationAggregateInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -227,6 +229,7 @@ export type CarcassTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"CarcassTypeMaster"> | number
   rules?: Prisma.TimelineRuleListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
+  leadMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -254,6 +257,7 @@ export type CarcassTypeMasterCreateInput = {
   name: string
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutCarcassInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCarcassTypesInput
 }
 
@@ -263,12 +267,14 @@ export type CarcassTypeMasterUncheckedCreateInput = {
   vendor_id: number
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutCarcassInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
 }
 
 export type CarcassTypeMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   rules?: Prisma.TimelineRuleUpdateManyWithoutCarcassNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCarcassTypesNestedInput
 }
 
@@ -278,6 +284,7 @@ export type CarcassTypeMasterUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutCarcassNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
 }
 
 export type CarcassTypeMasterCreateManyInput = {
@@ -306,6 +313,11 @@ export type CarcassTypeMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type CarcassTypeMasterScalarRelationFilter = {
+  is?: Prisma.CarcassTypeMasterWhereInput
+  isNot?: Prisma.CarcassTypeMasterWhereInput
+}
+
 export type CarcassTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -332,11 +344,6 @@ export type CarcassTypeMasterMinOrderByAggregateInput = {
 export type CarcassTypeMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-}
-
-export type CarcassTypeMasterScalarRelationFilter = {
-  is?: Prisma.CarcassTypeMasterWhereInput
-  isNot?: Prisma.CarcassTypeMasterWhereInput
 }
 
 export type CarcassTypeMasterNullableScalarRelationFilter = {
@@ -386,6 +393,20 @@ export type CarcassTypeMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   deleteMany?: Prisma.CarcassTypeMasterScalarWhereInput | Prisma.CarcassTypeMasterScalarWhereInput[]
 }
 
+export type CarcassTypeMasterCreateNestedOneWithoutLeadMappingsInput = {
+  create?: Prisma.XOR<Prisma.CarcassTypeMasterCreateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  connectOrCreate?: Prisma.CarcassTypeMasterCreateOrConnectWithoutLeadMappingsInput
+  connect?: Prisma.CarcassTypeMasterWhereUniqueInput
+}
+
+export type CarcassTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.CarcassTypeMasterCreateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  connectOrCreate?: Prisma.CarcassTypeMasterCreateOrConnectWithoutLeadMappingsInput
+  upsert?: Prisma.CarcassTypeMasterUpsertWithoutLeadMappingsInput
+  connect?: Prisma.CarcassTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CarcassTypeMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUpdateWithoutLeadMappingsInput>, Prisma.CarcassTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
+}
+
 export type CarcassTypeMasterCreateNestedOneWithoutRulesInput = {
   create?: Prisma.XOR<Prisma.CarcassTypeMasterCreateWithoutRulesInput, Prisma.CarcassTypeMasterUncheckedCreateWithoutRulesInput>
   connectOrCreate?: Prisma.CarcassTypeMasterCreateOrConnectWithoutRulesInput
@@ -420,6 +441,7 @@ export type CarcassTypeMasterCreateWithoutVendorInput = {
   name: string
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutCarcassInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassTypeInput
 }
 
 export type CarcassTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -427,6 +449,7 @@ export type CarcassTypeMasterUncheckedCreateWithoutVendorInput = {
   name: string
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutCarcassInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
 }
 
 export type CarcassTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -464,9 +487,56 @@ export type CarcassTypeMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"CarcassTypeMaster"> | number
 }
 
+export type CarcassTypeMasterCreateWithoutLeadMappingsInput = {
+  name: string
+  rules?: Prisma.TimelineRuleCreateNestedManyWithoutCarcassInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCarcassTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutCarcassTypesInput
+}
+
+export type CarcassTypeMasterUncheckedCreateWithoutLeadMappingsInput = {
+  id?: number
+  name: string
+  vendor_id: number
+  rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutCarcassInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
+}
+
+export type CarcassTypeMasterCreateOrConnectWithoutLeadMappingsInput = {
+  where: Prisma.CarcassTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CarcassTypeMasterCreateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+}
+
+export type CarcassTypeMasterUpsertWithoutLeadMappingsInput = {
+  update: Prisma.XOR<Prisma.CarcassTypeMasterUpdateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
+  create: Prisma.XOR<Prisma.CarcassTypeMasterCreateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  where?: Prisma.CarcassTypeMasterWhereInput
+}
+
+export type CarcassTypeMasterUpdateToOneWithWhereWithoutLeadMappingsInput = {
+  where?: Prisma.CarcassTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.CarcassTypeMasterUpdateWithoutLeadMappingsInput, Prisma.CarcassTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
+}
+
+export type CarcassTypeMasterUpdateWithoutLeadMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  rules?: Prisma.TimelineRuleUpdateManyWithoutCarcassNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCarcassTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCarcassTypesNestedInput
+}
+
+export type CarcassTypeMasterUncheckedUpdateWithoutLeadMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutCarcassNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
+}
+
 export type CarcassTypeMasterCreateWithoutRulesInput = {
   name: string
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCarcassTypesInput
 }
 
@@ -475,6 +545,7 @@ export type CarcassTypeMasterUncheckedCreateWithoutRulesInput = {
   name: string
   vendor_id: number
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
 }
 
 export type CarcassTypeMasterCreateOrConnectWithoutRulesInput = {
@@ -496,6 +567,7 @@ export type CarcassTypeMasterUpdateToOneWithWhereWithoutRulesInput = {
 export type CarcassTypeMasterUpdateWithoutRulesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCarcassTypesNestedInput
 }
 
@@ -504,11 +576,13 @@ export type CarcassTypeMasterUncheckedUpdateWithoutRulesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
 }
 
 export type CarcassTypeMasterCreateWithoutChsSelectionMappingsInput = {
   name: string
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutCarcassInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCarcassTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutCarcassTypesInput
 }
 
@@ -517,6 +591,7 @@ export type CarcassTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   name: string
   vendor_id: number
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutCarcassInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCarcassTypeInput
 }
 
 export type CarcassTypeMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -538,6 +613,7 @@ export type CarcassTypeMasterUpdateToOneWithWhereWithoutChsSelectionMappingsInpu
 export type CarcassTypeMasterUpdateWithoutChsSelectionMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   rules?: Prisma.TimelineRuleUpdateManyWithoutCarcassNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutCarcassTypesNestedInput
 }
 
@@ -546,6 +622,7 @@ export type CarcassTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutCarcassNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
 }
 
 export type CarcassTypeMasterCreateManyVendorInput = {
@@ -557,6 +634,7 @@ export type CarcassTypeMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   rules?: Prisma.TimelineRuleUpdateManyWithoutCarcassNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCarcassTypeNestedInput
 }
 
 export type CarcassTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -564,6 +642,7 @@ export type CarcassTypeMasterUncheckedUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutCarcassNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
+  leadMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCarcassTypeNestedInput
 }
 
 export type CarcassTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -579,11 +658,13 @@ export type CarcassTypeMasterUncheckedUpdateManyWithoutVendorInput = {
 export type CarcassTypeMasterCountOutputType = {
   rules: number
   chsSelectionMappings: number
+  leadMappings: number
 }
 
 export type CarcassTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rules?: boolean | CarcassTypeMasterCountOutputTypeCountRulesArgs
   chsSelectionMappings?: boolean | CarcassTypeMasterCountOutputTypeCountChsSelectionMappingsArgs
+  leadMappings?: boolean | CarcassTypeMasterCountOutputTypeCountLeadMappingsArgs
 }
 
 /**
@@ -610,6 +691,13 @@ export type CarcassTypeMasterCountOutputTypeCountChsSelectionMappingsArgs<ExtArg
   where?: Prisma.CHSSelectionTypeMappingWhereInput
 }
 
+/**
+ * CarcassTypeMasterCountOutputType without action
+ */
+export type CarcassTypeMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadCarcassMaterialMappingWhereInput
+}
+
 
 export type CarcassTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -617,6 +705,7 @@ export type CarcassTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   vendor_id?: boolean
   rules?: boolean | Prisma.CarcassTypeMaster$rulesArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.CarcassTypeMaster$chsSelectionMappingsArgs<ExtArgs>
+  leadMappings?: boolean | Prisma.CarcassTypeMaster$leadMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CarcassTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["carcassTypeMaster"]>
@@ -645,6 +734,7 @@ export type CarcassTypeMasterOmit<ExtArgs extends runtime.Types.Extensions.Inter
 export type CarcassTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   rules?: boolean | Prisma.CarcassTypeMaster$rulesArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.CarcassTypeMaster$chsSelectionMappingsArgs<ExtArgs>
+  leadMappings?: boolean | Prisma.CarcassTypeMaster$leadMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.CarcassTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -660,6 +750,7 @@ export type $CarcassTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
   objects: {
     rules: Prisma.$TimelineRulePayload<ExtArgs>[]
     chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
+    leadMappings: Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1062,6 +1153,7 @@ export interface Prisma__CarcassTypeMasterClient<T, Null = never, ExtArgs extend
   readonly [Symbol.toStringTag]: "PrismaPromise"
   rules<T extends Prisma.CarcassTypeMaster$rulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassTypeMaster$rulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chsSelectionMappings<T extends Prisma.CarcassTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadMappings<T extends Prisma.CarcassTypeMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CarcassTypeMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1541,6 +1633,30 @@ export type CarcassTypeMaster$chsSelectionMappingsArgs<ExtArgs extends runtime.T
   take?: number
   skip?: number
   distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
+}
+
+/**
+ * CarcassTypeMaster.leadMappings
+ */
+export type CarcassTypeMaster$leadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadCarcassMaterialMapping
+   */
+  select?: Prisma.LeadCarcassMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadCarcassMaterialMapping
+   */
+  omit?: Prisma.LeadCarcassMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadCarcassMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadCarcassMaterialMappingWhereInput
+  orderBy?: Prisma.LeadCarcassMaterialMappingOrderByWithRelationInput | Prisma.LeadCarcassMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadCarcassMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadCarcassMaterialMappingScalarFieldEnum | Prisma.LeadCarcassMaterialMappingScalarFieldEnum[]
 }
 
 /**

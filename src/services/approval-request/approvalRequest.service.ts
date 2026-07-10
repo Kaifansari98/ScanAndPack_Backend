@@ -323,10 +323,6 @@ export class ApprovalRequestService {
       throw new Error("Assignee does not belong to the lead's vendor");
     }
 
-    if (lead.franchise_id && assignee.franchise_id !== lead.franchise_id) {
-      throw new Error("Assignee must belong to the same franchise as the lead");
-    }
-
     const uploaderFiles = await uploadApprovalRequestFiles(
       input.files ?? [],
       lead.vendor_id,
