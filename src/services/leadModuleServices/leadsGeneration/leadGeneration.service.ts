@@ -1481,6 +1481,54 @@ export const getLeadProductStructureInstances = async (
   }
 };
 
+export const getLeadUniqueProductTypes = async (
+  leadId: number,
+  vendorId: number,
+) => {
+  try {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      include: {
+        productType: true,
+        productItemCode: {
+          include: {
+            productStructure: {
+              include: {
+                productType: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const uniqueProductTypesMap = new Map<string, any>();
+
+    for (const item of instances) {
+      const pType = item.productType || item.productItemCode?.productStructure?.productType;
+      if (pType && pType.type) {
+        const typeNormalized = pType.type.trim().toLowerCase();
+        if (!uniqueProductTypesMap.has(typeNormalized)) {
+          uniqueProductTypesMap.set(typeNormalized, pType);
+        }
+      }
+    }
+
+    return Array.from(uniqueProductTypesMap.values());
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error fetching unique product types for lead:",
+      error,
+    );
+    throw new Error(
+      `Failed to fetch unique product types for lead: ${error.message}`,
+    );
+  }
+};
+
 export const deleteLeadProductStructureInstance = async (
   leadId: number,
   vendorId: number,

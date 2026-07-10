@@ -962,6 +962,7 @@ export class DesigingStageController {
 
   public static async uploadDesigns(req: Request, res: Response) {
     try {
+      console.log("[BACKEND UPLOAD DESIGNS] req.body:", req.body);
       const { vendorId, leadId, userId } = req.body;
       const rawInstanceIds = req.body.product_structure_instance_ids;
 
@@ -1110,7 +1111,7 @@ export class DesigingStageController {
             });
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^[DR](\d+)-/i);
+                const match = doc.doc_og_name?.match(/^(?:\[[^\]]+\]\s*)?[DR](\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)

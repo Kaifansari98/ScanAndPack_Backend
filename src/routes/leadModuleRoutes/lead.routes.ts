@@ -301,6 +301,11 @@ leadsRouter.get(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances",
   leadController.fetchLeadProductStructureInstances
 );
+// GET unique product types for a lead and vendor
+leadsRouter.get(
+  "/lead/:leadId/vendor/:vendorId/unique-product-types",
+  leadController.fetchLeadUniqueProductTypes
+);
 // DELETE product structure instance for a lead and vendor
 leadsRouter.delete(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances/:instanceId",
