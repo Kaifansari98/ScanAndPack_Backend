@@ -55,9 +55,13 @@ import {
 } from "../../controllers/leadModuleControllers/paymentType.controller";
 import {
   fetchAllCarcassTypes,
+  fetchAllCarcasMaterials,
+  fetchCarcassMaterialFinishes,
   fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
   fetchAllShutterTypes,
+  fetchAllShutterMaterials,
+  fetchShutterMaterialFinishes,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -138,7 +142,23 @@ leadsRouter.patch(
   markSmallOrderRequestResolvedController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
+leadsRouter.get(
+  "/get-all-carcas-materials/:vendor_id",
+  fetchAllCarcasMaterials,
+);
+leadsRouter.get(
+  "/get-carcass-material-finishes/:carcas_material_id",
+  fetchCarcassMaterialFinishes,
+);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
+leadsRouter.get(
+  "/get-all-shutter-materials/:vendor_id",
+  fetchAllShutterMaterials,
+);
+leadsRouter.get(
+  "/get-shutter-material-finishes/:shutter_material_id",
+  fetchShutterMaterialFinishes,
+);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",

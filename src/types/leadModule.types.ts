@@ -136,6 +136,32 @@ export interface HandleType {
     vendor_id: number;
 }
 
+export interface CarcasMaterialFinish {
+    id: number;
+    name: string;
+    carcas_material_id: number;
+}
+
+export interface CarcasMaterial {
+    id: number;
+    name: string;
+    vendor_id: number;
+    finishes?: CarcasMaterialFinish[];
+}
+
+export interface ShutterMaterialFinish {
+    id: number;
+    name: string;
+    shutter_material_id: number;
+}
+
+export interface ShutterMaterial {
+    id: number;
+    name: string;
+    vendor_id: number;
+    finishes?: ShutterMaterialFinish[];
+}
+
 export interface DocumentTypeInput {
   vendor_id: number;
   type: string;

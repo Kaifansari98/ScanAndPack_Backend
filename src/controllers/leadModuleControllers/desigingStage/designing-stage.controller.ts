@@ -2834,6 +2834,312 @@ export class DesigingStageController {
     }
   }
 
+  public static async getLeadSpecifications(req: Request, res: Response) {
+    try {
+      const { vendorId, leadId } = req.params;
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const specifications = await prisma.leadSpecificationsMaster.findMany({
+        where: {
+          vendor_id: Number(vendorId),
+          lead_id: Number(leadId),
+        },
+        orderBy: { created_at: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead specifications fetched successfully",
+        data: specifications,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead specifications:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async getLeadCarcassMaterialMappings(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const mappings = await prisma.leadCarcassMaterialMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+        },
+        include: {
+          carcassType: { select: { id: true, name: true } },
+          carcasMaterial: { select: { id: true, name: true } },
+          carcassMaterialFinish: { select: { id: true, name: true } },
+        },
+        orderBy: { id: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead carcass material mappings fetched successfully",
+        data: mappings,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead carcass material mappings:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async upsertLeadCarcassMaterialMapping(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const id = req.body.id ? Number(req.body.id) : undefined;
+      const vendorId = Number(req.body.vendor_id);
+      const leadId = Number(req.body.lead_id);
+      const carcassTypeId = Number(req.body.carcass_type_id);
+      const carcasMaterialId = Number(req.body.carcas_material_id);
+      const carcassMaterialFinishId = Number(req.body.carcass_material_finish_id);
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !carcassTypeId ||
+        !carcasMaterialId ||
+        !carcassMaterialFinishId ||
+        !createdBy
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendor_id, lead_id, carcass_type_id, carcas_material_id, carcass_material_finish_id and created_by are required",
+        });
+      }
+
+      const data = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        carcass_type_id: carcassTypeId,
+        carcas_material_id: carcasMaterialId,
+        carcass_material_finish_id: carcassMaterialFinishId,
+        created_by: createdBy,
+      };
+
+      const existingDuplicate = await prisma.leadCarcassMaterialMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          carcass_type_id: carcassTypeId,
+          carcas_material_id: carcasMaterialId,
+          carcass_material_finish_id: carcassMaterialFinishId,
+          ...(id ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      });
+
+      if (existingDuplicate) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "This carcass type, material, and finish combination already exists for this lead.",
+        });
+      }
+
+      const mapping = id
+        ? await prisma.leadCarcassMaterialMapping.update({
+            where: { id },
+            data,
+            include: {
+              carcassType: { select: { id: true, name: true } },
+              carcasMaterial: { select: { id: true, name: true } },
+              carcassMaterialFinish: { select: { id: true, name: true } },
+            },
+          })
+        : await prisma.leadCarcassMaterialMapping.create({
+            data,
+            include: {
+              carcassType: { select: { id: true, name: true } },
+              carcasMaterial: { select: { id: true, name: true } },
+              carcassMaterialFinish: { select: { id: true, name: true } },
+            },
+          });
+
+      return res.status(200).json({
+        success: true,
+        message: id
+          ? "Lead carcass material mapping updated successfully"
+          : "Lead carcass material mapping created successfully",
+        data: mapping,
+      });
+    } catch (error: any) {
+      console.error("Error saving lead carcass material mapping:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async getLeadShutterMaterialMappings(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const mappings = await prisma.leadShutterMaterialMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+        },
+        include: {
+          shutterType: { select: { id: true, name: true } },
+          shutterMaterial: { select: { id: true, name: true } },
+          shutterMaterialFinish: { select: { id: true, name: true } },
+        },
+        orderBy: { id: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead shutter material mappings fetched successfully",
+        data: mappings,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead shutter material mappings:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async upsertLeadShutterMaterialMapping(
+    req: Request,
+    res: Response,
+  ) {
+    try {
+      const id = req.body.id ? Number(req.body.id) : undefined;
+      const vendorId = Number(req.body.vendor_id);
+      const leadId = Number(req.body.lead_id);
+      const shutterTypeId = Number(req.body.shutter_type_id);
+      const shutterMaterialId = Number(req.body.shutter_material_id);
+      const shutterMaterialFinishId = Number(req.body.shutter_material_finish_id);
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !shutterTypeId ||
+        !shutterMaterialId ||
+        !shutterMaterialFinishId ||
+        !createdBy
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendor_id, lead_id, shutter_type_id, shutter_material_id, shutter_material_finish_id and created_by are required",
+        });
+      }
+
+      const data = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        shutter_type_id: shutterTypeId,
+        shutter_material_id: shutterMaterialId,
+        shutter_material_finish_id: shutterMaterialFinishId,
+        created_by: createdBy,
+      };
+
+      const existingDuplicate = await prisma.leadShutterMaterialMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          shutter_type_id: shutterTypeId,
+          shutter_material_id: shutterMaterialId,
+          shutter_material_finish_id: shutterMaterialFinishId,
+          ...(id ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      });
+
+      if (existingDuplicate) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "This shutter type, material, and finish combination already exists for this lead.",
+        });
+      }
+
+      const mapping = id
+        ? await prisma.leadShutterMaterialMapping.update({
+            where: { id },
+            data,
+            include: {
+              shutterType: { select: { id: true, name: true } },
+              shutterMaterial: { select: { id: true, name: true } },
+              shutterMaterialFinish: { select: { id: true, name: true } },
+            },
+          })
+        : await prisma.leadShutterMaterialMapping.create({
+            data,
+            include: {
+              shutterType: { select: { id: true, name: true } },
+              shutterMaterial: { select: { id: true, name: true } },
+              shutterMaterialFinish: { select: { id: true, name: true } },
+            },
+          });
+
+      return res.status(200).json({
+        success: true,
+        message: id
+          ? "Lead shutter material mapping updated successfully"
+          : "Lead shutter material mapping created successfully",
+        data: mapping,
+      });
+    } catch (error: any) {
+      console.error("Error saving lead shutter material mapping:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
   public static async getInstanceStageController(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

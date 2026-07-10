@@ -207,6 +207,7 @@ export type ShutterTypeMasterWhereInput = {
   subTypes?: Prisma.ShutterSubTypeMasterListRelationFilter
   rules?: Prisma.TimelineRuleListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
+  leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }
 
@@ -217,6 +218,7 @@ export type ShutterTypeMasterOrderByWithRelationInput = {
   subTypes?: Prisma.ShutterSubTypeMasterOrderByRelationAggregateInput
   rules?: Prisma.TimelineRuleOrderByRelationAggregateInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingOrderByRelationAggregateInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingOrderByRelationAggregateInput
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
 }
 
@@ -230,6 +232,7 @@ export type ShutterTypeMasterWhereUniqueInput = Prisma.AtLeast<{
   subTypes?: Prisma.ShutterSubTypeMasterListRelationFilter
   rules?: Prisma.TimelineRuleListRelationFilter
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingListRelationFilter
+  leadMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
 }, "id">
 
@@ -258,6 +261,7 @@ export type ShutterTypeMasterCreateInput = {
   subTypes?: Prisma.ShutterSubTypeMasterCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterTypesInput
 }
 
@@ -268,6 +272,7 @@ export type ShutterTypeMasterUncheckedCreateInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterUpdateInput = {
@@ -275,6 +280,7 @@ export type ShutterTypeMasterUpdateInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput
 }
 
@@ -285,6 +291,7 @@ export type ShutterTypeMasterUncheckedUpdateInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterCreateManyInput = {
@@ -313,6 +320,11 @@ export type ShutterTypeMasterOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ShutterTypeMasterScalarRelationFilter = {
+  is?: Prisma.ShutterTypeMasterWhereInput
+  isNot?: Prisma.ShutterTypeMasterWhereInput
+}
+
 export type ShutterTypeMasterCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
@@ -339,11 +351,6 @@ export type ShutterTypeMasterMinOrderByAggregateInput = {
 export type ShutterTypeMasterSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   vendor_id?: Prisma.SortOrder
-}
-
-export type ShutterTypeMasterScalarRelationFilter = {
-  is?: Prisma.ShutterTypeMasterWhereInput
-  isNot?: Prisma.ShutterTypeMasterWhereInput
 }
 
 export type ShutterTypeMasterNullableScalarRelationFilter = {
@@ -391,6 +398,20 @@ export type ShutterTypeMasterUncheckedUpdateManyWithoutVendorNestedInput = {
   update?: Prisma.ShutterTypeMasterUpdateWithWhereUniqueWithoutVendorInput | Prisma.ShutterTypeMasterUpdateWithWhereUniqueWithoutVendorInput[]
   updateMany?: Prisma.ShutterTypeMasterUpdateManyWithWhereWithoutVendorInput | Prisma.ShutterTypeMasterUpdateManyWithWhereWithoutVendorInput[]
   deleteMany?: Prisma.ShutterTypeMasterScalarWhereInput | Prisma.ShutterTypeMasterScalarWhereInput[]
+}
+
+export type ShutterTypeMasterCreateNestedOneWithoutLeadMappingsInput = {
+  create?: Prisma.XOR<Prisma.ShutterTypeMasterCreateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  connectOrCreate?: Prisma.ShutterTypeMasterCreateOrConnectWithoutLeadMappingsInput
+  connect?: Prisma.ShutterTypeMasterWhereUniqueInput
+}
+
+export type ShutterTypeMasterUpdateOneRequiredWithoutLeadMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.ShutterTypeMasterCreateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  connectOrCreate?: Prisma.ShutterTypeMasterCreateOrConnectWithoutLeadMappingsInput
+  upsert?: Prisma.ShutterTypeMasterUpsertWithoutLeadMappingsInput
+  connect?: Prisma.ShutterTypeMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ShutterTypeMasterUpdateToOneWithWhereWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUpdateWithoutLeadMappingsInput>, Prisma.ShutterTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
 }
 
 export type ShutterTypeMasterCreateNestedOneWithoutSubTypesInput = {
@@ -444,6 +465,7 @@ export type ShutterTypeMasterCreateWithoutVendorInput = {
   subTypes?: Prisma.ShutterSubTypeMasterCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterUncheckedCreateWithoutVendorInput = {
@@ -452,6 +474,7 @@ export type ShutterTypeMasterUncheckedCreateWithoutVendorInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterCreateOrConnectWithoutVendorInput = {
@@ -489,10 +512,61 @@ export type ShutterTypeMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"ShutterTypeMaster"> | number
 }
 
+export type ShutterTypeMasterCreateWithoutLeadMappingsInput = {
+  name: string
+  subTypes?: Prisma.ShutterSubTypeMasterCreateNestedManyWithoutShutterInput
+  rules?: Prisma.TimelineRuleCreateNestedManyWithoutShutterInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterTypeInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterTypesInput
+}
+
+export type ShutterTypeMasterUncheckedCreateWithoutLeadMappingsInput = {
+  id?: number
+  name: string
+  vendor_id: number
+  subTypes?: Prisma.ShutterSubTypeMasterUncheckedCreateNestedManyWithoutShutterInput
+  rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutShutterInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutShutterTypeInput
+}
+
+export type ShutterTypeMasterCreateOrConnectWithoutLeadMappingsInput = {
+  where: Prisma.ShutterTypeMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.ShutterTypeMasterCreateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+}
+
+export type ShutterTypeMasterUpsertWithoutLeadMappingsInput = {
+  update: Prisma.XOR<Prisma.ShutterTypeMasterUpdateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
+  create: Prisma.XOR<Prisma.ShutterTypeMasterCreateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedCreateWithoutLeadMappingsInput>
+  where?: Prisma.ShutterTypeMasterWhereInput
+}
+
+export type ShutterTypeMasterUpdateToOneWithWhereWithoutLeadMappingsInput = {
+  where?: Prisma.ShutterTypeMasterWhereInput
+  data: Prisma.XOR<Prisma.ShutterTypeMasterUpdateWithoutLeadMappingsInput, Prisma.ShutterTypeMasterUncheckedUpdateWithoutLeadMappingsInput>
+}
+
+export type ShutterTypeMasterUpdateWithoutLeadMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  subTypes?: Prisma.ShutterSubTypeMasterUpdateManyWithoutShutterNestedInput
+  rules?: Prisma.TimelineRuleUpdateManyWithoutShutterNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterTypeNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput
+}
+
+export type ShutterTypeMasterUncheckedUpdateWithoutLeadMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  subTypes?: Prisma.ShutterSubTypeMasterUncheckedUpdateManyWithoutShutterNestedInput
+  rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
+}
+
 export type ShutterTypeMasterCreateWithoutSubTypesInput = {
   name: string
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterTypesInput
 }
 
@@ -502,6 +576,7 @@ export type ShutterTypeMasterUncheckedCreateWithoutSubTypesInput = {
   vendor_id: number
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterCreateOrConnectWithoutSubTypesInput = {
@@ -524,6 +599,7 @@ export type ShutterTypeMasterUpdateWithoutSubTypesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   rules?: Prisma.TimelineRuleUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput
 }
 
@@ -533,12 +609,14 @@ export type ShutterTypeMasterUncheckedUpdateWithoutSubTypesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterCreateWithoutRulesInput = {
   name: string
   subTypes?: Prisma.ShutterSubTypeMasterCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterTypesInput
 }
 
@@ -548,6 +626,7 @@ export type ShutterTypeMasterUncheckedCreateWithoutRulesInput = {
   vendor_id: number
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedCreateNestedManyWithoutShutterInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutShutterTypeInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterCreateOrConnectWithoutRulesInput = {
@@ -570,6 +649,7 @@ export type ShutterTypeMasterUpdateWithoutRulesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subTypes?: Prisma.ShutterSubTypeMasterUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput
 }
 
@@ -579,12 +659,14 @@ export type ShutterTypeMasterUncheckedUpdateWithoutRulesInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterCreateWithoutChsSelectionMappingsInput = {
   name: string
   subTypes?: Prisma.ShutterSubTypeMasterCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleCreateNestedManyWithoutShutterInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutShutterTypeInput
   vendor: Prisma.VendorMasterCreateNestedOneWithoutShutterTypesInput
 }
 
@@ -594,6 +676,7 @@ export type ShutterTypeMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   vendor_id: number
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedCreateNestedManyWithoutShutterInput
   rules?: Prisma.TimelineRuleUncheckedCreateNestedManyWithoutShutterInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutShutterTypeInput
 }
 
 export type ShutterTypeMasterCreateOrConnectWithoutChsSelectionMappingsInput = {
@@ -616,6 +699,7 @@ export type ShutterTypeMasterUpdateWithoutChsSelectionMappingsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   subTypes?: Prisma.ShutterSubTypeMasterUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUpdateManyWithoutShutterNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterTypeNestedInput
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutShutterTypesNestedInput
 }
 
@@ -625,6 +709,7 @@ export type ShutterTypeMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterCreateManyVendorInput = {
@@ -637,6 +722,7 @@ export type ShutterTypeMasterUpdateWithoutVendorInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterUncheckedUpdateWithoutVendorInput = {
@@ -645,6 +731,7 @@ export type ShutterTypeMasterUncheckedUpdateWithoutVendorInput = {
   subTypes?: Prisma.ShutterSubTypeMasterUncheckedUpdateManyWithoutShutterNestedInput
   rules?: Prisma.TimelineRuleUncheckedUpdateManyWithoutShutterNestedInput
   chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
+  leadMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutShutterTypeNestedInput
 }
 
 export type ShutterTypeMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -661,12 +748,14 @@ export type ShutterTypeMasterCountOutputType = {
   subTypes: number
   rules: number
   chsSelectionMappings: number
+  leadMappings: number
 }
 
 export type ShutterTypeMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subTypes?: boolean | ShutterTypeMasterCountOutputTypeCountSubTypesArgs
   rules?: boolean | ShutterTypeMasterCountOutputTypeCountRulesArgs
   chsSelectionMappings?: boolean | ShutterTypeMasterCountOutputTypeCountChsSelectionMappingsArgs
+  leadMappings?: boolean | ShutterTypeMasterCountOutputTypeCountLeadMappingsArgs
 }
 
 /**
@@ -700,6 +789,13 @@ export type ShutterTypeMasterCountOutputTypeCountChsSelectionMappingsArgs<ExtArg
   where?: Prisma.CHSSelectionTypeMappingWhereInput
 }
 
+/**
+ * ShutterTypeMasterCountOutputType without action
+ */
+export type ShutterTypeMasterCountOutputTypeCountLeadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadShutterMaterialMappingWhereInput
+}
+
 
 export type ShutterTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -708,6 +804,7 @@ export type ShutterTypeMasterSelect<ExtArgs extends runtime.Types.Extensions.Int
   subTypes?: boolean | Prisma.ShutterTypeMaster$subTypesArgs<ExtArgs>
   rules?: boolean | Prisma.ShutterTypeMaster$rulesArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.ShutterTypeMaster$chsSelectionMappingsArgs<ExtArgs>
+  leadMappings?: boolean | Prisma.ShutterTypeMaster$leadMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["shutterTypeMaster"]>
@@ -737,6 +834,7 @@ export type ShutterTypeMasterInclude<ExtArgs extends runtime.Types.Extensions.In
   subTypes?: boolean | Prisma.ShutterTypeMaster$subTypesArgs<ExtArgs>
   rules?: boolean | Prisma.ShutterTypeMaster$rulesArgs<ExtArgs>
   chsSelectionMappings?: boolean | Prisma.ShutterTypeMaster$chsSelectionMappingsArgs<ExtArgs>
+  leadMappings?: boolean | Prisma.ShutterTypeMaster$leadMappingsArgs<ExtArgs>
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ShutterTypeMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -753,6 +851,7 @@ export type $ShutterTypeMasterPayload<ExtArgs extends runtime.Types.Extensions.I
     subTypes: Prisma.$ShutterSubTypeMasterPayload<ExtArgs>[]
     rules: Prisma.$TimelineRulePayload<ExtArgs>[]
     chsSelectionMappings: Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>[]
+    leadMappings: Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>[]
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1156,6 +1255,7 @@ export interface Prisma__ShutterTypeMasterClient<T, Null = never, ExtArgs extend
   subTypes<T extends Prisma.ShutterTypeMaster$subTypesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMaster$subTypesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ShutterSubTypeMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   rules<T extends Prisma.ShutterTypeMaster$rulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMaster$rulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TimelineRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chsSelectionMappings<T extends Prisma.ShutterTypeMaster$chsSelectionMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMaster$chsSelectionMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CHSSelectionTypeMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  leadMappings<T extends Prisma.ShutterTypeMaster$leadMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ShutterTypeMaster$leadMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1659,6 +1759,30 @@ export type ShutterTypeMaster$chsSelectionMappingsArgs<ExtArgs extends runtime.T
   take?: number
   skip?: number
   distinct?: Prisma.CHSSelectionTypeMappingScalarFieldEnum | Prisma.CHSSelectionTypeMappingScalarFieldEnum[]
+}
+
+/**
+ * ShutterTypeMaster.leadMappings
+ */
+export type ShutterTypeMaster$leadMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadShutterMaterialMapping
+   */
+  select?: Prisma.LeadShutterMaterialMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadShutterMaterialMapping
+   */
+  omit?: Prisma.LeadShutterMaterialMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadShutterMaterialMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadShutterMaterialMappingWhereInput
+  orderBy?: Prisma.LeadShutterMaterialMappingOrderByWithRelationInput | Prisma.LeadShutterMaterialMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadShutterMaterialMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadShutterMaterialMappingScalarFieldEnum | Prisma.LeadShutterMaterialMappingScalarFieldEnum[]
 }
 
 /**
