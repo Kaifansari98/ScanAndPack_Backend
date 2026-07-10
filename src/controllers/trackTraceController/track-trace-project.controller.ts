@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
-import { createProjectService,
+import {
+  createProjectService,
   searchTrackTraceLeadsService,
   getTrackTraceVendorConfigService,
   getTrackTraceProjectService,
   updateTrackTraceProjectService,
- }
- from "../../../src/services/trackTraceServices/track-trace-project.service";
+}
+  from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
 
 
@@ -145,29 +146,65 @@ export const getTrackTraceProjectController = async (
   res: Response
 ) => {
   try {
-    const { unique_project_id } = req.params;
+    const uniqueProjectIdParam =
+      req.params.unique_project_id;
+
+    const unique_project_id =
+      Array.isArray(
+        uniqueProjectIdParam
+      )
+        ? uniqueProjectIdParam[0]
+        : uniqueProjectIdParam;
 
     if (!unique_project_id) {
-      return res.status(400).json({
-        success: false,
-        message: "unique_project_id is required",
-        data: null,
-      });
+      return res
+        .status(400)
+        .json({
+          success: false,
+
+          message:
+            "unique_project_id is required",
+
+          data: null,
+        });
     }
 
-    const result = await getTrackTraceProjectService(unique_project_id);
+    const result =
+      await getTrackTraceProjectService(
+        unique_project_id
+      );
 
-    return res.status(result.success ? 200 : 404).json(result);
-  } catch (error: any) {
-    logger.error("getTrackTraceProjectController error", {
-      error: error.message,
-    });
+    return res
+      .status(
+        result.success
+          ? 200
+          : 404
+      )
+      .json(
+        result
+      );
+  } catch (
+  error: any
+  ) {
+    logger.error(
+      "getTrackTraceProjectController error",
+      {
+        error:
+          error.message,
+      }
+    );
 
-    return res.status(500).json({
-      success: false,
-      message: error.message || "Failed to fetch project",
-      data: null,
-    });
+    return res
+      .status(500)
+      .json({
+        success: false,
+
+        message:
+          error.message ||
+          "Failed to fetch project",
+
+        data: null,
+      });
   }
 };
 
@@ -176,7 +213,29 @@ export const updateTrackTraceProjectController = async (
   res: Response
 ) => {
   try {
-    const { unique_project_id } = req.params;
+    const uniqueProjectIdParam =
+      req.params.unique_project_id;
+
+    const unique_project_id =
+      Array.isArray(
+        uniqueProjectIdParam
+      )
+        ? uniqueProjectIdParam[0]
+        : uniqueProjectIdParam;
+
+    if (!unique_project_id) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+
+          message:
+            "unique_project_id is required",
+
+          data: null,
+        });
+    }
+
 
     const result = await updateTrackTraceProjectService(unique_project_id, {
       ...req.body,
