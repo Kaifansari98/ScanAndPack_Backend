@@ -1208,6 +1208,7 @@ export class DesigingStageController {
   public static async uploadCostingFile(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
+      const rawInstanceIds = req.body.product_structure_instance_ids;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1225,7 +1226,7 @@ export class DesigingStageController {
               vendor_id: Number(vendorId),
               is_deleted: false,
             },
-            select: { id: true, account_id: true },
+            include: { vendor: true },
           });
 
           if (!lead) {
@@ -1237,6 +1238,22 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id;
+
+          // Load instances if applicable
+          let instanceIdToPersist: number | null = null;
+          const useCustomVendorFlow =
+            lead.vendor.is_this_vendor_is_custom_usertype_only;
+          if (useCustomVendorFlow && rawInstanceIds) {
+            const selectedInstances = await tx.leadProductStructureInstance.findMany({
+              where: {
+                id: { in: Array.isArray(rawInstanceIds) ? rawInstanceIds.map(Number) : [Number(rawInstanceIds)] },
+                lead_id: Number(leadId),
+                vendor_id: Number(vendorId),
+              },
+            });
+            instanceIdToPersist =
+              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          }
 
           // Get-or-create the "Costing File" document type for this vendor
           let costingFileDocType = await tx.documentTypeMaster.findFirst({
@@ -1276,6 +1293,7 @@ export class DesigingStageController {
                 account_id: Number(accountId),
                 doc_type_id: costingFileDocType.id,
                 created_by: Number(userId),
+                product_structure_instance_id: instanceIdToPersist,
               },
             });
 
