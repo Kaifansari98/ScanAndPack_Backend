@@ -415,6 +415,7 @@ export type UserMasterWhereInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingListRelationFilter
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
+  boxesPackedBy?: Prisma.BoxMasterListRelationFilter
 }
 
 export type UserMasterOrderByWithRelationInput = {
@@ -561,6 +562,7 @@ export type UserMasterOrderByWithRelationInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingOrderByRelationAggregateInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingOrderByRelationAggregateInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryOrderByRelationAggregateInput
+  boxesPackedBy?: Prisma.BoxMasterOrderByRelationAggregateInput
 }
 
 export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -710,6 +712,7 @@ export type UserMasterWhereUniqueInput = Prisma.AtLeast<{
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingListRelationFilter
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryListRelationFilter
+  boxesPackedBy?: Prisma.BoxMasterListRelationFilter
 }, "id" | "user_contact">
 
 export type UserMasterOrderByWithAggregationInput = {
@@ -890,6 +893,7 @@ export type UserMasterCreateInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateInput = {
@@ -1033,6 +1037,7 @@ export type UserMasterUncheckedCreateInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUpdateInput = {
@@ -1175,6 +1180,7 @@ export type UserMasterUpdateInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateInput = {
@@ -1318,6 +1324,7 @@ export type UserMasterUncheckedUpdateInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateManyInput = {
@@ -1608,6 +1615,12 @@ export type UserMasterCreateNestedOneWithoutBoxesSiteInInput = {
   connect?: Prisma.UserMasterWhereUniqueInput
 }
 
+export type UserMasterCreateNestedOneWithoutBoxesPackedByInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedCreateWithoutBoxesPackedByInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBoxesPackedByInput
+  connect?: Prisma.UserMasterWhereUniqueInput
+}
+
 export type UserMasterUpdateOneWithoutBoxesFactoryOutNestedInput = {
   create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesFactoryOutInput, Prisma.UserMasterUncheckedCreateWithoutBoxesFactoryOutInput>
   connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBoxesFactoryOutInput
@@ -1626,6 +1639,16 @@ export type UserMasterUpdateOneWithoutBoxesSiteInNestedInput = {
   delete?: Prisma.UserMasterWhereInput | boolean
   connect?: Prisma.UserMasterWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutBoxesSiteInInput, Prisma.UserMasterUpdateWithoutBoxesSiteInInput>, Prisma.UserMasterUncheckedUpdateWithoutBoxesSiteInInput>
+}
+
+export type UserMasterUpdateOneWithoutBoxesPackedByNestedInput = {
+  create?: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedCreateWithoutBoxesPackedByInput>
+  connectOrCreate?: Prisma.UserMasterCreateOrConnectWithoutBoxesPackedByInput
+  upsert?: Prisma.UserMasterUpsertWithoutBoxesPackedByInput
+  disconnect?: Prisma.UserMasterWhereInput | boolean
+  delete?: Prisma.UserMasterWhereInput | boolean
+  connect?: Prisma.UserMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserMasterUpdateToOneWithWhereWithoutBoxesPackedByInput, Prisma.UserMasterUpdateWithoutBoxesPackedByInput>, Prisma.UserMasterUncheckedUpdateWithoutBoxesPackedByInput>
 }
 
 export type UserMasterCreateNestedOneWithoutScanItemsCreatedInput = {
@@ -3593,6 +3616,7 @@ export type UserMasterCreateWithoutVendorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutVendorInput = {
@@ -3735,6 +3759,7 @@ export type UserMasterUncheckedCreateWithoutVendorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutVendorInput = {
@@ -3920,6 +3945,7 @@ export type UserMasterCreateWithoutUser_typeInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUser_typeInput = {
@@ -4062,6 +4088,7 @@ export type UserMasterUncheckedCreateWithoutUser_typeInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUser_typeInput = {
@@ -4229,6 +4256,7 @@ export type UserMasterCreateWithoutDocumentsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsInput = {
@@ -4371,6 +4399,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsInput = {
@@ -4528,6 +4557,7 @@ export type UserMasterUpdateWithoutDocumentsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
@@ -4670,6 +4700,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSessionsInput = {
@@ -4811,6 +4842,7 @@ export type UserMasterCreateWithoutSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSessionsInput = {
@@ -4953,6 +4985,7 @@ export type UserMasterUncheckedCreateWithoutSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSessionsInput = {
@@ -5099,6 +5132,7 @@ export type UserMasterCreateWithoutRevokedSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
@@ -5241,6 +5275,7 @@ export type UserMasterUncheckedCreateWithoutRevokedSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutRevokedSessionsInput = {
@@ -5398,6 +5433,7 @@ export type UserMasterUpdateWithoutSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSessionsInput = {
@@ -5540,6 +5576,7 @@ export type UserMasterUncheckedUpdateWithoutSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutRevokedSessionsInput = {
@@ -5692,6 +5729,7 @@ export type UserMasterUpdateWithoutRevokedSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
@@ -5834,6 +5872,7 @@ export type UserMasterUncheckedUpdateWithoutRevokedSessionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
@@ -5975,6 +6014,7 @@ export type UserMasterCreateWithoutUserPrivilegeMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
@@ -6117,6 +6157,7 @@ export type UserMasterUncheckedCreateWithoutUserPrivilegeMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserPrivilegeMappingsInput = {
@@ -6274,6 +6315,7 @@ export type UserMasterUpdateWithoutUserPrivilegeMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
@@ -6416,6 +6458,7 @@ export type UserMasterUncheckedUpdateWithoutUserPrivilegeMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedProjectsInput = {
@@ -6557,6 +6600,7 @@ export type UserMasterCreateWithoutCreatedProjectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
@@ -6699,6 +6743,7 @@ export type UserMasterUncheckedCreateWithoutCreatedProjectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedProjectsInput = {
@@ -6856,6 +6901,7 @@ export type UserMasterUpdateWithoutCreatedProjectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
@@ -6998,6 +7044,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedProjectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutBoxesFactoryOutInput = {
@@ -7139,6 +7186,7 @@ export type UserMasterCreateWithoutBoxesFactoryOutInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
@@ -7281,6 +7329,7 @@ export type UserMasterUncheckedCreateWithoutBoxesFactoryOutInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesFactoryOutInput = {
@@ -7427,6 +7476,7 @@ export type UserMasterCreateWithoutBoxesSiteInInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
@@ -7569,11 +7619,302 @@ export type UserMasterUncheckedCreateWithoutBoxesSiteInInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutBoxesSiteInInput = {
   where: Prisma.UserMasterWhereUniqueInput
   create: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesSiteInInput, Prisma.UserMasterUncheckedCreateWithoutBoxesSiteInInput>
+}
+
+export type UserMasterCreateWithoutBoxesPackedByInput = {
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  accountsCreated?: Prisma.AccountMasterCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleCreateNestedManyWithoutRejectedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutRevokedByInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalCreateNestedManyWithoutApproverInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogCreateNestedManyWithoutActorInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutUsersInput
+  user_type: Prisma.UserTypeMasterCreateNestedOneWithoutUsersInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutUsersInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryCreateNestedManyWithoutChangedByInput
+  architechuremasters?: Prisma.ArchitechuremasterCreateNestedManyWithoutUserInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserMasterUncheckedCreateWithoutBoxesPackedByInput = {
+  id?: number
+  vendor_id: number
+  user_name: string
+  user_contact: string
+  user_email: string
+  user_timezone: string
+  password: string
+  user_type_id: number
+  status?: string
+  created_at?: Date | string
+  updated_at?: Date | string
+  franchise_id?: number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  operator?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutOperatorInput
+  createdDefects?: Prisma.DefectedItemUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedCreateNestedManyWithoutUserInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutCreatedByInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutAssignerInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutDeletedByInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutAddedByInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedCreateNestedManyWithoutUserInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedCreateNestedManyWithoutMentionedUserInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedCreateNestedManyWithoutSenderInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutCreatedByInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutUpdatedByInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutCreatedByInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutUpdatedByInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutCreatedByInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutUpdatedByInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutUserInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutUserInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutCreatedByInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutDeletedByInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedToInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutAssignedByInput
+  leadsCreated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutUpdatedByInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutSupervisorInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutUserInput
+  ledgersCreated?: Prisma.LedgerUncheckedCreateNestedManyWithoutCreatedByInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  notificationsSent?: Prisma.NotificationUncheckedCreateNestedManyWithoutSenderInput
+  notificationsReceived?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutUpdatedByInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutDeletedByInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutCreatedByInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutApprovedByInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutCreatedByInput
+  createdProjects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutCreatedByUserInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedCreateNestedManyWithoutUserInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutCreatedByInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutUpdatedByInput
+  activityLogs?: Prisma.UserActivityLogUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.UserDocumentUncheckedCreateNestedManyWithoutUserInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedCreateNestedManyWithoutUserInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedCreateNestedManyWithoutUserInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutClosedByInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutCreatedByInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutUserInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedCreateNestedManyWithoutUserInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutCreatedByInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCreatedByInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutUpdatedByInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutCompletedByInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutRejectedByInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRequesterInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutUpdatedByInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutRevokedByInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedCreateNestedManyWithoutApproverInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedCreateNestedManyWithoutCreatedByInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedCreateNestedManyWithoutActorInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  revokedSessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutRevokedByInput
+  pushTokens?: Prisma.UserPushTokenUncheckedCreateNestedManyWithoutUserInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutCreatedByUserInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedCreateNestedManyWithoutUpdatedByInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutFactoryOutByUserInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutSiteInByUserInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutSiteInByUserInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutApprovedByInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutRejectedByInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedCreateNestedManyWithoutDeletedByInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedCreateNestedManyWithoutChangedByInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsCreated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutUpdatedByInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedCreateNestedManyWithoutConfirmedByInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutCreatedByInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedCreateNestedManyWithoutSettledByInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutCreatedByInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutUpdatedByInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedCreateNestedManyWithoutDeletedByInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedCreateNestedManyWithoutChangedByInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedCreateNestedManyWithoutUserInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserMasterCreateOrConnectWithoutBoxesPackedByInput = {
+  where: Prisma.UserMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedCreateWithoutBoxesPackedByInput>
 }
 
 export type UserMasterUpsertWithoutBoxesFactoryOutInput = {
@@ -7726,6 +8067,7 @@ export type UserMasterUpdateWithoutBoxesFactoryOutInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
@@ -7868,6 +8210,7 @@ export type UserMasterUncheckedUpdateWithoutBoxesFactoryOutInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutBoxesSiteInInput = {
@@ -8020,6 +8363,7 @@ export type UserMasterUpdateWithoutBoxesSiteInInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
@@ -8138,6 +8482,303 @@ export type UserMasterUncheckedUpdateWithoutBoxesSiteInInput = {
   projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
   boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUncheckedUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUncheckedUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUncheckedUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUncheckedUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUncheckedUpdateManyWithoutChangedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUncheckedUpdateManyWithoutUserNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
+}
+
+export type UserMasterUpsertWithoutBoxesPackedByInput = {
+  update: Prisma.XOR<Prisma.UserMasterUpdateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedUpdateWithoutBoxesPackedByInput>
+  create: Prisma.XOR<Prisma.UserMasterCreateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedCreateWithoutBoxesPackedByInput>
+  where?: Prisma.UserMasterWhereInput
+}
+
+export type UserMasterUpdateToOneWithWhereWithoutBoxesPackedByInput = {
+  where?: Prisma.UserMasterWhereInput
+  data: Prisma.XOR<Prisma.UserMasterUpdateWithoutBoxesPackedByInput, Prisma.UserMasterUncheckedUpdateWithoutBoxesPackedByInput>
+}
+
+export type UserMasterUpdateWithoutBoxesPackedByInput = {
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accountsCreated?: Prisma.AccountMasterUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUpdateManyWithoutRejectedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUpdateManyWithoutRevokedByNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUpdateManyWithoutApproverNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUpdateManyWithoutActorNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutUsersNestedInput
+  user_type?: Prisma.UserTypeMasterUpdateOneRequiredWithoutUsersNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutUsersNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUpdateManyWithoutSiteInByUserNestedInput
+  mappingSiteIns?: Prisma.CutListMachineMappingUpdateManyWithoutSiteInByUserNestedInput
+  purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUpdateManyWithoutUpdatedByNestedInput
+  purchaseIntentsApproved?: Prisma.PurchaseIntentMasterUpdateManyWithoutApprovedByNestedInput
+  purchaseIntentsRejected?: Prisma.PurchaseIntentMasterUpdateManyWithoutRejectedByNestedInput
+  purchaseIntentsDeleted?: Prisma.PurchaseIntentMasterUpdateManyWithoutDeletedByNestedInput
+  purchaseIntentStatusLogs?: Prisma.PurchaseIntentStatusLogUpdateManyWithoutChangedByNestedInput
+  purchaseOrdersCreated?: Prisma.PurchaseOrderMasterUpdateManyWithoutCreatedByNestedInput
+  purchaseOrdersUpdated?: Prisma.PurchaseOrderMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsCreated?: Prisma.GRNMasterUpdateManyWithoutCreatedByNestedInput
+  grnsUpdated?: Prisma.GRNMasterUpdateManyWithoutUpdatedByNestedInput
+  grnsConfirmed?: Prisma.GRNMasterUpdateManyWithoutConfirmedByNestedInput
+  dcnsCreated?: Prisma.DebitCreditNoteUpdateManyWithoutCreatedByNestedInput
+  dcnsSettled?: Prisma.DebitCreditNoteUpdateManyWithoutSettledByNestedInput
+  redeliveriesCreated?: Prisma.RedeliveryRequestUpdateManyWithoutCreatedByNestedInput
+  poItemsCreated?: Prisma.PurchaseOrderItemUpdateManyWithoutCreatedByNestedInput
+  poItemsUpdated?: Prisma.PurchaseOrderItemUpdateManyWithoutUpdatedByNestedInput
+  poItemsDeleted?: Prisma.PurchaseOrderItemUpdateManyWithoutDeletedByNestedInput
+  stockHistories?: Prisma.ProductStockHistoryUpdateManyWithoutChangedByNestedInput
+  architechuremasters?: Prisma.ArchitechuremasterUpdateManyWithoutUserNestedInput
+  leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
+  leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserMasterUncheckedUpdateWithoutBoxesPackedByInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_name?: Prisma.StringFieldUpdateOperationsInput | string
+  user_contact?: Prisma.StringFieldUpdateOperationsInput | string
+  user_email?: Prisma.StringFieldUpdateOperationsInput | string
+  user_timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  user_type_id?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  accountsCreated?: Prisma.AccountMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  accountsUpdated?: Prisma.AccountMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  companyVendorsCreated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  companyVendorsDeleted?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutDeletedByNestedInput
+  companyVendorsUpdated?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  operator?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutOperatorNestedInput
+  createdDefects?: Prisma.DefectedItemUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappingsCreated?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  headSiteSupervisorFranchiseMappings?: Prisma.HeadSiteSupervisorFranchiseMappingUncheckedUpdateManyWithoutUserNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  installationUpdatesCreated?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutCreatedByNestedInput
+  installersAssigned?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutAssignerNestedInput
+  installersCreated?: Prisma.InstallerUserMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsCreated?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadChatDocumentsDeleted?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadChatMembersAdded?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutAddedByNestedInput
+  leadChatMembers?: Prisma.LeadChatMemberUncheckedUpdateManyWithoutUserNestedInput
+  leadChatMentions?: Prisma.LeadChatMentionUncheckedUpdateManyWithoutMentionedUserNestedInput
+  leadChatMessagesSent?: Prisma.LeadChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+  designMeetingsCreated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designMeetingsUpdated?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  designMeetingDocsMappingForCreatedBY?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsCreated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutCreatedByNestedInput
+  clientVisitsUpdated?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutUpdatedByNestedInput
+  clientVisitDocumentMappingsCreated?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsCreated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutCreatedByNestedInput
+  designSelectionsUpdated?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutUpdatedByNestedInput
+  chsMappingCreatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  chsMappingUpdatedBy?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutUserNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutUserNestedInput
+  documentsCreated?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutCreatedByNestedInput
+  documentsDeleted?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutDeletedByNestedInput
+  leadsAssigned?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedToNestedInput
+  leadsDelegated?: Prisma.LeadMasterUncheckedUpdateManyWithoutAssignedByNestedInput
+  leadsCreated?: Prisma.LeadMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadsUpdated?: Prisma.LeadMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadProductsCreated?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutUpdatedByNestedInput
+  supervisorMappingsCreated?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  supervisorMappings?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutSupervisorNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserCreated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadUserUpdated?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadUserAsUser?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutUserNestedInput
+  ledgersCreated?: Prisma.LedgerUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscDocumentsCreated?: Prisma.MiscellaneousDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsCreated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  smallOrderRequestsUpdated?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  smallOrderRequestDocumentsCreated?: Prisma.SmallOrderRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscCreated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutCreatedByNestedInput
+  miscUpdated?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
+  notificationsSent?: Prisma.NotificationUncheckedUpdateManyWithoutSenderNestedInput
+  notificationsReceived?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginsUpdated?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutUpdatedByNestedInput
+  orderLoginPoFilesCreated?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  orderLoginPoFilesDeleted?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutDeletedByNestedInput
+  paymentsCreated?: Prisma.PaymentInfoUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadSuperAdminApprovalsApproved?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutApprovedByNestedInput
+  leadSuperAdminApprovalsCreated?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutCreatedByNestedInput
+  createdProjects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  scanItemsCreated?: Prisma.ScanAndPackItemUncheckedUpdateManyWithoutUserNestedInput
+  siteReadinessCreated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutCreatedByNestedInput
+  siteReadinessUpdated?: Prisma.SiteReadinessUncheckedUpdateManyWithoutUpdatedByNestedInput
+  activityLogs?: Prisma.UserActivityLogUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.UserDocumentUncheckedUpdateManyWithoutUserNestedInput
+  userPrivilegeMappings?: Prisma.UserPrivilegeMappingUncheckedUpdateManyWithoutUserNestedInput
+  userGeographicalMappings?: Prisma.UserGeographicalMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadTasksClosed?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutClosedByNestedInput
+  leadTasksCreated?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadTasksAssigned?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutUserNestedInput
+  createdUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  updatedUserMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  userMachineMappings?: Prisma.UserMachineMappingUncheckedUpdateManyWithoutUserNestedInput
+  leadAmcContractsCreated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadAmcContractsUpdated?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCreated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCreatedByNestedInput
+  leadServiceSchedulesUpdated?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutUpdatedByNestedInput
+  leadServiceSchedulesCompleted?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutCompletedByNestedInput
+  leadServiceSchedulesRejected?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutRejectedByNestedInput
+  fastProductionRequestsAsRequester?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestsCreated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestsUpdated?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestsRevoked?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionRequestBatchesAsRequester?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRequesterNestedInput
+  fastProductionRequestBatchesCreated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionRequestBatchesUpdated?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutUpdatedByNestedInput
+  fastProductionRequestBatchesRevoked?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutRevokedByNestedInput
+  fastProductionApprovals?: Prisma.FastProductionApprovalUncheckedUpdateManyWithoutApproverNestedInput
+  fastProductionRequestDocumentsCreated?: Prisma.FastProductionRequestDocumentUncheckedUpdateManyWithoutCreatedByNestedInput
+  fastProductionStatusLogs?: Prisma.FastProductionStatusLogUncheckedUpdateManyWithoutActorNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  revokedSessions?: Prisma.UserSessionUncheckedUpdateManyWithoutRevokedByNestedInput
+  pushTokens?: Prisma.UserPushTokenUncheckedUpdateManyWithoutUserNestedInput
+  externalPlatformTokensCreated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  externalPlatformTokensUpdated?: Prisma.ExternalPlatformTokenUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  completionPhotos?: Prisma.DefectCompletionPhotoUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsCreated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  projectCategoriesVendorMappingsUpdated?: Prisma.ProjectCategoriesMasterVendorMappingUncheckedUpdateManyWithoutUpdatedByNestedInput
+  boxesFactoryOut?: Prisma.BoxMasterUncheckedUpdateManyWithoutFactoryOutByUserNestedInput
+  boxesSiteIn?: Prisma.BoxMasterUncheckedUpdateManyWithoutSiteInByUserNestedInput
   mappingSiteIns?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutSiteInByUserNestedInput
   purchaseIntentsCreated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   purchaseIntentsUpdated?: Prisma.PurchaseIntentMasterUncheckedUpdateManyWithoutUpdatedByNestedInput
@@ -8303,6 +8944,7 @@ export type UserMasterCreateWithoutScanItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
@@ -8445,6 +9087,7 @@ export type UserMasterUncheckedCreateWithoutScanItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutScanItemsCreatedInput = {
@@ -8602,6 +9245,7 @@ export type UserMasterUpdateWithoutScanItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
@@ -8744,6 +9388,7 @@ export type UserMasterUncheckedUpdateWithoutScanItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadsAssignedInput = {
@@ -8885,6 +9530,7 @@ export type UserMasterCreateWithoutLeadsAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
@@ -9027,6 +9673,7 @@ export type UserMasterUncheckedCreateWithoutLeadsAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsAssignedInput = {
@@ -9173,6 +9820,7 @@ export type UserMasterCreateWithoutLeadsDelegatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
@@ -9315,6 +9963,7 @@ export type UserMasterUncheckedCreateWithoutLeadsDelegatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsDelegatedInput = {
@@ -9461,6 +10110,7 @@ export type UserMasterCreateWithoutLeadsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
@@ -9603,6 +10253,7 @@ export type UserMasterUncheckedCreateWithoutLeadsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsCreatedInput = {
@@ -9749,6 +10400,7 @@ export type UserMasterCreateWithoutLeadsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
@@ -9891,6 +10543,7 @@ export type UserMasterUncheckedCreateWithoutLeadsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadsUpdatedInput = {
@@ -10048,6 +10701,7 @@ export type UserMasterUpdateWithoutLeadsAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
@@ -10190,6 +10844,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsDelegatedInput = {
@@ -10342,6 +10997,7 @@ export type UserMasterUpdateWithoutLeadsDelegatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
@@ -10484,6 +11140,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsDelegatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsCreatedInput = {
@@ -10636,6 +11293,7 @@ export type UserMasterUpdateWithoutLeadsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
@@ -10778,6 +11436,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadsUpdatedInput = {
@@ -10930,6 +11589,7 @@ export type UserMasterUpdateWithoutLeadsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
@@ -11072,6 +11732,7 @@ export type UserMasterUncheckedUpdateWithoutLeadsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
@@ -11213,6 +11874,7 @@ export type UserMasterCreateWithoutLeadSpecificationsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
@@ -11355,6 +12017,7 @@ export type UserMasterUncheckedCreateWithoutLeadSpecificationsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSpecificationsCreatedInput = {
@@ -11512,6 +12175,7 @@ export type UserMasterUpdateWithoutLeadSpecificationsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
@@ -11654,6 +12318,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSpecificationsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -11795,6 +12460,7 @@ export type UserMasterCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -11937,6 +12603,7 @@ export type UserMasterUncheckedCreateWithoutLeadCarcassMaterialMappingsCreatedIn
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -12094,6 +12761,7 @@ export type UserMasterUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedInput = {
@@ -12236,6 +12904,7 @@ export type UserMasterUncheckedUpdateWithoutLeadCarcassMaterialMappingsCreatedIn
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -12377,6 +13046,7 @@ export type UserMasterCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -12519,6 +13189,7 @@ export type UserMasterUncheckedCreateWithoutLeadShutterMaterialMappingsCreatedIn
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -12676,6 +13347,7 @@ export type UserMasterUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedInput = {
@@ -12818,6 +13490,7 @@ export type UserMasterUncheckedUpdateWithoutLeadShutterMaterialMappingsCreatedIn
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -12959,6 +13632,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -13101,6 +13775,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsCreatedInput 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -13247,6 +13922,7 @@ export type UserMasterCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -13389,6 +14065,7 @@ export type UserMasterUncheckedCreateWithoutLeadSuperAdminApprovalsApprovedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -13546,6 +14223,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput = {
@@ -13688,6 +14366,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsCreatedInput 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -13840,6 +14519,7 @@ export type UserMasterUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput = {
@@ -13982,6 +14662,7 @@ export type UserMasterUncheckedUpdateWithoutLeadSuperAdminApprovalsApprovedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadUserCreatedInput = {
@@ -14123,6 +14804,7 @@ export type UserMasterCreateWithoutLeadUserCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
@@ -14265,6 +14947,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserCreatedInput = {
@@ -14411,6 +15094,7 @@ export type UserMasterCreateWithoutLeadUserUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
@@ -14553,6 +15237,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserUpdatedInput = {
@@ -14699,6 +15384,7 @@ export type UserMasterCreateWithoutLeadUserAsUserInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
@@ -14841,6 +15527,7 @@ export type UserMasterUncheckedCreateWithoutLeadUserAsUserInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadUserAsUserInput = {
@@ -14998,6 +15685,7 @@ export type UserMasterUpdateWithoutLeadUserCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
@@ -15140,6 +15828,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserUpdatedInput = {
@@ -15292,6 +15981,7 @@ export type UserMasterUpdateWithoutLeadUserUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
@@ -15434,6 +16124,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadUserAsUserInput = {
@@ -15586,6 +16277,7 @@ export type UserMasterUpdateWithoutLeadUserAsUserInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
@@ -15728,6 +16420,7 @@ export type UserMasterUncheckedUpdateWithoutLeadUserAsUserInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
@@ -15869,6 +16562,7 @@ export type UserMasterCreateWithoutLeadActivityStatusLogInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
@@ -16011,6 +16705,7 @@ export type UserMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadActivityStatusLogInput = {
@@ -16168,6 +16863,7 @@ export type UserMasterUpdateWithoutLeadActivityStatusLogInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
@@ -16310,6 +17006,7 @@ export type UserMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutAccountsCreatedInput = {
@@ -16451,6 +17148,7 @@ export type UserMasterCreateWithoutAccountsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
@@ -16593,6 +17291,7 @@ export type UserMasterUncheckedCreateWithoutAccountsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsCreatedInput = {
@@ -16739,6 +17438,7 @@ export type UserMasterCreateWithoutAccountsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
@@ -16881,6 +17581,7 @@ export type UserMasterUncheckedCreateWithoutAccountsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutAccountsUpdatedInput = {
@@ -17038,6 +17739,7 @@ export type UserMasterUpdateWithoutAccountsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
@@ -17180,6 +17882,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutAccountsUpdatedInput = {
@@ -17332,6 +18035,7 @@ export type UserMasterUpdateWithoutAccountsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
@@ -17474,6 +18178,7 @@ export type UserMasterUncheckedUpdateWithoutAccountsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadProductsCreatedInput = {
@@ -17615,6 +18320,7 @@ export type UserMasterCreateWithoutLeadProductsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
@@ -17757,6 +18463,7 @@ export type UserMasterUncheckedCreateWithoutLeadProductsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadProductsCreatedInput = {
@@ -17914,6 +18621,7 @@ export type UserMasterUpdateWithoutLeadProductsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
@@ -18056,6 +18764,7 @@ export type UserMasterUncheckedUpdateWithoutLeadProductsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDocumentsCreatedInput = {
@@ -18197,6 +18906,7 @@ export type UserMasterCreateWithoutDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
@@ -18339,6 +19049,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsCreatedInput = {
@@ -18485,6 +19196,7 @@ export type UserMasterCreateWithoutDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
@@ -18627,6 +19339,7 @@ export type UserMasterUncheckedCreateWithoutDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDocumentsDeletedInput = {
@@ -18784,6 +19497,7 @@ export type UserMasterUpdateWithoutDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
@@ -18926,6 +19640,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDocumentsDeletedInput = {
@@ -19078,6 +19793,7 @@ export type UserMasterUpdateWithoutDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
@@ -19220,6 +19936,7 @@ export type UserMasterUncheckedUpdateWithoutDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
@@ -19361,6 +20078,7 @@ export type UserMasterCreateWithoutLeadChatMembersAddedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
@@ -19503,6 +20221,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersAddedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersAddedInput = {
@@ -19649,6 +20368,7 @@ export type UserMasterCreateWithoutLeadChatMembersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
@@ -19791,6 +20511,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMembersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMembersInput = {
@@ -19948,6 +20669,7 @@ export type UserMasterUpdateWithoutLeadChatMembersAddedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
@@ -20090,6 +20812,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersAddedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatMembersInput = {
@@ -20242,6 +20965,7 @@ export type UserMasterUpdateWithoutLeadChatMembersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
@@ -20384,6 +21108,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMembersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
@@ -20525,6 +21250,7 @@ export type UserMasterCreateWithoutLeadChatMessagesSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
@@ -20667,6 +21393,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMessagesSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMessagesSentInput = {
@@ -20824,6 +21551,7 @@ export type UserMasterUpdateWithoutLeadChatMessagesSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
@@ -20966,6 +21694,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMessagesSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatMentionsInput = {
@@ -21107,6 +21836,7 @@ export type UserMasterCreateWithoutLeadChatMentionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
@@ -21249,6 +21979,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatMentionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatMentionsInput = {
@@ -21406,6 +22137,7 @@ export type UserMasterUpdateWithoutLeadChatMentionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
@@ -21548,6 +22280,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatMentionsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -21689,6 +22422,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
@@ -21831,6 +22565,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsCreatedInput = {
@@ -21977,6 +22712,7 @@ export type UserMasterCreateWithoutLeadChatDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
@@ -22119,6 +22855,7 @@ export type UserMasterUncheckedCreateWithoutLeadChatDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadChatDocumentsDeletedInput = {
@@ -22276,6 +23013,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
@@ -22418,6 +23156,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadChatDocumentsDeletedInput = {
@@ -22570,6 +23309,7 @@ export type UserMasterUpdateWithoutLeadChatDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
@@ -22712,6 +23452,7 @@ export type UserMasterUncheckedUpdateWithoutLeadChatDocumentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutProductStructureInstancesInput = {
@@ -22853,6 +23594,7 @@ export type UserMasterCreateWithoutProductStructureInstancesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
@@ -22995,6 +23737,7 @@ export type UserMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutProductStructureInstancesInput = {
@@ -23152,6 +23895,7 @@ export type UserMasterUpdateWithoutProductStructureInstancesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
@@ -23294,6 +24038,7 @@ export type UserMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPaymentsCreatedInput = {
@@ -23435,6 +24180,7 @@ export type UserMasterCreateWithoutPaymentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
@@ -23577,6 +24323,7 @@ export type UserMasterUncheckedCreateWithoutPaymentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPaymentsCreatedInput = {
@@ -23734,6 +24481,7 @@ export type UserMasterUpdateWithoutPaymentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
@@ -23876,6 +24624,7 @@ export type UserMasterUncheckedUpdateWithoutPaymentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLedgersCreatedInput = {
@@ -24017,6 +24766,7 @@ export type UserMasterCreateWithoutLedgersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
@@ -24159,6 +24909,7 @@ export type UserMasterUncheckedCreateWithoutLedgersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLedgersCreatedInput = {
@@ -24316,6 +25067,7 @@ export type UserMasterUpdateWithoutLedgersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
@@ -24458,6 +25210,7 @@ export type UserMasterUncheckedUpdateWithoutLedgersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -24599,6 +25352,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
@@ -24741,6 +25495,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsCreatedInput = {
@@ -24887,6 +25642,7 @@ export type UserMasterCreateWithoutSmallOrderRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
@@ -25029,6 +25785,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestsUpdatedInput = {
@@ -25186,6 +25943,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
@@ -25328,6 +26086,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSmallOrderRequestsUpdatedInput = {
@@ -25480,6 +26239,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
@@ -25622,6 +26382,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -25763,6 +26524,7 @@ export type UserMasterCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -25905,6 +26667,7 @@ export type UserMasterUncheckedCreateWithoutSmallOrderRequestDocumentsCreatedInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -26062,6 +26825,7 @@ export type UserMasterUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInput = {
@@ -26204,6 +26968,7 @@ export type UserMasterUncheckedUpdateWithoutSmallOrderRequestDocumentsCreatedInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
@@ -26345,6 +27110,7 @@ export type UserMasterCreateWithoutLeadAmcContractsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
@@ -26487,6 +27253,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsCreatedInput = {
@@ -26633,6 +27400,7 @@ export type UserMasterCreateWithoutLeadAmcContractsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
@@ -26775,6 +27543,7 @@ export type UserMasterUncheckedCreateWithoutLeadAmcContractsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadAmcContractsUpdatedInput = {
@@ -26932,6 +27701,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
@@ -27074,6 +27844,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadAmcContractsUpdatedInput = {
@@ -27226,6 +27997,7 @@ export type UserMasterUpdateWithoutLeadAmcContractsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
@@ -27368,6 +28140,7 @@ export type UserMasterUncheckedUpdateWithoutLeadAmcContractsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -27509,6 +28282,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCompletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput = {
@@ -27651,6 +28425,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCompletedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCompletedInput = {
@@ -27797,6 +28572,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
@@ -27939,6 +28715,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesCreatedInput = {
@@ -28085,6 +28862,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = {
@@ -28227,6 +29005,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesRejectedInput = 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesRejectedInput = {
@@ -28373,6 +29152,7 @@ export type UserMasterCreateWithoutLeadServiceSchedulesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -28515,6 +29295,7 @@ export type UserMasterUncheckedCreateWithoutLeadServiceSchedulesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadServiceSchedulesUpdatedInput = {
@@ -28672,6 +29453,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCompletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput = {
@@ -28814,6 +29596,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCompletedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesCreatedInput = {
@@ -28966,6 +29749,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
@@ -29108,6 +29892,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesRejectedInput = {
@@ -29260,6 +30045,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = {
@@ -29402,6 +30188,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesRejectedInput = 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadServiceSchedulesUpdatedInput = {
@@ -29554,6 +30341,7 @@ export type UserMasterUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
@@ -29696,6 +30484,7 @@ export type UserMasterUncheckedUpdateWithoutLeadServiceSchedulesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadStatusLogsInput = {
@@ -29837,6 +30626,7 @@ export type UserMasterCreateWithoutLeadStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
@@ -29979,6 +30769,7 @@ export type UserMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadStatusLogsInput = {
@@ -30136,6 +30927,7 @@ export type UserMasterUpdateWithoutLeadStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
@@ -30278,6 +31070,7 @@ export type UserMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
@@ -30419,6 +31212,7 @@ export type UserMasterCreateWithoutDesignMeetingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
@@ -30561,6 +31355,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsCreatedInput = {
@@ -30707,6 +31502,7 @@ export type UserMasterCreateWithoutDesignMeetingsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
@@ -30849,6 +31645,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingsUpdatedInput = {
@@ -31006,6 +31803,7 @@ export type UserMasterUpdateWithoutDesignMeetingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
@@ -31148,6 +31946,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignMeetingsUpdatedInput = {
@@ -31300,6 +32099,7 @@ export type UserMasterUpdateWithoutDesignMeetingsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
@@ -31442,6 +32242,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitsCreatedInput = {
@@ -31583,6 +32384,7 @@ export type UserMasterCreateWithoutClientVisitsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
@@ -31725,6 +32527,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsCreatedInput = {
@@ -31871,6 +32674,7 @@ export type UserMasterCreateWithoutClientVisitsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
@@ -32013,6 +32817,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitsUpdatedInput = {
@@ -32170,6 +32975,7 @@ export type UserMasterUpdateWithoutClientVisitsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
@@ -32312,6 +33118,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutClientVisitsUpdatedInput = {
@@ -32464,6 +33271,7 @@ export type UserMasterUpdateWithoutClientVisitsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
@@ -32606,6 +33414,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -32747,6 +33556,7 @@ export type UserMasterCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -32889,6 +33699,7 @@ export type UserMasterUncheckedCreateWithoutDesignMeetingDocsMappingForCreatedBY
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -33046,6 +33857,7 @@ export type UserMasterUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBYInput = {
@@ -33188,6 +34000,7 @@ export type UserMasterUncheckedUpdateWithoutDesignMeetingDocsMappingForCreatedBY
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -33329,6 +34142,7 @@ export type UserMasterCreateWithoutClientVisitDocumentMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -33471,6 +34285,7 @@ export type UserMasterUncheckedCreateWithoutClientVisitDocumentMappingsCreatedIn
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -33628,6 +34443,7 @@ export type UserMasterUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedInput = {
@@ -33770,6 +34586,7 @@ export type UserMasterUncheckedUpdateWithoutClientVisitDocumentMappingsCreatedIn
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
@@ -33911,6 +34728,7 @@ export type UserMasterCreateWithoutDesignSelectionsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
@@ -34053,6 +34871,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsCreatedInput = {
@@ -34199,6 +35018,7 @@ export type UserMasterCreateWithoutDesignSelectionsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
@@ -34341,6 +35161,7 @@ export type UserMasterUncheckedCreateWithoutDesignSelectionsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDesignSelectionsUpdatedInput = {
@@ -34498,6 +35319,7 @@ export type UserMasterUpdateWithoutDesignSelectionsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
@@ -34640,6 +35462,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDesignSelectionsUpdatedInput = {
@@ -34792,6 +35615,7 @@ export type UserMasterUpdateWithoutDesignSelectionsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
@@ -34934,6 +35758,7 @@ export type UserMasterUncheckedUpdateWithoutDesignSelectionsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutChsMappingCreatedByInput = {
@@ -35075,6 +35900,7 @@ export type UserMasterCreateWithoutChsMappingCreatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
@@ -35217,6 +36043,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingCreatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingCreatedByInput = {
@@ -35363,6 +36190,7 @@ export type UserMasterCreateWithoutChsMappingUpdatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
@@ -35505,6 +36333,7 @@ export type UserMasterUncheckedCreateWithoutChsMappingUpdatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutChsMappingUpdatedByInput = {
@@ -35662,6 +36491,7 @@ export type UserMasterUpdateWithoutChsMappingCreatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
@@ -35804,6 +36634,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingCreatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutChsMappingUpdatedByInput = {
@@ -35956,6 +36787,7 @@ export type UserMasterUpdateWithoutChsMappingUpdatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
@@ -36098,6 +36930,7 @@ export type UserMasterUncheckedUpdateWithoutChsMappingUpdatedByInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
@@ -36239,6 +37072,7 @@ export type UserMasterCreateWithoutSupervisorMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
@@ -36381,6 +37215,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsCreatedInput = {
@@ -36527,6 +37362,7 @@ export type UserMasterCreateWithoutSupervisorMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
@@ -36669,6 +37505,7 @@ export type UserMasterUncheckedCreateWithoutSupervisorMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSupervisorMappingsInput = {
@@ -36826,6 +37663,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
@@ -36968,6 +37806,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSupervisorMappingsInput = {
@@ -37120,6 +37959,7 @@ export type UserMasterUpdateWithoutSupervisorMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
@@ -37262,6 +38102,7 @@ export type UserMasterUncheckedUpdateWithoutSupervisorMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadTasksClosedInput = {
@@ -37403,6 +38244,7 @@ export type UserMasterCreateWithoutLeadTasksClosedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
@@ -37545,6 +38387,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksClosedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksClosedInput = {
@@ -37691,6 +38534,7 @@ export type UserMasterCreateWithoutLeadTasksCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
@@ -37833,6 +38677,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksCreatedInput = {
@@ -37979,6 +38824,7 @@ export type UserMasterCreateWithoutLeadTasksAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
@@ -38121,6 +38967,7 @@ export type UserMasterUncheckedCreateWithoutLeadTasksAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadTasksAssignedInput = {
@@ -38278,6 +39125,7 @@ export type UserMasterUpdateWithoutLeadTasksClosedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
@@ -38420,6 +39268,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksClosedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksCreatedInput = {
@@ -38572,6 +39421,7 @@ export type UserMasterUpdateWithoutLeadTasksCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
@@ -38714,6 +39564,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutLeadTasksAssignedInput = {
@@ -38866,6 +39717,7 @@ export type UserMasterUpdateWithoutLeadTasksAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
@@ -39008,6 +39860,7 @@ export type UserMasterUncheckedUpdateWithoutLeadTasksAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -39149,6 +40002,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesAsRequesterInput 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -39291,6 +40145,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesAsReques
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -39437,6 +40292,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedInput = {
@@ -39579,6 +40435,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesCreatedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesCreatedInput = {
@@ -39725,6 +40582,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -39867,6 +40725,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesUpdatedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -40013,6 +40872,7 @@ export type UserMasterCreateWithoutFastProductionRequestBatchesRevokedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedInput = {
@@ -40155,6 +41015,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestBatchesRevokedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestBatchesRevokedInput = {
@@ -40312,6 +41173,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesAsRequesterInput 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsRequesterInput = {
@@ -40454,6 +41316,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesAsReques
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesCreatedInput = {
@@ -40606,6 +41469,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedInput = {
@@ -40748,6 +41612,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesCreatedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -40900,6 +41765,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedInput = {
@@ -41042,6 +41908,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesUpdatedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestBatchesRevokedInput = {
@@ -41194,6 +42061,7 @@ export type UserMasterUpdateWithoutFastProductionRequestBatchesRevokedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedInput = {
@@ -41336,6 +42204,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestBatchesRevokedI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
@@ -41477,6 +42346,7 @@ export type UserMasterCreateWithoutFastProductionRequestsAsRequesterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInput = {
@@ -41619,6 +42489,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsAsRequesterInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsAsRequesterInput = {
@@ -41765,6 +42636,7 @@ export type UserMasterCreateWithoutFastProductionRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput = {
@@ -41907,6 +42779,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsCreatedInput = {
@@ -42053,6 +42926,7 @@ export type UserMasterCreateWithoutFastProductionRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput = {
@@ -42195,6 +43069,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsUpdatedInput = {
@@ -42341,6 +43216,7 @@ export type UserMasterCreateWithoutFastProductionRequestsRevokedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput = {
@@ -42483,6 +43359,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestsRevokedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestsRevokedInput = {
@@ -42640,6 +43517,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsAsRequesterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInput = {
@@ -42782,6 +43660,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsAsRequesterInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsCreatedInput = {
@@ -42934,6 +43813,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput = {
@@ -43076,6 +43956,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsUpdatedInput = {
@@ -43228,6 +44109,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput = {
@@ -43370,6 +44252,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutFastProductionRequestsRevokedInput = {
@@ -43522,6 +44405,7 @@ export type UserMasterUpdateWithoutFastProductionRequestsRevokedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput = {
@@ -43664,6 +44548,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestsRevokedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionApprovalsInput = {
@@ -43805,6 +44690,7 @@ export type UserMasterCreateWithoutFastProductionApprovalsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
@@ -43947,6 +44833,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionApprovalsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionApprovalsInput = {
@@ -44104,6 +44991,7 @@ export type UserMasterUpdateWithoutFastProductionApprovalsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
@@ -44246,6 +45134,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionApprovalsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -44387,6 +45276,7 @@ export type UserMasterCreateWithoutFastProductionRequestDocumentsCreatedInput = 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -44529,6 +45419,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionRequestDocumentsCreate
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -44686,6 +45577,7 @@ export type UserMasterUpdateWithoutFastProductionRequestDocumentsCreatedInput = 
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreatedInput = {
@@ -44828,6 +45720,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionRequestDocumentsCreate
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
@@ -44969,6 +45862,7 @@ export type UserMasterCreateWithoutFastProductionStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
@@ -45111,6 +46005,7 @@ export type UserMasterUncheckedCreateWithoutFastProductionStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFastProductionStatusLogsInput = {
@@ -45268,6 +46163,7 @@ export type UserMasterUpdateWithoutFastProductionStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
@@ -45410,6 +46306,7 @@ export type UserMasterUncheckedUpdateWithoutFastProductionStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDetailedLogsInput = {
@@ -45551,6 +46448,7 @@ export type UserMasterCreateWithoutLeadDetailedLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
@@ -45693,6 +46591,7 @@ export type UserMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDetailedLogsInput = {
@@ -45850,6 +46749,7 @@ export type UserMasterUpdateWithoutLeadDetailedLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
@@ -45992,6 +46892,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadDocumentLogsInput = {
@@ -46133,6 +47034,7 @@ export type UserMasterCreateWithoutLeadDocumentLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
@@ -46275,6 +47177,7 @@ export type UserMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadDocumentLogsInput = {
@@ -46432,6 +47335,7 @@ export type UserMasterUpdateWithoutLeadDocumentLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
@@ -46574,6 +47478,7 @@ export type UserMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -46715,6 +47620,7 @@ export type UserMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -46857,6 +47763,7 @@ export type UserMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -47014,6 +47921,7 @@ export type UserMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
@@ -47156,6 +48064,7 @@ export type UserMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
@@ -47297,6 +48206,7 @@ export type UserMasterCreateWithoutCompanyVendorsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
@@ -47439,6 +48349,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsCreatedInput = {
@@ -47585,6 +48496,7 @@ export type UserMasterCreateWithoutCompanyVendorsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
@@ -47727,6 +48639,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsDeletedInput = {
@@ -47873,6 +48786,7 @@ export type UserMasterCreateWithoutCompanyVendorsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
@@ -48015,6 +48929,7 @@ export type UserMasterUncheckedCreateWithoutCompanyVendorsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompanyVendorsUpdatedInput = {
@@ -48172,6 +49087,7 @@ export type UserMasterUpdateWithoutCompanyVendorsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
@@ -48314,6 +49230,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsDeletedInput = {
@@ -48466,6 +49383,7 @@ export type UserMasterUpdateWithoutCompanyVendorsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
@@ -48608,6 +49526,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutCompanyVendorsUpdatedInput = {
@@ -48760,6 +49679,7 @@ export type UserMasterUpdateWithoutCompanyVendorsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
@@ -48902,6 +49822,7 @@ export type UserMasterUncheckedUpdateWithoutCompanyVendorsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginDetailsInput = {
@@ -49043,6 +49964,7 @@ export type UserMasterCreateWithoutOrderLoginDetailsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
@@ -49185,6 +50107,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginDetailsInput = {
@@ -49331,6 +50254,7 @@ export type UserMasterCreateWithoutOrderLoginsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
@@ -49473,6 +50397,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginsUpdatedInput = {
@@ -49630,6 +50555,7 @@ export type UserMasterUpdateWithoutOrderLoginDetailsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
@@ -49772,6 +50698,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginsUpdatedInput = {
@@ -49924,6 +50851,7 @@ export type UserMasterUpdateWithoutOrderLoginsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
@@ -50066,6 +50994,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
@@ -50207,6 +51136,7 @@ export type UserMasterCreateWithoutSiteReadinessCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
@@ -50349,6 +51279,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessCreatedInput = {
@@ -50495,6 +51426,7 @@ export type UserMasterCreateWithoutSiteReadinessUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
@@ -50637,6 +51569,7 @@ export type UserMasterUncheckedCreateWithoutSiteReadinessUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutSiteReadinessUpdatedInput = {
@@ -50794,6 +51727,7 @@ export type UserMasterUpdateWithoutSiteReadinessCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
@@ -50936,6 +51870,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutSiteReadinessUpdatedInput = {
@@ -51088,6 +52023,7 @@ export type UserMasterUpdateWithoutSiteReadinessUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
@@ -51230,6 +52166,7 @@ export type UserMasterUncheckedUpdateWithoutSiteReadinessUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersCreatedInput = {
@@ -51371,6 +52308,7 @@ export type UserMasterCreateWithoutInstallersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
@@ -51513,6 +52451,7 @@ export type UserMasterUncheckedCreateWithoutInstallersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersCreatedInput = {
@@ -51670,6 +52609,7 @@ export type UserMasterUpdateWithoutInstallersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
@@ -51812,6 +52752,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallersAssignedInput = {
@@ -51953,6 +52894,7 @@ export type UserMasterCreateWithoutInstallersAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
@@ -52095,6 +53037,7 @@ export type UserMasterUncheckedCreateWithoutInstallersAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallersAssignedInput = {
@@ -52252,6 +53195,7 @@ export type UserMasterUpdateWithoutInstallersAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
@@ -52394,6 +53338,7 @@ export type UserMasterUncheckedUpdateWithoutInstallersAssignedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
@@ -52535,6 +53480,7 @@ export type UserMasterCreateWithoutInstallationUpdatesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
@@ -52677,6 +53623,7 @@ export type UserMasterUncheckedCreateWithoutInstallationUpdatesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationUpdatesCreatedInput = {
@@ -52834,6 +53781,7 @@ export type UserMasterUpdateWithoutInstallationUpdatesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
@@ -52976,6 +53924,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationUpdatesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscCreatedInput = {
@@ -53117,6 +54066,7 @@ export type UserMasterCreateWithoutMiscCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
@@ -53259,6 +54209,7 @@ export type UserMasterUncheckedCreateWithoutMiscCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscCreatedInput = {
@@ -53405,6 +54356,7 @@ export type UserMasterCreateWithoutMiscUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
@@ -53547,6 +54499,7 @@ export type UserMasterUncheckedCreateWithoutMiscUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscUpdatedInput = {
@@ -53704,6 +54657,7 @@ export type UserMasterUpdateWithoutMiscCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
@@ -53846,6 +54800,7 @@ export type UserMasterUncheckedUpdateWithoutMiscCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutMiscUpdatedInput = {
@@ -53998,6 +54953,7 @@ export type UserMasterUpdateWithoutMiscUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
@@ -54140,6 +55096,7 @@ export type UserMasterUncheckedUpdateWithoutMiscUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
@@ -54281,6 +55238,7 @@ export type UserMasterCreateWithoutMiscDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
@@ -54423,6 +55381,7 @@ export type UserMasterUncheckedCreateWithoutMiscDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMiscDocumentsCreatedInput = {
@@ -54580,6 +55539,7 @@ export type UserMasterUpdateWithoutMiscDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
@@ -54722,6 +55682,7 @@ export type UserMasterUncheckedUpdateWithoutMiscDocumentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
@@ -54863,6 +55824,7 @@ export type UserMasterCreateWithoutInstallationIssueLogMasterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
@@ -55005,6 +55967,7 @@ export type UserMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutInstallationIssueLogMasterInput = {
@@ -55162,6 +56125,7 @@ export type UserMasterUpdateWithoutInstallationIssueLogMasterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
@@ -55304,6 +56268,7 @@ export type UserMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutNotificationsSentInput = {
@@ -55445,6 +56410,7 @@ export type UserMasterCreateWithoutNotificationsSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
@@ -55587,6 +56553,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsSentInput = {
@@ -55733,6 +56700,7 @@ export type UserMasterCreateWithoutNotificationsReceivedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
@@ -55875,6 +56843,7 @@ export type UserMasterUncheckedCreateWithoutNotificationsReceivedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutNotificationsReceivedInput = {
@@ -56032,6 +57001,7 @@ export type UserMasterUpdateWithoutNotificationsSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
@@ -56174,6 +57144,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsSentInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutNotificationsReceivedInput = {
@@ -56326,6 +57297,7 @@ export type UserMasterUpdateWithoutNotificationsReceivedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
@@ -56468,6 +57440,7 @@ export type UserMasterUncheckedUpdateWithoutNotificationsReceivedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPushTokensInput = {
@@ -56609,6 +57582,7 @@ export type UserMasterCreateWithoutPushTokensInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPushTokensInput = {
@@ -56751,6 +57725,7 @@ export type UserMasterUncheckedCreateWithoutPushTokensInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPushTokensInput = {
@@ -56908,6 +57883,7 @@ export type UserMasterUpdateWithoutPushTokensInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
@@ -57050,6 +58026,7 @@ export type UserMasterUncheckedUpdateWithoutPushTokensInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOperatorInput = {
@@ -57191,6 +58168,7 @@ export type UserMasterCreateWithoutOperatorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOperatorInput = {
@@ -57333,6 +58311,7 @@ export type UserMasterUncheckedCreateWithoutOperatorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOperatorInput = {
@@ -57479,6 +58458,7 @@ export type UserMasterCreateWithoutMappingSiteInsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
@@ -57621,6 +58601,7 @@ export type UserMasterUncheckedCreateWithoutMappingSiteInsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutMappingSiteInsInput = {
@@ -57778,6 +58759,7 @@ export type UserMasterUpdateWithoutOperatorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOperatorInput = {
@@ -57920,6 +58902,7 @@ export type UserMasterUncheckedUpdateWithoutOperatorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutMappingSiteInsInput = {
@@ -58072,6 +59055,7 @@ export type UserMasterUpdateWithoutMappingSiteInsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
@@ -58214,6 +59198,7 @@ export type UserMasterUncheckedUpdateWithoutMappingSiteInsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
@@ -58355,6 +59340,7 @@ export type UserMasterCreateWithoutCreatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
@@ -58497,6 +59483,7 @@ export type UserMasterUncheckedCreateWithoutCreatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedUserMachineMappingsInput = {
@@ -58643,6 +59630,7 @@ export type UserMasterCreateWithoutUpdatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
@@ -58785,6 +59773,7 @@ export type UserMasterUncheckedCreateWithoutUpdatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUpdatedUserMachineMappingsInput = {
@@ -58931,6 +59920,7 @@ export type UserMasterCreateWithoutUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
@@ -59073,6 +60063,7 @@ export type UserMasterUncheckedCreateWithoutUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserMachineMappingsInput = {
@@ -59230,6 +60221,7 @@ export type UserMasterUpdateWithoutCreatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
@@ -59372,6 +60364,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutUpdatedUserMachineMappingsInput = {
@@ -59524,6 +60517,7 @@ export type UserMasterUpdateWithoutUpdatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
@@ -59666,6 +60660,7 @@ export type UserMasterUncheckedUpdateWithoutUpdatedUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutUserMachineMappingsInput = {
@@ -59818,6 +60813,7 @@ export type UserMasterUpdateWithoutUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
@@ -59960,6 +60956,7 @@ export type UserMasterUncheckedUpdateWithoutUserMachineMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -60101,6 +61098,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
@@ -60243,6 +61241,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesCreatedInput = {
@@ -60389,6 +61388,7 @@ export type UserMasterCreateWithoutOrderLoginPoFilesDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
@@ -60531,6 +61531,7 @@ export type UserMasterUncheckedCreateWithoutOrderLoginPoFilesDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutOrderLoginPoFilesDeletedInput = {
@@ -60688,6 +61689,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
@@ -60830,6 +61832,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutOrderLoginPoFilesDeletedInput = {
@@ -60982,6 +61985,7 @@ export type UserMasterUpdateWithoutOrderLoginPoFilesDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
@@ -61124,6 +62128,7 @@ export type UserMasterUncheckedUpdateWithoutOrderLoginPoFilesDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCreatedDefectsInput = {
@@ -61265,6 +62270,7 @@ export type UserMasterCreateWithoutCreatedDefectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
@@ -61407,6 +62413,7 @@ export type UserMasterUncheckedCreateWithoutCreatedDefectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCreatedDefectsInput = {
@@ -61564,6 +62571,7 @@ export type UserMasterUpdateWithoutCreatedDefectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
@@ -61706,6 +62714,7 @@ export type UserMasterUncheckedUpdateWithoutCreatedDefectsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutFranchiseInput = {
@@ -61847,6 +62856,7 @@ export type UserMasterCreateWithoutFranchiseInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutFranchiseInput = {
@@ -61989,6 +62999,7 @@ export type UserMasterUncheckedCreateWithoutFranchiseInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutFranchiseInput = {
@@ -62156,6 +63167,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -62298,6 +63310,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsC
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -62444,6 +63457,7 @@ export type UserMasterCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -62586,6 +63600,7 @@ export type UserMasterUncheckedCreateWithoutHeadSiteSupervisorFranchiseMappingsI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -62743,6 +63758,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInp
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsCreatedInput = {
@@ -62885,6 +63901,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsC
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -63037,6 +64054,7 @@ export type UserMasterUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsInput = {
@@ -63179,6 +64197,7 @@ export type UserMasterUncheckedUpdateWithoutHeadSiteSupervisorFranchiseMappingsI
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
@@ -63320,6 +64339,7 @@ export type UserMasterCreateWithoutUserGeographicalMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
@@ -63462,6 +64482,7 @@ export type UserMasterUncheckedCreateWithoutUserGeographicalMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutUserGeographicalMappingsInput = {
@@ -63619,6 +64640,7 @@ export type UserMasterUpdateWithoutUserGeographicalMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
@@ -63761,6 +64783,7 @@ export type UserMasterUncheckedUpdateWithoutUserGeographicalMappingsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutActivityLogsInput = {
@@ -63902,6 +64925,7 @@ export type UserMasterCreateWithoutActivityLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
@@ -64044,6 +65068,7 @@ export type UserMasterUncheckedCreateWithoutActivityLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutActivityLogsInput = {
@@ -64201,6 +65226,7 @@ export type UserMasterUpdateWithoutActivityLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
@@ -64343,6 +65369,7 @@ export type UserMasterUncheckedUpdateWithoutActivityLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -64484,6 +65511,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput = {
@@ -64626,6 +65654,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensCreatedInput = {
@@ -64772,6 +65801,7 @@ export type UserMasterCreateWithoutExternalPlatformTokensUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput = {
@@ -64914,6 +65944,7 @@ export type UserMasterUncheckedCreateWithoutExternalPlatformTokensUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutExternalPlatformTokensUpdatedInput = {
@@ -65071,6 +66102,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput = {
@@ -65213,6 +66245,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutExternalPlatformTokensUpdatedInput = {
@@ -65365,6 +66398,7 @@ export type UserMasterUpdateWithoutExternalPlatformTokensUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput = {
@@ -65507,6 +66541,7 @@ export type UserMasterUncheckedUpdateWithoutExternalPlatformTokensUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutCompletionPhotosInput = {
@@ -65648,6 +66683,7 @@ export type UserMasterCreateWithoutCompletionPhotosInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
@@ -65790,6 +66826,7 @@ export type UserMasterUncheckedCreateWithoutCompletionPhotosInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutCompletionPhotosInput = {
@@ -65947,6 +66984,7 @@ export type UserMasterUpdateWithoutCompletionPhotosInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
@@ -66089,6 +67127,7 @@ export type UserMasterUncheckedUpdateWithoutCompletionPhotosInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -66230,6 +67269,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -66372,6 +67412,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsCreat
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -66518,6 +67559,7 @@ export type UserMasterCreateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -66660,6 +67702,7 @@ export type UserMasterUncheckedCreateWithoutProjectCategoriesVendorMappingsUpdat
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -66817,6 +67860,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsCreatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreatedInput = {
@@ -66959,6 +68003,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsCreat
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -67111,6 +68156,7 @@ export type UserMasterUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput =
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdatedInput = {
@@ -67253,6 +68299,7 @@ export type UserMasterUncheckedUpdateWithoutProjectCategoriesVendorMappingsUpdat
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
@@ -67394,6 +68441,7 @@ export type UserMasterCreateWithoutPurchaseIntentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
@@ -67536,6 +68584,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsCreatedInput = {
@@ -67682,6 +68731,7 @@ export type UserMasterCreateWithoutPurchaseIntentsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
@@ -67824,6 +68874,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsUpdatedInput = {
@@ -67970,6 +69021,7 @@ export type UserMasterCreateWithoutPurchaseIntentsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
@@ -68112,6 +69164,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsApprovedInput = {
@@ -68258,6 +69311,7 @@ export type UserMasterCreateWithoutPurchaseIntentsRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
@@ -68400,6 +69454,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsRejectedInput = {
@@ -68546,6 +69601,7 @@ export type UserMasterCreateWithoutPurchaseIntentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
@@ -68688,6 +69744,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentsDeletedInput = {
@@ -68845,6 +69902,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
@@ -68987,6 +70045,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsUpdatedInput = {
@@ -69139,6 +70198,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
@@ -69281,6 +70341,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsApprovedInput = {
@@ -69433,6 +70494,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
@@ -69575,6 +70637,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsApprovedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsRejectedInput = {
@@ -69727,6 +70790,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
@@ -69869,6 +70933,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsRejectedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseIntentsDeletedInput = {
@@ -70021,6 +71086,7 @@ export type UserMasterUpdateWithoutPurchaseIntentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
@@ -70163,6 +71229,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -70304,6 +71371,7 @@ export type UserMasterCreateWithoutPurchaseIntentStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
@@ -70446,6 +71514,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseIntentStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseIntentStatusLogsInput = {
@@ -70603,6 +71672,7 @@ export type UserMasterUpdateWithoutPurchaseIntentStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
@@ -70745,6 +71815,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseIntentStatusLogsInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
@@ -70886,6 +71957,7 @@ export type UserMasterCreateWithoutPurchaseOrdersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
@@ -71028,6 +72100,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersCreatedInput = {
@@ -71174,6 +72247,7 @@ export type UserMasterCreateWithoutPurchaseOrdersUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
@@ -71316,6 +72390,7 @@ export type UserMasterUncheckedCreateWithoutPurchaseOrdersUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPurchaseOrdersUpdatedInput = {
@@ -71473,6 +72548,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
@@ -71615,6 +72691,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPurchaseOrdersUpdatedInput = {
@@ -71767,6 +72844,7 @@ export type UserMasterUpdateWithoutPurchaseOrdersUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
@@ -71909,6 +72987,7 @@ export type UserMasterUncheckedUpdateWithoutPurchaseOrdersUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPoItemsCreatedInput = {
@@ -72050,6 +73129,7 @@ export type UserMasterCreateWithoutPoItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
@@ -72192,6 +73272,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsCreatedInput = {
@@ -72338,6 +73419,7 @@ export type UserMasterCreateWithoutPoItemsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
@@ -72480,6 +73562,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsUpdatedInput = {
@@ -72626,6 +73709,7 @@ export type UserMasterCreateWithoutPoItemsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
@@ -72768,6 +73852,7 @@ export type UserMasterUncheckedCreateWithoutPoItemsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoItemsDeletedInput = {
@@ -72925,6 +74010,7 @@ export type UserMasterUpdateWithoutPoItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
@@ -73067,6 +74153,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsUpdatedInput = {
@@ -73219,6 +74306,7 @@ export type UserMasterUpdateWithoutPoItemsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
@@ -73361,6 +74449,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutPoItemsDeletedInput = {
@@ -73513,6 +74602,7 @@ export type UserMasterUpdateWithoutPoItemsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
@@ -73655,6 +74745,7 @@ export type UserMasterUncheckedUpdateWithoutPoItemsDeletedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutGrnsCreatedInput = {
@@ -73796,6 +74887,7 @@ export type UserMasterCreateWithoutGrnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
@@ -73938,6 +75030,7 @@ export type UserMasterUncheckedCreateWithoutGrnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsCreatedInput = {
@@ -74084,6 +75177,7 @@ export type UserMasterCreateWithoutGrnsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
@@ -74226,6 +75320,7 @@ export type UserMasterUncheckedCreateWithoutGrnsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsUpdatedInput = {
@@ -74372,6 +75467,7 @@ export type UserMasterCreateWithoutGrnsConfirmedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
@@ -74514,6 +75610,7 @@ export type UserMasterUncheckedCreateWithoutGrnsConfirmedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutGrnsConfirmedInput = {
@@ -74671,6 +75768,7 @@ export type UserMasterUpdateWithoutGrnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
@@ -74813,6 +75911,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsUpdatedInput = {
@@ -74965,6 +76064,7 @@ export type UserMasterUpdateWithoutGrnsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
@@ -75107,6 +76207,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsUpdatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutGrnsConfirmedInput = {
@@ -75259,6 +76360,7 @@ export type UserMasterUpdateWithoutGrnsConfirmedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
@@ -75401,6 +76503,7 @@ export type UserMasterUncheckedUpdateWithoutGrnsConfirmedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutDcnsCreatedInput = {
@@ -75542,6 +76645,7 @@ export type UserMasterCreateWithoutDcnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
@@ -75684,6 +76788,7 @@ export type UserMasterUncheckedCreateWithoutDcnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsCreatedInput = {
@@ -75830,6 +76935,7 @@ export type UserMasterCreateWithoutDcnsSettledInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
@@ -75972,6 +77078,7 @@ export type UserMasterUncheckedCreateWithoutDcnsSettledInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutDcnsSettledInput = {
@@ -76129,6 +77236,7 @@ export type UserMasterUpdateWithoutDcnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
@@ -76271,6 +77379,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUpsertWithoutDcnsSettledInput = {
@@ -76423,6 +77532,7 @@ export type UserMasterUpdateWithoutDcnsSettledInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
@@ -76565,6 +77675,7 @@ export type UserMasterUncheckedUpdateWithoutDcnsSettledInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
@@ -76706,6 +77817,7 @@ export type UserMasterCreateWithoutRedeliveriesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
@@ -76848,6 +77960,7 @@ export type UserMasterUncheckedCreateWithoutRedeliveriesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutRedeliveriesCreatedInput = {
@@ -77005,6 +78118,7 @@ export type UserMasterUpdateWithoutRedeliveriesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
@@ -77147,6 +78261,7 @@ export type UserMasterUncheckedUpdateWithoutRedeliveriesCreatedInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutStockHistoriesInput = {
@@ -77288,6 +78403,7 @@ export type UserMasterCreateWithoutStockHistoriesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
@@ -77430,6 +78546,7 @@ export type UserMasterUncheckedCreateWithoutStockHistoriesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutStockHistoriesInput = {
@@ -77587,6 +78704,7 @@ export type UserMasterUpdateWithoutStockHistoriesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
@@ -77729,6 +78847,7 @@ export type UserMasterUncheckedUpdateWithoutStockHistoriesInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
@@ -77870,6 +78989,7 @@ export type UserMasterCreateWithoutPoPaymentScheduleHistoriesInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutCreatedByInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
@@ -78012,6 +79132,7 @@ export type UserMasterUncheckedCreateWithoutPoPaymentScheduleHistoriesInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutCreatedByInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutPoPaymentScheduleHistoriesInput = {
@@ -78169,6 +79290,7 @@ export type UserMasterUpdateWithoutPoPaymentScheduleHistoriesInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUpdateManyWithoutCreatedByNestedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
@@ -78311,6 +79433,7 @@ export type UserMasterUncheckedUpdateWithoutPoPaymentScheduleHistoriesInput = {
   leadSpecificationsCreated?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByNestedInput
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateWithoutArchitechuremastersInput = {
@@ -78452,6 +79575,7 @@ export type UserMasterCreateWithoutArchitechuremastersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
@@ -78594,6 +79718,7 @@ export type UserMasterUncheckedCreateWithoutArchitechuremastersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutCreatedByInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedCreateNestedManyWithoutCreatedByInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutPackedByUserInput
 }
 
 export type UserMasterCreateOrConnectWithoutArchitechuremastersInput = {
@@ -78751,6 +79876,7 @@ export type UserMasterUpdateWithoutArchitechuremastersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
@@ -78893,6 +80019,7 @@ export type UserMasterUncheckedUpdateWithoutArchitechuremastersInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterCreateManyVendorInput = {
@@ -79048,6 +80175,7 @@ export type UserMasterUpdateWithoutVendorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutVendorInput = {
@@ -79190,6 +80318,7 @@ export type UserMasterUncheckedUpdateWithoutVendorInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutVendorInput = {
@@ -79359,6 +80488,7 @@ export type UserMasterUpdateWithoutUser_typeInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
@@ -79501,6 +80631,7 @@ export type UserMasterUncheckedUpdateWithoutUser_typeInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutUser_typeInput = {
@@ -79670,6 +80801,7 @@ export type UserMasterUpdateWithoutFranchiseInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
@@ -79812,6 +80944,7 @@ export type UserMasterUncheckedUpdateWithoutFranchiseInput = {
   leadCarcassMaterialMappingsCreated?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   leadShutterMaterialMappingsCreated?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutCreatedByNestedInput
   poPaymentScheduleHistories?: Prisma.POPaymentScheduleHistoryUncheckedUpdateManyWithoutCreatedByNestedInput
+  boxesPackedBy?: Prisma.BoxMasterUncheckedUpdateManyWithoutPackedByUserNestedInput
 }
 
 export type UserMasterUncheckedUpdateManyWithoutFranchiseInput = {
@@ -79962,6 +81095,7 @@ export type UserMasterCountOutputType = {
   leadCarcassMaterialMappingsCreated: number
   leadShutterMaterialMappingsCreated: number
   poPaymentScheduleHistories: number
+  boxesPackedBy: number
 }
 
 export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -80093,6 +81227,7 @@ export type UserMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   leadCarcassMaterialMappingsCreated?: boolean | UserMasterCountOutputTypeCountLeadCarcassMaterialMappingsCreatedArgs
   leadShutterMaterialMappingsCreated?: boolean | UserMasterCountOutputTypeCountLeadShutterMaterialMappingsCreatedArgs
   poPaymentScheduleHistories?: boolean | UserMasterCountOutputTypeCountPoPaymentScheduleHistoriesArgs
+  boxesPackedBy?: boolean | UserMasterCountOutputTypeCountBoxesPackedByArgs
 }
 
 /**
@@ -81001,6 +82136,13 @@ export type UserMasterCountOutputTypeCountPoPaymentScheduleHistoriesArgs<ExtArgs
   where?: Prisma.POPaymentScheduleHistoryWhereInput
 }
 
+/**
+ * UserMasterCountOutputType without action
+ */
+export type UserMasterCountOutputTypeCountBoxesPackedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BoxMasterWhereInput
+}
+
 
 export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -81146,6 +82288,7 @@ export type UserMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   leadCarcassMaterialMappingsCreated?: boolean | Prisma.UserMaster$leadCarcassMaterialMappingsCreatedArgs<ExtArgs>
   leadShutterMaterialMappingsCreated?: boolean | Prisma.UserMaster$leadShutterMaterialMappingsCreatedArgs<ExtArgs>
   poPaymentScheduleHistories?: boolean | Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>
+  boxesPackedBy?: boolean | Prisma.UserMaster$boxesPackedByArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userMaster"]>
 
@@ -81333,6 +82476,7 @@ export type UserMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   leadCarcassMaterialMappingsCreated?: boolean | Prisma.UserMaster$leadCarcassMaterialMappingsCreatedArgs<ExtArgs>
   leadShutterMaterialMappingsCreated?: boolean | Prisma.UserMaster$leadShutterMaterialMappingsCreatedArgs<ExtArgs>
   poPaymentScheduleHistories?: boolean | Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>
+  boxesPackedBy?: boolean | Prisma.UserMaster$boxesPackedByArgs<ExtArgs>
   _count?: boolean | Prisma.UserMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -81480,6 +82624,7 @@ export type $UserMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     leadCarcassMaterialMappingsCreated: Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>[]
     leadShutterMaterialMappingsCreated: Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>[]
     poPaymentScheduleHistories: Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>[]
+    boxesPackedBy: Prisma.$BoxMasterPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -82019,6 +83164,7 @@ export interface Prisma__UserMasterClient<T, Null = never, ExtArgs extends runti
   leadCarcassMaterialMappingsCreated<T extends Prisma.UserMaster$leadCarcassMaterialMappingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadCarcassMaterialMappingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leadShutterMaterialMappingsCreated<T extends Prisma.UserMaster$leadShutterMaterialMappingsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$leadShutterMaterialMappingsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   poPaymentScheduleHistories<T extends Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$POPaymentScheduleHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  boxesPackedBy<T extends Prisma.UserMaster$boxesPackedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMaster$boxesPackedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BoxMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -85549,6 +86695,30 @@ export type UserMaster$poPaymentScheduleHistoriesArgs<ExtArgs extends runtime.Ty
   take?: number
   skip?: number
   distinct?: Prisma.POPaymentScheduleHistoryScalarFieldEnum | Prisma.POPaymentScheduleHistoryScalarFieldEnum[]
+}
+
+/**
+ * UserMaster.boxesPackedBy
+ */
+export type UserMaster$boxesPackedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BoxMaster
+   */
+  select?: Prisma.BoxMasterSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BoxMaster
+   */
+  omit?: Prisma.BoxMasterOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BoxMasterInclude<ExtArgs> | null
+  where?: Prisma.BoxMasterWhereInput
+  orderBy?: Prisma.BoxMasterOrderByWithRelationInput | Prisma.BoxMasterOrderByWithRelationInput[]
+  cursor?: Prisma.BoxMasterWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BoxMasterScalarFieldEnum | Prisma.BoxMasterScalarFieldEnum[]
 }
 
 /**

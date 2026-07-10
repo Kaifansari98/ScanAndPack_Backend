@@ -72,24 +72,38 @@ export const createProjectDetails = async (data: Omit<ProjectDetails, 'id'>) => 
 
 
 export const getAllProjectsTrackTrace = (vendor_id: number) => {
+
   return prisma.projectMaster.findMany({
     where: {
       vendor_id: vendor_id,
     },
-    include: {
-      vendor: true,
-      createdByUser: true,
-      details: true,
-      items: true,
+    select: {
+      id: true,
+      unique_project_id: true,
+      project_name: true,
+      project_status: true,
+      track_trace_status: true,
+      created_at: true,
+
+      lead_id: true,
+
+      order_no: true,
+      client_name: true,
+      client_address: true,
+      client_contact_no: true,
+
       lead: {
         select: {
           id: true,
+          lead_code: true,
           firstname: true,
           lastname: true,
-          lead_code: true
-        }
-      }
+          contact_no: true,
+          site_address: true,
+        },
+      },
     },
+
 
     orderBy: { id: "desc" }
   });
@@ -277,11 +291,11 @@ export const getProjectById = async (id: number) => {
   const packagingStats = packagingMachine
     ? await getPackagingStats(id, project.vendor_id, packagingMachine)
     : {
-        total_items: 0,
-        total_packed: 0,
-        total_unpacked: 0,
-        total_weight: 0,
-      };
+      total_items: 0,
+      total_packed: 0,
+      total_unpacked: 0,
+      total_weight: 0,
+    };
 
   return {
     ...project,
@@ -474,7 +488,7 @@ export const getProjectsByVendorIdService = async (vendorId: number) => {
   // ── 1. Fetch packaging machine ───────────────────────────────────────────
   const packagingMachine = await prisma.machineMaster.findFirst({
     where: { vendor_id: vendorId, machine_type_id: 18 },
-    select: { id: true, sequence_no: true },    
+    select: { id: true, sequence_no: true },
   });
 
   // ── 2. Fetch all projects ────────────────────────────────────────────────

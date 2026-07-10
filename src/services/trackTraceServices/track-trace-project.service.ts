@@ -378,12 +378,31 @@ export const validateCutlistPayload = (payload: unknown): ValidationResult => {
 
 /* ------------------ MAIN SERVICE ------------------ */
 
+type CreateProjectServicePayload = {
+  projectName: string;
+  vendorId: number;
+  leadId: number | null;
+  order_no?: string | null;
+  client_name?: string | null;
+  client_address?: string | null;
+  client_contact_no?: string | null;
+  file: Express.Multer.File;
+};
+
 export const createProjectService = async (
-  projectName: string,
-  vendorId: number,
-  leadId: number | null,
-  file: Express.Multer.File,
+  payloadData: CreateProjectServicePayload
 ) => {
+  const {
+    projectName,
+    vendorId,
+    leadId,
+    order_no,
+    client_name,
+    client_address,
+    client_contact_no,
+    file,
+  } = payloadData;
+
   let resolvedVendorId: number | null = null;
   let resolvedProjectId: number | null = null;
   let resolvedVendorToken: string | null = null;
@@ -396,7 +415,11 @@ export const createProjectService = async (
       fileName: file.originalname,
     });
 
-    /* STEP 0 — Resolve vendor */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0 — Resolve vendor
+    |--------------------------------------------------------------------------
+    */
     const vendor = await prisma.vendorMaster.findFirst({
       where: {
         id: Number(vendorId),
@@ -413,7 +436,11 @@ export const createProjectService = async (
 
     resolvedVendorId = vendor.id;
 
-    /* STEP 0.1 — Get active vendor token from vendorId */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0.1 — Get active vendor token
+    |--------------------------------------------------------------------------
+    */
     const vendorTokenEntry = await prisma.vendorTokens.findFirst({
       where: {
         vendor_id: vendor.id,
@@ -432,8 +459,17 @@ export const createProjectService = async (
 
     resolvedVendorToken = vendorTokenEntry.token;
 
-    /* STEP 0.2 — Validate lead_id belongs to this vendor */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0.2 — Resolve lead/client/order details
+    |--------------------------------------------------------------------------
+    */
     let lead_id: number | null = null;
+
+    let resolvedOrderNo = order_no?.trim() || null;
+    let resolvedClientName = client_name?.trim() || null;
+    let resolvedClientAddress = client_address?.trim() || null;
+    let resolvedClientContactNo = client_contact_no?.trim() || null;
 
     if (vendor.is_crm_enabled && leadId && Number(leadId) > 0) {
       const lead = await prisma.leadMaster.findFirst({
@@ -443,6 +479,11 @@ export const createProjectService = async (
         },
         select: {
           id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+          contact_no: true,
+          site_address: true,
         },
       });
 
@@ -451,11 +492,39 @@ export const createProjectService = async (
       }
 
       lead_id = lead.id;
+
+      const leadClientName = [lead.firstname, lead.lastname]
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+
+      resolvedOrderNo = resolvedOrderNo || lead.lead_code || null;
+      resolvedClientName = leadClientName || resolvedClientName;
+      resolvedClientAddress = lead.site_address || resolvedClientAddress;
+      resolvedClientContactNo = lead.contact_no || resolvedClientContactNo;
+    } else {
+      if (!resolvedOrderNo) {
+        throw new Error("Order number is required");
+      }
+
+      if (!resolvedClientName) {
+        throw new Error("Client name is required");
+      }
+
+      if (!resolvedClientAddress) {
+        throw new Error("Client address is required");
+      }
+
+      if (!resolvedClientContactNo) {
+        throw new Error("Client contact number is required");
+      }
     }
 
-    //const lead_id = lead.id;
-
-    /* STEP 0.3 — Initial API log */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0.3 — Initial API log
+    |--------------------------------------------------------------------------
+    */
     try {
       await prisma.apiRequestLog.create({
         data: {
@@ -466,6 +535,10 @@ export const createProjectService = async (
             projectName,
             vendorId,
             leadId,
+            order_no: resolvedOrderNo,
+            client_name: resolvedClientName,
+            client_address: resolvedClientAddress,
+            client_contact_no: resolvedClientContactNo,
             fileName: file.originalname,
           } as any,
           success: false,
@@ -478,7 +551,11 @@ export const createProjectService = async (
       logger.warn("Failed to write initial api log", { logError });
     }
 
-    /* STEP 1 — Parse Excel */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 1 — Parse Excel
+    |--------------------------------------------------------------------------
+    */
     const parsedExcel = await parseProjectExcel(file.path);
 
     logger.info("Excel parsed", {
@@ -489,7 +566,11 @@ export const createProjectService = async (
       throw new Error("Excel file is empty or contains only headers");
     }
 
-    /* STEP 2 — Validate Excel payload */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 2 — Validate Excel payload
+    |--------------------------------------------------------------------------
+    */
     const payload = {
       projectName,
       lead_id,
@@ -510,28 +591,35 @@ export const createProjectService = async (
 
     logger.info("Validation passed", {
       validItemsCount: validPayload.items.length,
-      lead_id: lead_id,
+      lead_id,
     });
 
-    /* STEP 3 — Check duplicate barcode1 within Excel */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 3 — Check duplicate barcode1 within Excel
+    |--------------------------------------------------------------------------
+    */
     const uniqueCodesToInsert = validPayload.items
       .map((item) => cleanText(item.barcode1))
       .filter(Boolean);
 
     const duplicatesInPayload = uniqueCodesToInsert.filter(
-      (code, index) => uniqueCodesToInsert.indexOf(code) !== index,
+      (code, index) => uniqueCodesToInsert.indexOf(code) !== index
     );
 
     if (duplicatesInPayload.length > 0) {
       throw new Error(
         `Duplicate barcodes found in Excel: ${[
           ...new Set(duplicatesInPayload),
-        ].join(", ")}`,
+        ].join(", ")}`
       );
     }
-    console.log(uniqueCodesToInsert)
 
-    /* STEP 4 — Check duplicate barcode1 in DB */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4 — Check duplicate barcode1 in DB
+    |--------------------------------------------------------------------------
+    */
     if (uniqueCodesToInsert.length > 0) {
       const existingCodes = await prisma.cutList.findMany({
         where: {
@@ -549,12 +637,16 @@ export const createProjectService = async (
         throw new Error(
           `Duplicate barcodes found in database: ${existingCodes
             .map((c) => c.unique_code)
-            .join(", ")}`,
+            .join(", ")}`
         );
       }
     }
 
-    /* STEP 5 — Resolve admin user */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 5 — Resolve admin user
+    |--------------------------------------------------------------------------
+    */
     const adminUser = await prisma.userMaster.findFirst({
       where: {
         vendor_id: vendor.id,
@@ -571,7 +663,11 @@ export const createProjectService = async (
 
     const createdByUserId = adminUser.id;
 
-    /* STEP 6 — Pre-fetch category type mappings */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 6 — Pre-fetch category type mappings
+    |--------------------------------------------------------------------------
+    */
     const categoryMappings = await prisma.projectCategoriesMaster.findMany({
       where: {
         vendor_id: vendor.id,
@@ -591,29 +687,33 @@ export const createProjectService = async (
 
     for (const category of categoryMappings) {
       const typeIds = category.projectCategoriesMasterVendorMapping.map(
-        (mapping) => mapping.project_categories_type_master_id,
+        (mapping) => mapping.project_categories_type_master_id
       );
 
-      categoryTypeMap.set(
-        category.category_name.trim().toLowerCase(),
-        typeIds,
-      );
+      categoryTypeMap.set(category.category_name.trim().toLowerCase(), typeIds);
     }
 
-    /* STEP 7 — Upload to Wasabi only after validation passes */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 7 — Upload to Wasabi only after validation passes
+    |--------------------------------------------------------------------------
+    */
     const { key, url } = await uploadToWasabiProjectExcel(
       file.path,
       vendor.id,
       file.originalname,
-      file.mimetype,
+      file.mimetype
     );
 
     logger.info("Excel uploaded to Wasabi", { key });
 
     const unique_project_id = randomUUID();
 
-    /* STEP 8 — Transaction */
-    /* STEP 8 — Transaction */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8 — Transaction
+    |--------------------------------------------------------------------------
+    */
     const result = await prisma.$transaction(
       async (tx) => {
         const project = await tx.projectMaster.create({
@@ -625,6 +725,11 @@ export const createProjectService = async (
             project_status: "Initiated",
             is_grouping: false,
             lead_id,
+
+            order_no: resolvedOrderNo,
+            client_name: resolvedClientName,
+            client_address: resolvedClientAddress,
+            client_contact_no: resolvedClientContactNo,
           },
         });
 
@@ -674,11 +779,10 @@ export const createProjectService = async (
 
         const getMachine = (
           machineTypeId: number,
-          activeOnly: boolean = false,
+          activeOnly: boolean = false
         ) => {
           return machines.find((machine) => {
             if (machine.machine_type_id !== machineTypeId) return false;
-
             if (activeOnly && machine.status !== "ACTIVE") return false;
 
             return true;
@@ -714,6 +818,11 @@ export const createProjectService = async (
           }
         };
 
+        /*
+        |--------------------------------------------------------------------------
+        | Create cutlist rows and machine mappings
+        |--------------------------------------------------------------------------
+        */
         for (const item of validPayload.items) {
           const quantity = Number(item.qty);
 
@@ -746,7 +855,8 @@ export const createProjectService = async (
             },
           });
 
-          const uniqueCode = cleanText(item.barcode1) || `${row.id}-${project.id}`;
+          const uniqueCode =
+            cleanText(item.barcode1) || `${row.id}-${project.id}`;
 
           await tx.cutList.update({
             where: {
@@ -766,7 +876,7 @@ export const createProjectService = async (
           const hasType4 = categoryTypeIds.includes(4);
           const hasType3 = categoryTypeIds.includes(3);
           const hasType1Or2 = categoryTypeIds.some(
-            (typeId) => typeId === 1 || typeId === 2,
+            (typeId) => typeId === 1 || typeId === 2
           );
 
           const isNormalFlow = hasType1Or2 || categoryTypeIds.length === 0;
@@ -813,7 +923,6 @@ export const createProjectService = async (
           | Normal flow
           |--------------------------------------------------------------------------
           */
-
           if (hasEdgeBanding) {
             const edgeBandingMachine = getMachine(11);
 
@@ -890,17 +999,27 @@ export const createProjectService = async (
       {
         maxWait: 10000,
         timeout: 30000,
-      },
+      }
     );
 
-    /* STEP 9 — Success API log */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 9 — Success API log
+    |--------------------------------------------------------------------------
+    */
     try {
       await prisma.apiRequestLog.create({
         data: {
           endpoint: "createProjectService_excel_upload",
           vendor_token: resolvedVendorToken,
           vendor_id: vendor.id,
-          payload: validPayload as any,
+          payload: {
+            ...validPayload,
+            order_no: resolvedOrderNo,
+            client_name: resolvedClientName,
+            client_address: resolvedClientAddress,
+            client_contact_no: resolvedClientContactNo,
+          } as any,
           success: true,
           response: {
             project_id: result.id,
@@ -949,6 +1068,10 @@ export const createProjectService = async (
             projectName,
             vendorId,
             leadId,
+            order_no,
+            client_name,
+            client_address,
+            client_contact_no,
             fileName: file?.originalname,
           } as any,
           success: false,
@@ -1080,6 +1203,303 @@ export const getTrackTraceVendorConfigService = async (vendorId: number) => {
     return {
       success: false,
       message: error.message || "Failed to fetch vendor config",
+      data: null,
+    };
+  }
+};
+
+export const getTrackTraceProjectService = async (
+  uniqueProjectId: string
+) => {
+  try {
+    const project = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id: uniqueProjectId,
+      },
+      select: {
+        id: true,
+        unique_project_id: true,
+        project_name: true,
+        vendor_id: true,
+        lead_id: true,
+
+        order_no: true,
+        client_name: true,
+        client_address: true,
+        client_contact_no: true,
+
+        lead: {
+          select: {
+            id: true,
+            lead_code: true,
+            firstname: true,
+            lastname: true,
+            email: true,
+            contact_no: true,
+            site_address: true,
+          },
+        },
+      },
+    });
+
+    if (!project) {
+      return {
+        success: false,
+        message: "Project not found",
+        data: null,
+      };
+    }
+
+    return {
+      success: true,
+      message: "Project fetched successfully",
+      data: project,
+    };
+  } catch (error: any) {
+    console.error("getTrackTraceProjectService error:", error);
+
+    return {
+      success: false,
+      message: error.message || "Failed to fetch project",
+      data: null,
+    };
+  }
+};
+
+
+type UpdateTrackTraceProjectPayload = {
+  vendorId: number | string;
+  projectName: string;
+  lead_id?: number | string | null;
+
+  order_no?: string | null;
+  client_name?: string | null;
+  client_address?: string | null;
+  client_contact_no?: string | null;
+
+  file?: Express.Multer.File;
+};
+
+export const updateTrackTraceProjectService = async (
+  uniqueProjectId: string,
+  payload: UpdateTrackTraceProjectPayload
+) => {
+  try {
+    const vendorId = Number(payload.vendorId);
+
+    const leadId =
+      payload.lead_id !== undefined &&
+      payload.lead_id !== null &&
+      payload.lead_id !== ""
+        ? Number(payload.lead_id)
+        : null;
+
+    if (!uniqueProjectId) {
+      return {
+        success: false,
+        message: "unique_project_id is required",
+        data: null,
+      };
+    }
+
+    if (!vendorId || Number.isNaN(vendorId)) {
+      return {
+        success: false,
+        message: "Invalid vendorId",
+        data: null,
+      };
+    }
+
+    if (!payload.projectName?.trim()) {
+      return {
+        success: false,
+        message: "Project name is required",
+        data: null,
+      };
+    }
+
+    const existingProject = await prisma.projectMaster.findFirst({
+      where: {
+        unique_project_id: uniqueProjectId,
+        vendor_id: vendorId,
+      },
+      select: {
+        id: true,
+        vendor_id: true,
+        lead_id: true,
+      },
+    });
+
+    if (!existingProject) {
+      return {
+        success: false,
+        message: "Project not found",
+        data: null,
+      };
+    }
+
+    const vendor = await prisma.vendorMaster.findFirst({
+      where: {
+        id: vendorId,
+      },
+      select: {
+        id: true,
+        is_crm_enabled: true,
+      },
+    });
+
+    if (!vendor) {
+      return {
+        success: false,
+        message: "Vendor not found",
+        data: null,
+      };
+    }
+
+    let resolvedLeadId: number | null = null;
+
+    let resolvedOrderNo = payload.order_no?.trim() || null;
+    let resolvedClientName = payload.client_name?.trim() || null;
+    let resolvedClientAddress = payload.client_address?.trim() || null;
+    let resolvedClientContactNo = payload.client_contact_no?.trim() || null;
+
+    /*
+    |--------------------------------------------------------------------------
+    | If lead selected, fetch client info from LeadMaster
+    |--------------------------------------------------------------------------
+    */
+    if (vendor.is_crm_enabled && leadId && leadId > 0) {
+      const lead = await prisma.leadMaster.findFirst({
+        where: {
+          id: leadId,
+          vendor_id: vendorId,
+        },
+        select: {
+          id: true,
+          lead_code: true,
+          firstname: true,
+          lastname: true,
+          contact_no: true,
+          site_address: true,
+        },
+      });
+
+      if (!lead) {
+        return {
+          success: false,
+          message: "Invalid lead selected",
+          data: null,
+        };
+      }
+
+      resolvedLeadId = lead.id;
+
+      const leadClientName = [lead.firstname, lead.lastname]
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+
+      resolvedOrderNo = resolvedOrderNo || lead.lead_code || null;
+      resolvedClientName = leadClientName || resolvedClientName;
+      resolvedClientAddress = lead.site_address || resolvedClientAddress;
+      resolvedClientContactNo = lead.contact_no || resolvedClientContactNo;
+    } else {
+      /*
+      |--------------------------------------------------------------------------
+      | If no lead selected, manual fields are mandatory
+      |--------------------------------------------------------------------------
+      */
+      if (!resolvedOrderNo) {
+        return {
+          success: false,
+          message: "Order number is required",
+          data: null,
+        };
+      }
+
+      if (!resolvedClientName) {
+        return {
+          success: false,
+          message: "Client name is required",
+          data: null,
+        };
+      }
+
+      if (!resolvedClientAddress) {
+        return {
+          success: false,
+          message: "Client address is required",
+          data: null,
+        };
+      }
+
+      if (!resolvedClientContactNo) {
+        return {
+          success: false,
+          message: "Client contact number is required",
+          data: null,
+        };
+      }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Update only project master details
+    | File replacement is NOT processed here yet.
+    |--------------------------------------------------------------------------
+    */
+    const updatedProject = await prisma.projectMaster.update({
+      where: {
+        id: existingProject.id,
+      },
+      data: {
+        project_name: payload.projectName.trim(),
+        lead_id: resolvedLeadId,
+
+        order_no: resolvedOrderNo,
+        client_name: resolvedClientName,
+        client_address: resolvedClientAddress,
+        client_contact_no: resolvedClientContactNo,
+      },
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Optional: if file is uploaded during edit
+    |--------------------------------------------------------------------------
+    | Currently we are not replacing existing cutlist/machine mappings.
+    | If required later, we need a separate safe replacement flow.
+    |--------------------------------------------------------------------------
+    */
+    if (payload.file) {
+      if (payload.file.path && fs.existsSync(payload.file.path)) {
+        fs.unlinkSync(payload.file.path);
+      }
+
+      logger.info("Edit project file uploaded but not processed", {
+        uniqueProjectId,
+        fileName: payload.file.originalname,
+      });
+    }
+
+    return {
+      success: true,
+      message: "Project updated successfully",
+      data: updatedProject,
+    };
+  } catch (error: any) {
+    if (payload.file?.path && fs.existsSync(payload.file.path)) {
+      fs.unlinkSync(payload.file.path);
+    }
+
+    logger.error("updateTrackTraceProjectService error", {
+      error: error.message,
+      stack: error.stack,
+    });
+
+    return {
+      success: false,
+      message: error.message || "Failed to update project",
       data: null,
     };
   }
