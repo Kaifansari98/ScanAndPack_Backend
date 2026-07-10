@@ -2055,7 +2055,7 @@ export const uploadPdfAndGetSignedUrl = async (
 
 export const uploadToWasabiVendorAsset = async (
   filePath: string,
-  assetType: "logo" | "icon",
+  assetType: "logo" | "icon" | "login_image",
   originalName: string,
   contentType: string
 ) => {

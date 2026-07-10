@@ -3,6 +3,8 @@ import {
   createProjectController,
   searchTrackTraceLeadsController,
   getTrackTraceVendorConfigController,
+  getTrackTraceProjectController,
+  updateTrackTraceProjectController
 
 } from "../../../src/controllers/trackTraceController/track-trace-project.controller";
 import { uploadProjectExcel } from "../../middlewares/uploadWasabi";
@@ -23,6 +25,17 @@ router.post(
 router.get(
   "/onboard/:vendor_id/config",
   getTrackTraceVendorConfigController
+);
+
+router.get(
+  "/onboard/project/:unique_project_id",
+  getTrackTraceProjectController
+);
+
+router.put(
+  "/onboard/project/:unique_project_id",
+  uploadProjectExcel.single("file"),
+  updateTrackTraceProjectController
 );
 
 export default router;

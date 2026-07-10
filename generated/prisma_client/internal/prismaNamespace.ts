@@ -11930,6 +11930,7 @@ export const VendorMasterScalarFieldEnum = {
   status: 'status',
   logo: 'logo',
   icon: 'icon',
+  login_image: 'login_image',
   time_zone: 'time_zone',
   subdomain_url: 'subdomain_url',
   IsAccountLocInEnabled: 'IsAccountLocInEnabled',
@@ -12086,6 +12087,12 @@ export const ProjectMasterScalarFieldEnum = {
   unique_project_id: 'unique_project_id',
   is_grouping: 'is_grouping',
   lead_id: 'lead_id',
+  order_no: 'order_no',
+  client_name: 'client_name',
+  client_address: 'client_address',
+  client_contact_no: 'client_contact_no',
+  updated_by: 'updated_by',
+  updated_at: 'updated_at',
   track_trace_status: 'track_trace_status',
   track_started_at: 'track_started_at',
   track_completed_at: 'track_completed_at'
@@ -12147,7 +12154,9 @@ export const BoxMasterScalarFieldEnum = {
   factory_out_by: 'factory_out_by',
   factory_out_at: 'factory_out_at',
   site_in_by: 'site_in_by',
-  site_in_at: 'site_in_at'
+  site_in_at: 'site_in_at',
+  packed_by: 'packed_by',
+  packed_at: 'packed_at'
 } as const
 
 export type BoxMasterScalarFieldEnum = (typeof BoxMasterScalarFieldEnum)[keyof typeof BoxMasterScalarFieldEnum]
@@ -13543,6 +13552,7 @@ export const CutListScalarFieldEnum = {
   elb: 'elb',
   esl: 'esl',
   esr: 'esr',
+  weight: 'weight',
   group_name: 'group_name',
   procurement: 'procurement',
   category_name: 'category_name'

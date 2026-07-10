@@ -8,9 +8,11 @@ export const createVendor = async (req: Request, res: Response) => {
     const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
     const logoFile = files?.logo?.[0];
     const iconFile = files?.icon?.[0];
+    const loginImageFile = files?.login_image?.[0];
 
     let logoUrl = req.body.logo || "";
     let iconUrl = req.body.icon || "";
+    let loginImageUrl = req.body.login_image || "";
 
     if (logoFile) {
       logoUrl = await uploadToWasabiVendorAsset(
@@ -32,10 +34,21 @@ export const createVendor = async (req: Request, res: Response) => {
       await fs.unlink(iconFile.path);
     }
 
+    if (loginImageFile) {
+      loginImageUrl = await uploadToWasabiVendorAsset(
+        loginImageFile.path,
+        "login_image",
+        loginImageFile.originalname,
+        loginImageFile.mimetype
+      );
+      await fs.unlink(loginImageFile.path);
+    }
+
     const vendorData = {
       ...req.body,
       logo: logoUrl,
       icon: iconUrl,
+      login_image: loginImageUrl,
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
@@ -66,9 +79,11 @@ export const updateVendorController = async (req: Request, res: Response) => {
     const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
     const logoFile = files?.logo?.[0];
     const iconFile = files?.icon?.[0];
+    const loginImageFile = files?.login_image?.[0];
 
     let logoUrl = req.body.logo;
     let iconUrl = req.body.icon;
+    let loginImageUrl = req.body.login_image;
 
     if (logoFile) {
       logoUrl = await uploadToWasabiVendorAsset(
@@ -90,10 +105,21 @@ export const updateVendorController = async (req: Request, res: Response) => {
       await fs.unlink(iconFile.path);
     }
 
+    if (loginImageFile) {
+      loginImageUrl = await uploadToWasabiVendorAsset(
+        loginImageFile.path,
+        "login_image",
+        loginImageFile.originalname,
+        loginImageFile.mimetype
+      );
+      await fs.unlink(loginImageFile.path);
+    }
+
     const vendorData = {
       ...req.body,
       ...(logoUrl !== undefined && { logo: logoUrl }),
       ...(iconUrl !== undefined && { icon: iconUrl }),
+      ...(loginImageUrl !== undefined && { login_image: loginImageUrl }),
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects !== undefined 
         ? (req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true)
         : undefined,
