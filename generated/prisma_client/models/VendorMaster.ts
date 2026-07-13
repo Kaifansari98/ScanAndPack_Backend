@@ -67908,6 +67908,7 @@ export type VendorMasterCreateWithoutAdditionalCostMastersInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -68052,6 +68053,7 @@ export type VendorMasterUncheckedCreateWithoutAdditionalCostMastersInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -68211,6 +68213,7 @@ export type VendorMasterUpdateWithoutAdditionalCostMastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68355,6 +68358,7 @@ export type VendorMasterUncheckedUpdateWithoutAdditionalCostMastersInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68498,6 +68502,7 @@ export type VendorMasterCreateWithoutPiSupplierAdditionalCostsInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -68642,6 +68647,7 @@ export type VendorMasterUncheckedCreateWithoutPiSupplierAdditionalCostsInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -68801,6 +68807,7 @@ export type VendorMasterUpdateWithoutPiSupplierAdditionalCostsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -68945,6 +68952,7 @@ export type VendorMasterUncheckedUpdateWithoutPiSupplierAdditionalCostsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69088,6 +69096,7 @@ export type VendorMasterCreateWithoutPoSupplierAdditionalCostsInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -69232,6 +69241,7 @@ export type VendorMasterUncheckedCreateWithoutPoSupplierAdditionalCostsInput = {
   status?: string
   logo: string
   icon?: string | null
+  login_image?: string | null
   time_zone: string
   subdomain_url?: string | null
   IsAccountLocInEnabled?: boolean | null
@@ -69391,6 +69401,7 @@ export type VendorMasterUpdateWithoutPoSupplierAdditionalCostsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -69535,6 +69546,7 @@ export type VendorMasterUncheckedUpdateWithoutPoSupplierAdditionalCostsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   logo?: Prisma.StringFieldUpdateOperationsInput | string
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  login_image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   time_zone?: Prisma.StringFieldUpdateOperationsInput | string
   subdomain_url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   IsAccountLocInEnabled?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
