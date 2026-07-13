@@ -961,7 +961,7 @@ export const createSmallOrderRequest = async (
 
   const { recipients: franchiseAdmins, isSuperAdminFallback } = await getFranchiseAdminRecipients({
     vendorId: value.vendor_id,
-    franchiseId: lead.franchise_id ?? actor.franchise_id ?? null,
+    franchiseId: lead.franchise_id ?? null,
     excludeUserId: value.created_by,
   });
 
