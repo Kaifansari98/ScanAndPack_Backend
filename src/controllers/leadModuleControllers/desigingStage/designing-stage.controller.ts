@@ -152,9 +152,8 @@ export class DesigingStageController {
 
       return res.json({
         success: true,
-        message: `${docs.length} quotation${
-          docs.length > 1 ? "s" : ""
-        } uploaded successfully`,
+        message: `${docs.length} quotation${docs.length > 1 ? "s" : ""
+          } uploaded successfully`,
         documents: docs,
       });
     } catch (error: any) {
@@ -962,6 +961,7 @@ export class DesigingStageController {
 
   public static async uploadDesigns(req: Request, res: Response) {
     try {
+      console.log("[BACKEND UPLOAD DESIGNS] req.body:", req.body);
       const { vendorId, leadId, userId } = req.body;
       const rawInstanceIds = req.body.product_structure_instance_ids;
 
@@ -1012,35 +1012,35 @@ export class DesigingStageController {
               : [];
           const parsedInstanceIds = useCustomVendorFlow
             ? [...new Set(
-                requestedInstanceIds
-                  .map((value) => Number(value))
-                  .filter((value) => Number.isFinite(value) && value > 0),
-              )]
+              requestedInstanceIds
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value) && value > 0),
+            )]
             : [];
 
           const allLeadInstances = useCustomVendorFlow
             ? await tx.leadProductStructureInstance.findMany({
-                where: {
-                  lead_id: Number(leadId),
-                  vendor_id: Number(vendorId),
-                  account_id: Number(accountId),
+              where: {
+                lead_id: Number(leadId),
+                vendor_id: Number(vendorId),
+                account_id: Number(accountId),
+              },
+              select: {
+                id: true,
+                title: true,
+                productType: {
+                  select: { type: true },
                 },
-                select: {
-                  id: true,
-                  title: true,
-                  productType: {
-                    select: { type: true },
-                  },
-                },
-                orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
-              })
+              },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            })
             : [];
 
           const selectedInstances = useCustomVendorFlow
             ? parsedInstanceIds.length > 0
               ? allLeadInstances.filter((instance) =>
-                  parsedInstanceIds.includes(instance.id),
-                )
+                parsedInstanceIds.includes(instance.id),
+              )
               : allLeadInstances
             : [];
 
@@ -1110,7 +1110,7 @@ export class DesigingStageController {
             });
             nextRevision =
               existingDesignDocs.reduce((maxRevision, doc) => {
-                const match = doc.doc_og_name?.match(/^[DR](\d+)-/i);
+                const match = doc.doc_og_name?.match(/^(?:\[[^\]]+\]\s*)?[DR](\d+)-/i);
                 const revision = match ? Number(match[1]) : -1;
                 return Number.isFinite(revision)
                   ? Math.max(maxRevision, revision)
@@ -1126,11 +1126,11 @@ export class DesigingStageController {
             const designTypePrefix = req.body.design_type ? `[${req.body.design_type}] ` : '';
             const finalOriginalName = designTypePrefix + (useCustomVendorFlow
               ? (() => {
-                  const extension = path.extname(file.originalname || "");
-                  const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
-                  nextRevision += 1;
-                  return renamedOriginalName;
-                })()
+                const extension = path.extname(file.originalname || "");
+                const renamedOriginalName = `D${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                nextRevision += 1;
+                return renamedOriginalName;
+              })()
               : file.originalname);
             const sysName = await uploadToWasabStage1DesingsFile(
               file.path,
@@ -1207,6 +1207,7 @@ export class DesigingStageController {
   public static async uploadCostingFile(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
+      const rawInstanceIds = req.body.product_structure_instance_ids;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1224,7 +1225,12 @@ export class DesigingStageController {
               vendor_id: Number(vendorId),
               is_deleted: false,
             },
-            select: { id: true, account_id: true },
+            select: {
+              id: true,
+              account_id: true,
+              firstname: true,
+              lastname: true,
+            },
           });
 
           if (!lead) {
@@ -1236,6 +1242,59 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id;
+          const vendor = await tx.vendorMaster.findUnique({
+            where: { id: Number(vendorId) },
+            select: { is_this_vendor_is_custom_usertype_only: true },
+          });
+          const useCustomVendorFlow =
+            vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+          const requestedInstanceIds = Array.isArray(rawInstanceIds)
+            ? rawInstanceIds
+            : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
+              ? [rawInstanceIds]
+              : [];
+          const parsedInstanceIds = useCustomVendorFlow
+            ? [...new Set(
+              requestedInstanceIds
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value) && value > 0),
+            )]
+            : [];
+
+          const allLeadInstances = useCustomVendorFlow
+            ? await tx.leadProductStructureInstance.findMany({
+              where: {
+                lead_id: Number(leadId),
+                vendor_id: Number(vendorId),
+                account_id: Number(accountId),
+              },
+              select: {
+                id: true,
+                title: true,
+                productType: {
+                  select: { type: true },
+                },
+              },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            })
+            : [];
+
+          const selectedInstances = useCustomVendorFlow
+            ? parsedInstanceIds.length > 0
+              ? allLeadInstances.filter((instance) =>
+                parsedInstanceIds.includes(instance.id),
+              )
+              : allLeadInstances
+            : [];
+
+          if (
+            useCustomVendorFlow &&
+            parsedInstanceIds.length > 0 &&
+            selectedInstances.length !== parsedInstanceIds.length
+          ) {
+            throw new Error("One or more selected product instances are invalid for this lead");
+          }
 
           // Get-or-create the "Costing File" document type for this vendor
           let costingFileDocType = await tx.documentTypeMaster.findFirst({
@@ -1254,13 +1313,79 @@ export class DesigingStageController {
             });
           }
 
+          let nextRevision = 0;
+          let clientNameSegment = "";
+          let structureSegment = "";
+          let dateSegment = "";
+          let instanceIdToPersist: number | null = null;
+
+          if (useCustomVendorFlow) {
+            const structureLabelSource =
+              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+            const uniqueStructureNames = [
+              ...new Set(
+                structureLabelSource
+                  .map((instance) => instance.productType?.type)
+                  .filter(Boolean),
+              ),
+            ];
+            structureSegment = sanitizeFilename(
+              uniqueStructureNames.length > 0
+                ? uniqueStructureNames.join("_")
+                : "General",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 80);
+            clientNameSegment = sanitizeFilename(
+              `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 50);
+            const now = new Date();
+            dateSegment = [
+              now.getFullYear(),
+              String(now.getMonth() + 1).padStart(2, "0"),
+              String(now.getDate()).padStart(2, "0"),
+            ].join("-");
+
+            const existingCostingDocs = await tx.leadDocuments.findMany({
+              where: {
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                doc_type_id: costingFileDocType.id,
+                is_deleted: false,
+              },
+              select: { doc_og_name: true },
+            });
+            nextRevision =
+              existingCostingDocs.reduce((maxRevision, doc) => {
+                const match = doc.doc_og_name?.match(/^C(\d+)-/i);
+                const revision = match ? Number(match[1]) : -1;
+                return Number.isFinite(revision)
+                  ? Math.max(maxRevision, revision)
+                  : maxRevision;
+              }, -1) + 1;
+
+            instanceIdToPersist =
+              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          }
+
           const newDocs: any[] = [];
           for (const file of files) {
+            const finalOriginalName = useCustomVendorFlow
+              ? (() => {
+                const extension = path.extname(file.originalname || "");
+                const renamedOriginalName = `C${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                nextRevision += 1;
+                return renamedOriginalName;
+              })()
+              : file.originalname;
+
             const sysName = await uploadToWasabiCostingFile(
               file.path,
               Number(vendorId),
               Number(leadId),
-              file.originalname,
+              finalOriginalName,
               file.mimetype,
             );
 
@@ -1268,13 +1393,14 @@ export class DesigingStageController {
 
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: file.originalname,
+                doc_og_name: finalOriginalName,
                 doc_sys_name: sysName,
                 vendor_id: Number(vendorId),
                 lead_id: Number(leadId),
                 account_id: Number(accountId),
                 doc_type_id: costingFileDocType.id,
                 created_by: Number(userId),
+                product_structure_instance_id: instanceIdToPersist,
               },
             });
 
@@ -1440,6 +1566,7 @@ export class DesigingStageController {
   public static async uploadElectricalPlumbing(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
+      const rawInstanceIds = req.body.product_structure_instance_ids;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1457,7 +1584,12 @@ export class DesigingStageController {
               vendor_id: Number(vendorId),
               is_deleted: false,
             },
-            select: { id: true, account_id: true },
+            select: {
+              id: true,
+              account_id: true,
+              firstname: true,
+              lastname: true,
+            },
           });
 
           if (!lead) {
@@ -1469,6 +1601,59 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id;
+          const vendor = await tx.vendorMaster.findUnique({
+            where: { id: Number(vendorId) },
+            select: { is_this_vendor_is_custom_usertype_only: true },
+          });
+          const useCustomVendorFlow =
+            vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+          const requestedInstanceIds = Array.isArray(rawInstanceIds)
+            ? rawInstanceIds
+            : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
+              ? [rawInstanceIds]
+              : [];
+          const parsedInstanceIds = useCustomVendorFlow
+            ? [...new Set(
+              requestedInstanceIds
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value) && value > 0),
+            )]
+            : [];
+
+          const allLeadInstances = useCustomVendorFlow
+            ? await tx.leadProductStructureInstance.findMany({
+              where: {
+                lead_id: Number(leadId),
+                vendor_id: Number(vendorId),
+                account_id: Number(accountId),
+              },
+              select: {
+                id: true,
+                title: true,
+                productType: {
+                  select: { type: true },
+                },
+              },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            })
+            : [];
+
+          const selectedInstances = useCustomVendorFlow
+            ? parsedInstanceIds.length > 0
+              ? allLeadInstances.filter((instance) =>
+                parsedInstanceIds.includes(instance.id),
+              )
+              : allLeadInstances
+            : [];
+
+          if (
+            useCustomVendorFlow &&
+            parsedInstanceIds.length > 0 &&
+            selectedInstances.length !== parsedInstanceIds.length
+          ) {
+            throw new Error("One or more selected product instances are invalid for this lead");
+          }
 
           // Get-or-create the "Electrical & Plumbing" document type for this vendor
           let electricalPlumbingDocType = await tx.documentTypeMaster.findFirst({
@@ -1487,13 +1672,79 @@ export class DesigingStageController {
             });
           }
 
+          let nextRevision = 0;
+          let clientNameSegment = "";
+          let structureSegment = "";
+          let dateSegment = "";
+          let instanceIdToPersist: number | null = null;
+
+          if (useCustomVendorFlow) {
+            const structureLabelSource =
+              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+            const uniqueStructureNames = [
+              ...new Set(
+                structureLabelSource
+                  .map((instance) => instance.productType?.type)
+                  .filter(Boolean),
+              ),
+            ];
+            structureSegment = sanitizeFilename(
+              uniqueStructureNames.length > 0
+                ? uniqueStructureNames.join("_")
+                : "General",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 80);
+            clientNameSegment = sanitizeFilename(
+              `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 50);
+            const now = new Date();
+            dateSegment = [
+              now.getFullYear(),
+              String(now.getMonth() + 1).padStart(2, "0"),
+              String(now.getDate()).padStart(2, "0"),
+            ].join("-");
+
+            const existingEPDocs = await tx.leadDocuments.findMany({
+              where: {
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                doc_type_id: electricalPlumbingDocType.id,
+                is_deleted: false,
+              },
+              select: { doc_og_name: true },
+            });
+            nextRevision =
+              existingEPDocs.reduce((maxRevision, doc) => {
+                const match = doc.doc_og_name?.match(/^E(\d+)-/i);
+                const revision = match ? Number(match[1]) : -1;
+                return Number.isFinite(revision)
+                  ? Math.max(maxRevision, revision)
+                  : maxRevision;
+              }, -1) + 1;
+
+            instanceIdToPersist =
+              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          }
+
           const newDocs: any[] = [];
           for (const file of files) {
+            const finalOriginalName = useCustomVendorFlow
+              ? (() => {
+                const extension = path.extname(file.originalname || "");
+                const renamedOriginalName = `E${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                nextRevision += 1;
+                return renamedOriginalName;
+              })()
+              : file.originalname;
+
             const sysName = await uploadToWasabiElectricalPlumbing(
               file.path,
               Number(vendorId),
               Number(leadId),
-              file.originalname,
+              finalOriginalName,
               file.mimetype,
             );
 
@@ -1501,13 +1752,14 @@ export class DesigingStageController {
 
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: file.originalname,
+                doc_og_name: finalOriginalName,
                 doc_sys_name: sysName,
                 vendor_id: Number(vendorId),
                 lead_id: Number(leadId),
                 account_id: Number(accountId),
                 doc_type_id: electricalPlumbingDocType.id,
                 created_by: Number(userId),
+                product_structure_instance_id: instanceIdToPersist,
               },
             });
 
@@ -1673,6 +1925,7 @@ export class DesigingStageController {
   public static async uploadFinalIsmUpload(req: Request, res: Response) {
     try {
       const { vendorId, leadId, userId } = req.body;
+      const rawInstanceIds = req.body.product_structure_instance_ids;
 
       if (!req.files || (req.files as Express.Multer.File[]).length === 0) {
         return res.status(400).json({
@@ -1690,7 +1943,12 @@ export class DesigingStageController {
               vendor_id: Number(vendorId),
               is_deleted: false,
             },
-            select: { id: true, account_id: true },
+            select: {
+              id: true,
+              account_id: true,
+              firstname: true,
+              lastname: true,
+            },
           });
 
           if (!lead) {
@@ -1702,6 +1960,59 @@ export class DesigingStageController {
           }
 
           const accountId = lead.account_id;
+          const vendor = await tx.vendorMaster.findUnique({
+            where: { id: Number(vendorId) },
+            select: { is_this_vendor_is_custom_usertype_only: true },
+          });
+          const useCustomVendorFlow =
+            vendor?.is_this_vendor_is_custom_usertype_only === true;
+
+          const requestedInstanceIds = Array.isArray(rawInstanceIds)
+            ? rawInstanceIds
+            : typeof rawInstanceIds === "string" && rawInstanceIds.length > 0
+              ? [rawInstanceIds]
+              : [];
+          const parsedInstanceIds = useCustomVendorFlow
+            ? [...new Set(
+              requestedInstanceIds
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value) && value > 0),
+            )]
+            : [];
+
+          const allLeadInstances = useCustomVendorFlow
+            ? await tx.leadProductStructureInstance.findMany({
+              where: {
+                lead_id: Number(leadId),
+                vendor_id: Number(vendorId),
+                account_id: Number(accountId),
+              },
+              select: {
+                id: true,
+                title: true,
+                productType: {
+                  select: { type: true },
+                },
+              },
+              orderBy: [{ product_structure_id: "asc" }, { quantity_index: "asc" }],
+            })
+            : [];
+
+          const selectedInstances = useCustomVendorFlow
+            ? parsedInstanceIds.length > 0
+              ? allLeadInstances.filter((instance) =>
+                parsedInstanceIds.includes(instance.id),
+              )
+              : allLeadInstances
+            : [];
+
+          if (
+            useCustomVendorFlow &&
+            parsedInstanceIds.length > 0 &&
+            selectedInstances.length !== parsedInstanceIds.length
+          ) {
+            throw new Error("One or more selected product instances are invalid for this lead");
+          }
 
           // Get-or-create the "Final ISM Upload" document type for this vendor
           let finalIsmUploadDocType = await tx.documentTypeMaster.findFirst({
@@ -1720,13 +2031,79 @@ export class DesigingStageController {
             });
           }
 
+          let nextRevision = 0;
+          let clientNameSegment = "";
+          let structureSegment = "";
+          let dateSegment = "";
+          let instanceIdToPersist: number | null = null;
+
+          if (useCustomVendorFlow) {
+            const structureLabelSource =
+              selectedInstances.length > 0 ? selectedInstances : allLeadInstances;
+            const uniqueStructureNames = [
+              ...new Set(
+                structureLabelSource
+                  .map((instance) => instance.productType?.type)
+                  .filter(Boolean),
+              ),
+            ];
+            structureSegment = sanitizeFilename(
+              uniqueStructureNames.length > 0
+                ? uniqueStructureNames.join("_")
+                : "General",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 80);
+            clientNameSegment = sanitizeFilename(
+              `${lead.firstname ?? ""}${lead.lastname ?? ""}` || "Client",
+            )
+              .replace(/_+/g, "_")
+              .slice(0, 50);
+            const now = new Date();
+            dateSegment = [
+              now.getFullYear(),
+              String(now.getMonth() + 1).padStart(2, "0"),
+              String(now.getDate()).padStart(2, "0"),
+            ].join("-");
+
+            const existingFDocs = await tx.leadDocuments.findMany({
+              where: {
+                vendor_id: Number(vendorId),
+                lead_id: Number(leadId),
+                doc_type_id: finalIsmUploadDocType.id,
+                is_deleted: false,
+              },
+              select: { doc_og_name: true },
+            });
+            nextRevision =
+              existingFDocs.reduce((maxRevision, doc) => {
+                const match = doc.doc_og_name?.match(/^F(\d+)-/i);
+                const revision = match ? Number(match[1]) : -1;
+                return Number.isFinite(revision)
+                  ? Math.max(maxRevision, revision)
+                  : maxRevision;
+              }, -1) + 1;
+
+            instanceIdToPersist =
+              selectedInstances.length === 1 ? selectedInstances[0].id : null;
+          }
+
           const newDocs: any[] = [];
           for (const file of files) {
+            const finalOriginalName = useCustomVendorFlow
+              ? (() => {
+                const extension = path.extname(file.originalname || "");
+                const renamedOriginalName = `F${nextRevision}-${clientNameSegment}-${structureSegment}-${dateSegment}${extension}`;
+                nextRevision += 1;
+                return renamedOriginalName;
+              })()
+              : file.originalname;
+
             const sysName = await uploadToWasabiFinalIsmUpload(
               file.path,
               Number(vendorId),
               Number(leadId),
-              file.originalname,
+              finalOriginalName,
               file.mimetype,
             );
 
@@ -1734,13 +2111,14 @@ export class DesigingStageController {
 
             const doc = await tx.leadDocuments.create({
               data: {
-                doc_og_name: file.originalname,
+                doc_og_name: finalOriginalName,
                 doc_sys_name: sysName,
                 vendor_id: Number(vendorId),
                 lead_id: Number(leadId),
                 account_id: Number(accountId),
                 doc_type_id: finalIsmUploadDocType.id,
                 created_by: Number(userId),
+                product_structure_instance_id: instanceIdToPersist,
               },
             });
 
@@ -2237,58 +2615,58 @@ export class DesigingStageController {
 
       const designSelection = existingSelection
         ? await prisma.leadDesignSelection.update({
-            where: { id: existingSelection.id },
-            data: {
-              desc,
-              updated_by: Number(created_by),
-              updated_at: new Date(),
+          where: { id: existingSelection.id },
+          data: {
+            desc,
+            updated_by: Number(created_by),
+            updated_at: new Date(),
+          },
+          include: {
+            createdBy: {
+              select: { id: true, user_name: true, user_email: true },
             },
-            include: {
-              createdBy: {
-                select: { id: true, user_name: true, user_email: true },
-              },
-              lead: {
-                select: {
-                  id: true,
-                  firstname: true,
-                  lastname: true,
-                  contact_no: true,
-                },
-              },
-              account: { select: { id: true, name: true } },
-              productStructureInstance: {
-                select: { id: true, title: true, quantity_index: true },
+            lead: {
+              select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                contact_no: true,
               },
             },
-          })
+            account: { select: { id: true, name: true } },
+            productStructureInstance: {
+              select: { id: true, title: true, quantity_index: true },
+            },
+          },
+        })
         : await prisma.leadDesignSelection.create({
-            data: {
-              lead_id: Number(lead_id),
-              account_id: Number(account_id),
-              vendor_id: Number(vendor_id),
-              product_structure_instance_id: resolvedInstanceId,
-              type,
-              desc,
-              created_by: Number(created_by),
+          data: {
+            lead_id: Number(lead_id),
+            account_id: Number(account_id),
+            vendor_id: Number(vendor_id),
+            product_structure_instance_id: resolvedInstanceId,
+            type,
+            desc,
+            created_by: Number(created_by),
+          },
+          include: {
+            createdBy: {
+              select: { id: true, user_name: true, user_email: true },
             },
-            include: {
-              createdBy: {
-                select: { id: true, user_name: true, user_email: true },
-              },
-              lead: {
-                select: {
-                  id: true,
-                  firstname: true,
-                  lastname: true,
-                  contact_no: true,
-                },
-              },
-              account: { select: { id: true, name: true } },
-              productStructureInstance: {
-                select: { id: true, title: true, quantity_index: true },
+            lead: {
+              select: {
+                id: true,
+                firstname: true,
+                lastname: true,
+                contact_no: true,
               },
             },
-          });
+            account: { select: { id: true, name: true } },
+            productStructureInstance: {
+              select: { id: true, title: true, quantity_index: true },
+            },
+          },
+        });
 
       logs.push(
         existingSelection
@@ -2721,24 +3099,24 @@ export class DesigingStageController {
         await Promise.all([
           quotationType
             ? prisma.leadDocuments.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: quotationType.id,
-                  is_deleted: false,
-                },
-              })
+              where: {
+                lead_id: lId,
+                vendor_id: vId,
+                doc_type_id: quotationType.id,
+                is_deleted: false,
+              },
+            })
             : 0,
 
           designsType
             ? prisma.leadDocuments.count({
-                where: {
-                  lead_id: lId,
-                  vendor_id: vId,
-                  doc_type_id: designsType.id,
-                  is_deleted: false,
-                },
-              })
+              where: {
+                lead_id: lId,
+                vendor_id: vId,
+                doc_type_id: designsType.id,
+                is_deleted: false,
+              },
+            })
             : 0,
 
           prisma.leadDesignSelection.count({
@@ -3310,7 +3688,7 @@ export class DesigingStageController {
 
 
 
-   public static async getLeadStatusForNotification(req: Request, res: Response) {
+  public static async getLeadStatusForNotification(req: Request, res: Response) {
     try {
       const { lead_id, vendor_id } = req.params;
       const { instance_id } = req.query;

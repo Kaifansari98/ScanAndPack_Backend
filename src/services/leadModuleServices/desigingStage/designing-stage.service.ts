@@ -23,7 +23,8 @@ function buildQuotationNameFromDesign(
   designOriginalName: string,
   quotationOriginalName: string,
 ) {
-  const designNameWithoutExtension = path.parse(designOriginalName).name;
+  let designNameWithoutExtension = path.parse(designOriginalName).name;
+  designNameWithoutExtension = designNameWithoutExtension.replace(/^\[.*?\]\s*/, "");
   const quotationExtension = path.extname(quotationOriginalName || "");
   const designMatch = designNameWithoutExtension.match(
     /^[DR](\d+)-(.+)-\d{4}-\d{2}-\d{2}$/i,
