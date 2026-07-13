@@ -1125,7 +1125,7 @@ export const generateBoxPdfService = async (
 <style>
 
 @page {
-  size: 4in 6in;
+  size: 3in 6in;
   margin: 0;
 }
 
@@ -1139,7 +1139,7 @@ export const generateBoxPdfService = async (
 
 html,
 body {
-  width: 4in;
+  width: 3in;
   height: 6in;
 
   margin: 0;
@@ -1161,7 +1161,7 @@ body {
 
 
 .page {
-  width: 4in;
+  width: 3in;
   height: 6in;
 
   padding: 14px;
@@ -2249,7 +2249,7 @@ body {
 
       {
         width:
-          "4in",
+          "3in",
 
         height:
           "6in",
@@ -3974,7 +3974,7 @@ export const generateAllBoxesPdfService = async (
 @page {
 
   size:
-    4in 6in;
+    3in 6in;
 
   margin:
     0;
@@ -4000,7 +4000,7 @@ html,
 body {
 
   width:
-    4in;
+    3in;
 
   margin:
     0;
@@ -4032,7 +4032,7 @@ body {
 .page {
 
   width:
-    4in;
+    3in;
 
   height:
     6in;
@@ -4898,7 +4898,7 @@ ${boxPages}
 
       {
         width:
-          "4in",
+          "3in",
 
         height:
           "6in",
@@ -6807,7 +6807,7 @@ export const generateProjectFullReportService = async (
 <style>
 
 @page {
-  size: 4in 6in;
+  size: 3in 6in;
   margin: 0;
 }
 
