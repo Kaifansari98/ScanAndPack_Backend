@@ -3140,6 +3140,144 @@ export class DesigingStageController {
     }
   }
 
+  public static async getLeadHardwareMappings(req: Request, res: Response) {
+    try {
+      const vendorId = Number(req.params.vendorId);
+      const leadId = Number(req.params.leadId);
+
+      if (!vendorId || !leadId) {
+        return res.status(400).json({
+          success: false,
+          message: "vendorId and leadId are required",
+        });
+      }
+
+      const mappings = await prisma.leadHardwareMapping.findMany({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+        },
+        include: {
+          carcassLegs: { select: { id: true, name: true } },
+          skirtingCarcassLegs: {
+            select: { id: true, name: true, inScope: true },
+          },
+          skirtingCarcassLegsColor: { select: { id: true, color: true } },
+        },
+        orderBy: { id: "asc" },
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: "Lead hardware mappings fetched successfully",
+        data: mappings,
+      });
+    } catch (error: any) {
+      console.error("Error fetching lead hardware mappings:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
+  public static async upsertLeadHardwareMapping(req: Request, res: Response) {
+    try {
+      const id = req.body.id ? Number(req.body.id) : undefined;
+      const vendorId = Number(req.body.vendor_id);
+      const leadId = Number(req.body.lead_id);
+      const carcassLegsId = Number(req.body.carcass_legs_id);
+      const skirtingCarcassLegsId = Number(req.body.skirting_carcass_legs_id);
+      const skirtingCarcassLegsColorId = req.body.skirting_carcass_legs_color_id
+        ? Number(req.body.skirting_carcass_legs_color_id)
+        : null;
+      const note =
+        typeof req.body.note === "string" && req.body.note.trim().length > 0
+          ? req.body.note
+          : null;
+      const createdBy = Number(req.body.created_by);
+
+      if (
+        !vendorId ||
+        !leadId ||
+        !carcassLegsId ||
+        !skirtingCarcassLegsId ||
+        !createdBy
+      ) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "vendor_id, lead_id, carcass_legs_id, skirting_carcass_legs_id and created_by are required",
+        });
+      }
+
+      const data = {
+        vendor_id: vendorId,
+        lead_id: leadId,
+        carcass_legs_id: carcassLegsId,
+        skirting_carcass_legs_id: skirtingCarcassLegsId,
+        skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+        note,
+        created_by: createdBy,
+      };
+
+      const existingDuplicate = await prisma.leadHardwareMapping.findFirst({
+        where: {
+          vendor_id: vendorId,
+          lead_id: leadId,
+          carcass_legs_id: carcassLegsId,
+          skirting_carcass_legs_id: skirtingCarcassLegsId,
+          skirting_carcass_legs_color_id: skirtingCarcassLegsColorId,
+          ...(id ? { NOT: { id } } : {}),
+        },
+        select: { id: true },
+      });
+
+      if (existingDuplicate) {
+        return res.status(400).json({
+          success: false,
+          message:
+            "This carcass legs, skirting, and color combination already exists for this lead.",
+        });
+      }
+
+      const includeShape = {
+        carcassLegs: { select: { id: true, name: true } },
+        skirtingCarcassLegs: {
+          select: { id: true, name: true, inScope: true },
+        },
+        skirtingCarcassLegsColor: { select: { id: true, color: true } },
+      };
+
+      const mapping = id
+        ? await prisma.leadHardwareMapping.update({
+            where: { id },
+            data,
+            include: includeShape,
+          })
+        : await prisma.leadHardwareMapping.create({
+            data,
+            include: includeShape,
+          });
+
+      return res.status(200).json({
+        success: true,
+        message: id
+          ? "Lead hardware mapping updated successfully"
+          : "Lead hardware mapping created successfully",
+        data: mapping,
+      });
+    } catch (error: any) {
+      console.error("Error saving lead hardware mapping:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Internal server error",
+        error: error.message,
+      });
+    }
+  }
+
   public static async getInstanceStageController(req: Request, res: Response) {
     try {
       const vendorId = Number(req.params.vendorId);

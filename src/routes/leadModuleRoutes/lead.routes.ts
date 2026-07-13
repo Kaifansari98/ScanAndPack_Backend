@@ -62,6 +62,9 @@ import {
   fetchAllShutterTypes,
   fetchAllShutterMaterials,
   fetchShutterMaterialFinishes,
+  fetchAllCarcassLegs,
+  fetchSkirtingCarcassLegs,
+  fetchSkirtingCarcassLegsColors,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -158,6 +161,15 @@ leadsRouter.get(
 leadsRouter.get(
   "/get-shutter-material-finishes/:shutter_material_id",
   fetchShutterMaterialFinishes,
+);
+leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
+leadsRouter.get(
+  "/get-skirting-carcass-legs/:carcass_legs_id",
+  fetchSkirtingCarcassLegs,
+);
+leadsRouter.get(
+  "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
+  fetchSkirtingCarcassLegsColors,
 );
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(
