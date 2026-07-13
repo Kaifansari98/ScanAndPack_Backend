@@ -215,6 +215,26 @@ export type ShutterMaterialMaster = Prisma.ShutterMaterialMasterModel
  */
 export type ShutterMaterialFinishMaster = Prisma.ShutterMaterialFinishMasterModel
 /**
+ * Model CarcassLegsMaster
+ * 
+ */
+export type CarcassLegsMaster = Prisma.CarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsMaster
+ * 
+ */
+export type SkirtingCarcassLegsMaster = Prisma.SkirtingCarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsColorMaster
+ * 
+ */
+export type SkirtingCarcassLegsColorMaster = Prisma.SkirtingCarcassLegsColorMasterModel
+/**
+ * Model LeadHardwareMapping
+ * 
+ */
+export type LeadHardwareMapping = Prisma.LeadHardwareMappingModel
+/**
  * Model HandleTypeMaster
  * 
  */

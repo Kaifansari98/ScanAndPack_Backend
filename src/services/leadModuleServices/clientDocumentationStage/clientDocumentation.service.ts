@@ -211,7 +211,7 @@ export class ClientDocumentationService {
           vendor_id: data.vendor_id,
           is_deleted: false,
         },
-        select: { id: true, account_id: true },
+        select: { id: true, account_id: true, is_fast_production: true },
       });
       if (!lead) {
         throw new Error("Lead not found");
@@ -268,6 +268,8 @@ export class ClientDocumentationService {
         return normalized.length > 0 && normalized.toUpperCase() !== "NULL";
       };
 
+      const isFastProduction = lead.is_fast_production === true;
+
       if (instances.length > 1) {
         for (const instance of instances) {
           const rows = selections.filter(
@@ -281,19 +283,20 @@ export class ClientDocumentationService {
             Shutter: rows.some(
               (row) => row.type === "Shutter" && hasFilledValue(row.desc),
             ),
-            Handles: rows.some(
-              (row) => row.type === "Handles" && hasFilledValue(row.desc),
-            ),
           };
 
-          if (
-            !hasValueByType.Carcas ||
-            !hasValueByType.Shutter ||
-            !hasValueByType.Handles
-          ) {
-            throw new Error(
-              `Carcas, Shutter and Handles must be filled for ${instance.title}`,
-            );
+          if (isFastProduction) {
+            if (!hasValueByType.Carcas) {
+              throw new Error(
+                `Carcas must be filled for ${instance.title}`,
+              );
+            }
+          } else {
+            if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
+              throw new Error(
+                `Carcas and Shutter must be filled for ${instance.title}`,
+              );
+            }
           }
         }
       } else {
@@ -304,16 +307,15 @@ export class ClientDocumentationService {
           Shutter: selections.some(
             (row) => row.type === "Shutter" && hasFilledValue(row.desc),
           ),
-          Handles: selections.some(
-            (row) => row.type === "Handles" && hasFilledValue(row.desc),
-          ),
         };
-        if (
-          !hasValueByType.Carcas ||
-          !hasValueByType.Shutter ||
-          !hasValueByType.Handles
-        ) {
-          throw new Error("Carcas, Shutter and Handles must be filled");
+        if (isFastProduction) {
+          if (!hasValueByType.Carcas) {
+            throw new Error("Carcas must be filled");
+          }
+        } else {
+          if (!hasValueByType.Carcas || !hasValueByType.Shutter) {
+            throw new Error("Carcas and Shutter must be filled");
+          }
         }
       }
 

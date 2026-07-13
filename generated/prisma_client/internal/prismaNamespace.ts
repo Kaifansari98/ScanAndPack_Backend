@@ -419,6 +419,10 @@ export const ModelName = {
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
   ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
+  CarcassLegsMaster: 'CarcassLegsMaster',
+  SkirtingCarcassLegsMaster: 'SkirtingCarcassLegsMaster',
+  SkirtingCarcassLegsColorMaster: 'SkirtingCarcassLegsColorMaster',
+  LeadHardwareMapping: 'LeadHardwareMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   LeadDocuments: 'LeadDocuments',
@@ -559,7 +563,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -3150,6 +3154,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ShutterMaterialFinishMasterCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ShutterMaterialFinishMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CarcassLegsMaster: {
+      payload: Prisma.$CarcassLegsMasterPayload<ExtArgs>
+      fields: Prisma.CarcassLegsMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CarcassLegsMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CarcassLegsMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.CarcassLegsMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CarcassLegsMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        findMany: {
+          args: Prisma.CarcassLegsMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>[]
+        }
+        create: {
+          args: Prisma.CarcassLegsMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        createMany: {
+          args: Prisma.CarcassLegsMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CarcassLegsMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.CarcassLegsMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        update: {
+          args: Prisma.CarcassLegsMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CarcassLegsMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CarcassLegsMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CarcassLegsMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.CarcassLegsMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CarcassLegsMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.CarcassLegsMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCarcassLegsMaster>
+        }
+        groupBy: {
+          args: Prisma.CarcassLegsMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarcassLegsMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CarcassLegsMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CarcassLegsMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkirtingCarcassLegsMaster: {
+      payload: Prisma.$SkirtingCarcassLegsMasterPayload<ExtArgs>
+      fields: Prisma.SkirtingCarcassLegsMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkirtingCarcassLegsMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkirtingCarcassLegsMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.SkirtingCarcassLegsMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkirtingCarcassLegsMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        findMany: {
+          args: Prisma.SkirtingCarcassLegsMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>[]
+        }
+        create: {
+          args: Prisma.SkirtingCarcassLegsMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        createMany: {
+          args: Prisma.SkirtingCarcassLegsMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkirtingCarcassLegsMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.SkirtingCarcassLegsMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        update: {
+          args: Prisma.SkirtingCarcassLegsMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkirtingCarcassLegsMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkirtingCarcassLegsMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkirtingCarcassLegsMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkirtingCarcassLegsMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.SkirtingCarcassLegsMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkirtingCarcassLegsMaster>
+        }
+        groupBy: {
+          args: Prisma.SkirtingCarcassLegsMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkirtingCarcassLegsMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkirtingCarcassLegsMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkirtingCarcassLegsMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    SkirtingCarcassLegsColorMaster: {
+      payload: Prisma.$SkirtingCarcassLegsColorMasterPayload<ExtArgs>
+      fields: Prisma.SkirtingCarcassLegsColorMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SkirtingCarcassLegsColorMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SkirtingCarcassLegsColorMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.SkirtingCarcassLegsColorMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SkirtingCarcassLegsColorMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        findMany: {
+          args: Prisma.SkirtingCarcassLegsColorMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>[]
+        }
+        create: {
+          args: Prisma.SkirtingCarcassLegsColorMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        createMany: {
+          args: Prisma.SkirtingCarcassLegsColorMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SkirtingCarcassLegsColorMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.SkirtingCarcassLegsColorMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        update: {
+          args: Prisma.SkirtingCarcassLegsColorMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.SkirtingCarcassLegsColorMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SkirtingCarcassLegsColorMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SkirtingCarcassLegsColorMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.SkirtingCarcassLegsColorMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SkirtingCarcassLegsColorMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.SkirtingCarcassLegsColorMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSkirtingCarcassLegsColorMaster>
+        }
+        groupBy: {
+          args: Prisma.SkirtingCarcassLegsColorMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkirtingCarcassLegsColorMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SkirtingCarcassLegsColorMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SkirtingCarcassLegsColorMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    LeadHardwareMapping: {
+      payload: Prisma.$LeadHardwareMappingPayload<ExtArgs>
+      fields: Prisma.LeadHardwareMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeadHardwareMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeadHardwareMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.LeadHardwareMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeadHardwareMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        findMany: {
+          args: Prisma.LeadHardwareMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>[]
+        }
+        create: {
+          args: Prisma.LeadHardwareMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        createMany: {
+          args: Prisma.LeadHardwareMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeadHardwareMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.LeadHardwareMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        update: {
+          args: Prisma.LeadHardwareMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeadHardwareMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeadHardwareMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeadHardwareMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeadHardwareMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeadHardwareMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.LeadHardwareMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeadHardwareMapping>
+        }
+        groupBy: {
+          args: Prisma.LeadHardwareMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadHardwareMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeadHardwareMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeadHardwareMappingCountAggregateOutputType> | number
         }
       }
     }
@@ -13044,6 +13344,50 @@ export const ShutterMaterialFinishMasterScalarFieldEnum = {
 export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
 
 
+export const CarcassLegsMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type CarcassLegsMasterScalarFieldEnum = (typeof CarcassLegsMasterScalarFieldEnum)[keyof typeof CarcassLegsMasterScalarFieldEnum]
+
+
+export const SkirtingCarcassLegsMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  carcass_legs_id: 'carcass_legs_id',
+  inScope: 'inScope'
+} as const
+
+export type SkirtingCarcassLegsMasterScalarFieldEnum = (typeof SkirtingCarcassLegsMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsMasterScalarFieldEnum]
+
+
+export const SkirtingCarcassLegsColorMasterScalarFieldEnum = {
+  id: 'id',
+  carcass_legs_id: 'carcass_legs_id',
+  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
+  color: 'color'
+} as const
+
+export type SkirtingCarcassLegsColorMasterScalarFieldEnum = (typeof SkirtingCarcassLegsColorMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsColorMasterScalarFieldEnum]
+
+
+export const LeadHardwareMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  carcass_legs_id: 'carcass_legs_id',
+  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
+  skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
+  note: 'note',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScalarFieldEnum)[keyof typeof LeadHardwareMappingScalarFieldEnum]
+
+
 export const HandleTypeMasterScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -16269,6 +16613,10 @@ export type GlobalOmitConfig = {
   shutterSubTypeMaster?: Prisma.ShutterSubTypeMasterOmit
   shutterMaterialMaster?: Prisma.ShutterMaterialMasterOmit
   shutterMaterialFinishMaster?: Prisma.ShutterMaterialFinishMasterOmit
+  carcassLegsMaster?: Prisma.CarcassLegsMasterOmit
+  skirtingCarcassLegsMaster?: Prisma.SkirtingCarcassLegsMasterOmit
+  skirtingCarcassLegsColorMaster?: Prisma.SkirtingCarcassLegsColorMasterOmit
+  leadHardwareMapping?: Prisma.LeadHardwareMappingOmit
   handleTypeMaster?: Prisma.HandleTypeMasterOmit
   timelineRule?: Prisma.TimelineRuleOmit
   leadDocuments?: Prisma.LeadDocumentsOmit

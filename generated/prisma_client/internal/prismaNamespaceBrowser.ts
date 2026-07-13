@@ -86,6 +86,10 @@ export const ModelName = {
   ShutterSubTypeMaster: 'ShutterSubTypeMaster',
   ShutterMaterialMaster: 'ShutterMaterialMaster',
   ShutterMaterialFinishMaster: 'ShutterMaterialFinishMaster',
+  CarcassLegsMaster: 'CarcassLegsMaster',
+  SkirtingCarcassLegsMaster: 'SkirtingCarcassLegsMaster',
+  SkirtingCarcassLegsColorMaster: 'SkirtingCarcassLegsColorMaster',
+  LeadHardwareMapping: 'LeadHardwareMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   LeadDocuments: 'LeadDocuments',
@@ -829,6 +833,50 @@ export const ShutterMaterialFinishMasterScalarFieldEnum = {
 } as const
 
 export type ShutterMaterialFinishMasterScalarFieldEnum = (typeof ShutterMaterialFinishMasterScalarFieldEnum)[keyof typeof ShutterMaterialFinishMasterScalarFieldEnum]
+
+
+export const CarcassLegsMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  vendor_id: 'vendor_id'
+} as const
+
+export type CarcassLegsMasterScalarFieldEnum = (typeof CarcassLegsMasterScalarFieldEnum)[keyof typeof CarcassLegsMasterScalarFieldEnum]
+
+
+export const SkirtingCarcassLegsMasterScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  carcass_legs_id: 'carcass_legs_id',
+  inScope: 'inScope'
+} as const
+
+export type SkirtingCarcassLegsMasterScalarFieldEnum = (typeof SkirtingCarcassLegsMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsMasterScalarFieldEnum]
+
+
+export const SkirtingCarcassLegsColorMasterScalarFieldEnum = {
+  id: 'id',
+  carcass_legs_id: 'carcass_legs_id',
+  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
+  color: 'color'
+} as const
+
+export type SkirtingCarcassLegsColorMasterScalarFieldEnum = (typeof SkirtingCarcassLegsColorMasterScalarFieldEnum)[keyof typeof SkirtingCarcassLegsColorMasterScalarFieldEnum]
+
+
+export const LeadHardwareMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  carcass_legs_id: 'carcass_legs_id',
+  skirting_carcass_legs_id: 'skirting_carcass_legs_id',
+  skirting_carcass_legs_color_id: 'skirting_carcass_legs_color_id',
+  note: 'note',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScalarFieldEnum)[keyof typeof LeadHardwareMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {

@@ -8,6 +8,9 @@ import {
   getAllShutterTypes,
   getAllShutterMaterials,
   getShutterMaterialFinishes,
+  getAllCarcassLegs,
+  getSkirtingCarcassLegs,
+  getSkirtingCarcassLegsColors,
 } from "../../services/leadModuleServices/selectionMaster.service";
 
 const getVendorId = (req: Request, res: Response): number | null => {
@@ -98,6 +101,58 @@ export const fetchShutterMaterialFinishes = async (
 
     const finishes = await getShutterMaterialFinishes(shutter_material_id);
     return res.status(200).json({ success: true, data: finishes });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllCarcassLegs = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const legs = await getAllCarcassLegs(vendor_id);
+    return res.status(200).json({ success: true, data: legs });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchSkirtingCarcassLegs = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const carcass_legs_id = Number(req.params.carcass_legs_id);
+    if (!carcass_legs_id) {
+      return res.status(400).json({ error: "carcass_legs_id is required" });
+    }
+
+    const skirtings = await getSkirtingCarcassLegs(carcass_legs_id);
+    return res.status(200).json({ success: true, data: skirtings });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchSkirtingCarcassLegsColors = async (
+  req: Request,
+  res: Response,
+) => {
+  try {
+    const skirting_carcass_legs_id = Number(
+      req.params.skirting_carcass_legs_id,
+    );
+    if (!skirting_carcass_legs_id) {
+      return res
+        .status(400)
+        .json({ error: "skirting_carcass_legs_id is required" });
+    }
+
+    const colors = await getSkirtingCarcassLegsColors(
+      skirting_carcass_legs_id,
+    );
+    return res.status(200).json({ success: true, data: colors });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }

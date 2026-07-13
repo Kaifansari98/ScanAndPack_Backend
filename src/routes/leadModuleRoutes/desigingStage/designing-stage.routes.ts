@@ -218,6 +218,16 @@ DesigningStageRouter.post(
   (req, res) => DesigingStageController.upsertLeadShutterMaterialMapping(req, res),
 );
 
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/hardware-mappings",
+  (req, res) => DesigingStageController.getLeadHardwareMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/hardware-mappings",
+  (req, res) => DesigingStageController.upsertLeadHardwareMapping(req, res),
+);
+
 // ─── CHS Selection Type Mapping ───────────────────────────────────────────────
 // POST   /api/leads/designing-stage/chs-selection-type-mapping
 DesigningStageRouter.post(

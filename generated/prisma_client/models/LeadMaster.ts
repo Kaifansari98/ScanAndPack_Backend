@@ -980,6 +980,7 @@ export type LeadMasterWhereInput = {
   specifications?: Prisma.LeadSpecificationsMasterListRelationFilter
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
+  hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   assignedTo?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   assignedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -1126,6 +1127,7 @@ export type LeadMasterOrderByWithRelationInput = {
   specifications?: Prisma.LeadSpecificationsMasterOrderByRelationAggregateInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingOrderByRelationAggregateInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingOrderByRelationAggregateInput
+  hardwareMappings?: Prisma.LeadHardwareMappingOrderByRelationAggregateInput
   account?: Prisma.AccountMasterOrderByWithRelationInput
   assignedTo?: Prisma.UserMasterOrderByWithRelationInput
   assignedBy?: Prisma.UserMasterOrderByWithRelationInput
@@ -1276,6 +1278,7 @@ export type LeadMasterWhereUniqueInput = Prisma.AtLeast<{
   specifications?: Prisma.LeadSpecificationsMasterListRelationFilter
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingListRelationFilter
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingListRelationFilter
+  hardwareMappings?: Prisma.LeadHardwareMappingListRelationFilter
   account?: Prisma.XOR<Prisma.AccountMasterNullableScalarRelationFilter, Prisma.AccountMasterWhereInput> | null
   assignedTo?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
   assignedBy?: Prisma.XOR<Prisma.UserMasterNullableScalarRelationFilter, Prisma.UserMasterWhereInput> | null
@@ -1600,6 +1603,7 @@ export type LeadMasterCreateInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -1746,6 +1750,7 @@ export type LeadMasterUncheckedCreateInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -1869,6 +1874,7 @@ export type LeadMasterUpdateInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -2015,6 +2021,7 @@ export type LeadMasterUncheckedUpdateInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -3162,6 +3169,20 @@ export type LeadMasterUpdateOneRequiredWithoutProductMappingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutProductMappingsInput, Prisma.LeadMasterUpdateWithoutProductMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutProductMappingsInput>
 }
 
+export type LeadMasterCreateNestedOneWithoutHardwareMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutHardwareMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutHardwareMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+}
+
+export type LeadMasterUpdateOneRequiredWithoutHardwareMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutHardwareMappingsInput>
+  connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutHardwareMappingsInput
+  upsert?: Prisma.LeadMasterUpsertWithoutHardwareMappingsInput
+  connect?: Prisma.LeadMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadMasterUpdateToOneWithWhereWithoutHardwareMappingsInput, Prisma.LeadMasterUpdateWithoutHardwareMappingsInput>, Prisma.LeadMasterUncheckedUpdateWithoutHardwareMappingsInput>
+}
+
 export type LeadMasterCreateNestedOneWithoutDocumentsInput = {
   create?: Prisma.XOR<Prisma.LeadMasterCreateWithoutDocumentsInput, Prisma.LeadMasterUncheckedCreateWithoutDocumentsInput>
   connectOrCreate?: Prisma.LeadMasterCreateOrConnectWithoutDocumentsInput
@@ -3873,6 +3894,7 @@ export type LeadMasterCreateWithoutVendorInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -4017,6 +4039,7 @@ export type LeadMasterUncheckedCreateWithoutVendorInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -4260,6 +4283,7 @@ export type LeadMasterCreateWithoutAssignedToInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
@@ -4404,6 +4428,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedToInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -4537,6 +4562,7 @@ export type LeadMasterCreateWithoutAssignedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
@@ -4681,6 +4707,7 @@ export type LeadMasterUncheckedCreateWithoutAssignedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -4814,6 +4841,7 @@ export type LeadMasterCreateWithoutCreatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -4958,6 +4986,7 @@ export type LeadMasterUncheckedCreateWithoutCreatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5091,6 +5120,7 @@ export type LeadMasterCreateWithoutUpdatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -5235,6 +5265,7 @@ export type LeadMasterUncheckedCreateWithoutUpdatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5432,6 +5463,7 @@ export type LeadMasterCreateWithoutProjectsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -5577,6 +5609,7 @@ export type LeadMasterUncheckedCreateWithoutProjectsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -5715,6 +5748,7 @@ export type LeadMasterUpdateWithoutProjectsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -5860,6 +5894,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -5982,6 +6017,7 @@ export type LeadMasterCreateWithoutProjectDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -6127,6 +6163,7 @@ export type LeadMasterUncheckedCreateWithoutProjectDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -6265,6 +6302,7 @@ export type LeadMasterUpdateWithoutProjectDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -6410,6 +6448,7 @@ export type LeadMasterUncheckedUpdateWithoutProjectDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -6532,6 +6571,7 @@ export type LeadMasterCreateWithoutBoxMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -6677,6 +6717,7 @@ export type LeadMasterUncheckedCreateWithoutBoxMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -6819,6 +6860,7 @@ export type LeadMasterCreateWithoutSpecificationsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -6964,6 +7006,7 @@ export type LeadMasterUncheckedCreateWithoutSpecificationsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -7102,6 +7145,7 @@ export type LeadMasterUpdateWithoutSpecificationsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -7247,6 +7291,7 @@ export type LeadMasterUncheckedUpdateWithoutSpecificationsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -7369,6 +7414,7 @@ export type LeadMasterCreateWithoutCarcassMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -7514,6 +7560,7 @@ export type LeadMasterUncheckedCreateWithoutCarcassMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -7652,6 +7699,7 @@ export type LeadMasterUpdateWithoutCarcassMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -7797,6 +7845,7 @@ export type LeadMasterUncheckedUpdateWithoutCarcassMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -7919,6 +7968,7 @@ export type LeadMasterCreateWithoutShutterMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -8064,6 +8114,7 @@ export type LeadMasterUncheckedCreateWithoutShutterMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -8202,6 +8253,7 @@ export type LeadMasterUpdateWithoutShutterMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -8347,6 +8399,7 @@ export type LeadMasterUncheckedUpdateWithoutShutterMaterialMappingsInput = {
   superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -8469,6 +8522,7 @@ export type LeadMasterCreateWithoutSuperAdminApprovalLocInsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -8614,6 +8668,7 @@ export type LeadMasterUncheckedCreateWithoutSuperAdminApprovalLocInsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -8752,6 +8807,7 @@ export type LeadMasterUpdateWithoutSuperAdminApprovalLocInsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -8897,6 +8953,7 @@ export type LeadMasterUncheckedUpdateWithoutSuperAdminApprovalLocInsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -9020,6 +9077,7 @@ export type LeadMasterCreateWithoutUserMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -9165,6 +9223,7 @@ export type LeadMasterUncheckedCreateWithoutUserMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -9303,6 +9362,7 @@ export type LeadMasterUpdateWithoutUserMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -9448,6 +9508,7 @@ export type LeadMasterUncheckedUpdateWithoutUserMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -9569,6 +9630,7 @@ export type LeadMasterCreateWithoutLeadActivityStatusLogInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -9714,6 +9776,7 @@ export type LeadMasterUncheckedCreateWithoutLeadActivityStatusLogInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -9852,6 +9915,7 @@ export type LeadMasterUpdateWithoutLeadActivityStatusLogInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -9997,6 +10061,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadActivityStatusLogInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -10120,6 +10185,7 @@ export type LeadMasterCreateWithoutSiteTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -10264,6 +10330,7 @@ export type LeadMasterUncheckedCreateWithoutSiteTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -10413,6 +10480,7 @@ export type LeadMasterCreateWithoutSourceInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -10557,6 +10625,7 @@ export type LeadMasterUncheckedCreateWithoutSourceInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -10706,6 +10775,7 @@ export type LeadMasterCreateWithoutAccountInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
@@ -10850,6 +10920,7 @@ export type LeadMasterUncheckedCreateWithoutAccountInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -10999,6 +11070,7 @@ export type LeadMasterCreateWithoutProductMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -11144,6 +11216,7 @@ export type LeadMasterUncheckedCreateWithoutProductMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -11282,6 +11355,7 @@ export type LeadMasterUpdateWithoutProductMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -11427,6 +11501,561 @@ export type LeadMasterUncheckedUpdateWithoutProductMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUncheckedUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUncheckedUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUncheckedUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUncheckedUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUncheckedUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterCreateWithoutHardwareMappingsInput = {
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  designer_remark?: string | null
+  created_at?: Date | string
+  updated_at?: Date | string
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  isLargeScaleProjectLead?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  tentative_order_login_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
+  assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
+  assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadsCreatedInput
+  franchise?: Prisma.FranchiseMasterCreateNestedOneWithoutLeadsInput
+  siteType?: Prisma.SiteTypeMasterCreateNestedOneWithoutLeadsInput
+  source?: Prisma.SourceMasterCreateNestedOneWithoutLeadsInput
+  statusType?: Prisma.StatusTypeMasterCreateNestedOneWithoutLeadsInput
+  updatedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsUpdatedInput
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadsInput
+  architect?: Prisma.ArchitechuremasterCreateNestedOneWithoutLeadsInput
+  productMappings?: Prisma.LeadProductMappingCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterUncheckedCreateWithoutHardwareMappingsInput = {
+  id?: number
+  firstname: string
+  lastname: string
+  country_code: string
+  contact_no: string
+  alt_contact_no?: string | null
+  email?: string | null
+  site_address?: string | null
+  site_type_id?: number | null
+  source_id?: number | null
+  archetech_name?: string | null
+  archetech_number?: string | null
+  architect_id?: number | null
+  designer_remark?: string | null
+  created_by: number
+  created_at?: Date | string
+  updated_by?: number | null
+  updated_at?: Date | string
+  vendor_id: number
+  assign_to?: number | null
+  assigned_by?: number | null
+  account_id?: number | null
+  deleted_at?: Date | string | null
+  deleted_by?: number | null
+  is_deleted?: boolean
+  status_id?: number | null
+  priority?: string | null
+  initial_site_measurement_date?: Date | string | null
+  final_desc_note?: string | null
+  advance_payment_date?: Date | string | null
+  site_map_link?: string | null
+  activity_status?: $Enums.ActivityStatus
+  activity_status_remark?: string | null
+  booking_amount?: number | null
+  pending_amount?: number | null
+  total_project_amount?: number | null
+  is_draft?: boolean
+  isLargeScaleProjectLead?: boolean
+  lead_code: string
+  is_small_order_request?: boolean
+  is_client_approval_submitted?: boolean
+  client_required_order_login_complition_date?: Date | string | null
+  tentative_order_login_date?: Date | string | null
+  expected_order_login_ready_date?: Date | string | null
+  no_of_client_documents_initially_submitted?: number | null
+  hardware_packing_details_remark?: string | null
+  woodwork_packing_details_remark?: string | null
+  no_of_boxes?: number | null
+  dispatch_planning_remark?: string | null
+  material_lift_availability?: boolean | null
+  material_lift_size?: string | null
+  vehicle_approachability_for_dispatch?: boolean | null
+  onsite_contact_person_name?: string | null
+  onsite_contact_person_number?: string | null
+  required_date_for_dispatch?: Date | string | null
+  is_fast_production?: boolean
+  fast_production_status?: $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Date | string | null
+  alt_onsite_contact_person_name?: string | null
+  alt_onsite_contact_person_number?: string | null
+  dispatch_date?: Date | string | null
+  dispatch_remark?: string | null
+  driver_name?: string | null
+  driver_number?: string | null
+  vehicle_no?: string | null
+  tech_check_reached_at?: Date | string | null
+  tech_check_completed_at?: Date | string | null
+  actual_installation_start_date?: Date | string | null
+  actual_installation_completion_at?: Date | string | null
+  carcass_installation_completion_date?: Date | string | null
+  expected_installation_end_date?: Date | string | null
+  is_carcass_installation_completed?: boolean | null
+  is_shutter_installation_completed?: boolean | null
+  shutter_installation_completion_date?: Date | string | null
+  usable_handover_pending_work_details?: string | null
+  mrp_value?: number | null
+  usable_handover_completed?: boolean | null
+  usable_handover_completed_at?: Date | string | null
+  is_amc_opted?: boolean | null
+  amc_opted_at?: Date | string | null
+  amc_plan_started_at?: Date | string | null
+  amc_plan_closed_at?: Date | string | null
+  final_handover_marked_at?: Date | string | null
+  franchise_id?: number | null
+  order_login_prod_files_remark?: string | null
+  total_required_chs_manufacturing_days?: number | null
+  is_blocked?: boolean
+  lead_blocked_at?: Date | string | null
+  cutList?: Prisma.CutListUncheckedCreateNestedManyWithoutLeadInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedCreateNestedManyWithoutLeadInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedCreateNestedManyWithoutLeadInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedCreateNestedManyWithoutLeadInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedCreateNestedManyWithoutLeadInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedCreateNestedManyWithoutLeadInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedCreateNestedManyWithoutLeadInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedCreateNestedManyWithoutLeadInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedCreateNestedManyWithoutLeadInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedCreateNestedManyWithoutLeadInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedCreateNestedManyWithoutLeadInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedCreateNestedManyWithoutLeadInput
+  documents?: Prisma.LeadDocumentsUncheckedCreateNestedManyWithoutLeadInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedCreateNestedManyWithoutLeadInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedCreateNestedManyWithoutLeadInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedCreateNestedManyWithoutLeadInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUncheckedCreateNestedManyWithoutLeadInput
+  userMappings?: Prisma.LeadUserMappingUncheckedCreateNestedManyWithoutLeadInput
+  ledgers?: Prisma.LedgerUncheckedCreateNestedManyWithoutLeadInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUncheckedCreateNestedManyWithoutLeadInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUncheckedCreateNestedManyWithoutLeadInput
+  payments?: Prisma.PaymentInfoUncheckedCreateNestedManyWithoutLeadInput
+  projects?: Prisma.ProjectMasterUncheckedCreateNestedManyWithoutLeadInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUncheckedCreateNestedManyWithoutLeadInput
+  siteReadiness?: Prisma.SiteReadinessUncheckedCreateNestedManyWithoutLeadInput
+  tasks?: Prisma.UserLeadTaskUncheckedCreateNestedManyWithoutLeadInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUncheckedCreateNestedManyWithoutLeadInput
+  projectDetails?: Prisma.ProjectDetailsUncheckedCreateNestedManyWithoutLeadMasterInput
+  BoxMaster?: Prisma.BoxMasterUncheckedCreateNestedManyWithoutLeadMasterInput
+  fastProductionRequests?: Prisma.FastProductionRequestUncheckedCreateNestedManyWithoutLeadInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUncheckedCreateNestedManyWithoutLeadInput
+}
+
+export type LeadMasterCreateOrConnectWithoutHardwareMappingsInput = {
+  where: Prisma.LeadMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutHardwareMappingsInput>
+}
+
+export type LeadMasterUpsertWithoutHardwareMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadMasterUpdateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutHardwareMappingsInput>
+  create: Prisma.XOR<Prisma.LeadMasterCreateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedCreateWithoutHardwareMappingsInput>
+  where?: Prisma.LeadMasterWhereInput
+}
+
+export type LeadMasterUpdateToOneWithWhereWithoutHardwareMappingsInput = {
+  where?: Prisma.LeadMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadMasterUpdateWithoutHardwareMappingsInput, Prisma.LeadMasterUncheckedUpdateWithoutHardwareMappingsInput>
+}
+
+export type LeadMasterUpdateWithoutHardwareMappingsInput = {
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
+  assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
+  assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
+  franchise?: Prisma.FranchiseMasterUpdateOneWithoutLeadsNestedInput
+  siteType?: Prisma.SiteTypeMasterUpdateOneWithoutLeadsNestedInput
+  source?: Prisma.SourceMasterUpdateOneWithoutLeadsNestedInput
+  statusType?: Prisma.StatusTypeMasterUpdateOneWithoutLeadsNestedInput
+  updatedBy?: Prisma.UserMasterUpdateOneWithoutLeadsUpdatedNestedInput
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadsNestedInput
+  architect?: Prisma.ArchitechuremasterUpdateOneWithoutLeadsNestedInput
+  productMappings?: Prisma.LeadProductMappingUpdateManyWithoutLeadNestedInput
+  productStructureInstances?: Prisma.LeadProductStructureInstanceUpdateManyWithoutLeadNestedInput
+  leadProductStructureMapping?: Prisma.LeadProductStructureMappingUpdateManyWithoutLeadNestedInput
+  siteSupervisors?: Prisma.LeadSiteSupervisorMappingUpdateManyWithoutLeadNestedInput
+  leadStatusLogs?: Prisma.LeadStatusLogsUpdateManyWithoutLeadNestedInput
+  userMappings?: Prisma.LeadUserMappingUpdateManyWithoutLeadNestedInput
+  ledgers?: Prisma.LedgerUpdateManyWithoutLeadNestedInput
+  miscellaneousMaster?: Prisma.MiscellaneousMasterUpdateManyWithoutLeadNestedInput
+  orderLoginDetails?: Prisma.OrderLoginDetailsUpdateManyWithoutLeadNestedInput
+  orderLoginPoFiles?: Prisma.OrderLoginPoFileMappingUpdateManyWithoutLeadNestedInput
+  payments?: Prisma.PaymentInfoUpdateManyWithoutLeadNestedInput
+  projects?: Prisma.ProjectMasterUpdateManyWithoutLeadNestedInput
+  serviceSchedules?: Prisma.LeadServiceScheduleUpdateManyWithoutLeadNestedInput
+  siteReadiness?: Prisma.SiteReadinessUpdateManyWithoutLeadNestedInput
+  tasks?: Prisma.UserLeadTaskUpdateManyWithoutLeadNestedInput
+  externalPlatformCustomerMappings?: Prisma.LeadExternalPlatformCustomerMappingUpdateManyWithoutLeadNestedInput
+  projectDetails?: Prisma.ProjectDetailsUpdateManyWithoutLeadMasterNestedInput
+  BoxMaster?: Prisma.BoxMasterUpdateManyWithoutLeadMasterNestedInput
+  fastProductionRequests?: Prisma.FastProductionRequestUpdateManyWithoutLeadNestedInput
+  fastProductionRequestBatches?: Prisma.FastProductionRequestBatchUpdateManyWithoutLeadNestedInput
+}
+
+export type LeadMasterUncheckedUpdateWithoutHardwareMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  firstname?: Prisma.StringFieldUpdateOperationsInput | string
+  lastname?: Prisma.StringFieldUpdateOperationsInput | string
+  country_code?: Prisma.StringFieldUpdateOperationsInput | string
+  contact_no?: Prisma.StringFieldUpdateOperationsInput | string
+  alt_contact_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  site_type_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  source_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  archetech_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archetech_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  architect_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  designer_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updated_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  updated_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  assign_to?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  assigned_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  account_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  deleted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  deleted_by?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_deleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  status_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  priority?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  initial_site_measurement_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_desc_note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  advance_payment_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  site_map_link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  activity_status?: Prisma.EnumActivityStatusFieldUpdateOperationsInput | $Enums.ActivityStatus
+  activity_status_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  booking_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  pending_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  total_project_amount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  is_draft?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isLargeScaleProjectLead?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_code?: Prisma.StringFieldUpdateOperationsInput | string
+  is_small_order_request?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  is_client_approval_submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  client_required_order_login_complition_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tentative_order_login_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_order_login_ready_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  no_of_client_documents_initially_submitted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  hardware_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  woodwork_packing_details_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  no_of_boxes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  dispatch_planning_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  material_lift_availability?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  material_lift_size?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_approachability_for_dispatch?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  required_date_for_dispatch?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_fast_production?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  fast_production_status?: Prisma.NullableEnumFastProductionRequestStatusFieldUpdateOperationsInput | $Enums.FastProductionRequestStatus | null
+  fast_production_approved_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  alt_onsite_contact_person_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  alt_onsite_contact_person_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dispatch_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dispatch_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driver_number?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  vehicle_no?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tech_check_reached_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  tech_check_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_start_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  actual_installation_completion_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  carcass_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  expected_installation_end_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_carcass_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  is_shutter_installation_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  shutter_installation_completion_date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  usable_handover_pending_work_details?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mrp_value?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  usable_handover_completed?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  usable_handover_completed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  is_amc_opted?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  amc_opted_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_started_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  amc_plan_closed_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  final_handover_marked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  franchise_id?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  order_login_prod_files_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  total_required_chs_manufacturing_days?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  is_blocked?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  lead_blocked_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cutList?: Prisma.CutListUncheckedUpdateManyWithoutLeadNestedInput
+  cutListMachineMapping?: Prisma.CutListMachineMappingUncheckedUpdateManyWithoutLeadNestedInput
+  installationIssueLogMaster?: Prisma.InstallationIssueLogMasterUncheckedUpdateManyWithoutLeadNestedInput
+  installationUpdates?: Prisma.InstallationUpdateUncheckedUpdateManyWithoutLeadNestedInput
+  installerMappings?: Prisma.InstallerUserMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadActivityStatusLog?: Prisma.LeadActivityStatusLogUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatDocuments?: Prisma.LeadChatDocumentUncheckedUpdateManyWithoutLeadNestedInput
+  leadChatRooms?: Prisma.LeadChatRoomUncheckedUpdateManyWithoutLeadNestedInput
+  designMeeting?: Prisma.LeadDesignMeetingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisits?: Prisma.LeadClientVisitUncheckedUpdateManyWithoutLeadNestedInput
+  designMeetingDocsMapping?: Prisma.LeadDesignMeetingDocumentsMappingUncheckedUpdateManyWithoutLeadNestedInput
+  clientVisitDocumentMappings?: Prisma.LeadClientVisitDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  designSelection?: Prisma.LeadDesignSelectionUncheckedUpdateManyWithoutLeadNestedInput
+  chsSelectionMappings?: Prisma.CHSSelectionTypeMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDetailedLogs?: Prisma.LeadDetailedLogsUncheckedUpdateManyWithoutLeadNestedInput
+  leadApprovalRequestDocumentMappings?: Prisma.LeadApprovalRequestDocumentMappingUncheckedUpdateManyWithoutLeadNestedInput
+  leadDocumentLogs?: Prisma.LeadDocumentLogsUncheckedUpdateManyWithoutLeadNestedInput
+  documents?: Prisma.LeadDocumentsUncheckedUpdateManyWithoutLeadNestedInput
+  smallOrderRequests?: Prisma.SmallOrderRequestUncheckedUpdateManyWithoutLeadNestedInput
+  amcContracts?: Prisma.LeadAmcContractUncheckedUpdateManyWithoutLeadNestedInput
+  superAdminApprovalLocIns?: Prisma.LeadSuperAdminApprovalLocInsUncheckedUpdateManyWithoutLeadNestedInput
+  specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
+  carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -11548,6 +12177,7 @@ export type LeadMasterCreateWithoutDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -11693,6 +12323,7 @@ export type LeadMasterUncheckedCreateWithoutDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -11831,6 +12462,7 @@ export type LeadMasterUpdateWithoutDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -11976,6 +12608,7 @@ export type LeadMasterUncheckedUpdateWithoutDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -12098,6 +12731,7 @@ export type LeadMasterCreateWithoutLeadChatRoomsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -12243,6 +12877,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatRoomsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -12381,6 +13016,7 @@ export type LeadMasterUpdateWithoutLeadChatRoomsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -12526,6 +13162,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatRoomsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -12648,6 +13285,7 @@ export type LeadMasterCreateWithoutLeadChatDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -12793,6 +13431,7 @@ export type LeadMasterUncheckedCreateWithoutLeadChatDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -12931,6 +13570,7 @@ export type LeadMasterUpdateWithoutLeadChatDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -13076,6 +13716,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadChatDocumentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -13199,6 +13840,7 @@ export type LeadMasterCreateWithoutLeadProductStructureMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -13344,6 +13986,7 @@ export type LeadMasterUncheckedCreateWithoutLeadProductStructureMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -13482,6 +14125,7 @@ export type LeadMasterUpdateWithoutLeadProductStructureMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -13627,6 +14271,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadProductStructureMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -13749,6 +14394,7 @@ export type LeadMasterCreateWithoutProductStructureInstancesInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -13894,6 +14540,7 @@ export type LeadMasterUncheckedCreateWithoutProductStructureInstancesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -14032,6 +14679,7 @@ export type LeadMasterUpdateWithoutProductStructureInstancesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -14177,6 +14825,7 @@ export type LeadMasterUncheckedUpdateWithoutProductStructureInstancesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
   siteSupervisors?: Prisma.LeadSiteSupervisorMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -14299,6 +14948,7 @@ export type LeadMasterCreateWithoutPaymentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -14444,6 +15094,7 @@ export type LeadMasterUncheckedCreateWithoutPaymentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -14582,6 +15233,7 @@ export type LeadMasterUpdateWithoutPaymentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -14727,6 +15379,7 @@ export type LeadMasterUncheckedUpdateWithoutPaymentsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -14849,6 +15502,7 @@ export type LeadMasterCreateWithoutLedgersInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -14994,6 +15648,7 @@ export type LeadMasterUncheckedCreateWithoutLedgersInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -15132,6 +15787,7 @@ export type LeadMasterUpdateWithoutLedgersInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -15277,6 +15933,7 @@ export type LeadMasterUncheckedUpdateWithoutLedgersInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15398,6 +16055,7 @@ export type LeadMasterCreateWithoutSmallOrderRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -15543,6 +16201,7 @@ export type LeadMasterUncheckedCreateWithoutSmallOrderRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -15681,6 +16340,7 @@ export type LeadMasterUpdateWithoutSmallOrderRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -15826,6 +16486,7 @@ export type LeadMasterUncheckedUpdateWithoutSmallOrderRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -15948,6 +16609,7 @@ export type LeadMasterCreateWithoutAmcContractsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -16093,6 +16755,7 @@ export type LeadMasterUncheckedCreateWithoutAmcContractsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16231,6 +16894,7 @@ export type LeadMasterUpdateWithoutAmcContractsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -16376,6 +17040,7 @@ export type LeadMasterUncheckedUpdateWithoutAmcContractsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -16499,6 +17164,7 @@ export type LeadMasterCreateWithoutServiceSchedulesInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -16644,6 +17310,7 @@ export type LeadMasterUncheckedCreateWithoutServiceSchedulesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -16782,6 +17449,7 @@ export type LeadMasterUpdateWithoutServiceSchedulesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -16927,6 +17595,7 @@ export type LeadMasterUncheckedUpdateWithoutServiceSchedulesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -17049,6 +17718,7 @@ export type LeadMasterCreateWithoutStatusTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -17193,6 +17863,7 @@ export type LeadMasterUncheckedCreateWithoutStatusTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -17342,6 +18013,7 @@ export type LeadMasterCreateWithoutLeadStatusLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -17487,6 +18159,7 @@ export type LeadMasterUncheckedCreateWithoutLeadStatusLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -17625,6 +18298,7 @@ export type LeadMasterUpdateWithoutLeadStatusLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -17770,6 +18444,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadStatusLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -17891,6 +18566,7 @@ export type LeadMasterCreateWithoutDesignMeetingInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -18036,6 +18712,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -18174,6 +18851,7 @@ export type LeadMasterUpdateWithoutDesignMeetingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -18319,6 +18997,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -18441,6 +19120,7 @@ export type LeadMasterCreateWithoutClientVisitsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -18586,6 +19266,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -18724,6 +19405,7 @@ export type LeadMasterUpdateWithoutClientVisitsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -18869,6 +19551,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -18991,6 +19674,7 @@ export type LeadMasterCreateWithoutDesignMeetingDocsMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -19136,6 +19820,7 @@ export type LeadMasterUncheckedCreateWithoutDesignMeetingDocsMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -19274,6 +19959,7 @@ export type LeadMasterUpdateWithoutDesignMeetingDocsMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -19419,6 +20105,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignMeetingDocsMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -19541,6 +20228,7 @@ export type LeadMasterCreateWithoutClientVisitDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -19686,6 +20374,7 @@ export type LeadMasterUncheckedCreateWithoutClientVisitDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -19824,6 +20513,7 @@ export type LeadMasterUpdateWithoutClientVisitDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -19969,6 +20659,7 @@ export type LeadMasterUncheckedUpdateWithoutClientVisitDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -20091,6 +20782,7 @@ export type LeadMasterCreateWithoutDesignSelectionInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -20236,6 +20928,7 @@ export type LeadMasterUncheckedCreateWithoutDesignSelectionInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -20374,6 +21067,7 @@ export type LeadMasterUpdateWithoutDesignSelectionInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -20519,6 +21213,7 @@ export type LeadMasterUncheckedUpdateWithoutDesignSelectionInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -20641,6 +21336,7 @@ export type LeadMasterCreateWithoutChsSelectionMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -20786,6 +21482,7 @@ export type LeadMasterUncheckedCreateWithoutChsSelectionMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -20924,6 +21621,7 @@ export type LeadMasterUpdateWithoutChsSelectionMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -21069,6 +21767,7 @@ export type LeadMasterUncheckedUpdateWithoutChsSelectionMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -21192,6 +21891,7 @@ export type LeadMasterCreateWithoutSiteSupervisorsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -21337,6 +22037,7 @@ export type LeadMasterUncheckedCreateWithoutSiteSupervisorsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -21475,6 +22176,7 @@ export type LeadMasterUpdateWithoutSiteSupervisorsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -21620,6 +22322,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteSupervisorsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -21742,6 +22445,7 @@ export type LeadMasterCreateWithoutTasksInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -21887,6 +22591,7 @@ export type LeadMasterUncheckedCreateWithoutTasksInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -22025,6 +22730,7 @@ export type LeadMasterUpdateWithoutTasksInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -22170,6 +22876,7 @@ export type LeadMasterUncheckedUpdateWithoutTasksInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -22292,6 +22999,7 @@ export type LeadMasterCreateWithoutFastProductionRequestBatchesInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -22437,6 +23145,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestBatchesInput = 
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -22575,6 +23284,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestBatchesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -22720,6 +23430,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestBatchesInput = 
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -22842,6 +23553,7 @@ export type LeadMasterCreateWithoutFastProductionRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -22987,6 +23699,7 @@ export type LeadMasterUncheckedCreateWithoutFastProductionRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -23125,6 +23838,7 @@ export type LeadMasterUpdateWithoutFastProductionRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -23270,6 +23984,7 @@ export type LeadMasterUncheckedUpdateWithoutFastProductionRequestsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -23391,6 +24106,7 @@ export type LeadMasterCreateWithoutLeadDetailedLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -23536,6 +24252,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDetailedLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -23674,6 +24391,7 @@ export type LeadMasterUpdateWithoutLeadDetailedLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -23819,6 +24537,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDetailedLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -23941,6 +24660,7 @@ export type LeadMasterCreateWithoutLeadDocumentLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -24086,6 +24806,7 @@ export type LeadMasterUncheckedCreateWithoutLeadDocumentLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -24224,6 +24945,7 @@ export type LeadMasterUpdateWithoutLeadDocumentLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -24369,6 +25091,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadDocumentLogsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -24491,6 +25214,7 @@ export type LeadMasterCreateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -24636,6 +25360,7 @@ export type LeadMasterUncheckedCreateWithoutLeadApprovalRequestDocumentMappingsI
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -24774,6 +25499,7 @@ export type LeadMasterUpdateWithoutLeadApprovalRequestDocumentMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -24919,6 +25645,7 @@ export type LeadMasterUncheckedUpdateWithoutLeadApprovalRequestDocumentMappingsI
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -25042,6 +25769,7 @@ export type LeadMasterCreateWithoutOrderLoginDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -25187,6 +25915,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -25325,6 +26054,7 @@ export type LeadMasterUpdateWithoutOrderLoginDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -25470,6 +26200,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginDetailsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -25592,6 +26323,7 @@ export type LeadMasterCreateWithoutSiteReadinessInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -25737,6 +26469,7 @@ export type LeadMasterUncheckedCreateWithoutSiteReadinessInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -25875,6 +26608,7 @@ export type LeadMasterUpdateWithoutSiteReadinessInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -26020,6 +26754,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteReadinessInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -26141,6 +26876,7 @@ export type LeadMasterCreateWithoutInstallerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -26286,6 +27022,7 @@ export type LeadMasterUncheckedCreateWithoutInstallerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -26424,6 +27161,7 @@ export type LeadMasterUpdateWithoutInstallerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -26569,6 +27307,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -26691,6 +27430,7 @@ export type LeadMasterCreateWithoutInstallationUpdatesInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -26836,6 +27576,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationUpdatesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -26974,6 +27715,7 @@ export type LeadMasterUpdateWithoutInstallationUpdatesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -27119,6 +27861,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationUpdatesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -27242,6 +27985,7 @@ export type LeadMasterCreateWithoutMiscellaneousMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -27387,6 +28131,7 @@ export type LeadMasterUncheckedCreateWithoutMiscellaneousMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -27525,6 +28270,7 @@ export type LeadMasterUpdateWithoutMiscellaneousMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -27670,6 +28416,7 @@ export type LeadMasterUncheckedUpdateWithoutMiscellaneousMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -27791,6 +28538,7 @@ export type LeadMasterCreateWithoutInstallationIssueLogMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -27936,6 +28684,7 @@ export type LeadMasterUncheckedCreateWithoutInstallationIssueLogMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -28074,6 +28823,7 @@ export type LeadMasterUpdateWithoutInstallationIssueLogMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -28219,6 +28969,7 @@ export type LeadMasterUncheckedUpdateWithoutInstallationIssueLogMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -28341,6 +29092,7 @@ export type LeadMasterCreateWithoutCutListInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -28486,6 +29238,7 @@ export type LeadMasterUncheckedCreateWithoutCutListInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -28624,6 +29377,7 @@ export type LeadMasterUpdateWithoutCutListInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -28769,6 +29523,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -28891,6 +29646,7 @@ export type LeadMasterCreateWithoutCutListMachineMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -29036,6 +29792,7 @@ export type LeadMasterUncheckedCreateWithoutCutListMachineMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -29174,6 +29931,7 @@ export type LeadMasterUpdateWithoutCutListMachineMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -29319,6 +30077,7 @@ export type LeadMasterUncheckedUpdateWithoutCutListMachineMappingInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -29442,6 +30201,7 @@ export type LeadMasterCreateWithoutOrderLoginPoFilesInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -29587,6 +30347,7 @@ export type LeadMasterUncheckedCreateWithoutOrderLoginPoFilesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -29725,6 +30486,7 @@ export type LeadMasterUpdateWithoutOrderLoginPoFilesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -29870,6 +30632,7 @@ export type LeadMasterUncheckedUpdateWithoutOrderLoginPoFilesInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -29992,6 +30755,7 @@ export type LeadMasterCreateWithoutFranchiseInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -30136,6 +30900,7 @@ export type LeadMasterUncheckedCreateWithoutFranchiseInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -30285,6 +31050,7 @@ export type LeadMasterCreateWithoutExternalPlatformCustomerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -30430,6 +31196,7 @@ export type LeadMasterUncheckedCreateWithoutExternalPlatformCustomerMappingsInpu
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -30568,6 +31335,7 @@ export type LeadMasterUpdateWithoutExternalPlatformCustomerMappingsInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -30713,6 +31481,7 @@ export type LeadMasterUncheckedUpdateWithoutExternalPlatformCustomerMappingsInpu
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -30835,6 +31604,7 @@ export type LeadMasterCreateWithoutArchitectInput = {
   specifications?: Prisma.LeadSpecificationsMasterCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingCreateNestedManyWithoutLeadInput
   account?: Prisma.AccountMasterCreateNestedOneWithoutLeadsInput
   assignedTo?: Prisma.UserMasterCreateNestedOneWithoutLeadsAssignedInput
   assignedBy?: Prisma.UserMasterCreateNestedOneWithoutLeadsDelegatedInput
@@ -30979,6 +31749,7 @@ export type LeadMasterUncheckedCreateWithoutArchitectInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedCreateNestedManyWithoutLeadInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedCreateNestedManyWithoutLeadInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedCreateNestedManyWithoutLeadInput
   productMappings?: Prisma.LeadProductMappingUncheckedCreateNestedManyWithoutLeadInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedCreateNestedManyWithoutLeadInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedCreateNestedManyWithoutLeadInput
@@ -31218,6 +31989,7 @@ export type LeadMasterUpdateWithoutVendorInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -31362,6 +32134,7 @@ export type LeadMasterUncheckedUpdateWithoutVendorInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -31935,6 +32708,7 @@ export type LeadMasterUpdateWithoutAssignedToInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
@@ -32079,6 +32853,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedToInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -32292,6 +33067,7 @@ export type LeadMasterUpdateWithoutAssignedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
@@ -32436,6 +33212,7 @@ export type LeadMasterUncheckedUpdateWithoutAssignedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -32649,6 +33426,7 @@ export type LeadMasterUpdateWithoutCreatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -32793,6 +33571,7 @@ export type LeadMasterUncheckedUpdateWithoutCreatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -33006,6 +33785,7 @@ export type LeadMasterUpdateWithoutUpdatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -33150,6 +33930,7 @@ export type LeadMasterUncheckedUpdateWithoutUpdatedByInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -33363,6 +34144,7 @@ export type LeadMasterUpdateWithoutBoxMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -33508,6 +34290,7 @@ export type LeadMasterUncheckedUpdateWithoutBoxMasterInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -33811,6 +34594,7 @@ export type LeadMasterUpdateWithoutSiteTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -33955,6 +34739,7 @@ export type LeadMasterUncheckedUpdateWithoutSiteTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -34258,6 +35043,7 @@ export type LeadMasterUpdateWithoutSourceInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -34402,6 +35188,7 @@ export type LeadMasterUncheckedUpdateWithoutSourceInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -34705,6 +35492,7 @@ export type LeadMasterUpdateWithoutAccountInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadsCreatedNestedInput
@@ -34849,6 +35637,7 @@ export type LeadMasterUncheckedUpdateWithoutAccountInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -35152,6 +35941,7 @@ export type LeadMasterUpdateWithoutStatusTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -35296,6 +36086,7 @@ export type LeadMasterUncheckedUpdateWithoutStatusTypeInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -35599,6 +36390,7 @@ export type LeadMasterUpdateWithoutFranchiseInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -35743,6 +36535,7 @@ export type LeadMasterUncheckedUpdateWithoutFranchiseInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -36046,6 +36839,7 @@ export type LeadMasterUpdateWithoutArchitectInput = {
   specifications?: Prisma.LeadSpecificationsMasterUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUpdateManyWithoutLeadNestedInput
   account?: Prisma.AccountMasterUpdateOneWithoutLeadsNestedInput
   assignedTo?: Prisma.UserMasterUpdateOneWithoutLeadsAssignedNestedInput
   assignedBy?: Prisma.UserMasterUpdateOneWithoutLeadsDelegatedNestedInput
@@ -36190,6 +36984,7 @@ export type LeadMasterUncheckedUpdateWithoutArchitectInput = {
   specifications?: Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput
   carcassMaterialMappings?: Prisma.LeadCarcassMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
   shutterMaterialMappings?: Prisma.LeadShutterMaterialMappingUncheckedUpdateManyWithoutLeadNestedInput
+  hardwareMappings?: Prisma.LeadHardwareMappingUncheckedUpdateManyWithoutLeadNestedInput
   productMappings?: Prisma.LeadProductMappingUncheckedUpdateManyWithoutLeadNestedInput
   productStructureInstances?: Prisma.LeadProductStructureInstanceUncheckedUpdateManyWithoutLeadNestedInput
   leadProductStructureMapping?: Prisma.LeadProductStructureMappingUncheckedUpdateManyWithoutLeadNestedInput
@@ -36332,6 +37127,7 @@ export type LeadMasterCountOutputType = {
   specifications: number
   carcassMaterialMappings: number
   shutterMaterialMappings: number
+  hardwareMappings: number
   productMappings: number
   productStructureInstances: number
   leadProductStructureMapping: number
@@ -36379,6 +37175,7 @@ export type LeadMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   specifications?: boolean | LeadMasterCountOutputTypeCountSpecificationsArgs
   carcassMaterialMappings?: boolean | LeadMasterCountOutputTypeCountCarcassMaterialMappingsArgs
   shutterMaterialMappings?: boolean | LeadMasterCountOutputTypeCountShutterMaterialMappingsArgs
+  hardwareMappings?: boolean | LeadMasterCountOutputTypeCountHardwareMappingsArgs
   productMappings?: boolean | LeadMasterCountOutputTypeCountProductMappingsArgs
   productStructureInstances?: boolean | LeadMasterCountOutputTypeCountProductStructureInstancesArgs
   leadProductStructureMapping?: boolean | LeadMasterCountOutputTypeCountLeadProductStructureMappingArgs
@@ -36577,6 +37374,13 @@ export type LeadMasterCountOutputTypeCountCarcassMaterialMappingsArgs<ExtArgs ex
  */
 export type LeadMasterCountOutputTypeCountShutterMaterialMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LeadShutterMaterialMappingWhereInput
+}
+
+/**
+ * LeadMasterCountOutputType without action
+ */
+export type LeadMasterCountOutputTypeCountHardwareMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadHardwareMappingWhereInput
 }
 
 /**
@@ -36833,6 +37637,7 @@ export type LeadMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   specifications?: boolean | Prisma.LeadMaster$specificationsArgs<ExtArgs>
   carcassMaterialMappings?: boolean | Prisma.LeadMaster$carcassMaterialMappingsArgs<ExtArgs>
   shutterMaterialMappings?: boolean | Prisma.LeadMaster$shutterMaterialMappingsArgs<ExtArgs>
+  hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
   assignedBy?: boolean | Prisma.LeadMaster$assignedByArgs<ExtArgs>
@@ -37188,6 +37993,7 @@ export type LeadMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   specifications?: boolean | Prisma.LeadMaster$specificationsArgs<ExtArgs>
   carcassMaterialMappings?: boolean | Prisma.LeadMaster$carcassMaterialMappingsArgs<ExtArgs>
   shutterMaterialMappings?: boolean | Prisma.LeadMaster$shutterMaterialMappingsArgs<ExtArgs>
+  hardwareMappings?: boolean | Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>
   account?: boolean | Prisma.LeadMaster$accountArgs<ExtArgs>
   assignedTo?: boolean | Prisma.LeadMaster$assignedToArgs<ExtArgs>
   assignedBy?: boolean | Prisma.LeadMaster$assignedByArgs<ExtArgs>
@@ -37275,6 +38081,7 @@ export type $LeadMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
     specifications: Prisma.$LeadSpecificationsMasterPayload<ExtArgs>[]
     carcassMaterialMappings: Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>[]
     shutterMaterialMappings: Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>[]
+    hardwareMappings: Prisma.$LeadHardwareMappingPayload<ExtArgs>[]
     account: Prisma.$AccountMasterPayload<ExtArgs> | null
     assignedTo: Prisma.$UserMasterPayload<ExtArgs> | null
     assignedBy: Prisma.$UserMasterPayload<ExtArgs> | null
@@ -37814,6 +38621,7 @@ export interface Prisma__LeadMasterClient<T, Null = never, ExtArgs extends runti
   specifications<T extends Prisma.LeadMaster$specificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$specificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadSpecificationsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   carcassMaterialMappings<T extends Prisma.LeadMaster$carcassMaterialMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$carcassMaterialMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadCarcassMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shutterMaterialMappings<T extends Prisma.LeadMaster$shutterMaterialMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$shutterMaterialMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadShutterMaterialMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  hardwareMappings<T extends Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$hardwareMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadHardwareMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   account<T extends Prisma.LeadMaster$accountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$accountArgs<ExtArgs>>): Prisma.Prisma__AccountMasterClient<runtime.Types.Result.GetResult<Prisma.$AccountMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedTo<T extends Prisma.LeadMaster$assignedToArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$assignedToArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   assignedBy<T extends Prisma.LeadMaster$assignedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMaster$assignedByArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -38936,6 +39744,30 @@ export type LeadMaster$shutterMaterialMappingsArgs<ExtArgs extends runtime.Types
   take?: number
   skip?: number
   distinct?: Prisma.LeadShutterMaterialMappingScalarFieldEnum | Prisma.LeadShutterMaterialMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadMaster.hardwareMappings
+ */
+export type LeadMaster$hardwareMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadHardwareMapping
+   */
+  select?: Prisma.LeadHardwareMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadHardwareMapping
+   */
+  omit?: Prisma.LeadHardwareMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadHardwareMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadHardwareMappingWhereInput
+  orderBy?: Prisma.LeadHardwareMappingOrderByWithRelationInput | Prisma.LeadHardwareMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadHardwareMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadHardwareMappingScalarFieldEnum | Prisma.LeadHardwareMappingScalarFieldEnum[]
 }
 
 /**
