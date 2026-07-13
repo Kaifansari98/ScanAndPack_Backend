@@ -136,6 +136,54 @@ export interface HandleType {
     vendor_id: number;
 }
 
+export interface CarcasMaterialFinish {
+    id: number;
+    name: string;
+    carcas_material_id: number;
+}
+
+export interface CarcasMaterial {
+    id: number;
+    name: string;
+    vendor_id: number;
+    finishes?: CarcasMaterialFinish[];
+}
+
+export interface ShutterMaterialFinish {
+    id: number;
+    name: string;
+    shutter_material_id: number;
+}
+
+export interface ShutterMaterial {
+    id: number;
+    name: string;
+    vendor_id: number;
+    finishes?: ShutterMaterialFinish[];
+}
+
+export interface SkirtingCarcassLegsColor {
+    id: number;
+    carcass_legs_id: number;
+    skirting_carcass_legs_id: number;
+    color: string;
+}
+
+export interface SkirtingCarcassLegs {
+    id: number;
+    name: string;
+    carcass_legs_id: number;
+    inScope: boolean;
+    colors?: SkirtingCarcassLegsColor[];
+}
+
+export interface CarcassLegs {
+    id: number;
+    name: string;
+    vendor_id: number;
+    skirtings?: SkirtingCarcassLegs[];
+}
+
 export interface DocumentTypeInput {
   vendor_id: number;
   type: string;

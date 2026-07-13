@@ -37,6 +37,7 @@ import {
 } from "../../email/brevoEmail.service";
 import { sendBrevoEmail } from "../../email/brevoEmail.service";
 import { createTaskHistoryLog } from "../../task/taskHistory.service";
+import { sanitizeFilename } from "../../../utils/fileUtils";
 
 type TxClient = Prisma.TransactionClient | typeof prisma;
 
@@ -1477,6 +1478,54 @@ export const getLeadProductStructureInstances = async (
     );
     throw new Error(
       `Failed to fetch lead product structure instances: ${error.message}`,
+    );
+  }
+};
+
+export const getLeadUniqueProductTypes = async (
+  leadId: number,
+  vendorId: number,
+) => {
+  try {
+    const instances = await prisma.leadProductStructureInstance.findMany({
+      where: {
+        lead_id: leadId,
+        vendor_id: vendorId,
+      },
+      include: {
+        productType: true,
+        productItemCode: {
+          include: {
+            productStructure: {
+              include: {
+                productType: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    const uniqueProductTypesMap = new Map<string, any>();
+
+    for (const item of instances) {
+      const pType = item.productType || item.productItemCode?.productStructure?.productType;
+      if (pType && pType.type) {
+        const typeNormalized = pType.type.trim().toLowerCase();
+        if (!uniqueProductTypesMap.has(typeNormalized)) {
+          uniqueProductTypesMap.set(typeNormalized, pType);
+        }
+      }
+    }
+
+    return Array.from(uniqueProductTypesMap.values());
+  } catch (error: any) {
+    console.error(
+      "[SERVICE] Error fetching unique product types for lead:",
+      error,
+    );
+    throw new Error(
+      `Failed to fetch unique product types for lead: ${error.message}`,
     );
   }
 };
@@ -3843,6 +3892,55 @@ export const updateLeadStageService = async (
         created_at: new Date(),
         stage_id: newStatusId, // Explicity set the stage_id for the log
       });
+
+      // On moving to the Designing stage, create a specifications entry —
+      // but only for vendors that handle large scale projects.
+      if (statusType.tag === "Type 3") {
+        const vendor = await tx.vendorMaster.findUnique({
+          where: { id: vendorId },
+          select: { handlesLargeScaleProjects: true },
+        });
+
+        if (vendor?.handlesLargeScaleProjects === true) {
+          const existingSpecificationCount =
+            await tx.leadSpecificationsMaster.count({
+              where: { vendor_id: vendorId, lead_id: leadId },
+            });
+
+          if (existingSpecificationCount === 0) {
+            const leadProductMapping = await tx.leadProductMapping.findFirst({
+              where: { vendor_id: vendorId, lead_id: leadId },
+              orderBy: { id: "asc" },
+              select: { productType: { select: { type: true } } },
+            });
+
+            const clientNameSegment = sanitizeFilename(
+              `${existingLead.firstname ?? ""}${existingLead.lastname ?? ""}` ||
+                "Client",
+            );
+            const itemGroupSegment = sanitizeFilename(
+              leadProductMapping?.productType?.type || "General",
+            );
+            const now = new Date();
+            const dateSegment = [
+              now.getFullYear(),
+              String(now.getMonth() + 1).padStart(2, "0"),
+              String(now.getDate()).padStart(2, "0"),
+            ].join("-");
+
+            const specificationName = `S${existingSpecificationCount}-${clientNameSegment}-${itemGroupSegment}-${dateSegment}`;
+
+            await tx.leadSpecificationsMaster.create({
+              data: {
+                vendor_id: vendorId,
+                lead_id: leadId,
+                name: specificationName,
+                created_by: userId,
+              },
+            });
+          }
+        }
+      }
 
       return updatedLead;
     });

@@ -246,7 +246,7 @@ const findAllActiveUsersByRole = async (
         },
       },
     },
-    orderBy: { created_at: "asc" },
+    orderBy: { created_at: "asc" }, 
     select: {
       id: true,
       user_name: true,
@@ -390,6 +390,24 @@ const syncLeadFastProductionState = async (
     })
     : null;
 
+  const currentLead = await tx.leadMaster.findUnique({
+    where: { id: leadId },
+    select: { client_required_order_login_complition_date: true },
+  });
+
+  const hasApprovals = latestActiveBatch
+    ? await tx.fastProductionApproval.count({
+        where: {
+          batch_id: latestActiveBatch.id,
+          status: { in: ["approved", "rejected"] },
+        },
+      }) > 0
+    : false;
+
+  const finalDate = (latestActiveBatch && hasApprovals && currentLead?.client_required_order_login_complition_date)
+    ? currentLead.client_required_order_login_complition_date
+    : (latestClientRequiredDate?._max?.client_required_delivery_date ?? null);
+
   await tx.leadMaster.update({
     where: { id: leadId },
     data: {
@@ -400,8 +418,7 @@ const syncLeadFastProductionState = async (
         latestClosedBatch?.status ??
         null,
       fast_production_approved_at: approvedBatch?.approved_at ?? null,
-      client_required_order_login_complition_date:
-        latestClientRequiredDate?._max?.client_required_delivery_date ?? null,
+      client_required_order_login_complition_date: finalDate,
       tentative_order_login_date:
         latestTentativeOrderLoginDate?._max?.tentative_order_login_date ?? null,
       updated_by: updatedBy,

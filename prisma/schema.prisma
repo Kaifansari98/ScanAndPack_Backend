@@ -59,7 +59,14 @@ model VendorMaster {
   installers                          InstallerUserMaster[]
   issueLogTypeMaster                  IssueLogTypeMaster[]
   carcassTypes                        CarcassTypeMaster[]
+  carcasMaterials                     CarcasMaterialMaster[]
   shutterTypes                        ShutterTypeMaster[]
+  shutterMaterials                    ShutterMaterialMaster[]
+  carcassLegs                         CarcassLegsMaster[]
+  leadSpecifications                  LeadSpecificationsMaster[]
+  leadCarcassMaterialMappings         LeadCarcassMaterialMapping[]
+  leadShutterMaterialMappings         LeadShutterMaterialMapping[]
+  leadHardwareMappings                LeadHardwareMapping[]
   handleTypes                         HandleTypeMaster[]
   timelineRules                       TimelineRule[]
   leadActivityStatusLog               LeadActivityStatusLog[]
@@ -352,6 +359,10 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]     @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]   @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]   @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]          @relation("LeadHardwareMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
 }
@@ -677,6 +688,10 @@ model LeadMaster {
   smallOrderRequests                          SmallOrderRequest[]
   amcContracts                                LeadAmcContract[]
   superAdminApprovalLocIns                    LeadSuperAdminApprovalLocIns[]
+  specifications                              LeadSpecificationsMaster[]
+  carcassMaterialMappings                     LeadCarcassMaterialMapping[]
+  shutterMaterialMappings                     LeadShutterMaterialMapping[]
+  hardwareMappings                            LeadHardwareMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                           @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
@@ -710,6 +725,73 @@ model LeadMaster {
   fastProductionRequestBatches                FastProductionRequestBatch[]
 
   @@unique([vendor_id, lead_code], name: "uniq_vendor_lead_code")
+}
+
+model LeadSpecificationsMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  lead_id    Int
+  name       String
+  created_at DateTime @default(now())
+  created_by Int
+
+  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead   LeadMaster   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([created_by])
+}
+
+model LeadCarcassMaterialMapping {
+  id                         Int      @id @default(autoincrement())
+  vendor_id                  Int
+  lead_id                    Int
+  carcass_type_id            Int
+  carcas_material_id         Int
+  carcass_material_finish_id Int
+  created_at                 DateTime @default(now())
+  created_by                 Int
+
+  vendor                VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  carcassType           CarcassTypeMaster            @relation(fields: [carcass_type_id], references: [id], onDelete: Cascade)
+  carcasMaterial        CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
+  carcassMaterialFinish CarcassMaterialFinishMaster  @relation(fields: [carcass_material_finish_id], references: [id], onDelete: Cascade)
+  createdBy             UserMaster                   @relation("LeadCarcassMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([carcass_type_id])
+  @@index([carcas_material_id])
+  @@index([carcass_material_finish_id])
+  @@index([created_by])
+}
+
+model LeadShutterMaterialMapping {
+  id                         Int      @id @default(autoincrement())
+  vendor_id                  Int
+  lead_id                    Int
+  shutter_type_id            Int
+  shutter_material_id        Int
+  shutter_material_finish_id Int
+  created_at                 DateTime @default(now())
+  created_by                 Int
+
+  vendor                VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  shutterType           ShutterTypeMaster            @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+  shutterMaterial       ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  shutterMaterialFinish ShutterMaterialFinishMaster  @relation(fields: [shutter_material_finish_id], references: [id], onDelete: Cascade)
+  createdBy             UserMaster                   @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([shutter_type_id])
+  @@index([shutter_material_id])
+  @@index([shutter_material_finish_id])
+  @@index([created_by])
 }
 
 model LeadSuperAdminApprovalLocIns {
@@ -878,7 +960,25 @@ model CarcassTypeMaster {
   vendor_id            Int
   rules                TimelineRule[]
   chsSelectionMappings CHSSelectionTypeMapping[]
+  leadMappings         LeadCarcassMaterialMapping[]
   vendor               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+}
+
+model CarcasMaterialMaster {
+  id        Int                           @id @default(autoincrement())
+  name      String
+  vendor_id Int
+  vendor    VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  finishes  CarcassMaterialFinishMaster[]
+  leadMappings LeadCarcassMaterialMapping[]
+}
+
+model CarcassMaterialFinishMaster {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  carcas_material_id Int
+  material           CarcasMaterialMaster @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
+  leadMappings       LeadCarcassMaterialMapping[]
 }
 
 model ShutterTypeMaster {
@@ -888,6 +988,7 @@ model ShutterTypeMaster {
   subTypes             ShutterSubTypeMaster[]
   rules                TimelineRule[]
   chsSelectionMappings CHSSelectionTypeMapping[]
+  leadMappings         LeadShutterMaterialMapping[]
   vendor               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
@@ -897,6 +998,79 @@ model ShutterSubTypeMaster {
   shutter_type_id      Int
   chsSelectionMappings CHSSelectionTypeMapping[]
   shutter              ShutterTypeMaster         @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+}
+
+model ShutterMaterialMaster {
+  id        Int                           @id @default(autoincrement())
+  name      String
+  vendor_id Int
+  vendor    VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  finishes  ShutterMaterialFinishMaster[]
+  leadMappings LeadShutterMaterialMapping[]
+}
+
+model ShutterMaterialFinishMaster {
+  id                  Int                   @id @default(autoincrement())
+  name                String
+  shutter_material_id Int
+  material            ShutterMaterialMaster @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  leadMappings        LeadShutterMaterialMapping[]
+}
+
+model CarcassLegsMaster {
+  id           Int    @id @default(autoincrement())
+  name         String
+  vendor_id    Int
+  vendor       VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  skirtings    SkirtingCarcassLegsMaster[]
+  colors       SkirtingCarcassLegsColorMaster[]
+  leadMappings LeadHardwareMapping[]
+}
+
+model SkirtingCarcassLegsMaster {
+  id              Int      @id @default(autoincrement())
+  name            String
+  carcass_legs_id Int
+  inScope         Boolean  @default(true)
+  carcassLegs     CarcassLegsMaster                @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  colors          SkirtingCarcassLegsColorMaster[]
+  leadMappings    LeadHardwareMapping[]
+}
+
+model SkirtingCarcassLegsColorMaster {
+  id                       Int    @id @default(autoincrement())
+  carcass_legs_id          Int
+  skirting_carcass_legs_id Int
+  color                    String
+  carcassLegs              CarcassLegsMaster         @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  skirtingCarcassLegs      SkirtingCarcassLegsMaster @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+  leadMappings             LeadHardwareMapping[]
+}
+
+model LeadHardwareMapping {
+  id                             Int      @id @default(autoincrement())
+  vendor_id                      Int
+  lead_id                        Int
+  carcass_legs_id                Int
+  skirting_carcass_legs_id       Int
+  skirting_carcass_legs_color_id Int?
+  note                           String?
+  created_at                     DateTime @default(now())
+  created_by                     Int
+
+  vendor                   VendorMaster                    @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                     LeadMaster                      @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  carcassLegs              CarcassLegsMaster               @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
+  skirtingCarcassLegs      SkirtingCarcassLegsMaster       @relation(fields: [skirting_carcass_legs_id], references: [id], onDelete: Cascade)
+  skirtingCarcassLegsColor SkirtingCarcassLegsColorMaster? @relation(fields: [skirting_carcass_legs_color_id], references: [id], onDelete: Cascade)
+  createdBy                UserMaster                      @relation("LeadHardwareMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([carcass_legs_id])
+  @@index([skirting_carcass_legs_id])
+  @@index([skirting_carcass_legs_color_id])
+  @@index([created_by])
 }
 
 model HandleTypeMaster {

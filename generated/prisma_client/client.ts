@@ -125,6 +125,21 @@ export type ClientMaster = Prisma.ClientMasterModel
  */
 export type LeadMaster = Prisma.LeadMasterModel
 /**
+ * Model LeadSpecificationsMaster
+ * 
+ */
+export type LeadSpecificationsMaster = Prisma.LeadSpecificationsMasterModel
+/**
+ * Model LeadCarcassMaterialMapping
+ * 
+ */
+export type LeadCarcassMaterialMapping = Prisma.LeadCarcassMaterialMappingModel
+/**
+ * Model LeadShutterMaterialMapping
+ * 
+ */
+export type LeadShutterMaterialMapping = Prisma.LeadShutterMaterialMappingModel
+/**
  * Model LeadSuperAdminApprovalLocIns
  * 
  */
@@ -170,6 +185,16 @@ export type ProductTypeMaster = Prisma.ProductTypeMasterModel
  */
 export type CarcassTypeMaster = Prisma.CarcassTypeMasterModel
 /**
+ * Model CarcasMaterialMaster
+ * 
+ */
+export type CarcasMaterialMaster = Prisma.CarcasMaterialMasterModel
+/**
+ * Model CarcassMaterialFinishMaster
+ * 
+ */
+export type CarcassMaterialFinishMaster = Prisma.CarcassMaterialFinishMasterModel
+/**
  * Model ShutterTypeMaster
  * 
  */
@@ -179,6 +204,36 @@ export type ShutterTypeMaster = Prisma.ShutterTypeMasterModel
  * 
  */
 export type ShutterSubTypeMaster = Prisma.ShutterSubTypeMasterModel
+/**
+ * Model ShutterMaterialMaster
+ * 
+ */
+export type ShutterMaterialMaster = Prisma.ShutterMaterialMasterModel
+/**
+ * Model ShutterMaterialFinishMaster
+ * 
+ */
+export type ShutterMaterialFinishMaster = Prisma.ShutterMaterialFinishMasterModel
+/**
+ * Model CarcassLegsMaster
+ * 
+ */
+export type CarcassLegsMaster = Prisma.CarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsMaster
+ * 
+ */
+export type SkirtingCarcassLegsMaster = Prisma.SkirtingCarcassLegsMasterModel
+/**
+ * Model SkirtingCarcassLegsColorMaster
+ * 
+ */
+export type SkirtingCarcassLegsColorMaster = Prisma.SkirtingCarcassLegsColorMasterModel
+/**
+ * Model LeadHardwareMapping
+ * 
+ */
+export type LeadHardwareMapping = Prisma.LeadHardwareMappingModel
 /**
  * Model HandleTypeMaster
  * 

@@ -6,6 +6,7 @@ import {
   getLeadsByVendor,
   getLeadsByVendorAndUser,
   getLeadProductStructureInstances,
+  getLeadUniqueProductTypes,
   deleteLeadProductStructureInstance,
   clearLeadProductStructures,
   updateLeadProductStructureInstance,
@@ -943,6 +944,50 @@ export class LeadController {
         .status(500)
         .json(
           ApiResponse.error("Failed to fetch product structure instances", 500),
+        );
+    }
+  };
+
+  fetchLeadUniqueProductTypes = async (
+    req: Request,
+    res: Response,
+  ): Promise<Response> => {
+    try {
+      const leadId = Number(req.params.leadId);
+      const vendorId = Number(req.params.vendorId);
+
+      if (!leadId || Number.isNaN(leadId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid lead ID provided", 400));
+      }
+
+      if (!vendorId || Number.isNaN(vendorId)) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid vendor ID provided", 400));
+      }
+
+      const productTypes = await getLeadUniqueProductTypes(leadId, vendorId);
+
+      return res
+        .status(200)
+        .json(
+          ApiResponse.success(
+            productTypes,
+            "Unique product types fetched successfully",
+            200,
+          ),
+        );
+    } catch (error: any) {
+      console.error(
+        "[CONTROLLER] fetchLeadUniqueProductTypes error:",
+        error,
+      );
+      return res
+        .status(500)
+        .json(
+          ApiResponse.error("Failed to fetch unique product types", 500),
         );
     }
   };

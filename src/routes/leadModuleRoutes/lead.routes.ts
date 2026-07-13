@@ -55,9 +55,16 @@ import {
 } from "../../controllers/leadModuleControllers/paymentType.controller";
 import {
   fetchAllCarcassTypes,
+  fetchAllCarcasMaterials,
+  fetchCarcassMaterialFinishes,
   fetchFastProductionTimelineRules,
   fetchAllHandleTypes,
   fetchAllShutterTypes,
+  fetchAllShutterMaterials,
+  fetchShutterMaterialFinishes,
+  fetchAllCarcassLegs,
+  fetchSkirtingCarcassLegs,
+  fetchSkirtingCarcassLegsColors,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -138,7 +145,32 @@ leadsRouter.patch(
   markSmallOrderRequestResolvedController,
 );
 leadsRouter.get("/get-all-carcass-types/:vendor_id", fetchAllCarcassTypes);
+leadsRouter.get(
+  "/get-all-carcas-materials/:vendor_id",
+  fetchAllCarcasMaterials,
+);
+leadsRouter.get(
+  "/get-carcass-material-finishes/:carcas_material_id",
+  fetchCarcassMaterialFinishes,
+);
 leadsRouter.get("/get-all-shutter-types/:vendor_id", fetchAllShutterTypes);
+leadsRouter.get(
+  "/get-all-shutter-materials/:vendor_id",
+  fetchAllShutterMaterials,
+);
+leadsRouter.get(
+  "/get-shutter-material-finishes/:shutter_material_id",
+  fetchShutterMaterialFinishes,
+);
+leadsRouter.get("/get-all-carcass-legs/:vendor_id", fetchAllCarcassLegs);
+leadsRouter.get(
+  "/get-skirting-carcass-legs/:carcass_legs_id",
+  fetchSkirtingCarcassLegs,
+);
+leadsRouter.get(
+  "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
+  fetchSkirtingCarcassLegsColors,
+);
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(
   "/get-fast-production-timeline-rules/:vendor_id",
@@ -300,6 +332,11 @@ leadsRouter.get(
 leadsRouter.get(
   "/lead/:leadId/vendor/:vendorId/product-structure-instances",
   leadController.fetchLeadProductStructureInstances
+);
+// GET unique product types for a lead and vendor
+leadsRouter.get(
+  "/lead/:leadId/vendor/:vendorId/unique-product-types",
+  leadController.fetchLeadUniqueProductTypes
 );
 // DELETE product structure instance for a lead and vendor
 leadsRouter.delete(

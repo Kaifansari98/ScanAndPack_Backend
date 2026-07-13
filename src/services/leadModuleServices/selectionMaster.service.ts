@@ -1,8 +1,15 @@
 import { prisma } from "../../prisma/client";
 import {
   CarcassType,
+  CarcasMaterial,
+  CarcasMaterialFinish,
   HandleType,
   ShutterType,
+  ShutterMaterial,
+  ShutterMaterialFinish,
+  CarcassLegs,
+  SkirtingCarcassLegs,
+  SkirtingCarcassLegsColor,
 } from "../../types/leadModule.types";
 
 const ensureVendorExists = async (vendor_id: number) => {
@@ -45,6 +52,125 @@ export const getAllShutterTypes = async (
   });
 
   return types as ShutterType[];
+};
+
+export const getAllCarcasMaterials = async (
+  vendor_id: number,
+): Promise<CarcasMaterial[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const materials = await prisma.carcasMaterialMaster.findMany({
+    where: { vendor_id },
+    orderBy: { name: "asc" },
+  });
+
+  return materials as CarcasMaterial[];
+};
+
+export const getCarcassMaterialFinishes = async (
+  carcas_material_id: number,
+): Promise<CarcasMaterialFinish[]> => {
+  const material = await prisma.carcasMaterialMaster.findUnique({
+    where: { id: carcas_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid carcas_material_id");
+  }
+
+  const finishes = await prisma.carcassMaterialFinishMaster.findMany({
+    where: { carcas_material_id },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as CarcasMaterialFinish[];
+};
+
+export const getAllShutterMaterials = async (
+  vendor_id: number,
+): Promise<ShutterMaterial[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const materials = await prisma.shutterMaterialMaster.findMany({
+    where: { vendor_id },
+    orderBy: { name: "asc" },
+  });
+
+  return materials as ShutterMaterial[];
+};
+
+export const getShutterMaterialFinishes = async (
+  shutter_material_id: number,
+): Promise<ShutterMaterialFinish[]> => {
+  const material = await prisma.shutterMaterialMaster.findUnique({
+    where: { id: shutter_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid shutter_material_id");
+  }
+
+  const finishes = await prisma.shutterMaterialFinishMaster.findMany({
+    where: { shutter_material_id },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as ShutterMaterialFinish[];
+};
+
+export const getAllCarcassLegs = async (
+  vendor_id: number,
+): Promise<CarcassLegs[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const legs = await prisma.carcassLegsMaster.findMany({
+    where: { vendor_id },
+    orderBy: { name: "asc" },
+  });
+
+  return legs as CarcassLegs[];
+};
+
+export const getSkirtingCarcassLegs = async (
+  carcass_legs_id: number,
+): Promise<SkirtingCarcassLegs[]> => {
+  const legs = await prisma.carcassLegsMaster.findUnique({
+    where: { id: carcass_legs_id },
+    select: { id: true },
+  });
+
+  if (!legs) {
+    throw new Error("Invalid carcass_legs_id");
+  }
+
+  const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
+    where: { carcass_legs_id },
+    orderBy: { name: "asc" },
+  });
+
+  return skirtings as SkirtingCarcassLegs[];
+};
+
+export const getSkirtingCarcassLegsColors = async (
+  skirting_carcass_legs_id: number,
+): Promise<SkirtingCarcassLegsColor[]> => {
+  const skirting = await prisma.skirtingCarcassLegsMaster.findUnique({
+    where: { id: skirting_carcass_legs_id },
+    select: { id: true },
+  });
+
+  if (!skirting) {
+    throw new Error("Invalid skirting_carcass_legs_id");
+  }
+
+  const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
+    where: { skirting_carcass_legs_id },
+    orderBy: { color: "asc" },
+  });
+
+  return colors as SkirtingCarcassLegsColor[];
 };
 
 export const getAllHandleTypes = async (

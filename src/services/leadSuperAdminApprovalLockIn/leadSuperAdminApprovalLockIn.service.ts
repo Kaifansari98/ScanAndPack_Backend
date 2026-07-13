@@ -444,9 +444,6 @@ export class LeadSuperAdminApprovalLockInService {
         lead_id: input.lead_id,
         user_id: superAdmin.id,
         task_type: "Order Login Approval",
-        ...(typeof input.instance_id !== "undefined"
-          ? { instance_id: input.instance_id ?? null }
-          : {}),
         status: {
           in: ["open", "in_progress"],
         },
@@ -470,9 +467,6 @@ export class LeadSuperAdminApprovalLockInService {
             : "Order Login approval pending from Super Admin",
           status: "open",
           created_by: input.created_by,
-          ...(typeof input.instance_id !== "undefined"
-            ? { instance_id: input.instance_id ?? null }
-            : {}),
         },
       });
       await createTaskHistoryLog({

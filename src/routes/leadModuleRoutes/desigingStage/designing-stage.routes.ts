@@ -192,6 +192,42 @@ DesigningStageRouter.get(
   DesigingStageController.getInstanceStageController,
 );
 
+// GET /api/leads/designing-stage/vendor/:vendorId/lead/:leadId/specifications
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/specifications",
+  (req, res) => DesigingStageController.getLeadSpecifications(req, res),
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/carcass-material-mappings",
+  (req, res) => DesigingStageController.getLeadCarcassMaterialMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/carcass-material-mappings",
+  (req, res) => DesigingStageController.upsertLeadCarcassMaterialMapping(req, res),
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/shutter-material-mappings",
+  (req, res) => DesigingStageController.getLeadShutterMaterialMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/shutter-material-mappings",
+  (req, res) => DesigingStageController.upsertLeadShutterMaterialMapping(req, res),
+);
+
+DesigningStageRouter.get(
+  "/vendor/:vendorId/lead/:leadId/hardware-mappings",
+  (req, res) => DesigingStageController.getLeadHardwareMappings(req, res),
+);
+
+DesigningStageRouter.post(
+  "/hardware-mappings",
+  (req, res) => DesigingStageController.upsertLeadHardwareMapping(req, res),
+);
+
 // ─── CHS Selection Type Mapping ───────────────────────────────────────────────
 // POST   /api/leads/designing-stage/chs-selection-type-mapping
 DesigningStageRouter.post(
