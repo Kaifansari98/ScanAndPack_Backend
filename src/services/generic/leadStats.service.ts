@@ -133,9 +133,7 @@ export class LeadStatsService {
 
     const baseLeadScope = {
       ...whereClause,
-      activity_status: {
-        in: [ActivityStatus.onGoing, ActivityStatus.lostApproval],
-      },
+      activity_status: ActivityStatus.onGoing,
     };
 
     const hiddenSmallOrderRequests = await prisma.smallOrderRequest.findMany({
