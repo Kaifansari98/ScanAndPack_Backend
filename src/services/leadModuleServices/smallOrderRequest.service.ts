@@ -798,6 +798,17 @@ const getTaskBoundSmallOrderRequest = async (taskId: number, leadId: number) => 
       created_at: true,
       created_by: true,
       small_order_request_id: true,
+      user: {
+        select: {
+          id: true,
+          user_name: true,
+          user_type: {
+            select: {
+              user_type: true,
+            },
+          },
+        },
+      },
       smallOrderRequest: {
         select: {
           id: true,
@@ -1413,18 +1424,21 @@ export const actOnSmallOrderRequestTask = async (
       updated_by: input.acted_by,
     };
 
+    const assigneeRole = (task as any).user?.user_type?.user_type?.trim().toLowerCase();
+    const targetRole = actorRole === "super-admin" ? assigneeRole : actorRole;
+
     if (creatorRole === "sales-executive") {
-      if (actorRole === "site-supervisor") {
+      if (targetRole === "site-supervisor") {
         approvalData.supervisor_approved = true;
         approvalData.supervisor_approved_at = new Date();
-      } else if (actorRole === "admin" || actorRole === "super-admin") {
+      } else if (targetRole === "admin" || targetRole === "super-admin") {
         approvalData.admin_approved = true;
         approvalData.admin_approved_at = new Date();
       } else {
         throw new Error("You are not allowed to approve this request");
       }
     } else if (creatorRole === "admin") {
-      if (actorRole !== "site-supervisor") {
+      if (targetRole !== "site-supervisor") {
         throw new Error("Only site-supervisor can approve this request");
       }
 
@@ -1438,6 +1452,58 @@ export const actOnSmallOrderRequestTask = async (
     }
 
     await closeTask(tx, input.task_id, input.acted_by);
+
+    if (approvalData.admin_approved) {
+      const otherAdminTasks = await tx.userLeadTask.findMany({
+        where: {
+          small_order_request_id: smallOrderRequest.id,
+          task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
+          status: { not: "completed" },
+          id: { not: input.task_id },
+          user: {
+            user_type: {
+              user_type: {
+                in: ["admin", "super-admin"],
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      for (const t of otherAdminTasks) {
+        await closeTask(tx, t.id, input.acted_by, "Approved by another admin");
+      }
+    }
+
+    if (approvalData.supervisor_approved) {
+      const otherSupervisorTasks = await tx.userLeadTask.findMany({
+        where: {
+          small_order_request_id: smallOrderRequest.id,
+          task_type: SMALL_ORDER_REQUEST_TASK_TYPE,
+          status: { not: "completed" },
+          id: { not: input.task_id },
+          user: {
+            user_type: {
+              user_type: {
+                equals: "site-supervisor",
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      for (const t of otherSupervisorTasks) {
+        await closeTask(tx, t.id, input.acted_by, "Approved by another supervisor");
+      }
+    }
 
     const afterApproval = await tx.smallOrderRequest.update({
       where: { id: smallOrderRequest.id },
