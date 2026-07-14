@@ -5,7 +5,7 @@ import { prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
 import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
-import { PackingType } from "generated/prisma_client/enums";
+import { PackingType } from "../../../generated/prisma_client/enums";
 
 /* ------------------ TYPES ------------------ */
 

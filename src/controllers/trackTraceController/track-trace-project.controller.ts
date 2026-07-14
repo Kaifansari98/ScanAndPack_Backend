@@ -8,7 +8,7 @@ import {
 }
   from "../../../src/services/trackTraceServices/track-trace-project.service";
 import logger from "../../utils/logger";
-import { PackingType } from "generated/prisma_client/enums";
+import { PackingType } from "../../../generated/prisma_client/enums";
 
 
 export const createProjectController = async (req: Request, res: Response) => {
