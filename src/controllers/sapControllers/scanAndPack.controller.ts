@@ -37,6 +37,7 @@ export const getScanAndPackItemsByFields = async (req: Request, res: Response) =
 };
 
 export const deleteScanAndPackItem = async (req: Request, res: Response) => {
+  console.log("req.params",req.params);
   const { id } = req.params;
 
   if (!id || isNaN(Number(id))) {

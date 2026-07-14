@@ -1,5 +1,5 @@
 import { prisma } from '../../prisma/client';
-import { BoxStatus } from '../../prisma/generated';
+import { BoxStatus, PackingType } from '../../prisma/generated';
 import { CreateBoxInput } from '../../types/boxTypes';
 
 import QRCode from "qrcode";
@@ -264,7 +264,8 @@ export const getAllBoxesWithItemCountService = async (
 
 export const updateBoxStatus = async (
   boxId: number,
-  newStatus: BoxStatus
+  newStatus: BoxStatus,
+  user_id: number
 ) => {
   const box = await prisma.boxMaster.findFirst({
     where: {
@@ -276,153 +277,14 @@ export const updateBoxStatus = async (
   if (!box) {
     throw new Error('Box not found or is deleted');
   }
+  const now = new Date();
 
   return await prisma.boxMaster.update({
     where: { id: boxId },
-    data: { box_status: newStatus },
+    data: { box_status: newStatus, packed_at: now, packed_by: user_id },
   });
 };
 
-// export const softDeleteBoxWithScanItems = async (
-//   boxId: number,
-//   deletedBy: number
-// ) => {
-//   // Step 1: Check if box exists and is not deleted
-//   const box = await prisma.boxMaster.findFirst({
-//     where: { id: boxId, is_deleted: false },
-//   });
-
-//   if (!box) throw new Error('Box not found or already deleted');
-
-//   // Step 2: Soft delete all scan items linked to this box
-//   await prisma.scanAndPackItem.updateMany({
-//     where: {
-//       box_id: boxId,
-//       is_deleted: false,
-//     },
-//     data: {
-//       is_deleted: true,
-//     },
-//   });
-
-//   // Step 3: Get all ProjectDetails (rooms) for this project
-//   const allProjectDetails = await prisma.projectDetails.findMany({
-//     where: {
-//       project_id: box.project_id,
-//       vendor_id: box.vendor_id,
-//       client_id: box.client_id,
-//     },
-//   });
-
-//   if (!allProjectDetails || allProjectDetails.length === 0) {
-//     throw new Error('ProjectDetails not found');
-//   }
-
-//   // Step 4: Recalculate counts for each room and update them
-//   const updatedRooms = [];
-
-//   for (const projectDetail of allProjectDetails) {
-//     // Get packed count for this specific room
-//     const packedCountForRoom = await prisma.scanAndPackItem.count({
-//       where: {
-//         project_details_id: projectDetail.id,
-//         project_id: box.project_id,
-//         vendor_id: box.vendor_id,
-//         client_id: box.client_id,
-//         is_deleted: false,
-//       },
-//     });
-
-//     // Calculate totals for this room
-//     const total_items = projectDetail.total_items;
-//     const total_packed = packedCountForRoom;
-//     const total_unpacked = Math.max(total_items - total_packed, 0);
-
-//     // Update this room's counts
-//     await prisma.projectDetails.update({
-//       where: {
-//         id: projectDetail.id,
-//       },
-//       data: {
-//         total_packed,
-//         total_unpacked,
-//       },
-//     });
-
-//     updatedRooms.push({
-//       project_details_id: projectDetail.id,
-//       room_name: projectDetail.room_name,
-//       total_items,
-//       total_packed,
-//       total_unpacked,
-//     });
-//   }
-
-//   // Step 5: Soft delete the box
-//   const deletedBox = await prisma.boxMaster.update({
-//     where: { id: boxId },
-//     data: {
-//       is_deleted: true,
-//       deleted_by: deletedBy,
-//       deleted_at: new Date(),
-//     },
-//   });
-
-//   return {
-//     message: 'Box and scan items soft-deleted successfully',
-//     deletedBoxId: deletedBox.id,
-//     updatedProjectDetails: updatedRooms,
-//   };
-// };
-
-// export const getGroupedItemInfoByBoxId = async (boxId: number) => {
-//   const groupedItem = await prisma.scanAndPackItem.findFirst({
-//     where: {
-//       box_id: boxId,
-//       is_deleted: false,
-//       details: {
-//         is_grouping: true,
-//       },
-//     },
-//     include: {
-//       details: true,
-//       project: false,
-//       vendor: false,
-//       client: false,
-//     },
-//   });
-
-//   if (!groupedItem) return null;
-
-//   const item = await prisma.projectItemsMaster.findFirst({
-//     where: {
-//       unique_id: groupedItem.unique_id,
-//       project_id: groupedItem.project_id,
-//       client_id: groupedItem.client_id,
-//       vendor_id: groupedItem.vendor_id,
-//       project_details_id: groupedItem.project_details_id,
-//     },
-//   });
-
-//   return item ? {
-//     group: item.group,
-//     roomName: groupedItem.details.room_name,
-//   } : null;
-// };
-
-
-// boxPdf.service.ts
-// Generates a box label PDF and returns a downloadable URL path.
-//
-// Dependencies: npm install html-pdf-node
-// Types:        npm install --save-dev @types/html-pdf-node
-//
-// Place generated PDFs in:  /public/pdfs/boxes/  (served as static files)
-// Expose static dir in Express:  app.use('/pdfs', express.static('public/pdfs'))
-
-
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const sanitizeFileName = (name: string) =>
   name.replace(/[^a-zA-Z0-9-_]/g, "_");
@@ -519,7 +381,7 @@ export const generateBoxPdfService = async (
   try {
     /*
     |--------------------------------------------------------------------------
-    | 1. Fetch project, box, vendor and packaging machine
+    | 1. Fetch project, box, vendor, packaging machine and project boxes
     |--------------------------------------------------------------------------
     */
 
@@ -528,51 +390,82 @@ export const generateBoxPdfService = async (
       box,
       vendor,
       packagingMachine,
-      totalBoxes,
+      projectBoxes,
     ] = await Promise.all([
       prisma.projectMaster.findFirst({
         where: {
-          id: project_id,
+          id:
+            project_id,
+
           vendor_id,
         },
 
         select: {
-          id: true,
-          project_name: true,
-          lead_id: true,
-          order_no: true,
-          client_name: true,
-          client_address: true,
-          client_contact_no: true,
+          id:
+            true,
+
+          project_name:
+            true,
+
+          packing_type:
+            true,
+
+          lead_id:
+            true,
+
+          order_no:
+            true,
+
+          client_name:
+            true,
+
+          client_address:
+            true,
+
+          client_contact_no:
+            true,
         },
       }),
 
       prisma.boxMaster.findFirst({
         where: {
-          id: box_id,
+          id:
+            box_id,
+
           project_id,
+
           vendor_id,
-          is_deleted: false,
+
+          is_deleted:
+            false,
         },
 
         select: {
-          id: true,
-          box_name: true,
-          box_status: true,
-          created_date: true,
-          packed_at: true,
-          packed_by: true,
+          id:
+            true,
+
+          box_name:
+            true,
+
+          box_status:
+            true,
+
+          created_date:
+            true,
+
+          packed_at:
+            true,
+
+          packed_by:
+            true,
 
           packedByUser: {
             select: {
-              id: true,
-              user_name: true,
-            },
-          },
+              id:
+                true,
 
-          details: {
-            select: {
-              room_name: true,
+              user_name:
+                true,
             },
           },
         },
@@ -580,40 +473,81 @@ export const generateBoxPdfService = async (
 
       prisma.vendorMaster.findUnique({
         where: {
-          id: vendor_id,
+          id:
+            vendor_id,
         },
 
         select: {
-          vendor_name: true,
-          primary_contact_number: true,
-          primary_contact_email: true,
-          logo: true,
+          vendor_name:
+            true,
+
+          primary_contact_number:
+            true,
+
+          primary_contact_email:
+            true,
+
+          logo:
+            true,
         },
       }),
 
       prisma.machineMaster.findFirst({
         where: {
           vendor_id,
-          machine_type_id: 18,
+
+          machine_type_id:
+            18,
         },
 
         select: {
-          id: true,
+          id:
+            true,
         },
 
         orderBy: {
-          id: "asc",
+          id:
+            "asc",
         },
       }),
 
-      prisma.boxMaster.count({
+      prisma.boxMaster.findMany({
         where: {
           project_id,
+
           vendor_id,
-          is_deleted: false,
+
+          is_deleted:
+            false,
         },
+
+        select: {
+          id:
+            true,
+
+          created_date:
+            true,
+        },
+
+        orderBy: [
+          {
+            created_date:
+              "asc",
+          },
+
+          {
+            id:
+              "asc",
+          },
+        ],
       }),
     ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Validate records
+    |--------------------------------------------------------------------------
+    */
 
     if (!project) {
       return validationResponse(
@@ -643,21 +577,29 @@ export const generateBoxPdfService = async (
       );
     }
 
+    const totalBoxes =
+      projectBoxes.length;
+
     /*
     |--------------------------------------------------------------------------
-    | 2. Vendor logo
+    | 3. Vendor logo
     |--------------------------------------------------------------------------
     */
 
-    let logoUrl = "";
+    let logoUrl =
+      "";
 
-    if (vendor.logo) {
+    if (
+      vendor.logo
+    ) {
       try {
         logoUrl =
           await generateSignedUrl(
             vendor.logo
           );
-      } catch (error) {
+      } catch (
+        error
+      ) {
         console.error(
           "Error generating logo signed URL:",
           error
@@ -667,7 +609,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 3. Lead fallback
+    | 4. Lead fallback
     |--------------------------------------------------------------------------
     */
 
@@ -675,22 +617,32 @@ export const generateBoxPdfService = async (
       project.lead_id
         ? await prisma.leadMaster.findUnique({
             where: {
-              id: project.lead_id,
+              id:
+                project.lead_id,
             },
 
             select: {
-              firstname: true,
-              lastname: true,
-              contact_no: true,
-              email: true,
-              site_address: true,
+              firstname:
+                true,
+
+              lastname:
+                true,
+
+              contact_no:
+                true,
+
+              email:
+                true,
+
+              site_address:
+                true,
             },
           })
         : null;
 
     /*
     |--------------------------------------------------------------------------
-    | 4. Client details
+    | 5. Resolve client information
     |--------------------------------------------------------------------------
     */
 
@@ -721,52 +673,26 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 5. Find current box number
+    | 6. Fetch current box items and all box group mappings
     |--------------------------------------------------------------------------
     */
 
-    const projectBoxes =
-      await prisma.boxMaster.findMany({
-        where: {
-          project_id,
-          vendor_id,
-          is_deleted: false,
-        },
+    const [
+      mappingRows,
+      allBoxGroupMappings,
+    ] = await Promise.all([
+      /*
+      |--------------------------------------------------------------------------
+      | Current box items
+      |--------------------------------------------------------------------------
+      */
 
-        select: {
-          id: true,
-        },
-
-        orderBy: {
-          created_date: "asc",
-        },
-      });
-
-    const boxIndex =
-      projectBoxes.findIndex(
-        (
-          currentBox
-        ) =>
-          currentBox.id ===
-          box.id
-      );
-
-    const currentBoxNumber =
-      boxIndex >= 0
-        ? boxIndex + 1
-        : 1;
-
-    /*
-    |--------------------------------------------------------------------------
-    | 6. Fetch packed items
-    |--------------------------------------------------------------------------
-    */
-
-    const mappingRows =
-      await prisma.cutListMachineMapping.findMany({
+      prisma.cutListMachineMapping.findMany({
         where: {
           box_id,
+
           project_id,
+
           vendor_id,
 
           machine_id:
@@ -777,28 +703,87 @@ export const generateBoxPdfService = async (
         },
 
         select: {
-          id: true,
+          id:
+            true,
 
           cut_list: {
             select: {
-              id: true,
-              item_name: true,
-              category_name: true,
-              group_name: true,
-              unique_code: true,
-              weight: true,
+              id:
+                true,
+
+              item_name:
+                true,
+
+              category_name:
+                true,
+
+              group_name:
+                true,
+
+              unique_code:
+                true,
+
+              weight:
+                true,
             },
           },
         },
 
         orderBy: {
-          created_at: "asc",
+          created_at:
+            "asc",
         },
-      });
+      }),
+
+      /*
+      |--------------------------------------------------------------------------
+      | Group information for all project boxes
+      |--------------------------------------------------------------------------
+      */
+
+      prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+
+          vendor_id,
+
+          machine_id:
+            packagingMachine.id,
+
+          expected_in:
+            true,
+
+          box_id: {
+            not:
+              null,
+          },
+        },
+
+        select: {
+          id:
+            true,
+
+          box_id:
+            true,
+
+          cut_list: {
+            select: {
+              group_name:
+                true,
+            },
+          },
+        },
+
+        orderBy: {
+          created_at:
+            "asc",
+        },
+      }),
+    ]);
 
     /*
     |--------------------------------------------------------------------------
-    | 7. Group repeated products
+    | 7. Merge repeated cut-list rows
     |--------------------------------------------------------------------------
     */
 
@@ -806,7 +791,8 @@ export const generateBoxPdfService = async (
       new Map<
         number,
         {
-          id: number;
+          id:
+            number;
 
           item_name:
             string;
@@ -842,26 +828,29 @@ export const generateBoxPdfService = async (
         continue;
       }
 
-      const weight =
+      const itemWeight =
         Number(
           cutList.weight ||
           0
         );
 
-      const existing =
+      const existingItem =
         itemMap.get(
           cutList.id
         );
 
-      if (existing) {
-        existing.quantity +=
+      if (
+        existingItem
+      ) {
+        existingItem.quantity +=
           1;
 
-        existing.total_weight +=
-          weight;
+        existingItem.total_weight +=
+          itemWeight;
       } else {
         itemMap.set(
           cutList.id,
+
           {
             id:
               cutList.id,
@@ -879,13 +868,13 @@ export const generateBoxPdfService = async (
               cutList.unique_code,
 
             unit_weight:
-              weight,
+              itemWeight,
 
             quantity:
               1,
 
             total_weight:
-              weight,
+              itemWeight,
           }
         );
       }
@@ -918,7 +907,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 8. Totals
+    | 8. Calculate box totals
     |--------------------------------------------------------------------------
     */
 
@@ -930,6 +919,7 @@ export const generateBoxPdfService = async (
         ) =>
           total +
           item.quantity,
+
         0
       );
 
@@ -941,12 +931,234 @@ export const generateBoxPdfService = async (
         ) =>
           total +
           item.total_weight,
+
         0
       );
 
     /*
     |--------------------------------------------------------------------------
-    | 9. Package date
+    | 9. Resolve current box group
+    |--------------------------------------------------------------------------
+    */
+
+    const groupedItem =
+      items.find(
+        (
+          item
+        ) =>
+          Boolean(
+            item.group_name
+              ?.trim()
+          )
+      );
+
+    const currentBoxGroupName =
+      groupedItem
+        ?.group_name
+        ?.trim() ||
+      null;
+
+    const normalizeGroupName =
+      (
+        value:
+          string |
+          null |
+          undefined
+      ) =>
+        value
+          ?.trim()
+          .toLowerCase() ||
+        null;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 10. Build first group map for every box
+    |--------------------------------------------------------------------------
+    */
+
+    const boxGroupMap =
+      new Map<
+        number,
+        string | null
+      >();
+
+    for (
+      const mapping
+      of allBoxGroupMappings
+    ) {
+      if (
+        !mapping.box_id
+      ) {
+        continue;
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | Use first item group as box group
+      |--------------------------------------------------------------------------
+      */
+
+      if (
+        boxGroupMap.has(
+          mapping.box_id
+        )
+      ) {
+        continue;
+      }
+
+      boxGroupMap.set(
+        mapping.box_id,
+
+        mapping
+          .cut_list
+          ?.group_name
+          ?.trim() ||
+          null
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 11. Calculate PRODUCT BOX COUNT
+    |--------------------------------------------------------------------------
+    */
+
+    let currentProductBoxNumber =
+      1;
+
+    let productBoxTotal =
+      Math.max(
+        totalBoxes,
+        1
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | GROUPWISE:
+    |
+    | Group A:
+    | 1 of 3
+    | 2 of 3
+    | 3 of 3
+    |
+    | Group B:
+    | 1 of 5
+    | ...
+    | 5 of 5
+    |--------------------------------------------------------------------------
+    */
+
+    if (
+      project.packing_type ===
+      PackingType.GROUPWISE
+    ) {
+      const currentGroupKey =
+        normalizeGroupName(
+          currentBoxGroupName
+        );
+
+      /*
+      |--------------------------------------------------------------------------
+      | Group is available
+      |--------------------------------------------------------------------------
+      */
+
+      if (
+        currentGroupKey
+      ) {
+        const currentGroupBoxes =
+          projectBoxes.filter(
+            (
+              projectBox
+            ) => {
+              const boxGroupKey =
+                normalizeGroupName(
+                  boxGroupMap.get(
+                    projectBox.id
+                  )
+                );
+
+              return (
+                boxGroupKey ===
+                currentGroupKey
+              );
+            }
+          );
+
+        const currentGroupBoxIndex =
+          currentGroupBoxes.findIndex(
+            (
+              projectBox
+            ) =>
+              projectBox.id ===
+              box.id
+          );
+
+        currentProductBoxNumber =
+          currentGroupBoxIndex >=
+          0
+            ? currentGroupBoxIndex +
+              1
+            : 1;
+
+        productBoxTotal =
+          Math.max(
+            currentGroupBoxes.length,
+            1
+          );
+      } else {
+        /*
+        |--------------------------------------------------------------------------
+        | Old groupwise data without group:
+        |
+        | Treat box independently
+        |--------------------------------------------------------------------------
+        */
+
+        currentProductBoxNumber =
+          1;
+
+        productBoxTotal =
+          1;
+      }
+    } else {
+      /*
+      |--------------------------------------------------------------------------
+      | DEFAULT:
+      |
+      | Existing project-wide numbering
+      |--------------------------------------------------------------------------
+      */
+
+      const currentBoxIndex =
+        projectBoxes.findIndex(
+          (
+            projectBox
+          ) =>
+            projectBox.id ===
+            box.id
+        );
+
+      currentProductBoxNumber =
+        currentBoxIndex >=
+        0
+          ? currentBoxIndex +
+            1
+          : 1;
+
+      productBoxTotal =
+        Math.max(
+          totalBoxes,
+          1
+        );
+    }
+
+    const productBoxCount =
+      `${currentProductBoxNumber} of ${productBoxTotal}`;
+
+    /*
+    |--------------------------------------------------------------------------
+    | 12. Package date
     |--------------------------------------------------------------------------
     */
 
@@ -958,7 +1170,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 10. Embedded QR
+    | 13. QR code
     |--------------------------------------------------------------------------
     */
 
@@ -968,10 +1180,13 @@ export const generateBoxPdfService = async (
     const qrImage =
       await QRCode.toDataURL(
         qrValue,
-        {
-          width: 250,
 
-          margin: 1,
+        {
+          width:
+            250,
+
+          margin:
+            1,
 
           errorCorrectionLevel:
             "M",
@@ -988,7 +1203,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 11. Logo
+    | 14. Vendor logo
     |--------------------------------------------------------------------------
     */
 
@@ -997,7 +1212,9 @@ export const generateBoxPdfService = async (
         ? `
           <img
             src="${logoUrl}"
+
             class="company-logo"
+
             alt="Logo"
           />
         `
@@ -1013,22 +1230,12 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 12. Product rows
+    | 15. Product rows
     |--------------------------------------------------------------------------
     */
 
-    const visibleItems =
-      items.slice(
-        0,
-        10
-      );
-
-    const hiddenItemsCount =
-      items.length -
-      visibleItems.length;
-
     const itemRows =
-      visibleItems
+      items
         .map(
           (
             item,
@@ -1043,25 +1250,13 @@ export const generateBoxPdfService = async (
                 }
               </td>
 
+
               <td>
                 ${escapeHtml(
                   item.item_name
                 )}
               </td>
 
-              <td>
-                ${escapeHtml(
-                  item.category_name ||
-                  "—"
-                )}
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  item.group_name ||
-                  "—"
-                )}
-              </td>
 
               <td>
                 ${
@@ -1069,10 +1264,21 @@ export const generateBoxPdfService = async (
                 }
               </td>
 
+
+              <td>
+                ${item.unit_weight.toFixed(
+                  2
+                )}
+
+                kg
+              </td>
+
+
               <td>
                 ${item.total_weight.toFixed(
                   2
                 )}
+
                 kg
               </td>
 
@@ -1081,35 +1287,9 @@ export const generateBoxPdfService = async (
         )
         .join("");
 
-    const hiddenItemsRow =
-      hiddenItemsCount >
-      0
-        ? `
-          <tr>
-
-            <td
-              colspan="6"
-
-              class="more-items"
-            >
-              +
-              ${hiddenItemsCount}
-
-              more item${
-                hiddenItemsCount >
-                1
-                  ? "s"
-                  : ""
-              }
-            </td>
-
-          </tr>
-        `
-        : "";
-
     /*
     |--------------------------------------------------------------------------
-    | 13. HTML
+    | 16. HTML
     |--------------------------------------------------------------------------
     */
 
@@ -1122,62 +1302,99 @@ export const generateBoxPdfService = async (
 
 <meta charset="UTF-8"/>
 
+
 <style>
 
+
 @page {
-  size: 3in 6in;
-  margin: 0;
+
+  size:
+    4in 5in;
+
+  margin:
+    0;
+
 }
 
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+  box-sizing:
+    border-box;
+
+  margin:
+    0;
+
+  padding:
+    0;
+
 }
 
 
 html,
 body {
-  width: 3in;
-  height: 6in;
 
-  margin: 0;
-  padding: 0;
+  width:
+    4in;
+
+  height:
+    5in;
+
+  margin:
+    0;
+
+  padding:
+    0;
+
 }
 
 
 body {
-  color: #172033;
 
-  background: #FFFFFF;
+  color:
+    #172033;
+
+  background:
+    #FFFFFF;
 
   font-family:
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size:
+    11px;
+
 }
 
 
 .page {
-  width: 3in;
-  height: 6in;
 
-  padding: 14px;
+  width:
+    4in;
 
-  overflow: hidden;
+  height:
+    5in;
+
+  padding:
+    14px;
+
+  overflow:
+    hidden;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Company header
+| Company
 |--------------------------------------------------------------------------
 */
 
+
 .main-header {
-  display: flex;
+
+  display:
+    flex;
 
   justify-content:
     space-between;
@@ -1185,137 +1402,178 @@ body {
   align-items:
     flex-start;
 
-  min-height: 38px;
+  min-height:
+    38px;
 
-  padding-bottom: 6px;
+  padding-bottom:
+    6px;
 
   border-bottom:
     1px solid
     #172033;
+
 }
 
 
 .company-logo {
-  display: block;
 
-  max-width: 92px;
+  display:
+    block;
 
-  max-height: 30px;
+  max-width:
+    92px;
 
-  object-fit: contain;
+  max-height:
+    30px;
+
+  object-fit:
+    contain;
+
 }
 
 
 .company-logo-text {
-  font-size: 14px;
 
-  font-weight: 800;
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
 }
 
 
 .company-information {
-  color: #667085;
 
-  font-size: 6.5px;
+  color:
+    #667085;
 
-  line-height: 1.35;
+  font-size:
+    6.5px;
 
-  text-align: right;
+  line-height:
+    1.35;
+
+  text-align:
+    right;
+
 }
 
 
 .company-name {
-  color: #172033;
 
-  font-size: 8.5px;
+  color:
+    #172033;
 
-  font-weight: 800;
+  font-size:
+    8.5px;
+
+  font-weight:
+    800;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Project header
+| Client information
 |--------------------------------------------------------------------------
 */
 
-.project-heading {
-  display: flex;
 
-  justify-content:
-    space-between;
+.box-client-info {
 
-  align-items:
-    center;
+  display:
+    grid;
 
-  min-height: 37px;
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    minmax(
+      0,
+      1fr
+    );
 
-  padding: 6px 0;
+  gap:
+    12px;
+
+  padding:
+    6px 0;
 
   border-bottom:
     1px solid
     #D9DEE7;
+
 }
 
 
-.project-heading-left {
-  width: 64%;
+.box-client-info > div {
+
+  min-width:
+    0;
+
 }
 
 
-.project-name {
-  max-width: 220px;
+.box-client-info > div:last-child {
 
-  overflow: hidden;
+  text-align:
+    right;
 
-  color: #172033;
+}
 
-  font-size: 10.5px;
 
-  line-height: 1.15;
+.box-client-info span {
 
-  font-weight: 900;
+  display:
+    block;
 
-  white-space: nowrap;
+  color:
+    #667085;
+
+  font-size:
+    5.7px;
+
+  line-height:
+    1.1;
+
+  font-weight:
+    800;
+
+}
+
+
+.box-client-info strong {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  overflow:
+    hidden;
+
+  color:
+    #172033;
+
+  font-size:
+    7.5px;
+
+  line-height:
+    1.15;
+
+  font-weight:
+    800;
+
+  white-space:
+    nowrap;
 
   text-overflow:
     ellipsis;
-}
 
-
-.project-subtitle {
-  margin-top: 2px;
-
-  color: #667085;
-
-  font-size: 6.5px;
-}
-
-
-.project-client {
-  width: 34%;
-
-  color: #667085;
-
-  font-size: 6.5px;
-
-  line-height: 1.3;
-
-  text-align: right;
-}
-
-
-.project-client strong {
-  display: block;
-
-  overflow: hidden;
-
-  color: #172033;
-
-  white-space: nowrap;
-
-  text-overflow:
-    ellipsis;
 }
 
 
@@ -1325,23 +1583,23 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .box-header {
-  padding: 7px 0;
+
+  padding:
+    7px 0;
 
   border-bottom:
     2px solid
     #172033;
+
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| 75% details + 25% QR
-|--------------------------------------------------------------------------
-*/
-
 .box-main-row {
-  display: grid;
+
+  display:
+    grid;
 
   grid-template-columns:
     minmax(
@@ -1353,78 +1611,34 @@ body {
       25%
     );
 
-  width: 100%;
+  align-items:
+    center;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Left section
+| Box details
 |--------------------------------------------------------------------------
 */
+
 
 .box-left-section {
-  min-width: 0;
 
-  padding-right: 10px;
+  min-width:
+    0;
+
+  padding-right:
+    10px;
+
 }
 
-
-.box-title-area {
-  padding-bottom: 6px;
-
-  margin-bottom: 7px;
-
-  border-bottom:
-    1px solid
-    #E1E5EB;
-}
-
-
-.box-title {
-  overflow: hidden;
-
-  color: #172033;
-
-  font-size: 13px;
-
-  line-height: 1.15;
-
-  font-weight: 900;
-
-  white-space: nowrap;
-
-  text-overflow:
-    ellipsis;
-}
-
-
-.room-name {
-  margin-top: 2px;
-
-  overflow: hidden;
-
-  color: #667085;
-
-  font-size: 6.5px;
-
-  line-height: 1.2;
-
-  white-space: nowrap;
-
-  text-overflow:
-    ellipsis;
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Details
-|--------------------------------------------------------------------------
-*/
 
 .box-details-grid {
-  display: grid;
+
+  display:
+    grid;
 
   grid-template-columns:
     repeat(
@@ -1435,54 +1649,74 @@ body {
       )
     );
 
-  column-gap: 10px;
+  column-gap:
+    10px;
 
-  row-gap: 9px;
+  row-gap:
+    10px;
+
 }
 
 
 .box-detail {
-  min-width: 0;
+
+  min-width:
+    0;
+
 }
 
 
 .box-detail span {
-  display: block;
 
-  color: #667085;
+  display:
+    block;
 
-  font-size: 5.7px;
+  color:
+    #667085;
 
-  line-height: 1.1;
+  font-size:
+    5.7px;
 
-  font-weight: 800;
+  line-height:
+    1.1;
 
-  letter-spacing:
-    0.1px;
+  font-weight:
+    800;
+
 }
 
 
 .box-detail strong {
-  display: block;
 
-  margin-top: 2px;
+  display:
+    block;
+
+  margin-top:
+    2px;
 
   overflow-wrap:
     anywhere;
 
-  color: #172033;
+  color:
+    #172033;
 
-  font-size: 7.7px;
+  font-size:
+    7.7px;
 
-  line-height: 1.15;
+  line-height:
+    1.15;
 
-  font-weight: 800;
+  font-weight:
+    800;
+
 }
 
 
 .total-weight-value {
+
   font-size:
     8.7px !important;
+
 }
 
 
@@ -1492,8 +1726,11 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .box-qr-section {
-  display: flex;
+
+  display:
+    flex;
 
   flex-direction:
     column;
@@ -1504,98 +1741,132 @@ body {
   align-items:
     center;
 
-  min-width: 0;
+  min-height:
+    82px;
 
-  padding-left: 8px;
+  padding-left:
+    8px;
 
   border-left:
     1px solid
     #D9DEE7;
+
 }
 
 
 .box-qr-code {
-  display: block;
 
-  width: 78px;
+  display:
+    block;
 
-  height: 78px;
+  width:
+    72px;
 
-  object-fit: contain;
+  height:
+    72px;
+
+  object-fit:
+    contain;
+
 }
 
 
 .box-qr-label {
-  margin-top: 4px;
 
-  color: #667085;
+  margin-top:
+    3px;
 
-  font-size: 5.5px;
+  color:
+    #667085;
 
-  line-height: 1;
+  font-size:
+    5.5px;
 
-  font-weight: 900;
+  font-weight:
+    900;
 
-  letter-spacing:
-    0.35px;
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Address
+| Delivery address
 |--------------------------------------------------------------------------
 */
 
-.box-address {
-  margin-top: 8px;
 
-  padding-top: 6px;
+.box-address {
+
+  margin-top:
+    8px;
+
+  padding-top:
+    6px;
 
   border-top:
     1px solid
     #D9DEE7;
+
 }
 
 
 .box-address span {
-  display: block;
 
-  color: #667085;
+  display:
+    block;
 
-  font-size: 5.8px;
+  color:
+    #667085;
 
-  font-weight: 800;
+  font-size:
+    5.8px;
+
+  font-weight:
+    800;
+
 }
 
 
 .box-address strong {
-  display: block;
 
-  max-height: 27px;
+  display:
+    block;
 
-  margin-top: 3px;
+  max-height:
+    27px;
 
-  overflow: hidden;
+  margin-top:
+    3px;
 
-  color: #172033;
+  overflow:
+    hidden;
 
-  font-size: 7.2px;
+  color:
+    #172033;
 
-  line-height: 1.28;
+  font-size:
+    7.2px;
 
-  font-weight: 700;
+  line-height:
+    1.28;
+
+  font-weight:
+    700;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Products heading
+| Products
 |--------------------------------------------------------------------------
 */
 
+
 .products-title-row {
-  display: flex;
+
+  display:
+    flex;
 
   justify-content:
     space-between;
@@ -1605,22 +1876,32 @@ body {
 
   margin:
     6px 0 4px;
+
 }
 
 
 .section-title {
-  font-size: 8.5px;
 
-  font-weight: 900;
+  font-size:
+    8.5px;
+
+  font-weight:
+    900;
+
 }
 
 
 .products-count {
-  color: #667085;
 
-  font-size: 5.8px;
+  color:
+    #667085;
 
-  font-weight: 700;
+  font-size:
+    5.8px;
+
+  font-weight:
+    700;
+
 }
 
 
@@ -1630,37 +1911,51 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .report-table {
-  width: 100%;
+
+  width:
+    100%;
 
   border-collapse:
     collapse;
 
   table-layout:
     fixed;
+
 }
 
 
 .report-table thead {
-  color: #FFFFFF;
 
-  background: #172033;
+  color:
+    #FFFFFF;
+
+  background:
+    #172033;
+
 }
 
 
 .report-table th {
+
   padding:
     4px 3px;
 
-  font-size: 5.5px;
+  font-size:
+    5.5px;
 
-  font-weight: 700;
+  font-weight:
+    700;
 
-  text-align: left;
+  text-align:
+    left;
+
 }
 
 
 .report-table td {
+
   padding:
     4px 3px;
 
@@ -1668,82 +1963,93 @@ body {
     1px solid
     #E4E7EC;
 
-  font-size: 6px;
+  font-size:
+    6px;
 
-  line-height: 1.15;
+  line-height:
+    1.15;
 
   overflow-wrap:
     anywhere;
 
-  vertical-align: top;
+  vertical-align:
+    top;
+
 }
 
 
 .report-table tbody tr:nth-child(even) {
-  background: #F8FAFC;
+
+  background:
+    #F8FAFC;
+
 }
 
 
 .report-table tfoot {
-  background: #F1F5F9;
 
-  font-weight: 800;
+  background:
+    #F1F5F9;
+
+  font-weight:
+    800;
+
 }
 
 
 .sr-column {
-  width: 7%;
+
+  width:
+    7%;
+
 }
 
 
-.item-column {
-  width: 29%;
-}
+.product-column {
 
+  width:
+    45%;
 
-.category-column {
-  width: 18%;
-}
-
-
-.group-column {
-  width: 25%;
 }
 
 
 .qty-column {
-  width: 8%;
 
-  text-align:
-    center !important;
+  width:
+    10%;
+
 }
 
 
-.weight-column {
-  width: 13%;
+.unit-column {
 
-  text-align:
-    right !important;
+  width:
+    18%;
+
+}
+
+
+.total-column {
+
+  width:
+    20%;
+
 }
 
 
 .no-products {
+
   padding:
     14px !important;
 
-  color: #667085;
+  color:
+    #667085;
 
-  text-align: center;
+  text-align:
+    center;
+
 }
 
-
-.more-items {
-  color: #667085;
-
-  text-align: center;
-
-  font-weight: 700;
-}
 
 </style>
 
@@ -1752,15 +2058,18 @@ body {
 
 <body>
 
+
 <section
   class="page"
 >
+
 
   <!--
   ==============================================================
   COMPANY
   ==============================================================
   -->
+
 
   <div
     class="main-header"
@@ -1808,43 +2117,21 @@ body {
 
   <!--
   ==============================================================
-  PROJECT
+  CLIENT
   ==============================================================
   -->
 
+
   <div
-    class="project-heading"
+    class="box-client-info"
   >
 
-    <div
-      class="project-heading-left"
-    >
+    <div>
 
-      <div
-        class="project-name"
-      >
-        ${escapeHtml(
-          project.project_name
-        )}
-      </div>
+      <span>
+        CLIENT NAME
+      </span>
 
-
-      <div
-        class="project-subtitle"
-      >
-        Order Number:
-
-        ${escapeHtml(
-          orderNumber
-        )}
-      </div>
-
-    </div>
-
-
-    <div
-      class="project-client"
-    >
 
       <strong>
         ${escapeHtml(
@@ -1852,12 +2139,21 @@ body {
         )}
       </strong>
 
+    </div>
 
-      <div>
+
+    <div>
+
+      <span>
+        CONTACT NUMBER
+      </span>
+
+
+      <strong>
         ${escapeHtml(
           clientContact
         )}
-      </div>
+      </strong>
 
     </div>
 
@@ -1870,6 +2166,7 @@ body {
   ==============================================================
   -->
 
+
   <div
     class="box-header"
   >
@@ -1880,41 +2177,10 @@ body {
 
       <!-- LEFT 75% -->
 
+
       <div
         class="box-left-section"
       >
-
-        <div
-          class="box-title-area"
-        >
-
-          <div
-            class="box-title"
-          >
-            ${escapeHtml(
-              box.box_name
-            )}
-          </div>
-
-
-          ${
-            box.details
-              ?.room_name
-              ? `
-                <div
-                  class="room-name"
-                >
-                  ${escapeHtml(
-                    box.details
-                      .room_name
-                  )}
-                </div>
-              `
-              : ""
-          }
-
-        </div>
-
 
         <div
           class="box-details-grid"
@@ -1927,6 +2193,7 @@ body {
             <span>
               ORDER NUMBER
             </span>
+
 
             <strong>
               ${escapeHtml(
@@ -1944,6 +2211,7 @@ body {
             <span>
               PACKED BY
             </span>
+
 
             <strong>
               ${escapeHtml(
@@ -1965,6 +2233,7 @@ body {
               PACKET NO.
             </span>
 
+
             <strong>
               ${escapeHtml(
                 box.box_name
@@ -1982,6 +2251,7 @@ body {
               PACKAGE DATE
             </span>
 
+
             <strong>
               ${packageDate}
             </strong>
@@ -1997,12 +2267,11 @@ body {
               PRODUCT BOX COUNT
             </span>
 
+
             <strong>
-              ${currentBoxNumber}
-
-              of
-
-              ${totalBoxes}
+              ${escapeHtml(
+                productBoxCount
+              )}
             </strong>
 
           </div>
@@ -2016,12 +2285,14 @@ body {
               TOTAL WEIGHT
             </span>
 
+
             <strong
               class="total-weight-value"
             >
               ${totalWeight.toFixed(
                 2
               )}
+
               kg
             </strong>
 
@@ -2033,6 +2304,7 @@ body {
 
 
       <!-- RIGHT 25% -->
+
 
       <div
         class="box-qr-section"
@@ -2058,7 +2330,8 @@ body {
     </div>
 
 
-    <!-- FULL WIDTH ADDRESS -->
+    <!-- DELIVERY ADDRESS -->
+
 
     <div
       class="box-address"
@@ -2085,6 +2358,7 @@ body {
   PRODUCTS
   ==============================================================
   -->
+
 
   <div
     class="products-title-row"
@@ -2130,23 +2404,13 @@ body {
           #
         </th>
 
+
         <th
-          class="item-column"
+          class="product-column"
         >
           Product
         </th>
 
-        <th
-          class="category-column"
-        >
-          Category
-        </th>
-
-        <th
-          class="group-column"
-        >
-          Group
-        </th>
 
         <th
           class="qty-column"
@@ -2154,10 +2418,18 @@ body {
           Qty
         </th>
 
+
         <th
-          class="weight-column"
+          class="unit-column"
         >
-          Weight
+          Unit Weight
+        </th>
+
+
+        <th
+          class="total-column"
+        >
+          Total Weight
         </th>
 
       </tr>
@@ -2173,7 +2445,7 @@ body {
           <tr>
 
             <td
-              colspan="6"
+              colspan="5"
 
               class="no-products"
             >
@@ -2184,8 +2456,6 @@ body {
         `
       }
 
-      ${hiddenItemsRow}
-
     </tbody>
 
 
@@ -2194,19 +2464,27 @@ body {
       <tr>
 
         <td
-          colspan="4"
+          colspan="2"
         >
           TOTAL
         </td>
+
 
         <td>
           ${totalQuantity}
         </td>
 
+
+        <td>
+          —
+        </td>
+
+
         <td>
           ${totalWeight.toFixed(
             2
           )}
+
           kg
         </td>
 
@@ -2216,7 +2494,9 @@ body {
 
   </table>
 
+
 </section>
+
 
 </body>
 
@@ -2225,7 +2505,7 @@ body {
 
     /*
     |--------------------------------------------------------------------------
-    | 14. Generate PDF
+    | 17. Generate PDF
     |--------------------------------------------------------------------------
     */
 
@@ -2239,6 +2519,7 @@ body {
     tempFilePath =
       path.join(
         tempDir,
+
         fileName
       );
 
@@ -2249,10 +2530,10 @@ body {
 
       {
         width:
-          "3in",
+          "4in",
 
         height:
-          "6in",
+          "5in",
 
         printBackground:
           true,
@@ -2285,7 +2566,7 @@ body {
 
     /*
     |--------------------------------------------------------------------------
-    | 15. Upload
+    | 18. Upload PDF
     |--------------------------------------------------------------------------
     */
 
@@ -2324,6 +2605,15 @@ body {
         box_id:
           box.id,
 
+        packing_type:
+          project.packing_type,
+
+        product_box_count:
+          productBoxCount,
+
+        group_name:
+          currentBoxGroupName,
+
         total_quantity:
           totalQuantity,
 
@@ -2335,7 +2625,9 @@ body {
           ),
       }
     );
-  } catch (error) {
+  } catch (
+    error
+  ) {
     console.error(
       "generateBoxPdfService:",
       error
@@ -2354,6 +2646,7 @@ body {
 
     return validationResponse(
       0,
+
       "Failed to generate box PDF"
     );
   }
@@ -2894,7 +3187,7 @@ export const generateAllBoxesPdfService = async (
             vendor.logo
           );
       } catch (
-        error
+      error
       ) {
         console.error(
           "Error generating logo signed URL:",
@@ -2912,28 +3205,28 @@ export const generateAllBoxesPdfService = async (
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-            where: {
-              id:
-                project.lead_id,
-            },
+          where: {
+            id:
+              project.lead_id,
+          },
 
-            select: {
-              firstname:
-                true,
+          select: {
+            firstname:
+              true,
 
-              lastname:
-                true,
+            lastname:
+              true,
 
-              contact_no:
-                true,
+            contact_no:
+              true,
 
-              email:
-                true,
+            email:
+              true,
 
-              site_address:
-                true,
-            },
-          })
+            site_address:
+              true,
+          },
+        })
         : null;
 
     /*
@@ -2946,8 +3239,7 @@ export const generateAllBoxesPdfService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${
-              lead.lastname || ""
+          ? `${lead.firstname || ""} ${lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -3108,28 +3400,28 @@ export const generateAllBoxesPdfService = async (
                 number,
                 {
                   id:
-                    number;
+                  number;
 
                   item_name:
-                    string;
+                  string;
 
                   category_name:
-                    string | null;
+                  string | null;
 
                   group_name:
-                    string | null;
+                  string | null;
 
                   unique_code:
-                    string | null;
+                  string | null;
 
                   unit_weight:
-                    number;
+                  number;
 
                   quantity:
-                    number;
+                  number;
 
                   total_weight:
-                    number;
+                  number;
                 }
               >();
 
@@ -3263,9 +3555,8 @@ export const generateAllBoxesPdfService = async (
                 box.created_date,
 
               product_box_count:
-                `${
-                  boxIndex +
-                  1
+                `${boxIndex +
+                1
                 } of ${totalBoxes}`,
 
               total_quantity:
@@ -3304,8 +3595,8 @@ export const generateAllBoxesPdfService = async (
             class="company-logo-text"
           >
             ${escapeHtml(
-              vendor.vendor_name
-            )}
+          vendor.vendor_name
+        )}
           </div>
         `;
 
@@ -3335,24 +3626,24 @@ export const generateAllBoxesPdfService = async (
             class="company-name"
           >
             ${escapeHtml(
-              vendor.vendor_name
-            )}
+      vendor.vendor_name
+    )}
           </div>
 
 
           <div>
             ${escapeHtml(
-              vendor.primary_contact_number ||
-              ""
-            )}
+      vendor.primary_contact_number ||
+      ""
+    )}
           </div>
 
 
           <div>
             ${escapeHtml(
-              vendor.primary_contact_email ||
-              ""
-            )}
+      vendor.primary_contact_email ||
+      ""
+    )}
           </div>
 
         </div>
@@ -3372,8 +3663,8 @@ export const generateAllBoxesPdfService = async (
             class="project-name"
           >
             ${escapeHtml(
-              project.project_name
-            )}
+      project.project_name
+    )}
           </div>
 
 
@@ -3383,8 +3674,8 @@ export const generateAllBoxesPdfService = async (
             Order Number:
 
             ${escapeHtml(
-              orderNumber
-            )}
+      orderNumber
+    )}
           </div>
 
         </div>
@@ -3396,15 +3687,15 @@ export const generateAllBoxesPdfService = async (
 
           <strong>
             ${escapeHtml(
-              clientName
-            )}
+      clientName
+    )}
           </strong>
 
 
           <div>
             ${escapeHtml(
-              clientContact
-            )}
+      clientContact
+    )}
           </div>
 
         </div>
@@ -3487,47 +3778,45 @@ export const generateAllBoxesPdfService = async (
                     <tr>
 
                       <td>
-                        ${
-                          index +
-                          1
-                        }
+                        ${index +
+                    1
+                    }
                       </td>
 
 
                       <td>
                         ${escapeHtml(
-                          item.item_name
-                        )}
+                      item.item_name
+                    )}
                       </td>
 
 
                       <td>
                         ${escapeHtml(
-                          item.category_name ||
-                          "—"
-                        )}
+                      item.category_name ||
+                      "—"
+                    )}
                       </td>
 
 
                       <td>
                         ${escapeHtml(
-                          item.group_name ||
-                          "—"
-                        )}
+                      item.group_name ||
+                      "—"
+                    )}
                       </td>
 
 
                       <td>
-                        ${
-                          item.quantity
-                        }
+                        ${item.quantity
+                    }
                       </td>
 
 
                       <td>
                         ${item.total_weight.toFixed(
-                          2
-                        )}
+                      2
+                    )}
                         kg
                       </td>
 
@@ -3538,7 +3827,7 @@ export const generateAllBoxesPdfService = async (
 
             const hiddenItemsRow =
               hiddenItemsCount >
-              0
+                0
                 ? `
                   <tr>
 
@@ -3551,12 +3840,11 @@ export const generateAllBoxesPdfService = async (
 
                       ${hiddenItemsCount}
 
-                      more item${
-                        hiddenItemsCount >
-                        1
-                          ? "s"
-                          : ""
-                      }
+                      more item${hiddenItemsCount >
+                  1
+                  ? "s"
+                  : ""
+                }
                     </td>
 
                   </tr>
@@ -3605,26 +3893,25 @@ export const generateAllBoxesPdfService = async (
                           class="box-title"
                         >
                           ${escapeHtml(
-                            box.packet_no
-                          )}
+              box.packet_no
+            )}
                         </div>
 
 
-                        ${
-                          box.details
-                            ?.room_name
-                            ? `
+                        ${box.details
+                ?.room_name
+                ? `
                               <div
                                 class="room-name"
                               >
                                 ${escapeHtml(
-                                  box.details
-                                    .room_name
-                                )}
+                  box.details
+                    .room_name
+                )}
                               </div>
                             `
-                            : ""
-                        }
+                : ""
+              }
 
                       </div>
 
@@ -3644,8 +3931,8 @@ export const generateAllBoxesPdfService = async (
 
                           <strong>
                             ${escapeHtml(
-                              orderNumber
-                            )}
+                orderNumber
+              )}
                           </strong>
 
                         </div>
@@ -3662,8 +3949,8 @@ export const generateAllBoxesPdfService = async (
 
                           <strong>
                             ${escapeHtml(
-                              box.packed_by_name
-                            )}
+                box.packed_by_name
+              )}
                           </strong>
 
                         </div>
@@ -3680,8 +3967,8 @@ export const generateAllBoxesPdfService = async (
 
                           <strong>
                             ${escapeHtml(
-                              box.packet_no
-                            )}
+                box.packet_no
+              )}
                           </strong>
 
                         </div>
@@ -3714,8 +4001,8 @@ export const generateAllBoxesPdfService = async (
 
                           <strong>
                             ${escapeHtml(
-                              box.product_box_count
-                            )}
+                box.product_box_count
+              )}
                           </strong>
 
                         </div>
@@ -3734,8 +4021,8 @@ export const generateAllBoxesPdfService = async (
                             class="total-weight-value"
                           >
                             ${box.total_weight.toFixed(
-                              2
-                            )}
+                2
+              )}
 
                             kg
                           </strong>
@@ -3786,8 +4073,8 @@ export const generateAllBoxesPdfService = async (
 
                     <strong>
                       ${escapeHtml(
-                        deliveryAddress
-                      )}
+                deliveryAddress
+              )}
                     </strong>
 
                   </div>
@@ -3815,17 +4102,15 @@ export const generateAllBoxesPdfService = async (
                   <div
                     class="products-count"
                   >
-                    ${
-                      box.items.length
-                    }
+                    ${box.items.length
+              }
 
                     products
 
                     ·
 
-                    ${
-                      box.total_quantity
-                    }
+                    ${box.total_quantity
+              }
 
                     qty
                   </div>
@@ -3889,9 +4174,8 @@ export const generateAllBoxesPdfService = async (
 
                   <tbody>
 
-                    ${
-                      itemRows ||
-                      `
+                    ${itemRows ||
+              `
                         <tr>
 
                           <td
@@ -3904,7 +4188,7 @@ export const generateAllBoxesPdfService = async (
 
                         </tr>
                       `
-                    }
+              }
 
                     ${hiddenItemsRow}
 
@@ -3923,16 +4207,15 @@ export const generateAllBoxesPdfService = async (
 
 
                       <td>
-                        ${
-                          box.total_quantity
-                        }
+                        ${box.total_quantity
+              }
                       </td>
 
 
                       <td>
                         ${box.total_weight.toFixed(
-                          2
-                        )}
+                2
+              )}
 
                         kg
                       </td>
@@ -3974,7 +4257,7 @@ export const generateAllBoxesPdfService = async (
 @page {
 
   size:
-    3in 6in;
+    3in 5in;
 
   margin:
     0;
@@ -4035,7 +4318,7 @@ body {
     3in;
 
   height:
-    6in;
+    5in;
 
   padding:
     14px;
@@ -4901,7 +5184,7 @@ ${boxPages}
           "3in",
 
         height:
-          "6in",
+          "5in",
 
         printBackground:
           true,
@@ -4965,7 +5248,7 @@ ${boxPages}
       }
     );
   } catch (
-    error
+  error
   ) {
     console.error(
       "generateAllBoxesPdfService:",
@@ -5003,409 +5286,19 @@ export const generateProjectFullReportServiceWeb = async (
       id: true,
     },
   });
-  
+
 
   if (!project) {
     return validationResponse(0, "Project not found");
   }
 
-  return await generateProjectFullReportService(    
+  return await generateProjectFullReportService(
     project.id,
     vendor_id
   );
 };
 
-export const generateProjectFullReportService_old = async (
-  project_id: number,
-  vendor_id: number
-) => {
-  const tempDir = path.join(process.cwd(), "tmp");
-  if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 
-  let tempFilePath: string | null = null;
-
-  try {
-
-    // ── 1. Fetch project, vendor, packaging machine ──────────────────────────
-    const [project, vendor, packagingMachine] = await Promise.all([
-      prisma.projectMaster.findFirst({
-        where: { id: project_id, vendor_id },
-        select: {
-          id: true,
-          project_name: true,
-          lead_id: true,
-          project_status: true,
-          details: {
-            select: {
-              estimated_completion_date: true,
-              room_name: true,
-            },
-          },
-        },
-      }),
-      prisma.vendorMaster.findUnique({
-        where: { id: vendor_id },
-        select: {
-          vendor_name: true,
-          primary_contact_number: true,
-          primary_contact_email: true,
-          logo: true,
-        },
-      }),
-      prisma.machineMaster.findFirst({
-        where: { vendor_id, machine_type_id: 18 },
-        select: { id: true },
-        orderBy: { id: "asc" },
-      }),
-    ]);
-
-    if (!project) return validationResponse(0, "Project not found");
-    if (!vendor) return validationResponse(0, "Vendor not found");
-
-    // ── 2. Fetch lead ────────────────────────────────────────────────────────
-    let lead: {
-      firstname: string;
-      lastname: string;
-      contact_no: string;
-      email: string | null;
-      site_address: string | null;
-    } | null = null;
-
-    if (project.lead_id) {
-      lead = await prisma.leadMaster.findUnique({
-        where: { id: project.lead_id },
-        select: {
-          firstname: true,
-          lastname: true,
-          contact_no: true,
-          email: true,
-          site_address: true,
-        },
-      });
-    }
-
-    // ── 3. Fetch all boxes + items ───────────────────────────────────────────
-    const boxes = await prisma.boxMaster.findMany({
-      where: { project_id, vendor_id, is_deleted: false },
-      select: {
-        id: true,
-        box_name: true,
-        box_status: true,
-        details: { select: { room_name: true } },
-      },
-      orderBy: { created_date: "asc" },
-    });
-
-    if (boxes.length === 0) return validationResponse(0, "No boxes found for this project");
-
-    const boxesWithItems = await Promise.all(
-      boxes.map(async (box) => {
-        const mappingRows = packagingMachine
-          ? await prisma.cutListMachineMapping.findMany({
-            where: {
-              box_id: box.id,
-              project_id,
-              vendor_id,
-              machine_id: packagingMachine.id,
-              expected_in: true,
-            },
-            select: {
-              cut_list: {
-                select: {
-                  item_name: true,
-                  category_name: true,
-                  group_name: true,
-                  qty: true,
-                  unique_code: true,
-                },
-              },
-            },
-            orderBy: { created_at: "asc" },
-          })
-          : [];
-
-        const items = mappingRows
-          .map((r) => r.cut_list)
-          .filter(Boolean) as {
-            item_name: string;
-            category_name: string | null;
-            group_name: string | null;
-            qty: number;
-            unique_code: string | null;
-          }[];
-
-        return { ...box, items };
-      })
-    );
-
-    // ── 4. Computed totals ───────────────────────────────────────────────────
-    const totalBoxes = boxes.length;
-    const packedBoxes = boxes.filter((b) => b.box_status === "packed").length;
-    const totalItems = boxesWithItems.reduce((s, b) => s + b.items.length, 0);
-    const totalQtyAll = boxesWithItems.reduce((s, b) => s + b.items.reduce((ss, i) => ss + i.qty, 0), 0);
-    const estimatedDate = project.details[0]?.estimated_completion_date
-      ? new Date(project.details[0].estimated_completion_date).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
-      : "N/A";
-
-    // ── 5. Shared header / footer ────────────────────────────────────────────
-    const logoUrl = vendor.logo
-      ? `${process.env.STORAGE_BASE_URL ?? ""}/${vendor.logo}`
-      : null;
-
-    const logoHtml = logoUrl
-      ? `<img src="${logoUrl}" style="height:44px;object-fit:contain;" alt="Logo"/>`
-      : `<div style="width:80px;height:36px;background:#1a1a2e;border-radius:4px;display:flex;align-items:center;justify-content:center;"><span style="color:white;font-size:13px;">LOGO</span></div>`;
-
-    const leadHtml = lead
-      ? `
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Client:</strong> ${escapeHtml(`${lead.firstname} ${lead.lastname}`)}</p>
-        <p style="font-size:13px;margin-bottom:3px;"><strong>Contact:</strong> ${escapeHtml(lead.contact_no)}</p>
-        ${lead.email ? `<p style="font-size:13px;margin-bottom:3px;"><strong>Email:</strong> ${escapeHtml(lead.email)}</p>` : ""}
-        ${lead.site_address ? `<p style="font-size:13px;"><strong>Address:</strong> ${escapeHtml(lead.site_address)}</p>` : ""}
-      `
-      : `<p style="font-size:13px;color:#888;">No client information available</p>`;
-
-    const pageHeader = (pageLabel: string) => `
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;">
-        ${logoHtml}
-        <div style="text-align:right;">
-          <p style="font-size:15px;font-weight:600;color:#111;">${escapeHtml(vendor.vendor_name)}</p>
-          <p style="font-size:11px;color:#555;margin-top:2px;">Contact: ${escapeHtml(vendor.primary_contact_number)}</p>
-          <p style="font-size:11px;color:#555;">Email: ${escapeHtml(vendor.primary_contact_email)}</p>
-          <p style="font-size:11px;color:#555;">Date: ${new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}</p>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:10px;">
-        <div>${leadHtml}</div>
-        <div style="text-align:right;">
-          <p style="font-size:13px;font-weight:600;color:#111;">${escapeHtml(project.project_name)}</p>
-          <p style="font-size:11px;color:#666;margin-top:2px;">${pageLabel}</p>
-        </div>
-      </div>
-      <div style="height:1px;background:#222;margin:10px 0 14px;"></div>
-    `;
-
-    const pageFooter = `
-      <div style="margin-top:20px;padding-top:8px;border-top:0.5px solid #e5e7eb;display:flex;justify-content:space-between;">
-        <p style="font-size:10px;color:#9CA3AF;">Generated by ${escapeHtml(vendor.vendor_name)}</p>
-        <p style="font-size:10px;color:#9CA3AF;">Project ID: ${project_id}</p>
-      </div>
-    `;
-
-    // ── 6. PAGE 1: Project summary + boxes overview ──────────────────────────
-    const boxOverviewRows = boxesWithItems
-      .map((box, i) => {
-        const boxQty = box.items.reduce((s, item) => s + item.qty, 0);
-        const isPacked = box.box_status === "packed";
-        return `
-        <tr style="background:${i % 2 === 0 ? "#ffffff" : "#f9fafb"};">
-          <td style="padding:7px 10px;color:#555;font-size:12px;">${i + 1}</td>
-          <td style="padding:7px 10px;font-size:12px;font-weight:600;">${escapeHtml(box.box_name)}</td>
-          <td style="padding:7px 10px;font-size:12px;">${escapeHtml(box.details?.room_name ?? "—")}</td>
-          <td style="padding:7px 10px;font-size:12px;">${box.items.length}</td>
-          <td style="padding:7px 10px;font-size:12px;">${boxQty}</td>
-          <td style="padding:7px 10px;font-size:12px;">
-            <span style="
-              background:${isPacked ? "#DCFCE7" : "#FFEDD5"};
-              color:${isPacked ? "#15803D" : "#92400E"};
-              padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;
-            ">${box.box_status}</span>
-          </td>
-        </tr>`;
-      })
-      .join("");
-
-    const summaryPage = `
-      <div>
-        ${pageHeader("Project Summary")}
- 
-        <!-- Project stats chips -->
-        <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
-          <div style="background:#F3F4F6;border:1px solid #E5E7EB;border-radius:10px;padding:10px 16px;">
-            <p style="font-size:10px;color:#9CA3AF;font-weight:600;">STATUS</p>
-            <p style="font-size:14px;font-weight:700;color:#111;margin-top:2px;text-transform:capitalize;">${project.project_status}</p>
-          </div>
-          <div style="background:#F3F4F6;border:1px solid #E5E7EB;border-radius:10px;padding:10px 16px;">
-            <p style="font-size:10px;color:#9CA3AF;font-weight:600;">EST. DATE</p>
-            <p style="font-size:14px;font-weight:700;color:#111;margin-top:2px;">${estimatedDate}</p>
-          </div>
-          <div style="background:#E6F7F5;border:1px solid #2A9D8F;border-radius:10px;padding:10px 16px;">
-            <p style="font-size:10px;color:#1A7A70;font-weight:600;">PACKED BOXES</p>
-            <p style="font-size:14px;font-weight:700;color:#1A7A70;margin-top:2px;">${packedBoxes} / ${totalBoxes}</p>
-          </div>
-          <div style="background:#F3F4F6;border:1px solid #E5E7EB;border-radius:10px;padding:10px 16px;">
-            <p style="font-size:10px;color:#9CA3AF;font-weight:600;">TOTAL ITEMS</p>
-            <p style="font-size:14px;font-weight:700;color:#111;margin-top:2px;">${totalItems}</p>
-          </div>
-          <div style="background:#F3F4F6;border:1px solid #E5E7EB;border-radius:10px;padding:10px 16px;">
-            <p style="font-size:10px;color:#9CA3AF;font-weight:600;">TOTAL QTY</p>
-            <p style="font-size:14px;font-weight:700;color:#111;margin-top:2px;">${totalQtyAll}</p>
-          </div>
-        </div>
- 
-        <!-- Boxes overview table -->
-        <p style="font-size:13px;font-weight:700;color:#111;margin-bottom:10px;">Box Overview</p>
-        <table style="width:100%;border-collapse:collapse;">
-          <thead>
-            <tr style="background:#2d2d2d;color:white;">
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:6%;">Sr.</th>
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:26%;">Box Name</th>
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:26%;">Room</th>
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:14%;">Items</th>
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:14%;">Qty</th>
-              <th style="padding:8px 10px;text-align:left;font-size:12px;font-weight:500;width:14%;">Status</th>
-            </tr>
-          </thead>
-          <tbody>${boxOverviewRows}</tbody>
-          <tfoot>
-            <tr style="border-top:2px solid #ddd;background:#f3f4f6;">
-              <td colspan="3" style="padding:7px 10px;font-weight:600;font-size:12px;">Total</td>
-              <td style="padding:7px 10px;font-weight:600;font-size:12px;">${totalItems}</td>
-              <td style="padding:7px 10px;font-weight:600;font-size:12px;">${totalQtyAll}</td>
-              <td style="padding:7px 10px;font-weight:600;font-size:12px;">${packedBoxes} packed</td>
-            </tr>
-          </tfoot>
-        </table>
- 
-        ${pageFooter}
-      </div>
-    `;
-
-    // ── 7. PAGE 2+: One page per box with full item details ──────────────────
-    const boxDetailPages = boxesWithItems
-      .map((box) => {
-        const totalQty = box.items.reduce((s, i) => s + i.qty, 0);
-        const isPacked = box.box_status === "packed";
-
-        const qrValue = encodeURIComponent(
-          `vendor:${vendor_id},project:${project_id},box:${box.id}`
-        );
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${qrValue}&size=80x80`;
-
-        const itemRows = box.items
-          .map(
-            (item, i) => `
-            <tr style="background:${i % 2 === 0 ? "#ffffff" : "#f9fafb"};">
-              <td style="padding:6px 8px;color:#555;font-size:11px;">${i + 1}</td>
-              <td style="padding:6px 8px;font-size:11px;">${escapeHtml(item.item_name)}</td>
-              <td style="padding:6px 8px;font-size:11px;color:#555;">${escapeHtml(item.category_name ?? "—")}</td>
-              <td style="padding:6px 8px;font-size:11px;color:#555;">${escapeHtml(item.group_name ?? "—")}</td>
-              <td style="padding:6px 8px;font-size:11px;">${item.qty}</td>
-            </tr>`
-          )
-          .join("");
-
-        return `
-          <div style="page-break-before: always;">
-            ${pageHeader(`Box Details · ${escapeHtml(box.box_name)}`)}
- 
-            <!-- Box summary bar -->
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-              <div style="display:flex;align-items:center;gap:10px;">
-                <span style="
-                  background:${isPacked ? "#E6F7F5" : "#FFF8EE"};
-                  color:${isPacked ? "#1A7A70" : "#C15C0A"};
-                  padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;
-                ">${box.box_status}</span>
-                <p style="font-size:14px;font-weight:700;color:#111;">${escapeHtml(box.box_name)}</p>
-                ${box.details?.room_name ? `<p style="font-size:11px;color:#666;">· ${escapeHtml(box.details.room_name)}</p>` : ""}
-              </div>
-              <div style="display:flex;align-items:center;gap:12px;">
-                <p style="font-size:11px;color:#555;"><strong>Items:</strong> ${box.items.length} &nbsp; <strong>Qty:</strong> ${totalQty}</p>
-                <img src="${qrUrl}" style="width:48px;height:48px;" alt="QR"/>
-              </div>
-            </div>
- 
-            <!-- Items table -->
-            <table style="width:100%;border-collapse:collapse;">
-              <thead>
-                <tr style="background:#2d2d2d;color:white;">
-                  <th style="padding:7px 8px;text-align:left;font-size:11px;font-weight:500;width:6%;">Sr.</th>
-                  <th style="padding:7px 8px;text-align:left;font-size:11px;font-weight:500;width:32%;">Item Name</th>
-                  <th style="padding:7px 8px;text-align:left;font-size:11px;font-weight:500;width:22%;">Category</th>
-                  <th style="padding:7px 8px;text-align:left;font-size:11px;font-weight:500;width:30%;">Group</th>
-                  <th style="padding:7px 8px;text-align:left;font-size:11px;font-weight:500;width:10%;">Qty</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${itemRows || `<tr><td colspan="5" style="padding:12px 8px;text-align:center;color:#9CA3AF;font-size:11px;">No items in this box</td></tr>`}
-              </tbody>
-              <tfoot>
-                <tr style="border-top:2px solid #ddd;background:#f3f4f6;">
-                  <td colspan="4" style="padding:6px 8px;font-weight:600;font-size:11px;">Total</td>
-                  <td style="padding:6px 8px;font-weight:600;font-size:11px;">${totalQty}</td>
-                </tr>
-              </tfoot>
-            </table>
- 
-            ${pageFooter}
-          </div>
-        `;
-      })
-      .join("");
-
-    // ── 8. Assemble full HTML ────────────────────────────────────────────────
-    const html = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8"/>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:Arial,sans-serif; margin:28px; color:#333; font-size:14px; }
-    p { margin:0; }
-    strong { font-weight:600; }
-  </style>
-</head>
-<body>
-  ${summaryPage}
-  ${boxDetailPages}
-</body>
-</html>`;
-
-    // ── 9. Generate PDF ──────────────────────────────────────────────────────
-    const fileName = `report_${sanitizeFileName(project.project_name)}_${Date.now()}.pdf`;
-    tempFilePath = path.join(tempDir, fileName);
-
-    const pdfBuffer = await generatePdf(html, tempFilePath);
-
-    // const pdfBuffer = await htmlPdfNode.generatePdf(
-    //   { content: html },
-    //   {
-    //     format: "A4",
-    //     margin: { top: "10mm", bottom: "10mm", left: "10mm", right: "10mm" },
-    //     printBackground: true,
-    //   }
-    // ) as unknown as Buffer;
-
-    // fs.writeFileSync(tempFilePath, pdfBuffer);
-
-    // ── 10. Upload to Wasabi + signed URL + delete temp ──────────────────────
-    const { signedUrl, wasabiKey } = await uploadPdfAndGetSignedUrl(
-      tempFilePath,
-      vendor_id,
-      project_id,
-      fileName
-    );
-    tempFilePath = null;
-
-    return validationResponse(1, "Project full report generated successfully", {
-      download_url: signedUrl,
-      file_name: fileName,
-      wasabi_key: wasabiKey,
-      total_boxes: totalBoxes,
-    });
-
-  } catch (error) {
-    console.error("Error generating project full report:", error);
-
-    if (tempFilePath && fs.existsSync(tempFilePath)) {
-      fs.unlinkSync(tempFilePath);
-    }
-
-    return validationResponse(0, "Failed to generate project report111");
-  }
-};
 
 export const generateProjectFullReportService = async (
   project_id: number,
@@ -5422,8 +5315,7 @@ export const generateProjectFullReportService = async (
     });
   }
 
-  let tempFilePath: string | null =
-    null;
+  let tempFilePath: string | null = null;
 
   try {
     /*
@@ -5447,6 +5339,7 @@ export const generateProjectFullReportService = async (
           id: true,
           project_name: true,
           project_status: true,
+          packing_type: true,
           lead_id: true,
           order_no: true,
           client_name: true,
@@ -5529,35 +5422,25 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 3. Lead
+    | 3. Lead fallback
     |--------------------------------------------------------------------------
     */
 
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-            where: {
-              id:
-                project.lead_id,
-            },
+          where: {
+            id: project.lead_id,
+          },
 
-            select: {
-              firstname:
-                true,
-
-              lastname:
-                true,
-
-              contact_no:
-                true,
-
-              email:
-                true,
-
-              site_address:
-                true,
-            },
-          })
+          select: {
+            firstname: true,
+            lastname: true,
+            contact_no: true,
+            email: true,
+            site_address: true,
+          },
+        })
         : null;
 
     /*
@@ -5570,8 +5453,7 @@ export const generateProjectFullReportService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${
-              lead.lastname || ""
+          ? `${lead.firstname || ""} ${lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -5593,7 +5475,7 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 5. Boxes
+    | 5. Fetch boxes
     |--------------------------------------------------------------------------
     */
 
@@ -5602,54 +5484,31 @@ export const generateProjectFullReportService = async (
         where: {
           project_id,
           vendor_id,
-          is_deleted:
-            false,
+          is_deleted: false,
         },
 
         select: {
-          id:
-            true,
-
-          box_name:
-            true,
-
-          box_status:
-            true,
-
-          created_date:
-            true,
-
-          packed_at:
-            true,
-
-          packed_by:
-            true,
+          id: true,
+          box_name: true,
+          box_status: true,
+          created_date: true,
+          packed_at: true,
+          packed_by: true,
 
           packedByUser: {
             select: {
-              id:
-                true,
-
-              user_name:
-                true,
-            },
-          },
-
-          details: {
-            select: {
-              room_name:
-                true,
+              id: true,
+              user_name: true,
             },
           },
         },
 
         orderBy: {
-          created_date:
-            "asc",
+          created_date: "asc",
         },
       });
 
-    if (!boxes.length) {
+    if (boxes.length === 0) {
       return validationResponse(
         0,
         "No boxes found"
@@ -5661,94 +5520,81 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 6. Box products
+    | 6. Fetch products for every box
     |--------------------------------------------------------------------------
     */
 
-    const boxesWithItems =
+    const rawBoxesWithItems =
       await Promise.all(
         boxes.map(
           async (
-            box,
-            boxIndex
+            box
           ) => {
             const mappings =
               await prisma.cutListMachineMapping.findMany({
                 where: {
-                  box_id:
-                    box.id,
-
+                  box_id: box.id,
                   project_id,
-
                   vendor_id,
 
                   machine_id:
                     packagingMachine.id,
 
-                  expected_in:
-                    true,
+                  expected_in: true,
                 },
 
                 select: {
-                  id:
-                    true,
+                  id: true,
 
                   cut_list: {
                     select: {
-                      id:
-                        true,
-
-                      item_name:
-                        true,
-
-                      category_name:
-                        true,
-
-                      group_name:
-                        true,
-
-                      unique_code:
-                        true,
-
-                      weight:
-                        true,
+                      id: true,
+                      item_name: true,
+                      category_name: true,
+                      group_name: true,
+                      unique_code: true,
+                      weight: true,
                     },
                   },
                 },
 
                 orderBy: {
-                  created_at:
-                    "asc",
+                  created_at: "asc",
                 },
               });
+
+            /*
+            |--------------------------------------------------------------------------
+            | Merge repeated mappings into quantity
+            |--------------------------------------------------------------------------
+            */
 
             const itemMap =
               new Map<
                 number,
                 {
-                  id:
-                    number;
+                  id: number;
 
                   item_name:
-                    string;
+                  string;
 
                   category_name:
-                    string | null;
+                  string | null;
 
                   group_name:
-                    string | null;
+                  string | null;
 
                   unique_code:
-                    string | null;
+                  string | null;
 
                   unit_weight:
-                    number;
+                  number;
 
                   quantity:
-                    number;
+                  number;
 
                   total_weight:
-                    number;
+                  number;
                 }
               >();
 
@@ -5763,26 +5609,27 @@ export const generateProjectFullReportService = async (
                 continue;
               }
 
-              const weight =
+              const itemWeight =
                 Number(
                   cutList.weight ||
                   0
                 );
 
-              const existing =
+              const existingItem =
                 itemMap.get(
                   cutList.id
                 );
 
-              if (existing) {
-                existing.quantity +=
+              if (existingItem) {
+                existingItem.quantity +=
                   1;
 
-                existing.total_weight +=
-                  weight;
+                existingItem.total_weight +=
+                  itemWeight;
               } else {
                 itemMap.set(
                   cutList.id,
+
                   {
                     id:
                       cutList.id,
@@ -5800,13 +5647,13 @@ export const generateProjectFullReportService = async (
                       cutList.unique_code,
 
                     unit_weight:
-                      weight,
+                      itemWeight,
 
                     quantity:
                       1,
 
                     total_weight:
-                      weight,
+                      itemWeight,
                   }
                 );
               }
@@ -5845,6 +5692,7 @@ export const generateProjectFullReportService = async (
                 ) =>
                   total +
                   item.quantity,
+
                 0
               );
 
@@ -5856,8 +5704,32 @@ export const generateProjectFullReportService = async (
                 ) =>
                   total +
                   item.total_weight,
+
                 0
               );
+
+            /*
+            |--------------------------------------------------------------------------
+            | Resolve group of box
+            |--------------------------------------------------------------------------
+            */
+
+            const groupedItem =
+              items.find(
+                (
+                  item
+                ) =>
+                  Boolean(
+                    item.group_name
+                      ?.trim()
+                  )
+              );
+
+            const boxGroupName =
+              groupedItem
+                ?.group_name
+                ?.trim() ||
+              null;
 
             return {
               ...box,
@@ -5880,14 +5752,11 @@ export const generateProjectFullReportService = async (
                 box.packed_at ||
                 box.created_date,
 
-              product_box_count:
-                `${
-                  boxIndex +
-                  1
-                } of ${totalBoxes}`,
-
               address:
                 clientAddress,
+
+              box_group_name:
+                boxGroupName,
 
               total_quantity:
                 totalQuantity,
@@ -5905,7 +5774,162 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 7. Project totals
+    | 7. Calculate PRODUCT BOX COUNT
+    |--------------------------------------------------------------------------
+    */
+
+    const boxesWithItems =
+      (() => {
+        /*
+        |--------------------------------------------------------------------------
+        | DEFAULT
+        |--------------------------------------------------------------------------
+        |
+        | 1 of total project boxes
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+          project.packing_type !==
+          PackingType.GROUPWISE
+        ) {
+          return rawBoxesWithItems.map(
+            (
+              box,
+              index
+            ) => ({
+              ...box,
+
+              product_box_count:
+                `${index +
+                1
+                } of ${totalBoxes}`,
+            })
+          );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | GROUPWISE
+        |--------------------------------------------------------------------------
+        |
+        | Every group has its own sequence
+        |--------------------------------------------------------------------------
+        */
+
+        const getGroupKey =
+          (
+            box:
+              (
+                typeof rawBoxesWithItems
+              )[number]
+          ) => {
+            const groupName =
+              box.box_group_name
+                ?.trim()
+                .toLowerCase();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Old data without a group
+            |--------------------------------------------------------------------------
+            */
+
+            if (!groupName) {
+              return `__ungrouped_box_${box.id}`;
+            }
+
+            return groupName;
+          };
+
+        /*
+        |--------------------------------------------------------------------------
+        | Total boxes per group
+        |--------------------------------------------------------------------------
+        */
+
+        const groupTotalMap =
+          new Map<
+            string,
+            number
+          >();
+
+        for (
+          const box
+          of rawBoxesWithItems
+        ) {
+          const groupKey =
+            getGroupKey(
+              box
+            );
+
+          groupTotalMap.set(
+            groupKey,
+
+            (
+              groupTotalMap.get(
+                groupKey
+              ) ||
+              0
+            ) +
+            1
+          );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Current number per group
+        |--------------------------------------------------------------------------
+        */
+
+        const groupCurrentMap =
+          new Map<
+            string,
+            number
+          >();
+
+        return rawBoxesWithItems.map(
+          (
+            box
+          ) => {
+            const groupKey =
+              getGroupKey(
+                box
+              );
+
+            const currentNumber =
+              (
+                groupCurrentMap.get(
+                  groupKey
+                ) ||
+                0
+              ) +
+              1;
+
+            groupCurrentMap.set(
+              groupKey,
+              currentNumber
+            );
+
+            const groupTotal =
+              groupTotalMap.get(
+                groupKey
+              ) ||
+              1;
+
+            return {
+              ...box,
+
+              product_box_count:
+                `${currentNumber} of ${groupTotal}`,
+            };
+          }
+        );
+      })();
+
+    /*
+    |--------------------------------------------------------------------------
+    | 8. Project totals
     |--------------------------------------------------------------------------
     */
 
@@ -5928,6 +5952,7 @@ export const generateProjectFullReportService = async (
         ) =>
           total +
           box.items.length,
+
         0
       );
 
@@ -5939,6 +5964,7 @@ export const generateProjectFullReportService = async (
         ) =>
           total +
           box.total_quantity,
+
         0
       );
 
@@ -5950,12 +5976,13 @@ export const generateProjectFullReportService = async (
         ) =>
           total +
           box.total_weight,
+
         0
       );
 
     /*
     |--------------------------------------------------------------------------
-    | 8. Logo
+    | 9. Vendor logo
     |--------------------------------------------------------------------------
     */
 
@@ -5964,7 +5991,9 @@ export const generateProjectFullReportService = async (
         ? `
           <img
             src="${logoUrl}"
+
             class="company-logo"
+
             alt="Logo"
           />
         `
@@ -5973,24 +6002,33 @@ export const generateProjectFullReportService = async (
             class="company-logo-text"
           >
             ${escapeHtml(
-              vendor.vendor_name
-            )}
+          vendor.vendor_name
+        )}
           </div>
         `;
 
     /*
     |--------------------------------------------------------------------------
-    | 9. Shared project header
+    | 10. Company header
+    |--------------------------------------------------------------------------
+    |
+    | Used on all pages
+    |
+    | Does not contain:
+    | - Project name
+    | - Packet number
     |--------------------------------------------------------------------------
     */
 
-    const projectHeader = `
+    const companyHeader = `
       <div
         class="main-header"
       >
 
         <div>
+
           ${logoHtml}
+
         </div>
 
 
@@ -6002,29 +6040,41 @@ export const generateProjectFullReportService = async (
             class="company-name"
           >
             ${escapeHtml(
-              vendor.vendor_name
-            )}
+      vendor.vendor_name
+    )}
           </div>
+
 
           <div>
             ${escapeHtml(
-              vendor.primary_contact_number ||
-              ""
-            )}
+      vendor.primary_contact_number ||
+      ""
+    )}
           </div>
+
 
           <div>
             ${escapeHtml(
-              vendor.primary_contact_email ||
-              ""
-            )}
+      vendor.primary_contact_email ||
+      ""
+    )}
           </div>
 
         </div>
 
       </div>
+    `;
 
+    /*
+    |--------------------------------------------------------------------------
+    | 11. Project heading
+    |--------------------------------------------------------------------------
+    |
+    | Used only on summary page
+    |--------------------------------------------------------------------------
+    */
 
+    const summaryProjectHeading = `
       <div
         class="project-heading"
       >
@@ -6037,9 +6087,10 @@ export const generateProjectFullReportService = async (
             class="project-name"
           >
             ${escapeHtml(
-              project.project_name
-            )}
+      project.project_name
+    )}
           </div>
+
 
           <div
             class="project-subtitle"
@@ -6047,8 +6098,8 @@ export const generateProjectFullReportService = async (
             Order Number:
 
             ${escapeHtml(
-              orderNumber
-            )}
+      orderNumber
+    )}
           </div>
 
         </div>
@@ -6060,14 +6111,15 @@ export const generateProjectFullReportService = async (
 
           <strong>
             ${escapeHtml(
-              clientName
-            )}
+      clientName
+    )}
           </strong>
+
 
           <div>
             ${escapeHtml(
-              clientContact
-            )}
+      clientContact
+    )}
           </div>
 
         </div>
@@ -6077,7 +6129,7 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 10. Summary rows
+    | 12. Summary table rows
     |--------------------------------------------------------------------------
     */
 
@@ -6091,61 +6143,67 @@ export const generateProjectFullReportService = async (
             <tr>
 
               <td>
-                ${
-                  index +
-                  1
-                }
+                ${index +
+            1
+            }
               </td>
+
 
               <td>
                 ${escapeHtml(
-                  box.packet_no
-                )}
+              box.packet_no
+            )}
               </td>
+
 
               <td>
                 ${escapeHtml(
-                  box.packed_by_name
-                )}
+              box.packed_by_name
+            )}
               </td>
+
 
               <td>
                 ${formatReportDate(
-                  box.package_date
-                )}
+              box.package_date
+            )}
               </td>
+
 
               <td>
                 ${escapeHtml(
-                  box.product_box_count
-                )}
+              box.product_box_count
+            )}
               </td>
 
-              <td>
-                ${
-                  box.items.length
-                }
-              </td>
 
               <td>
-                ${
-                  box.total_quantity
-                }
+                ${box.items.length
+            }
               </td>
+
+
+              <td>
+                ${box.total_quantity
+            }
+              </td>
+
 
               <td>
                 ${box.total_weight.toFixed(
-                  2
-                )}
+              2
+            )}
+
                 kg
               </td>
 
+
               <td>
                 ${escapeHtml(
-                  String(
-                    box.box_status
-                  )
-                )}
+              String(
+                box.box_status
+              )
+            )}
               </td>
 
             </tr>
@@ -6155,7 +6213,7 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 11. Summary page
+    | 13. Summary page
     |--------------------------------------------------------------------------
     */
 
@@ -6164,7 +6222,10 @@ export const generateProjectFullReportService = async (
         class="page"
       >
 
-        ${projectHeader}
+        ${companyHeader}
+
+
+        ${summaryProjectHeading}
 
 
         <div
@@ -6176,6 +6237,7 @@ export const generateProjectFullReportService = async (
             <span>
               BOXES
             </span>
+
 
             <strong>
               ${packedBoxes}
@@ -6190,6 +6252,7 @@ export const generateProjectFullReportService = async (
               PRODUCTS
             </span>
 
+
             <strong>
               ${totalProducts}
             </strong>
@@ -6202,6 +6265,7 @@ export const generateProjectFullReportService = async (
             <span>
               TOTAL QTY
             </span>
+
 
             <strong>
               ${totalQuantity}
@@ -6216,10 +6280,12 @@ export const generateProjectFullReportService = async (
               TOTAL WEIGHT
             </span>
 
+
             <strong>
               ${totalWeight.toFixed(
-                2
-              )}
+      2
+    )}
+
               kg
             </strong>
 
@@ -6236,9 +6302,10 @@ export const generateProjectFullReportService = async (
             DELIVERY ADDRESS:
           </strong>
 
+
           ${escapeHtml(
-            clientAddress
-          )}
+      clientAddress
+    )}
 
         </div>
 
@@ -6265,33 +6332,41 @@ export const generateProjectFullReportService = async (
                 #
               </th>
 
+
               <th>
                 Packet
               </th>
+
 
               <th>
                 Packed By
               </th>
 
+
               <th>
                 Date
               </th>
+
 
               <th>
                 Count
               </th>
 
+
               <th>
                 Products
               </th>
+
 
               <th>
                 Qty
               </th>
 
+
               <th>
                 Weight
               </th>
+
 
               <th>
                 Status
@@ -6319,20 +6394,25 @@ export const generateProjectFullReportService = async (
                 TOTAL
               </td>
 
+
               <td>
                 ${totalProducts}
               </td>
+
 
               <td>
                 ${totalQuantity}
               </td>
 
+
               <td>
                 ${totalWeight.toFixed(
-                  2
-                )}
+      2
+    )}
+
                 kg
               </td>
+
 
               <td>
                 ${packedBoxes}
@@ -6349,7 +6429,7 @@ export const generateProjectFullReportService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 12. Box pages
+    | 14. Box pages
     |--------------------------------------------------------------------------
     */
 
@@ -6364,12 +6444,19 @@ export const generateProjectFullReportService = async (
                 box.package_date
               );
 
+            /*
+            |--------------------------------------------------------------------------
+            | QR code
+            |--------------------------------------------------------------------------
+            */
+
             const qrValue =
               `vendor:${vendor_id},project:${project_id},box:${box.id}`;
 
             const qrImage =
               await QRCode.toDataURL(
                 qrValue,
+
                 {
                   width:
                     250,
@@ -6390,6 +6477,12 @@ export const generateProjectFullReportService = async (
                 }
               );
 
+            /*
+            |--------------------------------------------------------------------------
+            | Product rows
+            |--------------------------------------------------------------------------
+            */
+
             const itemRows =
               box.items
                 .map(
@@ -6400,35 +6493,39 @@ export const generateProjectFullReportService = async (
                     <tr>
 
                       <td>
-                        ${
-                          index +
-                          1
-                        }
+                        ${index +
+                    1
+                    }
                       </td>
+
 
                       <td>
                         ${escapeHtml(
-                          item.item_name
-                        )}
+                      item.item_name
+                    )}
                       </td>
 
+
                       <td>
-                        ${
-                          item.quantity
-                        }
+                        ${item.quantity
+                    }
                       </td>
+
 
                       <td>
                         ${item.unit_weight.toFixed(
-                          2
-                        )}
+                      2
+                    )}
+
                         kg
                       </td>
 
+
                       <td>
                         ${item.total_weight.toFixed(
-                          2
-                        )}
+                      2
+                    )}
+
                         kg
                       </td>
 
@@ -6436,6 +6533,19 @@ export const generateProjectFullReportService = async (
                   `
                 )
                 .join("");
+
+            /*
+            |--------------------------------------------------------------------------
+            | Individual box page
+            |--------------------------------------------------------------------------
+            |
+            | Project name is not displayed.
+            |
+            | Packet number appears only under PACKET NO.
+            |
+            | Client details are displayed below company information.
+            |--------------------------------------------------------------------------
+            */
 
             return `
               <section
@@ -6445,7 +6555,45 @@ export const generateProjectFullReportService = async (
                 "
               >
 
-                ${projectHeader}
+                ${companyHeader}
+
+
+                <div
+                  class="box-client-info"
+                >
+
+                  <div>
+
+                    <span>
+                      CLIENT NAME
+                    </span>
+
+
+                    <strong>
+                      ${escapeHtml(
+              clientName
+            )}
+                    </strong>
+
+                  </div>
+
+
+                  <div>
+
+                    <span>
+                      CONTACT NUMBER
+                    </span>
+
+
+                    <strong>
+                      ${escapeHtml(
+              clientContact
+            )}
+                    </strong>
+
+                  </div>
+
+                </div>
 
 
                 <div
@@ -6463,38 +6611,6 @@ export const generateProjectFullReportService = async (
                     >
 
                       <div
-                        class="box-title-area"
-                      >
-
-                        <div
-                          class="box-title"
-                        >
-                          ${escapeHtml(
-                            box.packet_no
-                          )}
-                        </div>
-
-
-                        ${
-                          box.details
-                            ?.room_name
-                            ? `
-                              <div
-                                class="room-name"
-                              >
-                                ${escapeHtml(
-                                  box.details
-                                    .room_name
-                                )}
-                              </div>
-                            `
-                            : ""
-                        }
-
-                      </div>
-
-
-                      <div
                         class="box-details-grid"
                       >
 
@@ -6506,10 +6622,11 @@ export const generateProjectFullReportService = async (
                             ORDER NUMBER
                           </span>
 
+
                           <strong>
                             ${escapeHtml(
-                              box.order_no
-                            )}
+              box.order_no
+            )}
                           </strong>
 
                         </div>
@@ -6523,10 +6640,11 @@ export const generateProjectFullReportService = async (
                             PACKED BY
                           </span>
 
+
                           <strong>
                             ${escapeHtml(
-                              box.packed_by_name
-                            )}
+              box.packed_by_name
+            )}
                           </strong>
 
                         </div>
@@ -6540,10 +6658,11 @@ export const generateProjectFullReportService = async (
                             PACKET NO.
                           </span>
 
+
                           <strong>
                             ${escapeHtml(
-                              box.packet_no
-                            )}
+              box.packet_no
+            )}
                           </strong>
 
                         </div>
@@ -6556,6 +6675,7 @@ export const generateProjectFullReportService = async (
                           <span>
                             PACKAGE DATE
                           </span>
+
 
                           <strong>
                             ${packageDate}
@@ -6572,10 +6692,11 @@ export const generateProjectFullReportService = async (
                             PRODUCT BOX COUNT
                           </span>
 
+
                           <strong>
                             ${escapeHtml(
-                              box.product_box_count
-                            )}
+              box.product_box_count
+            )}
                           </strong>
 
                         </div>
@@ -6589,12 +6710,14 @@ export const generateProjectFullReportService = async (
                             TOTAL WEIGHT
                           </span>
 
+
                           <strong
                             class="total-weight-value"
                           >
                             ${box.total_weight.toFixed(
-                              2
-                            )}
+              2
+            )}
+
                             kg
                           </strong>
 
@@ -6639,10 +6762,11 @@ export const generateProjectFullReportService = async (
                       DELIVERY ADDRESS
                     </span>
 
+
                     <strong>
                       ${escapeHtml(
-                        box.address
-                      )}
+              box.address
+            )}
                     </strong>
 
                   </div>
@@ -6664,17 +6788,15 @@ export const generateProjectFullReportService = async (
                   <div
                     class="products-count"
                   >
-                    ${
-                      box.items.length
-                    }
+                    ${box.items.length
+              }
 
                     products
 
                     ·
 
-                    ${
-                      box.total_quantity
-                    }
+                    ${box.total_quantity
+              }
 
                     qty
                   </div>
@@ -6696,11 +6818,13 @@ export const generateProjectFullReportService = async (
                         #
                       </th>
 
+
                       <th
                         class="product-column"
                       >
                         Product
                       </th>
+
 
                       <th
                         class="qty-column"
@@ -6708,11 +6832,13 @@ export const generateProjectFullReportService = async (
                         Qty
                       </th>
 
+
                       <th
                         class="unit-column"
                       >
                         Unit Weight
                       </th>
+
 
                       <th
                         class="total-column"
@@ -6727,9 +6853,8 @@ export const generateProjectFullReportService = async (
 
                   <tbody>
 
-                    ${
-                      itemRows ||
-                      `
+                    ${itemRows ||
+              `
                         <tr>
 
                           <td
@@ -6742,7 +6867,7 @@ export const generateProjectFullReportService = async (
 
                         </tr>
                       `
-                    }
+              }
 
                   </tbody>
 
@@ -6757,20 +6882,23 @@ export const generateProjectFullReportService = async (
                         TOTAL
                       </td>
 
+
                       <td>
-                        ${
-                          box.total_quantity
-                        }
+                        ${box.total_quantity
+              }
                       </td>
+
 
                       <td>
                         —
                       </td>
 
+
                       <td>
                         ${box.total_weight.toFixed(
-                          2
-                        )}
+                2
+              )}
+
                         kg
                       </td>
 
@@ -6787,11 +6915,13 @@ export const generateProjectFullReportService = async (
       );
 
     const boxPages =
-      boxPagesArray.join("");
+      boxPagesArray.join(
+        ""
+      );
 
     /*
     |--------------------------------------------------------------------------
-    | 13. HTML
+    | 15. Final HTML
     |--------------------------------------------------------------------------
     */
 
@@ -6804,63 +6934,93 @@ export const generateProjectFullReportService = async (
 
 <meta charset="UTF-8"/>
 
+
 <style>
 
+
 @page {
-  size: 3in 6in;
-  margin: 0;
+
+  size:
+    4in 5in;
+
+  margin:
+    0;
+
 }
 
 
 * {
-  box-sizing: border-box;
 
-  margin: 0;
+  box-sizing:
+    border-box;
 
-  padding: 0;
+  margin:
+    0;
+
+  padding:
+    0;
+
 }
 
 
 html,
 body {
-  width: 4in;
 
-  margin: 0;
+  width:
+    4in;
 
-  padding: 0;
+  margin:
+    0;
+
+  padding:
+    0;
+
 }
 
 
 body {
-  color: #172033;
 
-  background: #FFFFFF;
+  color:
+    #172033;
+
+  background:
+    #FFFFFF;
 
   font-family:
     Arial,
     sans-serif;
 
-  font-size: 11px;
+  font-size:
+    11px;
+
 }
 
 
 .page {
-  width: 4in;
 
-  height: 6in;
+  width:
+    4in;
 
-  padding: 14px;
+  height:
+    5in;
 
-  overflow: hidden;
+  padding:
+    14px;
+
+  overflow:
+    hidden;
 
   page-break-after:
     always;
+
 }
 
 
 .page:last-child {
+
   page-break-after:
     auto;
+
 }
 
 
@@ -6870,8 +7030,11 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .main-header {
-  display: flex;
+
+  display:
+    flex;
 
   justify-content:
     space-between;
@@ -6879,63 +7042,89 @@ body {
   align-items:
     flex-start;
 
-  min-height: 38px;
+  min-height:
+    38px;
 
-  padding-bottom: 6px;
+  padding-bottom:
+    6px;
 
   border-bottom:
     1px solid
     #172033;
+
 }
 
 
 .company-logo {
-  display: block;
 
-  max-width: 92px;
+  display:
+    block;
 
-  max-height: 30px;
+  max-width:
+    92px;
+
+  max-height:
+    30px;
 
   object-fit:
     contain;
+
 }
 
 
 .company-logo-text {
-  font-size: 14px;
 
-  font-weight: 800;
+  font-size:
+    14px;
+
+  font-weight:
+    800;
+
 }
 
 
 .company-information {
-  color: #667085;
 
-  font-size: 6.5px;
+  color:
+    #667085;
 
-  line-height: 1.35;
+  font-size:
+    6.5px;
 
-  text-align: right;
+  line-height:
+    1.35;
+
+  text-align:
+    right;
+
 }
 
 
 .company-name {
-  color: #172033;
 
-  font-size: 8.5px;
+  color:
+    #172033;
 
-  font-weight: 800;
+  font-size:
+    8.5px;
+
+  font-weight:
+    800;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Project
+| Summary project heading
 |--------------------------------------------------------------------------
 */
 
+
 .project-heading {
-  display: flex;
+
+  display:
+    flex;
 
   justify-content:
     space-between;
@@ -6943,70 +7132,204 @@ body {
   align-items:
     center;
 
-  min-height: 37px;
+  min-height:
+    37px;
 
-  padding: 6px 0;
+  padding:
+    6px 0;
 
   border-bottom:
     1px solid
     #D9DEE7;
+
 }
 
 
 .project-heading-left {
-  width: 64%;
+
+  width:
+    64%;
+
 }
 
 
 .project-name {
-  max-width: 220px;
 
-  overflow: hidden;
+  max-width:
+    220px;
 
-  font-size: 10.5px;
+  overflow:
+    hidden;
 
-  font-weight: 900;
+  font-size:
+    10.5px;
 
-  white-space: nowrap;
+  font-weight:
+    900;
+
+  white-space:
+    nowrap;
 
   text-overflow:
     ellipsis;
+
 }
 
 
 .project-subtitle {
-  margin-top: 2px;
 
-  color: #667085;
+  margin-top:
+    2px;
 
-  font-size: 6.5px;
+  color:
+    #667085;
+
+  font-size:
+    6.5px;
+
 }
 
 
 .project-client {
-  width: 34%;
 
-  color: #667085;
+  width:
+    34%;
 
-  font-size: 6.5px;
+  color:
+    #667085;
 
-  line-height: 1.3;
+  font-size:
+    6.5px;
 
-  text-align: right;
+  line-height:
+    1.3;
+
+  text-align:
+    right;
+
 }
 
 
 .project-client strong {
-  display: block;
 
-  overflow: hidden;
+  display:
+    block;
 
-  color: #172033;
+  overflow:
+    hidden;
 
-  white-space: nowrap;
+  color:
+    #172033;
+
+  white-space:
+    nowrap;
 
   text-overflow:
     ellipsis;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Client information on box page
+|--------------------------------------------------------------------------
+*/
+
+
+.box-client-info {
+
+  display:
+    grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1fr
+    )
+    minmax(
+      0,
+      1fr
+    );
+
+  gap:
+    12px;
+
+  padding:
+    6px 0;
+
+  border-bottom:
+    1px solid
+    #D9DEE7;
+
+}
+
+
+.box-client-info > div {
+
+  min-width:
+    0;
+
+}
+
+
+.box-client-info > div:last-child {
+
+  text-align:
+    right;
+
+}
+
+
+.box-client-info span {
+
+  display:
+    block;
+
+  color:
+    #667085;
+
+  font-size:
+    5.7px;
+
+  line-height:
+    1.1;
+
+  font-weight:
+    800;
+
+}
+
+
+.box-client-info strong {
+
+  display:
+    block;
+
+  margin-top:
+    2px;
+
+  overflow:
+    hidden;
+
+  color:
+    #172033;
+
+  font-size:
+    7.5px;
+
+  line-height:
+    1.15;
+
+  font-weight:
+    800;
+
+  white-space:
+    nowrap;
+
+  text-overflow:
+    ellipsis;
+
 }
 
 
@@ -7016,8 +7339,11 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .summary-line {
-  display: grid;
+
+  display:
+    grid;
 
   grid-template-columns:
     repeat(
@@ -7025,44 +7351,62 @@ body {
       1fr
     );
 
-  gap: 8px;
+  gap:
+    8px;
 
-  padding: 9px 0;
+  padding:
+    9px 0;
 
   border-bottom:
     1px solid
     #D9DEE7;
+
 }
 
 
 .summary-line span {
-  display: block;
 
-  color: #667085;
+  display:
+    block;
 
-  font-size: 6px;
+  color:
+    #667085;
 
-  font-weight: 700;
+  font-size:
+    6px;
+
+  font-weight:
+    700;
+
 }
 
 
 .summary-line strong {
-  display: block;
 
-  margin-top: 2px;
+  display:
+    block;
 
-  font-size: 10px;
+  margin-top:
+    2px;
+
+  font-size:
+    10px;
+
 }
 
 
 .summary-address {
-  padding: 7px 0;
+
+  padding:
+    7px 0;
 
   border-bottom:
     1px solid
     #D9DEE7;
 
-  font-size: 7px;
+  font-size:
+    7px;
+
 }
 
 
@@ -7072,17 +7416,23 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .box-header {
-  padding: 7px 0;
+
+  padding:
+    7px 0;
 
   border-bottom:
     2px solid
     #172033;
+
 }
 
 
 .box-main-row {
-  display: grid;
+
+  display:
+    grid;
 
   grid-template-columns:
     minmax(
@@ -7093,52 +7443,35 @@ body {
       0,
       25%
     );
+
+  align-items:
+    center;
+
 }
+
+
+/*
+|--------------------------------------------------------------------------
+| Box details
+|--------------------------------------------------------------------------
+*/
 
 
 .box-left-section {
-  min-width: 0;
 
-  padding-right: 10px;
-}
+  min-width:
+    0;
 
+  padding-right:
+    10px;
 
-.box-title-area {
-  padding-bottom: 6px;
-
-  margin-bottom: 7px;
-
-  border-bottom:
-    1px solid
-    #E1E5EB;
-}
-
-
-.box-title {
-  overflow: hidden;
-
-  font-size: 13px;
-
-  font-weight: 900;
-
-  white-space: nowrap;
-
-  text-overflow:
-    ellipsis;
-}
-
-
-.room-name {
-  margin-top: 2px;
-
-  color: #667085;
-
-  font-size: 6.5px;
 }
 
 
 .box-details-grid {
-  display: grid;
+
+  display:
+    grid;
 
   grid-template-columns:
     repeat(
@@ -7149,40 +7482,74 @@ body {
       )
     );
 
-  column-gap: 10px;
+  column-gap:
+    10px;
 
-  row-gap: 9px;
+  row-gap:
+    10px;
+
+}
+
+
+.box-detail {
+
+  min-width:
+    0;
+
 }
 
 
 .box-detail span {
-  display: block;
 
-  color: #667085;
+  display:
+    block;
 
-  font-size: 5.7px;
+  color:
+    #667085;
 
-  font-weight: 800;
+  font-size:
+    5.7px;
+
+  line-height:
+    1.1;
+
+  font-weight:
+    800;
+
 }
 
 
 .box-detail strong {
-  display: block;
 
-  margin-top: 2px;
+  display:
+    block;
+
+  margin-top:
+    2px;
 
   overflow-wrap:
     anywhere;
 
-  font-size: 7.7px;
+  color:
+    #172033;
 
-  font-weight: 800;
+  font-size:
+    7.7px;
+
+  line-height:
+    1.15;
+
+  font-weight:
+    800;
+
 }
 
 
 .total-weight-value {
+
   font-size:
     8.7px !important;
+
 }
 
 
@@ -7192,8 +7559,11 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .box-qr-section {
-  display: flex;
+
+  display:
+    flex;
 
   flex-direction:
     column;
@@ -7204,32 +7574,50 @@ body {
   align-items:
     center;
 
-  padding-left: 8px;
+  min-height:
+    82px;
+
+  padding-left:
+    8px;
 
   border-left:
     1px solid
     #D9DEE7;
+
 }
 
 
 .box-qr-code {
-  width: 78px;
 
-  height: 78px;
+  display:
+    block;
+
+  width:
+    72px;
+
+  height:
+    72px;
 
   object-fit:
     contain;
+
 }
 
 
 .box-qr-label {
-  margin-top: 4px;
 
-  color: #667085;
+  margin-top:
+    3px;
 
-  font-size: 5.5px;
+  color:
+    #667085;
 
-  font-weight: 900;
+  font-size:
+    5.5px;
+
+  font-weight:
+    900;
+
 }
 
 
@@ -7239,40 +7627,59 @@ body {
 |--------------------------------------------------------------------------
 */
 
-.box-address {
-  margin-top: 8px;
 
-  padding-top: 6px;
+.box-address {
+
+  margin-top:
+    8px;
+
+  padding-top:
+    6px;
 
   border-top:
     1px solid
     #D9DEE7;
+
 }
 
 
 .box-address span {
-  display: block;
 
-  color: #667085;
+  display:
+    block;
 
-  font-size: 5.8px;
+  color:
+    #667085;
 
-  font-weight: 800;
+  font-size:
+    5.8px;
+
+  font-weight:
+    800;
+
 }
 
 
 .box-address strong {
-  display: block;
 
-  max-height: 27px;
+  display:
+    block;
 
-  margin-top: 3px;
+  max-height:
+    27px;
 
-  overflow: hidden;
+  margin-top:
+    3px;
 
-  font-size: 7.2px;
+  overflow:
+    hidden;
 
-  line-height: 1.28;
+  font-size:
+    7.2px;
+
+  line-height:
+    1.28;
+
 }
 
 
@@ -7282,8 +7689,11 @@ body {
 |--------------------------------------------------------------------------
 */
 
+
 .products-title-row {
-  display: flex;
+
+  display:
+    flex;
 
   justify-content:
     space-between;
@@ -7293,60 +7703,83 @@ body {
 
   margin:
     6px 0 4px;
+
 }
 
 
 .section-title {
-  font-size: 8.5px;
 
-  font-weight: 900;
+  font-size:
+    8.5px;
+
+  font-weight:
+    900;
+
 }
 
 
 .products-count {
-  color: #667085;
 
-  font-size: 5.8px;
+  color:
+    #667085;
 
-  font-weight: 700;
+  font-size:
+    5.8px;
+
+  font-weight:
+    700;
+
 }
 
 
 /*
 |--------------------------------------------------------------------------
-| Table
+| Tables
 |--------------------------------------------------------------------------
 */
 
+
 .report-table {
-  width: 100%;
+
+  width:
+    100%;
 
   border-collapse:
     collapse;
 
   table-layout:
     fixed;
+
 }
 
 
 .report-table thead {
-  color: #FFFFFF;
 
-  background: #172033;
+  color:
+    #FFFFFF;
+
+  background:
+    #172033;
+
 }
 
 
 .report-table th {
+
   padding:
     4px 3px;
 
-  font-size: 5.5px;
+  font-size:
+    5.5px;
 
-  text-align: left;
+  text-align:
+    left;
+
 }
 
 
 .report-table td {
+
   padding:
     4px 3px;
 
@@ -7354,58 +7787,87 @@ body {
     1px solid
     #E4E7EC;
 
-  font-size: 6px;
+  font-size:
+    6px;
 
-  line-height: 1.15;
+  line-height:
+    1.15;
 
   overflow-wrap:
     anywhere;
+
 }
 
 
 .report-table tbody tr:nth-child(even) {
-  background: #F8FAFC;
+
+  background:
+    #F8FAFC;
+
 }
 
 
 .report-table tfoot {
-  background: #F1F5F9;
 
-  font-weight: 800;
+  background:
+    #F1F5F9;
+
+  font-weight:
+    800;
+
 }
 
 
 .sr-column {
-  width: 7%;
+
+  width:
+    7%;
+
 }
 
 
 .product-column {
-  width: 45%;
+
+  width:
+    45%;
+
 }
 
 
 .qty-column {
-  width: 10%;
+
+  width:
+    10%;
+
 }
 
 
 .unit-column {
-  width: 18%;
+
+  width:
+    18%;
+
 }
 
 
 .total-column {
-  width: 20%;
+
+  width:
+    20%;
+
 }
 
 
 .no-products {
+
   padding:
     14px !important;
 
-  text-align: center;
+  text-align:
+    center;
+
 }
+
 
 </style>
 
@@ -7414,9 +7876,12 @@ body {
 
 <body>
 
+
 ${summaryPage}
 
+
 ${boxPages}
+
 
 </body>
 
@@ -7425,7 +7890,7 @@ ${boxPages}
 
     /*
     |--------------------------------------------------------------------------
-    | 14. PDF
+    | 16. Generate PDF
     |--------------------------------------------------------------------------
     */
 
@@ -7450,7 +7915,7 @@ ${boxPages}
           "4in",
 
         height:
-          "6in",
+          "5in",
 
         printBackground:
           true,
@@ -7473,7 +7938,7 @@ ${boxPages}
 
     /*
     |--------------------------------------------------------------------------
-    | 15. Upload
+    | 17. Upload PDF
     |--------------------------------------------------------------------------
     */
 
@@ -7509,6 +7974,9 @@ ${boxPages}
         wasabi_key:
           wasabiKey,
 
+        packing_type:
+          project.packing_type,
+
         total_boxes:
           totalBoxes,
 
@@ -7520,7 +7988,9 @@ ${boxPages}
           ),
       }
     );
-  } catch (error) {
+  } catch (
+  error
+  ) {
     console.error(
       "generateProjectFullReportService:",
       error
@@ -7539,6 +8009,7 @@ ${boxPages}
 
     return validationResponse(
       0,
+
       "Failed to generate project report"
     );
   }

@@ -1,14 +1,13 @@
 import { validationResponse } from '../../../src/utils/validationResponse';
 import axios from "axios";
 import { prisma } from '../../prisma/client';
-import { Prisma, CutListMachineMapping } from '../../prisma/generated';
+import { PackingType } from '../../prisma/generated';
 import { CutListSavePayload, MarkDefectPayload, QRParam, TrackTraceDashboardPayload } from '../../../src/types/track-trace';
 import ExcelJS from "exceljs";
 import * as fs from "fs";
 import * as path from "path";
 import { getVendorSettingValue } from '../vendor.service';
 import { generateSignedUrl, uploadToWasabiCompletionPhotos, uploadToWasabiDefectedItems } from '../../../src/utils/wasabiClient';
-import { cache } from "../../utils/cache";
 
 interface TrackTracePayload {
   project_id: number;
@@ -18,432 +17,6 @@ interface TrackTracePayload {
   created_by: number;
   box_id?: number;
 }
-
-// export const updateScannedItem = async (payload: TrackTracePayload) => {
-//     const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
-
-//     //check if item is mapped to any machine
-//     const currentMapping =
-//         await prisma.cutListMachineMapping.findFirst({
-//             where: {
-//                 machine_id: machine_id,
-//                 vendor_id: vendor_id,
-
-//                 cut_list: {
-//                     unique_code: unique_code,
-//                 },
-//             },
-//             select: {
-//                 id: true,
-//                 sequence_no: true,
-//                 cut_list_id: true
-//             },
-//         });
-
-//     if (!currentMapping) {
-//         return validationResponse(0, 'Machine mapping not found');
-//     }
-
-
-//     const nextMapping =
-//         await prisma.cutListMachineMapping.findFirst({
-//             where: {
-//                 machine_id: machine_id,
-//                 vendor_id: vendor_id,
-
-//                 cut_list: {
-//                     unique_code: unique_code,
-//                 },
-//                 actual_in_at: null
-//             },
-//             select: {
-//                 id: true,
-//                 sequence_no: true,
-//                 cut_list_id: true
-//             },
-//         });
-
-
-//     if (!nextMapping) {
-//         return validationResponse(0, 'Already Scanned');
-//     }
-
-//     const { id, sequence_no, cut_list_id } = nextMapping;
-//     // return currentMapping;
-//     // return id;
-
-//     // 679 1 364
-
-//     console.log(id, sequence_no, cut_list_id)
-
-//     //check if already scanned in machine
-
-//     const scanned_count = await prisma.cutListMachineMapping.count({
-//         where: {
-//             cut_list_id: cut_list_id,
-//             vendor_id: vendor_id,            
-//             sequence_no: sequence_no,
-//             expected_in: true,
-//             actual_in_at: null,
-//             machine_id: machine_id
-
-//         }
-//     });
-
-//     console.log("scanned_count",scanned_count);
-
-//     //return scanned_count;
-
-
-//     // this item is already scanned in provided machine
-//     if (scanned_count == 0) {
-//         return validationResponse(0, 'Already Scanned');
-//     }
-
-
-
-//     //check if any machine is left in sequence
-//     const count = await prisma.cutListMachineMapping.count({
-//         where: {
-//             cut_list_id: cut_list_id,
-//             vendor_id: vendor_id,            
-//             sequence_no: { lt: sequence_no },
-//             actual_in_at: null
-//         }
-//     });
-
-//     // return count;
-
-//     //No machine is left in sequence
-//     if (count == 0) {
-
-//         //update as scan done
-//         const updated = await prisma.cutListMachineMapping.update({
-//             where: {
-//                 id: id,
-//             },
-//             data: {
-//                 actual_in_at: new Date(),
-//                 in_operator: created_by,
-//             },
-//         });
-//         return validationResponse(1, 'Scan done');
-
-//     } else {
-
-
-
-
-
-//         return validationResponse(0, 'Scan on other machine first');
-//     }
-
-
-
-
-
-
-
-// };
-
-
-export const updateScannedItem_old = async (payload: TrackTracePayload, is_check: boolean = false) => {
-
-  try {
-
-
-    const { project_id, vendor_id, machine_id, unique_code, created_by } = payload;
-
-
-    //check if item is mapped to any machine
-    const currentMapping = await prisma.cutListMachineMapping.findFirst({
-      where: {
-        machine_id: machine_id,
-        vendor_id: vendor_id,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
-          },
-        },
-      },
-      select: {
-        id: true,
-        sequence_no: true,
-        cut_list_id: true,
-        project_id: true,
-        project: {
-          select: {
-            track_trace_status: true,
-          },
-        },
-      },
-    });
-
-    //console.log("currentMapping",currentMapping)
-    if (!currentMapping) {
-      return validationResponse(0, 'Machine mapping not found');
-    }
-
-    //return currentMapping;
-
-
-    const nextMapping = await prisma.cutListMachineMapping.findFirst({
-      where: {
-        machine_id: machine_id,
-        vendor_id: vendor_id,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
-          },
-        },
-        actual_in_at: null,
-      },
-      select: {
-        id: true,
-        sequence_no: true,
-        cut_list_id: true,
-      },
-    });
-
-
-    if (!nextMapping) {
-      console.log("Already Scanned");
-      return validationResponse(0, 'Already Scanned');
-    }
-
-    const { id, sequence_no, cut_list_id } = nextMapping;
-    // return currentMapping;
-    // return id;
-
-    // 679 1 364
-
-    console.log(id, sequence_no, cut_list_id)
-
-    //check if already scanned in machine
-
-    const scanned_count = await prisma.cutListMachineMapping.count({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: sequence_no,
-        expected_in: true,
-        actual_in_at: null,
-        machine_id: machine_id
-
-      }
-    });
-
-    console.log("scanned_count", scanned_count);
-
-    //return scanned_count;
-
-
-    // this item is already scanned in provided machine
-    if (scanned_count == 0) {
-      return validationResponse(0, 'Already Scanned');
-    }
-
-
-
-    // ✅ Check if any machine is left in sequence (excluding 'pass' type machines)
-    const count = await prisma.cutListMachineMapping.count({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: { lt: sequence_no },
-        actual_in_at: null,
-        machine: {
-          scan_type: {
-            not: 'PASS'  // Only count machines that require scanning
-          }
-        }
-      }
-    });
-
-    // console.log("pending_scans_count", count);
-
-
-    const passMachines = await prisma.cutListMachineMapping.findMany({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: { lt: sequence_no },
-        actual_in_at: null,
-        machine: {
-          scan_type: 'PASS'
-        }
-      },
-      select: {
-        id: true,
-        machine: {
-          select: {
-            machine_name: true
-          }
-        }
-      }
-    });
-
-    console.log("pass_machines_to_update", passMachines.length);
-
-    if (count == 0) {
-
-
-      if (is_check) {
-
-        const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
-        if (value == "1") {
-
-          const mappedItem = await prisma.cutListMachineMapping.findFirst({
-            where: {
-              machine_id: machine_id,
-              vendor_id: vendor_id,
-              cut_list: {
-                unique_code: {
-                  equals: unique_code,
-                  mode: "insensitive",
-                },
-              },
-            },
-            select: {
-              id: true,
-              sequence_no: true,
-              cut_list_id: true,
-              project_id: true,
-              actual_in_at: true,
-              machine_id: true,
-              machine: {
-                select: {
-                  id: true,
-                  machine_name: true,
-                },
-              },
-              cut_list: {
-                select: {
-                  unique_code: true,
-                  description: true,
-                  item_name: true,
-                },
-              },
-              project: {
-                select: {
-                  track_trace_status: true,
-                  project_name: true,
-                },
-              },
-            },
-          });
-          if (!mappedItem) {
-            return validationResponse(0, "Item not found for this machine");
-          }
-          let activeDefect = null;
-          if (mappedItem.cut_list_id) {
-            activeDefect = await prisma.defectedItem.findFirst({
-              where: {
-                cut_list_id: mappedItem.cut_list_id,
-                defect_status: { not: "Completed" },
-              },
-              orderBy: { created_at: "desc" },
-              select: {
-                id: true,
-                defect_id: true,
-                remark: true,
-                action: true,
-                rework_machine_id: true,
-                defect_status: true,
-                created_at: true,
-                defect: {
-                  select: {
-                    id: true,
-                    defect_name: true,
-                  },
-                },
-                images: {
-                  select: {
-                    id: true,
-                    doc_og_name: true,
-                    doc_sys_name: true,
-                    created_at: true,
-                  },
-                },
-              },
-            });
-          }
-          // generate signed URLs for each image after fetching
-          if (activeDefect && activeDefect.images.length > 0) {
-            const imagesWithUrls = await Promise.all(
-              activeDefect.images.map(async (img) => ({
-                ...img,
-                signed_url: await generateSignedUrl(img.doc_sys_name),
-              }))
-            );
-
-            activeDefect = { ...activeDefect, images: imagesWithUrls };
-          }
-          console.log("mappedItem", mappedItem);
-          return validationResponse(1, '', { mappedItem, activeDefect });
-        } else {
-          updateScannedItem(payload, false);
-        }
-
-      } else {
-
-        // ✅ Update all 'pass' type machines as scanned
-        if (passMachines.length > 0) {
-          await prisma.cutListMachineMapping.updateMany({
-            where: {
-              id: {
-                in: passMachines.map(m => m.id)
-              }
-            },
-            data: {
-              actual_in_at: new Date(),
-              in_operator: created_by,
-            }
-          });
-
-          console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
-        }
-
-        // ✅ Update current machine as scanned
-        const updated = await prisma.cutListMachineMapping.update({
-          where: {
-            id: id,
-          },
-          data: {
-            actual_in_at: new Date(),
-            in_operator: created_by,
-          },
-        });
-
-        console.log("currentMapping.project.track_trace_status", currentMapping.project.track_trace_status);
-        await updateProjectStatus(currentMapping.project_id, currentMapping.project.track_trace_status);
-
-        return validationResponse(1, 'Scan done');
-      }
-
-
-
-
-
-
-    } else {
-      // ✅ There are still machines that need to be scanned before this one
-      return validationResponse(0, 'Scan on other machine first old');
-    }
-
-  } catch (error) {
-    console.log("Error in api", error);
-    return validationResponse(0, 'Something went wrong');
-  }
-
-
-
-
-
-
-};
 
 //qty wise logic
 
@@ -464,21 +37,40 @@ export const updateScannedItem = async (
       box_id,
     } = payload;
 
-    const projectFilter = project_id ? { project_id } : {};
+    const projectFilter =
+      project_id
+        ? {
+          project_id,
+        }
+        : {};
 
-    // ── Validate box_id if provided ────────────────────────────────────────
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 0:
+    | Validate selected box
+    |--------------------------------------------------------------------------
+    */
+
     if (box_id) {
-      const box = await prisma.boxMaster.findFirst({
-        where: {
-          id: box_id,
-          vendor_id,
-          ...projectFilter,
-          is_deleted: false,
-        },
-        select: {
-          id: true,
-        },
-      });
+      const box =
+        await prisma.boxMaster.findFirst({
+          where: {
+            id:
+              box_id,
+
+            vendor_id,
+
+            ...projectFilter,
+
+            is_deleted:
+              false,
+          },
+
+          select: {
+            id:
+              true,
+          },
+        });
 
       if (!box) {
         return validationResponse(
@@ -488,462 +80,1034 @@ export const updateScannedItem = async (
       }
     }
 
-    /**
-     * STEP 1:
-     * Check whether this barcode is mapped to this machine.
-     */
-    const mappingExists = await prisma.cutListMachineMapping.findFirst({
-      where: {
-        machine_id,
-        vendor_id,
-        ...projectFilter,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 1:
+    | Check barcode mapping for selected machine
+    |--------------------------------------------------------------------------
+    */
+
+    const mappingExists =
+      await prisma.cutListMachineMapping.findFirst({
+        where: {
+          machine_id,
+
+          vendor_id,
+
+          ...projectFilter,
+
+          cut_list: {
+            unique_code: {
+              equals:
+                unique_code,
+
+              mode:
+                "insensitive",
+            },
           },
         },
-      },
-      select: {
-        id: true,
-      },
-    });
+
+        select: {
+          id:
+            true,
+        },
+      });
 
     if (!mappingExists) {
       return validationResponse(
         0,
+
         project_id
           ? "Item not found for this machine in the selected project"
           : "Machine mapping not found",
       );
     }
 
-    /**
-     * STEP 2:
-     * Get pending rows for this barcode on the current machine.
-     *
-     * Important:
-     * In your data, 5 qty share same cut_list_id.
-     * So we cannot decide eligibility only using cut_list_id.
-     * We have to compare scanned count of previous machine vs scanned count of current machine.
-     */
-    const pendingMappings = await prisma.cutListMachineMapping.findMany({
-      where: {
-        machine_id,
-        vendor_id,
-        ...projectFilter,
-        expected_in: true,
-        actual_in_at: null,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
-          },
-        },
-      },
-      orderBy: [
-        {
-          cut_list_id: "asc",
-        },
-        {
-          id: "asc",
-        },
-      ],
-      select: {
-        id: true,
-        sequence_no: true,
-        cut_list_id: true,
-        project_id: true,
-        actual_in_at: true,
-        machine_id: true,
-        machine: {
-          select: {
-            id: true,
-            machine_name: true,
-          },
-        },
-        cut_list: {
-          select: {
-            unique_code: true,
-            description: true,
-            item_name: true,
-          },
-        },
-        project: {
-          select: {
-            track_trace_status: true,
-            project_name: true,
-          },
-        },
-      },
-    });
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 2:
+    | Fetch pending rows for barcode
+    |--------------------------------------------------------------------------
+    */
 
-    if (pendingMappings.length === 0) {
-      return validationResponse(0, "Already Scanned");
+    const pendingMappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          machine_id,
+
+          vendor_id,
+
+          ...projectFilter,
+
+          expected_in:
+            true,
+
+          actual_in_at:
+            null,
+
+          cut_list: {
+            unique_code: {
+              equals:
+                unique_code,
+
+              mode:
+                "insensitive",
+            },
+          },
+        },
+
+        orderBy: [
+          {
+            cut_list_id:
+              "asc",
+          },
+
+          {
+            id:
+              "asc",
+          },
+        ],
+
+        select: {
+          id:
+            true,
+
+          sequence_no:
+            true,
+
+          cut_list_id:
+            true,
+
+          project_id:
+            true,
+
+          actual_in_at:
+            true,
+
+          machine_id:
+            true,
+
+          machine: {
+            select: {
+              id:
+                true,
+
+              machine_name:
+                true,
+            },
+          },
+
+          cut_list: {
+            select: {
+              unique_code:
+                true,
+
+              description:
+                true,
+
+              item_name:
+                true,
+
+              group_name:
+                true,
+            },
+          },
+
+          project: {
+            select: {
+              track_trace_status:
+                true,
+
+              project_name:
+                true,
+
+              packing_type:
+                true,
+            },
+          },
+        },
+      });
+
+    if (
+      pendingMappings.length ===
+      0
+    ) {
+      return validationResponse(
+        0,
+        "Already Scanned",
+      );
     }
 
-    /**
-     * STEP 3:
-     * Find one eligible row.
-     *
-     * Logic:
-     * - If current machine is first machine, allow scan.
-     * - Else previous machine scanned count should be greater than
-     *   current machine scanned count.
-     *
-     * Example:
-     * Previous machine scanned = 1
-     * Current machine scanned = 0
-     * Allow 1 scan.
-     *
-     * Previous machine scanned = 1
-     * Current machine scanned = 1
-     * Block until another qty is scanned on previous machine.
-     */
-    let eligibleMapping: (typeof pendingMappings)[number] | null = null;
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 3:
+    | Find one eligible mapping row
+    |--------------------------------------------------------------------------
+    */
 
-    for (const item of pendingMappings) {
-      const itemProjectFilter = item.project_id
-        ? { project_id: item.project_id }
-        : {};
+    let eligibleMapping:
+      (typeof pendingMappings)[number] |
+      null =
+      null;
 
-      /**
-       * Get all previous non-PASS machine mappings for same cut_list_id.
-       */
+    for (
+      const item
+      of pendingMappings
+    ) {
+      const itemProjectFilter =
+        item.project_id
+          ? {
+            project_id:
+              item.project_id,
+          }
+          : {};
+
+      /*
+      |--------------------------------------------------------------------------
+      | Previous non-PASS mappings
+      |--------------------------------------------------------------------------
+      */
+
       const previousNonPassMappings =
         await prisma.cutListMachineMapping.findMany({
           where: {
-            cut_list_id: item.cut_list_id,
+            cut_list_id:
+              item.cut_list_id,
+
             vendor_id,
+
             ...itemProjectFilter,
-            expected_in: true,
+
+            expected_in:
+              true,
+
             sequence_no: {
-              lt: item.sequence_no,
+              lt:
+                item.sequence_no,
             },
+
             machine: {
               scan_type: {
-                not: "PASS",
+                not:
+                  "PASS",
               },
             },
           },
+
           select: {
-            id: true,
-            machine_id: true,
-            sequence_no: true,
-            actual_in_at: true,
+            id:
+              true,
+
+            machine_id:
+              true,
+
+            sequence_no:
+              true,
+
+            actual_in_at:
+              true,
           },
         });
 
-      /**
-       * If there is no previous non-PASS machine, this is the first real scan stage.
-       * So allow scan.
-       */
-      if (previousNonPassMappings.length === 0) {
-        eligibleMapping = item;
+      /*
+      |--------------------------------------------------------------------------
+      | First actual scan machine
+      |--------------------------------------------------------------------------
+      */
+
+      if (
+        previousNonPassMappings.length ===
+        0
+      ) {
+        eligibleMapping =
+          item;
+
         break;
       }
 
-      /**
-       * Group previous mappings by machine and sequence.
-       *
-       * For each previous machine, count how many qty are scanned.
-       */
-      const previousMachineScanMap = new Map<
-        string,
-        {
-          scannedQty: number;
-          totalQty: number;
+      /*
+      |--------------------------------------------------------------------------
+      | Calculate scanned quantity for previous machines
+      |--------------------------------------------------------------------------
+      */
+
+      const previousMachineScanMap =
+        new Map<
+          string,
+          {
+            scannedQty:
+            number;
+
+            totalQty:
+            number;
+          }
+        >();
+
+      for (
+        const previousItem
+        of previousNonPassMappings
+      ) {
+        const key =
+          `${previousItem.sequence_no}_${previousItem.machine_id}`;
+
+        if (
+          !previousMachineScanMap.has(
+            key,
+          )
+        ) {
+          previousMachineScanMap.set(
+            key,
+
+            {
+              scannedQty:
+                0,
+
+              totalQty:
+                0,
+            },
+          );
         }
-      >();
 
-      for (const previousItem of previousNonPassMappings) {
-        const key = `${previousItem.sequence_no}_${previousItem.machine_id}`;
+        const currentData =
+          previousMachineScanMap.get(
+            key,
+          )!;
 
-        if (!previousMachineScanMap.has(key)) {
-          previousMachineScanMap.set(key, {
-            scannedQty: 0,
-            totalQty: 0,
-          });
+        currentData.totalQty +=
+          1;
+
+        if (
+          previousItem.actual_in_at
+        ) {
+          currentData.scannedQty +=
+            1;
         }
 
-        const currentData = previousMachineScanMap.get(key)!;
-
-        currentData.totalQty += 1;
-
-        if (previousItem.actual_in_at) {
-          currentData.scannedQty += 1;
-        }
-
-        previousMachineScanMap.set(key, currentData);
+        previousMachineScanMap.set(
+          key,
+          currentData,
+        );
       }
 
-      /**
-       * Minimum scanned qty from previous machines.
-       *
-       * If previous machine scanned 1 qty, current machine can scan only 1 qty.
-       * If previous machine scanned 3 qty, current machine can scan 3 qty.
-       */
-      const previousScannedQtyList = Array.from(
-        previousMachineScanMap.values(),
-      ).map((data) => data.scannedQty);
+      const previousScannedQtyList =
+        Array.from(
+          previousMachineScanMap.values(),
+        ).map(
+          (
+            data,
+          ) =>
+            data.scannedQty,
+        );
 
-      const allowedQtyForCurrentMachine = Math.min(...previousScannedQtyList);
+      const allowedQtyForCurrentMachine =
+        Math.min(
+          ...previousScannedQtyList,
+        );
 
-      /**
-       * Count how many qty are already scanned on current machine.
-       */
+      /*
+      |--------------------------------------------------------------------------
+      | Count scanned quantity on current machine
+      |--------------------------------------------------------------------------
+      */
+
       const currentMachineScannedQty =
         await prisma.cutListMachineMapping.count({
           where: {
-            cut_list_id: item.cut_list_id,
+            cut_list_id:
+              item.cut_list_id,
+
             vendor_id,
+
             ...itemProjectFilter,
+
             machine_id,
-            sequence_no: item.sequence_no,
-            expected_in: true,
+
+            sequence_no:
+              item.sequence_no,
+
+            expected_in:
+              true,
+
             actual_in_at: {
-              not: null,
+              not:
+                null,
             },
           },
         });
 
       console.log({
-        cut_list_id: item.cut_list_id,
+        cut_list_id:
+          item.cut_list_id,
+
         machine_id,
-        sequence_no: item.sequence_no,
+
+        sequence_no:
+          item.sequence_no,
+
         allowedQtyForCurrentMachine,
+
         currentMachineScannedQty,
       });
 
-      /**
-       * If previous machine has scanned more qty than current machine,
-       * then this row is eligible for scanning.
-       */
-      if (currentMachineScannedQty < allowedQtyForCurrentMachine) {
-        eligibleMapping = item;
+      if (
+        currentMachineScannedQty <
+        allowedQtyForCurrentMachine
+      ) {
+        eligibleMapping =
+          item;
+
         break;
       }
     }
 
     if (!eligibleMapping) {
-      return validationResponse(0, "Scan on other machine first");
+      return validationResponse(
+        0,
+        "Scan on other machine first",
+      );
     }
 
-    const { id, sequence_no, cut_list_id } = eligibleMapping;
+    const {
+      id,
+      sequence_no,
+      cut_list_id,
+    } =
+      eligibleMapping;
 
-    /**
-     * STEP 4:
-     * Check mode.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 4:
+    | Status check mode
+    |--------------------------------------------------------------------------
+    */
+
     if (is_check) {
-      const value = await getVendorSettingValue(
-        vendor_id,
-        "SHOW_STATUS_ON_SCAN",
-      );
+      const value =
+        await getVendorSettingValue(
+          vendor_id,
 
-      if (value === "1") {
-        const mappedItem = eligibleMapping;
+          "SHOW_STATUS_ON_SCAN",
+        );
 
-        let activeDefect: any = null;
+      if (
+        value ===
+        "1"
+      ) {
+        const mappedItem =
+          eligibleMapping;
 
-        if (mappedItem.cut_list_id) {
-          activeDefect = await prisma.defectedItem.findFirst({
-            where: {
-              cut_list_id: mappedItem.cut_list_id,
-              defect_status: {
-                not: "Completed",
-              },
-            },
-            orderBy: {
-              created_at: "desc",
-            },
-            select: {
-              id: true,
-              defect_id: true,
-              remark: true,
-              action: true,
-              rework_machine_id: true,
-              defect_status: true,
-              created_at: true,
-              defect: {
-                select: {
-                  id: true,
-                  defect_name: true,
+        let activeDefect:
+          any =
+          null;
+
+        if (
+          mappedItem.cut_list_id
+        ) {
+          activeDefect =
+            await prisma.defectedItem.findFirst({
+              where: {
+                cut_list_id:
+                  mappedItem.cut_list_id,
+
+                defect_status: {
+                  not:
+                    "Completed",
                 },
               },
-              images: {
+
+              orderBy: {
+                created_at:
+                  "desc",
+              },
+
+              select: {
+                id:
+                  true,
+
+                defect_id:
+                  true,
+
+                remark:
+                  true,
+
+                action:
+                  true,
+
+                rework_machine_id:
+                  true,
+
+                defect_status:
+                  true,
+
+                created_at:
+                  true,
+
+                defect: {
+                  select: {
+                    id:
+                      true,
+
+                    defect_name:
+                      true,
+                  },
+                },
+
+                images: {
+                  select: {
+                    id:
+                      true,
+
+                    doc_og_name:
+                      true,
+
+                    doc_sys_name:
+                      true,
+
+                    created_at:
+                      true,
+                  },
+                },
+              },
+            });
+        }
+
+        if (
+          activeDefect &&
+          activeDefect.images.length >
+          0
+        ) {
+          const imagesWithUrls =
+            await Promise.all(
+              activeDefect.images.map(
+                async (
+                  image:
+                    any,
+                ) => ({
+                  ...image,
+
+                  signed_url:
+                    await generateSignedUrl(
+                      image.doc_sys_name,
+                    ),
+                }),
+              ),
+            );
+
+          activeDefect =
+          {
+            ...activeDefect,
+
+            images:
+              imagesWithUrls,
+          };
+        }
+
+        return validationResponse(
+          1,
+
+          "",
+
+          {
+            mappedItem,
+
+            activeDefect,
+
+            countdown_timer:
+              3,
+          },
+        );
+      }
+
+      return await updateScannedItem(
+        payload,
+
+        false,
+
+        files,
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 5:
+    | Validate groupwise packing before updating anything
+    |--------------------------------------------------------------------------
+    */
+
+    if (box_id) {
+      /*
+      |--------------------------------------------------------------------------
+      | Fetch project packing type
+      |--------------------------------------------------------------------------
+      */
+
+      const currentProject =
+        await prisma.projectMaster.findFirst({
+          where: {
+            id:
+              eligibleMapping.project_id,
+
+            vendor_id,
+          },
+
+          select: {
+            id:
+              true,
+
+            packing_type:
+              true,
+          },
+        });
+
+      if (!currentProject) {
+        return validationResponse(
+          0,
+          "Project not found",
+        );
+      }
+
+      /*
+      |--------------------------------------------------------------------------
+      | Validate only GROUPWISE projects
+      |--------------------------------------------------------------------------
+      */
+
+      if (
+        currentProject.packing_type ===
+        PackingType.GROUPWISE
+      ) {
+        /*
+        |--------------------------------------------------------------------------
+        | Get incoming item's group
+        |--------------------------------------------------------------------------
+        */
+
+        const incomingItem =
+          await prisma.cutList.findFirst({
+            where: {
+              id:
+                cut_list_id,
+
+              vendor_id,
+
+              project_id:
+                eligibleMapping.project_id,
+            },
+
+            select: {
+              id:
+                true,
+
+              item_name:
+                true,
+
+              group_name:
+                true,
+            },
+          });
+
+        if (!incomingItem) {
+          return validationResponse(
+            0,
+            "Cutlist item not found",
+          );
+        }
+
+        const incomingGroupName =
+          incomingItem.group_name
+            ?.trim();
+
+        const incomingGroup =
+          incomingGroupName
+            ?.toLowerCase();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Group is mandatory in GROUPWISE mode
+        |--------------------------------------------------------------------------
+        */
+
+        if (!incomingGroup) {
+          return validationResponse(
+            0,
+
+            `Group is not configured for item "${incomingItem.item_name}"`,
+          );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Get first already packed item from selected box
+        |--------------------------------------------------------------------------
+        |
+        | First packed item establishes the group of the box.
+        |--------------------------------------------------------------------------
+        */
+
+        const existingBoxItem =
+          await prisma.cutListMachineMapping.findFirst({
+            where: {
+              box_id,
+
+              vendor_id,
+
+              project_id:
+                eligibleMapping.project_id,
+
+              actual_in_at: {
+                not:
+                  null,
+              },
+            },
+
+            orderBy: [
+              {
+                actual_in_at:
+                  "asc",
+              },
+
+              {
+                id:
+                  "asc",
+              },
+            ],
+
+            select: {
+              id:
+                true,
+
+              cut_list: {
                 select: {
-                  id: true,
-                  doc_og_name: true,
-                  doc_sys_name: true,
-                  created_at: true,
+                  id:
+                    true,
+
+                  item_name:
+                    true,
+
+                  group_name:
+                    true,
                 },
               },
             },
           });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Validate existing box group
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+          existingBoxItem
+            ?.cut_list
+        ) {
+          const existingGroupName =
+            existingBoxItem
+              .cut_list
+              .group_name
+              ?.trim();
+
+          const existingGroup =
+            existingGroupName
+              ?.toLowerCase();
+
+          /*
+          |--------------------------------------------------------------------------
+          | Existing item has no group
+          |--------------------------------------------------------------------------
+          */
+
+          if (!existingGroup) {
+            return validationResponse(
+              0,
+
+              `Existing item "${existingBoxItem.cut_list.item_name}" in this box does not have a group configured`,
+            );
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Different group is not allowed
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            existingGroup !==
+            incomingGroup
+          ) {
+            return validationResponse(
+              0,
+
+              `This box belongs to group "${existingGroupName}". Item from group "${incomingGroupName}" cannot be packed in this box.`,
+            );
+          }
         }
-
-        if (activeDefect && activeDefect.images.length > 0) {
-          const imagesWithUrls = await Promise.all(
-            activeDefect.images.map(async (img: any) => ({
-              ...img,
-              signed_url: await generateSignedUrl(img.doc_sys_name),
-            })),
-          );
-
-          activeDefect = {
-            ...activeDefect,
-            images: imagesWithUrls,
-          };
-        }
-
-        return validationResponse(1, "", {
-          mappedItem,
-          activeDefect,
-          countdown_timer: 3,
-        });
       }
-
-      return await updateScannedItem(payload, false, files);
     }
 
-    /**
-     * STEP 5:
-     * Auto-pass previous PASS machines.
-     *
-     * Important:
-     * Do not update all PASS rows.
-     * Only update one pending PASS row per previous PASS machine/sequence.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 6:
+    | Find previous pending PASS machine rows
+    |--------------------------------------------------------------------------
+    */
+
     const previousPassMappings =
       await prisma.cutListMachineMapping.findMany({
         where: {
           cut_list_id,
+
           vendor_id,
+
           ...(eligibleMapping.project_id
-            ? { project_id: eligibleMapping.project_id }
+            ? {
+              project_id:
+                eligibleMapping.project_id,
+            }
             : {}),
+
           sequence_no: {
-            lt: sequence_no,
+            lt:
+              sequence_no,
           },
-          actual_in_at: null,
+
+          actual_in_at:
+            null,
+
           machine: {
-            scan_type: "PASS",
+            scan_type:
+              "PASS",
           },
         },
+
         orderBy: [
           {
-            sequence_no: "asc",
+            sequence_no:
+              "asc",
           },
+
           {
-            id: "asc",
+            id:
+              "asc",
           },
         ],
+
         select: {
-          id: true,
-          sequence_no: true,
-          machine_id: true,
-          machine: {
-            select: {
-              machine_name: true,
-            },
-          },
+          id:
+            true,
+
+          sequence_no:
+            true,
+
+          machine_id:
+            true,
         },
       });
 
-    const passMappingIdsToUpdate: number[] = [];
-    const passMachineKeySet = new Set<string>();
+    /*
+    |--------------------------------------------------------------------------
+    | Pick only one pending row per PASS machine
+    |--------------------------------------------------------------------------
+    */
 
-    for (const passMapping of previousPassMappings) {
-      const key = `${passMapping.sequence_no}_${passMapping.machine_id}`;
+    const passMappingIdsToUpdate:
+      number[] =
+      [];
 
-      if (!passMachineKeySet.has(key)) {
-        passMachineKeySet.add(key);
-        passMappingIdsToUpdate.push(passMapping.id);
+    const passMachineKeySet =
+      new Set<string>();
+
+    for (
+      const passMapping
+      of previousPassMappings
+    ) {
+      const key =
+        `${passMapping.sequence_no}_${passMapping.machine_id}`;
+
+      if (
+        !passMachineKeySet.has(
+          key,
+        )
+      ) {
+        passMachineKeySet.add(
+          key,
+        );
+
+        passMappingIdsToUpdate.push(
+          passMapping.id,
+        );
       }
     }
 
-    if (passMappingIdsToUpdate.length > 0) {
-      await prisma.cutListMachineMapping.updateMany({
-        where: {
-          id: {
-            in: passMappingIdsToUpdate,
-          },
-        },
-        data: {
-          actual_in_at: new Date(),
-          in_operator: created_by,
-        },
-      });
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 7:
+    | Update PASS mappings and current mapping atomically
+    |--------------------------------------------------------------------------
+    */
 
-      console.log(
-        `Auto-passed ${passMappingIdsToUpdate.length} PASS machine rows`,
+    const scanUpdate =
+      await prisma.$transaction(
+        async (
+          tx,
+        ) => {
+          /*
+          |--------------------------------------------------------------------------
+          | Auto-pass pending PASS rows
+          |--------------------------------------------------------------------------
+          */
+
+          if (
+            passMappingIdsToUpdate.length >
+            0
+          ) {
+            await tx.cutListMachineMapping.updateMany({
+              where: {
+                id: {
+                  in:
+                    passMappingIdsToUpdate,
+                },
+
+                actual_in_at:
+                  null,
+              },
+
+              data: {
+                actual_in_at:
+                  new Date(),
+
+                in_operator:
+                  created_by,
+              },
+            });
+          }
+
+          /*
+          |--------------------------------------------------------------------------
+          | Scan current machine row
+          |--------------------------------------------------------------------------
+          */
+
+          return await tx.cutListMachineMapping.updateMany({
+            where: {
+              id,
+
+              actual_in_at:
+                null,
+            },
+
+            data: {
+              actual_in_at:
+                new Date(),
+
+              in_operator:
+                created_by,
+
+              ...(box_id
+                ? {
+                  box_id,
+                }
+                : {}),
+            },
+          });
+        },
+      );
+
+    if (
+      scanUpdate.count ===
+      0
+    ) {
+      return validationResponse(
+        0,
+        "Already Scanned",
       );
     }
 
-    /**
-     * STEP 6:
-     * Mark current machine row as scanned.
-     */
-    const scanUpdate = await prisma.cutListMachineMapping.updateMany({
-      where: {
-        id,
-        actual_in_at: null,
-      },
-      data: {
-        actual_in_at: new Date(),
-        in_operator: created_by,
-        ...(box_id ? { box_id } : {}),
-      },
-    });
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 8:
+    | Complete pending defect
+    |--------------------------------------------------------------------------
+    */
 
-    if (scanUpdate.count === 0) {
-      return validationResponse(0, "Already Scanned");
-    }
-
-    /**
-     * STEP 7:
-     * Complete pending defect if available.
-     */
     if (cut_list_id) {
-      const pendingDefect = await prisma.defectedItem.findFirst({
-        where: {
-          cut_list_id,
-          defect_status: {
-            not: "Completed",
-          },
-        },
-      });
-
-      if (pendingDefect) {
-        await prisma.defectedItem.update({
+      const pendingDefect =
+        await prisma.defectedItem.findFirst({
           where: {
-            id: pendingDefect.id,
-          },
-          data: {
-            defect_status: "Completed",
-            defect_completed_by: created_by,
-            defect_completed_at: new Date(),
+            cut_list_id,
+
+            defect_status: {
+              not:
+                "Completed",
+            },
           },
         });
 
-        if (files.length > 0) {
-          const uploadedPhotos = await uploadToWasabiCompletionPhotos(
-            files,
-            vendor_id,
-            id,
-          );
+      if (
+        pendingDefect
+      ) {
+        await prisma.defectedItem.update({
+          where: {
+            id:
+              pendingDefect.id,
+          },
+
+          data: {
+            defect_status:
+              "Completed",
+
+            defect_completed_by:
+              created_by,
+
+            defect_completed_at:
+              new Date(),
+          },
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload defect completion photos
+        |--------------------------------------------------------------------------
+        */
+
+        if (
+          files.length >
+          0
+        ) {
+          const uploadedPhotos =
+            await uploadToWasabiCompletionPhotos(
+              files,
+
+              vendor_id,
+
+              id,
+            );
 
           await prisma.defectCompletionPhoto.createMany({
-            data: uploadedPhotos.map((photo) => ({
-              cut_list_machine_mapping_id: id,
-              cut_list_id,
-              vendor_id,
-              defected_item_id: pendingDefect.id,
-              doc_og_name: photo.originalName,
-              doc_sys_name: photo.systemName,
-              created_by,
-            })),
+            data:
+              uploadedPhotos.map(
+                (
+                  photo,
+                ) => ({
+                  cut_list_machine_mapping_id:
+                    id,
+
+                  cut_list_id,
+
+                  vendor_id,
+
+                  defected_item_id:
+                    pendingDefect.id,
+
+                  doc_og_name:
+                    photo.originalName,
+
+                  doc_sys_name:
+                    photo.systemName,
+
+                  created_by,
+                }),
+              ),
           });
 
           console.log(
@@ -953,353 +1117,44 @@ export const updateScannedItem = async (
       }
     }
 
-    /**
-     * STEP 8:
-     * Update project track-trace status.
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | STEP 9:
+    | Update project Track & Trace status
+    |--------------------------------------------------------------------------
+    */
+
     await updateProjectStatus(
       eligibleMapping.project_id,
-      eligibleMapping.project.track_trace_status,
+
+      eligibleMapping.project
+        .track_trace_status,
+    );
+    return validationResponse(
+      1,
+      "Scan done",
     );
 
-    return validationResponse(1, "Scan done");
-  } catch (error) {
-    console.log("Error in api", error);
-    return validationResponse(0, "Something went wrong");
+  } catch (
+  error: unknown
+  ) {
+    console.error(
+      "updateScannedItem error:",
+      error,
+    );
+
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Something went wrong";
+
+    return validationResponse(
+      0,
+      errorMessage,
+    );
   }
 };
 
-//Barcode wise logic
-export const updateScannedItem_8_july_2026 = async (
-  payload: TrackTracePayload,
-  is_check: boolean = false,
-  files: Express.Multer.File[] = [],
-) => {
-  try {
-    const { project_id, vendor_id, machine_id, unique_code, created_by, box_id } = payload;
-
-    // conditionally add project_id filter if provided
-    const projectFilter = project_id ? { project_id } : {};
-
-    // ── Validate box_id if provided ────────────────────────────────────────
-    if (box_id) {
-      const box = await prisma.boxMaster.findFirst({
-        where: { id: box_id, vendor_id, project_id, is_deleted: false },
-        select: { id: true },
-      });
-      if (!box) {
-        return validationResponse(0, "Invalid box_id: box not found for this project");
-      }
-    }
-
-    // check if item is mapped to any machine
-    const currentMapping = await prisma.cutListMachineMapping.findFirst({
-      where: {
-        machine_id: machine_id,
-        vendor_id: vendor_id,
-        ...projectFilter,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
-          },
-        },
-      },
-      select: {
-        id: true,
-        sequence_no: true,
-        cut_list_id: true,
-        project_id: true,
-        project: {
-          select: {
-            track_trace_status: true,
-          },
-        },
-      },
-    });
-
-    if (!currentMapping) {
-      return validationResponse(0, project_id
-        ? 'Item not found for this machine in the selected project'
-        : 'Machine mapping not found'
-      );
-    }
-
-    const nextMapping = await prisma.cutListMachineMapping.findFirst({
-      where: {
-        machine_id: machine_id,
-        vendor_id: vendor_id,
-        ...projectFilter,
-        cut_list: {
-          unique_code: {
-            equals: unique_code,
-            mode: "insensitive",
-          },
-        },
-        actual_in_at: null,
-      },
-      select: {
-        id: true,
-        sequence_no: true,
-        cut_list_id: true,
-      },
-    });
-
-    if (!nextMapping) {
-      console.log("Already Scanned");
-      return validationResponse(0, 'Already Scanned');
-    }
-
-    const { id, sequence_no, cut_list_id } = nextMapping;
-
-    console.log(id, sequence_no, cut_list_id);
-
-    const scanned_count = await prisma.cutListMachineMapping.count({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: sequence_no,
-        expected_in: true,
-        actual_in_at: null,
-        machine_id: machine_id,
-      },
-    });
-
-    console.log("scanned_count", scanned_count);
-
-    if (scanned_count == 0) {
-      return validationResponse(0, 'Already Scanned');
-    }
-
-    // check if any machine is left in sequence (excluding 'pass' type machines)
-    const count = await prisma.cutListMachineMapping.count({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: { lt: sequence_no },
-        actual_in_at: null,
-        machine: {
-          scan_type: {
-            not: 'PASS',
-          },
-        },
-      },
-    });
-
-    const passMachines = await prisma.cutListMachineMapping.findMany({
-      where: {
-        cut_list_id: cut_list_id,
-        vendor_id: vendor_id,
-        sequence_no: { lt: sequence_no },
-        actual_in_at: null,
-        machine: {
-          scan_type: 'PASS',
-        },
-      },
-      select: {
-        id: true,
-        machine: {
-          select: {
-            machine_name: true,
-          },
-        },
-      },
-    });
-
-    console.log("count", count);
-
-
-    if (count == 0) {
-
-      if (is_check) {
-
-        const value = await getVendorSettingValue(vendor_id, 'SHOW_STATUS_ON_SCAN');
-        if (value == "1") {
-
-          const mappedItem = await prisma.cutListMachineMapping.findFirst({
-            where: {
-              machine_id: machine_id,
-              vendor_id: vendor_id,
-              ...projectFilter,
-              cut_list: {
-                unique_code: {
-                  equals: unique_code,
-                  mode: "insensitive",
-                },
-              },
-            },
-            select: {
-              id: true,
-              sequence_no: true,
-              cut_list_id: true,
-              project_id: true,
-              actual_in_at: true,
-              machine_id: true,
-              machine: {
-                select: {
-                  id: true,
-                  machine_name: true,
-                },
-              },
-              cut_list: {
-                select: {
-                  unique_code: true,
-                  description: true,
-                  item_name: true,
-                },
-              },
-              project: {
-                select: {
-                  track_trace_status: true,
-                  project_name: true,
-                },
-              },
-            },
-          });
-
-          if (!mappedItem) {
-            return validationResponse(0, "Item not found for this machine");
-          }
-
-          let activeDefect = null;
-          if (mappedItem.cut_list_id) {
-            activeDefect = await prisma.defectedItem.findFirst({
-              where: {
-                cut_list_id: mappedItem.cut_list_id,
-                defect_status: { not: "Completed" },
-              },
-              orderBy: { created_at: "desc" },
-              select: {
-                id: true,
-                defect_id: true,
-                remark: true,
-                action: true,
-                rework_machine_id: true,
-                defect_status: true,
-                created_at: true,
-                defect: {
-                  select: {
-                    id: true,
-                    defect_name: true,
-                  },
-                },
-                images: {
-                  select: {
-                    id: true,
-                    doc_og_name: true,
-                    doc_sys_name: true,
-                    created_at: true,
-                  },
-                },
-              },
-            });
-          }
-
-          if (activeDefect && activeDefect.images.length > 0) {
-            const imagesWithUrls = await Promise.all(
-              activeDefect.images.map(async (img) => ({
-                ...img,
-                signed_url: await generateSignedUrl(img.doc_sys_name),
-              }))
-            );
-            activeDefect = { ...activeDefect, images: imagesWithUrls };
-          }
-
-          console.log("mappedItem", mappedItem);
-          return validationResponse(1, '', { mappedItem, activeDefect, countdown_timer: 3 });
-
-        } else {
-          updateScannedItem(payload, false, files);
-        }
-
-      } else {
-
-        // auto-pass pass-type machines
-        if (passMachines.length > 0) {
-          await prisma.cutListMachineMapping.updateMany({
-            where: {
-              id: { in: passMachines.map(m => m.id) },
-            },
-            data: {
-              actual_in_at: new Date(),
-              in_operator: created_by,
-            },
-          });
-          console.log(`Auto-passed ${passMachines.length} machines with scan_type='pass'`);
-        }
-
-        // update current machine as scanned — include box_id if provided
-        await prisma.cutListMachineMapping.update({
-          where: { id: id },
-          data: {
-            actual_in_at: new Date(),
-            in_operator: created_by,
-            ...(box_id ? { box_id } : {}),
-          },
-        });
-
-        // ── mark defect as completed + save completion photos ──
-        if (cut_list_id) {
-          const pendingDefect = await prisma.defectedItem.findFirst({
-            where: {
-              cut_list_id: cut_list_id,
-              defect_status: { not: "Completed" },
-            },
-          });
-
-          if (pendingDefect) {
-            // mark defect as completed with completed_by and completed_at
-            await prisma.defectedItem.update({
-              where: { id: pendingDefect.id },
-              data: {
-                defect_status: "Completed",
-                defect_completed_by: created_by,
-                defect_completed_at: new Date(),
-              },
-            });
-
-            // save completion photos linked to the defected item
-            if (files.length > 0) {
-              const uploadedPhotos = await uploadToWasabiCompletionPhotos(
-                files,
-                vendor_id,
-                id,
-              );
-
-              await prisma.defectCompletionPhoto.createMany({
-                data: uploadedPhotos.map((photo) => ({
-                  cut_list_machine_mapping_id: id,
-                  cut_list_id: cut_list_id,
-                  vendor_id: vendor_id,
-                  defected_item_id: pendingDefect.id,
-                  doc_og_name: photo.originalName,
-                  doc_sys_name: photo.systemName,
-                  created_by: created_by,
-                })),
-              });
-
-              console.log(
-                `Saved ${uploadedPhotos.length} completion photos for defect ${pendingDefect.id}`
-              );
-            }
-          }
-        }
-
-        await updateProjectStatus(currentMapping.project_id, currentMapping.project.track_trace_status);
-
-
-        return validationResponse(1, 'Scan done');
-      }
-
-    } else {
-      return validationResponse(0, 'Scan on other machine first');
-    }
-
-  } catch (error) {
-    console.log("Error in api", error);
-    return validationResponse(0, 'Something went wrong');
-  }
-};
 
 export const check_defect = async (payload: TrackTracePayload) => {
   console.log(payload);
