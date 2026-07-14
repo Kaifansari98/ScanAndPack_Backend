@@ -12916,6 +12916,7 @@ export const ProjectMasterScalarFieldEnum = {
   client_name: 'client_name',
   client_address: 'client_address',
   client_contact_no: 'client_contact_no',
+  packing_type: 'packing_type',
   updated_by: 'updated_by',
   updated_at: 'updated_at',
   track_trace_status: 'track_trace_status',
@@ -15627,6 +15628,20 @@ export type EnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'UserSessionStatus[]'
  */
 export type ListEnumUserSessionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserSessionStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PackingType'
+ */
+export type EnumPackingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PackingType'>
+    
+
+
+/**
+ * Reference to a field of type 'PackingType[]'
+ */
+export type ListEnumPackingTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PackingType[]'>
     
 
 
