@@ -65,6 +65,9 @@ import {
   fetchAllCarcassLegs,
   fetchSkirtingCarcassLegs,
   fetchSkirtingCarcassLegsColors,
+  fetchAllLightCarcasTypes,
+  fetchLightCarcasUnits,
+  fetchAllOtherAppliances,
 } from "../../controllers/leadModuleControllers/selectionMaster.controller";
 import { fetchAllSmallOrderRequestTypes } from "../../controllers/leadModuleControllers/smallOrderRequestType.controller";
 import {
@@ -170,6 +173,18 @@ leadsRouter.get(
 leadsRouter.get(
   "/get-skirting-carcass-legs-colors/:skirting_carcass_legs_id",
   fetchSkirtingCarcassLegsColors,
+);
+leadsRouter.get(
+  "/get-all-light-carcas-types/:vendor_id",
+  fetchAllLightCarcasTypes,
+);
+leadsRouter.get(
+  "/get-light-carcas-units/:light_carcas_type_id",
+  fetchLightCarcasUnits,
+);
+leadsRouter.get(
+  "/get-all-other-appliances/:vendor_id",
+  fetchAllOtherAppliances,
 );
 leadsRouter.get("/get-all-handle-types/:vendor_id", fetchAllHandleTypes);
 leadsRouter.get(

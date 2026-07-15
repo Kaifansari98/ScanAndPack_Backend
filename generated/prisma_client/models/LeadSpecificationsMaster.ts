@@ -45,6 +45,7 @@ export type LeadSpecificationsMasterMinAggregateOutputType = {
   vendor_id: number | null
   lead_id: number | null
   name: string | null
+  lights_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -54,6 +55,7 @@ export type LeadSpecificationsMasterMaxAggregateOutputType = {
   vendor_id: number | null
   lead_id: number | null
   name: string | null
+  lights_remark: string | null
   created_at: Date | null
   created_by: number | null
 }
@@ -63,6 +65,7 @@ export type LeadSpecificationsMasterCountAggregateOutputType = {
   vendor_id: number
   lead_id: number
   name: number
+  lights_remark: number
   created_at: number
   created_by: number
   _all: number
@@ -88,6 +91,7 @@ export type LeadSpecificationsMasterMinAggregateInputType = {
   vendor_id?: true
   lead_id?: true
   name?: true
+  lights_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -97,6 +101,7 @@ export type LeadSpecificationsMasterMaxAggregateInputType = {
   vendor_id?: true
   lead_id?: true
   name?: true
+  lights_remark?: true
   created_at?: true
   created_by?: true
 }
@@ -106,6 +111,7 @@ export type LeadSpecificationsMasterCountAggregateInputType = {
   vendor_id?: true
   lead_id?: true
   name?: true
+  lights_remark?: true
   created_at?: true
   created_by?: true
   _all?: true
@@ -202,6 +208,7 @@ export type LeadSpecificationsMasterGroupByOutputType = {
   vendor_id: number
   lead_id: number
   name: string
+  lights_remark: string | null
   created_at: Date
   created_by: number
   _count: LeadSpecificationsMasterCountAggregateOutputType | null
@@ -234,11 +241,14 @@ export type LeadSpecificationsMasterWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   lead_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   name?: Prisma.StringFilter<"LeadSpecificationsMaster"> | string
+  lights_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadSpecificationsMaster"> | Date | string
   created_by?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
 }
 
 export type LeadSpecificationsMasterOrderByWithRelationInput = {
@@ -246,11 +256,14 @@ export type LeadSpecificationsMasterOrderByWithRelationInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lights_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   vendor?: Prisma.VendorMasterOrderByWithRelationInput
   lead?: Prisma.LeadMasterOrderByWithRelationInput
   createdBy?: Prisma.UserMasterOrderByWithRelationInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingOrderByRelationAggregateInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingOrderByRelationAggregateInput
 }
 
 export type LeadSpecificationsMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -261,11 +274,14 @@ export type LeadSpecificationsMasterWhereUniqueInput = Prisma.AtLeast<{
   vendor_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   lead_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   name?: Prisma.StringFilter<"LeadSpecificationsMaster"> | string
+  lights_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadSpecificationsMaster"> | Date | string
   created_by?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   lead?: Prisma.XOR<Prisma.LeadMasterScalarRelationFilter, Prisma.LeadMasterWhereInput>
   createdBy?: Prisma.XOR<Prisma.UserMasterScalarRelationFilter, Prisma.UserMasterWhereInput>
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingListRelationFilter
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingListRelationFilter
 }, "id">
 
 export type LeadSpecificationsMasterOrderByWithAggregationInput = {
@@ -273,6 +289,7 @@ export type LeadSpecificationsMasterOrderByWithAggregationInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lights_remark?: Prisma.SortOrderInput | Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
   _count?: Prisma.LeadSpecificationsMasterCountOrderByAggregateInput
@@ -290,16 +307,20 @@ export type LeadSpecificationsMasterScalarWhereWithAggregatesInput = {
   vendor_id?: Prisma.IntWithAggregatesFilter<"LeadSpecificationsMaster"> | number
   lead_id?: Prisma.IntWithAggregatesFilter<"LeadSpecificationsMaster"> | number
   name?: Prisma.StringWithAggregatesFilter<"LeadSpecificationsMaster"> | string
+  lights_remark?: Prisma.StringNullableWithAggregatesFilter<"LeadSpecificationsMaster"> | string | null
   created_at?: Prisma.DateTimeWithAggregatesFilter<"LeadSpecificationsMaster"> | Date | string
   created_by?: Prisma.IntWithAggregatesFilter<"LeadSpecificationsMaster"> | number
 }
 
 export type LeadSpecificationsMasterCreateInput = {
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSpecificationsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSpecificationsCreatedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterUncheckedCreateInput = {
@@ -307,16 +328,22 @@ export type LeadSpecificationsMasterUncheckedCreateInput = {
   vendor_id: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSpecificationsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSpecificationsCreatedNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateInput = {
@@ -324,8 +351,11 @@ export type LeadSpecificationsMasterUncheckedUpdateInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterCreateManyInput = {
@@ -333,12 +363,14 @@ export type LeadSpecificationsMasterCreateManyInput = {
   vendor_id: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadSpecificationsMasterUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -347,6 +379,7 @@ export type LeadSpecificationsMasterUncheckedUpdateManyInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -366,6 +399,7 @@ export type LeadSpecificationsMasterCountOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lights_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -382,6 +416,7 @@ export type LeadSpecificationsMasterMaxOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lights_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -391,6 +426,7 @@ export type LeadSpecificationsMasterMinOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  lights_remark?: Prisma.SortOrder
   created_at?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
 }
@@ -400,6 +436,11 @@ export type LeadSpecificationsMasterSumOrderByAggregateInput = {
   vendor_id?: Prisma.SortOrder
   lead_id?: Prisma.SortOrder
   created_by?: Prisma.SortOrder
+}
+
+export type LeadSpecificationsMasterScalarRelationFilter = {
+  is?: Prisma.LeadSpecificationsMasterWhereInput
+  isNot?: Prisma.LeadSpecificationsMasterWhereInput
 }
 
 export type LeadSpecificationsMasterCreateNestedManyWithoutVendorInput = {
@@ -528,19 +569,53 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadNestedInput = 
   deleteMany?: Prisma.LeadSpecificationsMasterScalarWhereInput | Prisma.LeadSpecificationsMasterScalarWhereInput[]
 }
 
+export type LeadSpecificationsMasterCreateNestedOneWithoutLightCarcasUnitMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput>
+  connectOrCreate?: Prisma.LeadSpecificationsMasterCreateOrConnectWithoutLightCarcasUnitMappingsInput
+  connect?: Prisma.LeadSpecificationsMasterWhereUniqueInput
+}
+
+export type LeadSpecificationsMasterUpdateOneRequiredWithoutLightCarcasUnitMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput>
+  connectOrCreate?: Prisma.LeadSpecificationsMasterCreateOrConnectWithoutLightCarcasUnitMappingsInput
+  upsert?: Prisma.LeadSpecificationsMasterUpsertWithoutLightCarcasUnitMappingsInput
+  connect?: Prisma.LeadSpecificationsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateToOneWithWhereWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUpdateWithoutLightCarcasUnitMappingsInput>, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput>
+}
+
+export type LeadSpecificationsMasterCreateNestedOneWithoutOtherAppliancesMappingsInput = {
+  create?: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMappingsInput>
+  connectOrCreate?: Prisma.LeadSpecificationsMasterCreateOrConnectWithoutOtherAppliancesMappingsInput
+  connect?: Prisma.LeadSpecificationsMasterWhereUniqueInput
+}
+
+export type LeadSpecificationsMasterUpdateOneRequiredWithoutOtherAppliancesMappingsNestedInput = {
+  create?: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMappingsInput>
+  connectOrCreate?: Prisma.LeadSpecificationsMasterCreateOrConnectWithoutOtherAppliancesMappingsInput
+  upsert?: Prisma.LeadSpecificationsMasterUpsertWithoutOtherAppliancesMappingsInput
+  connect?: Prisma.LeadSpecificationsMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateToOneWithWhereWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUpdateWithoutOtherAppliancesMappingsInput>, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput>
+}
+
 export type LeadSpecificationsMasterCreateWithoutVendorInput = {
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSpecificationsCreatedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterUncheckedCreateWithoutVendorInput = {
   id?: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterCreateOrConnectWithoutVendorInput = {
@@ -577,15 +652,19 @@ export type LeadSpecificationsMasterScalarWhereInput = {
   vendor_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   lead_id?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
   name?: Prisma.StringFilter<"LeadSpecificationsMaster"> | string
+  lights_remark?: Prisma.StringNullableFilter<"LeadSpecificationsMaster"> | string | null
   created_at?: Prisma.DateTimeFilter<"LeadSpecificationsMaster"> | Date | string
   created_by?: Prisma.IntFilter<"LeadSpecificationsMaster"> | number
 }
 
 export type LeadSpecificationsMasterCreateWithoutCreatedByInput = {
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSpecificationsInput
   lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationsInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterUncheckedCreateWithoutCreatedByInput = {
@@ -593,7 +672,10 @@ export type LeadSpecificationsMasterUncheckedCreateWithoutCreatedByInput = {
   vendor_id: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterCreateOrConnectWithoutCreatedByInput = {
@@ -624,17 +706,23 @@ export type LeadSpecificationsMasterUpdateManyWithWhereWithoutCreatedByInput = {
 
 export type LeadSpecificationsMasterCreateWithoutLeadInput = {
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSpecificationsInput
   createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSpecificationsCreatedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterUncheckedCreateWithoutLeadInput = {
   id?: number
   vendor_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
 }
 
 export type LeadSpecificationsMasterCreateOrConnectWithoutLeadInput = {
@@ -663,33 +751,157 @@ export type LeadSpecificationsMasterUpdateManyWithWhereWithoutLeadInput = {
   data: Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateManyMutationInput, Prisma.LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadInput>
 }
 
+export type LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput = {
+  name: string
+  lights_remark?: string | null
+  created_at?: Date | string
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSpecificationsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSpecificationsCreatedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingCreateNestedManyWithoutSpecificationInput
+}
+
+export type LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  name: string
+  lights_remark?: string | null
+  created_at?: Date | string
+  created_by: number
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedCreateNestedManyWithoutSpecificationInput
+}
+
+export type LeadSpecificationsMasterCreateOrConnectWithoutLightCarcasUnitMappingsInput = {
+  where: Prisma.LeadSpecificationsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput>
+}
+
+export type LeadSpecificationsMasterUpsertWithoutLightCarcasUnitMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput>
+  create: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutLightCarcasUnitMappingsInput>
+  where?: Prisma.LeadSpecificationsMasterWhereInput
+}
+
+export type LeadSpecificationsMasterUpdateToOneWithWhereWithoutLightCarcasUnitMappingsInput = {
+  where?: Prisma.LeadSpecificationsMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateWithoutLightCarcasUnitMappingsInput, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput>
+}
+
+export type LeadSpecificationsMasterUpdateWithoutLightCarcasUnitMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSpecificationsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSpecificationsCreatedNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
+}
+
+export type LeadSpecificationsMasterUncheckedUpdateWithoutLightCarcasUnitMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+}
+
+export type LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput = {
+  name: string
+  lights_remark?: string | null
+  created_at?: Date | string
+  vendor: Prisma.VendorMasterCreateNestedOneWithoutLeadSpecificationsInput
+  lead: Prisma.LeadMasterCreateNestedOneWithoutSpecificationsInput
+  createdBy: Prisma.UserMasterCreateNestedOneWithoutLeadSpecificationsCreatedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingCreateNestedManyWithoutSpecificationInput
+}
+
+export type LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMappingsInput = {
+  id?: number
+  vendor_id: number
+  lead_id: number
+  name: string
+  lights_remark?: string | null
+  created_at?: Date | string
+  created_by: number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedCreateNestedManyWithoutSpecificationInput
+}
+
+export type LeadSpecificationsMasterCreateOrConnectWithoutOtherAppliancesMappingsInput = {
+  where: Prisma.LeadSpecificationsMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMappingsInput>
+}
+
+export type LeadSpecificationsMasterUpsertWithoutOtherAppliancesMappingsInput = {
+  update: Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput>
+  create: Prisma.XOR<Prisma.LeadSpecificationsMasterCreateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedCreateWithoutOtherAppliancesMappingsInput>
+  where?: Prisma.LeadSpecificationsMasterWhereInput
+}
+
+export type LeadSpecificationsMasterUpdateToOneWithWhereWithoutOtherAppliancesMappingsInput = {
+  where?: Prisma.LeadSpecificationsMasterWhereInput
+  data: Prisma.XOR<Prisma.LeadSpecificationsMasterUpdateWithoutOtherAppliancesMappingsInput, Prisma.LeadSpecificationsMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput>
+}
+
+export type LeadSpecificationsMasterUpdateWithoutOtherAppliancesMappingsInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSpecificationsNestedInput
+  lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationsNestedInput
+  createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSpecificationsCreatedNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
+}
+
+export type LeadSpecificationsMasterUncheckedUpdateWithoutOtherAppliancesMappingsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
+  lead_id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+}
+
 export type LeadSpecificationsMasterCreateManyVendorInput = {
   id?: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadSpecificationsMasterUpdateWithoutVendorInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSpecificationsCreatedNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateManyWithoutVendorInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
@@ -699,14 +911,18 @@ export type LeadSpecificationsMasterCreateManyCreatedByInput = {
   vendor_id: number
   lead_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
 }
 
 export type LeadSpecificationsMasterUpdateWithoutCreatedByInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSpecificationsNestedInput
   lead?: Prisma.LeadMasterUpdateOneRequiredWithoutSpecificationsNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateWithoutCreatedByInput = {
@@ -714,7 +930,10 @@ export type LeadSpecificationsMasterUncheckedUpdateWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByInput = {
@@ -722,6 +941,7 @@ export type LeadSpecificationsMasterUncheckedUpdateManyWithoutCreatedByInput = {
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   lead_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -729,33 +949,79 @@ export type LeadSpecificationsMasterCreateManyLeadInput = {
   id?: number
   vendor_id: number
   name: string
+  lights_remark?: string | null
   created_at?: Date | string
   created_by: number
 }
 
 export type LeadSpecificationsMasterUpdateWithoutLeadInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   vendor?: Prisma.VendorMasterUpdateOneRequiredWithoutLeadSpecificationsNestedInput
   createdBy?: Prisma.UserMasterUpdateOneRequiredWithoutLeadSpecificationsCreatedNestedInput
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
+  lightCarcasUnitMappings?: Prisma.LeadLightCarcasUnitMappingUncheckedUpdateManyWithoutSpecificationNestedInput
+  otherAppliancesMappings?: Prisma.LeadOtherAppliancesMappingUncheckedUpdateManyWithoutSpecificationNestedInput
 }
 
 export type LeadSpecificationsMasterUncheckedUpdateManyWithoutLeadInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   vendor_id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  lights_remark?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   created_by?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+
+/**
+ * Count Type LeadSpecificationsMasterCountOutputType
+ */
+
+export type LeadSpecificationsMasterCountOutputType = {
+  lightCarcasUnitMappings: number
+  otherAppliancesMappings: number
+}
+
+export type LeadSpecificationsMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  lightCarcasUnitMappings?: boolean | LeadSpecificationsMasterCountOutputTypeCountLightCarcasUnitMappingsArgs
+  otherAppliancesMappings?: boolean | LeadSpecificationsMasterCountOutputTypeCountOtherAppliancesMappingsArgs
+}
+
+/**
+ * LeadSpecificationsMasterCountOutputType without action
+ */
+export type LeadSpecificationsMasterCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadSpecificationsMasterCountOutputType
+   */
+  select?: Prisma.LeadSpecificationsMasterCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * LeadSpecificationsMasterCountOutputType without action
+ */
+export type LeadSpecificationsMasterCountOutputTypeCountLightCarcasUnitMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadLightCarcasUnitMappingWhereInput
+}
+
+/**
+ * LeadSpecificationsMasterCountOutputType without action
+ */
+export type LeadSpecificationsMasterCountOutputTypeCountOtherAppliancesMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LeadOtherAppliancesMappingWhereInput
+}
 
 
 export type LeadSpecificationsMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -763,11 +1029,15 @@ export type LeadSpecificationsMasterSelect<ExtArgs extends runtime.Types.Extensi
   vendor_id?: boolean
   lead_id?: boolean
   name?: boolean
+  lights_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lightCarcasUnitMappings?: boolean | Prisma.LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs>
+  otherAppliancesMappings?: boolean | Prisma.LeadSpecificationsMaster$otherAppliancesMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadSpecificationsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["leadSpecificationsMaster"]>
 
 export type LeadSpecificationsMasterSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -775,6 +1045,7 @@ export type LeadSpecificationsMasterSelectCreateManyAndReturn<ExtArgs extends ru
   vendor_id?: boolean
   lead_id?: boolean
   name?: boolean
+  lights_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -787,6 +1058,7 @@ export type LeadSpecificationsMasterSelectUpdateManyAndReturn<ExtArgs extends ru
   vendor_id?: boolean
   lead_id?: boolean
   name?: boolean
+  lights_remark?: boolean
   created_at?: boolean
   created_by?: boolean
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -799,15 +1071,19 @@ export type LeadSpecificationsMasterSelectScalar = {
   vendor_id?: boolean
   lead_id?: boolean
   name?: boolean
+  lights_remark?: boolean
   created_at?: boolean
   created_by?: boolean
 }
 
-export type LeadSpecificationsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "name" | "created_at" | "created_by", ExtArgs["result"]["leadSpecificationsMaster"]>
+export type LeadSpecificationsMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "vendor_id" | "lead_id" | "name" | "lights_remark" | "created_at" | "created_by", ExtArgs["result"]["leadSpecificationsMaster"]>
 export type LeadSpecificationsMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
   lead?: boolean | Prisma.LeadMasterDefaultArgs<ExtArgs>
   createdBy?: boolean | Prisma.UserMasterDefaultArgs<ExtArgs>
+  lightCarcasUnitMappings?: boolean | Prisma.LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs>
+  otherAppliancesMappings?: boolean | Prisma.LeadSpecificationsMaster$otherAppliancesMappingsArgs<ExtArgs>
+  _count?: boolean | Prisma.LeadSpecificationsMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type LeadSpecificationsMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   vendor?: boolean | Prisma.VendorMasterDefaultArgs<ExtArgs>
@@ -826,12 +1102,15 @@ export type $LeadSpecificationsMasterPayload<ExtArgs extends runtime.Types.Exten
     vendor: Prisma.$VendorMasterPayload<ExtArgs>
     lead: Prisma.$LeadMasterPayload<ExtArgs>
     createdBy: Prisma.$UserMasterPayload<ExtArgs>
+    lightCarcasUnitMappings: Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>[]
+    otherAppliancesMappings: Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     vendor_id: number
     lead_id: number
     name: string
+    lights_remark: string | null
     created_at: Date
     created_by: number
   }, ExtArgs["result"]["leadSpecificationsMaster"]>
@@ -1231,6 +1510,8 @@ export interface Prisma__LeadSpecificationsMasterClient<T, Null = never, ExtArgs
   vendor<T extends Prisma.VendorMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VendorMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__VendorMasterClient<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   lead<T extends Prisma.LeadMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__LeadMasterClient<runtime.Types.Result.GetResult<Prisma.$LeadMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   createdBy<T extends Prisma.UserMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__UserMasterClient<runtime.Types.Result.GetResult<Prisma.$UserMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  lightCarcasUnitMappings<T extends Prisma.LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadLightCarcasUnitMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  otherAppliancesMappings<T extends Prisma.LeadSpecificationsMaster$otherAppliancesMappingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.LeadSpecificationsMaster$otherAppliancesMappingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadOtherAppliancesMappingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1264,6 +1545,7 @@ export interface LeadSpecificationsMasterFieldRefs {
   readonly vendor_id: Prisma.FieldRef<"LeadSpecificationsMaster", 'Int'>
   readonly lead_id: Prisma.FieldRef<"LeadSpecificationsMaster", 'Int'>
   readonly name: Prisma.FieldRef<"LeadSpecificationsMaster", 'String'>
+  readonly lights_remark: Prisma.FieldRef<"LeadSpecificationsMaster", 'String'>
   readonly created_at: Prisma.FieldRef<"LeadSpecificationsMaster", 'DateTime'>
   readonly created_by: Prisma.FieldRef<"LeadSpecificationsMaster", 'Int'>
 }
@@ -1664,6 +1946,54 @@ export type LeadSpecificationsMasterDeleteManyArgs<ExtArgs extends runtime.Types
    * Limit how many LeadSpecificationsMasters to delete.
    */
   limit?: number
+}
+
+/**
+ * LeadSpecificationsMaster.lightCarcasUnitMappings
+ */
+export type LeadSpecificationsMaster$lightCarcasUnitMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadLightCarcasUnitMapping
+   */
+  select?: Prisma.LeadLightCarcasUnitMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadLightCarcasUnitMapping
+   */
+  omit?: Prisma.LeadLightCarcasUnitMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadLightCarcasUnitMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadLightCarcasUnitMappingWhereInput
+  orderBy?: Prisma.LeadLightCarcasUnitMappingOrderByWithRelationInput | Prisma.LeadLightCarcasUnitMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadLightCarcasUnitMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadLightCarcasUnitMappingScalarFieldEnum | Prisma.LeadLightCarcasUnitMappingScalarFieldEnum[]
+}
+
+/**
+ * LeadSpecificationsMaster.otherAppliancesMappings
+ */
+export type LeadSpecificationsMaster$otherAppliancesMappingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LeadOtherAppliancesMapping
+   */
+  select?: Prisma.LeadOtherAppliancesMappingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LeadOtherAppliancesMapping
+   */
+  omit?: Prisma.LeadOtherAppliancesMappingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LeadOtherAppliancesMappingInclude<ExtArgs> | null
+  where?: Prisma.LeadOtherAppliancesMappingWhereInput
+  orderBy?: Prisma.LeadOtherAppliancesMappingOrderByWithRelationInput | Prisma.LeadOtherAppliancesMappingOrderByWithRelationInput[]
+  cursor?: Prisma.LeadOtherAppliancesMappingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LeadOtherAppliancesMappingScalarFieldEnum | Prisma.LeadOtherAppliancesMappingScalarFieldEnum[]
 }
 
 /**

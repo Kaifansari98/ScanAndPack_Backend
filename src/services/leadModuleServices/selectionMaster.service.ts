@@ -10,6 +10,9 @@ import {
   CarcassLegs,
   SkirtingCarcassLegs,
   SkirtingCarcassLegsColor,
+  LightCarcasType,
+  LightCarcasUnit,
+  OtherAppliances,
 } from "../../types/leadModule.types";
 
 const ensureVendorExists = async (vendor_id: number) => {
@@ -171,6 +174,52 @@ export const getSkirtingCarcassLegsColors = async (
   });
 
   return colors as SkirtingCarcassLegsColor[];
+};
+
+export const getAllLightCarcasTypes = async (
+  vendor_id: number,
+): Promise<LightCarcasType[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const types = await prisma.lightCarcasTypeMaster.findMany({
+    where: { vendor_id, is_active: true },
+    orderBy: { type: "asc" },
+  });
+
+  return types as LightCarcasType[];
+};
+
+export const getLightCarcasUnits = async (
+  light_carcas_type_id: number,
+): Promise<LightCarcasUnit[]> => {
+  const type = await prisma.lightCarcasTypeMaster.findUnique({
+    where: { id: light_carcas_type_id },
+    select: { id: true },
+  });
+
+  if (!type) {
+    throw new Error("Invalid light_carcas_type_id");
+  }
+
+  const units = await prisma.lightCarcasUnitMaster.findMany({
+    where: { light_carcas_type_id, is_active: true },
+    orderBy: { type: "asc" },
+  });
+
+  return units as LightCarcasUnit[];
+};
+
+export const getAllOtherAppliances = async (
+  vendor_id: number,
+): Promise<OtherAppliances[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const appliances = await prisma.otherAppliancesMaster.findMany({
+    where: { vendor_id },
+    orderBy: [{ type: "asc" }, { article_number: "asc" }],
+  });
+
+  return appliances as OtherAppliances[];
 };
 
 export const getAllHandleTypes = async (

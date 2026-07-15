@@ -90,6 +90,11 @@ export const ModelName = {
   SkirtingCarcassLegsMaster: 'SkirtingCarcassLegsMaster',
   SkirtingCarcassLegsColorMaster: 'SkirtingCarcassLegsColorMaster',
   LeadHardwareMapping: 'LeadHardwareMapping',
+  LightCarcasTypeMaster: 'LightCarcasTypeMaster',
+  LightCarcasUnitMaster: 'LightCarcasUnitMaster',
+  LeadLightCarcasUnitMapping: 'LeadLightCarcasUnitMapping',
+  OtherAppliancesMaster: 'OtherAppliancesMaster',
+  LeadOtherAppliancesMapping: 'LeadOtherAppliancesMapping',
   HandleTypeMaster: 'HandleTypeMaster',
   TimelineRule: 'TimelineRule',
   LeadDocuments: 'LeadDocuments',
@@ -623,6 +628,7 @@ export const LeadSpecificationsMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   lead_id: 'lead_id',
   name: 'name',
+  lights_remark: 'lights_remark',
   created_at: 'created_at',
   created_by: 'created_by'
 } as const
@@ -877,6 +883,67 @@ export const LeadHardwareMappingScalarFieldEnum = {
 } as const
 
 export type LeadHardwareMappingScalarFieldEnum = (typeof LeadHardwareMappingScalarFieldEnum)[keyof typeof LeadHardwareMappingScalarFieldEnum]
+
+
+export const LightCarcasTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type LightCarcasTypeMasterScalarFieldEnum = (typeof LightCarcasTypeMasterScalarFieldEnum)[keyof typeof LightCarcasTypeMasterScalarFieldEnum]
+
+
+export const LightCarcasUnitMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  light_carcas_type_id: 'light_carcas_type_id',
+  is_active: 'is_active',
+  created_at: 'created_at'
+} as const
+
+export type LightCarcasUnitMasterScalarFieldEnum = (typeof LightCarcasUnitMasterScalarFieldEnum)[keyof typeof LightCarcasUnitMasterScalarFieldEnum]
+
+
+export const LeadLightCarcasUnitMappingScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  lead_id: 'lead_id',
+  specs_id: 'specs_id',
+  light_carcas_unit_master_id: 'light_carcas_unit_master_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadLightCarcasUnitMappingScalarFieldEnum = (typeof LeadLightCarcasUnitMappingScalarFieldEnum)[keyof typeof LeadLightCarcasUnitMappingScalarFieldEnum]
+
+
+export const OtherAppliancesMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_id: 'vendor_id',
+  type: 'type',
+  article_number: 'article_number',
+  description: 'description',
+  created_at: 'created_at'
+} as const
+
+export type OtherAppliancesMasterScalarFieldEnum = (typeof OtherAppliancesMasterScalarFieldEnum)[keyof typeof OtherAppliancesMasterScalarFieldEnum]
+
+
+export const LeadOtherAppliancesMappingScalarFieldEnum = {
+  id: 'id',
+  lead_id: 'lead_id',
+  vendor_id: 'vendor_id',
+  specs_id: 'specs_id',
+  other_appliances_master_id: 'other_appliances_master_id',
+  created_at: 'created_at',
+  created_by: 'created_by'
+} as const
+
+export type LeadOtherAppliancesMappingScalarFieldEnum = (typeof LeadOtherAppliancesMappingScalarFieldEnum)[keyof typeof LeadOtherAppliancesMappingScalarFieldEnum]
 
 
 export const HandleTypeMasterScalarFieldEnum = {

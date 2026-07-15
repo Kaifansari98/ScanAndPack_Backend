@@ -235,6 +235,31 @@ export type SkirtingCarcassLegsColorMaster = Prisma.SkirtingCarcassLegsColorMast
  */
 export type LeadHardwareMapping = Prisma.LeadHardwareMappingModel
 /**
+ * Model LightCarcasTypeMaster
+ * 
+ */
+export type LightCarcasTypeMaster = Prisma.LightCarcasTypeMasterModel
+/**
+ * Model LightCarcasUnitMaster
+ * 
+ */
+export type LightCarcasUnitMaster = Prisma.LightCarcasUnitMasterModel
+/**
+ * Model LeadLightCarcasUnitMapping
+ * 
+ */
+export type LeadLightCarcasUnitMapping = Prisma.LeadLightCarcasUnitMappingModel
+/**
+ * Model OtherAppliancesMaster
+ * 
+ */
+export type OtherAppliancesMaster = Prisma.OtherAppliancesMasterModel
+/**
+ * Model LeadOtherAppliancesMapping
+ * 
+ */
+export type LeadOtherAppliancesMapping = Prisma.LeadOtherAppliancesMappingModel
+/**
  * Model HandleTypeMaster
  * 
  */

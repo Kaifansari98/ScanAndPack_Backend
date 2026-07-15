@@ -67,6 +67,11 @@ model VendorMaster {
   leadCarcassMaterialMappings         LeadCarcassMaterialMapping[]
   leadShutterMaterialMappings         LeadShutterMaterialMapping[]
   leadHardwareMappings                LeadHardwareMapping[]
+  lightCarcasTypes                    LightCarcasTypeMaster[]
+  lightCarcasUnits                    LightCarcasUnitMaster[]
+  leadLightCarcasUnitMappings         LeadLightCarcasUnitMapping[]
+  otherAppliances                     OtherAppliancesMaster[]
+  leadOtherAppliancesMappings         LeadOtherAppliancesMapping[]
   handleTypes                         HandleTypeMaster[]
   timelineRules                       TimelineRule[]
   leadActivityStatusLog               LeadActivityStatusLog[]
@@ -363,6 +368,8 @@ model UserMaster {
   leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]   @relation("LeadCarcassMaterialMappingCreatedBy")
   leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]   @relation("LeadShutterMaterialMappingCreatedBy")
   leadHardwareMappingsCreated                LeadHardwareMapping[]          @relation("LeadHardwareMappingCreatedBy")
+  leadLightCarcasUnitMappingsCreated         LeadLightCarcasUnitMapping[]   @relation("LeadLightCarcasUnitMappingCreatedBy")
+  leadOtherAppliancesMappingsCreated         LeadOtherAppliancesMapping[]   @relation("LeadOtherAppliancesMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
 }
@@ -692,6 +699,8 @@ model LeadMaster {
   carcassMaterialMappings                     LeadCarcassMaterialMapping[]
   shutterMaterialMappings                     LeadShutterMaterialMapping[]
   hardwareMappings                            LeadHardwareMapping[]
+  lightCarcasUnitMappings                     LeadLightCarcasUnitMapping[]
+  otherAppliancesMappings                     LeadOtherAppliancesMapping[]
   account                                     AccountMaster?                        @relation(fields: [account_id], references: [id], onDelete: Cascade)
   assignedTo                                  UserMaster?                           @relation("LeadAssignedTo", fields: [assign_to], references: [id])
   assignedBy                                  UserMaster?                           @relation("LeadAssignedBy", fields: [assigned_by], references: [id])
@@ -728,16 +737,19 @@ model LeadMaster {
 }
 
 model LeadSpecificationsMaster {
-  id         Int      @id @default(autoincrement())
-  vendor_id  Int
-  lead_id    Int
-  name       String
-  created_at DateTime @default(now())
-  created_by Int
+  id            Int      @id @default(autoincrement())
+  vendor_id     Int
+  lead_id       Int
+  name          String
+  lights_remark String?
+  created_at    DateTime @default(now())
+  created_by    Int
 
   vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   lead   LeadMaster   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
   createdBy UserMaster @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  lightCarcasUnitMappings LeadLightCarcasUnitMapping[]
+  otherAppliancesMappings LeadOtherAppliancesMapping[]
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -1070,6 +1082,93 @@ model LeadHardwareMapping {
   @@index([carcass_legs_id])
   @@index([skirting_carcass_legs_id])
   @@index([skirting_carcass_legs_color_id])
+  @@index([created_by])
+}
+
+model LightCarcasTypeMaster {
+  id         Int      @id @default(autoincrement())
+  vendor_id  Int
+  type       String
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  vendor VendorMaster            @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  units  LightCarcasUnitMaster[]
+
+  @@index([vendor_id])
+}
+
+model LightCarcasUnitMaster {
+  id                   Int      @id @default(autoincrement())
+  vendor_id            Int
+  type                 String
+  light_carcas_type_id Int
+  is_active            Boolean  @default(true)
+  created_at           DateTime @default(now())
+
+  vendor          VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lightCarcasType LightCarcasTypeMaster        @relation(fields: [light_carcas_type_id], references: [id], onDelete: Cascade)
+  leadMappings    LeadLightCarcasUnitMapping[]
+
+  @@index([vendor_id])
+  @@index([light_carcas_type_id])
+}
+
+model LeadLightCarcasUnitMapping {
+  id                          Int      @id @default(autoincrement())
+  vendor_id                   Int
+  lead_id                     Int
+  specs_id                    Int
+  light_carcas_unit_master_id Int
+  created_at                  DateTime @default(now())
+  created_by                  Int
+
+  vendor          VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead            LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  specification   LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  lightCarcasUnit LightCarcasUnitMaster    @relation(fields: [light_carcas_unit_master_id], references: [id], onDelete: Cascade)
+  createdBy       UserMaster               @relation("LeadLightCarcasUnitMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([vendor_id])
+  @@index([lead_id])
+  @@index([specs_id])
+  @@index([light_carcas_unit_master_id])
+  @@index([created_by])
+}
+
+model OtherAppliancesMaster {
+  id              Int      @id @default(autoincrement())
+  vendor_id       Int
+  type            String
+  article_number  String
+  description     String
+  created_at      DateTime @default(now())
+
+  vendor       VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  leadMappings LeadOtherAppliancesMapping[]
+
+  @@index([vendor_id])
+}
+
+model LeadOtherAppliancesMapping {
+  id                        Int      @id @default(autoincrement())
+  lead_id                   Int
+  vendor_id                 Int
+  specs_id                  Int
+  other_appliances_master_id Int
+  created_at                DateTime @default(now())
+  created_by                 Int
+
+  lead                LeadMaster               @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  vendor              VendorMaster             @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  specification       LeadSpecificationsMaster @relation(fields: [specs_id], references: [id], onDelete: Cascade)
+  otherAppliances     OtherAppliancesMaster    @relation(fields: [other_appliances_master_id], references: [id], onDelete: Cascade)
+  createdBy           UserMaster               @relation("LeadOtherAppliancesMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+
+  @@index([lead_id])
+  @@index([vendor_id])
+  @@index([specs_id])
+  @@index([other_appliances_master_id])
   @@index([created_by])
 }
 

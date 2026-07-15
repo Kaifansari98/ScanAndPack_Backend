@@ -184,6 +184,30 @@ export interface CarcassLegs {
     skirtings?: SkirtingCarcassLegs[];
 }
 
+export interface LightCarcasUnit {
+    id: number;
+    vendor_id: number;
+    type: string;
+    light_carcas_type_id: number;
+    is_active: boolean;
+}
+
+export interface LightCarcasType {
+    id: number;
+    vendor_id: number;
+    type: string;
+    is_active: boolean;
+    units?: LightCarcasUnit[];
+}
+
+export interface OtherAppliances {
+    id: number;
+    vendor_id: number;
+    type: string;
+    article_number: string;
+    description: string;
+}
+
 export interface DocumentTypeInput {
   vendor_id: number;
   type: string;

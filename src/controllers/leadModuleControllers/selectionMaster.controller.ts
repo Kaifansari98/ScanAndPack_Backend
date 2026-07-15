@@ -11,6 +11,9 @@ import {
   getAllCarcassLegs,
   getSkirtingCarcassLegs,
   getSkirtingCarcassLegsColors,
+  getAllLightCarcasTypes,
+  getLightCarcasUnits,
+  getAllOtherAppliances,
 } from "../../services/leadModuleServices/selectionMaster.service";
 
 const getVendorId = (req: Request, res: Response): number | null => {
@@ -153,6 +156,46 @@ export const fetchSkirtingCarcassLegsColors = async (
       skirting_carcass_legs_id,
     );
     return res.status(200).json({ success: true, data: colors });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllLightCarcasTypes = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const types = await getAllLightCarcasTypes(vendor_id);
+    return res.status(200).json({ success: true, data: types });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchLightCarcasUnits = async (req: Request, res: Response) => {
+  try {
+    const light_carcas_type_id = Number(req.params.light_carcas_type_id);
+    if (!light_carcas_type_id) {
+      return res
+        .status(400)
+        .json({ error: "light_carcas_type_id is required" });
+    }
+
+    const units = await getLightCarcasUnits(light_carcas_type_id);
+    return res.status(200).json({ success: true, data: units });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export const fetchAllOtherAppliances = async (req: Request, res: Response) => {
+  try {
+    const vendor_id = getVendorId(req, res);
+    if (!vendor_id) return;
+
+    const appliances = await getAllOtherAppliances(vendor_id);
+    return res.status(200).json({ success: true, data: appliances });
   } catch (error: any) {
     return res.status(500).json({ success: false, error: error.message });
   }
