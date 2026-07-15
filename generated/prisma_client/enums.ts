@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const PackingType = {
+  DEFAULT: 'DEFAULT',
+  GROUPWISE: 'GROUPWISE'
+} as const
+
+export type PackingType = (typeof PackingType)[keyof typeof PackingType]
+
+
 export const AdditionalCostCalculationType = {
   Fixed: 'Fixed',
   Percentage: 'Percentage'

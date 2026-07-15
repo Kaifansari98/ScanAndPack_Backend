@@ -448,6 +448,7 @@ model ProjectMaster {
   client_name       String?
   client_address    String?
   client_contact_no String?
+  packing_type      PackingType @default(DEFAULT)
   updated_by        Int?
   updated_at        DateTime? @updatedAt
 
@@ -3922,6 +3923,12 @@ model PurchaseOrderSupplierAdditionalCost {
   @@index([company_vendor_id], map: "po_sup_cost_company_vendor_idx")
   @@index([additional_cost_id], map: "po_sup_cost_master_idx")
   @@index([source_pi_additional_cost_id], map: "po_sup_cost_source_pi_idx")
+}
+
+
+enum PackingType {
+  DEFAULT
+  GROUPWISE
 }
 
 enum AdditionalCostCalculationType {

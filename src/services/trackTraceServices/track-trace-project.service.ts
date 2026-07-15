@@ -5,6 +5,7 @@ import { prisma } from "../../../src/prisma/client";
 import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
 import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
+import { PackingType } from "../../../generated/prisma_client/enums";
 
 /* ------------------ TYPES ------------------ */
 
@@ -386,6 +387,7 @@ type CreateProjectServicePayload = {
   client_name?: string | null;
   client_address?: string | null;
   client_contact_no?: string | null;
+  packing_type: PackingType;
   file: Express.Multer.File;
 };
 
@@ -400,6 +402,7 @@ export const createProjectService = async (
     client_name,
     client_address,
     client_contact_no,
+    packing_type,
     file,
   } = payloadData;
 
@@ -725,7 +728,7 @@ export const createProjectService = async (
             project_status: "Initiated",
             is_grouping: false,
             lead_id,
-
+            packing_type,
             order_no: resolvedOrderNo,
             client_name: resolvedClientName,
             client_address: resolvedClientAddress,
@@ -1227,6 +1230,7 @@ export const getTrackTraceProjectService = async (
         client_name: true,
         client_address: true,
         client_contact_no: true,
+        packing_type:true,
 
         lead: {
           select: {
@@ -1276,6 +1280,7 @@ type UpdateTrackTraceProjectPayload = {
   client_name?: string | null;
   client_address?: string | null;
   client_contact_no?: string | null;
+  packing_type?: PackingType | string;
 
   file?: Express.Multer.File;
 };
@@ -1289,8 +1294,8 @@ export const updateTrackTraceProjectService = async (
 
     const leadId =
       payload.lead_id !== undefined &&
-      payload.lead_id !== null &&
-      payload.lead_id !== ""
+        payload.lead_id !== null &&
+        payload.lead_id !== ""
         ? Number(payload.lead_id)
         : null;
 
@@ -1441,6 +1446,13 @@ export const updateTrackTraceProjectService = async (
         };
       }
     }
+    const resolvedPackingType:
+      PackingType =
+      payload.packing_type ===
+        PackingType.GROUPWISE
+        ? PackingType.GROUPWISE
+        : PackingType.DEFAULT;
+
 
     /*
     |--------------------------------------------------------------------------
@@ -1455,7 +1467,7 @@ export const updateTrackTraceProjectService = async (
       data: {
         project_name: payload.projectName.trim(),
         lead_id: resolvedLeadId,
-
+        packing_type: resolvedPackingType,
         order_no: resolvedOrderNo,
         client_name: resolvedClientName,
         client_address: resolvedClientAddress,
