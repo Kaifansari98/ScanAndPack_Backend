@@ -859,3 +859,43 @@ export type PurchaseIntentSupplierAdditionalCost = Prisma.PurchaseIntentSupplier
  * 
  */
 export type PurchaseOrderSupplierAdditionalCost = Prisma.PurchaseOrderSupplierAdditionalCostModel
+/**
+ * Model VendorTypeMaster
+ * 
+ */
+export type VendorTypeMaster = Prisma.VendorTypeMasterModel
+/**
+ * Model CompanyVendorStatusMaster
+ * 
+ */
+export type CompanyVendorStatusMaster = Prisma.CompanyVendorStatusMasterModel
+/**
+ * Model CompanyVendorTypeMapping
+ * 
+ */
+export type CompanyVendorTypeMapping = Prisma.CompanyVendorTypeMappingModel
+/**
+ * Model CompanyVendorContactPerson
+ * 
+ */
+export type CompanyVendorContactPerson = Prisma.CompanyVendorContactPersonModel
+/**
+ * Model CompanyVendorBankAccount
+ * 
+ */
+export type CompanyVendorBankAccount = Prisma.CompanyVendorBankAccountModel
+/**
+ * Model CompanyVendorDocumentMaster
+ * 
+ */
+export type CompanyVendorDocumentMaster = Prisma.CompanyVendorDocumentMasterModel
+/**
+ * Model CompanyVendorDocumentMapping
+ * 
+ */
+export type CompanyVendorDocumentMapping = Prisma.CompanyVendorDocumentMappingModel
+/**
+ * Model CompanyVendorAddress
+ * 
+ */
+export type CompanyVendorAddress = Prisma.CompanyVendorAddressModel
