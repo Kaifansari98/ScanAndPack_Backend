@@ -58,7 +58,7 @@ export const createBox = async (
             project_id: Number(project_id),
             lead_id: lead_id ? Number(lead_id) : null,
             box_name: box_name.trim(),
-            created_by: created_by || null,
+            created_by: created_by ,
           },
 
           select: {
