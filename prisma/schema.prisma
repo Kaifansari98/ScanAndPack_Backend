@@ -2127,12 +2127,19 @@ model LeadApprovalRequestDocumentMapping {
 model CompanyVendorsMaster {
   id                      Int          @id @default(autoincrement())
   vendor_id               Int
-  vendor_code             String
+  vendor_code             String       @unique
   company_name            String
+  vendor_name             String       @default("")
   point_of_contact        String
   contact_no              String
   email                   String?
   address                 String?
+  alternate_mobile_no     String?
+  alternate_email         String?
+  gst_no                  String?      @unique
+  pan_no                  String?      @unique
+  status_id               Int?
+  primary_contact_id      Int?
   created_at              DateTime     @default(now())
   created_by              Int
   updated_at              DateTime     @updatedAt
@@ -2147,6 +2154,14 @@ model CompanyVendorsMaster {
   state_id                Int?
   default_payment_term_id Int?
   state                   StateMaster? @relation("CompanyVendorState", fields: [state_id], references: [id], onDelete: SetNull)
+
+  status                  CompanyVendorStatusMaster?  @relation(fields: [status_id], references: [id])
+  primaryContact          CompanyVendorContactPerson? @relation("CompanyVendorPrimaryContact", fields: [primary_contact_id], references: [id], onDelete: SetNull)
+  vendorTypes             CompanyVendorTypeMapping[]
+  contactPersons          CompanyVendorContactPerson[] @relation("CompanyVendorContacts")
+  bankAccounts            CompanyVendorBankAccount[]
+  documents               CompanyVendorDocumentMapping[]
+  addresses               CompanyVendorAddress[]
 
   vendor                       VendorMaster                      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   orderLoginLinks              OrderLoginDetails[]
@@ -2167,6 +2182,8 @@ model CompanyVendorsMaster {
 
   @@index([default_payment_term_id])
   @@index([state_id])
+  @@index([status_id])
+  @@index([primary_contact_id])
 }
 
 model OrderLoginDetails {
@@ -2791,21 +2808,23 @@ model RegionMaster {
 }
 
 model StateMaster {
-  id             Int                    @id @default(autoincrement())
-  name           String
-  region_id      Int
-  cities         CityMaster[]
-  region         RegionMaster           @relation(fields: [region_id], references: [id])
-  vendors        VendorMaster[]         @relation("VendorState")
-  companyVendors CompanyVendorsMaster[] @relation("CompanyVendorState")
+  id                     Int                    @id @default(autoincrement())
+  name                   String
+  region_id              Int
+  cities                 CityMaster[]
+  region                 RegionMaster           @relation(fields: [region_id], references: [id])
+  vendors                VendorMaster[]         @relation("VendorState")
+  companyVendors         CompanyVendorsMaster[] @relation("CompanyVendorState")
+  companyVendorAddresses CompanyVendorAddress[] @relation("CompanyVendorAddressState")
 }
 
 model CityMaster {
-  id       Int          @id @default(autoincrement())
-  name     String
-  state_id Int
-  areas    AreaMaster[]
-  state    StateMaster  @relation(fields: [state_id], references: [id])
+  id                     Int                    @id @default(autoincrement())
+  name                   String
+  state_id               Int
+  areas                  AreaMaster[]
+  state                  StateMaster            @relation(fields: [state_id], references: [id])
+  companyVendorAddresses CompanyVendorAddress[] @relation("CompanyVendorAddressCity")
 }
 
 model AreaMaster {
@@ -4307,3 +4326,161 @@ enum PaymentScheduleAction {
   StatusChanged
   Cancelled
 }
+
+model VendorTypeMaster {
+  id               Int                        @id @default(autoincrement()) @map("vendor_type_id")
+  vendor_type_name String                     @map("vendor_type_name")
+  vendorMappings   CompanyVendorTypeMapping[]
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("VendorTypeMaster")
+}
+
+model CompanyVendorStatusMaster {
+  id             Int                    @id @default(autoincrement()) @map("status_id")
+  status_name    String                 @map("status_name")
+  companyVendors CompanyVendorsMaster[]
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorStatusMaster")
+}
+
+model CompanyVendorTypeMapping {
+  id                Int                  @id @default(autoincrement()) @map("mapping_id")
+  company_vendor_id Int                  @map("company_vendor_id")
+  vendor_type_id    Int                  @map("vendor_type_id")
+  companyVendor     CompanyVendorsMaster @relation(fields: [company_vendor_id], references: [id], onDelete: Cascade)
+  vendorType        VendorTypeMaster     @relation(fields: [vendor_type_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorTypeMapping")
+}
+
+model CompanyVendorContactPerson {
+  id                Int                    @id @default(autoincrement()) @map("contact_id")
+  company_vendor_id Int                    @map("company_vendor_id")
+  name              String                 @map("name")
+  department        String?                @map("department")
+  phone             String                 @map("phone")
+  designation       String?                @map("designation")
+  email             String?                @map("email")
+  is_primary        Boolean                @default(false) @map("is_primary")
+  companyVendor     CompanyVendorsMaster   @relation("CompanyVendorContacts", fields: [company_vendor_id], references: [id], onDelete: Cascade)
+  primaryForVendors CompanyVendorsMaster[] @relation("CompanyVendorPrimaryContact")
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorContactPerson")
+}
+
+model CompanyVendorBankAccount {
+  id                    Int                  @id @default(autoincrement()) @map("bank_id")
+  company_vendor_id     Int                  @map("company_vendor_id")
+  holder_name           String               @map("holder_name")
+  account_no            String               @map("account_no")
+  ifsc                  String               @map("ifsc")
+  swift                 String?              @map("swift")
+  branch                String               @map("branch")
+  cancelled_cheque_path String?              @map("cancelled_cheque_path")
+  is_default            Boolean              @default(false) @map("is_default")
+  companyVendor         CompanyVendorsMaster @relation(fields: [company_vendor_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@unique([company_vendor_id, account_no])
+  @@map("CompanyVendorBankAccount")
+}
+
+model CompanyVendorDocumentMaster {
+  id            Int                            @id @default(autoincrement()) @map("document_type_id")
+  document_name String                         @map("document_name")
+  docMappings   CompanyVendorDocumentMapping[]
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorDocumentMaster")
+}
+
+model CompanyVendorDocumentMapping {
+  id                Int                         @id @default(autoincrement()) @map("document_id")
+  company_vendor_id Int                         @map("company_vendor_id")
+  document_type_id  Int                         @map("document_type_id")
+  file_path         String                      @map("file_path")
+  companyVendor     CompanyVendorsMaster        @relation(fields: [company_vendor_id], references: [id], onDelete: Cascade)
+  documentType      CompanyVendorDocumentMaster @relation(fields: [document_type_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorDocumentMapping")
+}
+
+model CompanyVendorAddress {
+  id                Int                  @id @default(autoincrement()) @map("address_id")
+  company_vendor_id Int                  @map("company_vendor_id")
+  address_line_1    String               @map("address_line_1")
+  address_line_2    String?              @map("address_line_2")
+  landmark          String?              @map("landmark")
+  pincode           String               @map("pincode")
+  state_id          Int                  @map("state_id")
+  city_id           Int                  @map("city_id")
+  is_primary        Boolean              @default(false) @map("is_primary")
+  companyVendor     CompanyVendorsMaster @relation(fields: [company_vendor_id], references: [id], onDelete: Cascade)
+  state             StateMaster          @relation("CompanyVendorAddressState", fields: [state_id], references: [id])
+  city              CityMaster           @relation("CompanyVendorAddressCity", fields: [city_id], references: [id])
+
+  created_at DateTime  @default(now()) @map("created_at")
+  created_by Int       @map("created_by")
+  updated_at DateTime  @updatedAt @map("updated_at")
+  updated_by Int       @map("updated_by")
+  deleted_at DateTime? @map("deleted_at")
+  deleted_by Int?      @map("deleted_by")
+  is_deleted Boolean   @default(false) @map("is_deleted")
+
+  @@map("CompanyVendorAddress")
+}
+

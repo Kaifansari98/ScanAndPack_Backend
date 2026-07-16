@@ -219,7 +219,15 @@ export const ModelName = {
   Architechuremaster: 'Architechuremaster',
   AdditionalCostMaster: 'AdditionalCostMaster',
   PurchaseIntentSupplierAdditionalCost: 'PurchaseIntentSupplierAdditionalCost',
-  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost'
+  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost',
+  VendorTypeMaster: 'VendorTypeMaster',
+  CompanyVendorStatusMaster: 'CompanyVendorStatusMaster',
+  CompanyVendorTypeMapping: 'CompanyVendorTypeMapping',
+  CompanyVendorContactPerson: 'CompanyVendorContactPerson',
+  CompanyVendorBankAccount: 'CompanyVendorBankAccount',
+  CompanyVendorDocumentMaster: 'CompanyVendorDocumentMaster',
+  CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
+  CompanyVendorAddress: 'CompanyVendorAddress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1685,10 +1693,17 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   vendor_code: 'vendor_code',
   company_name: 'company_name',
+  vendor_name: 'vendor_name',
   point_of_contact: 'point_of_contact',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',
+  alternate_mobile_no: 'alternate_mobile_no',
+  alternate_email: 'alternate_email',
+  gst_no: 'gst_no',
+  pan_no: 'pan_no',
+  status_id: 'status_id',
+  primary_contact_id: 'primary_contact_id',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
@@ -3056,6 +3071,149 @@ export const PurchaseOrderSupplierAdditionalCostScalarFieldEnum = {
 } as const
 
 export type PurchaseOrderSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum]
+
+
+export const VendorTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_type_name: 'vendor_type_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type VendorTypeMasterScalarFieldEnum = (typeof VendorTypeMasterScalarFieldEnum)[keyof typeof VendorTypeMasterScalarFieldEnum]
+
+
+export const CompanyVendorStatusMasterScalarFieldEnum = {
+  id: 'id',
+  status_name: 'status_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorStatusMasterScalarFieldEnum = (typeof CompanyVendorStatusMasterScalarFieldEnum)[keyof typeof CompanyVendorStatusMasterScalarFieldEnum]
+
+
+export const CompanyVendorTypeMappingScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  vendor_type_id: 'vendor_type_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorTypeMappingScalarFieldEnum = (typeof CompanyVendorTypeMappingScalarFieldEnum)[keyof typeof CompanyVendorTypeMappingScalarFieldEnum]
+
+
+export const CompanyVendorContactPersonScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  name: 'name',
+  department: 'department',
+  phone: 'phone',
+  designation: 'designation',
+  email: 'email',
+  is_primary: 'is_primary',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorContactPersonScalarFieldEnum = (typeof CompanyVendorContactPersonScalarFieldEnum)[keyof typeof CompanyVendorContactPersonScalarFieldEnum]
+
+
+export const CompanyVendorBankAccountScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  holder_name: 'holder_name',
+  account_no: 'account_no',
+  ifsc: 'ifsc',
+  swift: 'swift',
+  branch: 'branch',
+  cancelled_cheque_path: 'cancelled_cheque_path',
+  is_default: 'is_default',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorBankAccountScalarFieldEnum = (typeof CompanyVendorBankAccountScalarFieldEnum)[keyof typeof CompanyVendorBankAccountScalarFieldEnum]
+
+
+export const CompanyVendorDocumentMasterScalarFieldEnum = {
+  id: 'id',
+  document_name: 'document_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorDocumentMasterScalarFieldEnum = (typeof CompanyVendorDocumentMasterScalarFieldEnum)[keyof typeof CompanyVendorDocumentMasterScalarFieldEnum]
+
+
+export const CompanyVendorDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  document_type_id: 'document_type_id',
+  file_path: 'file_path',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorDocumentMappingScalarFieldEnum = (typeof CompanyVendorDocumentMappingScalarFieldEnum)[keyof typeof CompanyVendorDocumentMappingScalarFieldEnum]
+
+
+export const CompanyVendorAddressScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  address_line_1: 'address_line_1',
+  address_line_2: 'address_line_2',
+  landmark: 'landmark',
+  pincode: 'pincode',
+  state_id: 'state_id',
+  city_id: 'city_id',
+  is_primary: 'is_primary',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorAddressScalarFieldEnum = (typeof CompanyVendorAddressScalarFieldEnum)[keyof typeof CompanyVendorAddressScalarFieldEnum]
 
 
 export const SortOrder = {

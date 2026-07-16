@@ -109,6 +109,47 @@ export const uploadToWasabStage1Desings = async (
   return sysName; // relative path
 };
 
+export const validateCompanyVendorFile = (file: Express.Multer.File) => {
+  const allowedExtensions = ["pdf", "jpg", "jpeg", "png"];
+  const allowedMimeTypes = ["application/pdf", "image/jpeg", "image/jpg", "image/png"];
+  const maxSizeBytes = 5 * 1024 * 1024; // 5 MB
+
+  const ext = (file.originalname || "").split(".").pop()?.toLowerCase() || "";
+
+  if (!allowedExtensions.includes(ext)) {
+    throw new Error(`Invalid file extension .${ext}. Only pdf, jpg, jpeg, and png are allowed.`);
+  }
+
+  if (!allowedMimeTypes.includes(file.mimetype)) {
+    throw new Error(`Invalid MIME type ${file.mimetype}. Only pdf, jpg, jpeg, and png are allowed.`);
+  }
+
+  if (file.size > maxSizeBytes) {
+    throw new Error(`File size of ${file.originalname} exceeds the 5 MB limit.`);
+  }
+};
+
+export const uploadToWasabiCompanyVendorDocument = async (
+  buffer: Buffer,
+  vendorId: number,
+  originalName: string,
+  contentType: string,
+) => {
+  const ext = originalName.split(".").pop()?.toLowerCase() || "";
+  const sysName = `company_vendor_documents/${vendorId}/${uuidv4()}.${ext}`;
+
+  await wasabi.send(
+    new PutObjectCommand({
+      Bucket: process.env.WASABI_BUCKET_NAME!,
+      Key: sysName,
+      Body: buffer,
+      ContentType: contentType || "application/octet-stream",
+    }),
+  );
+
+  return sysName; // returns key
+};
+
 export const uploadToWasabStage1DesingsFile = async (
   filePath: string,
   vendorId: number,

@@ -206,6 +206,7 @@ export type CityMasterWhereInput = {
   state_id?: Prisma.IntFilter<"CityMaster"> | number
   areas?: Prisma.AreaMasterListRelationFilter
   state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
+  companyVendorAddresses?: Prisma.CompanyVendorAddressListRelationFilter
 }
 
 export type CityMasterOrderByWithRelationInput = {
@@ -214,6 +215,7 @@ export type CityMasterOrderByWithRelationInput = {
   state_id?: Prisma.SortOrder
   areas?: Prisma.AreaMasterOrderByRelationAggregateInput
   state?: Prisma.StateMasterOrderByWithRelationInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressOrderByRelationAggregateInput
 }
 
 export type CityMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -225,6 +227,7 @@ export type CityMasterWhereUniqueInput = Prisma.AtLeast<{
   state_id?: Prisma.IntFilter<"CityMaster"> | number
   areas?: Prisma.AreaMasterListRelationFilter
   state?: Prisma.XOR<Prisma.StateMasterScalarRelationFilter, Prisma.StateMasterWhereInput>
+  companyVendorAddresses?: Prisma.CompanyVendorAddressListRelationFilter
 }, "id">
 
 export type CityMasterOrderByWithAggregationInput = {
@@ -251,6 +254,7 @@ export type CityMasterCreateInput = {
   name: string
   areas?: Prisma.AreaMasterCreateNestedManyWithoutCityInput
   state: Prisma.StateMasterCreateNestedOneWithoutCitiesInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterUncheckedCreateInput = {
@@ -258,12 +262,14 @@ export type CityMasterUncheckedCreateInput = {
   name: string
   state_id: number
   areas?: Prisma.AreaMasterUncheckedCreateNestedManyWithoutCityInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   areas?: Prisma.AreaMasterUpdateManyWithoutCityNestedInput
   state?: Prisma.StateMasterUpdateOneRequiredWithoutCitiesNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterUncheckedUpdateInput = {
@@ -271,6 +277,7 @@ export type CityMasterUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   state_id?: Prisma.IntFieldUpdateOperationsInput | number
   areas?: Prisma.AreaMasterUncheckedUpdateManyWithoutCityNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterCreateManyInput = {
@@ -388,15 +395,31 @@ export type CityMasterUpdateOneRequiredWithoutAreasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CityMasterUpdateToOneWithWhereWithoutAreasInput, Prisma.CityMasterUpdateWithoutAreasInput>, Prisma.CityMasterUncheckedUpdateWithoutAreasInput>
 }
 
+export type CityMasterCreateNestedOneWithoutCompanyVendorAddressesInput = {
+  create?: Prisma.XOR<Prisma.CityMasterCreateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  connectOrCreate?: Prisma.CityMasterCreateOrConnectWithoutCompanyVendorAddressesInput
+  connect?: Prisma.CityMasterWhereUniqueInput
+}
+
+export type CityMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput = {
+  create?: Prisma.XOR<Prisma.CityMasterCreateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  connectOrCreate?: Prisma.CityMasterCreateOrConnectWithoutCompanyVendorAddressesInput
+  upsert?: Prisma.CityMasterUpsertWithoutCompanyVendorAddressesInput
+  connect?: Prisma.CityMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CityMasterUpdateToOneWithWhereWithoutCompanyVendorAddressesInput, Prisma.CityMasterUpdateWithoutCompanyVendorAddressesInput>, Prisma.CityMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+}
+
 export type CityMasterCreateWithoutStateInput = {
   name: string
   areas?: Prisma.AreaMasterCreateNestedManyWithoutCityInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterUncheckedCreateWithoutStateInput = {
   id?: number
   name: string
   areas?: Prisma.AreaMasterUncheckedCreateNestedManyWithoutCityInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterCreateOrConnectWithoutStateInput = {
@@ -437,12 +460,14 @@ export type CityMasterScalarWhereInput = {
 export type CityMasterCreateWithoutAreasInput = {
   name: string
   state: Prisma.StateMasterCreateNestedOneWithoutCitiesInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterUncheckedCreateWithoutAreasInput = {
   id?: number
   name: string
   state_id: number
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutCityInput
 }
 
 export type CityMasterCreateOrConnectWithoutAreasInput = {
@@ -464,12 +489,56 @@ export type CityMasterUpdateToOneWithWhereWithoutAreasInput = {
 export type CityMasterUpdateWithoutAreasInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   state?: Prisma.StateMasterUpdateOneRequiredWithoutCitiesNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterUncheckedUpdateWithoutAreasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   state_id?: Prisma.IntFieldUpdateOperationsInput | number
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCityNestedInput
+}
+
+export type CityMasterCreateWithoutCompanyVendorAddressesInput = {
+  name: string
+  areas?: Prisma.AreaMasterCreateNestedManyWithoutCityInput
+  state: Prisma.StateMasterCreateNestedOneWithoutCitiesInput
+}
+
+export type CityMasterUncheckedCreateWithoutCompanyVendorAddressesInput = {
+  id?: number
+  name: string
+  state_id: number
+  areas?: Prisma.AreaMasterUncheckedCreateNestedManyWithoutCityInput
+}
+
+export type CityMasterCreateOrConnectWithoutCompanyVendorAddressesInput = {
+  where: Prisma.CityMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.CityMasterCreateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+}
+
+export type CityMasterUpsertWithoutCompanyVendorAddressesInput = {
+  update: Prisma.XOR<Prisma.CityMasterUpdateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+  create: Prisma.XOR<Prisma.CityMasterCreateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  where?: Prisma.CityMasterWhereInput
+}
+
+export type CityMasterUpdateToOneWithWhereWithoutCompanyVendorAddressesInput = {
+  where?: Prisma.CityMasterWhereInput
+  data: Prisma.XOR<Prisma.CityMasterUpdateWithoutCompanyVendorAddressesInput, Prisma.CityMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+}
+
+export type CityMasterUpdateWithoutCompanyVendorAddressesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  areas?: Prisma.AreaMasterUpdateManyWithoutCityNestedInput
+  state?: Prisma.StateMasterUpdateOneRequiredWithoutCitiesNestedInput
+}
+
+export type CityMasterUncheckedUpdateWithoutCompanyVendorAddressesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  state_id?: Prisma.IntFieldUpdateOperationsInput | number
+  areas?: Prisma.AreaMasterUncheckedUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterCreateManyStateInput = {
@@ -480,12 +549,14 @@ export type CityMasterCreateManyStateInput = {
 export type CityMasterUpdateWithoutStateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   areas?: Prisma.AreaMasterUpdateManyWithoutCityNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterUncheckedUpdateWithoutStateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   areas?: Prisma.AreaMasterUncheckedUpdateManyWithoutCityNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutCityNestedInput
 }
 
 export type CityMasterUncheckedUpdateManyWithoutStateInput = {
@@ -500,10 +571,12 @@ export type CityMasterUncheckedUpdateManyWithoutStateInput = {
 
 export type CityMasterCountOutputType = {
   areas: number
+  companyVendorAddresses: number
 }
 
 export type CityMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   areas?: boolean | CityMasterCountOutputTypeCountAreasArgs
+  companyVendorAddresses?: boolean | CityMasterCountOutputTypeCountCompanyVendorAddressesArgs
 }
 
 /**
@@ -523,6 +596,13 @@ export type CityMasterCountOutputTypeCountAreasArgs<ExtArgs extends runtime.Type
   where?: Prisma.AreaMasterWhereInput
 }
 
+/**
+ * CityMasterCountOutputType without action
+ */
+export type CityMasterCountOutputTypeCountCompanyVendorAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompanyVendorAddressWhereInput
+}
+
 
 export type CityMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -530,6 +610,7 @@ export type CityMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   state_id?: boolean
   areas?: boolean | Prisma.CityMaster$areasArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
+  companyVendorAddresses?: boolean | Prisma.CityMaster$companyVendorAddressesArgs<ExtArgs>
   _count?: boolean | Prisma.CityMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cityMaster"]>
 
@@ -557,6 +638,7 @@ export type CityMasterOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type CityMasterInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   areas?: boolean | Prisma.CityMaster$areasArgs<ExtArgs>
   state?: boolean | Prisma.StateMasterDefaultArgs<ExtArgs>
+  companyVendorAddresses?: boolean | Prisma.CityMaster$companyVendorAddressesArgs<ExtArgs>
   _count?: boolean | Prisma.CityMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CityMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -571,6 +653,7 @@ export type $CityMasterPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     areas: Prisma.$AreaMasterPayload<ExtArgs>[]
     state: Prisma.$StateMasterPayload<ExtArgs>
+    companyVendorAddresses: Prisma.$CompanyVendorAddressPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -972,6 +1055,7 @@ export interface Prisma__CityMasterClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   areas<T extends Prisma.CityMaster$areasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityMaster$areasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AreaMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   state<T extends Prisma.StateMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__StateMasterClient<runtime.Types.Result.GetResult<Prisma.$StateMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  companyVendorAddresses<T extends Prisma.CityMaster$companyVendorAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CityMaster$companyVendorAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyVendorAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1426,6 +1510,30 @@ export type CityMaster$areasArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.AreaMasterScalarFieldEnum | Prisma.AreaMasterScalarFieldEnum[]
+}
+
+/**
+ * CityMaster.companyVendorAddresses
+ */
+export type CityMaster$companyVendorAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyVendorAddress
+   */
+  select?: Prisma.CompanyVendorAddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompanyVendorAddress
+   */
+  omit?: Prisma.CompanyVendorAddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyVendorAddressInclude<ExtArgs> | null
+  where?: Prisma.CompanyVendorAddressWhereInput
+  orderBy?: Prisma.CompanyVendorAddressOrderByWithRelationInput | Prisma.CompanyVendorAddressOrderByWithRelationInput[]
+  cursor?: Prisma.CompanyVendorAddressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompanyVendorAddressScalarFieldEnum | Prisma.CompanyVendorAddressScalarFieldEnum[]
 }
 
 /**

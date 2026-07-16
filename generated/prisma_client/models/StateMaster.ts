@@ -208,6 +208,7 @@ export type StateMasterWhereInput = {
   region?: Prisma.XOR<Prisma.RegionMasterScalarRelationFilter, Prisma.RegionMasterWhereInput>
   vendors?: Prisma.VendorMasterListRelationFilter
   companyVendors?: Prisma.CompanyVendorsMasterListRelationFilter
+  companyVendorAddresses?: Prisma.CompanyVendorAddressListRelationFilter
 }
 
 export type StateMasterOrderByWithRelationInput = {
@@ -218,6 +219,7 @@ export type StateMasterOrderByWithRelationInput = {
   region?: Prisma.RegionMasterOrderByWithRelationInput
   vendors?: Prisma.VendorMasterOrderByRelationAggregateInput
   companyVendors?: Prisma.CompanyVendorsMasterOrderByRelationAggregateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressOrderByRelationAggregateInput
 }
 
 export type StateMasterWhereUniqueInput = Prisma.AtLeast<{
@@ -231,6 +233,7 @@ export type StateMasterWhereUniqueInput = Prisma.AtLeast<{
   region?: Prisma.XOR<Prisma.RegionMasterScalarRelationFilter, Prisma.RegionMasterWhereInput>
   vendors?: Prisma.VendorMasterListRelationFilter
   companyVendors?: Prisma.CompanyVendorsMasterListRelationFilter
+  companyVendorAddresses?: Prisma.CompanyVendorAddressListRelationFilter
 }, "id">
 
 export type StateMasterOrderByWithAggregationInput = {
@@ -259,6 +262,7 @@ export type StateMasterCreateInput = {
   region: Prisma.RegionMasterCreateNestedOneWithoutStatesInput
   vendors?: Prisma.VendorMasterCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUncheckedCreateInput = {
@@ -268,6 +272,7 @@ export type StateMasterUncheckedCreateInput = {
   cities?: Prisma.CityMasterUncheckedCreateNestedManyWithoutStateInput
   vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUpdateInput = {
@@ -276,6 +281,7 @@ export type StateMasterUpdateInput = {
   region?: Prisma.RegionMasterUpdateOneRequiredWithoutStatesNestedInput
   vendors?: Prisma.VendorMasterUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateInput = {
@@ -285,6 +291,7 @@ export type StateMasterUncheckedUpdateInput = {
   cities?: Prisma.CityMasterUncheckedUpdateManyWithoutStateNestedInput
   vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterCreateManyInput = {
@@ -439,11 +446,26 @@ export type StateMasterUpdateOneRequiredWithoutCitiesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StateMasterUpdateToOneWithWhereWithoutCitiesInput, Prisma.StateMasterUpdateWithoutCitiesInput>, Prisma.StateMasterUncheckedUpdateWithoutCitiesInput>
 }
 
+export type StateMasterCreateNestedOneWithoutCompanyVendorAddressesInput = {
+  create?: Prisma.XOR<Prisma.StateMasterCreateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  connectOrCreate?: Prisma.StateMasterCreateOrConnectWithoutCompanyVendorAddressesInput
+  connect?: Prisma.StateMasterWhereUniqueInput
+}
+
+export type StateMasterUpdateOneRequiredWithoutCompanyVendorAddressesNestedInput = {
+  create?: Prisma.XOR<Prisma.StateMasterCreateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  connectOrCreate?: Prisma.StateMasterCreateOrConnectWithoutCompanyVendorAddressesInput
+  upsert?: Prisma.StateMasterUpsertWithoutCompanyVendorAddressesInput
+  connect?: Prisma.StateMasterWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StateMasterUpdateToOneWithWhereWithoutCompanyVendorAddressesInput, Prisma.StateMasterUpdateWithoutCompanyVendorAddressesInput>, Prisma.StateMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+}
+
 export type StateMasterCreateWithoutVendorsInput = {
   name: string
   cities?: Prisma.CityMasterCreateNestedManyWithoutStateInput
   region: Prisma.RegionMasterCreateNestedOneWithoutStatesInput
   companyVendors?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUncheckedCreateWithoutVendorsInput = {
@@ -452,6 +474,7 @@ export type StateMasterUncheckedCreateWithoutVendorsInput = {
   region_id: number
   cities?: Prisma.CityMasterUncheckedCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterCreateOrConnectWithoutVendorsInput = {
@@ -475,6 +498,7 @@ export type StateMasterUpdateWithoutVendorsInput = {
   cities?: Prisma.CityMasterUpdateManyWithoutStateNestedInput
   region?: Prisma.RegionMasterUpdateOneRequiredWithoutStatesNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateWithoutVendorsInput = {
@@ -483,6 +507,7 @@ export type StateMasterUncheckedUpdateWithoutVendorsInput = {
   region_id?: Prisma.IntFieldUpdateOperationsInput | number
   cities?: Prisma.CityMasterUncheckedUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterCreateWithoutCompanyVendorsInput = {
@@ -490,6 +515,7 @@ export type StateMasterCreateWithoutCompanyVendorsInput = {
   cities?: Prisma.CityMasterCreateNestedManyWithoutStateInput
   region: Prisma.RegionMasterCreateNestedOneWithoutStatesInput
   vendors?: Prisma.VendorMasterCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUncheckedCreateWithoutCompanyVendorsInput = {
@@ -498,6 +524,7 @@ export type StateMasterUncheckedCreateWithoutCompanyVendorsInput = {
   region_id: number
   cities?: Prisma.CityMasterUncheckedCreateNestedManyWithoutStateInput
   vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterCreateOrConnectWithoutCompanyVendorsInput = {
@@ -521,6 +548,7 @@ export type StateMasterUpdateWithoutCompanyVendorsInput = {
   cities?: Prisma.CityMasterUpdateManyWithoutStateNestedInput
   region?: Prisma.RegionMasterUpdateOneRequiredWithoutStatesNestedInput
   vendors?: Prisma.VendorMasterUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateWithoutCompanyVendorsInput = {
@@ -529,6 +557,7 @@ export type StateMasterUncheckedUpdateWithoutCompanyVendorsInput = {
   region_id?: Prisma.IntFieldUpdateOperationsInput | number
   cities?: Prisma.CityMasterUncheckedUpdateManyWithoutStateNestedInput
   vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterCreateWithoutRegionInput = {
@@ -536,6 +565,7 @@ export type StateMasterCreateWithoutRegionInput = {
   cities?: Prisma.CityMasterCreateNestedManyWithoutStateInput
   vendors?: Prisma.VendorMasterCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUncheckedCreateWithoutRegionInput = {
@@ -544,6 +574,7 @@ export type StateMasterUncheckedCreateWithoutRegionInput = {
   cities?: Prisma.CityMasterUncheckedCreateNestedManyWithoutStateInput
   vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterCreateOrConnectWithoutRegionInput = {
@@ -586,6 +617,7 @@ export type StateMasterCreateWithoutCitiesInput = {
   region: Prisma.RegionMasterCreateNestedOneWithoutStatesInput
   vendors?: Prisma.VendorMasterCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterUncheckedCreateWithoutCitiesInput = {
@@ -594,6 +626,7 @@ export type StateMasterUncheckedCreateWithoutCitiesInput = {
   region_id: number
   vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutStateInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedCreateNestedManyWithoutStateInput
 }
 
 export type StateMasterCreateOrConnectWithoutCitiesInput = {
@@ -617,12 +650,64 @@ export type StateMasterUpdateWithoutCitiesInput = {
   region?: Prisma.RegionMasterUpdateOneRequiredWithoutStatesNestedInput
   vendors?: Prisma.VendorMasterUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateWithoutCitiesInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   region_id?: Prisma.IntFieldUpdateOperationsInput | number
+  vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendors?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutStateNestedInput
+}
+
+export type StateMasterCreateWithoutCompanyVendorAddressesInput = {
+  name: string
+  cities?: Prisma.CityMasterCreateNestedManyWithoutStateInput
+  region: Prisma.RegionMasterCreateNestedOneWithoutStatesInput
+  vendors?: Prisma.VendorMasterCreateNestedManyWithoutStateInput
+  companyVendors?: Prisma.CompanyVendorsMasterCreateNestedManyWithoutStateInput
+}
+
+export type StateMasterUncheckedCreateWithoutCompanyVendorAddressesInput = {
+  id?: number
+  name: string
+  region_id: number
+  cities?: Prisma.CityMasterUncheckedCreateNestedManyWithoutStateInput
+  vendors?: Prisma.VendorMasterUncheckedCreateNestedManyWithoutStateInput
+  companyVendors?: Prisma.CompanyVendorsMasterUncheckedCreateNestedManyWithoutStateInput
+}
+
+export type StateMasterCreateOrConnectWithoutCompanyVendorAddressesInput = {
+  where: Prisma.StateMasterWhereUniqueInput
+  create: Prisma.XOR<Prisma.StateMasterCreateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+}
+
+export type StateMasterUpsertWithoutCompanyVendorAddressesInput = {
+  update: Prisma.XOR<Prisma.StateMasterUpdateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+  create: Prisma.XOR<Prisma.StateMasterCreateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedCreateWithoutCompanyVendorAddressesInput>
+  where?: Prisma.StateMasterWhereInput
+}
+
+export type StateMasterUpdateToOneWithWhereWithoutCompanyVendorAddressesInput = {
+  where?: Prisma.StateMasterWhereInput
+  data: Prisma.XOR<Prisma.StateMasterUpdateWithoutCompanyVendorAddressesInput, Prisma.StateMasterUncheckedUpdateWithoutCompanyVendorAddressesInput>
+}
+
+export type StateMasterUpdateWithoutCompanyVendorAddressesInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cities?: Prisma.CityMasterUpdateManyWithoutStateNestedInput
+  region?: Prisma.RegionMasterUpdateOneRequiredWithoutStatesNestedInput
+  vendors?: Prisma.VendorMasterUpdateManyWithoutStateNestedInput
+  companyVendors?: Prisma.CompanyVendorsMasterUpdateManyWithoutStateNestedInput
+}
+
+export type StateMasterUncheckedUpdateWithoutCompanyVendorAddressesInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  region_id?: Prisma.IntFieldUpdateOperationsInput | number
+  cities?: Prisma.CityMasterUncheckedUpdateManyWithoutStateNestedInput
   vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput
 }
@@ -637,6 +722,7 @@ export type StateMasterUpdateWithoutRegionInput = {
   cities?: Prisma.CityMasterUpdateManyWithoutStateNestedInput
   vendors?: Prisma.VendorMasterUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateWithoutRegionInput = {
@@ -645,6 +731,7 @@ export type StateMasterUncheckedUpdateWithoutRegionInput = {
   cities?: Prisma.CityMasterUncheckedUpdateManyWithoutStateNestedInput
   vendors?: Prisma.VendorMasterUncheckedUpdateManyWithoutStateNestedInput
   companyVendors?: Prisma.CompanyVendorsMasterUncheckedUpdateManyWithoutStateNestedInput
+  companyVendorAddresses?: Prisma.CompanyVendorAddressUncheckedUpdateManyWithoutStateNestedInput
 }
 
 export type StateMasterUncheckedUpdateManyWithoutRegionInput = {
@@ -661,12 +748,14 @@ export type StateMasterCountOutputType = {
   cities: number
   vendors: number
   companyVendors: number
+  companyVendorAddresses: number
 }
 
 export type StateMasterCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   cities?: boolean | StateMasterCountOutputTypeCountCitiesArgs
   vendors?: boolean | StateMasterCountOutputTypeCountVendorsArgs
   companyVendors?: boolean | StateMasterCountOutputTypeCountCompanyVendorsArgs
+  companyVendorAddresses?: boolean | StateMasterCountOutputTypeCountCompanyVendorAddressesArgs
 }
 
 /**
@@ -700,6 +789,13 @@ export type StateMasterCountOutputTypeCountCompanyVendorsArgs<ExtArgs extends ru
   where?: Prisma.CompanyVendorsMasterWhereInput
 }
 
+/**
+ * StateMasterCountOutputType without action
+ */
+export type StateMasterCountOutputTypeCountCompanyVendorAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompanyVendorAddressWhereInput
+}
+
 
 export type StateMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -709,6 +805,7 @@ export type StateMasterSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   region?: boolean | Prisma.RegionMasterDefaultArgs<ExtArgs>
   vendors?: boolean | Prisma.StateMaster$vendorsArgs<ExtArgs>
   companyVendors?: boolean | Prisma.StateMaster$companyVendorsArgs<ExtArgs>
+  companyVendorAddresses?: boolean | Prisma.StateMaster$companyVendorAddressesArgs<ExtArgs>
   _count?: boolean | Prisma.StateMasterCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["stateMaster"]>
 
@@ -738,6 +835,7 @@ export type StateMasterInclude<ExtArgs extends runtime.Types.Extensions.Internal
   region?: boolean | Prisma.RegionMasterDefaultArgs<ExtArgs>
   vendors?: boolean | Prisma.StateMaster$vendorsArgs<ExtArgs>
   companyVendors?: boolean | Prisma.StateMaster$companyVendorsArgs<ExtArgs>
+  companyVendorAddresses?: boolean | Prisma.StateMaster$companyVendorAddressesArgs<ExtArgs>
   _count?: boolean | Prisma.StateMasterCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StateMasterIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -754,6 +852,7 @@ export type $StateMasterPayload<ExtArgs extends runtime.Types.Extensions.Interna
     region: Prisma.$RegionMasterPayload<ExtArgs>
     vendors: Prisma.$VendorMasterPayload<ExtArgs>[]
     companyVendors: Prisma.$CompanyVendorsMasterPayload<ExtArgs>[]
+    companyVendorAddresses: Prisma.$CompanyVendorAddressPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1157,6 +1256,7 @@ export interface Prisma__StateMasterClient<T, Null = never, ExtArgs extends runt
   region<T extends Prisma.RegionMasterDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RegionMasterDefaultArgs<ExtArgs>>): Prisma.Prisma__RegionMasterClient<runtime.Types.Result.GetResult<Prisma.$RegionMasterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   vendors<T extends Prisma.StateMaster$vendorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMaster$vendorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VendorMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   companyVendors<T extends Prisma.StateMaster$companyVendorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMaster$companyVendorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyVendorsMasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  companyVendorAddresses<T extends Prisma.StateMaster$companyVendorAddressesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StateMaster$companyVendorAddressesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompanyVendorAddressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1659,6 +1759,30 @@ export type StateMaster$companyVendorsArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.CompanyVendorsMasterScalarFieldEnum | Prisma.CompanyVendorsMasterScalarFieldEnum[]
+}
+
+/**
+ * StateMaster.companyVendorAddresses
+ */
+export type StateMaster$companyVendorAddressesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyVendorAddress
+   */
+  select?: Prisma.CompanyVendorAddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompanyVendorAddress
+   */
+  omit?: Prisma.CompanyVendorAddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyVendorAddressInclude<ExtArgs> | null
+  where?: Prisma.CompanyVendorAddressWhereInput
+  orderBy?: Prisma.CompanyVendorAddressOrderByWithRelationInput | Prisma.CompanyVendorAddressOrderByWithRelationInput[]
+  cursor?: Prisma.CompanyVendorAddressWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompanyVendorAddressScalarFieldEnum | Prisma.CompanyVendorAddressScalarFieldEnum[]
 }
 
 /**

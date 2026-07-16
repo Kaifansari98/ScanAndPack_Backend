@@ -73,6 +73,10 @@ app.use(
       "X-Requested-With",
       "Accept",
       "Origin",
+      "x-vendor-id",
+      "x-user-id",
+      "vendor_id",
+      "user_id",
     ],
   })
 );

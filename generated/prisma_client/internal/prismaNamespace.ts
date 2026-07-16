@@ -552,7 +552,15 @@ export const ModelName = {
   Architechuremaster: 'Architechuremaster',
   AdditionalCostMaster: 'AdditionalCostMaster',
   PurchaseIntentSupplierAdditionalCost: 'PurchaseIntentSupplierAdditionalCost',
-  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost'
+  PurchaseOrderSupplierAdditionalCost: 'PurchaseOrderSupplierAdditionalCost',
+  VendorTypeMaster: 'VendorTypeMaster',
+  CompanyVendorStatusMaster: 'CompanyVendorStatusMaster',
+  CompanyVendorTypeMapping: 'CompanyVendorTypeMapping',
+  CompanyVendorContactPerson: 'CompanyVendorContactPerson',
+  CompanyVendorBankAccount: 'CompanyVendorBankAccount',
+  CompanyVendorDocumentMaster: 'CompanyVendorDocumentMaster',
+  CompanyVendorDocumentMapping: 'CompanyVendorDocumentMapping',
+  CompanyVendorAddress: 'CompanyVendorAddress'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -568,7 +576,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost"
+    modelProps: "vendorMaster" | "vendorAddress" | "vendorTaxInfo" | "userTypeMaster" | "privilegeMaster" | "userMaster" | "userDocument" | "userSession" | "userPrivilegeMapping" | "projectMaster" | "projectDetails" | "projectItemsMaster" | "boxMaster" | "scanAndPackItem" | "vendorTokens" | "clientMaster" | "leadMaster" | "leadSpecificationsMaster" | "leadCarcassMaterialMapping" | "leadShutterMaterialMapping" | "leadSuperAdminApprovalLocIns" | "leadUserMapping" | "leadActivityStatusLog" | "siteTypeMaster" | "sourceMaster" | "accountMaster" | "leadProductMapping" | "productTypeMaster" | "carcassTypeMaster" | "carcasMaterialMaster" | "carcassMaterialFinishMaster" | "shutterTypeMaster" | "shutterSubTypeMaster" | "shutterMaterialMaster" | "shutterMaterialFinishMaster" | "carcassLegsMaster" | "skirtingCarcassLegsMaster" | "skirtingCarcassLegsColorMaster" | "leadHardwareMapping" | "lightCarcasTypeMaster" | "lightCarcasUnitMaster" | "leadLightCarcasUnitMapping" | "otherAppliancesMaster" | "leadOtherAppliancesMapping" | "handleTypeMaster" | "timelineRule" | "leadDocuments" | "leadChatRoom" | "leadChatMember" | "leadChatMessage" | "leadChatAttachment" | "leadChatMention" | "leadChatDocument" | "productStructure" | "productSubStructure" | "productItemCode" | "leadProductStructureMapping" | "leadProductStructureInstance" | "selfAssignTaskTypeMaster" | "paymentInfo" | "ledger" | "documentTypeMaster" | "smallOrderRequestTypeMaster" | "smallOrderRequest" | "smallOrderRequestDocument" | "leadAmcContract" | "leadServiceSchedule" | "statusTypeMaster" | "leadStatusLogs" | "leadDesignMeeting" | "leadClientVisit" | "meetingTypeMaster" | "leadDesignMeetingDocumentsMapping" | "leadClientVisitDocumentMapping" | "leadDesignSelection" | "cHSSelectionTypeMapping" | "paymentTypeMaster" | "leadSiteSupervisorMapping" | "userLeadTask" | "fastProductionRequestBatch" | "fastProductionRequest" | "fastProductionFinish" | "fastProductionApproval" | "fastProductionRequestDocument" | "fastProductionStatusLog" | "leadDetailedLogs" | "leadDocumentLogs" | "leadApprovalRequest" | "leadApprovalRequestDocumentMapping" | "companyVendorsMaster" | "orderLoginDetails" | "siteReadiness" | "installerUserMaster" | "installerUserMapping" | "installationUpdate" | "installationUpdateDocuments" | "miscellaneousMaster" | "miscellaneousTypeMaster" | "miscellaneousTeamMaster" | "miscellaneousTeamMapping" | "miscellaneousDocument" | "installationIssueLogMaster" | "issueLogTypeMaster" | "issueLogTypeMapping" | "issueLogResponsibleTeamMapping" | "emailNotificationMaster" | "notification" | "userPushToken" | "notificationDeliveryLogs" | "vloqEmailLogs" | "modulesMaster" | "vendorModulesMapping" | "machineMaster" | "cutList" | "cutListMachineMapping" | "userMachineMapping" | "orderLoginPoFileMapping" | "machineTypeMaster" | "vendorSettingKey" | "vendorSetting" | "defectMaster" | "defectedItem" | "franchiseMaster" | "headSiteSupervisorFranchiseMapping" | "countryMaster" | "regionMaster" | "stateMaster" | "cityMaster" | "areaMaster" | "geographicalMapping" | "userGeographicalMapping" | "userActivityLog" | "themeMaster" | "themeMapping" | "apiRequestLog" | "externalPlatformMaster" | "externalPlatformToken" | "leadExternalPlatformCustomerMapping" | "defectedItemImage" | "defectCompletionPhoto" | "projectCategoriesTypeMaster" | "projectCategoriesMaster" | "projectCategoriesMasterVendorMapping" | "brandMaster" | "productMaster" | "purchaseIntentMaster" | "purchaseIntentItem" | "purchaseIntentItemVendorMapping" | "purchaseIntentStatusLog" | "purchaseOrderMaster" | "purchaseOrderItem" | "gRNMaster" | "gRNItem" | "debitCreditNote" | "redeliveryRequest" | "hsnProductMapping" | "productStockHistory" | "paymentTermMaster" | "paymentTermStage" | "pOPaymentSchedule" | "pOPayment" | "unitMaster" | "itemGroupMaster" | "productSupplierMapping" | "pOPaymentScheduleHistory" | "architechuremaster" | "additionalCostMaster" | "purchaseIntentSupplierAdditionalCost" | "purchaseOrderSupplierAdditionalCost" | "vendorTypeMaster" | "companyVendorStatusMaster" | "companyVendorTypeMapping" | "companyVendorContactPerson" | "companyVendorBankAccount" | "companyVendorDocumentMaster" | "companyVendorDocumentMapping" | "companyVendorAddress"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -13078,6 +13086,598 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    VendorTypeMaster: {
+      payload: Prisma.$VendorTypeMasterPayload<ExtArgs>
+      fields: Prisma.VendorTypeMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.VendorTypeMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.VendorTypeMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.VendorTypeMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.VendorTypeMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        findMany: {
+          args: Prisma.VendorTypeMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>[]
+        }
+        create: {
+          args: Prisma.VendorTypeMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        createMany: {
+          args: Prisma.VendorTypeMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.VendorTypeMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.VendorTypeMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        update: {
+          args: Prisma.VendorTypeMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.VendorTypeMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.VendorTypeMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.VendorTypeMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.VendorTypeMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$VendorTypeMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.VendorTypeMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateVendorTypeMaster>
+        }
+        groupBy: {
+          args: Prisma.VendorTypeMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorTypeMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.VendorTypeMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.VendorTypeMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorStatusMaster: {
+      payload: Prisma.$CompanyVendorStatusMasterPayload<ExtArgs>
+      fields: Prisma.CompanyVendorStatusMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorStatusMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorStatusMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorStatusMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorStatusMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorStatusMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorStatusMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorStatusMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorStatusMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorStatusMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorStatusMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorStatusMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorStatusMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorStatusMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorStatusMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorStatusMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorStatusMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorStatusMaster>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorStatusMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorStatusMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorStatusMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorStatusMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorTypeMapping: {
+      payload: Prisma.$CompanyVendorTypeMappingPayload<ExtArgs>
+      fields: Prisma.CompanyVendorTypeMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorTypeMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorTypeMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorTypeMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorTypeMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorTypeMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorTypeMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorTypeMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorTypeMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorTypeMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorTypeMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorTypeMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorTypeMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorTypeMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorTypeMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorTypeMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorTypeMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorTypeMapping>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorTypeMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorTypeMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorTypeMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorTypeMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorContactPerson: {
+      payload: Prisma.$CompanyVendorContactPersonPayload<ExtArgs>
+      fields: Prisma.CompanyVendorContactPersonFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorContactPersonFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorContactPersonFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorContactPersonFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorContactPersonFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorContactPersonFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorContactPersonCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorContactPersonCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorContactPersonCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorContactPersonDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorContactPersonUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorContactPersonDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorContactPersonUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorContactPersonUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorContactPersonUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorContactPersonPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorContactPersonAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorContactPerson>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorContactPersonGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorContactPersonGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorContactPersonCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorContactPersonCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorBankAccount: {
+      payload: Prisma.$CompanyVendorBankAccountPayload<ExtArgs>
+      fields: Prisma.CompanyVendorBankAccountFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorBankAccountFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorBankAccountFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorBankAccountFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorBankAccountFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorBankAccountFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorBankAccountCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorBankAccountCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorBankAccountCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorBankAccountDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorBankAccountUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorBankAccountDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorBankAccountUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorBankAccountUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorBankAccountUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorBankAccountPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorBankAccountAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorBankAccount>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorBankAccountGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorBankAccountGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorBankAccountCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorBankAccountCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorDocumentMaster: {
+      payload: Prisma.$CompanyVendorDocumentMasterPayload<ExtArgs>
+      fields: Prisma.CompanyVendorDocumentMasterFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorDocumentMasterFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorDocumentMasterFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorDocumentMasterFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorDocumentMasterFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorDocumentMasterFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorDocumentMasterCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorDocumentMasterCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorDocumentMasterCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorDocumentMasterDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorDocumentMasterUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorDocumentMasterDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorDocumentMasterUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorDocumentMasterUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorDocumentMasterUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMasterPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorDocumentMasterAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorDocumentMaster>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorDocumentMasterGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorDocumentMasterGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorDocumentMasterCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorDocumentMasterCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorDocumentMapping: {
+      payload: Prisma.$CompanyVendorDocumentMappingPayload<ExtArgs>
+      fields: Prisma.CompanyVendorDocumentMappingFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorDocumentMappingFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorDocumentMappingFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorDocumentMappingFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorDocumentMappingFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorDocumentMappingFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorDocumentMappingCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorDocumentMappingCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorDocumentMappingCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorDocumentMappingDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorDocumentMappingUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorDocumentMappingDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorDocumentMappingUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorDocumentMappingUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorDocumentMappingUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorDocumentMappingPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorDocumentMappingAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorDocumentMapping>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorDocumentMappingGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorDocumentMappingGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorDocumentMappingCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorDocumentMappingCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompanyVendorAddress: {
+      payload: Prisma.$CompanyVendorAddressPayload<ExtArgs>
+      fields: Prisma.CompanyVendorAddressFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyVendorAddressFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyVendorAddressFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyVendorAddressFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyVendorAddressFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyVendorAddressFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyVendorAddressCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyVendorAddressCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyVendorAddressCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyVendorAddressDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        update: {
+          args: Prisma.CompanyVendorAddressUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyVendorAddressDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyVendorAddressUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyVendorAddressUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyVendorAddressUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyVendorAddressPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyVendorAddressAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyVendorAddress>
+        }
+        groupBy: {
+          args: Prisma.CompanyVendorAddressGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorAddressGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyVendorAddressCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyVendorAddressCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -14564,10 +15164,17 @@ export const CompanyVendorsMasterScalarFieldEnum = {
   vendor_id: 'vendor_id',
   vendor_code: 'vendor_code',
   company_name: 'company_name',
+  vendor_name: 'vendor_name',
   point_of_contact: 'point_of_contact',
   contact_no: 'contact_no',
   email: 'email',
   address: 'address',
+  alternate_mobile_no: 'alternate_mobile_no',
+  alternate_email: 'alternate_email',
+  gst_no: 'gst_no',
+  pan_no: 'pan_no',
+  status_id: 'status_id',
+  primary_contact_id: 'primary_contact_id',
   created_at: 'created_at',
   created_by: 'created_by',
   updated_at: 'updated_at',
@@ -15937,6 +16544,149 @@ export const PurchaseOrderSupplierAdditionalCostScalarFieldEnum = {
 export type PurchaseOrderSupplierAdditionalCostScalarFieldEnum = (typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum)[keyof typeof PurchaseOrderSupplierAdditionalCostScalarFieldEnum]
 
 
+export const VendorTypeMasterScalarFieldEnum = {
+  id: 'id',
+  vendor_type_name: 'vendor_type_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type VendorTypeMasterScalarFieldEnum = (typeof VendorTypeMasterScalarFieldEnum)[keyof typeof VendorTypeMasterScalarFieldEnum]
+
+
+export const CompanyVendorStatusMasterScalarFieldEnum = {
+  id: 'id',
+  status_name: 'status_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorStatusMasterScalarFieldEnum = (typeof CompanyVendorStatusMasterScalarFieldEnum)[keyof typeof CompanyVendorStatusMasterScalarFieldEnum]
+
+
+export const CompanyVendorTypeMappingScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  vendor_type_id: 'vendor_type_id',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorTypeMappingScalarFieldEnum = (typeof CompanyVendorTypeMappingScalarFieldEnum)[keyof typeof CompanyVendorTypeMappingScalarFieldEnum]
+
+
+export const CompanyVendorContactPersonScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  name: 'name',
+  department: 'department',
+  phone: 'phone',
+  designation: 'designation',
+  email: 'email',
+  is_primary: 'is_primary',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorContactPersonScalarFieldEnum = (typeof CompanyVendorContactPersonScalarFieldEnum)[keyof typeof CompanyVendorContactPersonScalarFieldEnum]
+
+
+export const CompanyVendorBankAccountScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  holder_name: 'holder_name',
+  account_no: 'account_no',
+  ifsc: 'ifsc',
+  swift: 'swift',
+  branch: 'branch',
+  cancelled_cheque_path: 'cancelled_cheque_path',
+  is_default: 'is_default',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorBankAccountScalarFieldEnum = (typeof CompanyVendorBankAccountScalarFieldEnum)[keyof typeof CompanyVendorBankAccountScalarFieldEnum]
+
+
+export const CompanyVendorDocumentMasterScalarFieldEnum = {
+  id: 'id',
+  document_name: 'document_name',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorDocumentMasterScalarFieldEnum = (typeof CompanyVendorDocumentMasterScalarFieldEnum)[keyof typeof CompanyVendorDocumentMasterScalarFieldEnum]
+
+
+export const CompanyVendorDocumentMappingScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  document_type_id: 'document_type_id',
+  file_path: 'file_path',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorDocumentMappingScalarFieldEnum = (typeof CompanyVendorDocumentMappingScalarFieldEnum)[keyof typeof CompanyVendorDocumentMappingScalarFieldEnum]
+
+
+export const CompanyVendorAddressScalarFieldEnum = {
+  id: 'id',
+  company_vendor_id: 'company_vendor_id',
+  address_line_1: 'address_line_1',
+  address_line_2: 'address_line_2',
+  landmark: 'landmark',
+  pincode: 'pincode',
+  state_id: 'state_id',
+  city_id: 'city_id',
+  is_primary: 'is_primary',
+  created_at: 'created_at',
+  created_by: 'created_by',
+  updated_at: 'updated_at',
+  updated_by: 'updated_by',
+  deleted_at: 'deleted_at',
+  deleted_by: 'deleted_by',
+  is_deleted: 'is_deleted'
+} as const
+
+export type CompanyVendorAddressScalarFieldEnum = (typeof CompanyVendorAddressScalarFieldEnum)[keyof typeof CompanyVendorAddressScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -17199,6 +17949,14 @@ export type GlobalOmitConfig = {
   additionalCostMaster?: Prisma.AdditionalCostMasterOmit
   purchaseIntentSupplierAdditionalCost?: Prisma.PurchaseIntentSupplierAdditionalCostOmit
   purchaseOrderSupplierAdditionalCost?: Prisma.PurchaseOrderSupplierAdditionalCostOmit
+  vendorTypeMaster?: Prisma.VendorTypeMasterOmit
+  companyVendorStatusMaster?: Prisma.CompanyVendorStatusMasterOmit
+  companyVendorTypeMapping?: Prisma.CompanyVendorTypeMappingOmit
+  companyVendorContactPerson?: Prisma.CompanyVendorContactPersonOmit
+  companyVendorBankAccount?: Prisma.CompanyVendorBankAccountOmit
+  companyVendorDocumentMaster?: Prisma.CompanyVendorDocumentMasterOmit
+  companyVendorDocumentMapping?: Prisma.CompanyVendorDocumentMappingOmit
+  companyVendorAddress?: Prisma.CompanyVendorAddressOmit
 }
 
 /* Types for Logging */
