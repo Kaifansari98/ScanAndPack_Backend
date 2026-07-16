@@ -9,4 +9,10 @@ export type CreateBoxInput = {
   box_name: string;
   box_status: BoxStatus;
   created_by: number;
+  box_info_values?: BoxInfoValueInput[];
+};
+
+export type BoxInfoValueInput = {
+  field_id: number;
+  field_value?: string | null;
 };

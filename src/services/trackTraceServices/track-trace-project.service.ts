@@ -6,6 +6,10 @@ import { randomUUID } from "crypto";
 import logger from "../../../src/utils/logger";
 import { uploadToWasabiProjectExcel } from "../../../src/utils/wasabiClient";
 import { PackingType } from "../../../generated/prisma_client/enums";
+import {
+  syncProjectBoxInfoFields,
+} from "../../services/trackTraceServices/boxInfoField.service";
+
 
 /* ------------------ TYPES ------------------ */
 
@@ -379,15 +383,32 @@ export const validateCutlistPayload = (payload: unknown): ValidationResult => {
 
 /* ------------------ MAIN SERVICE ------------------ */
 
-type CreateProjectServicePayload = {
+export type BoxInfoFieldPayload = {
+  id?: number;
+  field_label: string;
+  field_type?: "TEXT" | "NUMBER" | "DATE" | "TEXTAREA";
+  is_required?: boolean;
+  sort_order?: number;
+  active?: boolean;
+};
+
+
+export type CreateProjectServicePayload = {
   projectName: string;
   vendorId: number;
-  leadId: number | null;
-  order_no?: string | null;
-  client_name?: string | null;
-  client_address?: string | null;
-  client_contact_no?: string | null;
-  packing_type: PackingType;
+  leadId?: number | null;
+
+  order_no?: string;
+  client_name?: string;
+  client_address?: string;
+  client_contact_no?: string;
+
+  packing_type?: PackingType;
+
+  box_info_fields?: BoxInfoFieldPayload[];
+
+  created_by?: number;
+
   file: Express.Multer.File;
 };
 
@@ -403,6 +424,8 @@ export const createProjectService = async (
     client_address,
     client_contact_no,
     packing_type,
+    box_info_fields = [],
+    created_by,
     file,
   } = payloadData;
 
@@ -436,6 +459,13 @@ export const createProjectService = async (
     if (!vendor) {
       throw new Error("Vendor not found");
     }
+
+    const resolvedPackingType:
+      PackingType =
+      packing_type ===
+        PackingType.GROUPWISE
+        ? PackingType.GROUPWISE
+        : PackingType.DEFAULT;
 
     resolvedVendorId = vendor.id;
 
@@ -734,6 +764,23 @@ export const createProjectService = async (
             client_address: resolvedClientAddress,
             client_contact_no: resolvedClientContactNo,
           },
+        });
+
+        await syncProjectBoxInfoFields({
+          tx,
+
+          projectId:
+            project.id,
+
+          vendorId:
+            vendor.id,
+
+          fields:
+            box_info_fields,
+
+          userId:
+            created_by ||
+            createdByUserId,
         });
 
         resolvedProjectId = project.id;
@@ -1230,7 +1277,7 @@ export const getTrackTraceProjectService = async (
         client_name: true,
         client_address: true,
         client_contact_no: true,
-        packing_type:true,
+        packing_type: true,
 
         lead: {
           select: {
@@ -1241,6 +1288,30 @@ export const getTrackTraceProjectService = async (
             email: true,
             contact_no: true,
             site_address: true,
+          },
+        },
+        box_info_fields: {
+          where: {
+            active: true,
+          },
+
+          orderBy: [
+            {
+              sort_order: "asc",
+            },
+            {
+              id: "asc",
+            },
+          ],
+
+          select: {
+            id: true,
+            field_label: true,
+            field_key: true,
+            field_type: true,
+            is_required: true,
+            sort_order: true,
+            active: true,
           },
         },
       },
@@ -1281,6 +1352,9 @@ type UpdateTrackTraceProjectPayload = {
   client_address?: string | null;
   client_contact_no?: string | null;
   packing_type?: PackingType | string;
+  updated_by?: number;
+
+  box_info_fields?: BoxInfoFieldPayload[];
 
   file?: Express.Multer.File;
 };
@@ -1460,20 +1534,84 @@ export const updateTrackTraceProjectService = async (
     | File replacement is NOT processed here yet.
     |--------------------------------------------------------------------------
     */
-    const updatedProject = await prisma.projectMaster.update({
-      where: {
-        id: existingProject.id,
-      },
-      data: {
-        project_name: payload.projectName.trim(),
-        lead_id: resolvedLeadId,
-        packing_type: resolvedPackingType,
-        order_no: resolvedOrderNo,
-        client_name: resolvedClientName,
-        client_address: resolvedClientAddress,
-        client_contact_no: resolvedClientContactNo,
-      },
-    });
+    const updatedProject =
+      await prisma.$transaction(
+        async (
+          tx
+        ) => {
+          const project =
+            await tx.projectMaster.update({
+              where: {
+                id:
+                  existingProject.id,
+              },
+
+              data: {
+                project_name:
+                  payload.projectName.trim(),
+
+                lead_id:
+                  resolvedLeadId,
+
+                packing_type:
+                  resolvedPackingType,
+
+                is_grouping:
+                  resolvedPackingType ===
+                  PackingType.GROUPWISE,
+
+                order_no:
+                  resolvedOrderNo,
+
+                client_name:
+                  resolvedClientName,
+
+                client_address:
+                  resolvedClientAddress,
+
+                client_contact_no:
+                  resolvedClientContactNo,
+
+                ...(payload.updated_by
+                  ? {
+                    updated_by:
+                      Number(
+                        payload.updated_by
+                      ),
+                  }
+                  : {}),
+              },
+            });
+
+          if (
+            Array.isArray(
+              payload.box_info_fields
+            )
+          ) {
+            await syncProjectBoxInfoFields({
+              tx,
+
+              projectId:
+                existingProject.id,
+
+              vendorId,
+
+              fields:
+                payload.box_info_fields,
+
+              userId:
+                payload.updated_by
+                  ? Number(
+                    payload.updated_by
+                  )
+                  : undefined,
+            });
+          }
+
+          return project;
+        }
+      );
+
 
     /*
     |--------------------------------------------------------------------------

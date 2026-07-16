@@ -11,7 +11,41 @@ import logger from "../../utils/logger";
 import { PackingType } from "../../../generated/prisma_client/enums";
 
 
-export const createProjectController = async (req: Request, res: Response) => {
+const parseBoxInfoFields = (
+  value: any
+) => {
+  if (!value) {
+    return [];
+  }
+
+  if (
+    Array.isArray(
+      value
+    )
+  ) {
+    return value;
+  }
+
+  try {
+    const parsed =
+      JSON.parse(
+        value
+      );
+
+    return Array.isArray(
+      parsed
+    )
+      ? parsed
+      : [];
+  } catch {
+    return [];
+  }
+};
+
+export const createProjectController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const {
       projectName,
@@ -21,7 +55,9 @@ export const createProjectController = async (req: Request, res: Response) => {
       client_name,
       client_address,
       client_contact_no,
-      packing_type
+      packing_type,
+      box_info_fields,
+      created_by,
     } = req.body;
 
     if (!projectName || !vendorId) {
@@ -39,32 +75,51 @@ export const createProjectController = async (req: Request, res: Response) => {
     }
 
     const parsedLeadId =
-      lead_id !== undefined && lead_id !== null && lead_id !== ""
+      lead_id !== undefined &&
+      lead_id !== null &&
+      lead_id !== ""
         ? Number(lead_id)
         : null;
 
-        const resolvedPackingType:
-  PackingType =
-  packing_type ===
-  PackingType.GROUPWISE
-    ? PackingType.GROUPWISE
-    : PackingType.DEFAULT;
+    const resolvedPackingType: PackingType =
+      packing_type === PackingType.GROUPWISE
+        ? PackingType.GROUPWISE
+        : PackingType.DEFAULT;
+
+    const parsedBoxInfoFields =
+      parseBoxInfoFields(box_info_fields);
 
     const result = await createProjectService({
       projectName,
+
       vendorId: Number(vendorId),
+
       leadId: parsedLeadId,
+
       order_no,
+
       client_name,
+
       client_address,
+
       client_contact_no,
-      packing_type,
+
+      packing_type: resolvedPackingType,
+
+      box_info_fields: parsedBoxInfoFields,
+
+      created_by: created_by
+        ? Number(created_by)
+        : undefined,
+
       file: req.file,
     });
 
     return res.status(201).json({
       ...result,
-      message: result.message || "Project created successfully",
+      message:
+        result.message ||
+        "Project created successfully",
     });
   } catch (error: any) {
     logger.error("createProjectController error", {
@@ -80,7 +135,8 @@ export const createProjectController = async (req: Request, res: Response) => {
       error.message.includes("Duplicate barcodes") ||
       error.message.includes("Invalid lead_id") ||
       error.message.includes("Vendor not found") ||
-      error.message.includes("Vendor token not found");
+      error.message.includes("Vendor token not found") ||
+      error.message.includes("Duplicate box field");
 
     return res.status(isValidationError ? 422 : 500).json({
       success: false,
@@ -227,40 +283,53 @@ export const updateTrackTraceProjectController = async (
       req.params.unique_project_id;
 
     const unique_project_id =
-      Array.isArray(
-        uniqueProjectIdParam
-      )
+      Array.isArray(uniqueProjectIdParam)
         ? uniqueProjectIdParam[0]
         : uniqueProjectIdParam;
 
     if (!unique_project_id) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-
-          message:
-            "unique_project_id is required",
-
-          data: null,
-        });
+      return res.status(400).json({
+        success: false,
+        message: "unique_project_id is required",
+        data: null,
+      });
     }
 
+    const parsedBoxInfoFields =
+      req.body.box_info_fields !== undefined
+        ? parseBoxInfoFields(req.body.box_info_fields)
+        : undefined;
 
-    const result = await updateTrackTraceProjectService(unique_project_id, {
-      ...req.body,
-      file: req.file,
-    });
+    const result =
+      await updateTrackTraceProjectService(
+        unique_project_id,
+        {
+          ...req.body,
 
-    return res.status(result.success ? 200 : 400).json(result);
+          box_info_fields:
+            parsedBoxInfoFields,
+
+          file:
+            req.file,
+        }
+      );
+
+    return res
+      .status(result.success ? 200 : 400)
+      .json(result);
   } catch (error: any) {
-    logger.error("updateTrackTraceProjectController error", {
-      error: error.message,
-    });
+    logger.error(
+      "updateTrackTraceProjectController error",
+      {
+        error: error.message,
+      }
+    );
 
     return res.status(500).json({
       success: false,
-      message: error.message || "Failed to update project",
+      message:
+        error.message ||
+        "Failed to update project",
       data: null,
     });
   }

@@ -1072,7 +1072,8 @@ export const checkToken = async (req: Request, res: Response) => {
 // GET /track-trace/project-detail/:vendor_id/:project_id
 export const getProjectDetail = async (req: Request, res: Response) => {
   try {
-    console.log("getProjectDetail", req.params);
+    
+    console.log("getProjectDetailsss", req.params);
     const vendor_id = Number(req.params.vendor_id);
     const project_id = String(req.params.project_id);
     if (isNaN(vendor_id))

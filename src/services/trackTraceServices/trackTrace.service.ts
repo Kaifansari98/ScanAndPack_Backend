@@ -4841,170 +4841,442 @@ export const getProjectDetailService = async (
   unique_project_id: string
 ) => {
   try {
+    /*
+    |--------------------------------------------------------------------------
+    | Resolve unique_project_id → project_id
+    |--------------------------------------------------------------------------
+    */
 
-    // ── Resolve unique_project_id → project_id ────────────────────────────────
-    const projectLookup = await prisma.projectMaster.findFirst({
-      where: { unique_project_id, vendor_id },
-      select: { id: true },
-    });
-    if (!projectLookup) return validationResponse(0, "Project not found");
-    const project_id = projectLookup.id;
-
-    // ── 1. Project + lead info ────────────────────────────────────────────────
-    const project = await prisma.projectMaster.findFirst({
-      where: { id: project_id, vendor_id },
-      select: {                              // ✅ fix 1: select was missing
-        id: true,
-        project_name: true,
-        project_status: true,
-        track_trace_status: true,
-        lead_id: true,
-        details: {
-          select: {
-            id: true,
-            total_items: true,
-            total_packed: true,
-            total_unpacked: true,
-            estimated_completion_date: true,
-            start_date: true,
-            room_name: true,
-          },
-          take: 1,
+    const projectLookup =
+      await prisma.projectMaster.findFirst({
+        where: {
+          unique_project_id,
+          vendor_id,
         },
-      },
-    });
 
-    if (!project) return validationResponse(0, "Project not found");
-
-    // Fetch lead separately
-    let lead: { firstname: string; contact_no: string; email: string | null; site_address: string | null } | null = null;
-    if (project.lead_id) {
-      lead = await prisma.leadMaster.findUnique({
-        where: { id: project.lead_id },
-        select: { firstname: true, contact_no: true, email: true, site_address: true },
+        select: {
+          id: true,
+        },
       });
+
+    if (!projectLookup) {
+      return validationResponse(
+        0,
+        "Project not found"
+      );
     }
 
-    // ── 2. Boxes ──────────────────────────────────────────────────────────────
-    const boxes = await prisma.boxMaster.findMany({
-      where: { project_id, vendor_id, is_deleted: false },
-      select: {
-        id: true,
-        box_name: true,
-        box_status: true,
-        factory_out_at: true,
-        factory_out_by: true,
-        site_in_at: true,
-        site_in_by: true,
-      },
-      orderBy: { id: "asc" },
-    });
+    const project_id =
+      projectLookup.id;
 
-    const boxItemCounts = await Promise.all(
-      boxes.map(b =>
-        prisma.cutListMachineMapping.count({
-          where: { box_id: b.id, project_id, vendor_id, expected_in: true },
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Project + lead info
+    |--------------------------------------------------------------------------
+    */
+
+    const project =
+      await prisma.projectMaster.findFirst({
+        where: {
+          id: project_id,
+          vendor_id,
+        },
+
+        select: {
+          id: true,
+          project_name: true,
+          project_status: true,
+          track_trace_status: true,
+          lead_id: true,
+
+          details: {
+            select: {
+              id: true,
+              total_items: true,
+              total_packed: true,
+              total_unpacked: true,
+              estimated_completion_date: true,
+              start_date: true,
+              room_name: true,
+            },
+
+            take: 1,
+          },
+        },
+      });
+
+    if (!project) {
+      return validationResponse(
+        0,
+        "Project not found"
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Lead info
+    |--------------------------------------------------------------------------
+    */
+
+    let lead: {
+      firstname: string;
+      contact_no: string;
+      email: string | null;
+      site_address: string | null;
+    } | null = null;
+
+    if (project.lead_id) {
+      lead =
+        await prisma.leadMaster.findUnique({
+          where: {
+            id: project.lead_id,
+          },
+
+          select: {
+            firstname: true,
+            contact_no: true,
+            email: true,
+            site_address: true,
+          },
+        });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Boxes with dynamic BoxInfoFieldValue
+    |--------------------------------------------------------------------------
+    */
+
+    const boxes =
+      await prisma.boxMaster.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          is_deleted: false,
+        },
+
+        select: {
+          id: true,
+          box_name: true,
+          box_status: true,
+          factory_out_at: true,
+          factory_out_by: true,
+          site_in_at: true,
+          site_in_by: true,
+
+          box_info_values: {
+            select: {
+              id: true,
+              field_id: true,
+              field_value: true,
+
+              field: {
+                select: {
+                  id: true,
+                  field_label: true,
+                  field_key: true,
+                  field_type: true,
+                  is_required: true,
+                  sort_order: true,
+                  active: true,
+                },
+              },
+            },
+          },
+        },
+
+        orderBy: {
+          id: "asc",
+        },
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Box item counts
+    |--------------------------------------------------------------------------
+    */
+
+    const boxItemCounts =
+      await Promise.all(
+        boxes.map((box) =>
+          prisma.cutListMachineMapping.count({
+            where: {
+              box_id: box.id,
+              project_id,
+              vendor_id,
+              expected_in: true,
+            },
+          })
+        )
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Operator name lookup for Factory Out / Site In
+    |--------------------------------------------------------------------------
+    */
+
+    const operatorIds =
+      [
+        ...new Set([
+          ...boxes
+            .map((box) => box.factory_out_by)
+            .filter(Boolean),
+
+          ...boxes
+            .map((box) => box.site_in_by)
+            .filter(Boolean),
+        ]),
+      ] as number[];
+
+    const operators =
+      operatorIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in: operatorIds,
+              },
+            },
+
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const operatorMap =
+      new Map(
+        operators.map((user) => [
+          user.id,
+          user.user_name,
+        ])
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Machines
+    |--------------------------------------------------------------------------
+    */
+
+    const distinctMachines =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          expected_in: true,
+        },
+
+        distinct: ["machine_id"],
+
+        select: {
+          machine_id: true,
+
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+
+              machineType: {
+                select: {
+                  machine_type: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+    const machineStats =
+      await Promise.all(
+        distinctMachines.map(async (machineRow) => {
+          const [
+            total,
+            scanned,
+          ] =
+            await Promise.all([
+              prisma.cutListMachineMapping.count({
+                where: {
+                  project_id,
+                  vendor_id,
+                  machine_id: machineRow.machine_id,
+                  expected_in: true,
+                },
+              }),
+
+              prisma.cutListMachineMapping.count({
+                where: {
+                  project_id,
+                  vendor_id,
+                  machine_id: machineRow.machine_id,
+                  expected_in: true,
+                  actual_in_at: {
+                    not: null,
+                  },
+                },
+              }),
+            ]);
+
+          return {
+            machine_id:
+              machineRow.machine_id,
+
+            machine_name:
+              machineRow.machine.machine_name,
+
+            machine_type:
+              machineRow.machine.machineType
+                ?.machine_type ?? null,
+
+            total,
+
+            scanned,
+
+            pending:
+              total - scanned,
+
+            pct:
+              total > 0
+                ? Math.round(
+                    (scanned / total) * 100
+                  )
+                : 0,
+          };
         })
-      )
-    );
+      );
 
-    const operatorIds = [
-      ...new Set([
-        ...boxes.map(b => b.factory_out_by).filter(Boolean),
-        ...boxes.map(b => b.site_in_by).filter(Boolean),
-      ])
-    ] as number[];
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Cut list — one row per panel unit
+    |--------------------------------------------------------------------------
+    */
 
-    const operators = operatorIds.length > 0
-      ? await prisma.userMaster.findMany({
-        where: { id: { in: operatorIds } },
-        select: { id: true, user_name: true },
-      })
-      : [];
-    const operatorMap = new Map(operators.map(u => [u.id, u.user_name]));
+    const allMappings =
+      await prisma.cutListMachineMapping.findMany({
+        where: {
+          project_id,
+          vendor_id,
+          expected_in: true,
+        },
 
-    // ── 3. Machines ───────────────────────────────────────────────────────────
-    const distinctMachines = await prisma.cutListMachineMapping.findMany({
-      where: { project_id, vendor_id, expected_in: true },
-      distinct: ["machine_id"],
-      select: {
-        machine_id: true,
-        machine: {
-          select: {
-            id: true,
-            machine_name: true,
-            machineType: { select: { machine_type: true } },
+        select: {
+          id: true,
+          cut_list_id: true,
+          machine_id: true,
+          sequence_no: true,
+          actual_in_at: true,
+          box_id: true,
+          in_operator: true,
+
+          machine: {
+            select: {
+              id: true,
+              machine_name: true,
+            },
+          },
+
+          cut_list: {
+            select: {
+              id: true,
+              item_name: true,
+              unique_code: true,
+              description: true,
+              qty: true,
+              category_name: true,
+              group_name: true,
+              length: true,
+              width: true,
+              thickness: true,
+            },
           },
         },
-      },
-    });
 
-    const machineStats = await Promise.all(
-      distinctMachines.map(async (m) => {
-        const [total, scanned] = await Promise.all([
-          prisma.cutListMachineMapping.count({ where: { project_id, vendor_id, machine_id: m.machine_id, expected_in: true } }),
-          prisma.cutListMachineMapping.count({ where: { project_id, vendor_id, machine_id: m.machine_id, expected_in: true, actual_in_at: { not: null } } }),
-        ]);
-        return {
-          machine_id: m.machine_id,
-          machine_name: m.machine.machine_name,
-          machine_type: m.machine.machineType?.machine_type ?? null,
-          total, scanned,
-          pending: total - scanned,
-          pct: total > 0 ? Math.round((scanned / total) * 100) : 0,
-        };
-      })
-    );
-
-    // ── 4. Cut list — one row per panel unit ──────────────────────────────────
-    const allMappings = await prisma.cutListMachineMapping.findMany({
-      where: { project_id, vendor_id, expected_in: true },
-      select: {
-        id: true,
-        cut_list_id: true,
-        machine_id: true,
-        sequence_no: true,
-        actual_in_at: true,
-        box_id: true,
-        in_operator: true,
-        machine: { select: { id: true, machine_name: true } },
-        cut_list: {
-          select: {
-            id: true,
-            item_name: true,
-            unique_code: true,
-            description: true,
-            qty: true,
-            category_name: true,
-            group_name: true,
-            length: true,
-            width: true,
-            thickness: true,
+        orderBy: [
+          {
+            cut_list_id: "asc",
           },
-        },
-      },
-      orderBy: [{ cut_list_id: "asc" }, { machine_id: "asc" }, { id: "asc" }],
-    });
+          {
+            machine_id: "asc",
+          },
+          {
+            id: "asc",
+          },
+        ],
+      });
 
-    // Collect operator ids for name lookup
-    const allInOperatorIds = [
-      ...new Set(allMappings.map(m => m.in_operator).filter(Boolean))
-    ] as number[];
+    /*
+    |--------------------------------------------------------------------------
+    | Operator lookup for cut list scan operators
+    |--------------------------------------------------------------------------
+    */
 
-    const allOperators = allInOperatorIds.length > 0
-      ? await prisma.userMaster.findMany({
-        where: { id: { in: allInOperatorIds } },
-        select: { id: true, user_name: true },
-      })
-      : [];
-    const allOperatorMap = new Map(allOperators.map(u => [u.id, u.user_name]));
+    const allInOperatorIds =
+      [
+        ...new Set(
+          allMappings
+            .map((mapping) => mapping.in_operator)
+            .filter(Boolean)
+        ),
+      ] as number[];
 
-    // Group by cut_list_id, then pair units across machines
-    const cutlistByItem = new Map<number, typeof allMappings>();
-    for (const m of allMappings) {
-      if (!cutlistByItem.has(m.cut_list_id)) cutlistByItem.set(m.cut_list_id, []);
-      cutlistByItem.get(m.cut_list_id)!.push(m);
+    const allOperators =
+      allInOperatorIds.length > 0
+        ? await prisma.userMaster.findMany({
+            where: {
+              id: {
+                in: allInOperatorIds,
+              },
+            },
+
+            select: {
+              id: true,
+              user_name: true,
+            },
+          })
+        : [];
+
+    const allOperatorMap =
+      new Map(
+        allOperators.map((user) => [
+          user.id,
+          user.user_name,
+        ])
+      );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Group cut list mappings by item
+    |--------------------------------------------------------------------------
+    */
+
+    const cutlistByItem =
+      new Map<
+        number,
+        typeof allMappings
+      >();
+
+    for (const mapping of allMappings) {
+      if (
+        !cutlistByItem.has(
+          mapping.cut_list_id
+        )
+      ) {
+        cutlistByItem.set(
+          mapping.cut_list_id,
+          []
+        );
+      }
+
+      cutlistByItem
+        .get(mapping.cut_list_id)!
+        .push(mapping);
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Build unit rows
+    |--------------------------------------------------------------------------
+    */
 
     const unitRows: {
       row_number: number;
@@ -5031,97 +5303,330 @@ export const getProjectDetailService = async (
       }[];
     }[] = [];
 
-    let rowNumber = 1;
-    for (const [cut_list_id, rows] of cutlistByItem) {
-      const cl = rows[0].cut_list;
+    let rowNumber =
+      1;
 
-      // Group rows by machine_id
-      const byMachine = new Map<number, typeof rows>();
-      for (const r of rows) {
-        if (!byMachine.has(r.machine_id)) byMachine.set(r.machine_id, []);
-        byMachine.get(r.machine_id)!.push(r);
+    for (const [
+      cut_list_id,
+      rows,
+    ] of cutlistByItem) {
+      const cutList =
+        rows[0].cut_list;
+
+      const byMachine =
+        new Map<
+          number,
+          typeof rows
+        >();
+
+      for (const row of rows) {
+        if (
+          !byMachine.has(
+            row.machine_id
+          )
+        ) {
+          byMachine.set(
+            row.machine_id,
+            []
+          );
+        }
+
+        byMachine
+          .get(row.machine_id)!
+          .push(row);
       }
 
-      // Unit count = rows for any single machine (all machines have same count)
-      const unitCount = Math.max(...[...byMachine.values()].map(v => v.length));
+      const unitCount =
+        Math.max(
+          ...[
+            ...byMachine.values(),
+          ].map(
+            (machineRows) =>
+              machineRows.length
+          )
+        );
 
-      for (let u = 0; u < unitCount; u++) {
+      for (
+        let unitIndex = 0;
+        unitIndex < unitCount;
+        unitIndex++
+      ) {
         const machineColumns = [];
-        for (const [, machineRows] of byMachine) {
-          const r = machineRows[u];
-          if (!r) continue;
+
+        for (const [
+          ,
+          machineRows,
+        ] of byMachine) {
+          const row =
+            machineRows[unitIndex];
+
+          if (!row) {
+            continue;
+          }
+
           machineColumns.push({
-            mapping_id: r.id,
-            machine_id: r.machine_id,
-            machine_name: r.machine.machine_name,
-            sequence_no: r.sequence_no,
-            box_id: r.box_id,
-            scanned: r.actual_in_at !== null,
-            scanned_at: r.actual_in_at,
-            scanned_by: r.in_operator ? (allOperatorMap.get(r.in_operator) ?? null) : null,
+            mapping_id:
+              row.id,
+
+            machine_id:
+              row.machine_id,
+
+            machine_name:
+              row.machine.machine_name,
+
+            sequence_no:
+              row.sequence_no,
+
+            box_id:
+              row.box_id,
+
+            scanned:
+              row.actual_in_at !== null,
+
+            scanned_at:
+              row.actual_in_at,
+
+            scanned_by:
+              row.in_operator
+                ? allOperatorMap.get(
+                    row.in_operator
+                  ) ?? null
+                : null,
           });
         }
+
         unitRows.push({
-          row_number: rowNumber++,
+          row_number:
+            rowNumber++,
+
           cut_list_id,
-          item_name: cl.item_name,
-          unique_code: cl.unique_code,
-          description: cl.description,
-          qty: cl.qty,
-          unit_index: u + 1,
-          category: cl.category_name,
-          group: cl.group_name,
-          length: cl.length,
-          width: cl.width,
-          thickness: cl.thickness,
-          machines: machineColumns,
+
+          item_name:
+            cutList.item_name,
+
+          unique_code:
+            cutList.unique_code,
+
+          description:
+            cutList.description,
+
+          qty:
+            cutList.qty,
+
+          unit_index:
+            unitIndex + 1,
+
+          category:
+            cutList.category_name,
+
+          group:
+            cutList.group_name,
+
+          length:
+            cutList.length,
+
+          width:
+            cutList.width,
+
+          thickness:
+            cutList.thickness,
+
+          machines:
+            machineColumns,
         });
       }
     }
 
-    // ── 5. Stats ──────────────────────────────────────────────────────────────
-    const totalPanels = unitRows.length;
-    const uniqueItems = cutlistByItem.size;   // ✅ fix 2: replaces cutListItems.length
+    /*
+    |--------------------------------------------------------------------------
+    | 5. Stats
+    |--------------------------------------------------------------------------
+    */
 
-    return validationResponse(1, "Project detail fetched", {
-      project: {
-        id: project.id,
-        project_name: project.project_name,
-        project_status: project.project_status,
-        track_trace_status: project.track_trace_status,
-        lead_id: project.lead_id,
-        lead: lead ? {
-          lead_name: lead.firstname,
-          lead_phone: lead.contact_no,
-          lead_email: lead.email,
-          lead_address: lead.site_address,
-        } : null,
-        details: project.details[0] ?? null,
-      },
-      stats: {
-        total_panels: totalPanels,
-        total_items: uniqueItems,            // ✅ fix 2: was cutListItems.length
-        total_boxes: boxes.length,
-        packed_boxes: boxes.filter(b => b.box_status === "packed").length,
-        unpacked_boxes: boxes.filter(b => b.box_status === "unpacked").length,
-      },
-      machines: machineStats,
-      boxes: boxes.map((b, idx) => ({
-        id: b.id,
-        box_name: b.box_name,
-        box_status: b.box_status,
-        items_count: boxItemCounts[idx],
-        factory_out_at: b.factory_out_at,
-        factory_out_by: b.factory_out_by ? (operatorMap.get(b.factory_out_by) ?? null) : null,
-        site_in_at: b.site_in_at,
-        site_in_by: b.site_in_by ? (operatorMap.get(b.site_in_by) ?? null) : null,
-      })),
-      cutlist: unitRows,
-    });
+    const totalPanels =
+      unitRows.length;
 
+    const uniqueItems =
+      cutlistByItem.size;
+
+    /*
+    |--------------------------------------------------------------------------
+    | Format boxes with box_info_values
+    |--------------------------------------------------------------------------
+    */
+
+    const formattedBoxes =
+      boxes.map((box, index) => {
+        const boxInfoValues =
+          box.box_info_values
+            .filter(
+              (item) =>
+                item.field &&
+                item.field.active
+            )
+            .sort(
+              (a, b) =>
+                Number(
+                  a.field.sort_order || 0
+                ) -
+                Number(
+                  b.field.sort_order || 0
+                )
+            )
+            .map((item) => ({
+              id:
+                item.id,
+
+              field_id:
+                item.field_id,
+
+              field_label:
+                item.field.field_label,
+
+              field_key:
+                item.field.field_key,
+
+              field_type:
+                item.field.field_type,
+
+              is_required:
+                item.field.is_required,
+
+              sort_order:
+                item.field.sort_order,
+
+              field_value:
+                item.field_value || "",
+            }));
+
+        return {
+          id:
+            box.id,
+
+          box_name:
+            box.box_name,
+
+          box_status:
+            box.box_status,
+
+          items_count:
+            boxItemCounts[index],
+
+          factory_out_at:
+            box.factory_out_at,
+
+          factory_out_by:
+            box.factory_out_by
+              ? operatorMap.get(
+                  box.factory_out_by
+                ) ?? null
+              : null,
+
+          site_in_at:
+            box.site_in_at,
+
+          site_in_by:
+            box.site_in_by
+              ? operatorMap.get(
+                  box.site_in_by
+                ) ?? null
+              : null,
+
+          box_info_values:
+            boxInfoValues,
+        };
+      });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Final response
+    |--------------------------------------------------------------------------
+    */
+
+    return validationResponse(
+      1,
+      "Project detail fetched",
+      {
+        project: {
+          id:
+            project.id,
+
+          project_name:
+            project.project_name,
+
+          project_status:
+            project.project_status,
+
+          track_trace_status:
+            project.track_trace_status,
+
+          lead_id:
+            project.lead_id,
+
+          lead:
+            lead
+              ? {
+                  lead_name:
+                    lead.firstname,
+
+                  lead_phone:
+                    lead.contact_no,
+
+                  lead_email:
+                    lead.email,
+
+                  lead_address:
+                    lead.site_address,
+                }
+              : null,
+
+          details:
+            project.details[0] ?? null,
+        },
+
+        stats: {
+          total_panels:
+            totalPanels,
+
+          total_items:
+            uniqueItems,
+
+          total_boxes:
+            boxes.length,
+
+          packed_boxes:
+            boxes.filter(
+              (box) =>
+                box.box_status === "packed"
+            ).length,
+
+          unpacked_boxes:
+            boxes.filter(
+              (box) =>
+                box.box_status === "unpacked"
+            ).length,
+        },
+
+        machines:
+          machineStats,
+
+        boxes:
+          formattedBoxes,
+
+        cutlist:
+          unitRows,
+      }
+    );
   } catch (error) {
-    console.error("getProjectDetailService error:", error);
-    return validationResponse(0, "Failed to fetch project detail");
+    console.error(
+      "getProjectDetailService error:",
+      error
+    );
+
+    return validationResponse(
+      0,
+      "Failed to fetch project detail"
+    );
   }
 };
 

@@ -16,42 +16,131 @@ import {
 import { BoxStatus } from '../../prisma/generated';
 import { ApiResponse } from '../../../src/utils/apiResponse';
 
-export const createBox = async (req: Request, res: Response) => {
+export const createBox = async (
+  req: Request,
+  res: Response
+) => {
   try {
-    console.log(req.body);
-    const newBox = await boxService.createBox(req.body);
+    const newBox =
+      await boxService.createBox({
+        ...req.body,
+
+        project_id:
+          Number(req.body.project_id),
+
+        project_details_id:
+          req.body.project_details_id
+            ? Number(
+                req.body.project_details_id
+              )
+            : null,
+
+        vendor_id:
+          Number(req.body.vendor_id),
+
+        lead_id:
+          req.body.lead_id
+            ? Number(req.body.lead_id)
+            : null,
+
+        created_by:
+          req.body.created_by
+            ? Number(req.body.created_by)
+            : undefined,
+
+        box_info_values:
+          Array.isArray(
+            req.body.box_info_values
+          )
+            ? req.body.box_info_values
+            : [],
+      });
+
     res.status(201).json({
-      message: 'Box created successfully',
-      box: newBox, // includes id and other selected fields
+      message: "Box created successfully",
+      box: newBox,
     });
   } catch (err: any) {
-    if (err.message === 'Box already exists') {
-      return res.status(409).json({ message: err.message });
+    if (
+      err.message ===
+      "Box already exists"
+    ) {
+      return res
+        .status(409)
+        .json({
+          message: err.message,
+        });
     }
-    res.status(400).json({ error: err.message });
+
+    res.status(400).json({
+      error: err.message,
+      message: err.message,
+    });
   }
 };
 
-export const updateBoxName = async (req: Request, res: Response) => {
-  const { id, vendor_id, project_id, client_id, box_name } = req.body;
+export const updateBoxName = async (
+  req: Request,
+  res: Response
+) => {
+  const {
+    id,
+    vendor_id,
+    project_id,
+    client_id,
+    lead_id,
+    box_name,
+    box_info_values,
+    updated_by,
+  } = req.body;
 
   try {
-    const updatedBox = await boxService.updateBoxName(
-      id,
-      vendor_id,
-      project_id,
-      client_id,
-      box_name
-    );
+    const updatedBox =
+      await boxService.updateBoxName(
+        Number(id),
+        Number(vendor_id),
+        Number(project_id),
+        Number(
+          lead_id || client_id
+        ),
+        String(box_name || ""),
+        Array.isArray(box_info_values)
+          ? box_info_values
+          : [],
+        updated_by
+          ? Number(updated_by)
+          : undefined
+      );
+
     res.status(200).json(updatedBox);
   } catch (err: any) {
-    if (err.message === 'Box not found') {
-      return res.status(404).json({ message: err.message });
+    throw err;
+    if (
+      err.message ===
+      "Box not found"
+    ) {
+      return res
+        .status(404)
+        .json({
+          message: err.message,
+        });
     }
-    if (err.message === 'Another box with the same name already exists') {
-      return res.status(409).json({ message: err.message });
+
+    if (
+      err.message ===
+      "Another box with the same name already exists"
+    ) {
+      return res
+        .status(409)
+        .json({
+          message: err.message,
+        });
     }
-    res.status(400).json({ error: err.message });
+
+    res.status(400).json({
+      error: err.message,
+      message: err.message,
+    });
   }
 };
 
@@ -364,3 +453,99 @@ export const getBoxSiteInStatus = async (req: Request, res: Response) => {
   }
 };
 
+
+
+export const getProjectBoxInfoFields = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const projectId =
+      Number(req.params.projectId);
+
+    const vendorId =
+      Number(req.params.vendorId);
+
+    if (
+      !projectId ||
+      !vendorId
+    ) {
+      return res.status(400).json({
+        message:
+          "Invalid projectId or vendorId",
+        data: [],
+      });
+    }
+
+    const fields =
+      await boxService.getProjectBoxInfoFieldsService(
+        projectId,
+        vendorId
+      );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Box info fields fetched successfully",
+      data: fields,
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      message:
+        err.message ||
+        "Failed to fetch box info fields",
+      data: [],
+    });
+  }
+};
+
+export const getBoxInfoValues = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const boxId =
+      Number(req.params.boxId);
+
+    const projectId =
+      Number(req.query.project_id);
+
+    const vendorId =
+      Number(req.query.vendor_id);
+
+    if (
+      !boxId ||
+      !projectId ||
+      !vendorId
+    ) {
+      return res.status(400).json({
+        message:
+          "Invalid boxId, project_id or vendor_id",
+        data: [],
+      });
+    }
+
+    const values =
+      await boxService.getBoxInfoValuesService(
+        boxId,
+        projectId,
+        vendorId
+      );
+
+    return res.status(200).json({
+      success: true,
+      message:
+        "Box info values fetched successfully",
+      data: values,
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      message:
+        err.message ||
+        "Failed to fetch box info values",
+      data: [],
+    });
+  }
+};

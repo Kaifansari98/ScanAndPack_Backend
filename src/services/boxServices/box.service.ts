@@ -20,27 +20,79 @@ if (!fs.existsSync(PDF_OUTPUT_DIR)) {
   fs.mkdirSync(PDF_OUTPUT_DIR, { recursive: true });
 }
 
-export const createBox = async (data: CreateBoxInput) => {
-  const { vendor_id, project_id, lead_id, box_name } = data;
+export const createBox = async (
+  data: CreateBoxInput
+) => {
+  const {
+    vendor_id,
+    project_id,
+    lead_id,
+    box_name,
+    box_info_values = [],
+    created_by,
+    ...boxData
+  } = data;
 
-  const existingBox = await prisma.boxMaster.findFirst({
-    where: {
-      vendor_id,
-      project_id,
-      lead_id,
-      box_name,
-      is_deleted: false, // also respect soft delete
-    },
-  });
+  const existingBox =
+    await prisma.boxMaster.findFirst({
+      where: {
+        vendor_id: Number(vendor_id),
+        project_id: Number(project_id),
+        lead_id: lead_id ? Number(lead_id) : null,
+        box_name: box_name.trim(),
+        is_deleted: false,
+      },
+    });
 
   if (existingBox) {
-    throw new Error('Box already exists');
+    throw new Error("Box already exists");
   }
 
-  return prisma.boxMaster.create({
-    data,
-    select: { id: true, box_name: true, project_id: true, vendor_id: true, lead_id: true, box_status: true }
-  });
+  return await prisma.$transaction(
+    async (tx) => {
+      const createdBox =
+        await tx.boxMaster.create({
+          data: {
+            ...boxData,
+            vendor_id: Number(vendor_id),
+            project_id: Number(project_id),
+            lead_id: lead_id ? Number(lead_id) : null,
+            box_name: box_name.trim(),
+            created_by: created_by || null,
+          },
+
+          select: {
+            id: true,
+            box_name: true,
+            project_id: true,
+            vendor_id: true,
+            lead_id: true,
+            box_status: true,
+          },
+        });
+
+      await saveBoxInfoValuesTx({
+        tx,
+        box_id: createdBox.id,
+        project_id: Number(project_id),
+        vendor_id: Number(vendor_id),
+        values: box_info_values,
+        user_id: created_by,
+      });
+
+      const boxInfoValues =
+        await getBoxInfoValuesFormatted(
+          createdBox.id,
+          Number(project_id),
+          Number(vendor_id)
+        );
+
+      return {
+        ...createdBox,
+        box_info_values: boxInfoValues,
+      };
+    }
+  );
 };
 
 export const updateBoxName = async (
@@ -48,48 +100,89 @@ export const updateBoxName = async (
   vendor_id: number,
   project_id: number,
   lead_id: number,
-  newBoxName: string
+  newBoxName: string,
+  box_info_values: BoxInfoValueInput[] = [],
+  updated_by?: number | null
 ) => {
-  // Check if box exists with these fields
-  const existingBox = await prisma.boxMaster.findFirst({
-    where: {
-      id,
-      vendor_id,
-      project_id,
-      lead_id,
-      is_deleted: false,
-    },
-  });
+  const existingBox =
+    await prisma.boxMaster.findFirst({
+      where: {
+        id,
+        vendor_id,
+        project_id,
+        lead_id,
+        is_deleted: false,
+      },
+    });
 
   if (!existingBox) {
-    throw new Error('Box not found');
+    throw new Error("Box not found");
   }
 
-  // Check if the new box_name already exists for this vendor/project/client
-  const duplicate = await prisma.boxMaster.findFirst({
-    where: {
-      vendor_id,
-      project_id,
-      lead_id,
-      box_name: newBoxName,
-      is_deleted: false,
-      NOT: {
-        id, // exclude the current box
+  const duplicate =
+    await prisma.boxMaster.findFirst({
+      where: {
+        vendor_id,
+        project_id,
+        lead_id,
+        box_name: newBoxName.trim(),
+        is_deleted: false,
+        NOT: {
+          id,
+        },
       },
-    },
-  });
+    });
 
   if (duplicate) {
-    throw new Error('Another box with the same name already exists');
+    throw new Error(
+      "Another box with the same name already exists"
+    );
   }
 
-  // Proceed to update
-  return prisma.boxMaster.update({
-    where: { id },
-    data: {
-      box_name: newBoxName,
-    },
-  });
+  return await prisma.$transaction(
+    async (tx) => {
+      const updatedBox =
+        await tx.boxMaster.update({
+          where: {
+            id,
+          },
+
+          data: {
+            box_name: newBoxName.trim(),            
+          },
+
+          select: {
+            id: true,
+            box_name: true,
+            project_id: true,
+            vendor_id: true,
+            lead_id: true,
+            box_status: true,
+          },
+        });
+
+      await saveBoxInfoValuesTx({
+        tx,
+        box_id: id,
+        project_id,
+        vendor_id,
+        values: box_info_values,
+        user_id: updated_by,
+      });
+
+      const boxInfoValues =
+        await getBoxInfoValuesFormatted(
+          id,
+          project_id,
+          vendor_id
+        );
+
+      return {
+        ...updatedBox,
+        box_info_values: boxInfoValues,
+      };
+    }
+  );
 };
 
 export const getAllBoxes = async () => {
@@ -105,36 +198,102 @@ export const getAllBoxes = async () => {
   });
 };
 
-export const getBoxesByVendorAndProject = async (vendorId: number, projectId: number) => {
-  const boxes = await prisma.boxMaster.findMany({
-    where: {
-      vendor_id: vendorId,
-      project_id: projectId,
-      is_deleted: false,
-    },
-    include: {
-      details: true,
-    },
-  });
+export const getBoxesByVendorAndProject = async (
+  vendorId: number,
+  projectId: number
+) => {
+  const boxes =
+    await prisma.boxMaster.findMany({
+      where: {
+        vendor_id: vendorId,
+        project_id: projectId,
+        is_deleted: false,
+      },
 
-  // ── Enrich each box with item count from CutListMachineMapping ─────────────
-  const enriched = await Promise.all(
-    boxes.map(async (box) => {
-      const items_count = await prisma.cutListMachineMapping.count({
-        where: {
-          box_id: box.id,
-          project_id: projectId,
-          vendor_id: vendorId,
-          actual_in_at: { not: null },
+      include: {
+        details: true,
+
+        box_info_values: {
+          include: {
+            field: {
+              select: {
+                id: true,
+                field_label: true,
+                field_key: true,
+                field_type: true,
+                is_required: true,
+                sort_order: true,
+                active: true,
+              },
+            },
+          },
         },
-      });
+      },
 
-      return {
-        ...box,
-        items_count,
-      };
-    })
-  );
+      orderBy: {
+        created_date: "asc",
+      },
+    });
+
+  const enriched =
+    await Promise.all(
+      boxes.map(
+        async (box) => {
+          const items_count =
+            await prisma.cutListMachineMapping.count({
+              where: {
+                box_id: box.id,
+                project_id: projectId,
+                vendor_id: vendorId,
+                actual_in_at: {
+                  not: null,
+                },
+              },
+            });
+
+          const boxInfoValues =
+            box.box_info_values
+              .filter(
+                (item) =>
+                  item.field?.active
+              )
+              .sort(
+                (a, b) =>
+                  Number(
+                    a.field.sort_order || 0
+                  ) -
+                  Number(
+                    b.field.sort_order || 0
+                  )
+              )
+              .map(
+                (item) => ({
+                  id: item.id,
+                  field_id: item.field_id,
+                  field_label:
+                    item.field.field_label,
+                  field_key:
+                    item.field.field_key,
+                  field_type:
+                    item.field.field_type,
+                  is_required:
+                    item.field.is_required,
+                  sort_order:
+                    item.field.sort_order,
+                  field_value:
+                    item.field_value || "",
+                })
+              );
+
+          return {
+            ...box,
+            items_count,
+            box_info_values:
+              boxInfoValues,
+          };
+        }
+      )
+    );
 
   return enriched;
 };
@@ -359,6 +518,7 @@ export const generateBoxPdfServiceWeb = async (
 
 
 
+
 export const generateBoxPdfService = async (
   box_id: number,
   project_id: number,
@@ -466,6 +626,50 @@ export const generateBoxPdfService = async (
 
               user_name:
                 true,
+            },
+          },
+
+          /*
+          |--------------------------------------------------------------------------
+          | Dynamic box information values
+          |--------------------------------------------------------------------------
+          */
+
+          box_info_values: {
+            select: {
+              id:
+                true,
+
+              field_id:
+                true,
+
+              field_value:
+                true,
+
+              field: {
+                select: {
+                  id:
+                    true,
+
+                  field_label:
+                    true,
+
+                  field_key:
+                    true,
+
+                  field_type:
+                    true,
+
+                  is_required:
+                    true,
+
+                  sort_order:
+                    true,
+
+                  active:
+                    true,
+                },
+              },
             },
           },
         },
@@ -582,24 +786,79 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 3. Vendor logo
+    | 3. Format dynamic box information values
+    |--------------------------------------------------------------------------
+    */
+
+    const boxInfoValues =
+      box.box_info_values
+        .filter(
+          (
+            item
+          ) =>
+            item.field &&
+            item.field.active
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            Number(
+              a.field.sort_order ||
+              0
+            ) -
+            Number(
+              b.field.sort_order ||
+              0
+            )
+        )
+        .map(
+          (
+            item
+          ) => ({
+            id:
+              item.id,
+
+            field_id:
+              item.field_id,
+
+            field_label:
+              item.field.field_label,
+
+            field_key:
+              item.field.field_key,
+
+            field_type:
+              item.field.field_type,
+
+            is_required:
+              item.field.is_required,
+
+            sort_order:
+              item.field.sort_order,
+
+            field_value:
+              item.field_value || "",
+          })
+        );
+
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Vendor logo
     |--------------------------------------------------------------------------
     */
 
     let logoUrl =
       "";
 
-    if (
-      vendor.logo
-    ) {
+    if (vendor.logo) {
       try {
         logoUrl =
           await generateSignedUrl(
             vendor.logo
           );
-      } catch (
-        error
-      ) {
+      } catch (error) {
         console.error(
           "Error generating logo signed URL:",
           error
@@ -609,7 +868,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 4. Lead fallback
+    | 5. Lead fallback
     |--------------------------------------------------------------------------
     */
 
@@ -642,7 +901,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 5. Resolve client information
+    | 6. Resolve client information
     |--------------------------------------------------------------------------
     */
 
@@ -673,117 +932,106 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 6. Fetch current box items and all box group mappings
+    | 7. Fetch current box items and all box group mappings
     |--------------------------------------------------------------------------
     */
 
     const [
       mappingRows,
       allBoxGroupMappings,
-    ] = await Promise.all([
-      /*
-      |--------------------------------------------------------------------------
-      | Current box items
-      |--------------------------------------------------------------------------
-      */
+    ] =
+      await Promise.all([
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            box_id,
 
-      prisma.cutListMachineMapping.findMany({
-        where: {
-          box_id,
+            project_id,
 
-          project_id,
+            vendor_id,
 
-          vendor_id,
+            machine_id:
+              packagingMachine.id,
 
-          machine_id:
-            packagingMachine.id,
+            expected_in:
+              true,
+          },
 
-          expected_in:
-            true,
-        },
+          select: {
+            id:
+              true,
 
-        select: {
-          id:
-            true,
+            cut_list: {
+              select: {
+                id:
+                  true,
 
-          cut_list: {
-            select: {
-              id:
-                true,
+                item_name:
+                  true,
 
-              item_name:
-                true,
+                category_name:
+                  true,
 
-              category_name:
-                true,
+                group_name:
+                  true,
 
-              group_name:
-                true,
+                unique_code:
+                  true,
 
-              unique_code:
-                true,
-
-              weight:
-                true,
+                weight:
+                  true,
+              },
             },
           },
-        },
 
-        orderBy: {
-          created_at:
-            "asc",
-        },
-      }),
-
-      /*
-      |--------------------------------------------------------------------------
-      | Group information for all project boxes
-      |--------------------------------------------------------------------------
-      */
-
-      prisma.cutListMachineMapping.findMany({
-        where: {
-          project_id,
-
-          vendor_id,
-
-          machine_id:
-            packagingMachine.id,
-
-          expected_in:
-            true,
-
-          box_id: {
-            not:
-              null,
+          orderBy: {
+            created_at:
+              "asc",
           },
-        },
+        }),
 
-        select: {
-          id:
-            true,
+        prisma.cutListMachineMapping.findMany({
+          where: {
+            project_id,
 
-          box_id:
-            true,
+            vendor_id,
 
-          cut_list: {
-            select: {
-              group_name:
-                true,
+            machine_id:
+              packagingMachine.id,
+
+            expected_in:
+              true,
+
+            box_id: {
+              not:
+                null,
             },
           },
-        },
 
-        orderBy: {
-          created_at:
-            "asc",
-        },
-      }),
-    ]);
+          select: {
+            id:
+              true,
+
+            box_id:
+              true,
+
+            cut_list: {
+              select: {
+                group_name:
+                  true,
+              },
+            },
+          },
+
+          orderBy: {
+            created_at:
+              "asc",
+          },
+        }),
+      ]);
 
     /*
     |--------------------------------------------------------------------------
-    | 7. Merge repeated cut-list rows
+    | 8. Merge repeated cut-list rows
     |--------------------------------------------------------------------------
     */
 
@@ -817,10 +1065,7 @@ export const generateBoxPdfService = async (
         }
       >();
 
-    for (
-      const mapping
-      of mappingRows
-    ) {
+    for (const mapping of mappingRows) {
       const cutList =
         mapping.cut_list;
 
@@ -839,9 +1084,7 @@ export const generateBoxPdfService = async (
           cutList.id
         );
 
-      if (
-        existingItem
-      ) {
+      if (existingItem) {
         existingItem.quantity +=
           1;
 
@@ -907,7 +1150,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 8. Calculate box totals
+    | 9. Calculate box totals
     |--------------------------------------------------------------------------
     */
 
@@ -937,7 +1180,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 9. Resolve current box group
+    | 10. Resolve current box group
     |--------------------------------------------------------------------------
     */
 
@@ -972,7 +1215,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 10. Build first group map for every box
+    | 11. Build first group map for every box
     |--------------------------------------------------------------------------
     */
 
@@ -982,21 +1225,10 @@ export const generateBoxPdfService = async (
         string | null
       >();
 
-    for (
-      const mapping
-      of allBoxGroupMappings
-    ) {
-      if (
-        !mapping.box_id
-      ) {
+    for (const mapping of allBoxGroupMappings) {
+      if (!mapping.box_id) {
         continue;
       }
-
-      /*
-      |--------------------------------------------------------------------------
-      | Use first item group as box group
-      |--------------------------------------------------------------------------
-      */
 
       if (
         boxGroupMap.has(
@@ -1019,7 +1251,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 11. Calculate PRODUCT BOX COUNT
+    | 12. Calculate PRODUCT BOX COUNT
     |--------------------------------------------------------------------------
     */
 
@@ -1032,22 +1264,6 @@ export const generateBoxPdfService = async (
         1
       );
 
-    /*
-    |--------------------------------------------------------------------------
-    | GROUPWISE:
-    |
-    | Group A:
-    | 1 of 3
-    | 2 of 3
-    | 3 of 3
-    |
-    | Group B:
-    | 1 of 5
-    | ...
-    | 5 of 5
-    |--------------------------------------------------------------------------
-    */
-
     if (
       project.packing_type ===
       PackingType.GROUPWISE
@@ -1057,15 +1273,7 @@ export const generateBoxPdfService = async (
           currentBoxGroupName
         );
 
-      /*
-      |--------------------------------------------------------------------------
-      | Group is available
-      |--------------------------------------------------------------------------
-      */
-
-      if (
-        currentGroupKey
-      ) {
+      if (currentGroupKey) {
         const currentGroupBoxes =
           projectBoxes.filter(
             (
@@ -1107,14 +1315,6 @@ export const generateBoxPdfService = async (
             1
           );
       } else {
-        /*
-        |--------------------------------------------------------------------------
-        | Old groupwise data without group:
-        |
-        | Treat box independently
-        |--------------------------------------------------------------------------
-        */
-
         currentProductBoxNumber =
           1;
 
@@ -1122,14 +1322,6 @@ export const generateBoxPdfService = async (
           1;
       }
     } else {
-      /*
-      |--------------------------------------------------------------------------
-      | DEFAULT:
-      |
-      | Existing project-wide numbering
-      |--------------------------------------------------------------------------
-      */
-
       const currentBoxIndex =
         projectBoxes.findIndex(
           (
@@ -1158,7 +1350,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 12. Package date
+    | 13. Package date
     |--------------------------------------------------------------------------
     */
 
@@ -1170,7 +1362,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 13. QR code
+    | 14. QR code
     |--------------------------------------------------------------------------
     */
 
@@ -1203,7 +1395,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 14. Vendor logo
+    | 15. Vendor logo
     |--------------------------------------------------------------------------
     */
 
@@ -1212,16 +1404,12 @@ export const generateBoxPdfService = async (
         ? `
           <img
             src="${logoUrl}"
-
             class="company-logo"
-
             alt="Logo"
           />
         `
         : `
-          <div
-            class="company-logo-text"
-          >
+          <div class="company-logo-text">
             ${escapeHtml(
               vendor.vendor_name
             )}
@@ -1230,7 +1418,39 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 15. Product rows
+    | 16. Dynamic box info HTML
+    |--------------------------------------------------------------------------
+    */
+
+    const dynamicBoxDetails =
+      boxInfoValues
+        .map(
+          (
+            item
+          ) => `
+            <div class="box-detail">
+
+              <span>
+                ${escapeHtml(
+                  item.field_label
+                )}
+              </span>
+
+              <strong>
+                ${escapeHtml(
+                  item.field_value ||
+                  "—"
+                )}
+              </strong>
+
+            </div>
+          `
+        )
+        .join("");
+
+    /*
+    |--------------------------------------------------------------------------
+    | 17. Product rows
     |--------------------------------------------------------------------------
     */
 
@@ -1244,12 +1464,8 @@ export const generateBoxPdfService = async (
             <tr>
 
               <td>
-                ${
-                  index +
-                  1
-                }
+                ${index + 1}
               </td>
-
 
               <td>
                 ${escapeHtml(
@@ -1257,13 +1473,9 @@ export const generateBoxPdfService = async (
                 )}
               </td>
 
-
               <td>
-                ${
-                  item.quantity
-                }
+                ${item.quantity}
               </td>
-
 
               <td>
                 ${item.unit_weight.toFixed(
@@ -1272,7 +1484,6 @@ export const generateBoxPdfService = async (
 
                 kg
               </td>
-
 
               <td>
                 ${item.total_weight.toFixed(
@@ -1289,7 +1500,7 @@ export const generateBoxPdfService = async (
 
     /*
     |--------------------------------------------------------------------------
-    | 16. HTML
+    | 18. HTML
     |--------------------------------------------------------------------------
     */
 
@@ -1302,798 +1513,310 @@ export const generateBoxPdfService = async (
 
 <meta charset="UTF-8"/>
 
-
 <style>
 
-
 @page {
-
-  size:
-    4in 5in;
-
-  margin:
-    0;
-
+  size: 4in 5in;
+  margin: 0;
 }
-
 
 * {
-
-  box-sizing:
-    border-box;
-
-  margin:
-    0;
-
-  padding:
-    0;
-
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-
 
 html,
 body {
-
-  width:
-    4in;
-
-  height:
-    5in;
-
-  margin:
-    0;
-
-  padding:
-    0;
-
+  width: 4in;
+  height: 5in;
+  margin: 0;
+  padding: 0;
 }
-
 
 body {
-
-  color:
-    #172033;
-
-  background:
-    #FFFFFF;
-
-  font-family:
-    Arial,
-    sans-serif;
-
-  font-size:
-    11px;
-
+  color: #172033;
+  background: #FFFFFF;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
 }
-
 
 .page {
-
-  width:
-    4in;
-
-  height:
-    5in;
-
-  padding:
-    14px;
-
-  overflow:
-    hidden;
-
+  width: 4in;
+  height: 5in;
+  padding: 14px;
+  overflow: hidden;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Company
-|--------------------------------------------------------------------------
-*/
-
 
 .main-header {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    flex-start;
-
-  min-height:
-    38px;
-
-  padding-bottom:
-    6px;
-
-  border-bottom:
-    1px solid
-    #172033;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-height: 38px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #172033;
 }
-
 
 .company-logo {
-
-  display:
-    block;
-
-  max-width:
-    92px;
-
-  max-height:
-    30px;
-
-  object-fit:
-    contain;
-
+  display: block;
+  max-width: 92px;
+  max-height: 30px;
+  object-fit: contain;
 }
-
 
 .company-logo-text {
-
-  font-size:
-    14px;
-
-  font-weight:
-    800;
-
+  font-size: 14px;
+  font-weight: 800;
 }
-
 
 .company-information {
-
-  color:
-    #667085;
-
-  font-size:
-    6.5px;
-
-  line-height:
-    1.35;
-
-  text-align:
-    right;
-
+  color: #667085;
+  font-size: 6.5px;
+  line-height: 1.35;
+  text-align: right;
 }
-
 
 .company-name {
-
-  color:
-    #172033;
-
-  font-size:
-    8.5px;
-
-  font-weight:
-    800;
-
+  color: #172033;
+  font-size: 8.5px;
+  font-weight: 800;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Client information
-|--------------------------------------------------------------------------
-*/
-
 
 .box-client-info {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    minmax(
-      0,
-      1fr
-    )
-    minmax(
-      0,
-      1fr
-    );
-
-  gap:
-    12px;
-
-  padding:
-    6px 0;
-
-  border-bottom:
-    1px solid
-    #D9DEE7;
-
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid #D9DEE7;
 }
-
 
 .box-client-info > div {
-
-  min-width:
-    0;
-
+  min-width: 0;
 }
-
 
 .box-client-info > div:last-child {
-
-  text-align:
-    right;
-
+  text-align: right;
 }
-
 
 .box-client-info span {
-
-  display:
-    block;
-
-  color:
-    #667085;
-
-  font-size:
-    5.7px;
-
-  line-height:
-    1.1;
-
-  font-weight:
-    800;
-
+  display: block;
+  color: #667085;
+  font-size: 5.7px;
+  line-height: 1.1;
+  font-weight: 800;
 }
-
 
 .box-client-info strong {
-
-  display:
-    block;
-
-  margin-top:
-    2px;
-
-  overflow:
-    hidden;
-
-  color:
-    #172033;
-
-  font-size:
-    7.5px;
-
-  line-height:
-    1.15;
-
-  font-weight:
-    800;
-
-  white-space:
-    nowrap;
-
-  text-overflow:
-    ellipsis;
-
+  display: block;
+  margin-top: 2px;
+  overflow: hidden;
+  color: #172033;
+  font-size: 7.5px;
+  line-height: 1.15;
+  font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Box
-|--------------------------------------------------------------------------
-*/
-
 
 .box-header {
-
-  padding:
-    7px 0;
-
-  border-bottom:
-    2px solid
-    #172033;
-
+  padding: 7px 0;
+  border-bottom: 2px solid #172033;
 }
-
 
 .box-main-row {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    minmax(
-      0,
-      75%
-    )
-    minmax(
-      0,
-      25%
-    );
-
-  align-items:
-    center;
-
+  display: grid;
+  grid-template-columns: minmax(0, 75%) minmax(0, 25%);
+  align-items: center;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Box details
-|--------------------------------------------------------------------------
-*/
-
 
 .box-left-section {
-
-  min-width:
-    0;
-
-  padding-right:
-    10px;
-
+  min-width: 0;
+  padding-right: 10px;
 }
-
 
 .box-details-grid {
-
-  display:
-    grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(
-        0,
-        1fr
-      )
-    );
-
-  column-gap:
-    10px;
-
-  row-gap:
-    10px;
-
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 10px;
+  row-gap: 10px;
 }
-
 
 .box-detail {
-
-  min-width:
-    0;
-
+  min-width: 0;
 }
-
 
 .box-detail span {
-
-  display:
-    block;
-
-  color:
-    #667085;
-
-  font-size:
-    5.7px;
-
-  line-height:
-    1.1;
-
-  font-weight:
-    800;
-
+  display: block;
+  color: #667085;
+  font-size: 5.7px;
+  line-height: 1.1;
+  font-weight: 800;
+  text-transform: uppercase;
 }
-
 
 .box-detail strong {
-
-  display:
-    block;
-
-  margin-top:
-    2px;
-
-  overflow-wrap:
-    anywhere;
-
-  color:
-    #172033;
-
-  font-size:
-    7.7px;
-
-  line-height:
-    1.15;
-
-  font-weight:
-    800;
-
+  display: block;
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+  color: #172033;
+  font-size: 7.7px;
+  line-height: 1.15;
+  font-weight: 800;
 }
-
 
 .total-weight-value {
-
-  font-size:
-    8.7px !important;
-
+  font-size: 8.7px !important;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| QR
-|--------------------------------------------------------------------------
-*/
-
 
 .box-qr-section {
-
-  display:
-    flex;
-
-  flex-direction:
-    column;
-
-  justify-content:
-    center;
-
-  align-items:
-    center;
-
-  min-height:
-    82px;
-
-  padding-left:
-    8px;
-
-  border-left:
-    1px solid
-    #D9DEE7;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 82px;
+  padding-left: 8px;
+  border-left: 1px solid #D9DEE7;
 }
-
 
 .box-qr-code {
-
-  display:
-    block;
-
-  width:
-    72px;
-
-  height:
-    72px;
-
-  object-fit:
-    contain;
-
+  display: block;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
 }
-
 
 .box-qr-label {
-
-  margin-top:
-    3px;
-
-  color:
-    #667085;
-
-  font-size:
-    5.5px;
-
-  font-weight:
-    900;
-
+  margin-top: 3px;
+  color: #667085;
+  font-size: 5.5px;
+  font-weight: 900;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Delivery address
-|--------------------------------------------------------------------------
-*/
-
 
 .box-address {
-
-  margin-top:
-    8px;
-
-  padding-top:
-    6px;
-
-  border-top:
-    1px solid
-    #D9DEE7;
-
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #D9DEE7;
 }
-
 
 .box-address span {
-
-  display:
-    block;
-
-  color:
-    #667085;
-
-  font-size:
-    5.8px;
-
-  font-weight:
-    800;
-
+  display: block;
+  color: #667085;
+  font-size: 5.8px;
+  font-weight: 800;
 }
-
 
 .box-address strong {
-
-  display:
-    block;
-
-  max-height:
-    27px;
-
-  margin-top:
-    3px;
-
-  overflow:
-    hidden;
-
-  color:
-    #172033;
-
-  font-size:
-    7.2px;
-
-  line-height:
-    1.28;
-
-  font-weight:
-    700;
-
+  display: block;
+  max-height: 27px;
+  margin-top: 3px;
+  overflow: hidden;
+  color: #172033;
+  font-size: 7.2px;
+  line-height: 1.28;
+  font-weight: 700;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Products
-|--------------------------------------------------------------------------
-*/
-
 
 .products-title-row {
-
-  display:
-    flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
-  margin:
-    6px 0 4px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 6px 0 4px;
 }
-
 
 .section-title {
-
-  font-size:
-    8.5px;
-
-  font-weight:
-    900;
-
+  font-size: 8.5px;
+  font-weight: 900;
 }
-
 
 .products-count {
-
-  color:
-    #667085;
-
-  font-size:
-    5.8px;
-
-  font-weight:
-    700;
-
+  color: #667085;
+  font-size: 5.8px;
+  font-weight: 700;
 }
-
-
-/*
-|--------------------------------------------------------------------------
-| Product table
-|--------------------------------------------------------------------------
-*/
-
 
 .report-table {
-
-  width:
-    100%;
-
-  border-collapse:
-    collapse;
-
-  table-layout:
-    fixed;
-
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
-
 
 .report-table thead {
-
-  color:
-    #FFFFFF;
-
-  background:
-    #172033;
-
+  color: #FFFFFF;
+  background: #172033;
 }
-
 
 .report-table th {
-
-  padding:
-    4px 3px;
-
-  font-size:
-    5.5px;
-
-  font-weight:
-    700;
-
-  text-align:
-    left;
-
+  padding: 4px 3px;
+  font-size: 5.5px;
+  font-weight: 700;
+  text-align: left;
 }
-
 
 .report-table td {
-
-  padding:
-    4px 3px;
-
-  border-bottom:
-    1px solid
-    #E4E7EC;
-
-  font-size:
-    6px;
-
-  line-height:
-    1.15;
-
-  overflow-wrap:
-    anywhere;
-
-  vertical-align:
-    top;
-
+  padding: 4px 3px;
+  border-bottom: 1px solid #E4E7EC;
+  font-size: 6px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  vertical-align: top;
 }
-
 
 .report-table tbody tr:nth-child(even) {
-
-  background:
-    #F8FAFC;
-
+  background: #F8FAFC;
 }
-
 
 .report-table tfoot {
-
-  background:
-    #F1F5F9;
-
-  font-weight:
-    800;
-
+  background: #F1F5F9;
+  font-weight: 800;
 }
-
 
 .sr-column {
-
-  width:
-    7%;
-
+  width: 7%;
 }
-
 
 .product-column {
-
-  width:
-    45%;
-
+  width: 45%;
 }
-
 
 .qty-column {
-
-  width:
-    10%;
-
+  width: 10%;
 }
-
 
 .unit-column {
-
-  width:
-    18%;
-
+  width: 18%;
 }
-
 
 .total-column {
-
-  width:
-    20%;
-
+  width: 20%;
 }
-
 
 .no-products {
-
-  padding:
-    14px !important;
-
-  color:
-    #667085;
-
-  text-align:
-    center;
-
+  padding: 14px !important;
+  color: #667085;
+  text-align: center;
 }
-
 
 </style>
 
 </head>
 
-
 <body>
 
+<section class="page">
 
-<section
-  class="page"
->
-
-
-  <!--
-  ==============================================================
-  COMPANY
-  ==============================================================
-  -->
-
-
-  <div
-    class="main-header"
-  >
+  <div class="main-header">
 
     <div>
-
       ${logoHtml}
-
     </div>
 
+    <div class="company-information">
 
-    <div
-      class="company-information"
-    >
-
-      <div
-        class="company-name"
-      >
+      <div class="company-name">
         ${escapeHtml(
           vendor.vendor_name
         )}
       </div>
-
 
       <div>
         ${escapeHtml(
@@ -2101,7 +1824,6 @@ body {
           ""
         )}
       </div>
-
 
       <div>
         ${escapeHtml(
@@ -2114,24 +1836,13 @@ body {
 
   </div>
 
-
-  <!--
-  ==============================================================
-  CLIENT
-  ==============================================================
-  -->
-
-
-  <div
-    class="box-client-info"
-  >
+  <div class="box-client-info">
 
     <div>
 
       <span>
         CLIENT NAME
       </span>
-
 
       <strong>
         ${escapeHtml(
@@ -2141,13 +1852,11 @@ body {
 
     </div>
 
-
     <div>
 
       <span>
         CONTACT NUMBER
       </span>
-
 
       <strong>
         ${escapeHtml(
@@ -2159,41 +1868,19 @@ body {
 
   </div>
 
+  <div class="box-header">
 
-  <!--
-  ==============================================================
-  BOX
-  ==============================================================
-  -->
+    <div class="box-main-row">
 
+      <div class="box-left-section">
 
-  <div
-    class="box-header"
-  >
+        <div class="box-details-grid">
 
-    <div
-      class="box-main-row"
-    >
-
-      <!-- LEFT 75% -->
-
-
-      <div
-        class="box-left-section"
-      >
-
-        <div
-          class="box-details-grid"
-        >
-
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               ORDER NUMBER
             </span>
-
 
             <strong>
               ${escapeHtml(
@@ -2203,20 +1890,15 @@ body {
 
           </div>
 
-
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               PACKED BY
             </span>
 
-
             <strong>
               ${escapeHtml(
-                box
-                  .packedByUser
+                box.packedByUser
                   ?.user_name ||
                 "N/A"
               )}
@@ -2224,15 +1906,11 @@ body {
 
           </div>
 
-
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               PACKET NO.
             </span>
-
 
             <strong>
               ${escapeHtml(
@@ -2242,15 +1920,13 @@ body {
 
           </div>
 
+          ${dynamicBoxDetails}
 
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               PACKAGE DATE
             </span>
-
 
             <strong>
               ${packageDate}
@@ -2258,15 +1934,11 @@ body {
 
           </div>
 
-
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               PRODUCT BOX COUNT
             </span>
-
 
             <strong>
               ${escapeHtml(
@@ -2276,19 +1948,13 @@ body {
 
           </div>
 
-
-          <div
-            class="box-detail"
-          >
+          <div class="box-detail">
 
             <span>
               TOTAL WEIGHT
             </span>
 
-
-            <strong
-              class="total-weight-value"
-            >
+            <strong class="total-weight-value">
               ${totalWeight.toFixed(
                 2
               )}
@@ -2302,26 +1968,15 @@ body {
 
       </div>
 
-
-      <!-- RIGHT 25% -->
-
-
-      <div
-        class="box-qr-section"
-      >
+      <div class="box-qr-section">
 
         <img
           src="${qrImage}"
-
           class="box-qr-code"
-
           alt="Box QR Code"
         />
 
-
-        <div
-          class="box-qr-label"
-        >
+        <div class="box-qr-label">
           SCAN BOX
         </div>
 
@@ -2329,18 +1984,11 @@ body {
 
     </div>
 
-
-    <!-- DELIVERY ADDRESS -->
-
-
-    <div
-      class="box-address"
-    >
+    <div class="box-address">
 
       <span>
         DELIVERY ADDRESS
       </span>
-
 
       <strong>
         ${escapeHtml(
@@ -2352,31 +2000,14 @@ body {
 
   </div>
 
+  <div class="products-title-row">
 
-  <!--
-  ==============================================================
-  PRODUCTS
-  ==============================================================
-  -->
-
-
-  <div
-    class="products-title-row"
-  >
-
-    <h3
-      class="section-title"
-    >
+    <h3 class="section-title">
       PRODUCTS
     </h3>
 
-
-    <div
-      class="products-count"
-    >
-      ${
-        items.length
-      }
+    <div class="products-count">
+      ${items.length}
 
       products
 
@@ -2389,46 +2020,29 @@ body {
 
   </div>
 
-
-  <table
-    class="report-table"
-  >
+  <table class="report-table">
 
     <thead>
 
       <tr>
 
-        <th
-          class="sr-column"
-        >
+        <th class="sr-column">
           #
         </th>
 
-
-        <th
-          class="product-column"
-        >
+        <th class="product-column">
           Product
         </th>
 
-
-        <th
-          class="qty-column"
-        >
+        <th class="qty-column">
           Qty
         </th>
 
-
-        <th
-          class="unit-column"
-        >
+        <th class="unit-column">
           Unit Weight
         </th>
 
-
-        <th
-          class="total-column"
-        >
+        <th class="total-column">
           Total Weight
         </th>
 
@@ -2436,49 +2050,36 @@ body {
 
     </thead>
 
-
     <tbody>
 
       ${
         itemRows ||
         `
           <tr>
-
-            <td
-              colspan="5"
-
-              class="no-products"
-            >
+            <td colspan="5" class="no-products">
               No products found
             </td>
-
           </tr>
         `
       }
 
     </tbody>
 
-
     <tfoot>
 
       <tr>
 
-        <td
-          colspan="2"
-        >
+        <td colspan="2">
           TOTAL
         </td>
-
 
         <td>
           ${totalQuantity}
         </td>
 
-
         <td>
           —
         </td>
-
 
         <td>
           ${totalWeight.toFixed(
@@ -2494,9 +2095,7 @@ body {
 
   </table>
 
-
 </section>
-
 
 </body>
 
@@ -2505,7 +2104,7 @@ body {
 
     /*
     |--------------------------------------------------------------------------
-    | 17. Generate PDF
+    | 19. Generate PDF
     |--------------------------------------------------------------------------
     */
 
@@ -2566,7 +2165,7 @@ body {
 
     /*
     |--------------------------------------------------------------------------
-    | 18. Upload PDF
+    | 20. Upload PDF
     |--------------------------------------------------------------------------
     */
 
@@ -2589,9 +2188,7 @@ body {
 
     return validationResponse(
       1,
-
       "Box PDF generated successfully",
-
       {
         download_url:
           signedUrl,
@@ -2623,11 +2220,12 @@ body {
               2
             )
           ),
+
+        box_info_values:
+          boxInfoValues,
       }
     );
-  } catch (
-    error
-  ) {
+  } catch (error) {
     console.error(
       "generateBoxPdfService:",
       error
@@ -2646,7 +2244,6 @@ body {
 
     return validationResponse(
       0,
-
       "Failed to generate box PDF"
     );
   }
@@ -5429,18 +5026,18 @@ export const generateProjectFullReportService = async (
     const lead =
       project.lead_id
         ? await prisma.leadMaster.findUnique({
-          where: {
-            id: project.lead_id,
-          },
+            where: {
+              id: project.lead_id,
+            },
 
-          select: {
-            firstname: true,
-            lastname: true,
-            contact_no: true,
-            email: true,
-            site_address: true,
-          },
-        })
+            select: {
+              firstname: true,
+              lastname: true,
+              contact_no: true,
+              email: true,
+              site_address: true,
+            },
+          })
         : null;
 
     /*
@@ -5453,7 +5050,8 @@ export const generateProjectFullReportService = async (
       project.client_name ||
       (
         lead
-          ? `${lead.firstname || ""} ${lead.lastname || ""
+          ? `${lead.firstname || ""} ${
+              lead.lastname || ""
             }`.trim()
           : ""
       ) ||
@@ -5499,6 +5097,26 @@ export const generateProjectFullReportService = async (
             select: {
               id: true,
               user_name: true,
+            },
+          },
+
+          box_info_values: {
+            select: {
+              id: true,
+              field_id: true,
+              field_value: true,
+
+              field: {
+                select: {
+                  id: true,
+                  field_label: true,
+                  field_key: true,
+                  field_type: true,
+                  is_required: true,
+                  sort_order: true,
+                  active: true,
+                },
+              },
             },
           },
         },
@@ -5576,25 +5194,25 @@ export const generateProjectFullReportService = async (
                   id: number;
 
                   item_name:
-                  string;
+                    string;
 
                   category_name:
-                  string | null;
+                    string | null;
 
                   group_name:
-                  string | null;
+                    string | null;
 
                   unique_code:
-                  string | null;
+                    string | null;
 
                   unit_weight:
-                  number;
+                    number;
 
                   quantity:
-                  number;
+                    number;
 
                   total_weight:
-                  number;
+                    number;
                 }
               >();
 
@@ -5731,6 +5349,65 @@ export const generateProjectFullReportService = async (
                 ?.trim() ||
               null;
 
+            /*
+            |--------------------------------------------------------------------------
+            | Dynamic box info values
+            |--------------------------------------------------------------------------
+            */
+
+            const boxInfoValues =
+              box.box_info_values
+                .filter(
+                  (
+                    item
+                  ) =>
+                    item.field &&
+                    item.field.active
+                )
+                .sort(
+                  (
+                    a,
+                    b
+                  ) =>
+                    Number(
+                      a.field.sort_order ||
+                      0
+                    ) -
+                    Number(
+                      b.field.sort_order ||
+                      0
+                    )
+                )
+                .map(
+                  (
+                    item
+                  ) => ({
+                    id:
+                      item.id,
+
+                    field_id:
+                      item.field_id,
+
+                    field_label:
+                      item.field.field_label,
+
+                    field_key:
+                      item.field.field_key,
+
+                    field_type:
+                      item.field.field_type,
+
+                    is_required:
+                      item.field.is_required,
+
+                    sort_order:
+                      item.field.sort_order,
+
+                    field_value:
+                      item.field_value || "",
+                  })
+                );
+
             return {
               ...box,
 
@@ -5757,6 +5434,9 @@ export const generateProjectFullReportService = async (
 
               box_group_name:
                 boxGroupName,
+
+              box_info_values:
+                boxInfoValues,
 
               total_quantity:
                 totalQuantity,
@@ -5802,7 +5482,7 @@ export const generateProjectFullReportService = async (
 
               product_box_count:
                 `${index +
-                1
+                  1
                 } of ${totalBoxes}`,
             })
           );
@@ -5872,7 +5552,7 @@ export const generateProjectFullReportService = async (
               ) ||
               0
             ) +
-            1
+              1
           );
         }
 
@@ -6002,8 +5682,8 @@ export const generateProjectFullReportService = async (
             class="company-logo-text"
           >
             ${escapeHtml(
-          vendor.vendor_name
-        )}
+              vendor.vendor_name
+            )}
           </div>
         `;
 
@@ -6040,24 +5720,24 @@ export const generateProjectFullReportService = async (
             class="company-name"
           >
             ${escapeHtml(
-      vendor.vendor_name
-    )}
+              vendor.vendor_name
+            )}
           </div>
 
 
           <div>
             ${escapeHtml(
-      vendor.primary_contact_number ||
-      ""
-    )}
+              vendor.primary_contact_number ||
+              ""
+            )}
           </div>
 
 
           <div>
             ${escapeHtml(
-      vendor.primary_contact_email ||
-      ""
-    )}
+              vendor.primary_contact_email ||
+              ""
+            )}
           </div>
 
         </div>
@@ -6087,8 +5767,8 @@ export const generateProjectFullReportService = async (
             class="project-name"
           >
             ${escapeHtml(
-      project.project_name
-    )}
+              project.project_name
+            )}
           </div>
 
 
@@ -6098,8 +5778,8 @@ export const generateProjectFullReportService = async (
             Order Number:
 
             ${escapeHtml(
-      orderNumber
-    )}
+              orderNumber
+            )}
           </div>
 
         </div>
@@ -6111,15 +5791,15 @@ export const generateProjectFullReportService = async (
 
           <strong>
             ${escapeHtml(
-      clientName
-    )}
+              clientName
+            )}
           </strong>
 
 
           <div>
             ${escapeHtml(
-      clientContact
-    )}
+              clientContact
+            )}
           </div>
 
         </div>
@@ -6144,55 +5824,55 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${index +
-            1
-            }
+                  1
+                }
               </td>
 
 
               <td>
                 ${escapeHtml(
-              box.packet_no
-            )}
+                  box.packet_no
+                )}
               </td>
 
 
               <td>
                 ${escapeHtml(
-              box.packed_by_name
-            )}
+                  box.packed_by_name
+                )}
               </td>
 
 
               <td>
                 ${formatReportDate(
-              box.package_date
-            )}
+                  box.package_date
+                )}
               </td>
 
 
               <td>
                 ${escapeHtml(
-              box.product_box_count
-            )}
+                  box.product_box_count
+                )}
               </td>
 
 
               <td>
                 ${box.items.length
-            }
+                }
               </td>
 
 
               <td>
                 ${box.total_quantity
-            }
+                }
               </td>
 
 
               <td>
                 ${box.total_weight.toFixed(
-              2
-            )}
+                  2
+                )}
 
                 kg
               </td>
@@ -6200,10 +5880,10 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${escapeHtml(
-              String(
-                box.box_status
-              )
-            )}
+                  String(
+                    box.box_status
+                  )
+                )}
               </td>
 
             </tr>
@@ -6283,8 +5963,8 @@ export const generateProjectFullReportService = async (
 
             <strong>
               ${totalWeight.toFixed(
-      2
-    )}
+                2
+              )}
 
               kg
             </strong>
@@ -6304,8 +5984,8 @@ export const generateProjectFullReportService = async (
 
 
           ${escapeHtml(
-      clientAddress
-    )}
+            clientAddress
+          )}
 
         </div>
 
@@ -6407,8 +6087,8 @@ export const generateProjectFullReportService = async (
 
               <td>
                 ${totalWeight.toFixed(
-      2
-    )}
+                  2
+                )}
 
                 kg
               </td>
@@ -6494,28 +6174,28 @@ export const generateProjectFullReportService = async (
 
                       <td>
                         ${index +
-                    1
-                    }
+                          1
+                        }
                       </td>
 
 
                       <td>
                         ${escapeHtml(
-                      item.item_name
-                    )}
+                          item.item_name
+                        )}
                       </td>
 
 
                       <td>
                         ${item.quantity
-                    }
+                        }
                       </td>
 
 
                       <td>
                         ${item.unit_weight.toFixed(
-                      2
-                    )}
+                          2
+                        )}
 
                         kg
                       </td>
@@ -6523,8 +6203,8 @@ export const generateProjectFullReportService = async (
 
                       <td>
                         ${item.total_weight.toFixed(
-                      2
-                    )}
+                          2
+                        )}
 
                         kg
                       </td>
@@ -6533,6 +6213,41 @@ export const generateProjectFullReportService = async (
                   `
                 )
                 .join("");
+
+            /*
+            |--------------------------------------------------------------------------
+            | Dynamic box info fields
+            |--------------------------------------------------------------------------
+            */
+
+            const dynamicBoxDetails =
+              box.box_info_values
+                ?.map(
+                  (
+                    item
+                  ) => `
+                    <div
+                      class="box-detail"
+                    >
+
+                      <span>
+                        ${escapeHtml(
+                          item.field_label
+                        )}
+                      </span>
+
+
+                      <strong>
+                        ${escapeHtml(
+                          item.field_value ||
+                          "—"
+                        )}
+                      </strong>
+
+                    </div>
+                  `
+                )
+                .join("") || "";
 
             /*
             |--------------------------------------------------------------------------
@@ -6571,8 +6286,8 @@ export const generateProjectFullReportService = async (
 
                     <strong>
                       ${escapeHtml(
-              clientName
-            )}
+                        clientName
+                      )}
                     </strong>
 
                   </div>
@@ -6587,8 +6302,8 @@ export const generateProjectFullReportService = async (
 
                     <strong>
                       ${escapeHtml(
-              clientContact
-            )}
+                        clientContact
+                      )}
                     </strong>
 
                   </div>
@@ -6625,8 +6340,8 @@ export const generateProjectFullReportService = async (
 
                           <strong>
                             ${escapeHtml(
-              box.order_no
-            )}
+                              box.order_no
+                            )}
                           </strong>
 
                         </div>
@@ -6643,8 +6358,8 @@ export const generateProjectFullReportService = async (
 
                           <strong>
                             ${escapeHtml(
-              box.packed_by_name
-            )}
+                              box.packed_by_name
+                            )}
                           </strong>
 
                         </div>
@@ -6661,11 +6376,14 @@ export const generateProjectFullReportService = async (
 
                           <strong>
                             ${escapeHtml(
-              box.packet_no
-            )}
+                              box.packet_no
+                            )}
                           </strong>
 
                         </div>
+
+
+                        ${dynamicBoxDetails}
 
 
                         <div
@@ -6695,8 +6413,8 @@ export const generateProjectFullReportService = async (
 
                           <strong>
                             ${escapeHtml(
-              box.product_box_count
-            )}
+                              box.product_box_count
+                            )}
                           </strong>
 
                         </div>
@@ -6715,8 +6433,8 @@ export const generateProjectFullReportService = async (
                             class="total-weight-value"
                           >
                             ${box.total_weight.toFixed(
-              2
-            )}
+                              2
+                            )}
 
                             kg
                           </strong>
@@ -6765,8 +6483,8 @@ export const generateProjectFullReportService = async (
 
                     <strong>
                       ${escapeHtml(
-              box.address
-            )}
+                        box.address
+                      )}
                     </strong>
 
                   </div>
@@ -6789,14 +6507,14 @@ export const generateProjectFullReportService = async (
                     class="products-count"
                   >
                     ${box.items.length
-              }
+                    }
 
                     products
 
                     ·
 
                     ${box.total_quantity
-              }
+                    }
 
                     qty
                   </div>
@@ -6854,7 +6572,7 @@ export const generateProjectFullReportService = async (
                   <tbody>
 
                     ${itemRows ||
-              `
+                      `
                         <tr>
 
                           <td
@@ -6867,7 +6585,7 @@ export const generateProjectFullReportService = async (
 
                         </tr>
                       `
-              }
+                    }
 
                   </tbody>
 
@@ -6885,7 +6603,7 @@ export const generateProjectFullReportService = async (
 
                       <td>
                         ${box.total_quantity
-              }
+                        }
                       </td>
 
 
@@ -6896,8 +6614,8 @@ export const generateProjectFullReportService = async (
 
                       <td>
                         ${box.total_weight.toFixed(
-                2
-              )}
+                          2
+                        )}
 
                         kg
                       </td>
@@ -7989,7 +7707,7 @@ ${boxPages}
       }
     );
   } catch (
-  error
+    error
   ) {
     console.error(
       "generateProjectFullReportService:",
@@ -8351,4 +8069,237 @@ const generateCustomSizePdf = async (
   } finally {
     await browser.close();
   }
+};
+
+type BoxInfoValueInput = {
+  field_id: number;
+  field_value?: string | null;
+};
+
+const normalizeValue = (
+  value: string | null | undefined
+) => {
+  const trimmed =
+    String(value ?? "").trim();
+
+  return trimmed || null;
+};
+
+const getBoxInfoValuesFormatted = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  const rows =
+    await prisma.boxInfoFieldValue.findMany({
+      where: {
+        box_id,
+        project_id,
+        vendor_id,
+      },
+
+      include: {
+        field: {
+          select: {
+            id: true,
+            field_label: true,
+            field_key: true,
+            field_type: true,
+            is_required: true,
+            sort_order: true,
+            active: true,
+          },
+        },
+      },
+    });
+
+  return rows
+    .filter((row) => row.field?.active)
+    .sort(
+      (a, b) =>
+        Number(a.field.sort_order || 0) -
+        Number(b.field.sort_order || 0)
+    )
+    .map((row) => ({
+      id: row.id,
+      field_id: row.field_id,
+      field_label: row.field.field_label,
+      field_key: row.field.field_key,
+      field_type: row.field.field_type,
+      is_required: row.field.is_required,
+      sort_order: row.field.sort_order,
+      field_value: row.field_value || "",
+    }));
+};
+
+const saveBoxInfoValuesTx = async ({
+  tx,
+  box_id,
+  project_id,
+  vendor_id,
+  values,
+  user_id,
+}: {
+  tx: any;
+  box_id: number;
+  project_id: number;
+  vendor_id: number;
+  values: BoxInfoValueInput[];
+  user_id?: number | null;
+}) => {
+  const configuredFields =
+    await tx.projectBoxInfoField.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        active: true,
+      },
+
+      orderBy: [
+        {
+          sort_order: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+
+      select: {
+        id: true,
+        field_label: true,
+        is_required: true,
+      },
+    });
+
+  const valueMap =
+    new Map<number, string | null>();
+
+  for (const item of values || []) {
+    valueMap.set(
+      Number(item.field_id),
+      normalizeValue(item.field_value)
+    );
+  }
+
+  for (const field of configuredFields) {
+    const value =
+      valueMap.get(field.id) || null;
+
+    if (field.is_required && !value) {
+      throw new Error(`${field.field_label} is required`);
+    }
+  }
+
+  for (const field of configuredFields) {
+    const value =
+      valueMap.get(field.id) || null;
+
+    await tx.boxInfoFieldValue.upsert({
+      where: {
+        box_id_field_id: {
+          box_id,
+          field_id: field.id,
+        },
+      },
+
+      create: {
+        box_id,
+        project_id,
+        vendor_id,
+        field_id: field.id,
+        field_value: value,
+        created_by: user_id || null,
+      },
+
+      update: {
+        field_value: value,
+        updated_by: user_id || null,
+      },
+    });
+  }
+};
+
+
+export const getProjectBoxInfoFieldsService = async (
+  project_id: number,
+  vendor_id: number
+) => {
+  const fields =
+    await prisma.projectBoxInfoField.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        active: true,
+      },
+
+      orderBy: [
+        {
+          sort_order: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+
+      select: {
+        id: true,
+        project_id: true,
+        vendor_id: true,
+        field_label: true,
+        field_key: true,
+        field_type: true,
+        is_required: true,
+        sort_order: true,
+      },
+    });
+
+  return fields;
+};
+
+export const getBoxInfoValuesService = async (
+  box_id: number,
+  project_id: number,
+  vendor_id: number
+) => {
+  const fields =
+    await prisma.projectBoxInfoField.findMany({
+      where: {
+        project_id,
+        vendor_id,
+        active: true,
+      },
+
+      orderBy: [
+        {
+          sort_order: "asc",
+        },
+        {
+          id: "asc",
+        },
+      ],
+
+      include: {
+        values: {
+          where: {
+            box_id,
+          },
+
+          select: {
+            id: true,
+            field_value: true,
+          },
+        },
+      },
+    });
+
+  return fields.map((field) => ({
+    field_id: field.id,
+    field_label: field.field_label,
+    field_key: field.field_key,
+    field_type: field.field_type,
+    is_required: field.is_required,
+    sort_order: field.sort_order,
+    field_value:
+      field.values?.[0]?.field_value || "",
+  }));
 };

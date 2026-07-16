@@ -1513,6 +1513,23 @@ export type EnumAdditionalCostCalculationTypeWithAggregatesFilter<$PrismaModel =
   _max?: Prisma.NestedEnumAdditionalCostCalculationTypeFilter<$PrismaModel>
 }
 
+export type EnumBoxInfoFieldTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoxInfoFieldType | Prisma.EnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel> | $Enums.BoxInfoFieldType
+}
+
+export type EnumBoxInfoFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoxInfoFieldType | Prisma.EnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoxInfoFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.BoxInfoFieldType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel>
+}
+
 export type NestedIntFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
@@ -2947,6 +2964,23 @@ export type NestedEnumAdditionalCostCalculationTypeWithAggregatesFilter<$PrismaM
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumAdditionalCostCalculationTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumAdditionalCostCalculationTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumBoxInfoFieldTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoxInfoFieldType | Prisma.EnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel> | $Enums.BoxInfoFieldType
+}
+
+export type NestedEnumBoxInfoFieldTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BoxInfoFieldType | Prisma.EnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.BoxInfoFieldType[] | Prisma.ListEnumBoxInfoFieldTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumBoxInfoFieldTypeWithAggregatesFilter<$PrismaModel> | $Enums.BoxInfoFieldType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBoxInfoFieldTypeFilter<$PrismaModel>
 }
 
 
