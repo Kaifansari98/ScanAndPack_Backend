@@ -22,6 +22,7 @@ import {
   uploadMoreSitePhotosService,
   checkSiteSupervisorAssigned,
   assignDesignerToLead,
+  unassignDesignerFromLead,
   blockLeadService,
   unblockLeadService,
 } from "../../../services/leadModuleServices/leadsGeneration/leadGeneration.service";
@@ -1914,6 +1915,55 @@ export class LeadController {
         .json(
           ApiResponse.error(
             error?.message || "Failed to assign designer",
+            statusCode,
+          ),
+        );
+    }
+  }
+
+  async unassignDesigner(req: Request, res: Response): Promise<Response> {
+    try {
+      const vendorId = Number(getParam(req.params.vendorId));
+      const leadId = Number(getParam(req.params.leadId));
+      const userId = Number(req.body.user_id);
+      const updatedBy = Number(req.body.updated_by);
+
+      if (
+        [vendorId, leadId, userId, updatedBy].some(
+          (value) => Number.isNaN(value) || value <= 0,
+        )
+      ) {
+        return res
+          .status(400)
+          .json(ApiResponse.error("Invalid unassignment payload", 400));
+      }
+
+      const result = await unassignDesignerFromLead({
+        lead_id: leadId,
+        vendor_id: vendorId,
+        user_id: userId,
+        updated_by: updatedBy,
+      });
+
+      return res.status(200).json(
+        ApiResponse.success(
+          { mapping_id: result.mappingId },
+          "Designer unassigned successfully",
+          200,
+        ),
+      );
+    } catch (error: any) {
+      console.error("[CONTROLLER] unassignDesigner error:", error);
+      const statusCode =
+        error?.message === "Lead not found" ||
+        error?.message === "Active designer assignment not found"
+          ? 404
+          : 400;
+      return res
+        .status(statusCode)
+        .json(
+          ApiResponse.error(
+            error?.message || "Failed to unassign designer",
             statusCode,
           ),
         );

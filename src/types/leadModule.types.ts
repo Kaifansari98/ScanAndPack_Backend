@@ -140,6 +140,7 @@ export interface CarcasMaterialFinish {
     id: number;
     name: string;
     carcas_material_id: number;
+    material?: { id: number; name: string };
 }
 
 export interface CarcasMaterial {
@@ -153,6 +154,7 @@ export interface ShutterMaterialFinish {
     id: number;
     name: string;
     shutter_material_id: number;
+    material?: { id: number; name: string };
 }
 
 export interface ShutterMaterial {
@@ -167,6 +169,7 @@ export interface SkirtingCarcassLegsColor {
     carcass_legs_id: number;
     skirting_carcass_legs_id: number;
     color: string;
+    skirtingCarcassLegs?: { id: number; name: string };
 }
 
 export interface SkirtingCarcassLegs {
@@ -175,6 +178,7 @@ export interface SkirtingCarcassLegs {
     carcass_legs_id: number;
     inScope: boolean;
     colors?: SkirtingCarcassLegsColor[];
+    carcassLegs?: { id: number; name: string };
 }
 
 export interface CarcassLegs {
@@ -190,6 +194,7 @@ export interface LightCarcasUnit {
     type: string;
     light_carcas_type_id: number;
     is_active: boolean;
+    lightCarcasType?: { id: number; type: string };
 }
 
 export interface LightCarcasType {

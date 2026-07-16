@@ -39,6 +39,19 @@ export const getAllCarcassTypes = async (
   return types as CarcassType[];
 };
 
+export const createCarcassType = async (
+  vendor_id: number,
+  name: string,
+): Promise<CarcassType> => {
+  await ensureVendorExists(vendor_id);
+
+  const type = await prisma.carcassTypeMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return type as CarcassType;
+};
+
 export const getAllShutterTypes = async (
   vendor_id: number,
 ): Promise<ShutterType[]> => {
@@ -57,6 +70,19 @@ export const getAllShutterTypes = async (
   return types as ShutterType[];
 };
 
+export const createShutterType = async (
+  vendor_id: number,
+  name: string,
+): Promise<ShutterType> => {
+  await ensureVendorExists(vendor_id);
+
+  const type = await prisma.shutterTypeMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return type as ShutterType;
+};
+
 export const getAllCarcasMaterials = async (
   vendor_id: number,
 ): Promise<CarcasMaterial[]> => {
@@ -68,6 +94,19 @@ export const getAllCarcasMaterials = async (
   });
 
   return materials as CarcasMaterial[];
+};
+
+export const createCarcasMaterial = async (
+  vendor_id: number,
+  name: string,
+): Promise<CarcasMaterial> => {
+  await ensureVendorExists(vendor_id);
+
+  const material = await prisma.carcasMaterialMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return material as CarcasMaterial;
 };
 
 export const getCarcassMaterialFinishes = async (
@@ -90,6 +129,40 @@ export const getCarcassMaterialFinishes = async (
   return finishes as CarcasMaterialFinish[];
 };
 
+export const createCarcassMaterialFinish = async (
+  carcas_material_id: number,
+  name: string,
+): Promise<CarcasMaterialFinish> => {
+  const material = await prisma.carcasMaterialMaster.findUnique({
+    where: { id: carcas_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid carcas_material_id");
+  }
+
+  const finish = await prisma.carcassMaterialFinishMaster.create({
+    data: { carcas_material_id, name },
+  });
+
+  return finish as CarcasMaterialFinish;
+};
+
+export const getAllCarcassMaterialFinishesForVendor = async (
+  vendor_id: number,
+): Promise<CarcasMaterialFinish[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const finishes = await prisma.carcassMaterialFinishMaster.findMany({
+    where: { material: { vendor_id } },
+    include: { material: { select: { id: true, name: true } } },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as CarcasMaterialFinish[];
+};
+
 export const getAllShutterMaterials = async (
   vendor_id: number,
 ): Promise<ShutterMaterial[]> => {
@@ -101,6 +174,19 @@ export const getAllShutterMaterials = async (
   });
 
   return materials as ShutterMaterial[];
+};
+
+export const createShutterMaterial = async (
+  vendor_id: number,
+  name: string,
+): Promise<ShutterMaterial> => {
+  await ensureVendorExists(vendor_id);
+
+  const material = await prisma.shutterMaterialMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return material as ShutterMaterial;
 };
 
 export const getShutterMaterialFinishes = async (
@@ -123,6 +209,40 @@ export const getShutterMaterialFinishes = async (
   return finishes as ShutterMaterialFinish[];
 };
 
+export const createShutterMaterialFinish = async (
+  shutter_material_id: number,
+  name: string,
+): Promise<ShutterMaterialFinish> => {
+  const material = await prisma.shutterMaterialMaster.findUnique({
+    where: { id: shutter_material_id },
+    select: { id: true },
+  });
+
+  if (!material) {
+    throw new Error("Invalid shutter_material_id");
+  }
+
+  const finish = await prisma.shutterMaterialFinishMaster.create({
+    data: { shutter_material_id, name },
+  });
+
+  return finish as ShutterMaterialFinish;
+};
+
+export const getAllShutterMaterialFinishesForVendor = async (
+  vendor_id: number,
+): Promise<ShutterMaterialFinish[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const finishes = await prisma.shutterMaterialFinishMaster.findMany({
+    where: { material: { vendor_id } },
+    include: { material: { select: { id: true, name: true } } },
+    orderBy: { name: "asc" },
+  });
+
+  return finishes as ShutterMaterialFinish[];
+};
+
 export const getAllCarcassLegs = async (
   vendor_id: number,
 ): Promise<CarcassLegs[]> => {
@@ -134,6 +254,19 @@ export const getAllCarcassLegs = async (
   });
 
   return legs as CarcassLegs[];
+};
+
+export const createCarcassLegs = async (
+  vendor_id: number,
+  name: string,
+): Promise<CarcassLegs> => {
+  await ensureVendorExists(vendor_id);
+
+  const legs = await prisma.carcassLegsMaster.create({
+    data: { vendor_id, name },
+  });
+
+  return legs as CarcassLegs;
 };
 
 export const getSkirtingCarcassLegs = async (
@@ -150,6 +283,41 @@ export const getSkirtingCarcassLegs = async (
 
   const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
     where: { carcass_legs_id },
+    orderBy: { name: "asc" },
+  });
+
+  return skirtings as SkirtingCarcassLegs[];
+};
+
+export const createSkirtingCarcassLegs = async (
+  carcass_legs_id: number,
+  name: string,
+  inScope: boolean,
+): Promise<SkirtingCarcassLegs> => {
+  const legs = await prisma.carcassLegsMaster.findUnique({
+    where: { id: carcass_legs_id },
+    select: { id: true },
+  });
+
+  if (!legs) {
+    throw new Error("Invalid carcass_legs_id");
+  }
+
+  const skirting = await prisma.skirtingCarcassLegsMaster.create({
+    data: { carcass_legs_id, name, inScope },
+  });
+
+  return skirting as SkirtingCarcassLegs;
+};
+
+export const getAllSkirtingCarcassLegsForVendor = async (
+  vendor_id: number,
+): Promise<SkirtingCarcassLegs[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const skirtings = await prisma.skirtingCarcassLegsMaster.findMany({
+    where: { carcassLegs: { vendor_id } },
+    include: { carcassLegs: { select: { id: true, name: true } } },
     orderBy: { name: "asc" },
   });
 
@@ -176,6 +344,41 @@ export const getSkirtingCarcassLegsColors = async (
   return colors as SkirtingCarcassLegsColor[];
 };
 
+export const createSkirtingCarcassLegsColor = async (
+  carcass_legs_id: number,
+  skirting_carcass_legs_id: number,
+  color: string,
+): Promise<SkirtingCarcassLegsColor> => {
+  const skirting = await prisma.skirtingCarcassLegsMaster.findUnique({
+    where: { id: skirting_carcass_legs_id },
+    select: { id: true, carcass_legs_id: true },
+  });
+
+  if (!skirting || skirting.carcass_legs_id !== carcass_legs_id) {
+    throw new Error("Invalid carcass_legs_id or skirting_carcass_legs_id");
+  }
+
+  const colorEntry = await prisma.skirtingCarcassLegsColorMaster.create({
+    data: { carcass_legs_id, skirting_carcass_legs_id, color },
+  });
+
+  return colorEntry as SkirtingCarcassLegsColor;
+};
+
+export const getAllSkirtingCarcassLegsColorsForVendor = async (
+  vendor_id: number,
+): Promise<SkirtingCarcassLegsColor[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const colors = await prisma.skirtingCarcassLegsColorMaster.findMany({
+    where: { carcassLegs: { vendor_id } },
+    include: { skirtingCarcassLegs: { select: { id: true, name: true } } },
+    orderBy: { color: "asc" },
+  });
+
+  return colors as SkirtingCarcassLegsColor[];
+};
+
 export const getAllLightCarcasTypes = async (
   vendor_id: number,
 ): Promise<LightCarcasType[]> => {
@@ -187,6 +390,19 @@ export const getAllLightCarcasTypes = async (
   });
 
   return types as LightCarcasType[];
+};
+
+export const createLightCarcasType = async (
+  vendor_id: number,
+  type: string,
+): Promise<LightCarcasType> => {
+  await ensureVendorExists(vendor_id);
+
+  const created = await prisma.lightCarcasTypeMaster.create({
+    data: { vendor_id, type },
+  });
+
+  return created as LightCarcasType;
 };
 
 export const getLightCarcasUnits = async (
@@ -209,6 +425,41 @@ export const getLightCarcasUnits = async (
   return units as LightCarcasUnit[];
 };
 
+export const createLightCarcasUnit = async (
+  vendor_id: number,
+  type: string,
+  light_carcas_type_id: number,
+): Promise<LightCarcasUnit> => {
+  const parentType = await prisma.lightCarcasTypeMaster.findUnique({
+    where: { id: light_carcas_type_id },
+    select: { id: true },
+  });
+
+  if (!parentType) {
+    throw new Error("Invalid light_carcas_type_id");
+  }
+
+  const created = await prisma.lightCarcasUnitMaster.create({
+    data: { vendor_id, type, light_carcas_type_id },
+  });
+
+  return created as LightCarcasUnit;
+};
+
+export const getAllLightCarcasUnitsForVendor = async (
+  vendor_id: number,
+): Promise<LightCarcasUnit[]> => {
+  await ensureVendorExists(vendor_id);
+
+  const units = await prisma.lightCarcasUnitMaster.findMany({
+    where: { vendor_id, is_active: true },
+    include: { lightCarcasType: { select: { id: true, type: true } } },
+    orderBy: { type: "asc" },
+  });
+
+  return units as LightCarcasUnit[];
+};
+
 export const getAllOtherAppliances = async (
   vendor_id: number,
 ): Promise<OtherAppliances[]> => {
@@ -220,6 +471,21 @@ export const getAllOtherAppliances = async (
   });
 
   return appliances as OtherAppliances[];
+};
+
+export const createOtherAppliances = async (
+  vendor_id: number,
+  type: string,
+  article_number: string,
+  description: string,
+): Promise<OtherAppliances> => {
+  await ensureVendorExists(vendor_id);
+
+  const created = await prisma.otherAppliancesMaster.create({
+    data: { vendor_id, type, article_number, description },
+  });
+
+  return created as OtherAppliances;
 };
 
 export const getAllHandleTypes = async (

@@ -122,6 +122,13 @@ type AssignDesignerInput = {
   created_by: number;
 };
 
+type UnassignDesignerInput = {
+  lead_id: number;
+  vendor_id: number;
+  user_id: number;
+  updated_by: number;
+};
+
 type ToggleLeadBlockInput = {
   vendor_id: number;
   lead_id: number;
@@ -1208,7 +1215,7 @@ export const getLeadById = async (
       },
     });
 
-    const oldestDesignerMapping = await prisma.leadUserMapping.findFirst({
+    const activeDesignerMappings = await prisma.leadUserMapping.findMany({
       where: {
         lead_id: lead.id,
         vendor_id: vendorId,
@@ -1259,13 +1266,13 @@ export const getLeadById = async (
             created_at: oldestIsmMapping.created_at,
           }
           : null,
-        assigned_designer_from_mapping: oldestDesignerMapping
-          ? {
-            user_id: oldestDesignerMapping.user_id,
-            user_name: oldestDesignerMapping.user?.user_name ?? null,
-            created_at: oldestDesignerMapping.created_at,
-          }
-          : null,
+        assigned_designers_from_mapping: activeDesignerMappings.map(
+          (mapping) => ({
+            user_id: mapping.user_id,
+            user_name: mapping.user?.user_name ?? null,
+            created_at: mapping.created_at,
+          }),
+        ),
       },
       userInfo: {
         role: userType,
@@ -1351,6 +1358,7 @@ export const assignDesignerToLead = async (
         vendor_id: data.vendor_id,
         status: "active",
         type: "designer",
+        user_id: designerUser.id,
       },
       select: {
         id: true,
@@ -1358,25 +1366,12 @@ export const assignDesignerToLead = async (
       },
     });
 
-    if (existingActiveDesignerMapping?.user_id === designerUser.id) {
+    if (existingActiveDesignerMapping) {
       return {
         mappingId: existingActiveDesignerMapping.id,
         user: designerUser,
       };
     }
-
-    await tx.leadUserMapping.updateMany({
-      where: {
-        lead_id: data.lead_id,
-        vendor_id: data.vendor_id,
-        type: "designer",
-        status: "active",
-      },
-      data: {
-        status: "inactive",
-        updated_by: data.created_by,
-      },
-    });
 
     const mapping = await tx.leadUserMapping.create({
       data: {
@@ -1440,6 +1435,60 @@ export const assignDesignerToLead = async (
       mappingId: mapping.id,
       user: designerUser,
     };
+  });
+};
+
+export const unassignDesignerFromLead = async (
+  data: UnassignDesignerInput,
+) => {
+  return prisma.$transaction(async (tx) => {
+    const lead = await tx.leadMaster.findFirst({
+      where: {
+        id: data.lead_id,
+        vendor_id: data.vendor_id,
+        is_deleted: false,
+      },
+      select: { id: true, account_id: true },
+    });
+
+    if (!lead) {
+      throw new Error("Lead not found");
+    }
+
+    const mapping = await tx.leadUserMapping.findFirst({
+      where: {
+        lead_id: data.lead_id,
+        vendor_id: data.vendor_id,
+        user_id: data.user_id,
+        type: "designer",
+        status: "active",
+      },
+      select: { id: true, user: { select: { user_name: true } } },
+    });
+
+    if (!mapping) {
+      throw new Error("Active designer assignment not found");
+    }
+
+    await tx.leadUserMapping.update({
+      where: { id: mapping.id },
+      data: {
+        status: "inactive",
+        updated_by: data.updated_by,
+      },
+    });
+
+    await createLeadLog(tx, {
+      vendor_id: data.vendor_id,
+      lead_id: data.lead_id,
+      account_id: lead.account_id!,
+      action: `Designer ${mapping.user?.user_name ?? ""} unassigned.`,
+      action_type: "UPDATE",
+      created_by: data.updated_by,
+      created_at: new Date(),
+    });
+
+    return { mappingId: mapping.id };
   });
 };
 
