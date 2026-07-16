@@ -3973,7 +3973,7 @@ model ProjectBoxInfoField {
 
   values BoxInfoFieldValue[]
 
-  @@unique([project_id, vendor_id, field_key])
+
   @@index([project_id, vendor_id])
   
 }

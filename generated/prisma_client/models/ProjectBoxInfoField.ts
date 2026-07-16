@@ -326,7 +326,6 @@ export type ProjectBoxInfoFieldOrderByWithRelationInput = {
 
 export type ProjectBoxInfoFieldWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  project_id_vendor_id_field_key?: Prisma.ProjectBoxInfoFieldProject_idVendor_idField_keyCompoundUniqueInput
   AND?: Prisma.ProjectBoxInfoFieldWhereInput | Prisma.ProjectBoxInfoFieldWhereInput[]
   OR?: Prisma.ProjectBoxInfoFieldWhereInput[]
   NOT?: Prisma.ProjectBoxInfoFieldWhereInput | Prisma.ProjectBoxInfoFieldWhereInput[]
@@ -345,7 +344,7 @@ export type ProjectBoxInfoFieldWhereUniqueInput = Prisma.AtLeast<{
   project?: Prisma.XOR<Prisma.ProjectMasterScalarRelationFilter, Prisma.ProjectMasterWhereInput>
   vendor?: Prisma.XOR<Prisma.VendorMasterScalarRelationFilter, Prisma.VendorMasterWhereInput>
   values?: Prisma.BoxInfoFieldValueListRelationFilter
-}, "id" | "project_id_vendor_id_field_key">
+}, "id">
 
 export type ProjectBoxInfoFieldOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -506,12 +505,6 @@ export type ProjectBoxInfoFieldListRelationFilter = {
 
 export type ProjectBoxInfoFieldOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
-}
-
-export type ProjectBoxInfoFieldProject_idVendor_idField_keyCompoundUniqueInput = {
-  project_id: number
-  vendor_id: number
-  field_key: string
 }
 
 export type ProjectBoxInfoFieldCountOrderByAggregateInput = {
