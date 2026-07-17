@@ -2750,6 +2750,7 @@ model FranchiseMaster {
   contact_email                       String?
   contact_person                      String?
   is_head_office                      Boolean                              @default(false)
+  moduled_for_b2b                     Boolean                              @default(false)
   zone_id                             Int?
   country_id                          Int?
   region_id                           Int?

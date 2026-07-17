@@ -2216,6 +2216,7 @@ export const FranchiseMasterScalarFieldEnum = {
   contact_email: 'contact_email',
   contact_person: 'contact_person',
   is_head_office: 'is_head_office',
+  moduled_for_b2b: 'moduled_for_b2b',
   zone_id: 'zone_id',
   country_id: 'country_id',
   region_id: 'region_id',
