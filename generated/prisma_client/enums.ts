@@ -9,16 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const BoxInfoFieldType = {
-  TEXT: 'TEXT',
-  NUMBER: 'NUMBER',
-  DATE: 'DATE',
-  TEXTAREA: 'TEXTAREA'
-} as const
-
-export type BoxInfoFieldType = (typeof BoxInfoFieldType)[keyof typeof BoxInfoFieldType]
-
-
 export const PackingType = {
   DEFAULT: 'DEFAULT',
   GROUPWISE: 'GROUPWISE'

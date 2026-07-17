@@ -116,6 +116,7 @@ export const getFranchisesByVendorId = async (vendorId: number) => {
       address: true,
       pincode: true,
       is_head_office: true,
+      moduled_for_b2b: true,
       status: true,
       createdAt: true,
     },
