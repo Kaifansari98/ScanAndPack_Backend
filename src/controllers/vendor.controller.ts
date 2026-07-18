@@ -3,6 +3,46 @@ import * as vendorService from "../services/vendor.service";
 import { uploadToWasabiVendorAsset } from "../utils/wasabiClient";
 import fs from "node:fs/promises";
 
+const cleanString = (value: any) => {
+  if (value === undefined || value === null) return undefined;
+
+  const trimmed = String(value).trim();
+
+  return trimmed || null;
+};
+
+const cleanNumberOrNull = (value: any) => {
+  if (value === undefined || value === null || value === "") return null;
+
+  const numberValue = Number(value);
+
+  return Number.isFinite(numberValue) ? numberValue : null;
+};
+
+const validateOptionalVendorCompanyFields = (data: any) => {
+  const gstNo = cleanString(data.gst_no);
+  const websiteLink = cleanString(data.website_link);
+  const pincode = cleanString(data.pincode);
+
+  const gstRegex =
+    /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/;
+
+  const websiteRegex =
+    /^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
+
+  if (gstNo && !gstRegex.test(String(gstNo).toUpperCase())) {
+    throw new Error("Invalid GST number format");
+  }
+
+  if (websiteLink && !websiteRegex.test(String(websiteLink))) {
+    throw new Error("Invalid website link format");
+  }
+
+  if (pincode && !/^\d{6}$/.test(String(pincode))) {
+    throw new Error("Pincode must be 6 digits");
+  }
+};
+
 export const createVendor = async (req: Request, res: Response) => {
   try {
     const files = req.files as { [key: string]: Express.Multer.File[] } | undefined;
@@ -49,6 +89,15 @@ export const createVendor = async (req: Request, res: Response) => {
       logo: logoUrl,
       icon: iconUrl,
       login_image: loginImageUrl,
+      gst_no: cleanString(req.body.gst_no),
+      toll_free_no: cleanString(req.body.toll_free_no),
+      website_link: cleanString(req.body.website_link),
+      tag_line: cleanString(req.body.tag_line),
+      address: cleanString(req.body.address),
+      pincode: cleanString(req.body.pincode),
+      city: cleanString(req.body.city),
+      state_id: cleanNumberOrNull(req.body.state_id),
+
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
@@ -120,7 +169,19 @@ export const updateVendorController = async (req: Request, res: Response) => {
       ...(logoUrl !== undefined && { logo: logoUrl }),
       ...(iconUrl !== undefined && { icon: iconUrl }),
       ...(loginImageUrl !== undefined && { login_image: loginImageUrl }),
-      handlesLargeScaleProjects: req.body.handlesLargeScaleProjects !== undefined 
+      gst_no: cleanString(req.body.gst_no),
+      toll_free_no: cleanString(req.body.toll_free_no),
+      website_link: cleanString(req.body.website_link),
+      tag_line: cleanString(req.body.tag_line),
+      address: cleanString(req.body.address),
+      pincode: cleanString(req.body.pincode),
+      city: cleanString(req.body.city),
+      state_id:
+        req.body.state_id !== undefined
+          ? cleanNumberOrNull(req.body.state_id)
+          : undefined,
+
+      handlesLargeScaleProjects: req.body.handlesLargeScaleProjects !== undefined
         ? (req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true)
         : undefined,
       is_crm_enabled: req.body.is_crm_enabled !== undefined
@@ -158,7 +219,7 @@ export const updateVendorController = async (req: Request, res: Response) => {
 
 export const getAllVendors = async (req: Request, res: Response) => {
   try {
-    const page  = Math.max(1, Number(req.query.page)  || 1);
+    const page = Math.max(1, Number(req.query.page) || 1);
     const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 20));
     const search = req.query.search ? String(req.query.search).trim() : undefined;
 
@@ -307,6 +368,15 @@ export const onboardVendorController = async (req: Request, res: Response) => {
       ...req.body,
       logo: logoUrl,
       icon: iconUrl,
+      gst_no: cleanString(req.body.gst_no),
+      toll_free_no: cleanString(req.body.toll_free_no),
+      website_link: cleanString(req.body.website_link),
+      tag_line: cleanString(req.body.tag_line),
+      address: cleanString(req.body.address),
+      pincode: cleanString(req.body.pincode),
+      city: cleanString(req.body.city),
+      state_id: cleanNumberOrNull(req.body.state_id),
+
       handlesLargeScaleProjects: req.body.handlesLargeScaleProjects === "true" || req.body.handlesLargeScaleProjects === true,
       is_crm_enabled: req.body.is_crm_enabled === "true" || req.body.is_crm_enabled === true,
       is_inventory_enabled: req.body.is_inventory_enabled === "true" || req.body.is_inventory_enabled === true,
@@ -646,6 +716,26 @@ export const getVendorBySubdomainController = async (req: Request, res: Response
     });
   } catch (error) {
     console.error("Get Vendor By Subdomain Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+export const getStatesController = async (req: Request, res: Response) => {
+  try {
+    const states = await vendorService.getStates();
+
+    return res.status(200).json({
+      success: true,
+      message: "States fetched successfully",
+      data: states,
+    });
+  } catch (error) {
+    console.error("Get States Error:", error);
+
     return res.status(500).json({
       success: false,
       message: "Internal server error",

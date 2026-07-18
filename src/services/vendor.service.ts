@@ -164,23 +164,23 @@ export const getAllVendorsPaginated = async ({
 
   const where = search
     ? {
-        OR: [
-          { vendor_name: { contains: search, mode: "insensitive" as const } },
-          { vendor_code: { contains: search, mode: "insensitive" as const } },
-          {
-            primary_contact_email: {
-              contains: search,
-              mode: "insensitive" as const,
-            },
+      OR: [
+        { vendor_name: { contains: search, mode: "insensitive" as const } },
+        { vendor_code: { contains: search, mode: "insensitive" as const } },
+        {
+          primary_contact_email: {
+            contains: search,
+            mode: "insensitive" as const,
           },
-          {
-            primary_contact_name: {
-              contains: search,
-              mode: "insensitive" as const,
-            },
+        },
+        {
+          primary_contact_name: {
+            contains: search,
+            mode: "insensitive" as const,
           },
-        ],
-      }
+        },
+      ],
+    }
     : {};
 
   const [data, totalCount] = await Promise.all([
@@ -209,6 +209,20 @@ export const getAllVendorsPaginated = async ({
         login_image: true,
         createdAt: true,
         updatedAt: true,
+        gst_no: true,
+        toll_free_no: true,
+        website_link: true,
+        tag_line: true,
+        address: true,
+        pincode: true,
+        city: true,
+        state_id: true,
+        state: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
       },
     }),
     prisma.vendorMaster.count({ where }),
@@ -981,14 +995,14 @@ export const getLeadTrackingReportData = async (
     const supervisorUsers =
       normalizedUserType === "site-supervisor"
         ? lead.siteSupervisors
-            .filter(
-              (mapping) =>
-                mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
-                "site-supervisor",
-            )
-            .map((mapping) => ({
-              id: mapping.supervisor.id,
-            }))
+          .filter(
+            (mapping) =>
+              mapping.supervisor.user_type.user_type.trim().toLowerCase() ===
+              "site-supervisor",
+          )
+          .map((mapping) => ({
+            id: mapping.supervisor.id,
+          }))
         : [];
 
     const matchedUsers = [...mappedUsers, ...supervisorUsers];
@@ -1123,11 +1137,11 @@ export const getPaymentsBetweenClientAndStoreReportData = async (
         where: {
           ...(fromDate && toDate
             ? {
-                created_at: {
-                  gte: new Date(fromDate),
-                  lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
-                },
-              }
+              created_at: {
+                gte: new Date(fromDate),
+                lte: new Date(new Date(toDate).setHours(23, 59, 59, 999)),
+              },
+            }
             : {}),
         },
         select: {
@@ -1720,6 +1734,15 @@ export const onboardVendor = async (data: any) => {
     primary_contact_name,
     primary_contact_number,
     primary_contact_email,
+    gst_no,
+    toll_free_no,
+    website_link,
+    tag_line,
+    address,
+    pincode,
+    city,
+    state_id,
+
     country_code,
     head_office_id,
     status,
@@ -1741,6 +1764,14 @@ export const onboardVendor = async (data: any) => {
       primary_contact_name,
       primary_contact_number,
       primary_contact_email,
+      gst_no,
+      toll_free_no,
+      website_link,
+      tag_line,
+      address,
+      pincode,
+      city,
+      state_id,
       country_code,
       head_office_id,
       status,
@@ -1794,6 +1825,16 @@ export const updateVendor = async (vendorId: number, data: any) => {
     primary_contact_name,
     primary_contact_number,
     primary_contact_email,
+    gst_no,
+    toll_free_no,
+    website_link,
+    tag_line,
+    address,
+    pincode,
+    city,
+    state_id,
+
+
     status,
     logo,
     icon,
@@ -1815,6 +1856,14 @@ export const updateVendor = async (vendorId: number, data: any) => {
       primary_contact_name,
       primary_contact_number,
       primary_contact_email,
+      gst_no,
+      toll_free_no,
+      website_link,
+      tag_line,
+      address,
+      pincode,
+      city,
+      state_id,
       status,
       logo,
       icon,
@@ -1862,7 +1911,7 @@ export const getVendorBySubdomain = async (subdomain: string) => {
     clean = clean.substring(4);
   }
   // E.g., if subdomain was "https://vloq.com/" -> clean is now "vloq.com"
-  
+
   // Get the main name part (vloq from vloq.com or vloq.localhost)
   const namePart = clean.split(".")[0];
 
@@ -1918,4 +1967,17 @@ export const getVendorBySubdomain = async (subdomain: string) => {
     iconUrl,
     loginImageUrl,
   };
+};
+
+
+export const getStates = async () => {
+  return prisma.stateMaster.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
+    orderBy: {
+      name: "asc",
+    },
+  });
 };
