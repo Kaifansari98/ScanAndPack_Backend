@@ -166,6 +166,7 @@ model VendorMaster {
   itemGroups                 ItemGroupMaster[]
   productSupplierMappings    ProductSupplierMapping[]
   popaymentScheduleHistories POPaymentScheduleHistory[]
+  broadcasts                 BroadcastMaster[]          @relation("VendorBroadcasts")
 
   @@index([state_id])
 }
@@ -359,12 +360,23 @@ model UserMaster {
   poItemsDeleted                             PurchaseOrderItem[]                    @relation("POItemDeletedBy")
   stockHistories                             ProductStockHistory[]                  @relation("StockHistoryUser")
   architechuremasters                        Architechuremaster[]
-  leadSpecificationsCreated                  LeadSpecificationsMaster[]     @relation("LeadSpecificationsCreatedBy")
-  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]   @relation("LeadCarcassMaterialMappingCreatedBy")
-  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]   @relation("LeadShutterMaterialMappingCreatedBy")
-  leadHardwareMappingsCreated                LeadHardwareMapping[]          @relation("LeadHardwareMappingCreatedBy")
+  leadSpecificationsCreated                  LeadSpecificationsMaster[]             @relation("LeadSpecificationsCreatedBy")
+  leadCarcassMaterialMappingsCreated         LeadCarcassMaterialMapping[]           @relation("LeadCarcassMaterialMappingCreatedBy")
+  leadShutterMaterialMappingsCreated         LeadShutterMaterialMapping[]           @relation("LeadShutterMaterialMappingCreatedBy")
+  leadHardwareMappingsCreated                LeadHardwareMapping[]                  @relation("LeadHardwareMappingCreatedBy")
   poPaymentScheduleHistories                 POPaymentScheduleHistory[]
   boxesPackedBy                              BoxMaster[]                            @relation("BoxPackedByUser")
+  broadcastsCreated                          BroadcastMaster[]                      @relation("BroadcastCreatedBy")
+  broadcastsUpdated                          BroadcastMaster[]                      @relation("BroadcastUpdatedBy")
+  broadcastAudienceCreated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceCreatedBy")
+  broadcastAudienceUpdated                   BroadcastAudienceMapping[]             @relation("BroadcastAudienceUpdatedBy")
+  broadcastAttachmentsCreated                BroadcastAttachment[]                  @relation("BroadcastAttachmentCreatedBy")
+  broadcastAttachmentsUpdated                BroadcastAttachment[]                  @relation("BroadcastAttachmentUpdatedBy")
+  broadcastReads                             BroadcastRead[]                        @relation("BroadcastReadUser")
+  broadcastReadsCreated                      BroadcastRead[]                        @relation("BroadcastReadCreatedBy")
+  broadcastReadsUpdated                      BroadcastRead[]                        @relation("BroadcastReadUpdatedBy")
+  notificationQueuesCreated                  NotificationQueue[]                    @relation("NotificationQueueCreatedBy")
+  notificationQueuesUpdated                  NotificationQueue[]                    @relation("NotificationQueueUpdatedBy")
 }
 
 model UserDocument {
@@ -735,9 +747,9 @@ model LeadSpecificationsMaster {
   created_at DateTime @default(now())
   created_by Int
 
-  vendor VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead   LeadMaster   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  createdBy UserMaster @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor    VendorMaster @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead      LeadMaster   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster   @relation("LeadSpecificationsCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -754,12 +766,12 @@ model LeadCarcassMaterialMapping {
   created_at                 DateTime @default(now())
   created_by                 Int
 
-  vendor                VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                  LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  carcassType           CarcassTypeMaster            @relation(fields: [carcass_type_id], references: [id], onDelete: Cascade)
-  carcasMaterial        CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
-  carcassMaterialFinish CarcassMaterialFinishMaster  @relation(fields: [carcass_material_finish_id], references: [id], onDelete: Cascade)
-  createdBy             UserMaster                   @relation("LeadCarcassMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                VendorMaster                @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster                  @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  carcassType           CarcassTypeMaster           @relation(fields: [carcass_type_id], references: [id], onDelete: Cascade)
+  carcasMaterial        CarcasMaterialMaster        @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
+  carcassMaterialFinish CarcassMaterialFinishMaster @relation(fields: [carcass_material_finish_id], references: [id], onDelete: Cascade)
+  createdBy             UserMaster                  @relation("LeadCarcassMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -779,12 +791,12 @@ model LeadShutterMaterialMapping {
   created_at                 DateTime @default(now())
   created_by                 Int
 
-  vendor                VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  lead                  LeadMaster                   @relation(fields: [lead_id], references: [id], onDelete: Cascade)
-  shutterType           ShutterTypeMaster            @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
-  shutterMaterial       ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
-  shutterMaterialFinish ShutterMaterialFinishMaster  @relation(fields: [shutter_material_finish_id], references: [id], onDelete: Cascade)
-  createdBy             UserMaster                   @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
+  vendor                VendorMaster                @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  lead                  LeadMaster                  @relation(fields: [lead_id], references: [id], onDelete: Cascade)
+  shutterType           ShutterTypeMaster           @relation(fields: [shutter_type_id], references: [id], onDelete: Cascade)
+  shutterMaterial       ShutterMaterialMaster       @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  shutterMaterialFinish ShutterMaterialFinishMaster @relation(fields: [shutter_material_finish_id], references: [id], onDelete: Cascade)
+  createdBy             UserMaster                  @relation("LeadShutterMaterialMappingCreatedBy", fields: [created_by], references: [id], onDelete: Cascade)
 
   @@index([vendor_id])
   @@index([lead_id])
@@ -955,41 +967,41 @@ model ProductTypeMaster {
 }
 
 model CarcassTypeMaster {
-  id                   Int                       @id @default(autoincrement())
+  id                   Int                          @id @default(autoincrement())
   name                 String
   vendor_id            Int
   rules                TimelineRule[]
   chsSelectionMappings CHSSelectionTypeMapping[]
   leadMappings         LeadCarcassMaterialMapping[]
-  vendor               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor               VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model CarcasMaterialMaster {
-  id        Int                           @id @default(autoincrement())
-  name      String
-  vendor_id Int
-  vendor    VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  finishes  CarcassMaterialFinishMaster[]
+  id           Int                           @id @default(autoincrement())
+  name         String
+  vendor_id    Int
+  vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  finishes     CarcassMaterialFinishMaster[]
   leadMappings LeadCarcassMaterialMapping[]
 }
 
 model CarcassMaterialFinishMaster {
-  id                 Int                  @id @default(autoincrement())
+  id                 Int                          @id @default(autoincrement())
   name               String
   carcas_material_id Int
-  material           CarcasMaterialMaster @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
+  material           CarcasMaterialMaster         @relation(fields: [carcas_material_id], references: [id], onDelete: Cascade)
   leadMappings       LeadCarcassMaterialMapping[]
 }
 
 model ShutterTypeMaster {
-  id                   Int                       @id @default(autoincrement())
+  id                   Int                          @id @default(autoincrement())
   name                 String
   vendor_id            Int
   subTypes             ShutterSubTypeMaster[]
   rules                TimelineRule[]
   chsSelectionMappings CHSSelectionTypeMapping[]
   leadMappings         LeadShutterMaterialMapping[]
-  vendor               VendorMaster              @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  vendor               VendorMaster                 @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
 }
 
 model ShutterSubTypeMaster {
@@ -1001,24 +1013,24 @@ model ShutterSubTypeMaster {
 }
 
 model ShutterMaterialMaster {
-  id        Int                           @id @default(autoincrement())
-  name      String
-  vendor_id Int
-  vendor    VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
-  finishes  ShutterMaterialFinishMaster[]
+  id           Int                           @id @default(autoincrement())
+  name         String
+  vendor_id    Int
+  vendor       VendorMaster                  @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
+  finishes     ShutterMaterialFinishMaster[]
   leadMappings LeadShutterMaterialMapping[]
 }
 
 model ShutterMaterialFinishMaster {
-  id                  Int                   @id @default(autoincrement())
+  id                  Int                          @id @default(autoincrement())
   name                String
   shutter_material_id Int
-  material            ShutterMaterialMaster @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
+  material            ShutterMaterialMaster        @relation(fields: [shutter_material_id], references: [id], onDelete: Cascade)
   leadMappings        LeadShutterMaterialMapping[]
 }
 
 model CarcassLegsMaster {
-  id           Int    @id @default(autoincrement())
+  id           Int                              @id @default(autoincrement())
   name         String
   vendor_id    Int
   vendor       VendorMaster                     @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
@@ -1028,17 +1040,17 @@ model CarcassLegsMaster {
 }
 
 model SkirtingCarcassLegsMaster {
-  id              Int      @id @default(autoincrement())
+  id              Int                              @id @default(autoincrement())
   name            String
   carcass_legs_id Int
-  inScope         Boolean  @default(true)
+  inScope         Boolean                          @default(true)
   carcassLegs     CarcassLegsMaster                @relation(fields: [carcass_legs_id], references: [id], onDelete: Cascade)
   colors          SkirtingCarcassLegsColorMaster[]
   leadMappings    LeadHardwareMapping[]
 }
 
 model SkirtingCarcassLegsColorMaster {
-  id                       Int    @id @default(autoincrement())
+  id                       Int                       @id @default(autoincrement())
   carcass_legs_id          Int
   skirting_carcass_legs_id Int
   color                    String
@@ -2055,13 +2067,13 @@ model CompanyVendorsMaster {
   default_payment_term_id Int?
   state                   StateMaster? @relation("CompanyVendorState", fields: [state_id], references: [id], onDelete: SetNull)
 
-  status                  CompanyVendorStatusMaster?  @relation(fields: [status_id], references: [id])
-  primaryContact          CompanyVendorContactPerson? @relation("CompanyVendorPrimaryContact", fields: [primary_contact_id], references: [id], onDelete: SetNull)
-  vendorTypes             CompanyVendorTypeMapping[]
-  contactPersons          CompanyVendorContactPerson[] @relation("CompanyVendorContacts")
-  bankAccounts            CompanyVendorBankAccount[]
-  documents               CompanyVendorDocumentMapping[]
-  addresses               CompanyVendorAddress[]
+  status         CompanyVendorStatusMaster?     @relation(fields: [status_id], references: [id])
+  primaryContact CompanyVendorContactPerson?    @relation("CompanyVendorPrimaryContact", fields: [primary_contact_id], references: [id], onDelete: SetNull)
+  vendorTypes    CompanyVendorTypeMapping[]
+  contactPersons CompanyVendorContactPerson[]   @relation("CompanyVendorContacts")
+  bankAccounts   CompanyVendorBankAccount[]
+  documents      CompanyVendorDocumentMapping[]
+  addresses      CompanyVendorAddress[]
 
   vendor                       VendorMaster                      @relation(fields: [vendor_id], references: [id], onDelete: Cascade)
   orderLoginLinks              OrderLoginDetails[]
@@ -4378,3 +4390,148 @@ model CompanyVendorAddress {
   @@map("CompanyVendorAddress")
 }
 
+enum BroadcastType {
+  CIRCULAR
+  DOCUMENT
+}
+
+enum BroadcastStatus {
+  DRAFT
+  SCHEDULED
+  ACTIVE
+  INACTIVE
+}
+
+enum AudienceType {
+  ALL
+  ROLE
+  USER
+  FRANCHISE
+}
+
+enum AttachmentType {
+  FILE
+  YOUTUBE
+}
+
+enum NotificationSource {
+  IN_APP
+  EMAIL
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+model BroadcastMaster {
+  id         Int             @id @default(autoincrement())
+  title      String
+  content    String          @db.Text
+  status     BroadcastStatus @default(DRAFT)
+  type       BroadcastType
+  publish_at DateTime?
+  vendor_id  Int?
+  created_by Int
+  updated_by Int?
+  created_at DateTime        @default(now())
+  updated_at DateTime        @updatedAt
+
+  vendor      VendorMaster?              @relation("VendorBroadcasts", fields: [vendor_id], references: [id], onDelete: SetNull)
+  createdBy   UserMaster                 @relation("BroadcastCreatedBy", fields: [created_by], references: [id])
+  updatedBy   UserMaster?                @relation("BroadcastUpdatedBy", fields: [updated_by], references: [id])
+  audiences   BroadcastAudienceMapping[]
+  attachments BroadcastAttachment[]
+  readLogs    BroadcastRead[]
+
+  @@index([vendor_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model BroadcastAudienceMapping {
+  id            Int          @id @default(autoincrement())
+  broadcast_id  Int
+  audience_type AudienceType
+  target_id     Int?
+  created_by    Int
+  updated_by    Int?
+  created_at    DateTime     @default(now())
+  updated_at    DateTime     @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastAudienceCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastAudienceUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([broadcast_id])
+  @@index([audience_type, target_id])
+}
+
+model BroadcastAttachment {
+  id                 Int            @id @default(autoincrement())
+  broadcast_id       Int
+  attachment_type    AttachmentType
+  title              String
+  file_name          String?
+  original_file_name String?
+  file_url           String
+  file_type          String?
+  created_by         Int
+  updated_by         Int?
+  created_at         DateTime       @default(now())
+  updated_at         DateTime       @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastAttachmentCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastAttachmentUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([broadcast_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model BroadcastRead {
+  id           Int      @id @default(autoincrement())
+  broadcast_id Int
+  user_id      Int
+  read_at      DateTime @default(now())
+  created_by   Int
+  updated_by   Int?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  broadcast BroadcastMaster @relation(fields: [broadcast_id], references: [id], onDelete: Cascade)
+  user      UserMaster      @relation("BroadcastReadUser", fields: [user_id], references: [id], onDelete: Cascade)
+  createdBy UserMaster      @relation("BroadcastReadCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster?     @relation("BroadcastReadUpdatedBy", fields: [updated_by], references: [id])
+
+  @@unique([broadcast_id, user_id])
+  @@index([broadcast_id])
+  @@index([user_id])
+  @@index([created_by])
+  @@index([updated_by])
+}
+
+model NotificationQueue {
+  id                  Int                @id @default(autoincrement())
+  title               String
+  body                String             @db.Text
+  redirect_url        String?
+  image               String?
+  notification_source NotificationSource
+  notification_status NotificationStatus @default(PENDING)
+  send_at             DateTime
+  request_body        Json?
+  created_by          Int
+  updated_by          Int?
+  created_at          DateTime           @default(now())
+  updated_at          DateTime           @updatedAt
+
+  createdBy UserMaster  @relation("NotificationQueueCreatedBy", fields: [created_by], references: [id])
+  updatedBy UserMaster? @relation("NotificationQueueUpdatedBy", fields: [updated_by], references: [id])
+
+  @@index([created_by])
+  @@index([updated_by])
+  @@index([notification_status, send_at])
+}
